@@ -9,14 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6270ef8dd86f1487ab0484df8e4de7cb, type: 3}
-  m_Name: SessionRecordings
+  m_Script: {fileID: 11500000, guid: 3b4b8a381ea5244b2830a839f609b829, type: 3}
+  m_Name: ARFoundationRemoteLoaderSettings
   m_EditorClassIdentifier: 
-  playbackRecordedSession: 0
-  respectTimeScale: 1
-  debug: 0
-  logWarnings: 0
-  timeScale: 1
-  targetFps: -2
-  sceneToRecordAssociations: []
-  isRecording: 0
