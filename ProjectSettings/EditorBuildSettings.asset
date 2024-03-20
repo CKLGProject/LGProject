@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Test/QR Test.unity
-    guid: 897c80ce4db714ecea4eef48ccae09c9
+    path: Assets/Scenes/Test/Notification Test.unity
+    guid: 475d2ea30e6f044c38e52a60b5ab2cd6
   m_configObjects:
     AR Foundation RemoteARFoundationRemoteLoaderSettings: {fileID: 11400000, guid: b62574607372f429585897789a5049fd,
       type: 2}
