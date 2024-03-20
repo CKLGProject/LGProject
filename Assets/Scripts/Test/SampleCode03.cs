@@ -1,4 +1,5 @@
 using System;
+using LGProjects.Android.Utility;
 using Unity.Notifications.Android;
 using UnityEngine;
 
@@ -6,6 +7,11 @@ public class SampleCode03 : MonoBehaviour
 {
     private static int id;
     private const string ChannelID = "LG_Channel_id";
+
+    public void PlayService()
+    {
+        AndroidUtility.TestService("삼성", "사랑해요", "lg_small", "lg_large");
+    }
 
     /// <summary>
     /// 노티피케이션을 3초후 울립니다.
@@ -39,7 +45,7 @@ public class SampleCode03 : MonoBehaviour
                 Importance = Importance.Default,
                 Description = "기본 알림"
             };
-            
+
             AndroidNotificationCenter.RegisterNotificationChannel(channel);
 
             AndroidNotification notification = new() {
