@@ -2,15 +2,24 @@ using System;
 using LGProjects.Android.Utility;
 using Unity.Notifications.Android;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SampleCode03 : MonoBehaviour
 {
     private static int id;
     private const string ChannelID = "LG_Channel_id";
 
+    public Text StepCountUI;
+
+    private void Start()
+    {
+        int stepCount = AndroidUtility.GetStepCount();
+        StepCountUI.text = stepCount.ToString();
+    }
+
     public void PlayService()
     {
-        AndroidUtility.TestService("삼성", "사랑해요", "lg_small", "lg_large");
+        AndroidUtility.TestService("LG 프로젝트", "사랑해요", "lg_small", "lg_large");
     }
 
     /// <summary>

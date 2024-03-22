@@ -28,5 +28,10 @@ namespace LGProjects.Android.Utility
         {
             AndroidJavaObject.Call("StartStepCountService", title, message, smallIcon, largeIcon);
         }
+
+        public static int GetStepCount()
+        {
+            return AndroidJavaObject.Call<int>("GetStepCount");
+        }
     }
 }

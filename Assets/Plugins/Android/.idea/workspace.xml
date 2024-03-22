@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="e9ac167a-747f-455a-b5b6-ba0798d9fb4f" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UPlugin.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UPlugin.kt.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Scenes/Test/Notification Test.unity" beforeDir="false" afterPath="$PROJECT_DIR$/../../Scenes/Test/Notification Test.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Scripts/Test/SampleCode03.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Scripts/Test/SampleCode03.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Scripts/Utility/AndroidUtility.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Scripts/Utility/AndroidUtility.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ProjectSettings/ProjectSettings.asset" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="2dwaBMPPIdNtPUBou7IswxHKQQV" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Local-Notification&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e9ac167a-747f-455a-b5b6-ba0798d9fb4f" name="Changes" comment="" />
+      <created>1710921458145</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1710921458145</updated>
+      <workItem from="1710921459592" duration="8000" />
+      <workItem from="1710928864398" duration="5000" />
+      <workItem from="1710929012082" duration="2514000" />
+      <workItem from="1710958545404" duration="76000" />
+      <workItem from="1710958794327" duration="5000" />
+      <workItem from="1711002657059" duration="47000" />
+      <workItem from="1711002762536" duration="4000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

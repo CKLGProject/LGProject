@@ -2,13 +2,16 @@
 <manifest
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION"/>
+    
     <application>
         <service
                 android:name=".StepCountService"
                 android:enabled="true"
                 android:exported="true">
         </service>
-        <activity android:name="com.unity3d.player.UnityPlayerActivity"
+        <activity android:name="com.unity3d.player.LGUnityPlayerActivity"
                   android:theme="@style/UnityThemeSelector">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
