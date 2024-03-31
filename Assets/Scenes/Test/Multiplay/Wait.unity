@@ -230,6 +230,9 @@ MonoBehaviour:
       m_Action: Back
       m_Flags: 0
     m_Flags: 0
+  GameScene:
+    sceneAsset: {fileID: 102900000, guid: 24ae60a97defa4af18350f8cf7aedcc2, type: 3}
+    path: Assets/Scenes/Test/Multiplay/Game.unity
 --- !u!1 &2127805151
 GameObject:
   m_ObjectHideFlags: 0

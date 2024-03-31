@@ -11,7 +11,7 @@ namespace LGProjects.Android.Utility
         Update,
         ChangeValue
     }
-    
+
     /// <summary>
     /// AR Session과 ARCameraManager가 계층구조에 존재해야 합니다.
     /// </summary>
@@ -19,7 +19,7 @@ namespace LGProjects.Android.Utility
     public class QRManager : MonoBehaviour
     {
         public delegate void ScanFinishResultDelegate(string result);
-        
+
         /// <summary>
         /// QR이 성공적으로 스캔되면 호출됩니다.
         /// </summary>
@@ -30,7 +30,7 @@ namespace LGProjects.Android.Utility
         /// </summary>
         [Tooltip("ChangeValue : 이전 결과와 다를 경우에만 호출합니다.")]
         public EResultMode resultMode = EResultMode.ChangeValue;
-        
+
         private string _result;
         private IBarcodeReader _barcodeReader;
         private ARCameraManager _cameraManager;
@@ -48,6 +48,9 @@ namespace LGProjects.Android.Utility
 
         private void UpdateQRRecord()
         {
+#if UNITY_EDITOR
+            return;
+#endif
             if (!_cameraManager.TryAcquireLatestCpuImage(out XRCpuImage image))
                 return;
 
@@ -56,7 +59,7 @@ namespace LGProjects.Android.Utility
                 var conversionParams = new XRCpuImage.ConversionParams(image, TextureFormat.R8, XRCpuImage.Transformation.MirrorY);
                 var dataSize = image.GetConvertedDataSize(conversionParams);
                 var grayscalePixels = new byte[dataSize];
-
+                
                 unsafe
                 {
                     fixed (void* ptr = grayscalePixels)
@@ -66,7 +69,7 @@ namespace LGProjects.Android.Utility
                 }
                 
                 Result result = _barcodeReader.Decode(grayscalePixels, image.width, image.height, RGBLuminanceSource.BitmapFormat.Gray8);
-
+                
                 if (result != null)
                 {
                     if (resultMode == EResultMode.Update)
@@ -83,7 +86,7 @@ namespace LGProjects.Android.Utility
                 }
             }
         }
-        
+
         /// <summary>
         /// QR 코드용 Color32를 생성합니다.
         /// </summary>

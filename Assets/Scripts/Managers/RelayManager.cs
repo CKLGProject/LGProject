@@ -116,19 +116,16 @@ public class RelayManager : Singleton
     /// </summary>
     /// <param name="joinCode"></param>
     /// <returns></returns>
-    public async Task<RelayJoinData> JoinRelay(string joinCode)
+    public async UniTask<bool> OnJoinRelay(string joinCode)
     {
-        InitializationOptions options = new InitializationOptions();
-
-        await UnityServices.InitializeAsync(options);
-
+        // 로그인 안되어 있으면 에러를 띄움
         if (!AuthenticationService.Instance.IsSignedIn)
-        {
-            await AuthenticationService.Instance.SignInAnonymouslyAsync();
-        }
-
+            return false;
+        
         JoinAllocation allocation = await Relay.Instance.JoinAllocationAsync(joinCode);
 
+        Debug.Log(allocation);
+        
         RelayJoinData relayJoinData = new RelayJoinData() {
             Key = allocation.Key,
             Port = (ushort)allocation.RelayServer.Port,
@@ -144,7 +141,7 @@ public class RelayManager : Singleton
 
         JoinCode = relayJoinData.JoinCode;
 
-        return relayJoinData;
+        return true;
     }
 
     public void Reset()

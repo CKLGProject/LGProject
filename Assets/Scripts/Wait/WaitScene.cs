@@ -2,6 +2,8 @@ using System;
 using USingleton;
 using UnityEngine;
 using LGProjects.Android.Utility;
+using R3;
+using R3.Triggers;
 using Unity.Netcode;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -16,6 +18,8 @@ public class WaitScene : MonoBehaviour
 
     public InputAction Back;
 
+    public SceneReference GameScene;
+    
     private void OnEnable()
     {
         Back.Enable();
@@ -35,16 +39,27 @@ public class WaitScene : MonoBehaviour
         if (Singleton.HasInstance<RelayManager>())
         {
             string joinCode = Singleton.Instance<RelayManager>().JoinCode;
-            Debug.Log(joinCode);
             GenerateJoinQR(joinCode);
         }
 
         Back.started += OnBack;
+
+        this.UpdateAsObservable()
+            .Where(_ => NetworkManager.Singleton.ConnectedClients.Count == 2)
+            .Take(1)
+            .Subscribe(_ => {
+                NetworkManager.Singleton.SceneManager.LoadScene(GameScene.Path, LoadSceneMode.Single);
+            })
+            .AddTo(this);
+
     }
     private void OnBack(InputAction.CallbackContext obj)
     {
         if (NetworkManager.Singleton != null)
+        {
             NetworkManager.Singleton.Shutdown();
+            Destroy(NetworkManager.Singleton.gameObject);
+        }
 
         if (Singleton.HasInstance<RelayManager>())
             Singleton.Instance<RelayManager>().Reset();

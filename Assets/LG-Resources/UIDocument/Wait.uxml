@@ -1,4 +1,5 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <engine:Label text="QR을 인식해주세요." style="right: 0; left: 0; top: 521px; -unity-text-align: middle-center; font-size: 64px; color: rgb(255, 255, 255); -unity-font-definition: url(&quot;project://database/Assets/LG-Resources/Fonts/ONE%20Mobile%20Bold.ttf?fileID=12800000&amp;guid=f8b9653d2e2054734922b50623c6a803&amp;type=3#ONE Mobile Bold&quot;);" />
     <engine:VisualElement name="root" style="flex-grow: 1; justify-content: center; align-self: center;">
         <engine:VisualElement name="QRTexture" style="width: 600px; height: 600px; background-color: rgb(255, 255, 255);" />
     </engine:VisualElement>

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class SingleNetworkManager : MonoBehaviour
 {
-    private void Awake()
+    private void Start()
     {
         if (NetworkManager.Singleton != null)
             Destroy(gameObject);
