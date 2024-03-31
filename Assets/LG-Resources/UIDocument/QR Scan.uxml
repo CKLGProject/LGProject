@@ -1,0 +1,6 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <engine:Label text="QR 인식 중..." style="position: absolute; right: 0; left: 0; top: 108px; font-size: 50px; color: rgb(255, 255, 255); -unity-text-align: middle-center; -unity-font-definition: url(&quot;project://database/Assets/LG-Resources/Fonts/ONE%20Mobile%20Bold.ttf?fileID=12800000&amp;guid=f8b9653d2e2054734922b50623c6a803&amp;type=3#ONE Mobile Bold&quot;);" />
+    <engine:VisualElement name="root" style="flex-grow: 1; justify-content: center; align-self: center;">
+        <engine:VisualElement name="QRPoint" style="background-image: url(&quot;project://database/Assets/LG-Resources/Textures/QR%20Point.png?fileID=2800000&amp;guid=71a60c602a6da484eba0f18692760de4&amp;type=3#QR Point&quot;); width: 700px; height: 700px;" />
+    </engine:VisualElement>
+</engine:UXML>
