@@ -1,0 +1,9 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/LG-Resources/USS/LGStyle%20Sheet.uss?fileID=7433441132597879392&amp;guid=70b963dcfd4ab486cb8c59f4fc73c9ac&amp;type=3#LGStyle Sheet" />
+    <engine:VisualElement name="root" style="flex-grow: 1; align-items: center; justify-content: center;">
+        <engine:VisualElement name="Button-Group" style="height: 487px; align-self: center; justify-content: space-between;">
+            <engine:Button text="Connect" name="Connect-Button" class="Test-Button" style="width: 800px; height: 200px;" />
+            <engine:Button text="Server Start" name="ServerConnect-Button" class="Test-Button" style="width: 800px; height: 200px;" />
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>
