@@ -19,7 +19,7 @@ public class WaitScene : MonoBehaviour
     public InputAction Back;
 
     public SceneReference GameScene;
-    
+
     private void OnEnable()
     {
         Back.Enable();
@@ -44,13 +44,10 @@ public class WaitScene : MonoBehaviour
 
         Back.started += OnBack;
 
-        this.UpdateAsObservable()
-            .Where(_ => NetworkManager.Singleton.ConnectedClients.Count == 2)
-            .Take(1)
+        CheckMaxCountObservable()
             .Subscribe(_ => {
                 NetworkManager.Singleton.SceneManager.LoadScene(GameScene.Path, LoadSceneMode.Single);
-            })
-            .AddTo(this);
+            });
 
     }
     private void OnBack(InputAction.CallbackContext obj)
@@ -79,5 +76,14 @@ public class WaitScene : MonoBehaviour
         QRTexture2D.Apply();
 
         UI.style.backgroundImage = new StyleBackground(QRTexture2D);
+    }
+
+    private Observable<Unit> CheckMaxCountObservable()
+    {
+        int maxCount = Singleton.Instance<RelayManager>().MaxConnections;
+
+        return this.UpdateAsObservable()
+            .Where(_ => NetworkManager.Singleton.ConnectedClients.Count == maxCount)
+            .Take(1);
     }
 }

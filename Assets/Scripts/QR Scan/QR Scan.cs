@@ -4,11 +4,17 @@ using LGProjects.Android.Utility;
 using MyBox;
 using Unity.Netcode;
 using UnityEngine.SceneManagement;
+using UnityEngine.XR.ARFoundation;
+using SceneReference = UnityEngine.SceneReference;
 
 public class QRScan : MonoBehaviour
 {
     public QRManager QRManager;
+    public ARSession Session;
+    public SceneReference PreviousScene;
+
     public InputAction Back;
+
 
     private void OnEnable()
     {
@@ -38,9 +44,16 @@ public class QRScan : MonoBehaviour
 
     private void OnBack(InputAction.CallbackContext obj)
     {
+        // 네트워크 매니저 제거
         if (NetworkManager.Singleton != null)
             Destroy(NetworkManager.Singleton.gameObject);
 
-        SceneManager.LoadScene("Main");
+        // 세션 초기화 및 XR 초기화
+        Session.Reset();
+        LoaderUtility.Deinitialize();
+        LoaderUtility.Initialize();
+        
+        // 이전 씬으로 이동
+        SceneManager.LoadScene(PreviousScene.Path);
     }
 }
