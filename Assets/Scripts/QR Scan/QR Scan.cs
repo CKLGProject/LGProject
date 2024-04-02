@@ -1,11 +1,11 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using LGProjects.Android.Utility;
-using MyBox;
 using Unity.Netcode;
 using UnityEngine.SceneManagement;
 using UnityEngine.XR.ARFoundation;
 using SceneReference = UnityEngine.SceneReference;
+using USingleton;
 
 public class QRScan : MonoBehaviour
 {
@@ -36,7 +36,7 @@ public class QRScan : MonoBehaviour
     }
     private async void ScanFinishResult(string result)
     {
-        bool isJoin =  await Singleton<RelayManager>.Instance.OnJoinRelay(result);
+        bool isJoin = await Singleton.Instance<RelayManager>().OnJoinRelay(result);
 
         if (isJoin)
             NetworkManager.Singleton.StartClient();
