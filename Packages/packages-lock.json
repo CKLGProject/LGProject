@@ -16,6 +16,13 @@
       "dependencies": {},
       "hash": "011ecd3d6f5d6c0891b92ba7dd1a3efa5bfbb479"
     },
+    "com.nkstudio.ufolder": {
+      "version": "https://github.com/NK-Studio/UFolder.git#UPM",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "dcc2954075ce0db866251a34c4bb5b2eb8aa6fc8"
+    },
     "com.nkstudio.usinglton": {
       "version": "https://github.com/NK-Studio/USingleton.git#UPM",
       "depth": 0,
