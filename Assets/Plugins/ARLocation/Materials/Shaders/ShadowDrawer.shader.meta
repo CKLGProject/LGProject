@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 2f7676612149a5f41877306a0ed59794
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 134882
+  packageName: AR + GPS Location
+  packageVersion: 4.0.1
+  assetPath: Assets/ARLocation/Materials/Shaders/ShadowDrawer.shader
+  uploadId: 608608

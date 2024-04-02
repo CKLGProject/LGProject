@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: e9615fb3790c0284b9ff2361c6f3b38b
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 134882
+  packageName: AR + GPS Location
+  packageVersion: 4.0.1
+  assetPath: Assets/ARLocation/Third-Party-Notices.txt
+  uploadId: 608608

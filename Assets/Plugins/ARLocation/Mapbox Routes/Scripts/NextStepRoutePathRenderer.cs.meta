@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: b3d4565e2fba5454e885ee85e49be2dc
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 134882
+  packageName: AR + GPS Location
+  packageVersion: 4.0.1
+  assetPath: Assets/ARLocation/Mapbox Routes/Scripts/NextStepRoutePathRenderer.cs
+  uploadId: 608608

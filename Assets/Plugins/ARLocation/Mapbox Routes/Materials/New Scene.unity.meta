@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 18f631636c650402f87e0fea79de41ff
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 134882
+  packageName: AR + GPS Location
+  packageVersion: 4.0.1
+  assetPath: Assets/ARLocation/Mapbox Routes/Materials/New Scene.unity
+  uploadId: 608608

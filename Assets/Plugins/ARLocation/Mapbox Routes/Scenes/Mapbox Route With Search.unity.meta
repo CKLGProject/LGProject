@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 3d7f39a6ae7594e8191b21466d209e8a
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 134882
+  packageName: AR + GPS Location
+  packageVersion: 4.0.1
+  assetPath: Assets/ARLocation/Mapbox Routes/Scenes/Mapbox Route With Search.unity
+  uploadId: 608608

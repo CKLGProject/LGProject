@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 1c04fa4e0641a427587f656c768c3002
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 134882
+  packageName: AR + GPS Location
+  packageVersion: 4.0.1
+  assetPath: Assets/ARLocation/Mapbox Routes/Scripts/DefaultOnScreenTargetIndicator.cs
+  uploadId: 608608

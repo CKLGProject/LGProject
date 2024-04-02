@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 1dda82d1016d23e459e52374ececdccf
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 134882
+  packageName: AR + GPS Location
+  packageVersion: 4.0.1
+  assetPath: Assets/ARLocation/Experimental/World Voxel Craft/AR+GPS Location World
+    Voxel.unity
+  uploadId: 608608

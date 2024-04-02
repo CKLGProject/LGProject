@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 5938ca4a639db8b448becdaee8d18567
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 134882
+  packageName: AR + GPS Location
+  packageVersion: 4.0.1
+  assetPath: Assets/ARLocation/Data/PrefabDb.asset
+  uploadId: 608608

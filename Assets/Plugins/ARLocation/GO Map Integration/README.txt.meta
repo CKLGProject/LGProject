@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 374cd345cf439c04890a574ae928d409
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 134882
+  packageName: AR + GPS Location
+  packageVersion: 4.0.1
+  assetPath: Assets/ARLocation/GO Map Integration/README.txt
+  uploadId: 608608

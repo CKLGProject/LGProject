@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 7dffd400607cdc24ea32e2d34f53fe95
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 134882
+  packageName: AR + GPS Location
+  packageVersion: 4.0.1
+  assetPath: Assets/ARLocation/Samples/ARLocation Basic.unity
+  uploadId: 608608

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: d7efeac44ba82b041b454f5048569bcc
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 134882
+  packageName: AR + GPS Location
+  packageVersion: 4.0.1
+  assetPath: Assets/ARLocation/CHANGELOG.md
+  uploadId: 608608

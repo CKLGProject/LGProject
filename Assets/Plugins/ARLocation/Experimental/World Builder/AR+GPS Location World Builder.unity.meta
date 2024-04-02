@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 423d0c8b7cbc90442a84476074b7e313
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 134882
+  packageName: AR + GPS Location
+  packageVersion: 4.0.1
+  assetPath: Assets/ARLocation/Experimental/World Builder/AR+GPS Location World Builder.unity
+  uploadId: 608608

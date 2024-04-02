@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: bb7f2afda94a0467aba0942164465f84
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 134882
+  packageName: AR + GPS Location
+  packageVersion: 4.0.1
+  assetPath: Assets/ARLocation/Mapbox Routes/Materials/CustomRoute.asset
+  uploadId: 608608

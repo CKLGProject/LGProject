@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 8774ed01b8a2ab0459563770e9c761a1
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 134882
+  packageName: AR + GPS Location
+  packageVersion: 4.0.1
+  assetPath: Assets/ARLocation/Prefabs/Sample Assets/POITextMesh.prefab
+  uploadId: 608608

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: b1407a565c11e4a81a23c0950bc16aec
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 134882
+  packageName: AR + GPS Location
+  packageVersion: 4.0.1
+  assetPath: Assets/ARLocation/Prefabs/Sample Assets/Walking Zombie.prefab
+  uploadId: 608608

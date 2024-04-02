@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 9ac6db890c4879d409a19ef3506794fa
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 134882
+  packageName: AR + GPS Location
+  packageVersion: 4.0.1
+  assetPath: Assets/ARLocation/Locations/IbiraHotspot05.asset
+  uploadId: 608608
