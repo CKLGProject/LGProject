@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: a28e462c37584d8988c3f06f0ce2f730
+timeCreated: 1507383465
+AssetOrigin:
+  serializedVersion: 1
+  productId: 67473
+  packageName: Android Native Goodies!
+  packageVersion: 1.8.5
+  assetPath: Assets/AndroidGoodies/Scripts/Goodies/AppInteraction/AGClipboard.cs
+  uploadId: 615729

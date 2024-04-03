@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: 12778720caf24f5d8cb7051cee8f7940
+timeCreated: 1519493328
+AssetOrigin:
+  serializedVersion: 1
+  productId: 67473
+  packageName: Android Native Goodies!
+  packageVersion: 1.8.5
+  assetPath: Assets/AndroidGoodies/Scripts/Goodies/Hardware/AGFingerprintScanner.cs
+  uploadId: 615729

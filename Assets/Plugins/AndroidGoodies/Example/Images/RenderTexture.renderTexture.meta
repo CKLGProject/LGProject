@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b33c767d79f3043ea8786599cbfc0b62
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 8400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 67473
+  packageName: Android Native Goodies!
+  packageVersion: 1.8.5
+  assetPath: Assets/AndroidGoodies/Example/Images/RenderTexture.renderTexture
+  uploadId: 615729

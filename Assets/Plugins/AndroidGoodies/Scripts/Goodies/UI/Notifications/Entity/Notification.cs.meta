@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 27d9b99ef570e0d41975746e9513a343
+timeCreated: 1533888035
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 67473
+  packageName: Android Native Goodies!
+  packageVersion: 1.8.5
+  assetPath: Assets/AndroidGoodies/Scripts/Goodies/UI/Notifications/Entity/Notification.cs
+  uploadId: 615729

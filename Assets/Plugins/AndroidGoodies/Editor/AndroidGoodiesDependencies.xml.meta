@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 02b3a94fec5f04bdfb402fe228743eb9
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 67473
+  packageName: Android Native Goodies!
+  packageVersion: 1.8.5
+  assetPath: Assets/AndroidGoodies/Editor/AndroidGoodiesDependencies.xml
+  uploadId: 615729

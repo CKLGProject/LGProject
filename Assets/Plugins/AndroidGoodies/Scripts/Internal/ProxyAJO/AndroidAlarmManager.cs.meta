@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: bbfd6e93dd69419a90613afac6cdbfb7
+timeCreated: 1535961109
+AssetOrigin:
+  serializedVersion: 1
+  productId: 67473
+  packageName: Android Native Goodies!
+  packageVersion: 1.8.5
+  assetPath: Assets/AndroidGoodies/Scripts/Internal/ProxyAJO/AndroidAlarmManager.cs
+  uploadId: 615729

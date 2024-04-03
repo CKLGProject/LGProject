@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 1c20479974e909d4d8b7772b19232631
+timeCreated: 1475426051
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 67473
+  packageName: Android Native Goodies!
+  packageVersion: 1.8.5
+  assetPath: Assets/AndroidGoodies/Scripts/Internal/CrossPlatform/LocationUtils.cs
+  uploadId: 615729

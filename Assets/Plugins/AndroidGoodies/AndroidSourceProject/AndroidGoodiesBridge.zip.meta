@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 77487fa3f2b9841b8805ddd31d2cc916
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 67473
+  packageName: Android Native Goodies!
+  packageVersion: 1.8.5
+  assetPath: Assets/AndroidGoodies/AndroidSourceProject/AndroidGoodiesBridge.zip
+  uploadId: 615729

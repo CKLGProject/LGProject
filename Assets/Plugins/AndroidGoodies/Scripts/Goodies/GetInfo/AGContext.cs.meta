@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: 52a53a8d526b432cbede00ad9277b361
+timeCreated: 1606159158
+AssetOrigin:
+  serializedVersion: 1
+  productId: 67473
+  packageName: Android Native Goodies!
+  packageVersion: 1.8.5
+  assetPath: Assets/AndroidGoodies/Scripts/Goodies/GetInfo/AGContext.cs
+  uploadId: 615729

@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: d54d9f01457dd1041ba7917e8e339266
+timeCreated: 1536924528
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 67473
+  packageName: Android Native Goodies!
+  packageVersion: 1.8.5
+  assetPath: Assets/AndroidGoodies/Scripts/Goodies/GetInfo/Entity/ServiceStates.cs
+  uploadId: 615729
