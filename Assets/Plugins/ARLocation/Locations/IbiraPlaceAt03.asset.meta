@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 351dee132841dfd4ab5315568cab1ed1
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 134882
+  packageName: AR + GPS Location
+  packageVersion: 4.0.1
+  assetPath: Assets/ARLocation/Locations/IbiraPlaceAt03.asset
+  uploadId: 608608

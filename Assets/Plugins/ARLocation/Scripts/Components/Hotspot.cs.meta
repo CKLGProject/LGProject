@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 45580b397e1664d41b2551750b4f3e54
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 134882
+  packageName: AR + GPS Location
+  packageVersion: 4.0.1
+  assetPath: Assets/ARLocation/Scripts/Components/Hotspot.cs
+  uploadId: 608608

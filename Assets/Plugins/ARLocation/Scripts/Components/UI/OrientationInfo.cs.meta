@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 5fda21f5386c0754da0bb1f38bd7a19e
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 134882
+  packageName: AR + GPS Location
+  packageVersion: 4.0.1
+  assetPath: Assets/ARLocation/Scripts/Components/UI/OrientationInfo.cs
+  uploadId: 608608

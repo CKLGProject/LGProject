@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 8f88f1c13fceca646abd593d77b55922
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 134882
+  packageName: AR + GPS Location
+  packageVersion: 4.0.1
+  assetPath: Assets/ARLocation/Scripts/Location/LocationReading.cs
+  uploadId: 608608

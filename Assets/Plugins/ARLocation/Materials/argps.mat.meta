@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 53d1eddac7b14da4b9fe72e91aa377a4
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 134882
+  packageName: AR + GPS Location
+  packageVersion: 4.0.1
+  assetPath: Assets/ARLocation/Materials/argps.mat
+  uploadId: 608608

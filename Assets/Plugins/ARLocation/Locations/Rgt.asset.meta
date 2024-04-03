@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ee3c6a6f0420495409d7197de6d17290
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 134882
+  packageName: AR + GPS Location
+  packageVersion: 4.0.1
+  assetPath: Assets/ARLocation/Locations/Rgt.asset
+  uploadId: 608608

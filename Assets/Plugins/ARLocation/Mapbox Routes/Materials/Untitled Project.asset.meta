@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 0e899b1e8630d41edbd0bb76c614f7e4
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 134882
+  packageName: AR + GPS Location
+  packageVersion: 4.0.1
+  assetPath: Assets/ARLocation/Mapbox Routes/Materials/Untitled Project.asset
+  uploadId: 608608

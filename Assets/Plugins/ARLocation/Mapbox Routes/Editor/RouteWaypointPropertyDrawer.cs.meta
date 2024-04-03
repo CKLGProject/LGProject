@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: c3334a21b37dc42889c8b506b3370a5a
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 134882
+  packageName: AR + GPS Location
+  packageVersion: 4.0.1
+  assetPath: Assets/ARLocation/Mapbox Routes/Editor/RouteWaypointPropertyDrawer.cs
+  uploadId: 608608

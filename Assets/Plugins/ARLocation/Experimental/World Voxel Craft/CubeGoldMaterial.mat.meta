@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 3cfa752b2bcf5294fa9eb0c995228478
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 134882
+  packageName: AR + GPS Location
+  packageVersion: 4.0.1
+  assetPath: Assets/ARLocation/Experimental/World Voxel Craft/CubeGoldMaterial.mat
+  uploadId: 608608

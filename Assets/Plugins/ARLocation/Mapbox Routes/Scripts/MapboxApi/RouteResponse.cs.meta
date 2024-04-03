@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: d71da66e7277246a987d2973be86c9ab
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 134882
+  packageName: AR + GPS Location
+  packageVersion: 4.0.1
+  assetPath: Assets/ARLocation/Mapbox Routes/Scripts/MapboxApi/RouteResponse.cs
+  uploadId: 608608

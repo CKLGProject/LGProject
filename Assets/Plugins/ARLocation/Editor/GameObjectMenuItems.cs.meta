@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: f06d2b153a6ae5a42b201b986063aacd
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 134882
+  packageName: AR + GPS Location
+  packageVersion: 4.0.1
+  assetPath: Assets/ARLocation/Editor/GameObjectMenuItems.cs
+  uploadId: 608608

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f350ad48755487b4dbf206092e4a5647
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 134882
+  packageName: AR + GPS Location
+  packageVersion: 4.0.1
+  assetPath: Assets/ARLocation/Locations/Hotspot 1.asset
+  uploadId: 608608

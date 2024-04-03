@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 922b3fd80274bd64980976211156160f
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 134882
+  packageName: AR + GPS Location
+  packageVersion: 4.0.1
+  assetPath: Assets/ARLocation/Scripts/Components/RenderPathLine.cs
+  uploadId: 608608

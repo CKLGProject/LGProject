@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 1b7ec642be620524eb98454c5f7d6220
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 134882
+  packageName: AR + GPS Location
+  packageVersion: 4.0.1
+  assetPath: Assets/ARLocation/Experimental/World Voxel Craft/CubeStone.prefab
+  uploadId: 608608

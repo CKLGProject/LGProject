@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 491dbf292636c9140a41f26b9c513ca2
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 134882
+  packageName: AR + GPS Location
+  packageVersion: 4.0.1
+  assetPath: Assets/ARLocation/Scripts/Utils/SelectScene.cs
+  uploadId: 608608

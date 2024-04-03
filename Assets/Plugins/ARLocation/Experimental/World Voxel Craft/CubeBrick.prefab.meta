@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: ea1041d6d459b1244a69e945813b0067
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 134882
+  packageName: AR + GPS Location
+  packageVersion: 4.0.1
+  assetPath: Assets/ARLocation/Experimental/World Voxel Craft/CubeBrick.prefab
+  uploadId: 608608

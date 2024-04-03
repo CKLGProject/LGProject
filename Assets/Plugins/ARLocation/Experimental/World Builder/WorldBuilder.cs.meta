@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: f479d71801b9c5043b03045000acdbd4
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 134882
+  packageName: AR + GPS Location
+  packageVersion: 4.0.1
+  assetPath: Assets/ARLocation/Experimental/World Builder/WorldBuilder.cs
+  uploadId: 608608

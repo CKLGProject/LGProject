@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 5c043518199ea024ead87bc2f9450641
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 134882
+  packageName: AR + GPS Location
+  packageVersion: 4.0.1
+  assetPath: Assets/ARLocation/Samples/ARLocation 3D Text.unity
+  uploadId: 608608

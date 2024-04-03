@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 05ddda517c35529448a6280a661a6130
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 134882
+  packageName: AR + GPS Location
+  packageVersion: 4.0.1
+  assetPath: Assets/ARLocation/Editor/ARLocationManagerInspector.cs
+  uploadId: 608608

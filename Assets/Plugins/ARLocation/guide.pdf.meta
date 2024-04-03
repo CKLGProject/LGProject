@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: a58d673f23273e7478e7a41dc8e3ab13
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 134882
+  packageName: AR + GPS Location
+  packageVersion: 4.0.1
+  assetPath: Assets/ARLocation/guide.pdf
+  uploadId: 608608

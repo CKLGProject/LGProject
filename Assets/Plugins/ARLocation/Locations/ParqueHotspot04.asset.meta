@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 1859bafc13dc3c0448a22394b4283ee1
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 134882
+  packageName: AR + GPS Location
+  packageVersion: 4.0.1
+  assetPath: Assets/ARLocation/Locations/ParqueHotspot04.asset
+  uploadId: 608608

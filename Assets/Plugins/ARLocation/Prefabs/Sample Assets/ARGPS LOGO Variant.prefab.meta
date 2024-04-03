@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: c23c5ef42ede27b4bb614fbad18d2f2e
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 134882
+  packageName: AR + GPS Location
+  packageVersion: 4.0.1
+  assetPath: Assets/ARLocation/Prefabs/Sample Assets/ARGPS LOGO Variant.prefab
+  uploadId: 608608

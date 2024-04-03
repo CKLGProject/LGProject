@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 6ba4e1ff819990d4a9fd03b1bdb63b58
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 134882
+  packageName: AR + GPS Location
+  packageVersion: 4.0.1
+  assetPath: Assets/ARLocation/Samples/ARLocation Web Map Loader.unity
+  uploadId: 608608

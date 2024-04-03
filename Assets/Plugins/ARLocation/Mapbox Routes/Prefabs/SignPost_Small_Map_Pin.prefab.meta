@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 154e5264001534d7999c9720b114562d
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 134882
+  packageName: AR + GPS Location
+  packageVersion: 4.0.1
+  assetPath: Assets/ARLocation/Mapbox Routes/Prefabs/SignPost_Small_Map_Pin.prefab
+  uploadId: 608608

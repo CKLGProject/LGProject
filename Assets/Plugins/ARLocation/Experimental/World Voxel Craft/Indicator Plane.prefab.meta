@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 61587ac9ea0231a42a30af282181f6d9
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 134882
+  packageName: AR + GPS Location
+  packageVersion: 4.0.1
+  assetPath: Assets/ARLocation/Experimental/World Voxel Craft/Indicator Plane.prefab
+  uploadId: 608608

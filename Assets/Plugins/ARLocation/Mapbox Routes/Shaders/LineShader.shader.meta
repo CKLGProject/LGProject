@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 3f7649606b80546c5ab4b4fb43757b81
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 134882
+  packageName: AR + GPS Location
+  packageVersion: 4.0.1
+  assetPath: Assets/ARLocation/Mapbox Routes/Shaders/LineShader.shader
+  uploadId: 608608

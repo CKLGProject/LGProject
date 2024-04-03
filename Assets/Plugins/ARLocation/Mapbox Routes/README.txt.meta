@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 9e555df3258fe4a909bb282c63784b10
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 134882
+  packageName: AR + GPS Location
+  packageVersion: 4.0.1
+  assetPath: Assets/ARLocation/Mapbox Routes/README.txt
+  uploadId: 608608
