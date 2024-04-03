@@ -1,10 +1,11 @@
 using System;
 using Postgrest.Attributes;
 using Postgrest.Models;
+
 namespace Data
 {
     [Table("Ranking")]
-    public class RankingModel : BaseModel
+    public class RankingData : BaseModel
     {
         [PrimaryKey("id")] public int Id { get; set; }
 
@@ -13,7 +14,7 @@ namespace Data
         [Column("profile_nickname")] public string Nickname { get; set; }
 
         [Column("profile_image_type")] public int Thumbnail { get; set; }
-        
+
         [Column("name")] public string UserName { get; set; }
 
         [Column("ci")] public string CI { get; set; }
@@ -23,7 +24,7 @@ namespace Data
 
         public override bool Equals(object obj)
         {
-            return obj is RankingModel data && Id == data.Id;
+            return obj is RankingData data && Id == data.Id;
         }
 
         public override int GetHashCode()
@@ -31,7 +32,7 @@ namespace Data
             return HashCode.Combine(Id);
         }
 
-        public RankingModel()
+        public RankingData()
         {
             Nickname = $"갸오";
             UserName = "김갸오";
