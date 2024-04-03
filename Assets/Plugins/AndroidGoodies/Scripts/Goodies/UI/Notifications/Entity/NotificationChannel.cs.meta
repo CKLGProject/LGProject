@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: 08c5fb126cc24534a5642e89f6a5611d
+timeCreated: 1533732175
+AssetOrigin:
+  serializedVersion: 1
+  productId: 67473
+  packageName: Android Native Goodies!
+  packageVersion: 1.8.5
+  assetPath: Assets/AndroidGoodies/Scripts/Goodies/UI/Notifications/Entity/NotificationChannel.cs
+  uploadId: 615729

@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: d0843d920d5264b17a644b9c120f5e7f
+timeCreated: 1467569401
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 67473
+  packageName: Android Native Goodies!
+  packageVersion: 1.8.5
+  assetPath: Assets/AndroidGoodies/Scripts/Goodies/UI/AGUIMisc.cs
+  uploadId: 615729

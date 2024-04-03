@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 5dd4929b03b7c43cf966ab9e9bb7aa60
+timeCreated: 1467708166
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 67473
+  packageName: Android Native Goodies!
+  packageVersion: 1.8.5
+  assetPath: Assets/AndroidGoodies/Scripts/Goodies/GetInfo/AGDeviceInfo.cs
+  uploadId: 615729

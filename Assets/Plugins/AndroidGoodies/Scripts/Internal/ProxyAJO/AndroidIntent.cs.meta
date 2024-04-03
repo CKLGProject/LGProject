@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: d1482065f009c4b77ba51ac5b4465b1b
+timeCreated: 1467383956
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 67473
+  packageName: Android Native Goodies!
+  packageVersion: 1.8.5
+  assetPath: Assets/AndroidGoodies/Scripts/Internal/ProxyAJO/AndroidIntent.cs
+  uploadId: 615729

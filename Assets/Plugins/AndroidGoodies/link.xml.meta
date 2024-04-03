@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 191fa2dd5ca4142ad91818de174ae27c
+timeCreated: 1519846496
+licenseType: Store
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 67473
+  packageName: Android Native Goodies!
+  packageVersion: 1.8.5
+  assetPath: Assets/AndroidGoodies/link.xml
+  uploadId: 615729

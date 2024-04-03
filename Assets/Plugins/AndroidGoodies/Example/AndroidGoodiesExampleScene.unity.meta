@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 847d3cb73c5744d70bed3f880986b901
+timeCreated: 1467042365
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 67473
+  packageName: Android Native Goodies!
+  packageVersion: 1.8.5
+  assetPath: Assets/AndroidGoodies/Example/AndroidGoodiesExampleScene.unity
+  uploadId: 615729

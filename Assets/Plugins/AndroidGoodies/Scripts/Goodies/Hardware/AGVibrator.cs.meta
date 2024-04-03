@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 9e15b357400326a4b8d05afa45d4c6a1
+timeCreated: 1470003789
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 67473
+  packageName: Android Native Goodies!
+  packageVersion: 1.8.5
+  assetPath: Assets/AndroidGoodies/Scripts/Goodies/Hardware/AGVibrator.cs
+  uploadId: 615729

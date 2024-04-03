@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: f2fb67815ba58374bac8169ce920ec41
+timeCreated: 1468878029
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 67473
+  packageName: Android Native Goodies!
+  packageVersion: 1.8.5
+  assetPath: Assets/AndroidGoodies/Scripts/Goodies/AppInteraction/AGDialer.cs
+  uploadId: 615729
