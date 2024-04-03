@@ -267,7 +267,7 @@ GameObject:
   - component: {fileID: 479674925}
   - component: {fileID: 479674924}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Ranking System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
