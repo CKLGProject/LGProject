@@ -174,7 +174,7 @@ namespace DeadMosquito.AndroidGoodies
 		}
 
 		/// <summary>
-		/// Checks if device has GPS module
+		/// 장치에 GPS 모듈이 있는지 확인합니다.
 		/// </summary>
 		/// <returns>True if device has GPS module</returns>
 		[PublicAPI]
@@ -230,8 +230,8 @@ namespace DeadMosquito.AndroidGoodies
 		/// <summary>
 		/// Requests the location updates.
 		/// </summary>
-		/// <param name="minTime">Minimum time interval between location updates, in milliseconds.</param>
-		/// <param name="minDistance">Minimum distance between location updates, in meters.</param>
+		/// <param name="minTime">위치 업데이트 간의 최소 시간 간격(밀리초)입니다.</param>
+		/// <param name="minDistance">위치 업데이트 간의 최소 거리(미터)입니다.</param>
 		/// <param name="onLocationChangedCallback">On location changed callback.</param>
 		[PublicAPI]
 		public static void RequestLocationUpdates(long minTime, float minDistance,

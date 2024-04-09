@@ -6,17 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Test/Multiplay/Main.unity
-    guid: 09efa96cfbeb649ff958c6169c9a9d56
-  - enabled: 1
-    path: Assets/Scenes/Test/Multiplay/Wait.unity
-    guid: 7a8357c4a480640a4adeaa64f678c0c6
-  - enabled: 1
-    path: Assets/Scenes/Test/Multiplay/QR Scan.unity
-    guid: c94084f4702fb4443967a26ae783f9c5
-  - enabled: 1
-    path: Assets/Scenes/Test/Multiplay/Game.unity
-    guid: 24ae60a97defa4af18350f8cf7aedcc2
+    path: Assets/Scenes/Test/Unique Location/AR_GPS.unity
+    guid: 2002568cb15ee43899b283316e2d622f
   m_configObjects:
     AR Foundation RemoteARFoundationRemoteLoaderSettings: {fileID: 11400000, guid: b62574607372f429585897789a5049fd,
       type: 2}

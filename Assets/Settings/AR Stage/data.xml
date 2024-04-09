@@ -1,0 +1,28 @@
+<ArGpsLocationData>
+    <Entry>
+        <id>0</id>
+        <lat>37.210272637175564</lat>
+        <lng>127.35920862147987</lng>
+        <altitude>0</altitude>
+        <altitudeMode>GroundRelative</altitudeMode>
+        <name>가짜정문</name>
+        <meshId>item01</meshId>
+        <movementSmoothing>0.05</movementSmoothing>
+        <maxNumberOfLocationUpdates>0</maxNumberOfLocationUpdates>
+        <useMovingAverage>false</useMovingAverage>
+        <hideObjectUtilItIsPlaced>true</hideObjectUtilItIsPlaced>
+    </Entry>
+    <Entry>
+        <id>1</id>
+        <lat>37.20972832499312</lat>
+        <lng>127.35940119655766</lng>
+        <altitude>0</altitude>
+        <altitudeMode>GroundRelative</altitudeMode>
+        <name>감성커피</name>
+        <meshId>item02</meshId>
+        <movementSmoothing>0.05</movementSmoothing>
+        <maxNumberOfLocationUpdates>0</maxNumberOfLocationUpdates>
+        <useMovingAverage>false</useMovingAverage>
+        <hideObjectUtilItIsPlaced>true</hideObjectUtilItIsPlaced>
+    </Entry>
+</ArGpsLocationData>
