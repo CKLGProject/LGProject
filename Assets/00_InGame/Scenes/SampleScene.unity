@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 38825120}
   - component: {fileID: 38825119}
   - component: {fileID: 38825118}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Guard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -238,7 +238,7 @@ GameObject:
   - component: {fileID: 268759942}
   - component: {fileID: 268759941}
   - component: {fileID: 268759940}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -771,7 +771,7 @@ GameObject:
   - component: {fileID: 1383880072}
   - component: {fileID: 1383880073}
   - component: {fileID: 1383880074}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -951,7 +951,7 @@ MonoBehaviour:
   movingAttack: 0
   layer:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 64
   directionX: 1
 --- !u!1 &2046298993
 GameObject:
@@ -968,7 +968,7 @@ GameObject:
   - component: {fileID: 2046298996}
   - component: {fileID: 2046298995}
   - component: {fileID: 2046298994}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -999,7 +999,7 @@ MonoBehaviour:
   movingAttack: 0
   layer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   directionX: 0
 --- !u!114 &2046298995
 MonoBehaviour:
@@ -1162,7 +1162,7 @@ GameObject:
   - component: {fileID: 2127459377}
   - component: {fileID: 2127459376}
   - component: {fileID: 2127459375}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Guard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
