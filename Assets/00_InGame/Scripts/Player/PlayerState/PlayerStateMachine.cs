@@ -43,7 +43,6 @@ namespace PlayerState  //
         public bool isAttack;
         public GameObject guardEffect;
 
-
         public int damageGage;
 
         #region Action_Properties

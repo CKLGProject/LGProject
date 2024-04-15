@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Playable : MonoBehaviour
+public class Playable : UnityEngine.MonoBehaviour
 {
     public PlayerState.IdleState idleState;
     public PlayerState.MoveState moveState;

@@ -16,7 +16,7 @@ public class NetworkBehaviourUIElement : Editor
     }
 }
 
-[CustomEditor(typeof(MonoBehaviour), true)]
+[CustomEditor(typeof(UnityEngine.MonoBehaviour), true)]
 public class MonoBehaviourUIElement : Editor
 {
     public override VisualElement CreateInspectorGUI()

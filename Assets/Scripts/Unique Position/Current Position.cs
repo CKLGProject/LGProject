@@ -6,7 +6,7 @@ using DeadMosquito.AndroidGoodies;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class LabelUI : MonoBehaviour
+public class LabelUI : UnityEngine.MonoBehaviour
 {
     public UIDocument UI;
 

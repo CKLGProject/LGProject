@@ -20,7 +20,7 @@ namespace PlayerState
         }
         public virtual void Enter()
         {
-            Debug.Log($"{stateMachine.playable.ToString()} / Enter State = {this.ToString()}");
+            //Debug.Log($"{stateMachine.playable.ToString()} / Enter State = {this.ToString()}");
         }
 
         public virtual void PhysicsUpdate()

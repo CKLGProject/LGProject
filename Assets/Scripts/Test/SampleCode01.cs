@@ -1,7 +1,7 @@
 using LGProjects.Android.Utility;
 using UnityEngine;
 
-public class SampleCode01 : MonoBehaviour
+public class SampleCode01 : UnityEngine.MonoBehaviour
 {
     public void TestMessage()
     {

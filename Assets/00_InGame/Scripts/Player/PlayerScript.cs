@@ -140,7 +140,7 @@ public class PlayerScript : Playable
             stateMachine.isJumpGuard = false;
             stateMachine.jumpInCount = 0;
             //stateMachine.collider.isTrigger = false;
-            Debug.Log("Hit Ground");
+            //Debug.Log("Hit Ground");
         }
     }
 
@@ -151,7 +151,7 @@ public class PlayerScript : Playable
             stateMachine.isGrounded = false;
             stateMachine.collider.isTrigger = true;
             stateMachine.isJumpGuard = true;
-            Debug.Log("Jumping");
+            //Debug.Log("Jumping");
         }
     }
 }

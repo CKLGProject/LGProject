@@ -16,7 +16,7 @@ namespace LGProjects.Android.Utility
     /// AR Session과 ARCameraManager가 계층구조에 존재해야 합니다.
     /// </summary>
     [RequireComponent(typeof(ARCameraManager))]
-    public class QRManager : MonoBehaviour
+    public class QRManager : UnityEngine.MonoBehaviour
     {
         public delegate void ScanFinishResultDelegate(string result);
 

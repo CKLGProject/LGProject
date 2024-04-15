@@ -1,7 +1,7 @@
 using LGProjects.Android.Utility;
 using UnityEngine;
 
-public class SampleCode02 : MonoBehaviour
+public class SampleCode02 : UnityEngine.MonoBehaviour
 {
     public QRManager qrManager;
 

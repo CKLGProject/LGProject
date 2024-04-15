@@ -5,10 +5,7 @@ using System.Threading;
 
 namespace PlayerState
 {
-    //public class AAAA
-    //{
-    //    AAAA
-    //}
+
 
     public class JumpState : State
     {
@@ -22,13 +19,8 @@ namespace PlayerState
             jumpScale = _jumpScale;
             maximumCount = _maximumCount;
             jumpDelay = 0.2f;
-            //callback = new Thread(new ThreadStart(Run));
+
         }
-
-        //void Run()
-        //{
-
-        //}
 
         public override void Enter()
         {

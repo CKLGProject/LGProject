@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Ranking
 {
-    public class ItemView : MonoBehaviour
+    public class ItemView : UnityEngine.MonoBehaviour
     {
         public TMP_Text OrderText;
         public TMP_Text NicknameText;

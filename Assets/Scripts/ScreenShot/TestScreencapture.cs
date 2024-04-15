@@ -3,7 +3,7 @@ using Cysharp.Threading.Tasks;
 using DeadMosquito.AndroidGoodies;
 using UnityEngine;
 
-public class TestScreencapture : MonoBehaviour
+public class TestScreencapture : UnityEngine.MonoBehaviour
 {
     public GameObject UI;
     

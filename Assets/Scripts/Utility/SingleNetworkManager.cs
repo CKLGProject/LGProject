@@ -1,7 +1,7 @@
 using Unity.Netcode;
 using UnityEngine;
 
-public class SingleNetworkManager : MonoBehaviour
+public class SingleNetworkManager : UnityEngine.MonoBehaviour
 {
     private void Start()
     {
