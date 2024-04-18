@@ -7,7 +7,7 @@ using UnityEngine.Pool;
 
 namespace Ranking
 {
-    public class RankingView : MonoBehaviour
+    public class RankingView : UnityEngine.MonoBehaviour
     {
         private ObjectPool<ItemView> _itemPool;
         public ItemView ItemPrefab;

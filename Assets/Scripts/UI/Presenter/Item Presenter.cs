@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Ranking
 {
-    public class ItemPresenter : MonoBehaviour
+    public class ItemPresenter : UnityEngine.MonoBehaviour
     {
         private ItemView _view;
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Ranking
 {
-    public class RankingModel : MonoBehaviour
+    public class RankingModel : UnityEngine.MonoBehaviour
     {
      public SupabaseSettings SupabaseSettings;
     }

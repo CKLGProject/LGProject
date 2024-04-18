@@ -9,7 +9,7 @@ using Client = Supabase.Client;
 
 namespace Ranking
 {
-    public class RankingPresenter : MonoBehaviour
+    public class RankingPresenter : UnityEngine.MonoBehaviour
     {
         private RankingModel _model;
         private RankingView _view;

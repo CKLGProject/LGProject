@@ -9,7 +9,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
-public class WaitScene : MonoBehaviour
+public class WaitScene : UnityEngine.MonoBehaviour
 {
     public UIDocument WaitDocument;
     public VisualElement UI;

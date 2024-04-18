@@ -7,7 +7,7 @@ using UnityEngine.XR.ARFoundation;
 using SceneReference = UnityEngine.SceneReference;
 using USingleton;
 
-public class QRScan : MonoBehaviour
+public class QRScan : UnityEngine.MonoBehaviour
 {
     public QRManager QRManager;
     public ARSession Session;

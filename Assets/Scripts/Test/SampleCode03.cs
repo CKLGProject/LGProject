@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using ZXing;
 using ZXing.QrCode;
 
-public class SampleCode03 : MonoBehaviour
+public class SampleCode03 : UnityEngine.MonoBehaviour
 {
     public string SampleMessage = "This is a LG Love Message";
     public RawImage QRRawImage;
