@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,7 +18,7 @@ namespace PlayerState
         {
             base.Enter();
 
-            // ¹æÇâ ÆÇÁ¤
+            // ë°©í–¥ íŒì •
             stateMachine.playable.directionX = stateMachine.moveAction.ReadValue<float>() >= 0.1f ? true : false;
             
         
@@ -49,10 +49,10 @@ namespace PlayerState
                 return;
             }
 
-            // Á¡ÇÁ °¡µå´Â ÇÑ¹ø¸¸!!
+            // ì í”„ ê°€ë“œëŠ” í•œë²ˆë§Œ!!
             if (stateMachine.guardAction.triggered && !stateMachine.isJumpGuard)
             {
-                // ¶¥¿¡ Á¢ÃËÇÏÁö ¾ÊÀº »óÅÂÀÏ ¶§
+                // ë•…ì— ì ‘ì´‰í•˜ì§€ ì•Šì€ ìƒíƒœì¼ ë•Œ
                 if(!stateMachine.isGrounded )
                 {
                     stateMachine.isJumpGuard = true;
@@ -62,7 +62,7 @@ namespace PlayerState
                 return;
             }
 
-            // ÁøÇà ¹æÇâ¿¡ ÀûÀÌ ÀÖ¾î?
+            // ì§„í–‰ ë°©í–¥ì— ì ì´ ìˆì–´?
             if (stateMachine.CheckEnemy())
             {
                 stateMachine.StandingVelocity();
@@ -70,8 +70,8 @@ namespace PlayerState
             }
             if (stateMachine.physics.velocity.x <= maximumSpeed && stateMachine.physics.velocity.x >= -maximumSpeed)
             {
-                // ¹Ù·Î ¾Õ¿¡ ÀûÀÌ ÀÖÀ¸¸é ´õÀÌ»ó ÀÌµ¿ÇÏÁö ¾ÊÀ½(¾Ö´Ï¸ŞÀÌ¼ÇÀº Àç»ı)
-                // ¸Ó¸®¿Í ´Ù¸®ÂÊ¿¡¼­ Ray¸¦ ½ò ¿¹Á¤
+                // ë°”ë¡œ ì•ì— ì ì´ ìˆìœ¼ë©´ ë”ì´ìƒ ì´ë™í•˜ì§€ ì•ŠìŒ(ì• ë‹ˆë©”ì´ì…˜ì€ ì¬ìƒ)
+                // ë¨¸ë¦¬ì™€ ë‹¤ë¦¬ìª½ì—ì„œ Rayë¥¼ ì  ì˜ˆì •
                 stateMachine.physics.velocity += Vector3.right * (stateMachine.moveAction.ReadValue<float>());
             }
 

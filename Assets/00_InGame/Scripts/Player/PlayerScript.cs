@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,7 +23,7 @@ public class PlayerScript : Playable
 
     private void OnDrawGizmos()
     {
-        // Attack Collider¸¦ ÇÑ °÷¿¡ °íÁ¤ÇÒ ÇÊ¿ä°¡ ÀÖÀ½.
+        // Attack Colliderë¥¼ í•œ ê³³ì— ê³ ì •í•  í•„ìš”ê°€ ìˆìŒ.
         try
         {
             Gizmos.color = Color.blue;
@@ -75,10 +75,10 @@ public class PlayerScript : Playable
 
     void Start()
     {
-        // refÀ» ¾²´Â ÀÌÀ¯
-        // ÀÏ¹İÀûÀ¸·Î »ç¿ëÇÏ¸é º¹»ç»ı¼ºÀÚ¸¦ ¾²±â ¶§¹®¿¡ ¸Ş¸ğ¸® ´©¼ö°¡ ÀÏ¾î³¯ ¼ö ÀÖ´Âµ¥, refÀ» »ç¿ëÇÏ¸é ·¹ÆÛ·±½º ÁÖ¼Ò°ªÀ¸·Î Àü´ŞÇÏ±â ¶§¹®¿¡ º¹»çÇÏ¿© ¸Ş¸ğ¸®¸¦ »ç¿ëÇÏ´Â ºÒ»ó»ç¸¦ ¸·À» ¼ö ÀÖÀ½
-        // ±×·³ OutÀ» ¾²Áö ¾Ê´Â ÀÌÀ¯?
-        // ±âº»ÀûÀ¸·Î OutÀ» »ç¿ëÇÏ¸é ¸Å¼­µå ³»ºÎ¿¡¼­ Á÷Á¢ÀûÀÎ ¼±¾ğ ex) (out int a)°¡ ¸Ş¼­µå·Î µé¾î°¬À» ¶§ a = ? À» ¹İµå½Ã ÇØÁà¾ß ÇÑ´Ù.
+        // refì„ ì“°ëŠ” ì´ìœ 
+        // ì¼ë°˜ì ìœ¼ë¡œ ì‚¬ìš©í•˜ë©´ ë³µì‚¬ìƒì„±ìë¥¼ ì“°ê¸° ë•Œë¬¸ì— ë©”ëª¨ë¦¬ ëˆ„ìˆ˜ê°€ ì¼ì–´ë‚  ìˆ˜ ìˆëŠ”ë°, refì„ ì‚¬ìš©í•˜ë©´ ë ˆí¼ëŸ°ìŠ¤ ì£¼ì†Œê°’ìœ¼ë¡œ ì „ë‹¬í•˜ê¸° ë•Œë¬¸ì— ë³µì‚¬í•˜ì—¬ ë©”ëª¨ë¦¬ë¥¼ ì‚¬ìš©í•˜ëŠ” ë¶ˆìƒì‚¬ë¥¼ ë§‰ì„ ìˆ˜ ìˆìŒ
+        // ê·¸ëŸ¼ Outì„ ì“°ì§€ ì•ŠëŠ” ì´ìœ ?
+        // ê¸°ë³¸ì ìœ¼ë¡œ Outì„ ì‚¬ìš©í•˜ë©´ ë§¤ì„œë“œ ë‚´ë¶€ì—ì„œ ì§ì ‘ì ì¸ ì„ ì–¸ ex) (out int a)ê°€ ë©”ì„œë“œë¡œ ë“¤ì–´ê°”ì„ ë•Œ a = ? ì„ ë°˜ë“œì‹œ í•´ì¤˜ì•¼ í•œë‹¤.
 
         stateMachine = new PlayerState.PlayerStateMachine();
         stateMachine = PlayerState.PlayerStateMachine.CreateStateMachine(this.gameObject);
@@ -119,7 +119,7 @@ public class PlayerScript : Playable
         velocity = stateMachine.physics.velocity;
         //Attack = stateMachine.jumpAction.triggered;
 
-        // ÀÏ´Ü ¿©±â¿¡ ³Ö¾îº¸ÀÚ
+        // ì¼ë‹¨ ì—¬ê¸°ì— ë„£ì–´ë³´ì
         Ray ray = new Ray(transform.position, -transform.forward);
         
         if (Physics.Raycast(transform.position, Vector3.down, out hit, 1.1f, layer))
