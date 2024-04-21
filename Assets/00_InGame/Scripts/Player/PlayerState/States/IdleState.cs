@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,7 +14,7 @@ namespace PlayerState
 
         public override void Enter()
         {
-            // ÀÔÀå ½Ã ³»ºÎ Á¤º¸¸¦ ÃÊ±âÈ­.
+            // ì…ì¥ ì‹œ ë‚´ë¶€ ì •ë³´ë¥¼ ì´ˆê¸°í™”.
             base.Enter();
             stateMachine.StandingVelocity();
         }
@@ -22,7 +22,7 @@ namespace PlayerState
         public override void LogicUpdate()
         {
             base.LogicUpdate();
-            // Å° ÀÔ·ÂÀ» ´ë±â ¹ŞÀ¸¸é »óÅÂ°¡ º¯°æµÊ.
+            // í‚¤ ì…ë ¥ì„ ëŒ€ê¸° ë°›ìœ¼ë©´ ìƒíƒœê°€ ë³€ê²½ë¨.
             if (Mathf.Abs(stateMachine.moveAction.ReadValue<float>()) > 0.2f)
             {
                 stateMachine.ChangeState(stateMachine.playable.moveState);
@@ -42,10 +42,10 @@ namespace PlayerState
                 return;
             }
 
-            // Á¡ÇÁ Áß¿¡´Â ÇÑ ¹ø¸¸ °¡´ÉÇÏ°Ô ÇÑ´Ù.
+            // ì í”„ ì¤‘ì—ëŠ” í•œ ë²ˆë§Œ ê°€ëŠ¥í•˜ê²Œ í•œë‹¤.
             if (stateMachine.guardAction.triggered && !stateMachine.isJumpGuard)
             {
-                // ¶¥¿¡ Á¢ÃËÇÏÁö ¾ÊÀº »óÅÂÀÏ ¶§
+                // ë•…ì— ì ‘ì´‰í•˜ì§€ ì•Šì€ ìƒíƒœì¼ ë•Œ
                 if (!stateMachine.isGrounded)
                 {
                     stateMachine.isJumpGuard = true;
@@ -65,13 +65,13 @@ namespace PlayerState
 
         void AttackLogic()
         {
-            // ¶¥¿¡ ºÙ¾îÀÖÀ¸¸é¼­ °ø°İÀ» ÁøÇàÇÏ¸é?
+            // ë•…ì— ë¶™ì–´ìˆìœ¼ë©´ì„œ ê³µê²©ì„ ì§„í–‰í•˜ë©´?
             if (stateMachine.isGrounded)
             {
                 stateMachine.ChangeState(stateMachine.playable.attackState);
                 return;
             }
-            // °øÁß¿¡¼­ °ø°İÇÏ¸é?
+            // ê³µì¤‘ì—ì„œ ê³µê²©í•˜ë©´?
             if(!stateMachine.isGrounded)
             {
                 stateMachine.ChangeState(stateMachine.playable.jumpAttackState);
@@ -81,14 +81,14 @@ namespace PlayerState
 
         public override void PhysicsUpdate()
         {
-            // ¶¥¿¡ ´êÀºÁö Ã¼Å©ÇÏ¿© jump Count¸¦ 0À¸·Î º¯°æ.
+            // ë•…ì— ë‹¿ì€ì§€ ì²´í¬í•˜ì—¬ jump Countë¥¼ 0ìœ¼ë¡œ ë³€ê²½.
             base.PhysicsUpdate();
 
         }
 
         public override void Exit()
         {
-            // ³ª°¥ ‹š ºÒÇÊ¿äÇÑ Á¤º¸µéÀ» Á¤¸®.
+            // ë‚˜ê°ˆ ë–„ ë¶ˆí•„ìš”í•œ ì •ë³´ë“¤ì„ ì •ë¦¬.
 
         }
 

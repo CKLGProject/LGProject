@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,7 +16,7 @@ namespace PlayerState
         public override void Enter()
         {
             base.Enter();
-            // Velocity´Â ÃÊ±âÈ­½ÃÅ°Áö ¾Êµµ·Ï ÇÏÀÚ.
+            // VelocityëŠ” ì´ˆê¸°í™”ì‹œí‚¤ì§€ ì•Šë„ë¡ í•˜ì.
             Debug.Log($"Enter = {stateMachine.jumpInCount}");
         }
 
@@ -31,13 +31,13 @@ namespace PlayerState
         public override void LogicUpdate()
         {
             base.LogicUpdate();
-            // Á¡ÇÁ °ø°İÀ» ÇÑ »óÅÂ¿¡¼­ ¿òÁ÷ÀÌ°Ô ÇÒ °ÍÀÎ°¡?
-            // Á¡ÇÁ °ø°İÀ» ÇÑ »óÅÂ¿¡¼­ Ã¼°ø ½Ã°£À» ´Ã¸± °ÍÀÎ°¡?
-            // 1´Ü Á¡ÇÁ¸¦ ÇÑ ÈÄ °ø°İÀ» ÇÑ »óÅÂ¶ó¸é 2´Ü Á¡ÇÁ°¡ °¡´ÉÇÏ°Ô ÇÒ °ÍÀÎ°¡?
+            // ì í”„ ê³µê²©ì„ í•œ ìƒíƒœì—ì„œ ì›€ì§ì´ê²Œ í•  ê²ƒì¸ê°€?
+            // ì í”„ ê³µê²©ì„ í•œ ìƒíƒœì—ì„œ ì²´ê³µ ì‹œê°„ì„ ëŠ˜ë¦´ ê²ƒì¸ê°€?
+            // 1ë‹¨ ì í”„ë¥¼ í•œ í›„ ê³µê²©ì„ í•œ ìƒíƒœë¼ë©´ 2ë‹¨ ì í”„ê°€ ê°€ëŠ¥í•˜ê²Œ í•  ê²ƒì¸ê°€?
 
             if (Mathf.Abs(stateMachine.moveAction.ReadValue<float>()) >= 0.2f)
             {
-                // ÁøÇà ¹æÇâ¿¡ ÀûÀÌ ÀÖ¾î?
+                // ì§„í–‰ ë°©í–¥ì— ì ì´ ìˆì–´?
                 if (!stateMachine.CheckEnemy() && stateMachine.physics.velocity.x <= maximumSpeed && stateMachine.physics.velocity.x >= -maximumSpeed)
                     stateMachine.physics.velocity += Vector3.right * (stateMachine.moveAction.ReadValue<float>());
             }
