@@ -4,15 +4,15 @@ using UnityEngine;
 
 namespace PlayerState
 {
-    // Attack State´Â Defualt Attack State¸¦ »ó¼Ó¹Ş¾Æ °ø°İ ÆÇÁ¤°ú ´õºÒ¾î
-    // °°Àº ÇÁ·ÎÆÛÆ¼¸¦ °øÀ¯ ¹ŞÀ» ¼ö ÀÖµµ·Ï ÇØ¾ß°Ú´Ù.
+    // Attack StateëŠ” Defualt Attack Stateë¥¼ ìƒì†ë°›ì•„ ê³µê²© íŒì •ê³¼ ë”ë¶ˆì–´
+    // ê°™ì€ í”„ë¡œí¼í‹°ë¥¼ ê³µìœ  ë°›ì„ ìˆ˜ ìˆë„ë¡ í•´ì•¼ê² ë‹¤.
     public class AttackState : State
     {
-        // Ã¼Å© ÇØ¾ßÇÒ °Í
-        // °ø°İÀ» ¿¬¼ÓÀ¸·Î ÇÏ´Â°¡?
-        // °øÁß¿¡ ÀÖ´Â°¡?
-        // ¾É¾Æ ÀÖ´Â°¡?
-        // ´Ş¸®°í ÀÖ´Â°¡?
+        // ì²´í¬ í•´ì•¼í•  ê²ƒ
+        // ê³µê²©ì„ ì—°ì†ìœ¼ë¡œ í•˜ëŠ”ê°€?
+        // ê³µì¤‘ì— ìˆëŠ”ê°€?
+        // ì•‰ì•„ ìˆëŠ”ê°€?
+        // ë‹¬ë¦¬ê³  ìˆëŠ”ê°€?
         // 
 
         //float AttackCont = 0;
@@ -35,12 +35,12 @@ namespace PlayerState
         public override void Enter()
         {
             base.Enter();
-            // ¾îµğ¼­ ¿Ô´ÂÁö Ã¼Å©°¡ ÇÊ¿äÇÒ±î?
+            // ì–´ë””ì„œ ì™”ëŠ”ì§€ ì²´í¬ê°€ í•„ìš”í• ê¹Œ?
             curTimer = 0;
 
             if (Mathf.Abs(stateMachine.moveAction.ReadValue<float>() ) > 0.2f)
             {
-                // ¹°¸® ÃÊ±âÈ­ X 
+                // ë¬¼ë¦¬ ì´ˆê¸°í™” X 
                 return;
             }
 
@@ -51,7 +51,7 @@ namespace PlayerState
             stateMachine.physics.velocity = temp;
             Debug.Log($"AttackCount = {stateMachine.attackCount}");
 
-            // ÀüÁø ¾îÅÃ
+            // ì „ì§„ ì–´íƒ
             if(movingAttack)
                 stateMachine.physics.velocity += Vector3.right * 1.5f;
             damageInCount = false;
@@ -61,23 +61,23 @@ namespace PlayerState
         {
 
         }
-        // ¾Õ¿¡ ÀÖ´Â Ä£±¸¸¦ ¶§¸± °ÍÀÎ°¡?
-        // ¾î¶»°Ô?
+        // ì•ì— ìˆëŠ” ì¹œêµ¬ë¥¼ ë•Œë¦´ ê²ƒì¸ê°€?
+        // ì–´ë–»ê²Œ?
         public override void LogicUpdate()
         {
             base.LogicUpdate();
-            // ÄÚ·çÆ¾ÀÌ³ª ¾²·¹µå µîÀ¸·Î Ä«¿îÆÃ ¶Ç´Â ºÒ¸®¾È °ªÀ» »ç¿ëÇÏ¿© »óÅÂ¸¦ º¯°æÇØ ÁÙ ¿¹Á¤
-            // °ø°İ ½Ã¿£ ÄŞº¸ ÀÔ·Âµµ ÇÊ¿äÇÒ °ÍÀÌ¶ó »ı°¢ÇÏ±â ¶§¹®¿¡ È÷Æ® ½ºÅ×ÀÌÆ®³ª ´Ù¿î ½ºÅ×ÀÌÆ® µîÀÌ ÇÊ¿äÇÒ °ÍÀ¸·Î ¿¹»óµÊ.
-            // ±×·³ °ø°İÀº ¾î¶»°Ô ÇÒ °ÍÀÎ°¡? 
+            // ì½”ë£¨í‹´ì´ë‚˜ ì“°ë ˆë“œ ë“±ìœ¼ë¡œ ì¹´ìš´íŒ… ë˜ëŠ” ë¶ˆë¦¬ì•ˆ ê°’ì„ ì‚¬ìš©í•˜ì—¬ ìƒíƒœë¥¼ ë³€ê²½í•´ ì¤„ ì˜ˆì •
+            // ê³µê²© ì‹œì—” ì½¤ë³´ ì…ë ¥ë„ í•„ìš”í•  ê²ƒì´ë¼ ìƒê°í•˜ê¸° ë•Œë¬¸ì— íˆíŠ¸ ìŠ¤í…Œì´íŠ¸ë‚˜ ë‹¤ìš´ ìŠ¤í…Œì´íŠ¸ ë“±ì´ í•„ìš”í•  ê²ƒìœ¼ë¡œ ì˜ˆìƒë¨.
+            // ê·¸ëŸ¼ ê³µê²©ì€ ì–´ë–»ê²Œ í•  ê²ƒì¸ê°€? 
             curTimer += Time.deltaTime;
             if(!damageInCount)
             {
                 Vector3 right = Vector3.right * (stateMachine.playable.directionX == true ? 1 : -1);
                 Vector3 center = stateMachine.transform.position + right;
-                // »ı°¢º¸´Ù ÆÇÁ¤ÀÌ ÈÄÇÏÁø ¾Ê°Ô ÇÏ±â
-                // hit boxÀÇ Å©±â¸¦ µû¶ó°¨.
+                // ìƒê°ë³´ë‹¤ íŒì •ì´ í›„í•˜ì§„ ì•Šê²Œ í•˜ê¸°
+                // hit boxì˜ í¬ê¸°ë¥¼ ë”°ë¼ê°.
                 Collider[] targets = Physics.OverlapBox(center, Vector3.one * 0.5f);
-                // ¹Ú½º ³»ºÎ¿¡ µé¾î¿Â ÀûÀ» »ı°¢ÇßÀ» ¶§, Playable Character¿Í °¡±î¿î ÀûÀ» Å¸°ÙÀ¸·Î »ï´Â´Ù.
+                // ë°•ìŠ¤ ë‚´ë¶€ì— ë“¤ì–´ì˜¨ ì ì„ ìƒê°í–ˆì„ ë•Œ, Playable Characterì™€ ê°€ê¹Œìš´ ì ì„ íƒ€ê²Ÿìœ¼ë¡œ ì‚¼ëŠ”ë‹¤.
                 System.Tuple<Transform, float> temp = null;
                 
                 foreach(var t in targets)
@@ -98,7 +98,7 @@ namespace PlayerState
                     try
                     {
                         Vector3 v = stateMachine.playable.CaculateVelocity(temp.Item1.GetComponent<Playable>().GetStateMachine.transform.position + temp.Item1.GetComponent<Playable>().GetStateMachine.transform.right, temp.Item1.GetComponent<Playable>().GetStateMachine.transform.position, 0.2f, 0.5f);
-                        // ½ºÅ×ÀÌÆ® ¸Ó½ÅÀ» °¡Á®¿Í¾ß ÇÑ´Ù. ¾î¶»°Ô °¡Á®¿Ã±î?
+                        // ìŠ¤í…Œì´íŠ¸ ë¨¸ì‹ ì„ ê°€ì ¸ì™€ì•¼ í•œë‹¤. ì–´ë–»ê²Œ ê°€ì ¸ì˜¬ê¹Œ?
                         if(temp.Item1 != stateMachine.transform)
                         {
                             temp.
@@ -120,16 +120,16 @@ namespace PlayerState
 
             #region ComboSystem
 
-            // µô·¹ÀÌ°¡ ³¡³­ ÀÌÈÄ Ãß°¡ Å° ÀÔ·ÂÀÌ µé¾î°¡¸é? 
+            // ë”œë ˆì´ê°€ ëë‚œ ì´í›„ ì¶”ê°€ í‚¤ ì…ë ¥ì´ ë“¤ì–´ê°€ë©´? 
             if (curTimer >= comboDelay && stateMachine.attackAction.triggered && stateMachine.attackCount < 3)
             {
-                // °ø°İ ÁøÇà
+                // ê³µê²© ì§„í–‰
                 stateMachine.ChangeState(stateMachine.playable.attackState);
             }
-            // ¸ğ¼ÇÀÌ ³¡³ª¸é?
+            // ëª¨ì…˜ì´ ëë‚˜ë©´?
             else if (curTimer >= aniDelay)
             {
-                // ¸ğ¼ÇÀÌ ³¡³µÀ¸´Ï ±âº» »óÅÂ·Î µÇµ¹¾Æ°¨.
+                // ëª¨ì…˜ì´ ëë‚¬ìœ¼ë‹ˆ ê¸°ë³¸ ìƒíƒœë¡œ ë˜ëŒì•„ê°.
                 stateMachine.attackCount = 0;
                 stateMachine.ChangeState(stateMachine.playable.idleState);
                 return;
@@ -137,7 +137,7 @@ namespace PlayerState
             #endregion
 
             #region SingleAttack
-            // ´ÜÅ¸ °ø°İ
+            // ë‹¨íƒ€ ê³µê²©
             //if(curTimer >= aniDelay)
             //{
             //    stateMachine.attackCount = 0;

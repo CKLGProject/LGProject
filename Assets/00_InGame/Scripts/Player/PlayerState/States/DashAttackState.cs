@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace PlayerState
 {
-    // »ó¼ÓÀº ´ÙÀ½ ±âÈ¸¿¡ 
+    // ìƒì†ì€ ë‹¤ìŒ ê¸°íšŒì— 
     public class DashAttackState : State
     {
         float curTimer;
@@ -19,8 +19,8 @@ namespace PlayerState
         {
             base.Enter();
             curTimer = 0;
-            // velocity ÃÊ±âÈ­ X
-            // ±×·±µ¥ ºê·¹ÀÌÅ©´Â °É¸é ÁÁÀ» µí? ´ëÃæ Drag°ª Á¶ÀıÇØ¼­ ³¢ÀÌÀÍ ÇÏ´Â ´À³¦À» Áàº¸ÀÚ.
+            // velocity ì´ˆê¸°í™” X
+            // ê·¸ëŸ°ë° ë¸Œë ˆì´í¬ëŠ” ê±¸ë©´ ì¢‹ì„ ë“¯? ëŒ€ì¶© Dragê°’ ì¡°ì ˆí•´ì„œ ë¼ì´ìµ í•˜ëŠ” ëŠë‚Œì„ ì¤˜ë³´ì.
 
         }
         public override void LogicUpdate()

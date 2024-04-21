@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -11,7 +11,7 @@ namespace PlayerState
 
         RaycastHit hit;
 
-        // Å° ÀÔ·Â¿¡ ´Ù¸¥ ActionÀ» Ãâ·Â
+        // í‚¤ ì…ë ¥ì— ë‹¤ë¥¸ Actionì„ ì¶œë ¥
 
         public State(PlayerState.PlayerStateMachine _stateMachine) 
         {
@@ -31,7 +31,7 @@ namespace PlayerState
         {
             if(stateMachine.isHit)
             {
-                // °ø°İÀ» ¹Ş¾ÒÀ» ¶§, hitState·Î º¯°æÇØ ÁÜ.
+                // ê³µê²©ì„ ë°›ì•˜ì„ ë•Œ, hitStateë¡œ ë³€ê²½í•´ ì¤Œ.
                 stateMachine.ChangeState(stateMachine.playable.hitState);
             }
             Debug.DrawLine(stateMachine.transform.position + Vector3.down, stateMachine.transform.position + Vector3.down * 1.1f, Color.red);

@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Threading;
@@ -60,7 +60,7 @@ namespace PlayerState
         {
             // State
 
-            // °øÁß¿¡ ¶°ÀÖ´Â ÄÚµå.
+            // ê³µì¤‘ì— ë– ìˆëŠ” ì½”ë“œ.
 
         }
 

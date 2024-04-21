@@ -16,7 +16,7 @@ namespace PlayerState
         {
             base.Enter();
 
-            // x,z Velocity¸¦ ÃÊ±âÈ­
+            // x,z Velocityë¥¼ ì´ˆê¸°í™”
             stateMachine.StandingVelocity();
             stateMachine.isGuard = true;
         }
