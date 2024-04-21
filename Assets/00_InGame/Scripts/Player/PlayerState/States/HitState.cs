@@ -6,22 +6,22 @@ namespace PlayerState
 {
     public class HitState : State
     {
-        float °æÁ÷Å¸ÀÌ¸Ó;
+        float ê²½ì§íƒ€ì´ë¨¸;
         float curTimer; 
-        // ÇÇ°İ ´çÇßÀ» ‹š ³¯¾Æ°¡³ª?
-        public HitState(PlayerStateMachine _stateMachine, float _°æÁ÷Å¸ÀÌ¸Ó) : base(_stateMachine)
+        // í”¼ê²© ë‹¹í–ˆì„ ë–„ ë‚ ì•„ê°€ë‚˜?
+        public HitState(PlayerStateMachine _stateMachine, float _ê²½ì§íƒ€ì´ë¨¸) : base(_stateMachine)
         {
-            °æÁ÷Å¸ÀÌ¸Ó = _°æÁ÷Å¸ÀÌ¸Ó;
+            ê²½ì§íƒ€ì´ë¨¸ = _ê²½ì§íƒ€ì´ë¨¸;
         }
         public override void Enter()
         {
             base.Enter();
-            // x,z Velocity¸¦ ÃÊ±âÈ­
+            // x,z Velocityë¥¼ ì´ˆê¸°í™”
             //Vector3 v = stateMachine.physics.velocity;
             //Vector3.zero;
             //stateMachine.physics.velocity = stateMachine;
 
-            stateMachine.isHit = false;     // ¸Â¾Ò¾î! ¸Â¾Ò´Ù°í! ±×¸¸¶§·Á!
+            stateMachine.isHit = false;     // ë§ì•˜ì–´! ë§ì•˜ë‹¤ê³ ! ê·¸ë§Œë•Œë ¤!
 
             //Debug.Log($"{stateMachine.transform.ToString()}who's hit? : {stateMachine.hitPlayer}");
             curTimer = 0;
@@ -39,7 +39,7 @@ namespace PlayerState
             if(stateMachine.isGrounded)
             {
                 curTimer += Time.deltaTime;
-                if (curTimer >= °æÁ÷Å¸ÀÌ¸Ó)
+                if (curTimer >= ê²½ì§íƒ€ì´ë¨¸)
                 {
                     stateMachine.ChangeState(stateMachine.playable.downState);
                     stateMachine.damageGage += 10;
@@ -48,9 +48,9 @@ namespace PlayerState
             }
             else
             {
-                // °øÁß¿¡¼­ ÇÇ°İ´çÇÒ ½Ã Idle state°¡ ¾Æ´Ñ Down State·Î º¯°æ
-                // Down StateÀÇ °æ¿ì ¶¥¿¡ ´êÀ» ¶§(is Grounded = true) ±îÁö
-                // Down State¸¦ À¯ÁöÇØ¾ß ÇÏ¸ç, 
+                // ê³µì¤‘ì—ì„œ í”¼ê²©ë‹¹í•  ì‹œ Idle stateê°€ ì•„ë‹Œ Down Stateë¡œ ë³€ê²½
+                // Down Stateì˜ ê²½ìš° ë•…ì— ë‹¿ì„ ë•Œ(is Grounded = true) ê¹Œì§€
+                // Down Stateë¥¼ ìœ ì§€í•´ì•¼ í•˜ë©°, 
                 stateMachine.ChangeState(stateMachine.playable.downState);
 
             }

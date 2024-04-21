@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace PlayerState
 {
-    // ´©¿ö ÀÖ´Â State
+    // ëˆ„ì›Œ ìˆëŠ” State
     public class DownState : State
     {
         float curTimer = 0;
@@ -31,12 +31,12 @@ namespace PlayerState
             base.LogicUpdate();
             if (stateMachine.isGrounded)
             {
-                // ¶¥¿¡ ´ê¾ÒÀ» ¶§ ´©¿öÀÖ´Â State
+                // ë•…ì— ë‹¿ì•˜ì„ ë•Œ ëˆ„ì›ŒìˆëŠ” State
                 curTimer += Time.deltaTime;
                 if (curTimer >= delay)
                 {
-                    // ¿ø·¡´Â WakeUp State
-                    // Wake UP Áß¿¡´Â °ø°İÀ» ¹Ş¾Æµµ ¹«ÀûÀÓ.
+                    // ì›ë˜ëŠ” WakeUp State
+                    // Wake UP ì¤‘ì—ëŠ” ê³µê²©ì„ ë°›ì•„ë„ ë¬´ì ì„.
                     stateMachine.ChangeState(stateMachine.playable.idleState);
                     return;
                 }

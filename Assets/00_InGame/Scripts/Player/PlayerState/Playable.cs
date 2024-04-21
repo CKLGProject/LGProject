@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,10 +23,10 @@ public class Playable : UnityEngine.MonoBehaviour
     public float dashSpeed;
     public float jumpScale;
     public float hitDelay;
-    public GameObject guardEffect;              // °¡µå ÀÌÆåÆ®ÀÎµ¥ ¿ÀºêÁ§Æ®·Î ÀÏ´Ü Ç¥Çö.
+    public GameObject guardEffect;              // ê°€ë“œ ì´í™íŠ¸ì¸ë° ì˜¤ë¸Œì íŠ¸ë¡œ ì¼ë‹¨ í‘œí˜„.
 
 
-    // °ø°İ °ü·Ã ÀÎ½ºÆåÅÍ 
+    // ê³µê²© ê´€ë ¨ ì¸ìŠ¤í™í„° 
     [Range(1f, 10f)]
     public float AttackDelay = 1f;
     public float comboDelay = 0;
@@ -35,7 +35,7 @@ public class Playable : UnityEngine.MonoBehaviour
 
     public LayerMask layer;
 
-    // °ø°İ ¹æÇâ
+    // ê³µê²© ë°©í–¥
     public bool directionX = false;
 
 
@@ -55,17 +55,17 @@ public class Playable : UnityEngine.MonoBehaviour
         #region Omit
         // define the distance x and y first;
         Vector3 distance = target - origin;
-        Vector3 distanceXZ = distance; // x¿Í zÀÇ Æò¸éÀÌ¸é ±âº»ÀûÀ¸·Î °Å¸®´Â °°Àº º¤ÅÍ.
-        distanceXZ.y = 0f; // y´Â 0À¸·Î ¼³Á¤.
+        Vector3 distanceXZ = distance; // xì™€ zì˜ í‰ë©´ì´ë©´ ê¸°ë³¸ì ìœ¼ë¡œ ê±°ë¦¬ëŠ” ê°™ì€ ë²¡í„°.
+        distanceXZ.y = 0f; // yëŠ” 0ìœ¼ë¡œ ì„¤ì •.
                            //Forward = origin;
                            // Create a float the represent our distance
-        float Sy = distance.y;    // ¼¼·Î ³ôÀÌÀÇ °Å¸®¸¦ ÁöÁ¤.
+        float Sy = distance.y;    // ì„¸ë¡œ ë†’ì´ì˜ ê±°ë¦¬ë¥¼ ì§€ì •.
         float Sxz = distanceXZ.magnitude;
 
-        // ¼Óµµ Ãß°¡
+        // ì†ë„ ì¶”ê°€
         float Vxz = Sxz / time;
         float Vy = Sy / time + height * Mathf.Abs(Physics.gravity.y) * time;
-        // °è»êÀ¸·Î ÀÎÇØ µÎ ÃàÀÇ ÃÊ±â ¼Óµµ¸¦ °¡Áö°í »õ·Î¿î º¤ÅÍ¸¦ ¸¸µé ¼ö ÀÖÀ½.
+        // ê³„ì‚°ìœ¼ë¡œ ì¸í•´ ë‘ ì¶•ì˜ ì´ˆê¸° ì†ë„ë¥¼ ê°€ì§€ê³  ìƒˆë¡œìš´ ë²¡í„°ë¥¼ ë§Œë“¤ ìˆ˜ ìˆìŒ.
         Vector3 result = distanceXZ.normalized;
         result *= Vxz;
         result.y = Vy;
