@@ -6,12 +6,12 @@ namespace LGProject.PlayerState
 {
     public class HitState : State
     {
-        float 경직타이머;
+        float stunedTimer;
         float curTimer; 
         // 피격 당했을 떄 날아가나?
-        public HitState(PlayerStateMachine _stateMachine, float _경직타이머) : base(_stateMachine)
+        public HitState(PlayerStateMachine _stateMachine, float _stunedTimer) : base(_stateMachine)
         {
-            경직타이머 = _경직타이머;
+            stunedTimer = _stunedTimer;
         }
         public override void Enter()
         {
@@ -39,7 +39,7 @@ namespace LGProject.PlayerState
             if(stateMachine.isGrounded)
             {
                 curTimer += Time.deltaTime;
-                if (curTimer >= 경직타이머)
+                if (curTimer >= stunedTimer)
                 {
                     stateMachine.ChangeState(stateMachine.playable.downState);
                     stateMachine.damageGage += 10;

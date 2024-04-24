@@ -99,49 +99,16 @@ namespace LGProject.PlayerState
 
         }
 
-        RaycastHit hit;
-
         void Update()
         {
             stateMachine.currentState.LogicUpdate();
             velocity = stateMachine.physics.velocity;
             //Attack = stateMachine.jumpAction.triggered;
-
-            // 일단 여기에 넣어보자
-            Ray ray = new Ray(transform.position, -transform.forward);
-
-            if (Physics.Raycast(transform.position, Vector3.down, out hit, 1.1f, layer))
-            {
-                //Debug.Log("AA");
-                stateMachine.collider.isTrigger = false;
-                //Debug.Log("AA");
-            }
+            PlatformCheck();
 
 
         }
 
-        private void OnCollisionEnter(Collision collision)
-        {
-            if (collision.transform.name == $"Platform")
-            {
-                stateMachine.isGrounded = true;
-                stateMachine.isJumpGuard = false;
-                stateMachine.jumpInCount = 0;
-                //stateMachine.collider.isTrigger = false;
-                //Debug.Log("Hit Ground");
-            }
-        }
-
-        private void OnCollisionExit(Collision collision)
-        {
-            if (collision.transform.name == $"Platform")
-            {
-                stateMachine.isGrounded = false;
-                stateMachine.collider.isTrigger = true;
-                //stateMachine.isJumpGuard = true;
-                //Debug.Log("Jumping");
-            }
-        }
     }
 
 }

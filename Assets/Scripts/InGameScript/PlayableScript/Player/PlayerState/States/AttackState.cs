@@ -97,14 +97,16 @@ namespace LGProject.PlayerState
                 {
                     try
                     {
-                        Vector3 v = stateMachine.playable.CaculateVelocity(temp.Item1.GetComponent<Playable>().GetStateMachine.transform.position + temp.Item1.GetComponent<Playable>().GetStateMachine.transform.right, temp.Item1.GetComponent<Playable>().GetStateMachine.transform.position, 0.2f, 0.5f);
+                        Vector3 v = stateMachine.playable.CaculateVelocity(
+                            temp.Item1.GetComponent<Playable>().GetStateMachine.transform.position + (temp.Item1.GetComponent<Playable>().GetStateMachine.transform.position - stateMachine.transform.position).normalized,
+                            temp.Item1.GetComponent<Playable>().GetStateMachine.transform.position, 0.5f, 0.5f);
                         // 스테이트 머신을 가져와야 한다. 어떻게 가져올까?
                         if(temp.Item1 != stateMachine.transform)
                         {
                             temp.
-                           Item1.GetComponent<Playable>().
-                           GetStateMachine.
-                           HitDamaged(stateMachine.attackCount - 1 < 2 ? Vector3.zero : v);
+                            Item1.GetComponent<Playable>().
+                            GetStateMachine.
+                            HitDamaged(stateMachine.attackCount - 1 < 2 ? Vector3.zero : v);
                             damageInCount = true;
                             temp.Item1.GetComponent<Playable>().GetStateMachine.hitPlayer = stateMachine.transform;
                             //Debug.Log($"Attack In Count = {stateMachine.attackCount}");

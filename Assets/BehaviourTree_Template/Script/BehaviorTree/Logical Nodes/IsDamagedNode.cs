@@ -1,13 +1,12 @@
-癤퓎sing System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 namespace BehaviourTree
 {
-    public class RepeatNode : DecoratorNode
+    // 피해를 입었을 때 작동하는 노드
+    public class IsDamagedNode : ActionNode
     {
-        public bool Loop = true;
         protected override void OnStart()
         {
 
@@ -15,14 +14,13 @@ namespace BehaviourTree
 
         protected override void OnStop()
         {
-
+            //agent.isHit = false;
         }
-
 
         protected override State OnUpdate()
         {
-            child.Update();
-            return State.Running;
+            return agent.GetStateMachine.isHit ? State.Success : State.Failure;
         }
     }
+
 }

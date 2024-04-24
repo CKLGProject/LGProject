@@ -26,7 +26,7 @@ namespace BehaviourTree
         {
             //Vector2 mousePos = Input.mousePosition;
             // 새 노드 생성
-            Node node = ScriptableObject.CreateInstance(type) as Node;
+            Node node = CreateInstance(type) as Node;
             // 이름 설정
             node.name = type.Name;
             //node.position = mousePos;
