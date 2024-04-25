@@ -1,16 +1,15 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 
 namespace BehaviourTree
 {
-    public class RepeatNode : DecoratorNode
+    public class TestNode : ActionNode
     {
-        public bool Loop = true;
         protected override void OnStart()
         {
-
+            Debug.Log("AA");
         }
 
         protected override void OnStop()
@@ -18,11 +17,11 @@ namespace BehaviourTree
 
         }
 
-
         protected override State OnUpdate()
         {
-            child.Update();
-            return State.Running;
+
+            return State.Success;
         }
     }
+
 }

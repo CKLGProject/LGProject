@@ -6,7 +6,7 @@ namespace BehaviourTree
 {
     public class RootNode : Node
     {
-        public Node child;
+        [HideInInspector] public Node child;
         protected override void OnStart()
         {
 

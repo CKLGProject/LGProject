@@ -1,204 +1,108 @@
-using System.Collections;
+Ôªøusing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 namespace BehaviourTree
 {
-    // ¡∂∞«
-    // -> ªÛ¥Î∏¶ √£¿∏∏È πŸ∑Œ ∞¯∞› 
-    // -> ±◊∑Ø≥™ ªÛ¥Îø°∞‘ ∞¯∞›¿ª πﬁ∞Ì¿÷¥¬ ªÛ≈¬∂Û∏È º˚æÓæﬂ«‘.
-    // -> æÓ∂ª∞‘ º˚æÓæﬂ «“±Ó? ¡÷∫Øø° ∞°¿Â ∞°±ÓøÓ ¿∫Ω≈√≥∏¶ √£æ∆æﬂ«‘.
+    // Ï°∞Í±¥
+    // -> ÏÉÅÎåÄÎ•º Ï∞æÏúºÎ©¥ Î∞îÎ°ú Í≥µÍ≤© 
+    // -> Í∑∏Îü¨ÎÇò ÏÉÅÎåÄÏóêÍ≤å Í≥µÍ≤©ÏùÑ Î∞õÍ≥†ÏûàÎäî ÏÉÅÌÉúÎùºÎ©¥ Ïà®Ïñ¥ÏïºÌï®.
+    // -> Ïñ¥ÎñªÍ≤å Ïà®Ïñ¥Ïïº Ìï†Íπå? Ï£ºÎ≥ÄÏóê Í∞ÄÏû• Í∞ÄÍπåÏö¥ ÏùÄÏã†Ï≤òÎ•º Ï∞æÏïÑÏïºÌï®.
     //
     //
-    public class AIAgent : MonoBehaviour
+    public class AIAgent : LGProject.PlayerState.Playable
     {
-        public NavMeshAgent navMeshAgent;
 
-        public bool FindTarget = false;
+        public Transform player;
 
-        public float chasingRange;
-        public float shootingRange;
-        public bool shoot = false;
+        //public Animator animator;
 
-        // ¿˚∞˙ ∏∂¡÷√∆¥Ÿ!!
-        public bool isEncounter = false;
-        public bool isHit = false;
-        public bool isConcealment = false;
-        public bool isHide = false;
-
-        private const float HorizontalViewAngle = 75;
-        private float m_horizontalViewHalfAngle = 0f;
-        private float rotateAngle = 0;
-        
-        [SerializeField] private float m_viewRotateZ = 0f;
-
-        [HideInInspector] public GameObject target;
-        [HideInInspector] public Vector3 LookPosition;
-        // ««∞› πÊ«‚
-        [HideInInspector] public Vector3 hitDirection;
-
-        [HideInInspector] public Transform bestCoverSpot;
-        #region Find View Targets
-
-        public static Vector3 AngleToDirY(Transform _transform, float angleInDegree)
+        [System.Obsolete]
+        private void Awake()
         {
-            #region Omit
-            float radian = (angleInDegree + _transform.eulerAngles.y) * Mathf.Deg2Rad;
-            return new Vector3(Mathf.Sin(radian), 0f, Mathf.Cos(radian));
-            #endregion
+            Random.seed = System.DateTime.Now.Millisecond;
+            stateMachine = new LGProject.PlayerState.PlayerStateMachine();
+            stateMachine = LGProject.PlayerState.PlayerStateMachine.CreateStateMachine(this.gameObject);
+
+            stateMachine.guardEffect = guardEffect;
+            stateMachine.guardEffect.SetActive(false);
         }
 
-        public GameObject FindViewTarget(float SearchRange, LayerMask hideMask, LayerMask targetMask )
+        private void Start()
         {
-            Vector3 targetPos, dir, lookDir;
-            Vector3 originPos = transform.position;
-            // «√∑π¿ÃæÓ º≠ƒ™
-            Collider[] hitedTargets = Physics.OverlapSphere(originPos, SearchRange, targetMask);
-            Transform faraway = null;
-            float dot, angle;
-            float distanceOld, distanceNew;
-
-            foreach (var hitedTarget in hitedTargets)
-            {
-                targetPos = hitedTarget.transform.position;
-                dir = (targetPos - originPos).normalized;
-                lookDir = AngleToDirY(this.transform, rotateAngle);
-
-                dot = Vector3.Dot(lookDir, dir);
-                angle = Mathf.Acos(dot) * Mathf.Rad2Deg;
-                bool hitWall = Physics.Raycast(originPos, dir, Vector3.Distance(originPos, targetPos), hideMask);
-                //Debug.Log($"aa = {a}");
-                if (angle <= HorizontalViewAngle * .5f &&
-                    !hitWall
-                    && hitedTarget != this)
-                {
-                    // Ω√æﬂ ∞¢ ≥ªø° ¿÷¿∏¥œ ∞≈∏Æ∏¶ ∫Ò±≥
-                    // ∞°¿Â ∏’ ∞˜¿∏∑Œ ∞°æﬂ«‘.
-                    if (faraway == null)
-                    {
-                        faraway = hitedTarget.transform;
-                        distanceOld = Vector3.Distance(transform.position, faraway.position);
-                    }
-                    else
-                    {
-                        // ∞≈∏Æ∏¶ ∫Ò±≥«ÿº≠ ∞°¿Â ∏’ ∞˜ø° ∞£¥Ÿ.
-                        distanceOld = Vector3.Distance(transform.position, faraway.position);
-                        distanceNew = Vector3.Distance(transform.position, hitedTarget.transform.position);
-                        if (distanceNew <= distanceOld)
-                        {
-                            // ∞°¿Â ∞°±ÓøÓ ¿˚¿ª «‚«ÿ πﬂ∆˜
-                            faraway = hitedTarget.transform;
-                            distanceOld = distanceNew;
-                        }
-                    }
-                }
-            }
-            // ∞…∏∞ æ÷µÈ ¡ﬂø° ∞°¿Â ∞°±ÓøÓ æ÷µÈ¿ª √‚∑¬
-            // ∞…∏Æ¥¬∞‘ æ¯≥™ø‰? ¡§ªÛ¿‘¥œ¥Ÿ.
-
-            return faraway == null ? null : faraway.gameObject;
+            
         }
 
+        private void Update()
+        {
+            // ÏùºÎã® Ïó¨Í∏∞Ïóê ÎÑ£Ïñ¥Î≥¥Ïûê
+            PlatformCheck();
+            // Î∞îÎùºÎ≥¥Îäî Î∞©Ìñ• -> ÏùºÎã® Î¨¥Ï°∞Í±¥ ÌîåÎ†àÏù¥Ïñ¥Î•º Î∞îÎùºÎ≥¥Í≤å ÏÑ§Ï†ï
+            
+        }
+
+        public void LookPlayer()
+        {
+            // ÌîåÎ†àÏù¥Ïñ¥Î•º Î∞îÎùºÎ¥Ñ.
+            
+
+        }
 
         private void OnDrawGizmos()
         {
-            m_horizontalViewHalfAngle = HorizontalViewAngle * 0.5f;
-
-            Vector3 originPos = transform.position - (transform.forward * 1.5f);
-
-            // ««∞› π¸¿ß
-            Gizmos.DrawWireSphere(transform.position, 2);
-
-            Vector3 horizontalLeftDir = AngleToDirY(transform, -m_horizontalViewHalfAngle + m_viewRotateZ);
-            Vector3 horizontalRightDir = AngleToDirY(transform, m_horizontalViewHalfAngle + m_viewRotateZ);
-            //Vector3 lookDir = AngleToDirY(transform, m_viewRotateZ);
-
-            Debug.DrawRay(originPos, horizontalRightDir * chasingRange, Color.cyan);
-            //Debug.DrawRay(originPos, lookDir * chasingRange, Color.green);
-            Debug.DrawRay(originPos, horizontalLeftDir * chasingRange, Color.cyan);
-
-            Debug.DrawLine(transform.position + transform.forward, transform.position + transform.forward - transform.right, Color.red);
-            Debug.DrawLine(transform.position + transform.forward, transform.position + transform.forward + transform.right, Color.blue);
-
-        }
-        #endregion
-
-        private void Awake()
-        {
-            // ƒ≥ΩÃ.
-            navMeshAgent = GetComponent<NavMeshAgent>();
-        }
-
-        // Start is called before the first frame update
-        void Start()
-        {
-
-        }
-
-
-
-        private float SearchTimer = 0.5f;
-        private float curTimer = 0;
-        // Update is called once per frame
-        void Update()
-        {
-            // ¿ß«˘¿ª πﬁ∞Ì ¿÷¿∏∏Èº≠ ±≥¿¸ ¡ﬂ¿Œ ªÛ≈¬¿Œ∞°?
-            if(!isHit && UnderAttack() )
+            try
             {
-                Debug.Log("AA");
+                Gizmos.color = Color.blue;
+
+                // ÌòÑÏû¨ Î∞îÎùºÎ≥¥Îäî Î∞©Ìñ•
+                Vector3 right = Vector3.right * (directionX == true ? 1 : -1);
+
+                Gizmos.DrawLine(transform.position + (Vector3.down * 0.9f), transform.position + (Vector3.down * 0.9f) + right);
+                Gizmos.DrawLine(transform.position + (Vector3.up * 0.9f), transform.position + (Vector3.up * 0.9f) + right);
+
+                // stateMachineÏùÑ ÏÇ¨Ïö©ÌïòÍ∏¥ ÌïòÏßÄÎßå, currentNodeÎ•º Ïì∞Îäî Í≤ÉÏù¥ ÏïÑÎãàÍ∏∞ ÎñÑÎ¨∏Ïóê ÌåêÏ†ïÏùÑ Îã¨Î¶¨ Ìï¥ÏïºÌïúÎã§.
+
+                if(stateMachine.isNormalAttack)
+                {
+                    switch (stateMachine.attackCount - 1)
+                    {
+                        case 0:
+                            Gizmos.color = Color.red;
+                            break;
+                        case 1:
+                            Gizmos.color = Color.blue;
+                            break;
+                        case 2:
+                            Gizmos.color = Color.yellow;
+                            break;
+                        default:
+                            break;
+                    }
+                    Gizmos.DrawWireCube(transform.position + right, Vector3.one);
+                }
+                else if(stateMachine.isDashAttack)
+                {
+                    Gizmos.color = Color.red;
+                    Vector3 hitBoxSize = Vector3.one;
+                    hitBoxSize.x *= 1.3f;
+                    //hitBoxSiz
+                    Gizmos.DrawWireCube(transform.position + right, hitBoxSize);
+                }
+                else if(stateMachine.isJumpAttack)
+                {
+                    Gizmos.color = Color.red;
+                    Vector3 hitBoxSize = Vector3.one;
+                    hitBoxSize.x *= 1.5f;
+                    //hitBoxSiz
+                    Gizmos.DrawWireCube(transform.position + right, hitBoxSize);
+                }
             }
-            if(target != null)
+            catch
             {
-                Debug.DrawLine(transform.position, target.transform.position);
+
             }
-            
-            // πÊ«‚¿ª «‚«ÿ πŸ∂Û∫∏¥¬∞≈∂Û Dir¿ª ±∏«“ « ø‰∞° ¿÷¿Ω ±◊∑≥ æÓâF∞‘ dir¿ª √º≈©«“ ∞Õ¿Œ∞°?
-            // hit point¿« ∞ÊøÏ transform class æ∆¥— vector3 ±∏¡∂√º∑Œ ¿Ã∑ÁæÓ¡Æ ¿÷±‚ ∂ßπÆø° ±‚∫ª¿˚¿∏∑Œ set¿Ã µ… ∞ÊøÏ (0, 0, 0);
-            //if(true)
-                //transform.forward = Vector3.Lerp(transform.forward, dir, 5 * Time.deltaTime);
-        }
-
-        public bool UnderAttack()
-        {
-            //Collider[] bullets = Physics.OverlapSphere(transform.position, 2f, 1 << 10);
-            ////Debug.Log($"bullets Count {bullets.Length}");
-            //foreach (var bullet in bullets)
-            //{
-            //    Bullet bullet1 = bullet.GetComponent<Bullet>();
-            //    if (bullet1)
-            //    {
-            //        // √—æÀ¿Ã ≥Øæ∆ø¿∏È √—æÀ¿Ã ≥Øæ∆ø¬ πÊ«‚¿ª ±‚¡ÿ¿∏∑Œ º˚¿ª ºˆ ¿÷¥¬ ∞°¿Â ∞°±ÓøÓ ∞¯∞£ø° º˚¥¬¥Ÿ.
-            //        isHit = true;
-            //        target = bullet1.getOner.gameObject;
-            //        return true;
-            //    }
-            //}
-            return false;
-        }
-
-        private bool CheckTimer()
-        {
-            curTimer += Time.deltaTime;
-            if(curTimer >= SearchTimer)
-            {
-                shoot = false;
-                curTimer = 0;
-                return true;
-            }
-            return false;
-        }
-
-        public Transform GetBestCoverSpot()
-        {
-            return bestCoverSpot;
-        }
-
-        public void SetBestCoverSopt(Transform _bestCoverSpot)
-        {
-            bestCoverSpot = _bestCoverSpot;
         }
 
     }
-
 }

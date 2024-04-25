@@ -40,7 +40,12 @@ namespace LGProject.PlayerState  //
         public bool isGuard;
         public bool isJumpGuard;
         public bool isHit;
-        public bool isAttack;
+
+        public bool isNormalAttack;
+
+        public bool isDashAttack = false;
+        public bool isJumpAttack = false;
+
         public GameObject guardEffect;
 
         public int damageGage;

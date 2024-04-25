@@ -40,7 +40,6 @@ namespace LGProject.PlayerState
         // 공격 방향
         public bool directionX = false;
 
-
         protected PlayerStateMachine stateMachine;
 
 
@@ -73,6 +72,41 @@ namespace LGProject.PlayerState
             result.y = Vy;
             return result;
             #endregion
+        }
+
+        private RaycastHit hit;
+
+        public void PlatformCheck()
+        {
+            // 일단 여기에 넣어보자
+            Ray ray = new Ray(transform.position, -transform.forward);
+
+            if (Physics.Raycast(transform.position, Vector3.down, out hit, 1.1f, 1 << 6))
+            {
+                stateMachine.collider.isTrigger = false;
+                stateMachine.isGrounded = true;
+                stateMachine.isJumpGuard = false;
+                stateMachine.jumpInCount = 0;
+            }
+        }
+
+        //private void OnCollisionEnter(Collision collision)
+        //{
+        //    if (collision.transform.name == $"Platform")
+        //    {
+
+        //        Debug.Log("onPlayform");
+        //    }
+        //}
+
+        private void OnCollisionExit(Collision collision)
+        {
+            if (collision.transform.name == $"Platform")
+            {
+                stateMachine.isGrounded = false;
+                stateMachine.collider.isTrigger = true;
+                Debug.Log("offPlayform");
+            }
         }
     }
 

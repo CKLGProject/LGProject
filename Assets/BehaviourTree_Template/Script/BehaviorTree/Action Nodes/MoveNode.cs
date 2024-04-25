@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+
 namespace BehaviourTree
 {
-    public class RepeatNode : DecoratorNode
+    // 움직임을 판단. 상대를 향해 이동
+    // 점프를 할 때도 있을 것이다. 이는 
+    public class MoveNode : ActionNode
     {
-        public bool Loop = true;
         protected override void OnStart()
         {
 
@@ -18,11 +20,10 @@ namespace BehaviourTree
 
         }
 
-
         protected override State OnUpdate()
         {
-            child.Update();
-            return State.Running;
+            return State.Failure;
         }
     }
+
 }
