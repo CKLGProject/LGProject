@@ -14,7 +14,6 @@ namespace BehaviourTree
     public class AIAgent : LGProject.PlayerState.Playable
     {
 
-
         public Transform player;
 
         //public Animator animator;
@@ -39,8 +38,71 @@ namespace BehaviourTree
         {
             // 일단 여기에 넣어보자
             PlatformCheck();
+            // 바라보는 방향 -> 일단 무조건 플레이어를 바라보게 설정
+            
         }
 
+        public void LookPlayer()
+        {
+            // 플레이어를 바라봄.
+            
+
+        }
+
+        private void OnDrawGizmos()
+        {
+            try
+            {
+                Gizmos.color = Color.blue;
+
+                // 현재 바라보는 방향
+                Vector3 right = Vector3.right * (directionX == true ? 1 : -1);
+
+                Gizmos.DrawLine(transform.position + (Vector3.down * 0.9f), transform.position + (Vector3.down * 0.9f) + right);
+                Gizmos.DrawLine(transform.position + (Vector3.up * 0.9f), transform.position + (Vector3.up * 0.9f) + right);
+
+                // stateMachine을 사용하긴 하지만, currentNode를 쓰는 것이 아니기 떄문에 판정을 달리 해야한다.
+
+                if(stateMachine.isNormalAttack)
+                {
+                    switch (stateMachine.attackCount - 1)
+                    {
+                        case 0:
+                            Gizmos.color = Color.red;
+                            break;
+                        case 1:
+                            Gizmos.color = Color.blue;
+                            break;
+                        case 2:
+                            Gizmos.color = Color.yellow;
+                            break;
+                        default:
+                            break;
+                    }
+                    Gizmos.DrawWireCube(transform.position + right, Vector3.one);
+                }
+                else if(stateMachine.isDashAttack)
+                {
+                    Gizmos.color = Color.red;
+                    Vector3 hitBoxSize = Vector3.one;
+                    hitBoxSize.x *= 1.3f;
+                    //hitBoxSiz
+                    Gizmos.DrawWireCube(transform.position + right, hitBoxSize);
+                }
+                else if(stateMachine.isJumpAttack)
+                {
+                    Gizmos.color = Color.red;
+                    Vector3 hitBoxSize = Vector3.one;
+                    hitBoxSize.x *= 1.5f;
+                    //hitBoxSiz
+                    Gizmos.DrawWireCube(transform.position + right, hitBoxSize);
+                }
+            }
+            catch
+            {
+
+            }
+        }
 
     }
 }

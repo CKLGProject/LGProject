@@ -54,7 +54,6 @@ namespace BehaviourTree
         private bool GetPercent()
         {
             float randFloat = Random.Range(0, maxPercent);
-            Debug.Log($"random Float Value = {randFloat}");
             if(percent > randFloat)
             {
                 return true;

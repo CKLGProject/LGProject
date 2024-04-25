@@ -1230,7 +1230,7 @@ MonoBehaviour:
   movingAttack: 1
   layer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   directionX: 0
   player: {fileID: 1383880071}
 --- !u!1 &2127459373

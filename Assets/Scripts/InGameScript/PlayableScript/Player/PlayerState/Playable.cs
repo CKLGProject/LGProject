@@ -40,7 +40,6 @@ namespace LGProject.PlayerState
         // 공격 방향
         public bool directionX = false;
 
-
         protected PlayerStateMachine stateMachine;
 
 

@@ -25,7 +25,7 @@ namespace BehaviourTree
                 case State.Running:
                     break;
                 case State.Failure:
-                    return State.Failure;
+                    return State.Success;
                 case State.Success:
                     curCount++;
                     break;
