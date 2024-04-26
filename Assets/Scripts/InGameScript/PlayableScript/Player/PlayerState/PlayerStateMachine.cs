@@ -105,21 +105,21 @@ namespace LGProject.PlayerState  //
 
         public bool CheckEnemy()
         {
-            Vector3 downPos = transform.position + (Vector3.down * 0.9f);
-            Vector3 upPos = transform.position + (Vector3.up * 0.9f);
+            Vector3 downPos = transform.position;
+            Vector3 upPos = transform.position + (Vector3.up * 0.75f);
             Vector3 direction = Vector3.right * (moveAction.ReadValue<float>() >= 0 ? +1.5f : -1.5f);
             Debug.Log($"Direction = {direction}");
             // 0일 경우 어디방향으로 공격을 해야하는지 체크해보자.
 
             Ray downRay = new Ray(downPos, direction);
             Ray upRay = new Ray(upPos, direction);
-            if (Physics.Raycast(downRay, 1f))
+            if (Physics.Raycast(downRay, .5f))
             {
                 //Debug.Log("down");
                 return true;
             }
             
-            if(Physics.Raycast(upRay, 1f))
+            if(Physics.Raycast(upRay, .5f))
             {
                 //Debug.Log("up");
                 return true;

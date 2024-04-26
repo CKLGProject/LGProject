@@ -18,8 +18,8 @@ namespace LGProject.PlayerState
                 //Vector3 right = Vector3.right * (stateMachine.moveAction.ReadValue<float>() >= 0 ? +1.5f : -1.5f);
                 Vector3 right = Vector3.right * (directionX == true ? 1 : -1);
 
-                Gizmos.DrawLine(transform.position + (Vector3.down * 0.9f), transform.position + (Vector3.down * 0.9f) + right);
-                Gizmos.DrawLine(transform.position + (Vector3.up * 0.9f), transform.position + (Vector3.up * 0.9f) + right);
+                Gizmos.DrawLine(transform.position, transform.position + right * 0.5f);
+                Gizmos.DrawLine(transform.position + (Vector3.up * 0.75f), transform.position + (Vector3.up * 0.75f) + right * 0.5f);
 
                 if (stateMachine.currentState.GetType() == typeof(PlayerState.AttackState))
                 {

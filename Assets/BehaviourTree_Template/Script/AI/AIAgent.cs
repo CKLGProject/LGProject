@@ -58,12 +58,12 @@ namespace BehaviourTree
                 // 현재 바라보는 방향
                 Vector3 right = Vector3.right * (directionX == true ? 1 : -1);
 
-                Gizmos.DrawLine(transform.position + (Vector3.down * 0.9f), transform.position + (Vector3.down * 0.9f) + right);
-                Gizmos.DrawLine(transform.position + (Vector3.up * 0.9f), transform.position + (Vector3.up * 0.9f) + right);
+                Gizmos.DrawLine(transform.position, transform.position + right * 0.5f);
+                Gizmos.DrawLine(transform.position + (Vector3.up * 0.75f), transform.position + (Vector3.up * 0.75f) + right * 0.5f);
 
                 // stateMachine을 사용하긴 하지만, currentNode를 쓰는 것이 아니기 떄문에 판정을 달리 해야한다.
 
-                if(stateMachine.isNormalAttack)
+                if (stateMachine.isNormalAttack)
                 {
                     switch (stateMachine.attackCount - 1)
                     {

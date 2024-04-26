@@ -79,9 +79,9 @@ namespace LGProject.PlayerState
         public void PlatformCheck()
         {
             // 일단 여기에 넣어보자
-            Ray ray = new Ray(transform.position, -transform.forward);
+            //Ray ray = new Ray(transform.position, -transform.forward);
 
-            if (Physics.Raycast(transform.position, Vector3.down, out hit, 1.1f, 1 << 6))
+            if (Physics.Raycast(transform.position, Vector3.down, out hit, 0.1f, 1 << 6))
             {
                 stateMachine.collider.isTrigger = false;
                 stateMachine.isGrounded = true;
