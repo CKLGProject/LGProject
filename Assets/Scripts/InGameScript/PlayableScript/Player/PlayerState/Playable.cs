@@ -26,6 +26,7 @@ namespace LGProject.PlayerState
         public float jumpScale;
         public float hitDelay;
         public GameObject guardEffect;              // 가드 이펙트인데 오브젝트로 일단 표현.
+        public LayerMask PlatformLayer = 1 << 6;
 
 
         // 공격 관련 인스펙터 
@@ -41,7 +42,6 @@ namespace LGProject.PlayerState
         public bool directionX = false;
 
         protected PlayerStateMachine stateMachine;
-
 
         public PlayerStateMachine GetStateMachine
         {
@@ -76,36 +76,44 @@ namespace LGProject.PlayerState
 
         private RaycastHit hit;
 
-        public void PlatformCheck()
-        {
-            // 일단 여기에 넣어보자
-            //Ray ray = new Ray(transform.position, -transform.forward);
+        float curTimer = 0;
+        float downTimer = 0.5f;
 
-            if (Physics.Raycast(transform.position, Vector3.down, out hit, 0.1f, 1 << 6))
+        public void IsPushDownKey()
+        {
+            if (stateMachine.isDown)
             {
-                stateMachine.collider.isTrigger = false;
-                stateMachine.isGrounded = true;
-                stateMachine.isJumpGuard = false;
-                stateMachine.jumpInCount = 0;
+                curTimer += Time.deltaTime;
+                if (downTimer < curTimer)
+                {
+                    stateMachine.isDown = false;
+                    curTimer = 0;
+                }
             }
         }
 
-        //private void OnCollisionEnter(Collision collision)
-        //{
-        //    if (collision.transform.name == $"Platform")
-        //    {
-
-        //        Debug.Log("onPlayform");
-        //    }
-        //}
-
-        private void OnCollisionExit(Collision collision)
+        public void PlatformCheck()
         {
-            if (collision.transform.name == $"Platform")
+            // 일단 여기에 넣어보자
+            Ray ray = new Ray(transform.position + Vector3.up * 0.25f, Vector3.down);
+
+            // 위를 체크하고 싶은데...
+            if(!stateMachine.isDown)
             {
-                stateMachine.isGrounded = false;
-                stateMachine.collider.isTrigger = true;
-                Debug.Log("offPlayform");
+                if (Physics.Raycast(ray, out hit, 0.3f, 1 << 6))
+                {
+                    //Debug.Log($"{hit.transform.name}");
+                    stateMachine.collider.isTrigger = false;
+                    stateMachine.isGrounded = true;
+                    stateMachine.isJumpGuard = false;
+                    stateMachine.jumpInCount = 0;
+                }
+                else
+                {
+                    stateMachine.isGrounded = false;
+                    stateMachine.collider.isTrigger = true;
+                    //Debug.Log("offPlayform");
+                }
             }
         }
     }

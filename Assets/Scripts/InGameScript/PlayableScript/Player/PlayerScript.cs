@@ -14,10 +14,15 @@ namespace LGProject.PlayerState
             // Attack Collider를 한 곳에 고정할 필요가 있음.
             try
             {
+                Gizmos.color = Color.red;
+                Gizmos.DrawLine(transform.position, transform.position - transform.up * 1f);
+
+
                 Gizmos.color = Color.blue;
                 //Vector3 right = Vector3.right * (stateMachine.moveAction.ReadValue<float>() >= 0 ? +1.5f : -1.5f);
-                Vector3 right = Vector3.right * (directionX == true ? 1 : -1);
 
+                Vector3 center = transform.position + Vector3.up * 0.5f;
+                Vector3 right = Vector3.right * (directionX == true ? 0.7f : -0.7f);
                 Gizmos.DrawLine(transform.position, transform.position + right * 0.5f);
                 Gizmos.DrawLine(transform.position + (Vector3.up * 0.75f), transform.position + (Vector3.up * 0.75f) + right * 0.5f);
 
@@ -35,23 +40,23 @@ namespace LGProject.PlayerState
                             Gizmos.color = Color.yellow;
                             break;
                     }
-                    Gizmos.DrawWireCube(transform.position + right, Vector3.one);
+                    Gizmos.DrawWireCube(center + right, Vector3.one * 0.5f);
                 }
                 else if (stateMachine.currentState.GetType() == typeof(PlayerState.DashAttackState))
                 {
                     Gizmos.color = Color.red;
-                    Vector3 hitBoxSize = Vector3.one;
+                    Vector3 hitBoxSize = Vector3.one * 0.7f;
                     hitBoxSize.x *= 1.3f;
                     //hitBoxSiz
-                    Gizmos.DrawWireCube(transform.position + right, hitBoxSize);
+                    Gizmos.DrawWireCube(center + right, hitBoxSize );
                 }
                 else if (stateMachine.currentState.GetType() == typeof(PlayerState.JumpAttackState))
                 {
                     Gizmos.color = Color.red;
-                    Vector3 hitBoxSize = Vector3.one;
+                    Vector3 hitBoxSize = Vector3.one * 0.7f;
                     hitBoxSize.x *= 1.5f;
                     //hitBoxSiz
-                    Gizmos.DrawWireCube(transform.position + right, hitBoxSize);
+                    Gizmos.DrawWireCube(center + right, hitBoxSize);
                 }
             }
             catch
@@ -105,8 +110,6 @@ namespace LGProject.PlayerState
             velocity = stateMachine.physics.velocity;
             //Attack = stateMachine.jumpAction.triggered;
             PlatformCheck();
-
-
         }
 
     }

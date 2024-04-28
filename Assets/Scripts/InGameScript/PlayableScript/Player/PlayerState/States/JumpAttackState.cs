@@ -46,6 +46,8 @@ namespace LGProject.PlayerState
                 stateMachine.StandingVelocity();
             }
 
+            // 공격 판정 -> 아직 없음.
+
             if (stateMachine.isGrounded)
             {
                 stateMachine.ChangeState(stateMachine.playable.idleState);

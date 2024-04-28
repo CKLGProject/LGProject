@@ -26,12 +26,16 @@ namespace LGProject.PlayerState
         public override void LogicUpdate()
         {
             base.LogicUpdate();
-            curTimer += Time.deltaTime; 
+            curTimer += Time.deltaTime;
+
             if(curTimer >= aniDelay)
             {
                 stateMachine.ChangeState(stateMachine.playable.idleState);
                 return ;
             }
+            // 공격 판정 
+            // -> 아직 없음.
+
         }
 
         public override void PhysicsUpdate()

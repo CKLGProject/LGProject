@@ -19,15 +19,15 @@ namespace BehaviourTree
 
         protected override State OnUpdate()
         {
-            try
-            {
+            //try
+            //{
                 return child.Update();
-            }
-            catch
-            {
-                Debug.Log("RootNode havn't ChildNode");
-            }
-            return State.Failure;
+            //}
+            //catch
+            //{
+            //    Debug.Log("RootNode havn't ChildNode");
+            //}
+            //return State.Failure;
         }
 
         public override Node Clone()
