@@ -209,6 +209,13 @@
         "com.unity.render-pipelines.core": "14.0.9"
       }
     },
+    "com.unity.scene-system": {
+      "version": "https://github.com/NK-Studio/SceneSystem.git#UPM",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "56b2f0655815736c3b4c01a1f21952c1d19617eb"
+    },
     "com.unity.searcher": {
       "version": "4.9.2",
       "depth": 2,
