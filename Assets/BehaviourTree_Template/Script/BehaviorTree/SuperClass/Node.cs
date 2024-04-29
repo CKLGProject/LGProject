@@ -19,7 +19,6 @@ namespace BehaviourTree
         // 세팅 후 최종 위치 Vector를 기록하는 변수.
         [HideInInspector] public Vector2 position;
         [HideInInspector] public Blackboard blackboard;
-        [HideInInspector] public AIAgent agent;
         [TextArea] public string description;
 
         public State Update()

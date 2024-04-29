@@ -6,6 +6,8 @@ namespace BehaviourTree
 {
     public class AttackNode : ActionNode
     {
+        public AIAgent Agent;
+        [Space(10f)]
         // 공격을 진행하는 노드 
         // 애니메이션을 실행함.
         int count = 0;
@@ -16,7 +18,7 @@ namespace BehaviourTree
 
         protected override void OnStop()
         {
-            agent.GetStateMachine.isNormalAttack = false;
+            Agent.GetStateMachine.isNormalAttack = false;
 
         }
 

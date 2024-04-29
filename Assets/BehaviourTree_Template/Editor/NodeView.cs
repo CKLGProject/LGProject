@@ -13,7 +13,7 @@ public class NodeView : UnityEditor.Experimental.GraphView.Node
     public Node node;
     public Port input;
     public Port output;
-    public NodeView(Node node, Vector2? position) : base("Assets/BehaviourTree_Template/Editor/UIBuilder/NodeView.uxml")
+    public NodeView(Node node, Vector2? position) : base(AssetDatabase.GUIDToAssetPath("55595d16967a82e4081e0e1691758658"))
     {
         this.node = node;
         this.title = node.name;

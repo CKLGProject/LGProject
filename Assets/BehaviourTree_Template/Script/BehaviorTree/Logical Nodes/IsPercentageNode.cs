@@ -9,6 +9,8 @@ namespace BehaviourTree
     /// </summary>
     public class IsPercentageNode : ActionNode
     {
+        public AIAgent Agent;
+        [Space(10f)]
         private float randTime = 0; 
         private float curTimer = 0;
         private const float maxPercent = 100;

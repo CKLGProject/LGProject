@@ -165,13 +165,13 @@ namespace BehaviourTree
 
         }
 
-        public void Bind(AIAgent agent)
+        public void Bind()
         {
-            Traverse(rootNode, node =>
-            {
-                node.agent = agent;
-                node.blackboard = blackboard;
-            });
+            //Traverse(rootNode, node =>
+            //{
+            //    node.agent = agent;
+            //    node.blackboard = blackboard;
+            //});
         }
     }
 }

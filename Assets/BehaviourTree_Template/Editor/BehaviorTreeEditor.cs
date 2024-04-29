@@ -41,15 +41,18 @@ public class BehaviorTreeEditor : EditorWindow
         // Each editor window contains a root VisualElement object
         VisualElement root = rootVisualElement;
 
+
+        var BehaviourTreeEditor_uxml = AssetDatabase.GUIDToAssetPath("816d5837ca230b24c9898a1693e4a8ac");
         // Import UXML
         //var visualTree = BaseUXML;
-        var visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/BehaviourTree_Template/Editor/UIBuilder/BehaviorTreeEditor.uxml");
+        var visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(BehaviourTreeEditor_uxml);
         visualTree.CloneTree(root);
 
+        var BehaviourTreeEditor_uss = AssetDatabase.GUIDToAssetPath("0abae94caedf05944a403a050ef2358b");
         // A stylesheet can be added to a VisualElement.
         // The style will be applied to the VisualElement and all of its children.
         //var styleSheet = BaseUSS;
-        var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/BehaviourTree_Template/Editor/UIBuilder/BehaviorTreeEditor.uss");
+        var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>(BehaviourTreeEditor_uss);
         root.styleSheets.Add(styleSheet);
 
 

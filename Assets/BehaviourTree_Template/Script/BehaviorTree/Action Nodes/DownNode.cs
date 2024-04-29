@@ -6,6 +6,8 @@ namespace BehaviourTree
 {
     public class DownNode : ActionNode
     {
+        public AIAgent Agent;
+        [Space(10f)]
         public float downTimer;
         private float curTimer;
         protected override void OnStart()
@@ -21,7 +23,7 @@ namespace BehaviourTree
 
         protected override State OnUpdate()
         {
-            if (agent.GetStateMachine.isGrounded)
+            if (Agent.GetStateMachine.isGrounded)
             {
 
                 curTimer += Time.deltaTime;

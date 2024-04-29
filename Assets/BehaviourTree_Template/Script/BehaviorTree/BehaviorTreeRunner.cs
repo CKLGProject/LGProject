@@ -11,7 +11,7 @@ namespace BehaviourTree
         private void Start()
         {
             tree = tree.Clone();
-            tree.Bind(GetComponent<AIAgent>());
+            //tree.Bind(GetComponent<AIAgent>());
 
         }
 
