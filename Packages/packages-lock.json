@@ -36,7 +36,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "dcc2954075ce0db866251a34c4bb5b2eb8aa6fc8"
+      "hash": "dc1607795397a9999262f94df4b278b5b6931088"
     },
     "com.nkstudio.usinglton": {
       "version": "https://github.com/NK-Studio/USingleton.git#UPM",
