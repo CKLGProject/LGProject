@@ -1346,7 +1346,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayGridGizmos: 0
-  displayGridOnPlatformGizmos: 1
+  displayGridOnPlatformGizmos: 0
   unwalkableMask:
     serializedVersion: 2
     m_Bits: 0
@@ -2266,7 +2266,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1656475567
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2912,7 +2912,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0c007b2e03c15d42bece2f59cb3dd62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tree: {fileID: 11400000, guid: b31e46ff439065d428172745f3cfeb51, type: 2}
+  tree: {fileID: 11400000, guid: ed93e99d8f8523f4fba747ff349e0f71, type: 2}
 --- !u!114 &1894206061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2947,7 +2947,7 @@ MonoBehaviour:
   path: []
   chasing: 0
   finding: 0
-  speed: 3
+  speed: 2.5
   targetIndex: 0
   player: {fileID: 237840297}
 --- !u!54 &1894206062
