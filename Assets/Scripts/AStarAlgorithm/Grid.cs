@@ -338,7 +338,7 @@ namespace pathFinding
             }
         }
 
-        public Vector3 GetRandPoint(Vector3 playerPos)
+        public Vector3 GetRandPoint()
         {
             int rand = UnityEngine.Random.Range(0, walkableNodeList.Count);
             
