@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -8,7 +8,7 @@ namespace BehaviourTree
     {
         public UnityAction<float, float> onWeightChanged;
 
-        // ÀÌ ³ëµå·Î µé¾î°¡±â À§ÇÑ °¡ÁßÄ¡
+        // ì´ ë…¸ë“œë¡œ ë“¤ì–´ê°€ê¸° ìœ„í•œ ê°€ì¤‘ì¹˜
         [SerializeField] private float weight;
         public float Weight
         {

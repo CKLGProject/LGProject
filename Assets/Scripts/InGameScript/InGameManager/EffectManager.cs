@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
@@ -16,7 +16,7 @@ public class EffectManager : MonoBehaviour
         //////          Fields          /////
         //===================================
 
-        /* ÀÌÆåÆ® */
+        /* ì´í™íŠ¸ */
         //========================================
         //////          GameObject          /////
         //========================================
@@ -31,7 +31,7 @@ public class EffectManager : MonoBehaviour
         private static GUIStyle BoldLabelStyle;
         private static GUIStyle BoldFoldStyle;
 
-        /* ½ºÅ¸ÀÏ °ü·Ã ³»¿ë */
+        /* ìŠ¤íƒ€ì¼ ê´€ë ¨ ë‚´ìš© */
         private static bool _AcidBombSettingFoldOut = false;
         private static bool _VineAttackFoldOut = false;
         private static bool _OneShotAcidBombFoldOut = false;
@@ -43,7 +43,7 @@ public class EffectManager : MonoBehaviour
             base.OnInspectorGUI();
 
             /*****************************************
-             * ¸ğµç ÇÁ·ÎÆÛÆ¼¸¦ ÀÎ½ºÆåÅÍ¿¡ Ç¥½Ã
+             * ëª¨ë“  í”„ë¡œí¼í‹°ë¥¼ ì¸ìŠ¤í™í„°ì— í‘œì‹œ
              * ***/
             serializedObject.Update();
 
@@ -56,7 +56,7 @@ public class EffectManager : MonoBehaviour
             //GUI_OneShotSetting();
             //GUI_ShotGunState();
 
-            /**º¯°æ»çÇ×ÀÌ ÀÖ´Ù¸é °ªÀ» °»½ÅÇÑ´Ù...*/
+            /**ë³€ê²½ì‚¬í•­ì´ ìˆë‹¤ë©´ ê°’ì„ ê°±ì‹ í•œë‹¤...*/
             if (GUI.changed)
             {
                 serializedObject.ApplyModifiedProperties();
@@ -70,7 +70,7 @@ public class EffectManager : MonoBehaviour
         {
             #region Omit
             /***************************************
-             * ¸ğµç ÇÁ·ÎÆÛÆ¼¸¦ ÃÊ±âÈ­ ÇÑ´Ù.
+             * ëª¨ë“  í”„ë¡œí¼í‹°ë¥¼ ì´ˆê¸°í™” í•œë‹¤.
              * **/
             if (AttackEffect == null)
             {
@@ -108,7 +108,7 @@ public class EffectManager : MonoBehaviour
             }
 
             /******************************************
-             * ¸ğµç ½ºÅ¸ÀÏÀ» ÃÊ±âÈ­
+             * ëª¨ë“  ìŠ¤íƒ€ì¼ì„ ì´ˆê¸°í™”
              * ***/
             if (BoldLabelStyle == null)
             {
@@ -138,7 +138,7 @@ public class EffectManager : MonoBehaviour
             }
 
             EditorGUI.indentLevel++;
-            /* ¿ŞÂÊ µ¢Äğ ÇÁ¸®ÆÕ ÂüÁ¶ÇÊµå Ç¥½Ã..*/
+            /* ì™¼ìª½ ë©ì¿¨ í”„ë¦¬íŒ¹ ì°¸ì¡°í•„ë“œ í‘œì‹œ..*/
             using (var changeScope = new EditorGUI.ChangeCheckScope())
             {
                 GameObject value = (GameObject)EditorGUILayout.ObjectField("AttackEffectPrefab", AttackEffect.objectReferenceValue, typeof(GameObject), true);
@@ -150,7 +150,7 @@ public class EffectManager : MonoBehaviour
 
             EditorGUILayout.Space(15f);
 
-            /* ¿À¸¥ÂÊ µ¢Äğ ÇÁ¸®ÆÕ ÂüÁ¶ÇÊµå Ç¥½Ã..*/
+            /* ì˜¤ë¥¸ìª½ ë©ì¿¨ í”„ë¦¬íŒ¹ ì°¸ì¡°í•„ë“œ í‘œì‹œ..*/
             using (var changeScope = new EditorGUI.ChangeCheckScope())
             {
                 GameObject value = (GameObject)EditorGUILayout.ObjectField("GuardEffectPrefab", GuardEffect.objectReferenceValue, typeof(GameObject), true);
@@ -236,7 +236,7 @@ public class EffectManager : MonoBehaviour
     //public int ShootArea { get { return _ShootArea; } set { _ShootArea = (value < 0 ? 0 : value); } }
 
     /*********************************************
-     * µ¢Äğ Ã¤Âï °ü·Ã ÇÁ·ÎÆÛÆ¼...
+     * ë©ì¿¨ ì±„ì° ê´€ë ¨ í”„ë¡œí¼í‹°...
      * ***/
 
     [SerializeField, HideInInspector]
@@ -276,7 +276,7 @@ public class EffectManager : MonoBehaviour
 
     private void Start()
     {
-        // ÀÏ´Ü ¿©±â¿¡ ÀÌÆåÆ®µéÀ» ¼¼ÆÃ
+        // ì¼ë‹¨ ì—¬ê¸°ì— ì´í™íŠ¸ë“¤ì„ ì„¸íŒ…
         GameObject tempEffect = null;
         if (_AttackEffect != null)
         {

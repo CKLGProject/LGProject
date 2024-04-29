@@ -39,7 +39,7 @@ namespace BehaviourTree
             #endregion
             if (Agent == null)
                 Agent = AIAgent.Instance;
-            // 이거 에러 있음 잘 안받아옴
+            // 상대방을 기준으로 공격을 진행해야함.
             PathRequestManager.RequestPath(new PathRequest(Agent.transform.position, Grid.Instance.GetRandPoint(), Agent.GetPath));
         }
 

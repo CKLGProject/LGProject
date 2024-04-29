@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +6,7 @@ namespace BehaviourTree
 {
     public class WeightSelectorNode : CompositeNode
     {
-        // ÃÑ °¡ÁßÄ¡
+        // ì´ ê°€ì¤‘ì¹˜
         [SerializeField] private float totalWeights = 0;
         private int childCurrent = 0;
         private Node currentNode;
@@ -29,7 +29,7 @@ namespace BehaviourTree
 
         protected override State OnUpdate()
         {
-            // °¡ÁßÄ¡¸¦ ºÎ¿©ÇÏ°í ºÎ¿©µÈ °¡ÁßÄ¡¸¦ ÅëÇØ 
+            // ê°€ì¤‘ì¹˜ë¥¼ ë¶€ì—¬í•˜ê³  ë¶€ì—¬ëœ ê°€ì¤‘ì¹˜ë¥¼ í†µí•´ 
             if (children.Count == 0) return State.Failure;
 
             currentNode = GetStartingNode();
