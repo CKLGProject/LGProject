@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,7 +9,7 @@ namespace BehaviourTree
         public float min;
         public float max;
 
-        // ´ë±â Áß
+        // ëŒ€ê¸° ì¤‘
         float curTimer;
         float randWaitTime;
 

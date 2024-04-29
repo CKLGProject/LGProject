@@ -16,7 +16,7 @@ namespace BehaviourTree
         [HideInInspector] public State state = State.Running;
         [HideInInspector] public bool started = false;
         [HideInInspector] public string guid;
-        // ¼¼ÆÃ ÈÄ ÃÖÁ¾ À§Ä¡ Vector¸¦ ±â·ÏÇÏ´Â º¯¼ö.
+        // ì„¸íŒ… í›„ ìµœì¢… ìœ„ì¹˜ Vectorë¥¼ ê¸°ë¡í•˜ëŠ” ë³€ìˆ˜.
         [HideInInspector] public Vector2 position;
         [HideInInspector] public Blackboard blackboard;
         [HideInInspector] public AIAgent agent;
