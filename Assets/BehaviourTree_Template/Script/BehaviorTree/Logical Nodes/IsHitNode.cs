@@ -9,7 +9,7 @@ namespace BehaviourTree
     // 데미지를 입히는 노드 
     public class IsHitNode : ActionNode
     {
-        public AIAgent Agent;
+        //public AIAgent Agent;
         protected override void OnStart()
         {
              
