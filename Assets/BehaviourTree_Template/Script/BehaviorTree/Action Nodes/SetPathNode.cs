@@ -37,6 +37,8 @@ namespace BehaviourTree
             //    = new Color(Color.red.r, Color.red.g, Color.red.b, 0.25f);
             //pathFinding.PathRequestManager.RequestPath();
             #endregion
+            if (Agent == null)
+                Agent = AIAgent.Instance;
             // 이거 에러 있음 잘 안받아옴
             PathRequestManager.RequestPath(new PathRequest(Agent.transform.position, Grid.Instance.GetRandPoint(), Agent.GetPath));
         }
