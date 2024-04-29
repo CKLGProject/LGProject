@@ -26,8 +26,8 @@ namespace BehaviourTree
         protected override void OnStop()
         {
             Agent.GetStateMachine.isNormalAttack = false;
-        }
 
+        }
         protected override State OnUpdate()
         {
             if (Agent.GetStateMachine.isGuard)

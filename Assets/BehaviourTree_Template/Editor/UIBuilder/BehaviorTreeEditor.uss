@@ -4,3 +4,23 @@ GridBackground{
 	--thick-line-color: rgba(193, 196, 192, 0.1);
 	--spacing: 15;
 }
+
+#title-label1 {
+    -unity-font-style: normal;
+    font-size: 14px;
+    -unity-text-align: upper-center;
+    background-color: rgb(37, 37, 37);
+    border-left-color: rgb(200, 200, 200);
+    border-right-color: rgb(200, 200, 200);
+    border-top-color: rgb(200, 200, 200);
+    border-bottom-color: rgb(200, 200, 200);
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    margin-bottom: 10px;
+}
