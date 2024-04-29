@@ -269,7 +269,7 @@ public class EffectManager : MonoBehaviour
 
     }
 
-    public void Play(string str)
+    public void Play()
     {
 
     }
