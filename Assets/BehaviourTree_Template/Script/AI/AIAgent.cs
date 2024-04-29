@@ -11,6 +11,8 @@ namespace BehaviourTree
     //
     public class AIAgent : LGProject.PlayerState.Playable
     {
+        private static AIAgent instance = null;
+        public static AIAgent Instance => instance;
 
         public Transform target;
         public Grid grid;
@@ -28,6 +30,10 @@ namespace BehaviourTree
         [System.Obsolete]
         private void Awake()
         {
+            if (instance == null)
+            {
+                instance = this;
+            }
             Random.seed = System.DateTime.Now.Millisecond;
             stateMachine = new LGProject.PlayerState.PlayerStateMachine();
             stateMachine = LGProject.PlayerState.PlayerStateMachine.CreateStateMachine(this.gameObject);

@@ -9,11 +9,6 @@
                 <ui:Label text="Inspector" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); background-color: rgb(37, 37, 37);" />
                 <InspectorView />
             </ui:VisualElement>
-            <SplitView orientation="Vertical" fixed-pane-initial-dimension="180">
-                <ui:Label tabindex="-1" text="Label" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Label" style="background-color: rgb(47, 47, 47); color: rgb(255, 255, 255);" />
-                <ui:IMGUIContainer />
-                <ui:VisualElement name="backboard-container" style="flex-grow: 1; height: 225px; flex-direction: column-reverse;" />
-            </SplitView>
         </ui:VisualElement>
         <ui:VisualElement name="right-panel">
             <ui:Label text="Tree View" display-tooltip-when-elided="true" style="background-color: rgb(37, 37, 37); color: rgb(255, 255, 255);" />

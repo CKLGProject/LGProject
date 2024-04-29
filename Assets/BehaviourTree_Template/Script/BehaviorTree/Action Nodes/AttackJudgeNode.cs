@@ -7,26 +7,28 @@ namespace BehaviourTree
 {
     public class AttackJudgeNode : ActionNode
     {
-        public AIAgent Agent;
-        [Space(10f)]
+        //public AIAgent Agent;
+        //[Space(10f)]
         public float judgTimer = 0;
         public float animTimer = 0;
         private float curTimer = 0;
         private bool isAttack = false;
         protected override void OnStart()
         {
-            Agent.GetStateMachine.attackCount++;
+            AIAgent.Instance.GetStateMachine.attackCount++;
             isAttack = false;
-            Agent.GetStateMachine.isNormalAttack = true;
+            AIAgent.Instance.GetStateMachine.isNormalAttack = true;
         }
 
         protected override void OnStop()
         {
-            Agent.GetStateMachine.isNormalAttack = false;
+            AIAgent.Instance.GetStateMachine.isNormalAttack = false;
         }
 
         protected override State OnUpdate()
         {
+            if (AIAgent.Instance.GetStateMachine.isGuard)
+                return State.Failure;
             curTimer += Time.deltaTime;
             if(judgTimer > curTimer)
             {
@@ -47,8 +49,8 @@ namespace BehaviourTree
         private bool ActionJudge()
         {
             // 판정 범위 계산.
-            Vector3 right = Vector3.right * (Agent.directionX == true ? 1 : -1);
-            Vector3 center = Agent.transform.position + right;
+            Vector3 right = Vector3.right * (AIAgent.Instance.directionX == true ? 1 : -1);
+            Vector3 center = AIAgent.Instance.transform.position + right;
 
             Collider[] targets = Physics.OverlapBox(center, Vector3.one * 0.5f);
             System.Tuple<Transform, float> temp = null;
@@ -56,7 +58,7 @@ namespace BehaviourTree
             foreach(var target in targets)
             {
                 float distance = Vector3.Distance(center, target.transform.position);
-                if(temp == null || (temp.Item2 >= distance && target.transform != Agent.transform))
+                if(temp == null || (temp.Item2 >= distance && target.transform != AIAgent.Instance.transform))
                 {
                     temp = System.Tuple.Create(target.transform, distance);
                 }
@@ -70,17 +72,17 @@ namespace BehaviourTree
             }
             else
             {
-                Vector3 v= Agent.CaculateVelocity(
-                        temp.Item1.GetComponent<Playable>().GetStateMachine.transform.position + (temp.Item1.GetComponent<Playable>().GetStateMachine.transform.position - Agent.transform.position).normalized,
+                Vector3 v= AIAgent.Instance.CaculateVelocity(
+                        temp.Item1.GetComponent<Playable>().GetStateMachine.transform.position + (temp.Item1.GetComponent<Playable>().GetStateMachine.transform.position - AIAgent.Instance.transform.position).normalized,
                         temp.Item1.GetComponent<Playable>().GetStateMachine.transform.position, 0.5f, 0.5f);
-                if (temp.Item1 != Agent.transform)
+                if (temp.Item1 != AIAgent.Instance.transform)
                 {
                     temp.
                     Item1.GetComponent<Playable>().
                     GetStateMachine.
-                    HitDamaged(Agent.GetStateMachine.attackCount - 1 < 2 ? Vector3.zero : v);
+                    HitDamaged(AIAgent.Instance.GetStateMachine.attackCount - 1 < 2 ? Vector3.zero : v);
                     //damageInCount = true; <- 이건 좀 생각해봐야 할 듯...
-                    temp.Item1.GetComponent<Playable>().GetStateMachine.hitPlayer = Agent.transform;
+                    temp.Item1.GetComponent<Playable>().GetStateMachine.hitPlayer = AIAgent.Instance.transform;
                     //Debug.Log($"Attack In Count = {stateMachine.attackCount}");
 
                     return true;

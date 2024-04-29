@@ -59,17 +59,17 @@ public class BehaviorTreeEditor : EditorWindow
         treeView = root.Q<BehaviorTreeView>();
         treeView.SetEditor(this);
         inspectorView = root.Q<InspectorView>();
-        blackboardView = root.Q<IMGUIContainer>();
+        //blackboardView = root.Q<IMGUIContainer>();
 
-        blackboardView.onGUIHandler = () =>
-        {
-            if (blackboardProperty == null) { return; }
-            if (treeObject.targetObject == null) { return; }
+        //blackboardView.onGUIHandler = () =>
+        //{
+        //    if (blackboardProperty == null) { return; }
+        //    if (treeObject.targetObject == null) { return; }
 
-            treeObject?.Update();
-            EditorGUILayout.PropertyField(blackboardProperty);
-            treeObject?.ApplyModifiedProperties();
-        };
+        //    treeObject?.Update();
+        //    EditorGUILayout.PropertyField(blackboardProperty);
+        //    treeObject?.ApplyModifiedProperties();
+        //};
 
         treeView.OnNodeSelected = OnNodeSelectionChanged;
         OnSelectionChange();
