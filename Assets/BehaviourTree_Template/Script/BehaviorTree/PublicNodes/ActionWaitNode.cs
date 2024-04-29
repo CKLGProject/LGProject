@@ -1,4 +1,4 @@
-using LGProject.PlayerState;
+ï»¿using LGProject.PlayerState;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,12 +22,12 @@ namespace BehaviourTree
 
         protected override State OnUpdate()
         {
-            // ½Ã°£ ³»¿¡ °ø°İ ÆÇÁ¤ ¹üÀ§ ³»¿¡ µé¾î¿À¸é OK
+            // ì‹œê°„ ë‚´ì— ê³µê²© íŒì • ë²”ìœ„ ë‚´ì— ë“¤ì–´ì˜¤ë©´ OK
             curTimer += Time.deltaTime;
             
             if(judgmentTime > curTimer)
             {
-                // Boolean type Method Running Áß 
+                // Boolean type Method Running ì¤‘ 
                 return State.Running;
             }
             return State.Failure;
@@ -35,11 +35,11 @@ namespace BehaviourTree
 
         private bool AttackRange()
         {
-            // ÆÇÁ¤¸¸ °è»êÇÔ.
+            // íŒì •ë§Œ ê³„ì‚°í•¨.
             Vector3 right = Vector3.right * (agent.directionX == true ? 1 : -1);
             Vector3 center = agent.transform.position + right;
-            // »ı°¢º¸´Ù ÆÇÁ¤ÀÌ ÈÄÇÏÁø ¾Ê°Ô ÇÏ±â
-            // hit boxÀÇ Å©±â¸¦ µû¶ó°¨.
+            // ìƒê°ë³´ë‹¤ íŒì •ì´ í›„í•˜ì§„ ì•Šê²Œ í•˜ê¸°
+            // hit boxì˜ í¬ê¸°ë¥¼ ë”°ë¼ê°.
             Collider[] targets = Physics.OverlapBox(center, Vector3.one * 0.5f);
             System.Tuple<Transform, float> temp = null;
 
@@ -63,7 +63,7 @@ namespace BehaviourTree
                     Vector3 v = agent.CaculateVelocity(
                         temp.Item1.GetComponent<Playable>().GetStateMachine.transform.position + (temp.Item1.GetComponent<Playable>().GetStateMachine.transform.position - agent.transform.position).normalized,
                         temp.Item1.GetComponent<Playable>().GetStateMachine.transform.position, 0.5f, 0.5f);
-                    // ½ºÅ×ÀÌÆ® ¸Ó½ÅÀ» °¡Á®¿Í¾ß ÇÑ´Ù. ¾î¶»°Ô °¡Á®¿Ã±î?
+                    // ìŠ¤í…Œì´íŠ¸ ë¨¸ì‹ ì„ ê°€ì ¸ì™€ì•¼ í•œë‹¤. ì–´ë–»ê²Œ ê°€ì ¸ì˜¬ê¹Œ?
                     if (temp.Item1 != agent.transform)
                     {
                         temp.

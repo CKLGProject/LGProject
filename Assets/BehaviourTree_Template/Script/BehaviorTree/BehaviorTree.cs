@@ -25,9 +25,9 @@ namespace BehaviourTree
         public Node CreateNode(System.Type type)
         {
             //Vector2 mousePos = Input.mousePosition;
-            // ªı ≥ÎµÂ ª˝º∫
+            // ÏÉà ÎÖ∏Îìú ÏÉùÏÑ±
             Node node = CreateInstance(type) as Node;
-            // ¿Ã∏ß º≥¡§
+            // Ïù¥Î¶Ñ ÏÑ§Ï†ï
             node.name = type.Name;
             //node.position = mousePos;
             node.guid = GUID.Generate().ToString();
@@ -52,7 +52,7 @@ namespace BehaviourTree
         public void DeleteNode(Node node)
         {
             Undo.RecordObject(this, "BehaviourTree Tree (CreateNode)");
-            // ≥ÎµÂ ªË¡¶
+            // ÎÖ∏Îìú ÏÇ≠Ï†ú
             nodes.Remove(node);
 
             //AssetDatabase.RemoveObjectFromAsset(node);

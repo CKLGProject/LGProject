@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine.UIElements;
 using UnityEditor.Experimental.GraphView;
@@ -24,28 +24,28 @@ public class BehaviorTreeView : GraphView
 
     public BehaviorTreeView()
     {
-        // FactoryÀÇ ÃÖÇÏ´Ü Layer¸¦
+        // Factoryì˜ ìµœí•˜ë‹¨ Layerë¥¼
         //
         //
-        // Background·Î º¯°æ 
+        // Backgroundë¡œ ë³€ê²½ 
         Insert(0, new GridBackground());
 
-        // ±â´É Ãß°¡ ºÎºĞ
-        // ÁÜ ÀÎ ¾Æ¿ô ±â´É.
+        // ê¸°ëŠ¥ ì¶”ê°€ ë¶€ë¶„
+        // ì¤Œ ì¸ ì•„ì›ƒ ê¸°ëŠ¥.
         this.AddManipulator(new ContentZoomer());
-        // È­¸é µå·¡±× ±â´É
+        // í™”ë©´ ë“œë˜ê·¸ ê¸°ëŠ¥
         this.AddManipulator(new ContentDragger());
-        // ³ëµå¸¦ ¼±ÅÃ ¹× µå·¡±×¸¦ ÇÒ ¼ö ÀÖ´Â ±â´É
+        // ë…¸ë“œë¥¼ ì„ íƒ ë° ë“œë˜ê·¸ë¥¼ í•  ìˆ˜ ìˆëŠ” ê¸°ëŠ¥
         this.AddManipulator(new SelectionDragger());
-        // µå·¡±×·Î ¹Ú½º¸¦ ¸¸µé¾î ±× ¾È¿¡ µé¾î°¡´Â ³ëµåµéÀ» ¼±ÅÃÇÒ ¼ö ÀÖ´Â ±â´É.
-        // º¹¼ö ¼±ÅÃ
+        // ë“œë˜ê·¸ë¡œ ë°•ìŠ¤ë¥¼ ë§Œë“¤ì–´ ê·¸ ì•ˆì— ë“¤ì–´ê°€ëŠ” ë…¸ë“œë“¤ì„ ì„ íƒí•  ìˆ˜ ìˆëŠ” ê¸°ëŠ¥.
+        // ë³µìˆ˜ ì„ íƒ
         this.AddManipulator(new RectangleSelector());
 
-        // StyleSheet ¸¦ ¼¼ÆÃ
+        // StyleSheet ë¥¼ ì„¸íŒ…
         var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/BehaviourTree_Template/Editor/UIBuilder/BehaviorTreeEditor.uss");
         styleSheets.Add(styleSheet);
 
-        // ctrl + z, ctrl + y¸¦ ½ÇÇàÇÏ¿´À» ¶§, ´ÙÀ½ÀÇ ÇÔ¼ö¸¦ È£ÃâÇÔ.
+        // ctrl + z, ctrl + yë¥¼ ì‹¤í–‰í•˜ì˜€ì„ ë•Œ, ë‹¤ìŒì˜ í•¨ìˆ˜ë¥¼ í˜¸ì¶œí•¨.
         Undo.undoRedoPerformed += OnUndoRedo;
     }
 
@@ -109,7 +109,7 @@ public class BehaviorTreeView : GraphView
 
     private GraphViewChange OnGraphViewChanged(GraphViewChange graphViewChange)
     {
-        // Tree ³»ºÎ¿¡ ³ëµå¸¦ Áö¿üÀ» ¶§, BehaviorTree object ³»ºÎ¿¡¼­ ³ëµå°¡ »èÁ¦ µÇ´Â ±â´É.
+        // Tree ë‚´ë¶€ì— ë…¸ë“œë¥¼ ì§€ì› ì„ ë•Œ, BehaviorTree object ë‚´ë¶€ì—ì„œ ë…¸ë“œê°€ ì‚­ì œ ë˜ëŠ” ê¸°ëŠ¥.
         if (graphViewChange.elementsToRemove != null)
         {
             graphViewChange.elementsToRemove.ForEach(elem =>
@@ -120,7 +120,7 @@ public class BehaviorTreeView : GraphView
                     tree.DeleteNode(nodeView.node);
                 }
 
-                // ¿¬°áµÇ¾îÀÖ´Â °£¼±°£ÀÇ ÇÏÀ§(ÀÚ½Ä)·Î µé¾î°¡ ÀÖ´Â ³ëµå¸¦ »óÀ§(ºÎ¸ğ)List¿¡¼­ Áö¿öÁÖ´Â ±â´É.
+                // ì—°ê²°ë˜ì–´ìˆëŠ” ê°„ì„ ê°„ì˜ í•˜ìœ„(ìì‹)ë¡œ ë“¤ì–´ê°€ ìˆëŠ” ë…¸ë“œë¥¼ ìƒìœ„(ë¶€ëª¨)Listì—ì„œ ì§€ì›Œì£¼ëŠ” ê¸°ëŠ¥.
                 Edge edge = elem as Edge;
                 if (edge != null)
                 {
@@ -131,7 +131,7 @@ public class BehaviorTreeView : GraphView
             });
         }
 
-        // ¿¬°á½ÃÅ² ºÎ¸ğ³ëµå·ÎºÎÅÍ ÇÏÀ§ ³ëµå¸¦ list¿¡ ºÒ·¯µéÀÌ´Â ±â´É.
+        // ì—°ê²°ì‹œí‚¨ ë¶€ëª¨ë…¸ë“œë¡œë¶€í„° í•˜ìœ„ ë…¸ë“œë¥¼ listì— ë¶ˆëŸ¬ë“¤ì´ëŠ” ê¸°ëŠ¥.
         if (graphViewChange.edgesToCreate != null)
         {
             graphViewChange.edgesToCreate.ForEach(edge =>
@@ -142,7 +142,7 @@ public class BehaviorTreeView : GraphView
             });
         }
 
-        // ³ëµåÀÇ Æ÷Áö¼Ç¿¡ µû¶ó ¼ø¼­´ë·Î ½ÇÇàµÇ°ÔÇÏ´Â ±â´É.
+        // ë…¸ë“œì˜ í¬ì§€ì…˜ì— ë”°ë¼ ìˆœì„œëŒ€ë¡œ ì‹¤í–‰ë˜ê²Œí•˜ëŠ” ê¸°ëŠ¥.
         if (graphViewChange.movedElements != null)
         {
             nodes.ForEach((n) =>

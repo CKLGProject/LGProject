@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,7 +23,7 @@ namespace BehaviourTree
         protected override State OnUpdate()
         {
             curTimer += Time.deltaTime;
-            // ÀÏ¾î³ª´Â ÁßÀÌ¸é ¹«Àû ÆÇÁ¤
+            // ì¼ì–´ë‚˜ëŠ” ì¤‘ì´ë©´ ë¬´ì  íŒì •
             if (wakeUpTime < curTimer )
             {
                 return State.Success;

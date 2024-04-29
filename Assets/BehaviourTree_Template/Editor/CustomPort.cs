@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
@@ -86,7 +86,7 @@ public class CustomPort : Port
         return port;
     }
 
-    // ÀÌ°Ô Rect ¹üÀ§¿¡ Å¬¸¯ ÇÒ ¼ö ÀÖ´Â ¹üÀ§¸¦ ¸¸µé¾î ÁÖ´Â °ÍÀ¸·Î ÆÇ´ÜµÊ.
+    // ì´ê²Œ Rect ë²”ìœ„ì— í´ë¦­ í•  ìˆ˜ ìˆëŠ” ë²”ìœ„ë¥¼ ë§Œë“¤ì–´ ì£¼ëŠ” ê²ƒìœ¼ë¡œ íŒë‹¨ë¨.
     public override bool ContainsPoint(Vector2 localPoint)
     {
         Rect lRect = m_ConnectorBox.layout;

@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using UnityEngine;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
@@ -19,7 +19,7 @@ public class NodeView : UnityEditor.Experimental.GraphView.Node
         this.title = node.name;
         this.viewDataKey = node.guid;
 
-        // style(³ëµå)ÀÇ left ¿Í topÀÇ À§Ä¡¸¦ nodeÀÇ pos.x, y°ªÀÇ À§Ä¡¿¡ µÒ.
+        // style(ë…¸ë“œ)ì˜ left ì™€ topì˜ ìœ„ì¹˜ë¥¼ nodeì˜ pos.x, yê°’ì˜ ìœ„ì¹˜ì— ë‘ .
         style.left = node.position.x;
         style.top = node.position.y;
 
