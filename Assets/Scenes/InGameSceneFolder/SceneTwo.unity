@@ -331,7 +331,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!54 &237840295
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -411,7 +411,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a53c88bfe88964c4894527fdea4a2a8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: {x: 0, y: 0, z: 0}
   maximumSpeed: 3
   dashSpeed: 2
   jumpScale: 5
@@ -428,6 +427,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   directionX: 1
+  effectManager: {fileID: 0}
 --- !u!114 &237840299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2619,7 +2619,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12c49e9a159b68f41abbe5cd44b26fe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: {x: 0, y: 0, z: 0}
   maximumSpeed: 3
   dashSpeed: 0
   jumpScale: 5
@@ -2636,6 +2635,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   directionX: 0
+  effectManager: {fileID: 0}
   target: {fileID: 0}
   grid: {fileID: 0}
   path: []
@@ -2784,7 +2784,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0c007b2e03c15d42bece2f59cb3dd62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tree: {fileID: 11400000, guid: ed93e99d8f8523f4fba747ff349e0f71, type: 2}
+  tree: {fileID: 11400000, guid: bf676e1904caabe4bb3b3daca0322aaf, type: 2}
 --- !u!114 &1894206061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2797,7 +2797,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12c49e9a159b68f41abbe5cd44b26fe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: {x: 0, y: 0, z: 0}
   maximumSpeed: 3
   dashSpeed: 0
   jumpScale: 5
@@ -2814,6 +2813,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   directionX: 0
+  effectManager: {fileID: 0}
   target: {fileID: 0}
   grid: {fileID: 0}
   path: []

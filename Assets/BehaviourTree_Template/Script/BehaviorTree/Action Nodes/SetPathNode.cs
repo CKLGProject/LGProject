@@ -7,15 +7,15 @@ using Grid = pathFinding.Grid;
 
 namespace BehaviourTree
 {
-    // °æ·Î¸¦ ¼¼ÆÃ 
+    // ê²½ë¡œë¥¼ ì„¸íŒ… 
     public class SetPathNode : ActionNode
     {
-        // ¿òÁ÷ÀÏ Æ÷ÀÎÆ®¸¦ Âï¾îÁÜ
-        // ¿òÁ÷ÀÏ Æ÷ÀÎÆ®°¡ ÂïÈ÷¸é MoveNode·Î ¿òÁ÷ÀÓÀ» Ã¼Å©ÇÏ°í ¸ñÇ¥ÁöÁ¡¿¡ µµ´ŞÇÒ ¶§±îÁö
-        // (Ex -> 0.5°Å¸® ÀÌÇÏ )
-        // °è¼Ó ÀÌµ¿.
-        // ¾ÕÀ¸·Î °¡´Â ¿ÍÁß ±æÀÌ ¾øÀ¸¸é, Á¡ÇÁ¸¦ ÇÑ´Ù. Á¡ÇÁÀÇ °æ¿ì 2´Ü±îÁö °¡´ÉÇÏ³ª
-        // 2´Ü Á¡ÇÁÀÇ °æ¿ì´Â ¾ÆÁ÷ ·ÎÁ÷À» »ı°¢ ¾ÈÇØµÒ.
+        // ì›€ì§ì¼ í¬ì¸íŠ¸ë¥¼ ì°ì–´ì¤Œ
+        // ì›€ì§ì¼ í¬ì¸íŠ¸ê°€ ì°íˆë©´ MoveNodeë¡œ ì›€ì§ì„ì„ ì²´í¬í•˜ê³  ëª©í‘œì§€ì ì— ë„ë‹¬í•  ë•Œê¹Œì§€
+        // (Ex -> 0.5ê±°ë¦¬ ì´í•˜ )
+        // ê³„ì† ì´ë™.
+        // ì•ìœ¼ë¡œ ê°€ëŠ” ì™€ì¤‘ ê¸¸ì´ ì—†ìœ¼ë©´, ì í”„ë¥¼ í•œë‹¤. ì í”„ì˜ ê²½ìš° 2ë‹¨ê¹Œì§€ ê°€ëŠ¥í•˜ë‚˜
+        // 2ë‹¨ ì í”„ì˜ ê²½ìš°ëŠ” ì•„ì§ ë¡œì§ì„ ìƒê° ì•ˆí•´ë‘ .
         //pathFinding.Grid
         //private pathFinding.Grid grid;
         //SetPathNode()
@@ -36,7 +36,7 @@ namespace BehaviourTree
             //    = new Color(Color.red.r, Color.red.g, Color.red.b, 0.25f);
             //pathFinding.PathRequestManager.RequestPath();
             #endregion
-            // ÀÌ°Å ¿¡·¯ ÀÖÀ½ Àß ¾È¹Ş¾Æ¿È
+            // ì´ê±° ì—ëŸ¬ ìˆìŒ ì˜ ì•ˆë°›ì•„ì˜´
             PathRequestManager.RequestPath(new PathRequest(agent.transform.position, Grid.Instance.GetRandPoint(), agent.GetPath));
         }
 
@@ -53,7 +53,7 @@ namespace BehaviourTree
                 return State.Success;   
             #region Legarcy
 
-            //// °æ·Î¸¦ Àß ¹Ş¾Æ¿Ô´Â°¡?
+            //// ê²½ë¡œë¥¼ ì˜ ë°›ì•„ì™”ëŠ”ê°€?
             //if (agent.target != null)
             //    return State.Success;
 

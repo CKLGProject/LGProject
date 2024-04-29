@@ -6,7 +6,7 @@ namespace BehaviourTree
 {
     public class RangeNode : ActionNode
     {
-        // °Å¸®¸¦ °è»êÇÏ´Â ³ëµå
+        // ê±°ë¦¬ë¥¼ ê³„ì‚°í•˜ëŠ” ë…¸ë“œ
         public float range;
         [Space(10f)]
         public bool Reverse;
@@ -23,12 +23,12 @@ namespace BehaviourTree
 
         protected override State OnUpdate()
         {
-            // ÇÃ·¹ÀÌ¾î¿ÍÀÇ °Å¸®¸¦ ºñ±³ÇÏ¿© ¹İÈ¯.
-            // ÇÃ·¹ÀÌ¾îÀÇ °æ¿ì ÇÏ³ª¹Û¿¡ ¾ø±â ¶§¹®¿¡ agent¿¡¼­ °ü¸®¸¦ ÇØÁà¾ßÇÒ±î?
-            // ÀÏ´Ü °ü¸®¸¦ ÇØÁÖ´Ù°¡ ÃßÈÄ Á¤Àû Å¬·¡½º·Î º¯°æ ÇÏ´Â °ÍÀ¸·Î ÇÏÀÚ.
+            // í”Œë ˆì´ì–´ì™€ì˜ ê±°ë¦¬ë¥¼ ë¹„êµí•˜ì—¬ ë°˜í™˜.
+            // í”Œë ˆì´ì–´ì˜ ê²½ìš° í•˜ë‚˜ë°–ì— ì—†ê¸° ë•Œë¬¸ì— agentì—ì„œ ê´€ë¦¬ë¥¼ í•´ì¤˜ì•¼í• ê¹Œ?
+            // ì¼ë‹¨ ê´€ë¦¬ë¥¼ í•´ì£¼ë‹¤ê°€ ì¶”í›„ ì •ì  í´ë˜ìŠ¤ë¡œ ë³€ê²½ í•˜ëŠ” ê²ƒìœ¼ë¡œ í•˜ì.
             float distance = Vector3.Distance(agent.transform.position, agent.player.position);
             
-            // ÇÃ·¹ÀÌ¾î¿ÍÀÇ °Å¸®°¡ °¡±î¿ö¾ß ¹«¾ùÀÌµç ÇÒ ¼ö ÀÖ±â ¶§¹®¿¡ ´ÙÀ½°ú °°ÀÌ ¼³Á¤.
+            // í”Œë ˆì´ì–´ì™€ì˜ ê±°ë¦¬ê°€ ê°€ê¹Œì›Œì•¼ ë¬´ì—‡ì´ë“  í•  ìˆ˜ ìˆê¸° ë•Œë¬¸ì— ë‹¤ìŒê³¼ ê°™ì´ ì„¤ì •.
             return distance <= range ? State.Success : State.Failure;
         }
     }

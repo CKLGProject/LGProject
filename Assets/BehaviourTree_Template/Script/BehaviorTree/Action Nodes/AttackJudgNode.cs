@@ -28,8 +28,8 @@ namespace BehaviourTree
             curTimer += Time.deltaTime;
             if(judgTimer > curTimer)
             {
-                // ¾Ö´Ï¸ŞÀÌ¼ÇÀÌ ³¡³­ ÀÌÈÄ µ¥¹ÌÁö ÆÇÁ¤ -> µ¥¹ÌÁö¸¦ ³Ö´Âµ¥ ¼º°øÇÏ¸é ´ÙÀ½ °ø°İ, ½Ã°£ÀÌ Áö³ªµµ °ø°İ ¸øÇÏ¸é Idle
-                // ¾Ö´Ï¸ŞÀÌ¼ÇÀÌ Àç»ı ÁßÀÌ¶ó¸é Running
+                // ì• ë‹ˆë©”ì´ì…˜ì´ ëë‚œ ì´í›„ ë°ë¯¸ì§€ íŒì • -> ë°ë¯¸ì§€ë¥¼ ë„£ëŠ”ë° ì„±ê³µí•˜ë©´ ë‹¤ìŒ ê³µê²©, ì‹œê°„ì´ ì§€ë‚˜ë„ ê³µê²© ëª»í•˜ë©´ Idle
+                // ì• ë‹ˆë©”ì´ì…˜ì´ ì¬ìƒ ì¤‘ì´ë¼ë©´ Running
                 if(isAttack == false) isAttack = ActionJudge();
                 if (curTimer > animTimer && isAttack)
                 {
@@ -44,7 +44,7 @@ namespace BehaviourTree
 
         private bool ActionJudge()
         {
-            // ÆÇÁ¤ ¹üÀ§ °è»ê.
+            // íŒì • ë²”ìœ„ ê³„ì‚°.
             Vector3 right = Vector3.right * (agent.directionX == true ? 1 : -1);
             Vector3 center = agent.transform.position + right;
 
@@ -60,10 +60,10 @@ namespace BehaviourTree
                 }
             }
 
-            // °ø°İ ¹üÀ§¿¡ ÀûÀÌ Á¸ÀçÇÏÁö ¾ÊÀ½.
+            // ê³µê²© ë²”ìœ„ì— ì ì´ ì¡´ì¬í•˜ì§€ ì•ŠìŒ.
             if(temp == null)
             {
-                // ¾ÆÁ÷ °ø°İÀ» ¼º°øÇÏÁö ¸øÇÔ.
+                // ì•„ì§ ê³µê²©ì„ ì„±ê³µí•˜ì§€ ëª»í•¨.
                 return false;
             }
             else
@@ -77,7 +77,7 @@ namespace BehaviourTree
                     Item1.GetComponent<Playable>().
                     GetStateMachine.
                     HitDamaged(agent.GetStateMachine.attackCount - 1 < 2 ? Vector3.zero : v);
-                    //damageInCount = true; <- ÀÌ°Ç Á» »ı°¢ÇØºÁ¾ß ÇÒ µí...
+                    //damageInCount = true; <- ì´ê±´ ì¢€ ìƒê°í•´ë´ì•¼ í•  ë“¯...
                     temp.Item1.GetComponent<Playable>().GetStateMachine.hitPlayer = agent.transform;
                     //Debug.Log($"Attack In Count = {stateMachine.attackCount}");
 

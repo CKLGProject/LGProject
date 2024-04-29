@@ -6,12 +6,12 @@ namespace BehaviourTree
 {
     public class AttackNode : ActionNode
     {
-        // °ø°İÀ» ÁøÇàÇÏ´Â ³ëµå 
-        // ¾Ö´Ï¸ŞÀÌ¼ÇÀ» ½ÇÇàÇÔ.
+        // ê³µê²©ì„ ì§„í–‰í•˜ëŠ” ë…¸ë“œ 
+        // ì• ë‹ˆë©”ì´ì…˜ì„ ì‹¤í–‰í•¨.
         int count = 0;
         protected override void OnStart()
         {
-            // ¾Ö´Ï¸ŞÀÌ¼Ç ½ÇÇà
+            // ì• ë‹ˆë©”ì´ì…˜ ì‹¤í–‰
         }
 
         protected override void OnStop()
@@ -22,7 +22,7 @@ namespace BehaviourTree
 
         protected override State OnUpdate()
         {
-            // °ø°İÀ» ÇßÀ¸´Ï ÀÌÁ¦ ¹º°¡¸¦ ¿©±â¼­ ÇØ¾ßÇÏ´Âµ¥...
+            // ê³µê²©ì„ í–ˆìœ¼ë‹ˆ ì´ì œ ë­”ê°€ë¥¼ ì—¬ê¸°ì„œ í•´ì•¼í•˜ëŠ”ë°...
             return State.Success;
         }
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace BehaviourTree
 {
-    // ÇÇÇØ¸¦ ÀÔ¾úÀ» ¶§ ÀÛµ¿ÇÏ´Â ³ëµå
+    // í”¼í•´ë¥¼ ì…ì—ˆì„ ë•Œ ì‘ë™í•˜ëŠ” ë…¸ë“œ
     public class IsDamagedNode : ActionNode
     {
         protected override void OnStart()
