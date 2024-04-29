@@ -33,6 +33,8 @@ namespace BehaviourTree
         protected override void OnStart()
         {
             // Path 설정
+            if (Agent == null)
+                Agent = AIAgent.Instance;
             curTimer = jumpDelay;
             Agent.targetIndex = 0;
             //startPoint = pathFinding.Grid.Instance.NodeFromWorldPoint(agent.transform.position).worldPosition - Vector3.up * 0.45f;
