@@ -1,8 +1,10 @@
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEditor.Experimental.GraphView;
 using UnityEditor.Callbacks;
 using BehaviourTree;
+using System.Collections.Generic;
 
 
 public class BehaviorTreeEditor : EditorWindow
@@ -43,15 +45,10 @@ public class BehaviorTreeEditor : EditorWindow
 
 
         var BehaviourTreeEditor_uxml = AssetDatabase.GUIDToAssetPath("816d5837ca230b24c9898a1693e4a8ac");
-        // Import UXML
-        //var visualTree = BaseUXML;
         var visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(BehaviourTreeEditor_uxml);
         visualTree.CloneTree(root);
 
         var BehaviourTreeEditor_uss = AssetDatabase.GUIDToAssetPath("0abae94caedf05944a403a050ef2358b");
-        // A stylesheet can be added to a VisualElement.
-        // The style will be applied to the VisualElement and all of its children.
-        //var styleSheet = BaseUSS;
         var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>(BehaviourTreeEditor_uss);
         root.styleSheets.Add(styleSheet);
 
@@ -107,14 +104,12 @@ public class BehaviorTreeEditor : EditorWindow
 
     private void OnSelectionChange()
     {
-        #region legarcy
-        // Editor에서 선택한 BehaviorTree에 추가한 노드를 삽입함.
         BehaviorTree tree = Selection.activeObject as BehaviorTree;
         if (!tree)
         {
             if (Selection.activeGameObject)
             {
-                BehaviorTreeRunner runner = Selection.activeGameObject.GetComponent<BehaviorTreeRunner>();
+                var runner = Selection.activeGameObject.GetComponent<BehaviorTreeRunner>();
                 if (runner)
                 {
                     tree = runner.tree;
@@ -122,60 +117,60 @@ public class BehaviorTreeEditor : EditorWindow
             }
         }
 
-        if (Application.isPlaying)
-        {
-            // Editor가 실행 중일 때 빈 tree가 아닐 경우 ui editor를 보여줌.
-            if (tree)
-            {
-                // 삽입한 노드를 뷰어에서 보여줌.
-                treeView.PopulateView(tree);
-            }
-        }
-        else
-        {
-            if (tree && AssetDatabase.CanOpenAssetInEditor(tree.GetInstanceID()))
-            {
-                // 삽입한 노드를 뷰어에서 보여줌.
-                treeView.PopulateView(tree);
-            }
-        }
-        //try
-        //{
-        //}
-        //catch
-        //{
-        //    Debug.LogWarning("treeView is nullptr");
-        //}
-        if (tree != null)
-        {
-            treeObject = new SerializedObject(tree);
-            blackboardProperty = treeObject.FindProperty("blackboard");
-        }
-        #endregion
-        //BehaviorTree tree = Selection.activeObject as BehaviorTree;
-        //if (!tree)
-        //{
-        //    if (Selection.activeGameObject)
-        //    {
-        //        var runner = Selection.activeGameObject.GetComponent<BehaviorTreeRunner>();
-        //        if (runner)
-        //        {
-        //            tree = runner.tree;
-        //        }
-        //    }
-        //}
+        if (!tree) { return; }
 
-        //if (!tree) { return; }
+        if (Application.isPlaying ? true : AssetDatabase.CanOpenAssetInEditor(tree.GetInstanceID()))
+        {
+            treeView?.PopulateView(tree);
+        }
 
-        //if (Application.isPlaying ? true : AssetDatabase.CanOpenAssetInEditor(tree.GetInstanceID()))
-        //{
-        //    treeView?.PopulateView(tree);
-        //}
-
-        //treeObject = new SerializedObject(tree);
-        //blackboardProperty = treeObject.FindProperty("blackboard");
+        treeObject = new SerializedObject(tree);
+        blackboardProperty = treeObject.FindProperty("blackboard");
+    }
+    private void OnGUI()
+    {
+        if (Event.current?.type == EventType.KeyDown && Event.current?.keyCode == KeyCode.Delete)
+        {
+            DeleteSelectedNode();
+            Event.current.Use(); // 이벤트 처리 완료
+        }
     }
 
+    private void DeleteSelectedNode()
+    {
+        // 그래프 뷰에서 선택된 요소들을 가져옴
+        var selection = treeView.selection;
+        var selections = new List<GraphElement>();
+
+        // 선택된 각 요소에 대해 작업 수행
+        foreach (var selectedElement in selection)
+        {
+            // 선택된 요소가 NodeView인 경우에만 삭제
+            if (selectedElement is GraphElement elem)
+            {
+                selections.Add(elem);
+            }
+        }
+
+        while (selections.Count > 0)
+        {
+            var nodeView = selections[0] as NodeView;
+
+            if (nodeView != null)
+            {
+                Undo.RecordObject(nodeView.node, "Behavior Tree (DeleteNode)");
+                nodeView.RemoveInputPort(treeView);
+                nodeView.RemoveOutputPort(treeView);
+            }
+
+            // 선택된 노드를 삭제
+            treeView.DeleteGraphElement(selections[0]);
+
+            selections.RemoveAt(0);
+        }
+
+        treeView.PopulateView();
+    }
     void OnNodeSelectionChanged(NodeView node)
     {
         inspectorView.UpdateSelection(node);

@@ -49,6 +49,17 @@ public class BehaviorTreeView : GraphView
         Undo.undoRedoPerformed += OnUndoRedo;
     }
 
+    //private void SetSearchWindow()
+    //{
+    //    if (searchWindow == null)
+    //    {
+    //        searchWindow = ScriptableObject.CreateInstance<BTSearchWindow>();
+
+    //        searchWindow.Initialize(this);
+    //    }
+    //    nodeCreationRequest = context => SearchWindow.Open(new SearchWindowContext(context.screenMousePosition), searchWindow);
+    //}
+
     public void SetEditor(BehaviorTreeEditor editor)
     {
         treeEditor = editor;
@@ -56,6 +67,7 @@ public class BehaviorTreeView : GraphView
 
     public void OnUndoRedo()
     {
+        if (tree == null) { return; }
         PopulateView(tree);
         AssetDatabase.SaveAssets();
     }
@@ -63,6 +75,11 @@ public class BehaviorTreeView : GraphView
     NodeView FindNodeView(Node node)
     {
         return GetNodeByGuid(node.guid) as NodeView;
+    }
+
+    public void PopulateView()
+    {
+        PopulateView(tree);
     }
 
     internal void PopulateView(BehaviorTree tree)
@@ -92,6 +109,8 @@ public class BehaviorTreeView : GraphView
                 NodeView parentView = FindNodeView(n);
                 NodeView childView = FindNodeView(c);
 
+                if (parentView == null || childView == null) { return; }
+
                 Edge edge = parentView.output.ConnectTo(childView.input);
                 AddElement(edge);
             });
@@ -109,29 +128,14 @@ public class BehaviorTreeView : GraphView
 
     private GraphViewChange OnGraphViewChanged(GraphViewChange graphViewChange)
     {
-        // Tree 내부에 노드를 지웠을 때, BehaviorTree object 내부에서 노드가 삭제 되는 기능.
         if (graphViewChange.elementsToRemove != null)
         {
             graphViewChange.elementsToRemove.ForEach(elem =>
             {
-                NodeView nodeView = elem as NodeView;
-                if (nodeView != null)
-                {
-                    tree.DeleteNode(nodeView.node);
-                }
-
-                // 연결되어있는 간선간의 하위(자식)로 들어가 있는 노드를 상위(부모)List에서 지워주는 기능.
-                Edge edge = elem as Edge;
-                if (edge != null)
-                {
-                    NodeView parentView = edge.output.node as NodeView;
-                    NodeView childView = edge.input.node as NodeView;
-                    tree.RemoveChild(parentView.node, childView.node);
-                }
+                DeleteGraphElement(elem);
             });
         }
 
-        // 연결시킨 부모노드로부터 하위 노드를 list에 불러들이는 기능.
         if (graphViewChange.edgesToCreate != null)
         {
             graphViewChange.edgesToCreate.ForEach(edge =>
@@ -142,7 +146,6 @@ public class BehaviorTreeView : GraphView
             });
         }
 
-        // 노드의 포지션에 따라 순서대로 실행되게하는 기능.
         if (graphViewChange.movedElements != null)
         {
             nodes.ForEach((n) =>
@@ -151,7 +154,25 @@ public class BehaviorTreeView : GraphView
                 view.SortChildren();
             });
         }
+
         return graphViewChange;
+    }
+
+    public void DeleteGraphElement(GraphElement elem)
+    {
+        NodeView nodeView = elem as NodeView;
+        if (nodeView != null)
+        {
+            tree.DeleteNode(nodeView.node);
+        }
+
+        Edge edge = elem as Edge;
+        if (edge != null)
+        {
+            NodeView parentView = edge.output.node as NodeView;
+            NodeView childView = edge.input.node as NodeView;
+            tree.RemoveChild(parentView.node, childView.node);
+        }
     }
 
     public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)
@@ -162,6 +183,7 @@ public class BehaviorTreeView : GraphView
             var types = TypeCache.GetTypesDerivedFrom<ActionNode>();
             foreach (var type in types)
             {
+                if (type.IsAbstract) { continue; }
                 evt.menu.AppendAction($"[{type.BaseType.Name}] {type.Name}", (a) => CreateNode(type, MousePosition));
             }
         }
@@ -170,6 +192,7 @@ public class BehaviorTreeView : GraphView
             var types = TypeCache.GetTypesDerivedFrom<CompositeNode>();
             foreach (var type in types)
             {
+                if (type.IsAbstract) { continue; }
                 evt.menu.AppendAction($"[{type.BaseType.Name}] {type.Name}", (a) => CreateNode(type, MousePosition));
             }
         }
@@ -178,6 +201,7 @@ public class BehaviorTreeView : GraphView
             var types = TypeCache.GetTypesDerivedFrom<DecoratorNode>();
             foreach (var type in types)
             {
+                if (type.IsAbstract) { continue; }
                 evt.menu.AppendAction($"[{type.BaseType.Name}] {type.Name}", (a) => CreateNode(type, MousePosition));
             }
         }
@@ -188,7 +212,10 @@ public class BehaviorTreeView : GraphView
     {
         Node node = tree.CreateNode(type);
 
-
+        if (node == null)
+        {
+            return;
+        }
         CreateNodeView(node, mousePosition);
 
     }

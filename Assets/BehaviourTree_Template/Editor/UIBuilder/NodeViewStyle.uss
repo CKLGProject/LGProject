@@ -1,17 +1,19 @@
+
+
 #node-border {
     background-color: rgb(56, 56, 56);
-    border-left-width: 1px;
-    border-right-width: 1px;
+    border-left-color: rgb(47, 47, 47);
+    border-right-color: rgb(47, 47, 47);
+    border-top-color: rgb(47, 47, 47);
+    border-bottom-color: rgb(47, 47, 47);
     border-top-width: 1px;
+    border-right-width: 1px;
     border-bottom-width: 1px;
-    border-left-color: rgb(37, 37, 37);
-    border-right-color: rgb(37, 37, 37);
-    border-top-color: rgb(37, 37, 37);
-    border-bottom-color: rgb(37, 37, 37);
+    border-left-width: 1px;
     border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
 }
 
 #input {
@@ -23,85 +25,117 @@
 }
 
 #selection-border {
-    border-left-color: rgb(0, 187, 255);
-    border-right-color: rgb(0, 187, 255);
-    border-top-color: rgb(0, 187, 255);
-    border-bottom-color: rgb(0, 187, 255);
-    border-left-width: 0;
-    border-right-width: 0;
-    border-top-width: 0;
-    border-bottom-width: 0;
+    border-left-color: rgb(130, 194, 221);
+    border-right-color: rgb(130, 194, 221);
+    border-top-color: rgb(130, 194, 221);
+    border-bottom-color: rgb(130, 194, 221);
     border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
     position: absolute;
     left: 0;
-    right: 0;
     top: 0;
+    right: 0;
     bottom: 0;
+    align-items: stretch;
 }
 
 :hover > #selection-border {
-    border-left-width: 1px;
-    border-right-width: 1px;
     border-top-width: 1px;
-    border-bottom-width: 1px;
-}
-
-:selected > #selection-border {
-    border-left-width: 1px;
     border-right-width: 1px;
-    border-top-width: 1px;
     border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
 }
 
 :hover:selected > #selection-border {
-    border-left-width: 2px;
-    border-right-width: 2px;
     border-top-width: 2px;
+    border-right-width: 2px;
     border-bottom-width: 2px;
+    border-left-width: 2px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-left-color: rgb(178, 222, 241);
+    border-right-color: rgb(178, 222, 241);
+    border-top-color: rgb(178, 222, 241);
+    border-bottom-color: rgb(178, 222, 241);
+}
+
+:selected > #selection-border {
+    border-top-width: 2px;
+    border-right-width: 2px;
+    border-bottom-width: 2px;
+    border-left-width: 2px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
 }
 
 .node {
-    min-width: 150px;
-    margin-left: 0;
-    margin-right: 0;
+    min-width: 160px;
+    min-height: auto;
     margin-top: 0;
+    margin-right: 0;
     margin-bottom: 0;
+    margin-left: 0;
+    max-width: 160px;
+    flex-wrap: nowrap;
 }
 
+
 #title {
-    font-size: 14px;
-    -unity-font-style: bold;
+    -unity-text-align: upper-center;
+    -unity-font-style: bold-and-italic;
+    padding-top: 1px;
+    padding-right: 1px;
+    padding-bottom: 1px;
+    padding-left: 1px;
+    -unity-text-outline-width: 1px;
+    -unity-text-outline-color: rgba(255, 255, 255, 0.87);
+    background-color: rgb(115, 115, 115);
 }
 
 #description {
     font-size: 10px;
-    -unity-font-style: normal;
     max-width: 150px;
     white-space: normal;
+    padding-top: 12px;
+    padding-right: 12px;
+    padding-bottom: 12px;
+    padding-left: 12px;
+    -unity-text-align: middle-left;
 }
 
 #divider {
-    background-color: rgb(77, 77, 77);
     min-height: 1px;
+    background-color: rgb(73, 74, 72);
+    margin-top: 3px;
+    margin-right: 40px;
+    margin-bottom: 3px;
+    margin-left: 40px;
 }
 
 .action #input {
-    background-color: rgb(152, 206, 0);
+    background-color: rgb(233, 179, 62);
 }
-
 .composite #input {
-    background-color: rgb(246, 174, 45);
+    background-color: rgb(139, 226, 99);
 }
 
 .decorator #input {
-    background-color: rgb(137, 166, 251);
+    background-color: rgb(84, 168, 226);
 }
 
+
 .root #input {
-    background-color: rgb(255, 81, 84);
+    background-color: rgb(238, 59, 44);
     min-height: 20px;
 }
 
@@ -112,24 +146,63 @@
     right: 0;
     bottom: 0;
     border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
 }
 
 .running #node-state {
-    background-color: rgb(255, 221, 0);
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
+    background-color: rgb(255, 227, 32);
 }
 
 .success #node-state {
-    background-color: rgb(46, 255, 0);
+    background-color: rgba(31, 255, 0, 0.75);
 }
 
 .failure #node-state {
-    background-color: rgba(250, 25, 25, 0.67);
+    background-color: rgba(229, 0, 0, 0.82);
+}
+
+/**/
+
+
+
+
+
+.develop #input {
+    background-color: rgb(71, 255, 189);
+    border-left-color: rgb(214, 0, 0);
+    border-right-color: rgb(214, 0, 0);
+    border-top-color: rgb(214, 0, 0);
+    border-bottom-color: rgb(214, 0, 0);
+}
+
+.develop {
+    border-left-color: rgb(35, 255, 225);
+    border-right-color: rgb(35, 255, 225);
+    border-top-color: rgb(35, 255, 225);
+    border-bottom-color: rgb(35, 255, 225);
+    border-top-width: 2px;
+    border-right-width: 2px;
+    border-bottom-width: 2px;
+    border-left-width: 2px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    max-width: 1120px;
+    max-height: initial;
+    min-width: 100px;
+    -unity-text-align: upper-left;
+}
+
+.develop #description {
+    font-size: 15px;
+    max-width: none;
+    -unity-text-align: upper-center;
+    -unity-font-style: bold;
+}
+
+.connectorText {
+    display: none;
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
@@ -106,6 +107,41 @@ public class NodeView : UnityEditor.Experimental.GraphView.Node
         }
     }
 
+    public void RemoveInputPort(BehaviorTreeView btView)
+    {
+        if (input == null) { return; }
+
+        List<Edge> removingEdges = new List<Edge>();
+
+        foreach (var child in input?.connections)
+        {
+            removingEdges.Add(child);
+        }
+
+        while (removingEdges.Count > 0)
+        {
+            btView.DeleteGraphElement(removingEdges[0]);
+            removingEdges.RemoveAt(0);
+        }
+    }
+
+    public void RemoveOutputPort(BehaviorTreeView btView)
+    {
+        if (output == null) { return; }
+
+        List<Edge> removingEdges = new List<Edge>();
+
+        foreach (var child in output?.connections)
+        {
+            removingEdges.Add(child);
+        }
+
+        while (removingEdges.Count > 0)
+        {
+            btView.DeleteGraphElement(removingEdges[0]);
+            removingEdges.RemoveAt(0);
+        }
+    }
     public void SortChildren()
     {
         CompositeNode composite = node as CompositeNode;

@@ -338,9 +338,10 @@ namespace pathFinding
             }
         }
 
-        public Vector3 GetRandPoint()
+        public Vector3 GetRandPoint(Vector3 playerPos)
         {
             int rand = UnityEngine.Random.Range(0, walkableNodeList.Count);
+            
 
             return walkableNodeList[rand].worldPosition; ;
         }
