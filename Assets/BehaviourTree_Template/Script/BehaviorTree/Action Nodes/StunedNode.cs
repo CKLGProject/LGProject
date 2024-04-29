@@ -26,7 +26,8 @@ namespace BehaviourTree
             if(agent.GetStateMachine.isHit)
             {
                 // 피격 모션 출력
-                Debug.Log("아야!");
+                //Debug.Log("아야!");
+                agent.effectManager.Play();
                 agent.GetStateMachine.isHit = false;
                 curTiemr = 0;
             }

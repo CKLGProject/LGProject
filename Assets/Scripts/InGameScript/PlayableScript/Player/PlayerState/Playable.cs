@@ -17,7 +17,7 @@ namespace LGProject.PlayerState
         public DownState downState;
 
 
-        public Vector3 velocity = Vector3.zero;
+        protected Vector3 velocity = Vector3.zero;
         public const int maximumJump = 2;
         public int maximumSpeed = 4;
 
@@ -41,6 +41,8 @@ namespace LGProject.PlayerState
         // 공격 방향
         public bool directionX = false;
 
+        public EffectManager effectManager;
+
         protected PlayerStateMachine stateMachine;
 
         public PlayerStateMachine GetStateMachine
@@ -51,6 +53,7 @@ namespace LGProject.PlayerState
             }
 
         }
+
         public Vector3 CaculateVelocity(Vector3 target, Vector3 origin, float time, float height = 1.5f)
         {
             #region Omit
@@ -74,6 +77,17 @@ namespace LGProject.PlayerState
             #endregion
         }
 
+        protected void InitEffects()
+        {
+            effectManager = GetComponent<EffectManager>();
+            if(effectManager == null)
+            {
+                Debug.LogError("EffectManager 없음");
+            }
+        }
+
+
+        #region CheckFields
         private RaycastHit hit;
 
         float curTimer = 0;
@@ -98,7 +112,7 @@ namespace LGProject.PlayerState
             Ray ray = new Ray(transform.position + Vector3.up * 0.25f, Vector3.down);
 
             // 위를 체크하고 싶은데...
-            if(!stateMachine.isDown)
+            if (!stateMachine.isDown)
             {
                 if (Physics.Raycast(ray, out hit, 0.3f, 1 << 6))
                 {
@@ -116,6 +130,7 @@ namespace LGProject.PlayerState
                 }
             }
         }
+        #endregion
     }
 
 }

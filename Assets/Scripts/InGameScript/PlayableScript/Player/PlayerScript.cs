@@ -65,8 +65,7 @@ namespace LGProject.PlayerState
             }
         }
 
-
-        void Start()
+        private void InitStates()
         {
             // ref을 쓰는 이유
             // 일반적으로 사용하면 복사생성자를 쓰기 때문에 메모리 누수가 일어날 수 있는데, ref을 사용하면 레퍼런스 주소값으로 전달하기 때문에 복사하여 메모리를 사용하는 불상사를 막을 수 있음
@@ -97,6 +96,12 @@ namespace LGProject.PlayerState
             //Instantiate(new GameObject(), transform.position + Vector3.down, Quaternion.identity);
 
             stateMachine.Initalize(idleState);
+        }
+
+        void Start()
+        {
+            InitStates();
+
         }
 
         private void FixedUpdate()

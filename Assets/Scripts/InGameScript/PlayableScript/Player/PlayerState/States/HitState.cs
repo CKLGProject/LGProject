@@ -52,7 +52,6 @@ namespace LGProject.PlayerState
                 // Down State의 경우 땅에 닿을 때(is Grounded = true) 까지
                 // Down State를 유지해야 하며, 
                 stateMachine.ChangeState(stateMachine.playable.downState);
-
             }
 
         }

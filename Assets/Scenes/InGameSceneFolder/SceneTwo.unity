@@ -324,6 +324,7 @@ GameObject:
   - component: {fileID: 237840295}
   - component: {fileID: 237840298}
   - component: {fileID: 237840299}
+  - component: {fileID: 237840300}
   m_Layer: 3
   m_Name: Player_Pivot
   m_TagString: Untagged
@@ -458,6 +459,30 @@ MonoBehaviour:
   m_DefaultActionMap: PlayerAction
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &237840300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 237840294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98a98f914f5372447b0bea678974f56c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _AttackEffect: {fileID: 0}
+  _GuardEffect: {fileID: 6828380774985832577, guid: d62653505d5e72f44b9b3e68d377f861,
+    type: 3}
+  _HitEffect: {fileID: 2049236942158399456, guid: 752622900d41f074ba777f81b03de0fe,
+    type: 3}
+  _KnockbackEffect: {fileID: 0}
+  _RunEffect: {fileID: 1235096126941009767, guid: c775dfbf3c36bfb4ca265f3df6de1cf1,
+    type: 3}
+  _LandingEffect: {fileID: 3194273807269049694, guid: 6b511e017081e5e42b8a9df84cbd5177,
+    type: 3}
+  _UltimateEffect: {fileID: 6915349224304202874, guid: c9920e406cb0ed944a113922da7fef5e,
+    type: 3}
 --- !u!1 &286184247
 GameObject:
   m_ObjectHideFlags: 0
@@ -2699,6 +2724,7 @@ GameObject:
   - component: {fileID: 1894206062}
   - component: {fileID: 1894206061}
   - component: {fileID: 1894206060}
+  - component: {fileID: 1894206063}
   m_Layer: 3
   m_Name: Enemy_Pivot
   m_TagString: Untagged
@@ -2823,6 +2849,30 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 88
   m_CollisionDetection: 0
+--- !u!114 &1894206063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1894206056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98a98f914f5372447b0bea678974f56c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _AttackEffect: {fileID: 0}
+  _GuardEffect: {fileID: 6828380774985832577, guid: d62653505d5e72f44b9b3e68d377f861,
+    type: 3}
+  _HitEffect: {fileID: 2049236942158399456, guid: 752622900d41f074ba777f81b03de0fe,
+    type: 3}
+  _KnockbackEffect: {fileID: 0}
+  _RunEffect: {fileID: 1235096126941009767, guid: c775dfbf3c36bfb4ca265f3df6de1cf1,
+    type: 3}
+  _LandingEffect: {fileID: 3194273807269049694, guid: 6b511e017081e5e42b8a9df84cbd5177,
+    type: 3}
+  _UltimateEffect: {fileID: 6915349224304202874, guid: c9920e406cb0ed944a113922da7fef5e,
+    type: 3}
 --- !u!1 &1974488065
 GameObject:
   m_ObjectHideFlags: 0
