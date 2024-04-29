@@ -9,7 +9,7 @@ namespace BehaviourTree
     {
         protected override void OnStart()
         {
-            Debug.Log("AA");
+            //Debug.Log("AA");
         }
 
         protected override void OnStop()

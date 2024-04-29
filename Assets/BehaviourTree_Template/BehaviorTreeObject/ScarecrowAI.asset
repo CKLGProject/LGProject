@@ -39,7 +39,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: c7b8559125cdffd43ba3e9903da119f6
-  position: {x: -157.9622, y: 559.833}
+  position: {x: -158, y: 560}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
@@ -140,7 +140,6 @@ MonoBehaviour:
   description: 
   child: {fileID: -4288313280875520722}
   Loop: 1
-  count: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -255,7 +254,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 7556b628ad359e4418ccc721c1064b93
-  position: {x: 142.03781, y: 559.833}
+  position: {x: 142, y: 560}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}

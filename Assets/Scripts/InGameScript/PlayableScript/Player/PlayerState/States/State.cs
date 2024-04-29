@@ -34,7 +34,7 @@ namespace LGProject.PlayerState
                 // 공격을 받았을 때, hitState로 변경해 줌.
                 stateMachine.ChangeState(stateMachine.playable.hitState);
             }
-            Debug.DrawLine(stateMachine.transform.position + Vector3.down, stateMachine.transform.position + Vector3.down * 1.1f, Color.red);
+            Debug.DrawLine(stateMachine.transform.position, stateMachine.transform.position + Vector3.down * 0.1f, Color.red);
 
             //if (Physics.Raycast(stateMachine.transform.position + Vector3.down, Vector3.down, out hit, maxDistance: 0.5f))
             //{

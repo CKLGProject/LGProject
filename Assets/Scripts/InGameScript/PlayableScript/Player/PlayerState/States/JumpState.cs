@@ -32,6 +32,8 @@ namespace LGProject.PlayerState
             stateMachine.physics.velocity += Vector3.up * jumpScale;
 
 
+            // 이걸 n초 뒤에 켜고 싶은데...
+            // -> 머리에 닿으면 꺼주고 싶은데...
         }
 
         public override void Exit()

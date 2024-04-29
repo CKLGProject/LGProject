@@ -5,7 +5,7 @@ using UnityEngine;
 namespace BehaviourTree
 {
     /// <summary>
-    /// È®·üÀ» ±¸ÇÏ´Â ³ëµå
+    /// í™•ë¥ ì„ êµ¬í•˜ëŠ” ë…¸ë“œ
     /// </summary>
     public class IsPercentageNode : ActionNode
     {
@@ -13,7 +13,7 @@ namespace BehaviourTree
         private float curTimer = 0;
         private const float maxPercent = 100;
 
-        // n%ÀÇ È®·ü·Î Åë°ú
+        // n%ì˜ í™•ë¥ ë¡œ í†µê³¼
         [Range(0, maxPercent), Min(0)]
         public float percent = 0;
 
@@ -37,7 +37,7 @@ namespace BehaviourTree
         {
             if(randTime <= 0)
             {
-                // Ã³À½ 0ÀÌ±â ¶§¹®¿¡ »õ·Î¿î ¼¼ÆÃÀ» ÇØÁÙ ÇÊ¿ä°¡ ÀÖÀ½.
+                // ì²˜ìŒ 0ì´ê¸° ë•Œë¬¸ì— ìƒˆë¡œìš´ ì„¸íŒ…ì„ í•´ì¤„ í•„ìš”ê°€ ìˆìŒ.
                 randTime = Random.Range(randMin, randMax);
             }
             curTimer += Time.deltaTime;
@@ -49,8 +49,8 @@ namespace BehaviourTree
             return State.Failure;
         }
 
-        // ÇÑ ¸î Ãµ¹ø µé¾î¿Ã°Å¶õ ¸»ÀÌÁö?
-        // ±×·³ ·£´ıÇÑ Å¸ÀÌ¹Ö¿¡ ·£´ıÇÑ »óÈ²¿¡¼­ °¡µå¸¦ ¾î¶»°Ô ¿Ã¸±±î?
+        // í•œ ëª‡ ì²œë²ˆ ë“¤ì–´ì˜¬ê±°ë€ ë§ì´ì§€?
+        // ê·¸ëŸ¼ ëœë¤í•œ íƒ€ì´ë°ì— ëœë¤í•œ ìƒí™©ì—ì„œ ê°€ë“œë¥¼ ì–´ë–»ê²Œ ì˜¬ë¦´ê¹Œ?
         private bool GetPercent()
         {
             float randFloat = Random.Range(0, maxPercent);

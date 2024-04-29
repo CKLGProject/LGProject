@@ -73,7 +73,7 @@ namespace LGProject.PlayerState
             if(!damageInCount)
             {
                 Vector3 right = Vector3.right * (stateMachine.playable.directionX == true ? 1 : -1);
-                Vector3 center = stateMachine.transform.position + right;
+                Vector3 center = stateMachine.transform.position + right + Vector3.up * 0.5f;
                 // 생각보다 판정이 후하진 않게 하기
                 // hit box의 크기를 따라감.
                 Collider[] targets = Physics.OverlapBox(center, Vector3.one * 0.5f);

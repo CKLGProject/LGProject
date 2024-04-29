@@ -1,7 +1,5 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 namespace BehaviourTree
 {
@@ -13,6 +11,15 @@ namespace BehaviourTree
     //
     public class AIAgent : LGProject.PlayerState.Playable
     {
+
+        public Transform target;
+        public Grid grid;
+        public Vector3[] path;
+        public bool chasing = false;
+        public bool finding = false;
+
+        public float speed = 10;
+        public int targetIndex;
 
         public Transform player;
 
@@ -37,20 +44,51 @@ namespace BehaviourTree
         private void Update()
         {
             // 일단 여기에 넣어보자
+            IsPushDownKey();
             PlatformCheck();
             // 바라보는 방향 -> 일단 무조건 플레이어를 바라보게 설정
-            
+
         }
 
         public void LookPlayer()
         {
             // 플레이어를 바라봄.
-            
 
+
+        }
+        
+        public void GetPath(Vector3[] newPath, bool pathSuccessful)
+        {
+            if(pathSuccessful)
+            {
+                chasing = true;
+                targetIndex = 0;
+                path = newPath;
+            }
         }
 
         private void OnDrawGizmos()
         {
+            if (path != null)
+            {
+                for (int i = targetIndex; i < path.Length; i++)
+                {
+                    if (i % 2 == 0)
+                        Gizmos.color = Color.black;
+                    else
+                        Gizmos.color = Color.gray;
+                    Gizmos.DrawCube(path[i], Vector3.one * .5f);
+
+                    if (i == targetIndex)
+                    {
+                        Gizmos.DrawLine(transform.position, path[i]);
+                    }
+                    else
+                    {
+                        Gizmos.DrawLine(path[i - 1], path[i]);
+                    }
+                }
+            }
             try
             {
                 Gizmos.color = Color.blue;
@@ -58,12 +96,12 @@ namespace BehaviourTree
                 // 현재 바라보는 방향
                 Vector3 right = Vector3.right * (directionX == true ? 1 : -1);
 
-                Gizmos.DrawLine(transform.position + (Vector3.down * 0.9f), transform.position + (Vector3.down * 0.9f) + right);
-                Gizmos.DrawLine(transform.position + (Vector3.up * 0.9f), transform.position + (Vector3.up * 0.9f) + right);
+                Gizmos.DrawLine(transform.position, transform.position + right * 0.5f);
+                Gizmos.DrawLine(transform.position + (Vector3.up * 0.75f), transform.position + (Vector3.up * 0.75f) + right * 0.5f);
 
                 // stateMachine을 사용하긴 하지만, currentNode를 쓰는 것이 아니기 떄문에 판정을 달리 해야한다.
 
-                if(stateMachine.isNormalAttack)
+                if (stateMachine.isNormalAttack)
                 {
                     switch (stateMachine.attackCount - 1)
                     {
