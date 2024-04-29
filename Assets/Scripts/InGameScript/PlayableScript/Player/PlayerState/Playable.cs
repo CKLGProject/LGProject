@@ -77,7 +77,7 @@ namespace LGProject.PlayerState
             #endregion
         }
 
-        protected void InitEffects()
+        protected void InitEffectManager()
         {
             effectManager = GetComponent<EffectManager>();
             if(effectManager == null)

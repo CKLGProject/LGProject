@@ -155,6 +155,7 @@ namespace LGProject.PlayerState  //
         {
             // 충격에 의한 물리를 제공
             physics.velocity = velocity;
+            
 
             isHit = true;
         }

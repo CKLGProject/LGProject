@@ -40,6 +40,7 @@ namespace BehaviourTree
 
             stateMachine.guardEffect = guardEffect;
             stateMachine.guardEffect.SetActive(false);
+            InitEffectManager();
         }
 
         private void Start()

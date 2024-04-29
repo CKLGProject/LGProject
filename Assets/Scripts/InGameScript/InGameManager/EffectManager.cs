@@ -260,18 +260,121 @@ public class EffectManager : MonoBehaviour
     [SerializeField, HideInInspector]
     public GameObject _UltimateEffect;
 
-    Dictionary<string, GameObject> _EffectContainer;
+    Dictionary<EFFECT, GameObject> _EffectContainer = new Dictionary<EFFECT, GameObject>();
+
+    public enum EFFECT
+    {
+        Attack = 0,
+        Guard = 1,
+        Hit = 2,
+        Knockback = 3,
+        Run = 4,
+        Landing = 5,
+        Ultimate = 6,
+    }
+
 
     private void Start()
     {
         // 일단 여기에 이펙트들을 세팅
+        GameObject tempEffect = null;
+        if (_AttackEffect != null)
+        {
+            tempEffect = Instantiate(_AttackEffect, transform.position, Quaternion.identity);
+            tempEffect.transform.parent = this.transform;
+            _EffectContainer.Add(EFFECT.Attack, tempEffect);
+            tempEffect.SetActive(false);
+        }
         
+        if(_GuardEffect != null)
+        {
+            tempEffect = Instantiate(_GuardEffect, transform.position, Quaternion.identity);
+            tempEffect.transform.parent = this.transform;
+            _EffectContainer.Add(EFFECT.Guard, tempEffect);
+            tempEffect.SetActive(false);
+        }
 
+        if(_HitEffect != null)
+        {
+            tempEffect = Instantiate(_HitEffect, transform.position, Quaternion.identity);
+            tempEffect.transform.parent = this.transform;
+            _EffectContainer.Add(EFFECT.Hit, tempEffect);
+            tempEffect.SetActive(false);
+        }
+
+        if(_RunEffect  != null)
+        {
+            tempEffect = Instantiate(_RunEffect, transform.position, Quaternion.identity);
+            tempEffect.transform.parent = this.transform;
+            _EffectContainer.Add(EFFECT.Run, tempEffect);
+            tempEffect.SetActive(false);
+        }
+
+        if (_KnockbackEffect != null)
+        {
+            tempEffect = Instantiate(_KnockbackEffect, transform.position, Quaternion.identity);
+            tempEffect.transform.parent = this.transform;
+            _EffectContainer.Add(EFFECT.Knockback, tempEffect);
+            tempEffect.SetActive(false);
+        }
+
+        if(_LandingEffect != null)
+        {
+            tempEffect = Instantiate(_LandingEffect, transform.position, Quaternion.identity);
+            tempEffect.transform.parent = this.transform;
+            _EffectContainer.Add(EFFECT.Knockback, tempEffect);
+            tempEffect.SetActive(false);
+        }
+
+        if(_UltimateEffect != null)
+        {
+            tempEffect = Instantiate(_UltimateEffect, transform.position, Quaternion.identity);
+            tempEffect.transform.parent = this.transform;
+            _EffectContainer.Add(EFFECT.Ultimate, tempEffect);
+            tempEffect.SetActive(false);
+        }
     }
 
-    public void Play()
+    public void Play(EFFECT effectType)
     {
+        try
+        {
+            GameObject effect;
+            _EffectContainer.TryGetValue(effectType, out effect);
 
+            if (effect != null)
+            {
+                effect.SetActive(true);
+                effect.GetComponent<ParticleSystem>().Play();
+            }
+            else
+            {
+                Debug.Log("Notting");
+            }
+        }
+        catch
+        {
+            Debug.LogError("EffectManager Error");
+        }
+    }
+
+    public void Stop(EFFECT effectType)
+    {
+        try
+        {
+            GameObject effect;
+            _EffectContainer.TryGetValue(effectType, out effect);
+
+            if (effect != null)
+            {
+                effect.GetComponent<ParticleSystem>().Stop();
+                effect.SetActive(false);
+            }
+        }
+        catch
+        {
+            Debug.LogError("EffectManager Error");
+        }
     }
     
 

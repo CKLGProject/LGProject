@@ -17,7 +17,8 @@ namespace BehaviourTree
         {
             if (Agent == null)
                 Agent = AIAgent.Instance;
-            Agent.GetStateMachine.attackCount++;
+            if (Agent.GetStateMachine.attackCount > 2)
+                Agent.GetStateMachine.attackCount = 0;
             isAttack = false;
             Agent.GetStateMachine.isNormalAttack = true;
         }
@@ -40,6 +41,8 @@ namespace BehaviourTree
                 if (curTimer > animTimer && isAttack)
                 {
                     curTimer = 0;
+                    Debug.Log($"ATK Count = {Agent.GetStateMachine.attackCount}");
+                    Agent.GetStateMachine.attackCount++;
                     return State.Success;
                 }
                 return State.Running;
@@ -54,7 +57,7 @@ namespace BehaviourTree
             Vector3 right = Vector3.right * (Agent.directionX == true ? 1 : -1);
             Vector3 center = Agent.transform.position + right;
 
-            Collider[] targets = Physics.OverlapBox(center, Vector3.one * 0.5f);
+            Collider[] targets = Physics.OverlapBox(center, Vector3.one * 0.5f, Quaternion.identity, 1 << 3);
             System.Tuple<Transform, float> temp = null;
 
             foreach(var target in targets)
@@ -82,11 +85,10 @@ namespace BehaviourTree
                     temp.
                     Item1.GetComponent<Playable>().
                     GetStateMachine.
-                    HitDamaged(Agent.GetStateMachine.attackCount - 1 < 2 ? Vector3.zero : v);
+                    HitDamaged(Agent.GetStateMachine.attackCount < 2 ? Vector3.zero : v);
                     //damageInCount = true; <- 이건 좀 생각해봐야 할 듯...
                     temp.Item1.GetComponent<Playable>().GetStateMachine.hitPlayer = Agent.transform;
                     //Debug.Log($"Attack In Count = {stateMachine.attackCount}");
-
                     return true;
                 }
             }
