@@ -41,7 +41,7 @@ namespace BehaviourTree
             {
                 // 처음 0이기 때문에 새로운 세팅을 해줄 필요가 있음.
                 randTime = Random.Range(randMin, randMax);
-            }
+            }   
             curTimer += Time.deltaTime;
             if(curTimer > randTime)
             {

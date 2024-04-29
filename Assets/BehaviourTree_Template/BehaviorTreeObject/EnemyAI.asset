@@ -66,6 +66,7 @@ MonoBehaviour:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
   description: "\uACF5\uC911\uC5D0 \uB5A0 \uC788\uB294\uAC00?"
+  Agent: {fileID: 0}
 --- !u!114 &-6656234684928509735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87,6 +88,7 @@ MonoBehaviour:
     moveToObject: {fileID: 0}
   description: "\uD50C\uB808\uC774\uC5B4\uC640\uC758 \uAC70\uB9AC\uAC00 \uAC00\uAE4C\uC6B0\uBA74
     \uAC00\uB4DC\uB97C \uC62C\uB9BC."
+  Agent: {fileID: 0}
   range: 1.5
   Reverse: 0
 --- !u!114 &-4288313280875520722
@@ -111,7 +113,7 @@ MonoBehaviour:
   description: 
   children:
   - {fileID: 136105427570411762}
-  - {fileID: -1192872199924796822}
+  - {fileID: -1024075571135447831}
   - {fileID: 3974259158523110251}
 --- !u!114 &-3455377277169705623
 MonoBehaviour:
@@ -154,6 +156,7 @@ MonoBehaviour:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
   description: "\uC77C\uB2E8 \uAC00\uB4DC\uB97C \uC62C\uB824"
+  Agent: {fileID: 0}
 --- !u!114 &-1878908651922025553
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,14 +197,13 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 630ea0adba613274f86b17a2eb4ee721
-  position: {x: -481, y: 816.79785}
+  position: {x: -482.15, y: 808.67413}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
   description: 
   children:
   - {fileID: 3063406251304216790}
-  - {fileID: -1024075571135447831}
 --- !u!114 &-1024075571135447831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -433,6 +435,7 @@ MonoBehaviour:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
   description: 
+  Agent: {fileID: 0}
 --- !u!114 &3063406251304216790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -448,7 +451,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 1539c224f70139a4cbdaf4dfc23f9bb4
-  position: {x: -687.0001, y: 930.79785}
+  position: {x: -686.9998, y: 931.00006}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
@@ -535,13 +538,14 @@ MonoBehaviour:
   m_Name: AttackJudgeNode
   m_EditorClassIdentifier: 
   state: 0
-  started: 0
+  started: 1
   guid: 18d75cb919619c44e8524f4dc5cd701b
-  position: {x: -272.00006, y: 1405.7977}
+  position: {x: -271.99997, y: 1406}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
   description: 
+  Agent: {fileID: 0}
   judgTimer: 1
   animTimer: 0.5
 --- !u!114 &6263507584445490026
@@ -633,6 +637,7 @@ MonoBehaviour:
     moveToObject: {fileID: 0}
   description: "\uD50C\uB808\uC774\uC5B4\uC640\uC758 \uAC70\uB9AC\uB97C \uCCB4\uD06C\uD558\uC5EC
     \uC77C\uC815 \uD655\uB960\uB85C \uACF5\uACA9\uC744 \uC9C4\uD589."
+  Agent: {fileID: 0}
   range: 2
   Reverse: 0
 --- !u!114 &8718406841925922171

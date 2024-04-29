@@ -12,8 +12,11 @@ namespace BehaviourTree
         private float curTimer;
         protected override void OnStart()
         {
+            if (Agent == null)
+                Agent = AIAgent.Instance;
             curTimer = 0;
             Debug.Log("Down");
+
         }
 
         protected override void OnStop()

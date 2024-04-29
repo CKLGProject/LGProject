@@ -101,6 +101,7 @@ namespace LGProject.PlayerState
         void Start()
         {
             InitStates();
+            InitEffectManager();
 
         }
 

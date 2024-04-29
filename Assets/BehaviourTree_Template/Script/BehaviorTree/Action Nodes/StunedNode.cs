@@ -15,6 +15,9 @@ namespace BehaviourTree
         protected override void OnStart()
         {
             Debug.Log("Stuned");
+            if (Agent == null)
+                Agent = AIAgent.Instance;
+            Agent.effectManager.Play(EffectManager.EFFECT.Hit);
         }
 
         protected override void OnStop()
@@ -29,7 +32,7 @@ namespace BehaviourTree
             {
                 // 피격 모션 출력
                 //Debug.Log("아야!");
-                Agent.effectManager.Play();
+                Agent.effectManager.Play(EffectManager.EFFECT.Hit);
                 Agent.GetStateMachine.isHit = false;
                 curTiemr = 0;
             }
@@ -38,6 +41,7 @@ namespace BehaviourTree
             {
                 // 나 피격 상태 끝났어!
                 // 그런데 공중에 있냐 체크 해야함
+                Agent.effectManager.Stop(EffectManager.EFFECT.Hit);
                 return State.Success;
             }
             return State.Running;
