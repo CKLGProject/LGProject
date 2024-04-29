@@ -24,7 +24,7 @@ public class BehaviorTreeEditor : EditorWindow
         wnd.titleContent = new GUIContent("BehaviorTreeEditor");
     }
 
-    // ¿¡¼ÂÀ» Å¬¸¯ÇÏ¿© GUI EditorÀ» ÄÑ´Â ±â´É.
+    // ì—ì…‹ì„ í´ë¦­í•˜ì—¬ GUI Editorì„ ì¼œëŠ” ê¸°ëŠ¥.
     [OnOpenAsset]
     public static bool OnOpenAsset(int instanceId, int line)
     {
@@ -105,7 +105,7 @@ public class BehaviorTreeEditor : EditorWindow
     private void OnSelectionChange()
     {
         #region legarcy
-        // Editor¿¡¼­ ¼±ÅÃÇÑ BehaviorTree¿¡ Ãß°¡ÇÑ ³ëµå¸¦ »ğÀÔÇÔ.
+        // Editorì—ì„œ ì„ íƒí•œ BehaviorTreeì— ì¶”ê°€í•œ ë…¸ë“œë¥¼ ì‚½ì…í•¨.
         BehaviorTree tree = Selection.activeObject as BehaviorTree;
         if (!tree)
         {
@@ -121,10 +121,10 @@ public class BehaviorTreeEditor : EditorWindow
 
         if (Application.isPlaying)
         {
-            // Editor°¡ ½ÇÇà ÁßÀÏ ¶§ ºó tree°¡ ¾Æ´Ò °æ¿ì ui editor¸¦ º¸¿©ÁÜ.
+            // Editorê°€ ì‹¤í–‰ ì¤‘ì¼ ë•Œ ë¹ˆ treeê°€ ì•„ë‹ ê²½ìš° ui editorë¥¼ ë³´ì—¬ì¤Œ.
             if (tree)
             {
-                // »ğÀÔÇÑ ³ëµå¸¦ ºä¾î¿¡¼­ º¸¿©ÁÜ.
+                // ì‚½ì…í•œ ë…¸ë“œë¥¼ ë·°ì–´ì—ì„œ ë³´ì—¬ì¤Œ.
                 treeView.PopulateView(tree);
             }
         }
@@ -132,7 +132,7 @@ public class BehaviorTreeEditor : EditorWindow
         {
             if (tree && AssetDatabase.CanOpenAssetInEditor(tree.GetInstanceID()))
             {
-                // »ğÀÔÇÑ ³ëµå¸¦ ºä¾î¿¡¼­ º¸¿©ÁÜ.
+                // ì‚½ì…í•œ ë…¸ë“œë¥¼ ë·°ì–´ì—ì„œ ë³´ì—¬ì¤Œ.
                 treeView.PopulateView(tree);
             }
         }
