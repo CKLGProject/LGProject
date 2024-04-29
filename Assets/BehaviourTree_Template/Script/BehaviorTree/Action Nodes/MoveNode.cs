@@ -11,6 +11,9 @@ namespace BehaviourTree
     public class MoveNode : ActionNode
     {
 
+        public AIAgent Agent;
+        [Space(10f)]
+
         // 어디로 이동할 것인가가 관건
         // 점프는 별개의 영역이므로 이동자체의 로직만 생각하자.
         // 목표 지점을 두는 것은 어떨까?
@@ -31,7 +34,7 @@ namespace BehaviourTree
         {
             // Path 설정
             curTimer = jumpDelay;
-            agent.targetIndex = 0;
+            Agent.targetIndex = 0;
             //startPoint = pathFinding.Grid.Instance.NodeFromWorldPoint(agent.transform.position).worldPosition - Vector3.up * 0.45f;
         }
 
@@ -59,7 +62,7 @@ namespace BehaviourTree
 
             #endregion
             // path가 있는지 확인. || 내 앞에 적이 있는 지 확인
-            if (agent.path == null)
+            if (Agent.path == null)
                 return State.Failure;
 
             // path가 있다면 움직이게 하기.
@@ -78,16 +81,16 @@ namespace BehaviourTree
         bool FollowPath()
         {
             curTimer += Time.deltaTime;
-            Vector3 currentWaypoint = new Vector3(agent.path[agent.targetIndex].x, agent.path[agent.targetIndex].y -0.45f, agent.path[agent.targetIndex].z);
-            if (agent.transform.position == currentWaypoint)
+            Vector3 currentWaypoint = new Vector3(Agent.path[Agent.targetIndex].x, Agent.path[Agent.targetIndex].y -0.45f, Agent.path[Agent.targetIndex].z);
+            if (Agent.transform.position == currentWaypoint)
             {
                 //startPoint = currentWaypoint;
-                agent.targetIndex++;
-                if (agent.targetIndex >= agent.path.Length)
+                Agent.targetIndex++;
+                if (Agent.targetIndex >= Agent.path.Length)
                 {
                     return false;
                 }
-                currentWaypoint = new Vector3(agent.path[agent.targetIndex].x, agent.path[agent.targetIndex].y - 0.45f, agent.path[agent.targetIndex].z);
+                currentWaypoint = new Vector3(Agent.path[Agent.targetIndex].x, Agent.path[Agent.targetIndex].y - 0.45f, Agent.path[Agent.targetIndex].z);
             }
 
             // 대각선 위인지 체크
@@ -107,7 +110,7 @@ namespace BehaviourTree
             }
 
 
-            currentWaypoint.z = agent.transform.position.z;
+            currentWaypoint.z = Agent.transform.position.z;
 
             //Vector3 direction = currentWaypoint - agent.transform.position;
             //;
@@ -115,13 +118,13 @@ namespace BehaviourTree
             //{
             //    agent.GetStateMachine.physics.velocity += Vector3.right * direction.normalized.x;
             //}
-            agent.transform.position = Vector3.MoveTowards(agent.transform.position, currentWaypoint, agent.speed * Time.deltaTime);
+            Agent.transform.position = Vector3.MoveTowards(Agent.transform.position, currentWaypoint, Agent.speed * Time.deltaTime);
             return true;
         }
 
         private bool CheckDownNode(Vector3 currentWayPoint)
         {
-            Vector3 direction = currentWayPoint - agent.transform.position;
+            Vector3 direction = currentWayPoint - Agent.transform.position;
 
             if (direction.y < -0.4)
             {
@@ -134,17 +137,17 @@ namespace BehaviourTree
 
         private bool AcrossTargetNode(Vector3 currentWayPoint)
         {
-            Vector3 direction = currentWayPoint - agent.transform.position;
+            Vector3 direction = currentWayPoint - Agent.transform.position;
             Vector2 directionOld = Vector2.zero;
             int i = 0;
             RaycastHit hit;
             // y가 0이 아닌 곳이면 점프 또는 내려가기를 진행
             if(direction.y > 0.1f)
             {
-                for(i = agent.targetIndex; i < agent.path.Length - 1; i++) 
+                for(i = Agent.targetIndex; i < Agent.path.Length - 1; i++) 
                 {
-                    Vector2 directionNew = new Vector2(agent.path[i].x - agent.path[i+1].x, agent.path[i + 1].y - agent.path[i].y);
-                    Ray ray = new Ray(agent.path[i], Vector3.down);
+                    Vector2 directionNew = new Vector2(Agent.path[i].x - Agent.path[i+1].x, Agent.path[i + 1].y - Agent.path[i].y);
+                    Ray ray = new Ray(Agent.path[i], Vector3.down);
                     // 조건
                     // 노드의 간격 중 y값이 0이면서 노드 아래에 플랫폼이 존재하는 경우.
                     if(directionNew.y < 0.1f && Physics.Raycast(ray, out hit, 0.5f, layerMask: 1 << 6))
@@ -152,7 +155,7 @@ namespace BehaviourTree
                         break;
                     }
                 }
-                agent.targetIndex = i;
+                Agent.targetIndex = i;
                 return true;
             }
             return false;
@@ -160,12 +163,12 @@ namespace BehaviourTree
 
         public bool CheckTargetPosition()
         {
-            if (agent.target == null)
+            if (Agent.target == null)
                 return false;
             // 타겟 노드
-            Vector3 targetPos = pathFinding.Grid.Instance.NodeFromWorldPoint(agent.target.position).worldPosition;
+            Vector3 targetPos = pathFinding.Grid.Instance.NodeFromWorldPoint(Agent.target.position).worldPosition;
             // 최종 목표
-            Vector3 FinTarget = agent.path[agent.path.Length - 1];
+            Vector3 FinTarget = Agent.path[Agent.path.Length - 1];
 
             float distance = Mathf.Abs(Vector3.Distance(targetPos, FinTarget));
 
@@ -182,22 +185,22 @@ namespace BehaviourTree
         // 4를 넘지 않았다면 계속 Physics 를 줘라
         private void MovingPoint()
         {
-            Vector3 direction = agent.target.position - agent.transform.position;
+            Vector3 direction = Agent.target.position - Agent.transform.position;
 
             JumpingPointCheck(direction);
 
-            if (Mathf.Abs(agent.GetStateMachine.physics.velocity.x) < 1 && Mathf.Abs(direction.x) > 0.1f)
+            if (Mathf.Abs(Agent.GetStateMachine.physics.velocity.x) < 1 && Mathf.Abs(direction.x) > 0.1f)
             {
                 // 방향을 체크
                 direction = new Vector3(direction.x, 0, 0);
                 direction.Normalize();
-                agent.GetStateMachine.physics.velocity += direction * 1;
+                Agent.GetStateMachine.physics.velocity += direction * 1;
                 // 여기서 가야하는 방향에 따라 바라보는 방향을 달리 해줌.
-                Vector3 viewTarget = new Vector3(agent.target.position.x, agent.transform.position.y, agent.target.position.z);
-                agent.transform.LookAt(viewTarget);
+                Vector3 viewTarget = new Vector3(Agent.target.position.x, Agent.transform.position.y, Agent.target.position.z);
+                Agent.transform.LookAt(viewTarget);
             }
             else if(Mathf.Abs(direction.x) < 0.1f)
-                agent.GetStateMachine.physics.velocity = new Vector3(0, agent.GetStateMachine.physics.velocity.y, 0);
+                Agent.GetStateMachine.physics.velocity = new Vector3(0, Agent.GetStateMachine.physics.velocity.y, 0);
         }
 
         RaycastHit hit;
@@ -211,12 +214,12 @@ namespace BehaviourTree
             // lookAt? 아니... 그냥 바라보는 곳을 명확하게 하는 것이 좋아보인다.
             
             // 점프를 하자마자 타이머가 돌아가야하는데, 이건 어떻게 표현할까?
-            Ray ray = new Ray(agent.transform.position + Vector3.up * 0.25f + Vector3.forward * 0.2f, Vector3.down);
+            Ray ray = new Ray(Agent.transform.position + Vector3.up * 0.25f + Vector3.forward * 0.2f, Vector3.down);
             curTimer += Time.deltaTime;
             bool case1 = /*Mathf.Abs(direction.x) < 1.5f && */direction.y >= 0.5f;
-            bool case2 = !Physics.Raycast(ray, out hit, 0.45f, 1 << 6) && agent.GetStateMachine.jumpInCount < 2; 
+            bool case2 = !Physics.Raycast(ray, out hit, 0.45f, 1 << 6) && Agent.GetStateMachine.jumpInCount < 2; 
             // 높은 곳이면 점프를 한다.
-            if ((direction.y >= 1f && Mathf.Abs( direction.x ) < 0.75f) && agent.GetStateMachine.jumpInCount < 2)
+            if ((direction.y >= 1f && Mathf.Abs( direction.x ) < 0.75f) && Agent.GetStateMachine.jumpInCount < 2)
             {
                 // 점프를 하는 조건
                 // isGrounded가 True거나, timer가 넘어설 경우
@@ -240,11 +243,11 @@ namespace BehaviourTree
             {
                 count++;
                 Debug.Log($"{curTimer} / {count}");
-                agent.GetStateMachine.jumpInCount++;
-                agent.GetStateMachine.JumpVelocity();
-                agent.GetStateMachine.physics.velocity += Vector3.up * agent.jumpScale;
+                Agent.GetStateMachine.jumpInCount++;
+                Agent.GetStateMachine.JumpVelocity();
+                Agent.GetStateMachine.physics.velocity += Vector3.up * Agent.jumpScale;
                 curTimer = 0;
-                Debug.Log($"Jump = {agent.GetStateMachine.physics.velocity}");
+                Debug.Log($"Jump = {Agent.GetStateMachine.physics.velocity}");
             }
         }
 

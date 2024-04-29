@@ -7,6 +7,8 @@ namespace BehaviourTree
 {
     public class StunedNode : ActionNode
     {
+        public AIAgent Agent;
+        [Space(10f)]
         public float stunedTimer;
         private float curTiemr;
 
@@ -23,12 +25,12 @@ namespace BehaviourTree
         protected override State OnUpdate()
         {
             // 경직 중 공격을 당하면 초기화
-            if(agent.GetStateMachine.isHit)
+            if(Agent.GetStateMachine.isHit)
             {
                 // 피격 모션 출력
                 //Debug.Log("아야!");
-                agent.effectManager.Play();
-                agent.GetStateMachine.isHit = false;
+                Agent.effectManager.Play();
+                Agent.GetStateMachine.isHit = false;
                 curTiemr = 0;
             }
             curTiemr += Time.deltaTime;

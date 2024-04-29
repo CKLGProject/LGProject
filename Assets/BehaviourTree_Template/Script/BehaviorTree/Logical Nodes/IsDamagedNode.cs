@@ -7,6 +7,7 @@ namespace BehaviourTree
     // 피해를 입었을 때 작동하는 노드
     public class IsDamagedNode : ActionNode
     {
+        public AIAgent Agent;
         protected override void OnStart()
         {
 
@@ -19,7 +20,7 @@ namespace BehaviourTree
 
         protected override State OnUpdate()
         {
-            return agent.GetStateMachine.isHit ? State.Success : State.Failure;
+            return Agent.GetStateMachine.isHit ? State.Success : State.Failure;
         }
     }
 

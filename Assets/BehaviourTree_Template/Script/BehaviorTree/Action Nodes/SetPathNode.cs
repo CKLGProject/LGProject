@@ -10,6 +10,7 @@ namespace BehaviourTree
     // 경로를 세팅 
     public class SetPathNode : ActionNode
     {
+        public AIAgent Agent;
         // 움직일 포인트를 찍어줌
         // 움직일 포인트가 찍히면 MoveNode로 움직임을 체크하고 목표지점에 도달할 때까지
         // (Ex -> 0.5거리 이하 )
@@ -37,7 +38,7 @@ namespace BehaviourTree
             //pathFinding.PathRequestManager.RequestPath();
             #endregion
             // 이거 에러 있음 잘 안받아옴
-            PathRequestManager.RequestPath(new PathRequest(agent.transform.position, Grid.Instance.GetRandPoint(), agent.GetPath));
+            PathRequestManager.RequestPath(new PathRequest(Agent.transform.position, Grid.Instance.GetRandPoint(), Agent.GetPath));
         }
 
         protected override void OnStop()
@@ -47,7 +48,7 @@ namespace BehaviourTree
 
         protected override State OnUpdate()
         {
-            if (agent.path == null)
+            if (Agent.path == null)
                 return State.Running;
             else
                 return State.Success;   

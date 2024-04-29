@@ -7,6 +7,8 @@ namespace BehaviourTree
 {
     public class WakeUpNode : ActionNode
     {
+        public AIAgent Agent;
+        [Space(10f)]
         public float wakeUpTime;
         private float curTimer;
         protected override void OnStart()

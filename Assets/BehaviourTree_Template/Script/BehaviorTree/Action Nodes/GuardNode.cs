@@ -6,14 +6,15 @@ namespace BehaviourTree
 {
     public class GuardNode : ActionNode
     {
+        public AIAgent Agent;
         //public float 
         // 회복도 해야겠네? 생각해야할 것이 많음 좀 우선순위를 낮추자.
         protected override void OnStart()
         {
             // 애니메이션 재생
             // 현재 가드를 올렸따!
-            agent.GetStateMachine.isGuard = agent.GetStateMachine.isGuard ? false : true;
-            agent.GetStateMachine.guardEffect.SetActive(agent.GetStateMachine.isGuard ? true : false);
+            Agent.GetStateMachine.isGuard = Agent.GetStateMachine.isGuard ? false : true;
+            Agent.GetStateMachine.guardEffect.SetActive(Agent.GetStateMachine.isGuard ? true : false);
             //agent.GetStateMachine.guardEffect.
         }
 

@@ -40,9 +40,9 @@ public class BehaviorTreeView : GraphView
         // 드래그로 박스를 만들어 그 안에 들어가는 노드들을 선택할 수 있는 기능.
         // 복수 선택
         this.AddManipulator(new RectangleSelector());
-
+        var BehaviourTreeEditor_uss = AssetDatabase.GUIDToAssetPath("0abae94caedf05944a403a050ef2358b");
         // StyleSheet 를 세팅
-        var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/BehaviourTree_Template/Editor/UIBuilder/BehaviorTreeEditor.uss");
+        var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>(BehaviourTreeEditor_uss);
         styleSheets.Add(styleSheet);
 
         // ctrl + z, ctrl + y를 실행하였을 때, 다음의 함수를 호출함.
