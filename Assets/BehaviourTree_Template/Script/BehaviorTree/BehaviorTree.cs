@@ -20,8 +20,6 @@ namespace BehaviourTree
             }
             return treeState;
         }
-
-#if UNITY_EDITOR
         public Node CreateNode(System.Type type)
         {
             //Vector2 mousePos = Input.mousePosition;
@@ -172,6 +170,5 @@ namespace BehaviourTree
             //});
         }
 
-#endif
     }
 }
