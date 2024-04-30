@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 
 namespace BehaviourTree
@@ -13,6 +13,8 @@ namespace BehaviourTree
     {
         private static AIAgent instance = null;
         public static AIAgent Instance => instance;
+
+        private float _attackRange;
 
         public Transform target;
         public Grid grid;
@@ -74,6 +76,12 @@ namespace BehaviourTree
             }
         }
 
+        public void SetAttacRange(float range)
+        {
+            _attackRange = range;
+
+        }
+
         private void OnDrawGizmos()
         {
             if (path != null)
@@ -110,7 +118,7 @@ namespace BehaviourTree
 
                 if (stateMachine.isNormalAttack)
                 {
-                    switch (stateMachine.attackCount - 1)
+                    switch (stateMachine.attackCount)
                     {
                         case 0:
                             Gizmos.color = Color.red;
@@ -129,16 +137,16 @@ namespace BehaviourTree
                 else if(stateMachine.isDashAttack)
                 {
                     Gizmos.color = Color.red;
-                    Vector3 hitBoxSize = Vector3.one;
-                    hitBoxSize.x *= 1.3f;
+                    Vector3 hitBoxSize = Vector3.one * 0.75f;
+                    hitBoxSize.x *= _attackRange;
                     //hitBoxSiz
                     Gizmos.DrawWireCube(transform.position + right, hitBoxSize);
                 }
                 else if(stateMachine.isJumpAttack)
                 {
                     Gizmos.color = Color.red;
-                    Vector3 hitBoxSize = Vector3.one;
-                    hitBoxSize.x *= 1.5f;
+                    Vector3 hitBoxSize = Vector3.one * 0.75f;
+                    hitBoxSize.x *= _attackRange;
                     //hitBoxSiz
                     Gizmos.DrawWireCube(transform.position + right, hitBoxSize);
                 }

@@ -9,6 +9,7 @@ namespace BehaviourTree
     {
         //public AIAgent Agent;
         //[Space(10f)]
+        [SerializeField, Range(0f, 2f)] private float attackRange;
         public float judgTimer = 0;
         public float animTimer = 0;
         private float _curTimer = 0;
@@ -21,11 +22,15 @@ namespace BehaviourTree
                 AIAgent.Instance.GetStateMachine.attackCount = 0;
             _isAttack = false;
             AIAgent.Instance.GetStateMachine.isNormalAttack = true;
+            AIAgent.Instance.SetAttacRange(attackRange);
+            //_curTimer = 0;
         }
 
         protected override void OnStop()
         {
             AIAgent.Instance.GetStateMachine.isNormalAttack = false;
+            AIAgent.Instance.GetStateMachine.attackCount = 0;
+            _isAttack = false;
 
         }
         protected override State OnUpdate()
@@ -37,13 +42,12 @@ namespace BehaviourTree
             {
                 // 애니메이션이 끝난 이후 데미지 판정 -> 데미지를 넣는데 성공하면 다음 공격, 시간이 지나도 공격 못하면 Idle
                 // 애니메이션이 재생 중이라면 Running
-                if(_isAttack == false) _isAttack = ActionJudge();
+                if(_isAttack == false && AIAgent.Instance.GetStateMachine.attackCount < 2) _isAttack = ActionJudge();
                 if (_curTimer > animTimer && _isAttack)
                 {
                     _curTimer = 0;
-                    Debug.Log($"ATK Count = {AIAgent.Instance.GetStateMachine.attackCount}");
-                    AIAgent.Instance.GetStateMachine.attackCount++;
-                    return State.Success;
+                    _isAttack = false;
+                    return State.Running;
                 }
                 return State.Running;
             }
@@ -57,7 +61,7 @@ namespace BehaviourTree
             Vector3 right = Vector3.right * (AIAgent.Instance.directionX == true ? 1 : -1);
             Vector3 center = AIAgent.Instance.transform.position + right;
 
-            Collider[] targets = Physics.OverlapBox(center, Vector3.one * 0.5f, Quaternion.identity, 1 << 3);
+            Collider[] targets = Physics.OverlapBox(center, Vector3.one * attackRange, Quaternion.identity, 1 << 3);
             System.Tuple<Transform, float> temp = null;
 
             foreach(var target in targets)
@@ -78,7 +82,7 @@ namespace BehaviourTree
             else
             {
                 Vector3 v = Vector3.zero;
-                if (AIAgent.Instance.GetStateMachine.attackCount >= 2)
+                if (AIAgent.Instance.GetStateMachine.attackCount >= 1)
                 {
                     v = AIAgent.Instance.CaculateVelocity(
                        temp.Item1.GetComponent<Playable>().GetStateMachine.transform.position + (temp.Item1.GetComponent<Playable>().GetStateMachine.transform.position - AIAgent.Instance.transform.position).normalized,
@@ -89,10 +93,9 @@ namespace BehaviourTree
                     temp.
                     Item1.GetComponent<Playable>().
                     GetStateMachine.
-                    HitDamaged(AIAgent.Instance.GetStateMachine.attackCount < 2 ? Vector3.zero : v);
-                    //damageInCount = true; <- 이건 좀 생각해봐야 할 듯...
+                    HitDamaged(AIAgent.Instance.GetStateMachine.attackCount < 1 ? Vector3.zero : v);
                     temp.Item1.GetComponent<Playable>().GetStateMachine.hitPlayer = AIAgent.Instance.transform;
-                    //Debug.Log($"Attack In Count = {stateMachine.attackCount}");
+                    AIAgent.Instance.GetStateMachine.attackCount++;
                     return true;
                 }
             }

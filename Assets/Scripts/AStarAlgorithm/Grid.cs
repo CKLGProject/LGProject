@@ -29,7 +29,7 @@ namespace pathFinding
         LayerMask walkableMask;
         Dictionary<int, int> walkableRegionsDictionary = new Dictionary<int, int>();
 
-        // ÀÌµ¿ÇÒ ¼ö ÀÖ´Â Æ÷ÀÎÆ®¸¦ ³Ö¾îµÎÀÚ
+        // ì´ë™í•  ìˆ˜ ìˆëŠ” í¬ì¸íŠ¸ë¥¼ ë„£ì–´ë‘ì
         public List<Node> walkableNodeList = new List<Node>();
 
         public Node this[int a, int b]
@@ -124,7 +124,7 @@ namespace pathFinding
 
                         grid[x, y] = new Node(walkable, worldPoint, x, y, movementPenalty);
 
-                        // ÇÃ·§ÆûÀÏ °æ¿ì
+                        // í”Œë«í¼ì¼ ê²½ìš°
                         if (hit.transform != null && hit.transform.gameObject.layer == 6 )
                         {
                             grid[x, y + 1].platform = true;
@@ -139,7 +139,7 @@ namespace pathFinding
                 }
             }
 
-            // ³ëµå¸¦ Áß½ÉÀ¸·Î °¡ÁßÄ¡¸¦ ºÎ°¡ÇÏ´Â ³ëµå.
+            // ë…¸ë“œë¥¼ ì¤‘ì‹¬ìœ¼ë¡œ ê°€ì¤‘ì¹˜ë¥¼ ë¶€ê°€í•˜ëŠ” ë…¸ë“œ.
             //BlurPenaltyMap(3);
         }
 
@@ -330,19 +330,33 @@ namespace pathFinding
                         else
                             Gizmos.color = (n.walkable) ? Color.white : new Color(Color.red.r, Color.red.g, Color.red.b, 0.25f);
                         //if (path != null)
-                        //    if (path.Contains(n))
+                        //    if (path.Cxontains(n))
                         //        Gizmos.color = Color.black;
                         Gizmos.DrawCube(n.worldPosition, Vector3.one * (nodeDiameter));
                     }
                 }
             }
         }
+        int totalCount = 0;
+        int count = 0;
 
-        public Vector3 GetRandPoint()
+        public Vector3 GetRandPoint(Vector3 Point)
         {
-            int rand = UnityEngine.Random.Range(0, walkableNodeList.Count);
-            // ÁÂÇ¥¿¡ µû¶ó ÀÌµ¿ °æ·Î°¡ ´Ù¸§.
-
+            int rand = 0;
+            count = 0;
+            while (true)
+            {
+                count = 0;
+                rand = UnityEngine.Random.Range(0, walkableNodeList.Count);
+                // ëœë¤ ì¢Œí‘œë¥¼ ë°›ì•„ì™”ë‹¤ë©´? í•´ë‹¹ ì¢Œí‘œê°€ í”Œë ˆì´ì–´ì˜ ìœ„ì¹˜ì™€ ì–¼ë§ˆë‚˜ ì°¨ì´ê°€ ë‚˜ëŠ”ì§€ ì²´í¬í•´ì•¼í•œë‹¤.
+                float distance = Vector3.Distance(walkableNodeList[rand].worldPosition, Point);
+                if (Mathf.Abs(distance) > 3f)
+                {
+                    break;
+                }
+            }
+            totalCount += count;
+            Debug.Log($"Search Point Counting : {totalCount} / {count}");
             return walkableNodeList[rand].worldPosition; ;
         }
 
