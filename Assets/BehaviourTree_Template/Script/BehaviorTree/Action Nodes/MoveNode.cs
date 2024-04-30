@@ -63,10 +63,15 @@ namespace BehaviourTree
             //return State.Running;
 
             #endregion
-            // path가 있는지 확인. || 내 앞에 적이 있는 지 확인
-            if (Agent.path == null)
-                return State.Failure;
+            if (Agent == null)
+                Agent = AIAgent.Instance;
+            float distance = Vector3.Distance(Agent.transform.position, Agent.player.position);
 
+            // path가 있는지 확인. || 내 앞에 적이 있는 지 확인
+            if ((Agent.path == null || distance <= 1.5f) && Agent.GetStateMachine.isGrounded)
+            {
+                return State.Failure;
+            }
             // path가 있다면 움직이게 하기.
             // Running 상태가 필요함.
             // 마지막 경로에 도착했는가를 체크해야함.
@@ -74,7 +79,6 @@ namespace BehaviourTree
             {
                 // 이동을 해야함.
                 return State.Running;
-                //transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
             }
             return State.Success;   
 
@@ -106,12 +110,10 @@ namespace BehaviourTree
             //if ()
 
 
-                if (CheckTargetPosition())
+            if (CheckTargetPosition())
             {
                 return false;
             }
-
-
             currentWaypoint.z = Agent.transform.position.z;
 
             //Vector3 direction = currentWaypoint - agent.transform.position;
@@ -121,6 +123,8 @@ namespace BehaviourTree
             //    agent.GetStateMachine.physics.velocity += Vector3.right * direction.normalized.x;
             //}
             Agent.transform.position = Vector3.MoveTowards(Agent.transform.position, currentWaypoint, Agent.speed * Time.deltaTime);
+            Vector3 rot = new Vector3(currentWaypoint.x, Agent.transform.position.y, Agent.transform.position.z);
+            Agent.transform.LookAt(rot);
             return true;
         }
 
@@ -244,12 +248,12 @@ namespace BehaviourTree
             if (curTimer >= jumpDelay)
             {
                 count++;
-                Debug.Log($"{curTimer} / {count}");
+                //Debug.Log($"{curTimer} / {count}");
                 Agent.GetStateMachine.jumpInCount++;
                 Agent.GetStateMachine.JumpVelocity();
                 Agent.GetStateMachine.physics.velocity += Vector3.up * Agent.jumpScale;
                 curTimer = 0;
-                Debug.Log($"Jump = {Agent.GetStateMachine.physics.velocity}");
+                //Debug.Log($"Jump = {Agent.GetStateMachine.physics.velocity}");
             }
         }
 

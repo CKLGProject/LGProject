@@ -124,7 +124,7 @@ namespace BehaviourTree
                         default:
                             break;
                     }
-                    Gizmos.DrawWireCube(transform.position + right, Vector3.one);
+                    Gizmos.DrawWireCube(transform.position + right, Vector3.one * .75f);
                 }
                 else if(stateMachine.isDashAttack)
                 {

@@ -17,12 +17,9 @@ namespace BehaviourTree
         // 계속 이동.
         // 앞으로 가는 와중 길이 없으면, 점프를 한다. 점프의 경우 2단까지 가능하나
         // 2단 점프의 경우는 아직 로직을 생각 안해둠.
-        //pathFinding.Grid
-        //private pathFinding.Grid grid;
-        //SetPathNode()
-        //{
-        //    grid = GameObject.Find("A*").GetComponent<pathFinding.Grid>();
-        //}
+
+        [SerializeField] private float coolDown = 2;
+        private float _curTimer;
 
         protected override void OnStart()
         {
@@ -40,7 +37,6 @@ namespace BehaviourTree
             if (Agent == null)
                 Agent = AIAgent.Instance;
             // 상대방을 기준으로 공격을 진행해야함.
-            PathRequestManager.RequestPath(new PathRequest(Agent.transform.position, Grid.Instance.GetRandPoint(), Agent.GetPath));
         }
 
         protected override void OnStop()
@@ -50,10 +46,20 @@ namespace BehaviourTree
 
         protected override State OnUpdate()
         {
+            // 타이머를 재생해서 0이 되면 실행되게 하기
+            _curTimer += Time.deltaTime;
+            if (_curTimer < coolDown)
+            {
+                return State.Failure;
+            }
             if (Agent.path == null)
                 return State.Running;
             else
-                return State.Success;   
+            {
+                _curTimer = 0;
+                PathRequestManager.RequestPath(new PathRequest(Agent.transform.position, Grid.Instance.GetRandPoint(), Agent.GetPath));
+                return State.Success;
+            }
             #region Legarcy
 
             //// 경로를 잘 받아왔는가?

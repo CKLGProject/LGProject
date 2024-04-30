@@ -338,10 +338,10 @@ namespace pathFinding
             }
         }
 
-        public Vector3 GetRandPoint(Vector3 playerPos)
+        public Vector3 GetRandPoint()
         {
             int rand = UnityEngine.Random.Range(0, walkableNodeList.Count);
-            
+            // 좌표에 따라 이동 경로가 다름.
 
             return walkableNodeList[rand].worldPosition; ;
         }

@@ -1,5 +1,27 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8567596068002769329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1ee089778469a6499c863647c673aaa, type: 3}
+  m_Name: WeightDecoratorNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 4884de2bd7b34db4b8d6f1b997c484d8
+  position: {x: -1104.9998, y: 1100}
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    moveToObject: {fileID: 0}
+  description: "\uACF5\uACA9 \uBE48\uB3C4 : 3"
+  child: {fileID: -1024075571135447831}
+  weight: 3
 --- !u!114 &-7617570576366680649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15,7 +37,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 3230ebe1299191c46ace076eff106022
-  position: {x: -860.12524, y: 1217.5}
+  position: {x: -1105, y: 1417}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
@@ -67,30 +89,6 @@ MonoBehaviour:
     moveToObject: {fileID: 0}
   description: "\uACF5\uC911\uC5D0 \uB5A0 \uC788\uB294\uAC00?"
   Agent: {fileID: 0}
---- !u!114 &-6656234684928509735
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41ba01fb4f8cf244694fcdefbe1221d6, type: 3}
-  m_Name: RangeNode
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: c3958f3ee70299a42a2d5b82bac90558
-  position: {x: -1511.1252, y: 1057.5}
-  blackboard:
-    moveToPosition: {x: 0, y: 0, z: 0}
-    moveToObject: {fileID: 0}
-  description: "\uD50C\uB808\uC774\uC5B4\uC640\uC758 \uAC70\uB9AC\uAC00 \uAC00\uAE4C\uC6B0\uBA74
-    \uAC00\uB4DC\uB97C \uC62C\uB9BC."
-  Agent: {fileID: 0}
-  range: 1.5
-  Reverse: 0
 --- !u!114 &-6052517405815213612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106,7 +104,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 1beb1424f874e74428234c7f23051647
-  position: {x: -412, y: 950}
+  position: {x: -301.87473, y: 957}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
@@ -115,6 +113,30 @@ MonoBehaviour:
   - {fileID: 8653642454358394542}
   - {fileID: 6026444198872143281}
   current: 0
+--- !u!114 &-5738260941832166143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c140c3504d9e904393cd92a76d59e6b, type: 3}
+  m_Name: WeightSelectorNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 6426123256ca7d845ab0a83e316ca8a9
+  position: {x: -1227.5417, y: 946}
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    moveToObject: {fileID: 0}
+  description: 
+  children:
+  - {fileID: 2799212600432384785}
+  - {fileID: -8567596068002769329}
+  totalWeights: 0
 --- !u!114 &-5131589572804364399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,13 +152,13 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 3b9f992a94dca2c43a96592595bbdc70
-  position: {x: -40, y: 792}
+  position: {x: 61.080345, y: 789.00006}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
   description: "\uD50C\uB808\uC774\uC5B4 \uCD94\uACA9"
-  child: {fileID: 0}
-  weight: 4
+  child: {fileID: 7480222185597077497}
+  weight: 2
 --- !u!114 &-4288313280875520722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,7 +180,7 @@ MonoBehaviour:
     moveToObject: {fileID: 0}
   description: 
   children:
-  - {fileID: -1192872199924796822}
+  - {fileID: 5261641601745863168}
   - {fileID: 136105427570411762}
   - {fileID: 4382182258252794628}
   - {fileID: 3974259158523110251}
@@ -177,7 +199,7 @@ MonoBehaviour:
   state: 0
   started: 1
   guid: d6ff6652ed390f64e832e7c645f5cc0f
-  position: {x: 239, y: -17}
+  position: {x: 239, y: -71}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
@@ -198,12 +220,14 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: b243ed80d3f61c04cb287c27d78c507d
-  position: {x: -1243.1252, y: 1228.5}
+  position: {x: -1432.0001, y: 1432}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
   description: "\uC77C\uB2E8 \uAC00\uB4DC\uB97C \uC62C\uB824"
   Agent: {fileID: 0}
+  percent: 80
+  guardEnableRange: 1.5
 --- !u!114 &-1878908651922025553
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,29 +253,6 @@ MonoBehaviour:
   - {fileID: -7252241123171764499}
   - {fileID: 6263507584445490026}
   current: 0
---- !u!114 &-1192872199924796822
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68047313e2fb8cf439c7453b6915160a, type: 3}
-  m_Name: SelectorNode
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: 630ea0adba613274f86b17a2eb4ee721
-  position: {x: -1220.1252, y: 729.5}
-  blackboard:
-    moveToPosition: {x: 0, y: 0, z: 0}
-    moveToObject: {fileID: 0}
-  description: "\uAC00\uC911\uCE58 \uC5C6\uC774 \uC774\uB3D9\uD558\uB294 \uB178\uB4DC "
-  children:
-  - {fileID: 3063406251304216790}
-  - {fileID: -1024075571135447831}
 --- !u!114 &-1024075571135447831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -267,15 +268,15 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 6b7ca2dc0289fff47b1ec9aa2bc4c2b9
-  position: {x: -1037.1252, y: 880.5}
+  position: {x: -1104.9998, y: 1247}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
   description: "\uD50C\uB7EC\uC5D0\uC774\uAC00 \uC77C\uC815 \uBC94\uC704\uC5D0 \uB4E4\uC5B4\uC624\uBA74
     \uACF5\uACA9\uC744 \uC9C4\uD589\uD558\uB294 \uB178\uB4DC"
   children:
-  - {fileID: 8312084001078462824}
-  - {fileID: 7104165399713211523}
+  - {fileID: -7617570576366680649}
+  - {fileID: 8718406841925922171}
   current: 0
 --- !u!114 &-903076578455832319
 MonoBehaviour:
@@ -292,7 +293,7 @@ MonoBehaviour:
   state: 0
   started: 1
   guid: 
-  position: {x: 239, y: 83}
+  position: {x: 239, y: 60.00004}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
@@ -325,28 +326,29 @@ MonoBehaviour:
   - {fileID: -7252241123171764499}
   - {fileID: 6263507584445490026}
   - {fileID: 3063406251304216790}
-  - {fileID: -6656234684928509735}
-  - {fileID: 782142378757560125}
-  - {fileID: 8902453521443192468}
   - {fileID: -3162985567936443679}
   - {fileID: 3974259158523110251}
   - {fileID: -1024075571135447831}
-  - {fileID: 8312084001078462824}
-  - {fileID: 1315391209876939497}
-  - {fileID: 7104165399713211523}
   - {fileID: -7617570576366680649}
   - {fileID: 1668414634039770992}
   - {fileID: 3047791323903036127}
   - {fileID: 8718406841925922171}
   - {fileID: 5364688945233204975}
-  - {fileID: 4854915725878843572}
-  - {fileID: -1192872199924796822}
   - {fileID: 4382182258252794628}
   - {fileID: 2986984668415281311}
   - {fileID: -5131589572804364399}
   - {fileID: 8653642454358394542}
   - {fileID: 6026444198872143281}
   - {fileID: -6052517405815213612}
+  - {fileID: 8118868408172696624}
+  - {fileID: 5261641601745863168}
+  - {fileID: -8567596068002769329}
+  - {fileID: -5738260941832166143}
+  - {fileID: 2799212600432384785}
+  - {fileID: 5949424694422935187}
+  - {fileID: 7480222185597077497}
+  - {fileID: 2612944177186896387}
+  - {fileID: 1516049398472019303}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
@@ -375,7 +377,7 @@ MonoBehaviour:
   - {fileID: 4814404046932979626}
   - {fileID: -1878908651922025553}
   current: 0
---- !u!114 &782142378757560125
+--- !u!114 &1516049398472019303
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -384,45 +386,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6babec2a44aec92419c275b704eb9284, type: 3}
-  m_Name: SequencerNode
+  m_Script: {fileID: 11500000, guid: 5e766465528e3f248b5f5e356cf5bc23, type: 3}
+  m_Name: DebugLogNode
   m_EditorClassIdentifier: 
   state: 0
   started: 0
-  guid: 3a8e64fac11e7c34183863ef47a21bc0
-  position: {x: -1332.1252, y: 1057.5}
+  guid: 982c7c7f5046e5f418b6c3fec746c917
+  position: {x: 349.8767, y: 957}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
-  description: "\uAC70\uB9AC\uAC00 \uAC00\uAE4C\uC6B0\uBA74 \uB9E4 \uD0C0\uC784\uB9C8\uB2E4
-    \uD37C\uC13C\uD2B8 \uACC4\uC0B0\uC5D0 \uB4E4\uC5B4\uAC10."
-  children:
-  - {fileID: 8902453521443192468}
-  - {fileID: -3162985567936443679}
-  current: 0
---- !u!114 &1315391209876939497
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b676fcbc4243a64c9ce3c293d092650, type: 3}
-  m_Name: IsPercentageNode
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: 9b5b68f303da6d14493b15384e197267
-  position: {x: -1020.1251, y: 1217.5}
-  blackboard:
-    moveToPosition: {x: 0, y: 0, z: 0}
-    moveToObject: {fileID: 0}
-  description: 
-  percent: 70
-  randMin: 0.2
-  randMax: 0.5
+  description: "\uCD94\uACA9 \uC911 n\uC758 \uAC70\uB9AC\uB9CC\uD07C \uAC00\uAE4C\uC6CC\uC9C0\uBA74
+    \uB300\uC26C \uC5B4\uD0DD\uC744 \uC9C4\uD589\uD568.\n\uB300\uC26C \uC5B4\uD0DD
+    \uD6C4 \uC7AC\uCC28 \uC774\uB3D9\uC744 \uC9C4\uD589\uD568."
+  message: 
 --- !u!114 &1668414634039770992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -438,7 +415,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 181e88f745b39a546ae2179dd1dcc977
-  position: {x: -860.12524, y: 1372.5}
+  position: {x: -1105, y: 1563.9999}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
@@ -447,6 +424,50 @@ MonoBehaviour:
   - {fileID: 5364688945233204975}
   - {fileID: 3047791323903036127}
   current: 0
+--- !u!114 &2612944177186896387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cb92853804b27d41ac471ecaeaa74e7, type: 3}
+  m_Name: ChasingNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 8b7d37cd2e1f54f439b25f49e49a0999
+  position: {x: 22.999874, y: 1110}
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    moveToObject: {fileID: 0}
+  description: 
+  Agent: {fileID: 0}
+  jumpDelay: 0
+--- !u!114 &2799212600432384785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1ee089778469a6499c863647c673aaa, type: 3}
+  m_Name: WeightDecoratorNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 00ae37c11edfbdb448b7fc1d721813e9
+  position: {x: -1335, y: 1100}
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    moveToObject: {fileID: 0}
+  description: "\uBC29\uC5B4\uBE48\uB3C4 : 1"
+  child: {fileID: 3063406251304216790}
+  weight: 1
 --- !u!114 &2986984668415281311
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -462,14 +483,14 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: aaa4582e69e1ab045981d487d919bd0a
-  position: {x: -278, y: 792}
+  position: {x: -175.25098, y: 788.99994}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
   description: "\uD50C\uB808\uC774\uC5B4\uB85C\uBD80\uD130 \uB5A8\uC5B4\uC838\uC788\uB294
     \uC704\uCE58\uB85C \uC774\uB3D9"
   child: {fileID: -6052517405815213612}
-  weight: 1
+  weight: 0
 --- !u!114 &3047791323903036127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -485,7 +506,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: a058f3f9a24096d4ca0c10a83e587cc8
-  position: {x: -778.1251, y: 1528.5}
+  position: {x: -1014.99994, y: 1715}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
@@ -506,15 +527,15 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 1539c224f70139a4cbdaf4dfc23f9bb4
-  position: {x: -1403.1252, y: 880.5}
+  position: {x: -1335.0001, y: 1260}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
   description: "\uC0C1\uB300\uBC29\uC758 \uACF5\uACA9\uC73C\uB85C\uBD80\uD130 \uBC29\uC5B4\uD558\uAE30\uC704\uD55C
     \uD589\uB3D9\uD328\uD134"
   children:
-  - {fileID: -6656234684928509735}
-  - {fileID: 782142378757560125}
+  - {fileID: -3162985567936443679}
+  - {fileID: 5949424694422935187}
   current: 0
 --- !u!114 &3974259158523110251
 MonoBehaviour:
@@ -531,7 +552,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 6c6fc843617466b44a83dc83480cb9a5
-  position: {x: 884.39777, y: 53}
+  position: {x: 888.02234, y: 84.00002}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
@@ -551,7 +572,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 119db1c05d0b4244c8700e275e9f567a
-  position: {x: -158, y: 607.84}
+  position: {x: -56.91974, y: 605}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
@@ -582,7 +603,7 @@ MonoBehaviour:
   description: "\uACBD\uC9C1"
   Agent: {fileID: 0}
   stunedTimer: 1.5
---- !u!114 &4854915725878843572
+--- !u!114 &5261641601745863168
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -596,13 +617,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   started: 0
-  guid: 651ea5e31e55e8f4c88b7123d04cb050
-  position: {x: 0, y: 0}
+  guid: b0e6f947234e71f44a67894eec9948e9
+  position: {x: -1293.5416, y: 789}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
   description: 
-  children: []
+  children:
+  - {fileID: 8118868408172696624}
+  - {fileID: -5738260941832166143}
   current: 0
 --- !u!114 &5364688945233204975
 MonoBehaviour:
@@ -619,14 +642,34 @@ MonoBehaviour:
   state: 0
   started: 1
   guid: 18d75cb919619c44e8524f4dc5cd701b
-  position: {x: -928.1252, y: 1528.5}
+  position: {x: -1175, y: 1715.0002}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
   description: 
-  Agent: {fileID: 0}
   judgTimer: 1
   animTimer: 0.5
+--- !u!114 &5949424694422935187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1aa872d1ab0ac5b4ea5ff254b581eb0e, type: 3}
+  m_Name: WaitNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: cb403ad248defad4caea64008e96fc11
+  position: {x: -1272, y: 1432}
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    moveToObject: {fileID: 0}
+  description: 
+  duration: 1
 --- !u!114 &6026444198872143281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -642,7 +685,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 269712fe7aa71044ba7aec21158ccafb
-  position: {x: -294, y: 1104}
+  position: {x: -221.99997, y: 1110}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
@@ -692,7 +735,7 @@ MonoBehaviour:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
   description: "\uD53C\uD574\uB97C \uC785\uC5C8\uB294\uAC00?"
---- !u!114 &7104165399713211523
+--- !u!114 &7480222185597077497
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -706,18 +749,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   started: 0
-  guid: e02595187abbc674e891382716266986
-  position: {x: -930.1252, y: 1057.5}
+  guid: 4309b8c42094a864d8b08cc67460b5e1
+  position: {x: 103.00001, y: 957.0001}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
-  description: "\uACF5\uACA9 \uC9C4\uD589"
+  description: 
   children:
-  - {fileID: 1315391209876939497}
-  - {fileID: -7617570576366680649}
-  - {fileID: 8718406841925922171}
+  - {fileID: 2612944177186896387}
   current: 0
---- !u!114 &8312084001078462824
+--- !u!114 &8118868408172696624
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -731,13 +772,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   started: 0
-  guid: 59f2df8676f85f842895d4231795662e
-  position: {x: -1088.1251, y: 1057.5}
+  guid: 63b1fb869d10aac47a0fe69ecf8094d9
+  position: {x: -1428.5416, y: 945}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
-  description: "\uD50C\uB808\uC774\uC5B4\uC640\uC758 \uAC70\uB9AC\uB97C \uCCB4\uD06C\uD558\uC5EC
-    \uC77C\uC815 \uD655\uB960\uB85C \uACF5\uACA9\uC744 \uC9C4\uD589."
+  description: 
   Agent: {fileID: 0}
   range: 2
   Reverse: 0
@@ -756,12 +796,13 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: c389a0c01f46f6a4f8bb333d7b585c69
-  position: {x: -530, y: 1104}
+  position: {x: -381.9999, y: 1110}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
-  description: 
+  description: "\uD3EC\uC9C0\uC158 \uC124\uC815"
   Agent: {fileID: 0}
+  coolDown: 1
 --- !u!114 &8718406841925922171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -777,33 +818,9 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 51b2889a6b7cd224bbb2316e03bc9f42
-  position: {x: -700.1253, y: 1217.5}
+  position: {x: -945, y: 1417}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
   description: 
   duration: 1
---- !u!114 &8902453521443192468
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b676fcbc4243a64c9ce3c293d092650, type: 3}
-  m_Name: IsPercentageNode
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: 5b5497f888f44f24bb17af5cefdb5af9
-  position: {x: -1401.1252, y: 1228.5}
-  blackboard:
-    moveToPosition: {x: 0, y: 0, z: 0}
-    moveToObject: {fileID: 0}
-  description: "0.2 ~ 1.0\uCD08 \uAC04\uACA9\uC73C\uB85C \uD37C\uC13C\uD2B8\uB97C
-    \uACC4\uC0B0\uD558\uC5EC \uAC00\uB4DC\uB97C \uC62C\uB9AC\uAC70\uB098 \uB0B4\uB9BC."
-  percent: 75
-  randMin: 0.2
-  randMax: 0.5
