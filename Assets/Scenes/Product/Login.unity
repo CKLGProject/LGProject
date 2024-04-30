@@ -1468,7 +1468,7 @@ MonoBehaviour:
   UseAsync: 0
   editorAutoLoad: 0
   loadScene:
-    sceneAsset: {fileID: 102900000, guid: 5c0a3d6bc51e3453eb995b6fbcdab8a7, type: 3}
+    sceneAsset: {fileID: 102900000, guid: 91caf55ad9aa496419e1bbe442ae9c59, type: 3}
     path: Assets/Scenes/Product/Lobby.unity
   additiveScenes: []
   SkipMode: 0
