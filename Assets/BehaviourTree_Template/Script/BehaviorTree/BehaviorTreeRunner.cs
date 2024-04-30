@@ -8,11 +8,14 @@ namespace BehaviourTree
     {
         public BehaviorTree tree;
 
+
         private void Start()
         {
+#if UNITY_EDITOR
             tree = tree.Clone();
             //tree.Bind(GetComponent<AIAgent>());
-
+#endif
+            
         }
 
         private void Update()

@@ -11,15 +11,15 @@ namespace BehaviourTree
         //[Space(10f)]
         public float judgTimer = 0;
         public float animTimer = 0;
-        private float curTimer = 0;
-        private bool isAttack = false;
+        private float _curTimer = 0;
+        private bool _isAttack = false;
         protected override void OnStart()
         {
             //if (Agent == null)
             //    Agent = AIAgent.Instance;
             if (AIAgent.Instance.GetStateMachine.attackCount > 2)
                 AIAgent.Instance.GetStateMachine.attackCount = 0;
-            isAttack = false;
+            _isAttack = false;
             AIAgent.Instance.GetStateMachine.isNormalAttack = true;
         }
 
@@ -32,22 +32,22 @@ namespace BehaviourTree
         {
             if (AIAgent.Instance.GetStateMachine.isGuard)
                 return State.Failure;
-            curTimer += Time.deltaTime;
-            if(judgTimer > curTimer)
+            _curTimer += Time.deltaTime;
+            if(judgTimer > _curTimer)
             {
                 // 애니메이션이 끝난 이후 데미지 판정 -> 데미지를 넣는데 성공하면 다음 공격, 시간이 지나도 공격 못하면 Idle
                 // 애니메이션이 재생 중이라면 Running
-                if(isAttack == false) isAttack = ActionJudge();
-                if (curTimer > animTimer && isAttack)
+                if(_isAttack == false) _isAttack = ActionJudge();
+                if (_curTimer > animTimer && _isAttack)
                 {
-                    curTimer = 0;
+                    _curTimer = 0;
                     Debug.Log($"ATK Count = {AIAgent.Instance.GetStateMachine.attackCount}");
                     AIAgent.Instance.GetStateMachine.attackCount++;
                     return State.Success;
                 }
                 return State.Running;
             }
-            curTimer = 0;
+            _curTimer = 0;
             return State.Failure;
         }
 

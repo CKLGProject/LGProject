@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -123,6 +123,9 @@ namespace BehaviourTree
             //    agent.GetStateMachine.physics.velocity += Vector3.right * direction.normalized.x;
             //}
             Agent.transform.position = Vector3.MoveTowards(Agent.transform.position, currentWaypoint, Agent.speed * Time.deltaTime);
+
+            Vector3 direction = currentWaypoint - Agent.transform.position;
+            Agent.directionX = direction.x >= 0.1f ? true : false;
             Vector3 rot = new Vector3(currentWaypoint.x, Agent.transform.position.y, Agent.transform.position.z);
             Agent.transform.LookAt(rot);
             return true;

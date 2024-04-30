@@ -20,8 +20,10 @@ namespace BehaviourTree
             }
             return treeState;
         }
+#if UNITY_EDITOR
         public Node CreateNode(System.Type type)
         {
+            
             //Vector2 mousePos = Input.mousePosition;
             // 새 노드 생성
             Node node = CreateInstance(type) as Node;
@@ -30,7 +32,6 @@ namespace BehaviourTree
             //node.position = mousePos;
             node.guid = GUID.Generate().ToString();
 
-
             Undo.RecordObject(this, "BehaviourTree Tree (CreateNode)");
             nodes.Add(node);
 
@@ -38,10 +39,8 @@ namespace BehaviourTree
             {
                 AssetDatabase.AddObjectToAsset(node, this);
             }
-
             //AssetDatabase.AddObjectToAsset(node, this);
             Undo.RegisterCompleteObjectUndo(node, "BehaviourTree Tree (CreateNode)");
-
             AssetDatabase.SaveAssets();
             return node;
 
@@ -161,6 +160,7 @@ namespace BehaviourTree
 
         }
 
+#endif
         public void Bind()
         {
             //Traverse(rootNode, node =>

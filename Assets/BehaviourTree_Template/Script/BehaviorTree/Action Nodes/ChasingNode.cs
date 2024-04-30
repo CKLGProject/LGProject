@@ -70,7 +70,6 @@ namespace BehaviourTree
         {
             float a = Vector3.Distance(Agent.path[Agent.path.Length - 1], Agent.player.position);
             return a;
-
         }
 
 
@@ -88,10 +87,6 @@ namespace BehaviourTree
                 currentWaypoint = new Vector3(Agent.path[Agent.targetIndex].x, Agent.path[Agent.targetIndex].y - 0.45f, Agent.path[Agent.targetIndex].z);
             }
 
-            //Vector3 direction = Agent.target.position - Agent.transform.position;
-
-            //JumpingPointCheck(direction);
-
             // 대각선 위인지 체크
             if (AcrossTargetNode(currentWaypoint))
             {
@@ -107,7 +102,11 @@ namespace BehaviourTree
             currentWaypoint.z = Agent.transform.position.z;
 
             Agent.transform.position = Vector3.MoveTowards(Agent.transform.position, currentWaypoint, Agent.speed * Time.deltaTime);
-            
+
+            Vector3 direction = currentWaypoint - Agent.transform.position;
+
+            Agent.directionX = direction.x >= 0.1f ? true : false; 
+
             Vector3 rot = new Vector3(currentWaypoint.x, Agent.transform.position.y, Agent.transform.position.z);
             Agent.transform.LookAt(rot);
             return true;
