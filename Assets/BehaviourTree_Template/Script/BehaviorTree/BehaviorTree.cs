@@ -150,9 +150,6 @@ namespace BehaviourTree
                 children.ForEach((n) => Traverse(n, visiter));
             }
         }
-
-
-#endif
         public BehaviorTree Clone()
         {
             BehaviorTree tree = Instantiate(this);
@@ -174,5 +171,7 @@ namespace BehaviourTree
             //    node.blackboard = blackboard;
             //});
         }
+
+#endif
     }
 }
