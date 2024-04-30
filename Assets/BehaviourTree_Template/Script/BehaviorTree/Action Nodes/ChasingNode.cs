@@ -6,6 +6,7 @@ namespace BehaviourTree
     {
         public AIAgent Agent;
         [SerializeField] private float jumpDelay;
+        [SerializeField] private float stopRange;
         private float curTimer;
         private int count;
         
@@ -42,8 +43,14 @@ namespace BehaviourTree
             if (Agent.path.Length > 0 && TargetPointToPlayerPositionDistance() > 2f)
             {
                 pathFinding.PathRequestManager.RequestPath(new pathFinding.PathRequest(AIAgent.Instance.transform.position, AIAgent.Instance.player.position, AIAgent.Instance.GetPath));
-                Debug.Log("AA");
                 return State.Running;
+            }
+
+            float distance = Vector3.Distance(Agent.transform.position, Agent.player.position);
+            //Debug.Log($"{distance}");
+            if (distance < stopRange)
+            {
+                return State.Success;
             }
 
             // Running 상태가 필요함.
@@ -55,12 +62,6 @@ namespace BehaviourTree
                 return State.Running;
             }
 
-            float distance = Vector3.Distance(Agent.transform.position, Agent.player.position);
-
-            if (distance < 1.5f)
-            {
-                return State.Success;
-            }
 
             return State.Success;
             
@@ -69,6 +70,8 @@ namespace BehaviourTree
         private float TargetPointToPlayerPositionDistance()
         {
             float a = Vector3.Distance(Agent.path[Agent.path.Length - 1], Agent.player.position);
+            if (!Agent.GetStateMachine.isGrounded)
+                a = 0;
             return a;
         }
 

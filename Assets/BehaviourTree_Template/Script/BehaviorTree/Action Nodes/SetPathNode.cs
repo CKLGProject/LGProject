@@ -7,6 +7,7 @@ using Grid = pathFinding.Grid;
 
 namespace BehaviourTree
 {
+    
     // 경로를 세팅 
     public class SetPathNode : ActionNode
     {
@@ -47,17 +48,17 @@ namespace BehaviourTree
         protected override State OnUpdate()
         {
             // 타이머를 재생해서 0이 되면 실행되게 하기
-            _curTimer += Time.deltaTime;
-            if (_curTimer < coolDown)
-            {
-                return State.Failure;
-            }
+            //_curTimer += Time.deltaTime;
+            //if (_curTimer < coolDown)
+            //{
+            //    return State.Failure;
+            //}
             if (Agent.path == null)
                 return State.Running;
             else
             {
                 _curTimer = 0;
-                PathRequestManager.RequestPath(new PathRequest(Agent.transform.position, Grid.Instance.GetRandPoint(), Agent.GetPath));
+                PathRequestManager.RequestPath(new PathRequest(Agent.transform.position, Grid.Instance.GetRandPoint(Agent.player.position), Agent.GetPath));
                 return State.Success;
             }
             #region Legarcy
