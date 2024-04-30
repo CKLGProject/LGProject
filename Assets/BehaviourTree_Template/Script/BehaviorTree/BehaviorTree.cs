@@ -141,7 +141,6 @@ namespace BehaviourTree
 
             return children;
         }
-#endif
         public void Traverse(Node node, System.Action<Node> visiter)
         {
             if (node)
@@ -152,6 +151,8 @@ namespace BehaviourTree
             }
         }
 
+
+#endif
         public BehaviorTree Clone()
         {
             BehaviorTree tree = Instantiate(this);
