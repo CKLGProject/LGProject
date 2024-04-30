@@ -13,7 +13,7 @@ namespace BehaviourTree
 
         protected override void OnStart()
         {
-            // ÇÃ·¹ÀÌ¾î 
+            // í”Œë ˆì´ì–´ 
             pathFinding.PathRequestManager.RequestPath(new pathFinding.PathRequest(AIAgent.Instance.transform.position, AIAgent.Instance.player.position, AIAgent.Instance.GetPath));
 
             if (Agent == null)
@@ -33,7 +33,7 @@ namespace BehaviourTree
             if (Agent == null)
                 Agent = AIAgent.Instance;
 
-            // path°¡ ÀÖ´ÂÁö È®ÀÎ. || ³»°¡ ÀûÁß ´çÇÑ °æ¿ì
+            // pathê°€ ìˆëŠ”ì§€ í™•ì¸. || ë‚´ê°€ ì ì¤‘ ë‹¹í•œ ê²½ìš°
             if (((Agent.path == null || Agent.path.Length < 1) || Agent.GetStateMachine.isHit))
             {
                 return State.Failure;
@@ -46,12 +46,12 @@ namespace BehaviourTree
                 return State.Running;
             }
 
-            // Running »óÅÂ°¡ ÇÊ¿äÇÔ.
-            // path°¡ ÀÖ´Ù¸é ¿òÁ÷ÀÌ°Ô ÇÏ±â.
-            // ¸¶Áö¸· °æ·Î¿¡ µµÂøÇß´Â°¡¸¦ Ã¼Å©ÇØ¾ßÇÔ.
+            // Running ìƒíƒœê°€ í•„ìš”í•¨.
+            // pathê°€ ìˆë‹¤ë©´ ì›€ì§ì´ê²Œ í•˜ê¸°.
+            // ë§ˆì§€ë§‰ ê²½ë¡œì— ë„ì°©í–ˆëŠ”ê°€ë¥¼ ì²´í¬í•´ì•¼í•¨.
             if (FollowPath())
             {
-                // ÀÌµ¿À» ÇØ¾ßÇÔ.
+                // ì´ë™ì„ í•´ì•¼í•¨.
                 return State.Running;
             }
 
@@ -92,10 +92,10 @@ namespace BehaviourTree
 
             //JumpingPointCheck(direction);
 
-            // ´ë°¢¼± À§ÀÎÁö Ã¼Å©
+            // ëŒ€ê°ì„  ìœ„ì¸ì§€ ì²´í¬
             if (AcrossTargetNode(currentWaypoint))
             {
-                // ¸ñÇ¥ÁöÁ¡°¡Áö Á¡ÇÁÇØ¾ßÇÏ´Âµ¥ ÀÏ´Ü µğ¹ö±× Âï°í ³¡³»ÀÚ
+                // ëª©í‘œì§€ì ê°€ì§€ ì í”„í•´ì•¼í•˜ëŠ”ë° ì¼ë‹¨ ë””ë²„ê·¸ ì°ê³  ëë‚´ì
                 SetJumpVelocity();
             }
 
@@ -116,34 +116,34 @@ namespace BehaviourTree
         RaycastHit hit;
         private void JumpingPointCheck(Vector3 direction)
         {
-            // Á¡ÇÁ¸¦ ÇÏ±â À§ÇØ ¹Ù·Î ´ë°¢¼± ¾Æ·¡¸¦ Ã¼Å©
-            // ´ë°¢¼± ¾Æ·¡¿¡ °ø°£ÀÌ ¾øÀ¸¸é Á¡ÇÁ¸¦ ÇÔ.
-            // Á¡ÇÁ¸¦ ÇÏ°í ¶³¾îÁö´Â ¿ÍÁß¿¡µµ °ø°£ÀÌ ¾øÀ½ Ãß°¡ Á¡ÇÁ¸¦ ÇØ¾ßÇÏ´Âµ¥,
-            // Ãß°¡ Á¡ÇÁ(2´Ü)´Â ³ªÁß¿¡ ±¸ÇöÇÏ´Â °ÍÀ¸·Î ÇÏÀÚ.
-            // ¾ÕÀ» ¹Ù¶óº¸°í ÀÖ´Ù´Â °ÍÀ» ¾î¶»°Ô Ç¥ÇöÇØ¾ß ÇÒ±î?
-            // lookAt? ¾Æ´Ï... ±×³É ¹Ù¶óº¸´Â °÷À» ¸íÈ®ÇÏ°Ô ÇÏ´Â °ÍÀÌ ÁÁ¾Æº¸ÀÎ´Ù.
+            // ì í”„ë¥¼ í•˜ê¸° ìœ„í•´ ë°”ë¡œ ëŒ€ê°ì„  ì•„ë˜ë¥¼ ì²´í¬
+            // ëŒ€ê°ì„  ì•„ë˜ì— ê³µê°„ì´ ì—†ìœ¼ë©´ ì í”„ë¥¼ í•¨.
+            // ì í”„ë¥¼ í•˜ê³  ë–¨ì–´ì§€ëŠ” ì™€ì¤‘ì—ë„ ê³µê°„ì´ ì—†ìŒ ì¶”ê°€ ì í”„ë¥¼ í•´ì•¼í•˜ëŠ”ë°,
+            // ì¶”ê°€ ì í”„(2ë‹¨)ëŠ” ë‚˜ì¤‘ì— êµ¬í˜„í•˜ëŠ” ê²ƒìœ¼ë¡œ í•˜ì.
+            // ì•ì„ ë°”ë¼ë³´ê³  ìˆë‹¤ëŠ” ê²ƒì„ ì–´ë–»ê²Œ í‘œí˜„í•´ì•¼ í• ê¹Œ?
+            // lookAt? ì•„ë‹ˆ... ê·¸ëƒ¥ ë°”ë¼ë³´ëŠ” ê³³ì„ ëª…í™•í•˜ê²Œ í•˜ëŠ” ê²ƒì´ ì¢‹ì•„ë³´ì¸ë‹¤.
 
-            // Á¡ÇÁ¸¦ ÇÏÀÚ¸¶ÀÚ Å¸ÀÌ¸Ó°¡ µ¹¾Æ°¡¾ßÇÏ´Âµ¥, ÀÌ°Ç ¾î¶»°Ô Ç¥ÇöÇÒ±î?
+            // ì í”„ë¥¼ í•˜ìë§ˆì íƒ€ì´ë¨¸ê°€ ëŒì•„ê°€ì•¼í•˜ëŠ”ë°, ì´ê±´ ì–´ë–»ê²Œ í‘œí˜„í• ê¹Œ?
             Ray ray = new Ray(Agent.transform.position + Vector3.up * 0.25f + Vector3.forward * 0.2f, Vector3.down);
             curTimer += Time.deltaTime;
             bool case1 = /*Mathf.Abs(direction.x) < 1.5f && */direction.y >= 0.5f;
             bool case2 = !Physics.Raycast(ray, out hit, 0.45f, 1 << 6) && Agent.GetStateMachine.jumpInCount < 2;
-            // ³ôÀº °÷ÀÌ¸é Á¡ÇÁ¸¦ ÇÑ´Ù.
+            // ë†’ì€ ê³³ì´ë©´ ì í”„ë¥¼ í•œë‹¤.
             if ((direction.y >= 1f && Mathf.Abs(direction.x) < 0.75f) && Agent.GetStateMachine.jumpInCount < 2)
             {
-                // Á¡ÇÁ¸¦ ÇÏ´Â Á¶°Ç
-                // isGrounded°¡ True°Å³ª, timer°¡ ³Ñ¾î¼³ °æ¿ì
-                // isGrounded ¶§¹®ÀÎ °Í °°À½.
+                // ì í”„ë¥¼ í•˜ëŠ” ì¡°ê±´
+                // isGroundedê°€ Trueê±°ë‚˜, timerê°€ ë„˜ì–´ì„¤ ê²½ìš°
+                // isGrounded ë•Œë¬¸ì¸ ê²ƒ ê°™ìŒ.
                 SetJumpVelocity();
             }
             else if (case1 && case2)
             {
                 SetJumpVelocity();
             }
-            // À§¸¦ Ã¼Å©ÇÏ°í ½ÍÀºµ¥...
+            // ìœ„ë¥¼ ì²´í¬í•˜ê³  ì‹¶ì€ë°...
 
 
-            // °¡´Â ±æ¿¡ ±æÀÌ ¾øÀ¸¸é ¾²´Â ·ÎÁ÷
+            // ê°€ëŠ” ê¸¸ì— ê¸¸ì´ ì—†ìœ¼ë©´ ì“°ëŠ” ë¡œì§
 
         }
 
@@ -151,15 +151,15 @@ namespace BehaviourTree
         {
             Vector3 direction = currentWayPoint - Agent.transform.position;
             int i = 0;
-            // y°¡ 0ÀÌ ¾Æ´Ñ °÷ÀÌ¸é Á¡ÇÁ ¶Ç´Â ³»·Á°¡±â¸¦ ÁøÇà
+            // yê°€ 0ì´ ì•„ë‹Œ ê³³ì´ë©´ ì í”„ ë˜ëŠ” ë‚´ë ¤ê°€ê¸°ë¥¼ ì§„í–‰
             if (direction.y > 0.1f)
             {
                 for (i = Agent.targetIndex; i < Agent.path.Length - 1; i++)
                 {
                     Vector2 directionNew = new Vector2(Agent.path[i].x - Agent.path[i + 1].x, Agent.path[i + 1].y - Agent.path[i].y);
                     Ray ray = new Ray(Agent.path[i], Vector3.down);
-                    // Á¶°Ç
-                    // ³ëµåÀÇ °£°İ Áß y°ªÀÌ 0ÀÌ¸é¼­ ³ëµå ¾Æ·¡¿¡ ÇÃ·§ÆûÀÌ Á¸ÀçÇÏ´Â °æ¿ì.
+                    // ì¡°ê±´
+                    // ë…¸ë“œì˜ ê°„ê²© ì¤‘ yê°’ì´ 0ì´ë©´ì„œ ë…¸ë“œ ì•„ë˜ì— í”Œë«í¼ì´ ì¡´ì¬í•˜ëŠ” ê²½ìš°.
                     if (directionNew.y < 0.1f && Physics.Raycast(ray, out hit, 0.5f, layerMask: 1 << 6))
                     {
                         break;
@@ -175,9 +175,9 @@ namespace BehaviourTree
         {
             if (Agent.target == null)
                 return false;
-            // Å¸°Ù ³ëµå
+            // íƒ€ê²Ÿ ë…¸ë“œ
             Vector3 targetPos = pathFinding.Grid.Instance.NodeFromWorldPoint(Agent.target.position).worldPosition;
-            // ÃÖÁ¾ ¸ñÇ¥
+            // ìµœì¢… ëª©í‘œ
             Vector3 FinTarget = Agent.path[Agent.path.Length - 1];
 
             float distance = Mathf.Abs(Vector3.Distance(targetPos, FinTarget));
