@@ -150,9 +150,11 @@ namespace LGProject.PlayerState  //
 
         public void HitDamaged(Vector3 velocity)
         {
-            // 충격에 의한 물리를 제공
-            physics.velocity = velocity;
-
+            if (!isGuard)
+            {
+                // 충격에 의한 물리를 제공
+                physics.velocity = velocity;
+            }
             isHit = true;
         }
 

@@ -96,6 +96,9 @@ namespace BehaviourTree
 
         bool FollowPath()
         {
+            if (Agent == null)
+                Agent = AIAgent.Instance;
+
             curTimer += Time.deltaTime;
             Vector3 currentWaypoint = new Vector3(Agent.path[Agent.targetIndex].x, Agent.path[Agent.targetIndex].y -0.45f, Agent.path[Agent.targetIndex].z);
             if (Agent.transform.position == currentWaypoint)
