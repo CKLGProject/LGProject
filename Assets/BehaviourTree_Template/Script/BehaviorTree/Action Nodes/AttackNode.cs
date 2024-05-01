@@ -29,7 +29,5 @@ namespace BehaviourTree
             // 공격을 했으니 이제 뭔가를 여기서 해야하는데...
             return State.Success;
         }
-
-
     }
 }

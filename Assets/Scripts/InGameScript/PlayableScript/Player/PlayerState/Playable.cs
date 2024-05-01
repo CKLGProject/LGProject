@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -25,7 +25,6 @@ namespace LGProject.PlayerState
         public float dashSpeed;
         public float jumpScale;
         public float hitDelay;
-        public GameObject guardEffect;              // 가드 이펙트인데 오브젝트로 일단 표현.
         public LayerMask PlatformLayer = 1 << 6;
 
 
@@ -106,6 +105,14 @@ namespace LGProject.PlayerState
             }
         }
 
+        public void NewPlatformCheck()
+        {
+            if(transform.position.y > 1)
+            {
+
+            }
+        }
+
         public void PlatformCheck()
         {
             // 일단 여기에 넣어보자
@@ -116,17 +123,19 @@ namespace LGProject.PlayerState
             {
                 if (Physics.Raycast(ray, out hit, 0.3f, 1 << 6))
                 {
-                    //Debug.Log($"{hit.transform.name}");
-                    stateMachine.collider.isTrigger = false;
-                    stateMachine.isGrounded = true;
-                    stateMachine.isJumpGuard = false;
-                    stateMachine.jumpInCount = 0;
+                    if (!stateMachine.isGrounded)
+                    {
+                        effectManager.Play(EffectManager.EFFECT.Landing);
+                        stateMachine.collider.isTrigger = false;
+                        stateMachine.isGrounded = true;
+                        stateMachine.isJumpGuard = false;
+                        stateMachine.jumpInCount = 0;
+                    }
                 }
                 else
                 {
                     stateMachine.isGrounded = false;
                     stateMachine.collider.isTrigger = true;
-                    //Debug.Log("offPlayform");
                 }
             }
         }

@@ -85,17 +85,12 @@ namespace LGProject.PlayerState
             dashAttackState = new DashAttackState(stateMachine, ref aniDelay);
 
             hitState = new HitState(stateMachine, 1f);
-            guardState = new GuardState(stateMachine, guardEffect);
+            guardState = new GuardState(stateMachine);
 
             downState = new DownState(stateMachine, 1f);
 
-            stateMachine.guardEffect = guardEffect;
-
-            guardEffect.SetActive(false);
-
-            //Instantiate(new GameObject(), transform.position + Vector3.down, Quaternion.identity);
-
             stateMachine.Initalize(idleState);
+
         }
 
         void Start()
@@ -103,6 +98,7 @@ namespace LGProject.PlayerState
             InitStates();
             InitEffectManager();
 
+            effectManager.InitParticles();
         }
 
         private void FixedUpdate()

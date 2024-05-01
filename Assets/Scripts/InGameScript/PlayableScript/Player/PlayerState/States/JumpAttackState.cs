@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -37,8 +37,8 @@ namespace LGProject.PlayerState
 
             if (Mathf.Abs(stateMachine.moveAction.ReadValue<float>()) >= 0.2f)
             {
-                // 진행 방향에 적이 있어?
-                if (!stateMachine.CheckEnemy() && stateMachine.physics.velocity.x <= maximumSpeed && stateMachine.physics.velocity.x >= -maximumSpeed)
+                // 진행 방향에 적이 있어? 없으면 이동
+                if (stateMachine.CheckEnemy() == null && stateMachine.physics.velocity.x <= maximumSpeed && stateMachine.physics.velocity.x >= -maximumSpeed)
                     stateMachine.physics.velocity += Vector3.right * (stateMachine.moveAction.ReadValue<float>());
             }
             else

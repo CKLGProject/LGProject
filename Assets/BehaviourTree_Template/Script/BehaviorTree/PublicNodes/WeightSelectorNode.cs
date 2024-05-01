@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,6 +10,7 @@ namespace BehaviourTree
         [SerializeField] private float totalWeights = 0;
         private int childCurrent = 0;
         private Node currentNode;
+       
         
         public WeightSelectorNode()
         {
@@ -37,7 +38,7 @@ namespace BehaviourTree
             {
                 return State.Success;
             }
-            
+
 
             return currentNode.Update();
         }

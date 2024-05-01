@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -104,30 +104,27 @@ namespace LGProject.PlayerState  //
             currentState.Enter();
         }
 
-        public bool CheckEnemy()
+        public Transform CheckEnemy()
         {
             Vector3 downPos = transform.position;
-            Vector3 upPos = transform.position + (Vector3.up * 0.75f);
-            Vector3 direction = Vector3.right * (moveAction.ReadValue<float>() >= 0 ? +1.5f : -1.5f);
-            Debug.Log($"Direction = {direction}");
+            Vector3 upPos = transform.position + (Vector3.up * 0.5f);
+            Vector3 direction = Vector3.right * (playable.directionX ? +1.5f : -1.5f);
             // 0일 경우 어디방향으로 공격을 해야하는지 체크해보자.
 
             Ray downRay = new Ray(downPos, direction);
             Ray upRay = new Ray(upPos, direction);
-            if (Physics.Raycast(downRay, .5f))
+            RaycastHit hit;
+            if (Physics.Raycast(downRay, out hit, .5f, 1 << 3))
             {
-                //Debug.Log("down");
-                return true;
+                return hit.transform;
             }
             
-            if(Physics.Raycast(upRay, .5f))
+            if(Physics.Raycast(upRay, out hit, .5f, 1 << 3))
             {
-                //Debug.Log("up");
-                return true;
+                return hit.transform;
             }
 
-            return false;
-            //if()
+            return null;
         }
 
         /// <summary>
@@ -155,7 +152,6 @@ namespace LGProject.PlayerState  //
         {
             // 충격에 의한 물리를 제공
             physics.velocity = velocity;
-            
 
             isHit = true;
         }
