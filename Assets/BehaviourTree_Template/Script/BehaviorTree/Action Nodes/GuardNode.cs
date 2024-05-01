@@ -42,6 +42,11 @@ namespace BehaviourTree
         // 그럼 내부에 타이머가 존재하겠네?
         protected override State OnUpdate()
         {
+            if(Agent.GetStateMachine.isHit)
+            {
+                Agent.GetStateMachine.isHit = false;
+                curTimer = 0;
+            }    
             if(Agent.GetStateMachine.isGuard)
             {
                 curTimer += Time.deltaTime;

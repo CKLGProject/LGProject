@@ -112,7 +112,7 @@ namespace BehaviourTree
 
                 Vector3 v = AIAgent.Instance.CaculateVelocity(direction * dashAttackPower, AIAgent.Instance.transform.position, 0.5f, 0.5f);
 
-                if (temp.Item1 != AIAgent.Instance.transform && !temp.Item1.GetStateMachine.isGuard)
+                if (temp.Item1 != AIAgent.Instance.transform/* && !temp.Item1.GetStateMachine.isGuard*/)
                 {
                     temp.
                     Item1.GetComponent<Playable>().

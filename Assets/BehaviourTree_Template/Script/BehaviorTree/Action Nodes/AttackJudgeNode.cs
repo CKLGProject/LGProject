@@ -90,7 +90,7 @@ namespace BehaviourTree
                        temp.Item1.GetStateMachine.transform.position + direction * 0.5f,
                           temp.Item1.GetStateMachine.transform.position, 0.5f, 1f);
                 }
-                if (temp.Item1 != AIAgent.Instance.transform && !temp.Item1.GetStateMachine.isGuard)
+                if (temp.Item1 != AIAgent.Instance.transform/* && !temp.Item1.GetStateMachine.isGuard*/)
                 {
                     temp.
                     Item1.GetStateMachine.

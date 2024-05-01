@@ -16,7 +16,9 @@ namespace LGProject.PlayerState
             base.Enter();
 
             // x,z Velocity를 초기화
+            
             stateMachine.StandingVelocity();
+            stateMachine.playable.effectManager.Play(EffectManager.EFFECT.Guard);
             stateMachine.isGuard = true;
         }
 
@@ -30,9 +32,11 @@ namespace LGProject.PlayerState
         public override void LogicUpdate()
         {
             base.LogicUpdate();
+            if (stateMachine.isHit)
+                stateMachine.isHit = false;
+
             if(!stateMachine.guardAction.IsPressed())
             {
-                stateMachine.playable.effectManager.Play(EffectManager.EFFECT.Guard);
                 stateMachine.ChangeState(stateMachine.playable.idleState);
                 return;
             }

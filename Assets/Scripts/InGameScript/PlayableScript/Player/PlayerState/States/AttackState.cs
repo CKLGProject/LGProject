@@ -102,13 +102,13 @@ namespace LGProject.PlayerState
                            temp.Item1.GetStateMachine.transform.position + direction * 0.5f,
                               temp.Item1.GetStateMachine.transform.position, 0.5f, 1f);
                         // 가드를 올리지 않았을 경우
-                        if (temp.Item1 != stateMachine.transform && !temp.Item1.GetStateMachine.isGuard)
+                        if (temp.Item1 != stateMachine.transform)
                         {
                             temp.
                             Item1.GetStateMachine.
                             HitDamaged(stateMachine.attackCount - 1 < 2 ? Vector3.zero : v);
                             damageInCount = true;
-                            temp.Item1.GetStateMachine.hitPlayer = stateMachine.transform;
+                            //temp.Item1.GetStateMachine.hitPlayer = stateMachine.transform;
 
                             temp.Item1.effectManager.PlayOneShot(EffectManager.EFFECT.Hit);
 
