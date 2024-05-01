@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,7 +20,6 @@ namespace LGProject.PlayerState
 
             // 방향 판정
             stateMachine.playable.directionX = stateMachine.moveAction.ReadValue<float>() >= 0.1f ? true : false;
-            
         
         
         }
@@ -33,6 +32,15 @@ namespace LGProject.PlayerState
         public override void LogicUpdate()
         {
             base.LogicUpdate();
+            if(stateMachine.isGrounded)
+            {
+                stateMachine.playable.effectManager.Play(EffectManager.EFFECT.Run);
+            }
+            else
+            {
+                stateMachine.playable.effectManager.Stop(EffectManager.EFFECT.Run);
+            }
+
             if (Mathf.Abs(stateMachine.moveAction.ReadValue<float>()) <= 0.2f)
             {
                 stateMachine.ChangeState(stateMachine.playable.idleState);

@@ -26,6 +26,7 @@ namespace BehaviourTree
         public int targetIndex;
 
         public Transform player;
+        public bool isGround;
 
         //public Animator animator;
 
@@ -40,18 +41,17 @@ namespace BehaviourTree
             stateMachine = new LGProject.PlayerState.PlayerStateMachine();
             stateMachine = LGProject.PlayerState.PlayerStateMachine.CreateStateMachine(this.gameObject);
 
-            stateMachine.guardEffect = guardEffect;
-            stateMachine.guardEffect.SetActive(false);
             InitEffectManager();
         }
 
         private void Start()
         {
-            
+            effectManager.InitParticles();
         }
 
         private void Update()
         {
+            isGround = stateMachine.isGrounded;
             // 일단 여기에 넣어보자
             IsPushDownKey();
             PlatformCheck();

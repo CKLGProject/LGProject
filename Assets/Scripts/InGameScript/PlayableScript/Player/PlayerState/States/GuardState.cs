@@ -6,10 +6,9 @@ namespace LGProject.PlayerState
 {
     public class GuardState : State
     {
-        GameObject gameObj;
-        public GuardState(PlayerStateMachine _stateMachine, GameObject _guardObj) : base(_stateMachine)
+        public GuardState(PlayerStateMachine _stateMachine) : base(_stateMachine)
         {
-            gameObj = _guardObj;
+
         }
 
         public override void Enter()
@@ -24,6 +23,7 @@ namespace LGProject.PlayerState
         public override void Exit()
         {
             base.Exit();
+            stateMachine.playable.effectManager.Stop(EffectManager.EFFECT.Guard);
             stateMachine.isGuard = false;
         }
 
@@ -32,7 +32,7 @@ namespace LGProject.PlayerState
             base.LogicUpdate();
             if(!stateMachine.guardAction.IsPressed())
             {
-                stateMachine.guardEffect.SetActive(false);
+                stateMachine.playable.effectManager.Play(EffectManager.EFFECT.Guard);
                 stateMachine.ChangeState(stateMachine.playable.idleState);
                 return;
             }

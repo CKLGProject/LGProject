@@ -35,7 +35,8 @@ namespace BehaviourTree
         }
         protected override State OnUpdate()
         {
-            if (AIAgent.Instance.GetStateMachine.isGuard)
+            // ?? 왜 가드를 여기서 올림?
+            if (AIAgent.Instance.GetStateMachine.isGuard && AIAgent.Instance.GetStateMachine.isHit)
                 return State.Failure;
             _curTimer += Time.deltaTime;
             if(judgTimer > _curTimer)
@@ -62,14 +63,14 @@ namespace BehaviourTree
             Vector3 center = AIAgent.Instance.transform.position + right;
 
             Collider[] targets = Physics.OverlapBox(center, Vector3.one * attackRange, Quaternion.identity, 1 << 3);
-            System.Tuple<Transform, float> temp = null;
+            System.Tuple<Playable, float> temp = null;
 
             foreach(var target in targets)
             {
                 float distance = Vector3.Distance(center, target.transform.position);
                 if(temp == null || (temp.Item2 >= distance && target.transform != AIAgent.Instance.transform))
                 {
-                    temp = System.Tuple.Create(target.transform, distance);
+                    temp = System.Tuple.Create(target.GetComponent<Playable>(), distance);
                 }
             }
 
@@ -84,24 +85,26 @@ namespace BehaviourTree
                 Vector3 v = Vector3.zero;
                 if (AIAgent.Instance.GetStateMachine.attackCount >= 1)
                 {
+                    Vector3 direction = (temp.Item1.GetStateMachine.transform.position - AIAgent.Instance.transform.position).normalized;
                     v = AIAgent.Instance.CaculateVelocity(
-                       temp.Item1.GetComponent<Playable>().GetStateMachine.transform.position + (temp.Item1.GetComponent<Playable>().GetStateMachine.transform.position - AIAgent.Instance.transform.position).normalized,
-                          temp.Item1.GetComponent<Playable>().GetStateMachine.transform.position, 0.5f, 0.5f);
+                       temp.Item1.GetStateMachine.transform.position + direction * 0.5f,
+                          temp.Item1.GetStateMachine.transform.position, 0.5f, 1f);
                 }
-                if (temp.Item1 != AIAgent.Instance.transform)
+                if (temp.Item1 != AIAgent.Instance.transform && !temp.Item1.GetStateMachine.isGuard)
                 {
                     temp.
-                    Item1.GetComponent<Playable>().
-                    GetStateMachine.
+                    Item1.GetStateMachine.
                     HitDamaged(AIAgent.Instance.GetStateMachine.attackCount < 1 ? Vector3.zero : v);
-                    temp.Item1.GetComponent<Playable>().GetStateMachine.hitPlayer = AIAgent.Instance.transform;
+                    temp.Item1.GetStateMachine.hitPlayer = AIAgent.Instance.transform;
+
+                    temp.Item1.effectManager.PlayOneShot(EffectManager.EFFECT.Hit);
+
+
                     AIAgent.Instance.GetStateMachine.attackCount++;
                     return true;
                 }
             }
             return false;
         }
-
-
     }
 }

@@ -65,6 +65,16 @@ namespace BehaviourTree
             #endregion
             if (Agent == null)
                 Agent = AIAgent.Instance;
+
+            if (Agent.GetStateMachine.isGrounded)
+            {
+                Agent.GetStateMachine.playable.effectManager.Play(EffectManager.EFFECT.Run);
+            }
+            else
+            {
+                Agent.GetStateMachine.playable.effectManager.Stop(EffectManager.EFFECT.Run);
+            }
+
             float distance = Vector3.Distance(Agent.transform.position, Agent.player.position);
 
             // path가 있는지 확인. || 내 앞에 적이 있는 지 확인

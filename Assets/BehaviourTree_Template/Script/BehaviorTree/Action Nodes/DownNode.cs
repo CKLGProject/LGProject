@@ -15,8 +15,7 @@ namespace BehaviourTree
             if (Agent == null)
                 Agent = AIAgent.Instance;
             curTimer = 0;
-            Debug.Log("Down");
-
+            Agent.effectManager.PlayOneShot(EffectManager.EFFECT.Knockback);
         }
 
         protected override void OnStop()

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,6 +12,8 @@ namespace BehaviourTree
 
         // 낮은 확률로 방어 해제 
         // 상대와 거리가 멀리 떨어지면 바로 해제
+        private float curTimer;
+        [SerializeField] private float onTimer;
         [SerializeField,Range(0, 100)] private int percent = 0;
         [SerializeField] private float guardEnableRange;
 
@@ -24,15 +26,14 @@ namespace BehaviourTree
             if (Agent == null)
                 Agent = AIAgent.Instance;
             Agent.GetStateMachine.isGuard = true;
-            Agent.GetStateMachine.guardEffect.SetActive(true);
-            Agent.effectManager.Play(EffectManager.EFFECT.Guard);
+            Agent.effectManager.PlayOneShot(EffectManager.EFFECT.Guard);
+            curTimer = 0;
         }
 
         protected override void OnStop()
         {
-            Agent.GetStateMachine.guardEffect.SetActive(false);
             Agent.effectManager.Stop(EffectManager.EFFECT.Guard);
-            
+
         }
 
         // 키를 누르고 있는가? > 이 는 곧 플레이어가 가까이 있을 때,
@@ -43,12 +44,17 @@ namespace BehaviourTree
         {
             if(Agent.GetStateMachine.isGuard)
             {
-                int rand = Random.Range(1, 100);
-                // 0퍼센트면 return failure;
-                if (rand < percent || guardEnableRange < Vector3.Distance(Agent.transform.position, Agent.player.position))
+                curTimer += Time.deltaTime;
+                // 최소 이정도는 기본으로 켜줘야한다.
+                if(curTimer > onTimer)
                 {
-                    Agent.GetStateMachine.isGuard = false;
-                    return State.Success;
+                    int rand = Random.Range(1, 100);
+                    // 0퍼센트면 return failure;
+                    if (rand < percent || guardEnableRange < Vector3.Distance(Agent.transform.position, Agent.player.position))
+                    {
+                        Agent.GetStateMachine.isGuard = false;
+                        return State.Success;
+                    }
                 }
                 return State.Running;
             }

@@ -76,16 +76,16 @@ namespace LGProject.PlayerState
                 Vector3 center = stateMachine.transform.position + right + Vector3.up * 0.5f;
                 // 생각보다 판정이 후하진 않게 하기
                 // hit box의 크기를 따라감.
-                Collider[] targets = Physics.OverlapBox(center, Vector3.one * 0.5f);
+                Collider[] targets = Physics.OverlapBox(center, Vector3.one * 0.5f,Quaternion.identity, 1<<3);
                 // 박스 내부에 들어온 적을 생각했을 때, Playable Character와 가까운 적을 타겟으로 삼는다.
-                System.Tuple<Transform, float> temp = null;
+                System.Tuple<Playable, float> temp = null;
                 
                 foreach(var t in targets)
                 {
                     float distance = Vector3.Distance(center, t.transform.position);
                     if(temp == null || (temp.Item2 >= distance && t.transform != stateMachine.transform))
                     {
-                        temp = System.Tuple.Create(t.GetComponent<Transform>(), distance);
+                        temp = System.Tuple.Create(t.GetComponent<Playable>(), distance);
                     }
                 }
 
@@ -97,20 +97,22 @@ namespace LGProject.PlayerState
                 {
                     try
                     {
+                        Vector3 direction = (temp.Item1.GetStateMachine.transform.position - stateMachine.transform.position).normalized;
                         Vector3 v = stateMachine.playable.CaculateVelocity(
-                            temp.Item1.GetComponent<Playable>().GetStateMachine.transform.position + (temp.Item1.GetComponent<Playable>().GetStateMachine.transform.position - stateMachine.transform.position).normalized,
-                            temp.Item1.GetComponent<Playable>().GetStateMachine.transform.position, 0.5f, 0.5f);
-                        // 스테이트 머신을 가져와야 한다. 어떻게 가져올까?
-                        if(temp.Item1 != stateMachine.transform)
+                           temp.Item1.GetStateMachine.transform.position + direction * 0.5f,
+                              temp.Item1.GetStateMachine.transform.position, 0.5f, 1f);
+                        // 가드를 올리지 않았을 경우
+                        if (temp.Item1 != stateMachine.transform && !temp.Item1.GetStateMachine.isGuard)
                         {
                             temp.
-                            Item1.GetComponent<Playable>().
-                            GetStateMachine.
+                            Item1.GetStateMachine.
                             HitDamaged(stateMachine.attackCount - 1 < 2 ? Vector3.zero : v);
                             damageInCount = true;
-                            temp.Item1.GetComponent<Playable>().GetStateMachine.hitPlayer = stateMachine.transform;
-                            //Debug.Log($"Attack In Count = {stateMachine.attackCount}");
-                            
+                            temp.Item1.GetStateMachine.hitPlayer = stateMachine.transform;
+
+                            temp.Item1.effectManager.PlayOneShot(EffectManager.EFFECT.Hit);
+
+
                         }
                     }
                     catch

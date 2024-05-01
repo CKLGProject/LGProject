@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,8 +28,7 @@ namespace LGProject.PlayerState
                 stateMachine.ChangeState(stateMachine.playable.moveState);
                 return;
             }
-            //Debug.Log($"Attack{stateMachine.attackAction.triggered}");
-            //bool jump = jumpAction.ReadValue<bool>();
+
             if (stateMachine.attackAction.triggered)
             {
                 AttackLogic();
@@ -50,7 +49,6 @@ namespace LGProject.PlayerState
                 {
                     stateMachine.isJumpGuard = true;
                 }
-                stateMachine.guardEffect.SetActive(true);
                 stateMachine.ChangeState(stateMachine.playable.guardState);
                 return;
             }
