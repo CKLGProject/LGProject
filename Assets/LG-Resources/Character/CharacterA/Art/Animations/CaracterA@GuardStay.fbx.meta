@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f64dc94788f97f3448dbb2ee68478f95
+guid: 4ea80ab457d85364bbc8d1e093731eda
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -33,11 +33,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: JumpStay
+      name: GuardStay
       takeName: Take 001
       internalID: 1827226128182048838
       firstFrame: 0
-      lastFrame: 5
+      lastFrame: 12
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -60,7 +60,7 @@ ModelImporter:
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 7
+      additiveReferencePoseFrame: 0
     isReadable: 0
   meshes:
     lODScreenPercentages: []
