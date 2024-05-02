@@ -29,8 +29,6 @@ namespace BehaviourTree
 
         protected override void OnStop()
         {
-            Debug.Log("Stop");
-            stateMachine.animator.SetTrigger("Idle");
             stateMachine.isNormalAttack = false;
             stateMachine.attackCount = 0;
             _isAttack = false;
@@ -53,8 +51,8 @@ namespace BehaviourTree
             //return State.Success;
             #endregion
 
-            float time = stateMachine.GetAnimPlayTime("Attack" + stateMachine.attackCount.ToString());
-            switch (stateMachine.attackCount)
+            float time = stateMachine.GetAnimPlayTime("Attack" + (stateMachine.attackCount + 1).ToString() );
+            switch (stateMachine.attackCount + 1)
             {
                 case 1:
                     animTimer = 0.25f;
@@ -70,18 +68,25 @@ namespace BehaviourTree
             if (_curTimer > animTimer)
             {
                 // 애니메이션이 끝난 이후 데미지 판정 -> 데미지를 넣는데 성공하면 다음 공격, 시간이 지나도 공격 못하면 Idle
-                    // 애니메이션이 재생 중이라면 Running
-                    if (_isAttack == false && stateMachine.attackCount < 2) _isAttack = ActionJudge();
-                    if (_curTimer > animTimer && _isAttack)
-                    {
+                // 애니메이션이 재생 중이라면 Running
+                if (_isAttack == false && stateMachine.attackCount < 2) _isAttack = ActionJudge();
+                if (_isAttack)
+                {
                     _curTimer = 0;
-                    _isAttack = false;
+                    _isAttack = false;;
+                    stateMachine.animator.SetInteger("Attack", stateMachine.attackCount + 1);
                     return State.Running;
                 }
-                return State.Running;
+                else if(_curTimer >= time)
+                {
+                    _curTimer = 0;
+                    Debug.Log("Stop");
+                    stateMachine.animator.SetInteger("Attack", 0);
+                    stateMachine.animator.SetTrigger("Idle");
+                    return State.Failure;
+                }
             }
-            _curTimer = 0;
-            return State.Failure;
+            return State.Running;
             #endregion
         }
 
@@ -136,12 +141,14 @@ namespace BehaviourTree
             Collider[] targets = Physics.OverlapBox(center, Vector3.one * attackRange, Quaternion.identity, 1 << 3);
             System.Tuple<Playable, float> temp = null;
 
+            // 자기 공격에 자기가 맞음.
             foreach(var target in targets)
             {
                 float distance = Vector3.Distance(center, target.transform.position);
-                if(temp == null || (temp.Item2 >= distance && target.transform != AIAgent.Instance.transform))
+                if((temp == null || temp.Item2 >= distance )&& target.transform != stateMachine.transform)
                 {
                     temp = System.Tuple.Create(target.GetComponent<Playable>(), distance);
+                    Debug.Log(target.name);
                 }
             }
 
@@ -171,6 +178,7 @@ namespace BehaviourTree
                     temp.Item1.effectManager.PlayOneShot(EffectManager.EFFECT.Hit);
 
 
+                    Debug.Log($"ATK!!! / {stateMachine.attackCount}");
                     AIAgent.Instance.GetStateMachine.attackCount++;
                     return true;
                 }

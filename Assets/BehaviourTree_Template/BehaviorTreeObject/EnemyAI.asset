@@ -490,7 +490,6 @@ MonoBehaviour:
   - {fileID: -1024075571135447831}
   - {fileID: -7617570576366680649}
   - {fileID: 1668414634039770992}
-  - {fileID: 3047791323903036127}
   - {fileID: 5364688945233204975}
   - {fileID: 4382182258252794628}
   - {fileID: 2986984668415281311}
@@ -524,6 +523,7 @@ MonoBehaviour:
   - {fileID: -892536741043771492}
   - {fileID: 8494814206541073582}
   - {fileID: 4013841926600570912}
+  - {fileID: 4242012654434233768}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
@@ -635,14 +635,13 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 181e88f745b39a546ae2179dd1dcc977
-  position: {x: -1326.8651, y: 1750.0002}
+  position: {x: -1327.0002, y: 1750.0002}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
   description: "\uACF5\uACA9 \uC9C4\uD589"
   children:
-  - {fileID: 5364688945233204975}
-  - {fileID: 3047791323903036127}
+  - {fileID: 4242012654434233768}
   current: 0
 --- !u!114 &1831652229012976082
 MonoBehaviour:
@@ -757,27 +756,6 @@ MonoBehaviour:
   Agent: {fileID: 0}
   jumpDelay: 0
   stopRange: 1
---- !u!114 &3047791323903036127
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d62d243e24f35db45bd022c415997de6, type: 3}
-  m_Name: AttackNode
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: a058f3f9a24096d4ca0c10a83e587cc8
-  position: {x: -1246.865, y: 1901.0002}
-  blackboard:
-    moveToPosition: {x: 0, y: 0, z: 0}
-    moveToObject: {fileID: 0}
-  description: 
-  Agent: {fileID: 0}
 --- !u!114 &3063406251304216790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -845,6 +823,28 @@ MonoBehaviour:
   description: 
   Agent: {fileID: 0}
   jumpDelay: 0
+--- !u!114 &4242012654434233768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee75bfbedf44a5a46a4dbe0c43b55b97, type: 3}
+  m_Name: RepeatNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 40088502e8d5fa841b94d85bfac6c5e7
+  position: {x: -1327.0002, y: 1886.0002}
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    moveToObject: {fileID: 0}
+  description: 
+  child: {fileID: 5364688945233204975}
+  Loop: 1
 --- !u!114 &4382182258252794628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -956,7 +956,7 @@ MonoBehaviour:
   state: 0
   started: 1
   guid: 18d75cb919619c44e8524f4dc5cd701b
-  position: {x: -1407, y: 1901}
+  position: {x: -1327.0002, y: 2010.0002}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
