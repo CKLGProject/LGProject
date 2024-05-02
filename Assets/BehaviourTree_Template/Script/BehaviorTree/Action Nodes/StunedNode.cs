@@ -16,7 +16,6 @@ namespace BehaviourTree
         {
             if (Agent == null)
                 Agent = AIAgent.Instance;
-            Agent.effectManager.PlayOneShot(EffectManager.EFFECT.Hit);
         }
 
         protected override void OnStop()
@@ -30,13 +29,12 @@ namespace BehaviourTree
             if(Agent.GetStateMachine.isHit)
             {
                 // 피격 모션 출력
-                //Debug.Log("아야!");
                 Agent.effectManager.PlayOneShot(EffectManager.EFFECT.Hit);
                 Agent.GetStateMachine.isHit = false;
                 curTiemr = 0;
             }
             curTiemr += Time.deltaTime;
-            if(stunedTimer < curTiemr || !Agent.GetStateMachine.isGrounded)
+            if(stunedTimer < curTiemr || !Agent.GetStateMachine.isGrounded || Agent.GetStateMachine.isHit)
             {
                 // 나 피격 상태 끝났어!
                 // 그런데 공중에 있냐 체크 해야함

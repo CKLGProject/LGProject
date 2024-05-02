@@ -13,13 +13,12 @@ namespace BehaviourTree
         {
             if (Agent == null)
                 Agent = AIAgent.Instance;
-            Agent.effectManager.Play(EffectManager.EFFECT.Airborne);
-            Debug.Log("Fly");
+            //Debug.Log("FlyCheck");
         }
 
         protected override void OnStop()
         {
-            Agent.effectManager.Stop(EffectManager.EFFECT.Airborne);
+
         }
 
         // 공중에 있는지 체크하는 노드
@@ -28,12 +27,11 @@ namespace BehaviourTree
         {
             if(!Agent.GetStateMachine.isGrounded)
             {
-                Debug.Log("Flying");
-                return State.Running;
+                //Debug.Log("Flying");
+                return State.Success;
             }
-
-            Debug.Log("Down");
-            return State.Success;
+            //Debug.Log("On The Ground");
+            return State.Failure;
         }
     }
 

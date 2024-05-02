@@ -13,22 +13,23 @@ namespace LGProject.PlayerState
         public DashAttackState(PlayerStateMachine _stateMachine, ref float _aniDelay) : base(_stateMachine)
         {
             aniDelay = _aniDelay;
+            //aniDelay = 
         }
 
         public override void Enter()
         {
             base.Enter();
             curTimer = 0;
+            stateMachine.animator.SetTrigger("DashAttack");
             // velocity 초기화 X
             // 그런데 브레이크는 걸면 좋을 듯? 대충 Drag값 조절해서 끼이익 하는 느낌을 줘보자.
-
+            //Debug.Log("Sert");
         }
         public override void LogicUpdate()
         {
             base.LogicUpdate();
             curTimer += Time.deltaTime;
-
-            if(curTimer >= aniDelay)
+            if (curTimer > stateMachine.GetAnimPlayTime("DashAttack")) 
             {
                 stateMachine.ChangeState(stateMachine.playable.idleState);
                 return ;

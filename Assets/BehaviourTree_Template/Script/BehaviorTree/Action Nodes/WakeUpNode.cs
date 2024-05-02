@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,7 +13,7 @@ namespace BehaviourTree
         private float curTimer;
         protected override void OnStart()
         {
-            Debug.Log("Wake Up");
+            //Debug.Log("Wake Up");
             curTimer = 0;
         }
 

@@ -31,7 +31,6 @@ namespace LGProject.PlayerState  //
         public InputAction downAction;
         public InputAction guardAction;
 
-
         // 스택 큐 -> 입력있을 때 마다 타이머 초기화 1초안 안에 안누르면 초기화?
         private Queue<E_KEYTYPE> comboQueue;
 
@@ -41,6 +40,7 @@ namespace LGProject.PlayerState  //
         public bool isJumpGuard;
         public bool isHit;
         public bool isDown;
+        public bool isKnockback;
 
         public bool isNormalAttack;
 
@@ -62,12 +62,27 @@ namespace LGProject.PlayerState  //
         public State currentState;
         public Transform hitPlayer;
 
+        private Dictionary<string, float> animClipsInfo = new Dictionary<string, float>();
+
+        public void SetAnimPlayTime(string clipName, float time)
+        {
+            animClipsInfo.Add(clipName, time);
+        }
+
+        public float GetAnimPlayTime(string clipName)
+        {
+            float value = 0;
+            animClipsInfo.TryGetValue(clipName, out value);
+            return value;
+        }
+
         public static PlayerStateMachine CreateStateMachine(GameObject obj)
         {
             PlayerStateMachine psm = new PlayerStateMachine();
             psm.transform = obj.transform;
             psm.playable = obj.GetComponent<Playable>();
-            psm.animator = obj.GetComponent<Animator>();
+            //psm.animator = obj.GetComponent<Animator>();
+            psm.animator = psm.playable.Animator;
             psm.physics = obj.GetComponent<Rigidbody>();
             psm.playerInput = obj.GetComponent<PlayerInput>();
             psm.collider = obj.GetComponent<Collider>();
@@ -152,8 +167,15 @@ namespace LGProject.PlayerState  //
         {
             if (!isGuard)
             {
+                animator.SetTrigger("Hit");
                 // 충격에 의한 물리를 제공
                 physics.velocity = velocity;
+                
+            }
+            if(velocity != Vector3.zero)
+            {
+                animator.SetTrigger("Knockback");
+                isKnockback = true;
             }
             isHit = true;
         }

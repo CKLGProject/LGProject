@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Threading;
@@ -30,6 +30,7 @@ namespace LGProject.PlayerState
 
             stateMachine.jumpInCount++;
             stateMachine.physics.velocity += Vector3.up * jumpScale;
+            stateMachine.animator.SetTrigger("Jump" + stateMachine.jumpInCount.ToString());
 
 
             // 이걸 n초 뒤에 켜고 싶은데...

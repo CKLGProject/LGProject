@@ -30,18 +30,12 @@ namespace BehaviourTree
 
                 curTimer += Time.deltaTime;
                 // 고정된 누어있는 시간이 존재함.
-                if (downTimer < curTimer)
+                if (Agent.GetStateMachine.GetAnimPlayTime("WakeUp") < curTimer)
                 {
                     // 누어있는 시간이 끝나면 Idle 상태가 되면서 일어남.
                     return State.Success;
                 }
             }
-            else
-            {
-                // 공중에 뜬 상태에서는 아무고토 모태
-                curTimer = 0;
-            }
-
             return State.Running;
         }
     }

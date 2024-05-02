@@ -8,7 +8,6 @@ namespace LGProject.PlayerState
 
     public class PlayerScript : Playable
     {
-
         private void OnDrawGizmos()
         {
             // Attack Collider를 한 곳에 고정할 필요가 있음.
@@ -82,14 +81,18 @@ namespace LGProject.PlayerState
             attackState = new AttackState(stateMachine, ref comboDelay, ref aniDelay, ref movingAttack);
 
             jumpAttackState = new JumpAttackState(stateMachine, maximumSpeed);
-            dashAttackState = new DashAttackState(stateMachine, ref aniDelay);
+            dashAttackState = new DashAttackState(stateMachine, ref dashAttackDelay);
 
             hitState = new HitState(stateMachine, 1f);
             guardState = new GuardState(stateMachine);
 
             downState = new DownState(stateMachine, 1f);
 
+            landingState = new LandingState(stateMachine);
+
             stateMachine.Initalize(idleState);
+
+            //clip1.frameRate;
 
         }
 
@@ -99,6 +102,13 @@ namespace LGProject.PlayerState
             InitEffectManager();
 
             effectManager.InitParticles();
+            for(int i = 0; i < stateMachine.animator.runtimeAnimatorController.animationClips.Length; i++)
+            {
+                string name = stateMachine.animator.runtimeAnimatorController.animationClips[i].name;
+                float time = stateMachine.animator.runtimeAnimatorController.animationClips[i].length;
+                stateMachine.SetAnimPlayTime(name, time);
+                //Debug.Log($"{ stateMachine.animator.runtimeAnimatorController.animationClips[i].name} / { stateMachine.animator.runtimeAnimatorController.animationClips[i].length}'s");
+            }
         }
 
         private void FixedUpdate()
