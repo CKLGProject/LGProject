@@ -15,14 +15,14 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 52aa76a76aaf432429f80607369448b1
-  position: {x: -7.962204, y: 559.833}
+  position: {x: 73, y: 645}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
-  agent: {fileID: 0}
   description: "\uD53C\uD574\uB97C \uC785\uC5B4 \uB204\uC6CC\uC788\uB294 \uC560\uB2C8\uBA54\uC774\uC158\uC774
     \uCD9C\uB825\uB428.\n\uACF5\uC911\uC5D0 \uB4E0 \uC0C1\uD0DC\uBA74 \uD0C0\uC774\uBA38\uAC00
     \uB3CC\uC9C0 \uC54A\uC74C."
+  Agent: {fileID: 0}
   downTimer: 1.5
 --- !u!114 &-6895995334728390926
 MonoBehaviour:
@@ -39,12 +39,12 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: c7b8559125cdffd43ba3e9903da119f6
-  position: {x: -158, y: 560}
+  position: {x: -247, y: 644}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
-  agent: {fileID: 0}
   description: "\uACF5\uC911\uC5D0 \uB5A0 \uC788\uB294\uAC00?"
+  Agent: {fileID: 0}
 --- !u!114 &-4288313280875520722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,7 +64,6 @@ MonoBehaviour:
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
-  agent: {fileID: 0}
   description: 
   children:
   - {fileID: 136105427570411762}
@@ -88,7 +87,6 @@ MonoBehaviour:
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
-  agent: {fileID: 0}
   description: 
   child: {fileID: -903076578455832319}
 --- !u!114 &-1878908651922025553
@@ -106,17 +104,37 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: e5e33875e377676408b25f8db00d83b5
-  position: {x: -7.962204, y: 438.833}
+  position: {x: 20, y: 496}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
-  agent: {fileID: 0}
   description: 
   children:
   - {fileID: -6895995334728390926}
+  - {fileID: -1314574971530753747}
   - {fileID: -7252241123171764499}
   - {fileID: 6263507584445490026}
   current: 0
+--- !u!114 &-1314574971530753747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 520fa92cef12ba142a696c69b343306e, type: 3}
+  m_Name: KnockbackFlightNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 710b9798a0a49ef4080fcd8d05f8ad0b
+  position: {x: -87, y: 645}
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    moveToObject: {fileID: 0}
+  description: "\uB0A0\uC544\uAC00\uB294 \uB178\uB4DC "
 --- !u!114 &-903076578455832319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,7 +154,6 @@ MonoBehaviour:
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
-  agent: {fileID: 0}
   description: 
   child: {fileID: -4288313280875520722}
   Loop: 1
@@ -166,6 +183,7 @@ MonoBehaviour:
   - {fileID: -7252241123171764499}
   - {fileID: 6263507584445490026}
   - {fileID: 3905422421944003415}
+  - {fileID: -1314574971530753747}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
@@ -184,11 +202,10 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 0ff1fb66cd2cd974bae964fdd4c5d8d0
-  position: {x: -104.962265, y: 304.833}
+  position: {x: -102, y: 340}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
-  agent: {fileID: 0}
   description: 
   children:
   - {fileID: 6577803585413208398}
@@ -210,11 +227,10 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: f4119cf1cc93bdc48bb7e333c82b355b
-  position: {x: 379, y: 305}
+  position: {x: 468, y: 348}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
-  agent: {fileID: 0}
   description: "Chapter 2\n\uD50C\uB808\uC774\uC5B4\uAC00 \uAC00\uAE4C\uC774 \uC654\uC744
     \uB54C \uC77C\uC815 \uD655\uB960\uB85C \uAC00\uB4DC\uB97C \uC62C\uB9AC\uAE30."
 --- !u!114 &4814404046932979626
@@ -232,12 +248,12 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: f17ebf5bf62ba4549a0d16486fdba4ab
-  position: {x: -158.00002, y: 439}
+  position: {x: -140, y: 496}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
-  agent: {fileID: 0}
   description: "\uACBD\uC9C1"
+  Agent: {fileID: 0}
   stunedTimer: 1.5
 --- !u!114 &6263507584445490026
 MonoBehaviour:
@@ -254,13 +270,13 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 7556b628ad359e4418ccc721c1064b93
-  position: {x: 142, y: 560}
+  position: {x: 233, y: 645}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
-  agent: {fileID: 0}
   description: "\uB204\uC6CC\uC788\uC744 \uB54C \uC77C\uC5B4\uB098\uB294 \uB178\uB4DC\n\uC77C\uC5B4\uB098\uB294
     \uB2F9\uC2DC\uC5D4 \uBB34\uC801."
+  Agent: {fileID: 0}
   wakeUpTime: 2
 --- !u!114 &6577803585413208398
 MonoBehaviour:
@@ -277,9 +293,8 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: eae37f0b7115c144c8edb618dc04bf57
-  position: {x: -308, y: 439.00006}
+  position: {x: -300, y: 496}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
-  agent: {fileID: 0}
   description: "\uD53C\uD574\uB97C \uC785\uC5C8\uB294\uAC00?"

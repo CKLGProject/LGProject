@@ -15,7 +15,9 @@ namespace LGProject.PlayerState
         public HitState hitState;
         public GuardState guardState;
         public DownState downState;
+        public LandingState landingState;
 
+        public Animator Animator;
 
         protected Vector3 velocity = Vector3.zero;
         public const int maximumJump = 2;
@@ -30,10 +32,14 @@ namespace LGProject.PlayerState
 
         // 공격 관련 인스펙터 
         [Range(1f, 10f)]
-        public float AttackDelay = 1f;
+        public float FirstAttackDelay = 1f;
+        public float SecondAttackDelay = 1f;
+        public float ThridAttackDelay = 1f;
         public float comboDelay = 0;
+        public float dashAttackDelay = 0;
         public float aniDelay = 0;
         public bool movingAttack = true;
+        
 
         public LayerMask layer;
 
@@ -130,12 +136,23 @@ namespace LGProject.PlayerState
                         stateMachine.isGrounded = true;
                         stateMachine.isJumpGuard = false;
                         stateMachine.jumpInCount = 0;
+                        stateMachine.StandingVelocity();
+
+
+                        // 이거 AI랑 공용으로 사용중이라 나중에 안되게 해야함.
+                        if(!stateMachine.isKnockback)
+                            stateMachine.ChangeState(stateMachine.playable.landingState);
+
+                        stateMachine.isHit = false;
                     }
                 }
                 else
                 {
                     stateMachine.isGrounded = false;
                     stateMachine.collider.isTrigger = true;
+                    stateMachine.animator.SetBool("Flying",stateMachine.jumpInCount < 1 ? true : false);
+                    if(stateMachine.jumpInCount < 1)
+                        stateMachine.jumpInCount++;
                 }
             }
         }

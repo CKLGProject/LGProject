@@ -16,11 +16,11 @@ namespace LGProject.PlayerState
         public State(PlayerState.PlayerStateMachine _stateMachine) 
         {
             stateMachine = _stateMachine;
-
         }
+
         public virtual void Enter()
         {
-            Debug.Log($"{stateMachine.playable.ToString()} / Enter State = {this.ToString()}");
+            //Debug.Log($"Enter State = {this.ToString()}");
         }
 
         public virtual void PhysicsUpdate()

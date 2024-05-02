@@ -49,17 +49,17 @@ namespace LGProject.PlayerState
             temp.x = 0;
             temp.z = 0;
             stateMachine.physics.velocity = temp;
-            Debug.Log($"AttackCount = {stateMachine.attackCount}");
+            stateMachine.animator.SetInteger("Attack", stateMachine.attackCount);
+            //Debug.Log($"AttackCount = {stateMachine.attackCount}");
 
             // 전진 어택
-            if(movingAttack)
+            if (movingAttack)
                 stateMachine.physics.velocity += Vector3.right * 1.5f;
             damageInCount = false;
         }
 
         public override void Exit()
         {
-
         }
         // 앞에 있는 친구를 때릴 것인가?
         // 어떻게?
@@ -70,20 +70,81 @@ namespace LGProject.PlayerState
             // 공격 시엔 콤보 입력도 필요할 것이라 생각하기 때문에 히트 스테이트나 다운 스테이트 등이 필요할 것으로 예상됨.
             // 그럼 공격은 어떻게 할 것인가? 
             curTimer += Time.deltaTime;
-            if(!damageInCount)
+
+            #region ComboSystem
+            AttackLogic();
+            #endregion
+
+            #region SingleAttack
+            // 단타 공격
+            //if(curTimer >= aniDelay)
+            //{
+            //    stateMachine.attackCount = 0;
+            //    stateMachine.ChangeState(stateMachine.playable.idleState);
+            //}
+
+            #endregion
+
+        }
+
+        private void AttackLogic()
+        {
+            float time = stateMachine.GetAnimPlayTime("Attack" + stateMachine.attackCount.ToString());
+            float animDelay = 1 ;
+            switch (stateMachine.attackCount)
+            {
+                case 1:
+                    animDelay = 0.25f;
+                    break;
+                case 2:
+                    animDelay = 0.4f; 
+                    break;
+                case 3:
+                    animDelay = 0.4f;
+                    break;
+            }
+            Debug.Log($"count: {stateMachine.attackCount} / {time}");
+            // 딜레이가 끝난 이후 추가 키 입력이 들어가면? 
+            if (curTimer > animDelay)
+            {
+                // 공격 진행
+                if (damageInCount == false) AttackJudge();
+                if (stateMachine.attackAction.triggered && stateMachine.attackCount < 3)
+                {
+                    stateMachine.ChangeState(stateMachine.playable.attackState);
+                }
+                // 모션이 끝나면?
+                else if (curTimer >= time )
+                {
+                    // 모션이 끝났으니 기본 상태로 되돌아감.
+                    Debug.Log("Stop");
+                    
+                    stateMachine.animator.SetTrigger("Idle");
+                    stateMachine.attackCount = 0;
+                    stateMachine.animator.SetInteger("Attack", stateMachine.attackCount);
+                    stateMachine.ChangeState(stateMachine.playable.idleState);
+                    return;
+                }
+            }
+        }
+
+        public void AttackJudge()
+        {
+
+            if (!damageInCount)
             {
                 Vector3 right = Vector3.right * (stateMachine.playable.directionX == true ? 1 : -1);
                 Vector3 center = stateMachine.transform.position + right + Vector3.up * 0.5f;
                 // 생각보다 판정이 후하진 않게 하기
                 // hit box의 크기를 따라감.
-                Collider[] targets = Physics.OverlapBox(center, Vector3.one * 0.5f,Quaternion.identity, 1<<3);
+                Collider[] targets = Physics.OverlapBox(center, Vector3.one * 0.5f, Quaternion.identity, 1 << 3);
                 // 박스 내부에 들어온 적을 생각했을 때, Playable Character와 가까운 적을 타겟으로 삼는다.
                 System.Tuple<Playable, float> temp = null;
-                
-                foreach(var t in targets)
+
+                foreach (var t in targets)
                 {
                     float distance = Vector3.Distance(center, t.transform.position);
-                    if(temp == null || (temp.Item2 >= distance && t.transform != stateMachine.transform))
+                    if (temp == null || (temp.Item2 >= distance && t.transform != stateMachine.transform))
                     {
                         temp = System.Tuple.Create(t.GetComponent<Playable>(), distance);
                     }
@@ -108,11 +169,8 @@ namespace LGProject.PlayerState
                             Item1.GetStateMachine.
                             HitDamaged(stateMachine.attackCount - 1 < 2 ? Vector3.zero : v);
                             damageInCount = true;
-                            //temp.Item1.GetStateMachine.hitPlayer = stateMachine.transform;
 
                             temp.Item1.effectManager.PlayOneShot(EffectManager.EFFECT.Hit);
-
-
                         }
                     }
                     catch
@@ -121,35 +179,6 @@ namespace LGProject.PlayerState
                     }
                 }
             }
-
-            #region ComboSystem
-
-            // 딜레이가 끝난 이후 추가 키 입력이 들어가면? 
-            if (curTimer >= comboDelay && stateMachine.attackAction.triggered && stateMachine.attackCount < 3)
-            {
-                // 공격 진행
-                stateMachine.ChangeState(stateMachine.playable.attackState);
-            }
-            // 모션이 끝나면?
-            else if (curTimer >= aniDelay)
-            {
-                // 모션이 끝났으니 기본 상태로 되돌아감.
-                stateMachine.attackCount = 0;
-                stateMachine.ChangeState(stateMachine.playable.idleState);
-                return;
-            }
-            #endregion
-
-            #region SingleAttack
-            // 단타 공격
-            //if(curTimer >= aniDelay)
-            //{
-            //    stateMachine.attackCount = 0;
-            //    stateMachine.ChangeState(stateMachine.playable.idleState);
-            //}
-
-            #endregion
-
         }
 
         public override void PhysicsUpdate()
