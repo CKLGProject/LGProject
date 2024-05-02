@@ -13,6 +13,7 @@
     "com.unity.learn.iet-framework.authoring": "1.2.2",
     "com.unity.mobile.android-logcat": "1.4.1",
     "com.unity.netcode.gameobjects": "1.8.1",
+    "com.unity.probuilder": "5.2.2",
     "com.unity.recorder": "4.0.2",
     "com.unity.render-pipelines.universal": "16.0.5",
     "com.unity.scene-system": "https://github.com/NK-Studio/SceneSystem.git#UPM",
