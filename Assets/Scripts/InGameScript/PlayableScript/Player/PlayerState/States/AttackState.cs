@@ -1,3 +1,5 @@
+using BehaviourTree;
+using Postgrest.Exceptions;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -69,6 +71,7 @@ namespace LGProject.PlayerState
             // 코루틴이나 쓰레드 등으로 카운팅 또는 불리안 값을 사용하여 상태를 변경해 줄 예정
             // 공격 시엔 콤보 입력도 필요할 것이라 생각하기 때문에 히트 스테이트나 다운 스테이트 등이 필요할 것으로 예상됨.
             // 그럼 공격은 어떻게 할 것인가? 
+            
             curTimer += Time.deltaTime;
 
             #region ComboSystem
@@ -113,7 +116,7 @@ namespace LGProject.PlayerState
                     stateMachine.ChangeState(stateMachine.playable.attackState);
                 }
                 // 모션이 끝나면?
-                else if (curTimer >= time )
+                else if (curTimer >= time * 0.9f )
                 {
                     // 모션이 끝났으니 기본 상태로 되돌아감.
                     Debug.Log("Stop");

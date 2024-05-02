@@ -38,7 +38,6 @@ namespace BehaviourTree
             {
                 // 나 피격 상태 끝났어!
                 // 그런데 공중에 있냐 체크 해야함
-                //Agent.effectManager.Stop(EffectManager.EFFECT.Hit);
                 return State.Success;
             }
             return State.Running;

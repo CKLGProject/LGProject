@@ -36,7 +36,7 @@ ModelImporter:
       name: JumpMidAirStay
       takeName: Take 001
       internalID: 1827226128182048838
-      firstFrame: 3
+      firstFrame: 0
       lastFrame: 3
       wrapMode: 0
       orientationOffsetY: 0

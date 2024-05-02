@@ -37,13 +37,36 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 3230ebe1299191c46ace076eff106022
-  position: {x: -1105, y: 1417}
+  position: {x: -1110, y: 1428}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
   description: "\uC5F0\uC18D \uACF5\uACA9\uC744 \uB2F4\uB2F9\uD558\uB294 \uBC18\uBCF5\uB178\uB4DC "
   child: {fileID: 6515957432640582364}
   repeatCount: 3
+--- !u!114 &-7401467733963597700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6babec2a44aec92419c275b704eb9284, type: 3}
+  m_Name: SequencerNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 4a02e0c677330b940a906b9b029ae93d
+  position: {x: -1196, y: 1751}
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    moveToObject: {fileID: 0}
+  description: 
+  children:
+  - {fileID: 5364688945233204975}
+  current: 0
 --- !u!114 &-7252241123171764499
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -83,7 +106,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: c7b8559125cdffd43ba3e9903da119f6
-  position: {x: -1270, y: 444}
+  position: {x: -1467, y: 457}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
@@ -288,7 +311,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: bf5a6d4afba963c4384dead00b69d2c3
-  position: {x: -1516, y: 1748.0002}
+  position: {x: -1470.95, y: 1771.0002}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
@@ -339,6 +362,7 @@ MonoBehaviour:
   description: 
   children:
   - {fileID: -6895995334728390926}
+  - {fileID: -237580460281809946}
   - {fileID: -7252241123171764499}
   - {fileID: 6263507584445490026}
   current: 0
@@ -437,6 +461,26 @@ MonoBehaviour:
   jashAttackPower: 1
   judgeTimer: 1.75
   aniDelay: 1
+--- !u!114 &-237580460281809946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 520fa92cef12ba142a696c69b343306e, type: 3}
+  m_Name: KnockbackFlightNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: dfda43c592b9cf34896abf766fb804dd
+  position: {x: -1294, y: 458}
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    moveToObject: {fileID: 0}
+  description: 
 --- !u!114 &-223067373621195579
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -489,7 +533,6 @@ MonoBehaviour:
   - {fileID: 3974259158523110251}
   - {fileID: -1024075571135447831}
   - {fileID: -7617570576366680649}
-  - {fileID: 1668414634039770992}
   - {fileID: 5364688945233204975}
   - {fileID: 4382182258252794628}
   - {fileID: 2986984668415281311}
@@ -524,6 +567,8 @@ MonoBehaviour:
   - {fileID: 8494814206541073582}
   - {fileID: 4013841926600570912}
   - {fileID: 4242012654434233768}
+  - {fileID: -7401467733963597700}
+  - {fileID: -237580460281809946}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
@@ -589,7 +634,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: feeb42f81f8a67347a19cb6c35d90bc9
-  position: {x: -829, y: 1898}
+  position: {x: -829.00006, y: 1898.0002}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
@@ -620,29 +665,6 @@ MonoBehaviour:
     \uB300\uC26C \uC5B4\uD0DD\uC744 \uC9C4\uD589\uD568.\n\uB300\uC26C \uC5B4\uD0DD
     \uD6C4 \uC7AC\uCC28 \uC774\uB3D9\uC744 \uC9C4\uD589\uD568."
   message: 
---- !u!114 &1668414634039770992
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6babec2a44aec92419c275b704eb9284, type: 3}
-  m_Name: SequencerNode
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: 181e88f745b39a546ae2179dd1dcc977
-  position: {x: -1327.0002, y: 1750.0002}
-  blackboard:
-    moveToPosition: {x: 0, y: 0, z: 0}
-    moveToObject: {fileID: 0}
-  description: "\uACF5\uACA9 \uC9C4\uD589"
-  children:
-  - {fileID: 4242012654434233768}
-  current: 0
 --- !u!114 &1831652229012976082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -680,7 +702,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 8b7d37cd2e1f54f439b25f49e49a0999
-  position: {x: 23.000046, y: 1111}
+  position: {x: 23.000017, y: 1111}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
@@ -748,7 +770,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 3a9031e43fc5ab04a90b2b235ecd3d58
-  position: {x: -989, y: 1898}
+  position: {x: -989, y: 1898.0004}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
@@ -838,13 +860,13 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 40088502e8d5fa841b94d85bfac6c5e7
-  position: {x: -1327.0002, y: 1886.0002}
+  position: {x: -1421.96, y: 1566}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
   description: 
-  child: {fileID: 5364688945233204975}
-  Loop: 1
+  child: {fileID: 0}
+  Loop: 0
 --- !u!114 &4382182258252794628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -884,7 +906,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 9937500bf7fe93749810c1905dd8a576
-  position: {x: -927, y: 1737}
+  position: {x: -927, y: 1737.0002}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
@@ -910,7 +932,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: f17ebf5bf62ba4549a0d16486fdba4ab
-  position: {x: -1240, y: 290}
+  position: {x: -1240, y: 290.00003}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
@@ -954,9 +976,9 @@ MonoBehaviour:
   m_Name: AttackJudgeNode
   m_EditorClassIdentifier: 
   state: 0
-  started: 1
+  started: 0
   guid: 18d75cb919619c44e8524f4dc5cd701b
-  position: {x: -1327.0002, y: 2010.0002}
+  position: {x: -1196, y: 1897.9998}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
@@ -979,7 +1001,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: cb403ad248defad4caea64008e96fc11
-  position: {x: -1356, y: 1431}
+  position: {x: -1356.0002, y: 1431}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
@@ -1022,7 +1044,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 7556b628ad359e4418ccc721c1064b93
-  position: {x: -950.3922, y: 447.12}
+  position: {x: -950, y: 444}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
@@ -1045,13 +1067,13 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 2cf3ac832cd8bc0439fe141320d580f0
-  position: {x: -1087, y: 1580}
+  position: {x: -1110, y: 1589}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
   description: 
   children:
-  - {fileID: 1668414634039770992}
+  - {fileID: -7401467733963597700}
   - {fileID: 4594252641255856070}
 --- !u!114 &6577803585413208398
 MonoBehaviour:
@@ -1066,7 +1088,7 @@ MonoBehaviour:
   m_Name: IsDamagedNode
   m_EditorClassIdentifier: 
   state: 0
-  started: 1
+  started: 0
   guid: eae37f0b7115c144c8edb618dc04bf57
   position: {x: -1406.3922, y: 290.12}
   blackboard:

@@ -79,21 +79,18 @@ namespace BehaviourTree
             else
             {
                 Vector3 v = Vector3.zero;
-                if (AIAgent.Instance.GetStateMachine.attackCount >= 2)
-                {
-                    v = AIAgent.Instance.CaculateVelocity(
-                       temp.Item1.GetComponent<Playable>().GetStateMachine.transform.position + (temp.Item1.GetComponent<Playable>().GetStateMachine.transform.position - AIAgent.Instance.transform.position).normalized,
-                          temp.Item1.GetComponent<Playable>().GetStateMachine.transform.position, 0.5f, 0.5f);
-                }
+                v = AIAgent.Instance.CaculateVelocity(
+                   temp.Item1.GetComponent<Playable>().GetStateMachine.transform.position + (temp.Item1.GetComponent<Playable>().GetStateMachine.transform.position - AIAgent.Instance.transform.position).normalized * 0.5f,
+                      temp.Item1.GetComponent<Playable>().GetStateMachine.transform.position, 0.5f, 0.5f);
                 if (temp.Item1 != AIAgent.Instance.transform)
                 {
                     temp.
                     Item1.GetComponent<Playable>().
                     GetStateMachine.
-                    HitDamaged(AIAgent.Instance.GetStateMachine.attackCount < 2 ? Vector3.zero : v);
+                    HitDamaged(v);
                     //damageInCount = true; <- 이건 좀 생각해봐야 할 듯...
                     temp.Item1.GetComponent<Playable>().GetStateMachine.hitPlayer = AIAgent.Instance.transform;
-                    //Debug.Log($"Attack In Count = {stateMachine.attackCount}");
+
                     return true;
                 }
             }

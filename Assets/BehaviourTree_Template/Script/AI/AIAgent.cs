@@ -47,11 +47,18 @@ namespace BehaviourTree
         private void Start()
         {
             effectManager.InitParticles();
+            for (int i = 0; i < stateMachine.animator.runtimeAnimatorController.animationClips.Length; i++)
+            {
+                string name = stateMachine.animator.runtimeAnimatorController.animationClips[i].name;
+                float time = stateMachine.animator.runtimeAnimatorController.animationClips[i].length;
+                stateMachine.SetAnimPlayTime(name, time);
+                //Debug.Log($"{ stateMachine.animator.runtimeAnimatorController.animationClips[i].name} / { stateMachine.animator.runtimeAnimatorController.animationClips[i].length}'s");
+            }
         }
 
         private void Update()
         {
-            isGround = stateMachine.isGrounded;
+            isGround = stateMachine.isHit;
             // 일단 여기에 넣어보자
             IsPushDownKey();
             PlatformCheck();
