@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using LGProject.PlayerState;
 
 namespace BehaviourTree
 {
     public class GuardNode : ActionNode
     {
+        private PlayerStateMachine stateMachine;
         public AIAgent Agent;
         //private float _curTimer;
         //[SerializeField] private float maxGuardTimer;
@@ -23,17 +25,21 @@ namespace BehaviourTree
         {
             // 애니메이션 재생
             // 현재 가드를 올렸따!
-            if (Agent == null)
-                Agent = AIAgent.Instance;
-            Agent.GetStateMachine.isGuard = true;
-            Agent.effectManager.PlayOneShot(EffectManager.EFFECT.Guard);
+            //if (Agent == null)
+            //    Agent = AIAgent.Instance;
+            if (stateMachine == null)
+                stateMachine = AIAgent.Instance.GetStateMachine;
+            stateMachine.isGuard = true;
+            stateMachine.playable.effectManager.PlayOneShot(EffectManager.EFFECT.Guard);
             curTimer = 0;
+            stateMachine.animator.SetTrigger("Guard");
         }
 
         protected override void OnStop()
         {
-            Agent.effectManager.Stop(EffectManager.EFFECT.Guard);
+            stateMachine.playable.effectManager.Stop(EffectManager.EFFECT.Guard);
 
+            stateMachine.animator.SetTrigger("Idle");
         }
 
         // 키를 누르고 있는가? > 이 는 곧 플레이어가 가까이 있을 때,
@@ -42,12 +48,12 @@ namespace BehaviourTree
         // 그럼 내부에 타이머가 존재하겠네?
         protected override State OnUpdate()
         {
-            if(Agent.GetStateMachine.isHit)
+            if(stateMachine.isHit)
             {
-                Agent.GetStateMachine.isHit = false;
+                stateMachine.isHit = false;
                 curTimer = 0;
             }    
-            if(Agent.GetStateMachine.isGuard)
+            if(stateMachine.isGuard)
             {
                 curTimer += Time.deltaTime;
                 // 최소 이정도는 기본으로 켜줘야한다.
@@ -57,7 +63,7 @@ namespace BehaviourTree
                     // 0퍼센트면 return failure;
                     if (rand < percent || guardEnableRange < Vector3.Distance(Agent.transform.position, Agent.player.position))
                     {
-                        Agent.GetStateMachine.isGuard = false;
+                        stateMachine.isGuard = false;
                         return State.Success;
                     }
                 }

@@ -40,7 +40,7 @@ namespace BehaviourTree
             Random.seed = System.DateTime.Now.Millisecond;
             stateMachine = new LGProject.PlayerState.PlayerStateMachine();
             stateMachine = LGProject.PlayerState.PlayerStateMachine.CreateStateMachine(this.gameObject);
-
+            
             InitEffectManager();
         }
 
@@ -79,7 +79,6 @@ namespace BehaviourTree
         public void SetAttacRange(float range)
         {
             _attackRange = range;
-
         }
 
         private void OnDrawGizmos()

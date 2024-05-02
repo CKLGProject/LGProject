@@ -7,7 +7,7 @@ namespace BehaviourTree
 {
     public class AttackJudgeNode : ActionNode
     {
-        //public AIAgent Agent;
+        public PlayerStateMachine stateMachine;
         //[Space(10f)]
         [SerializeField, Range(0f, 2f)] private float attackRange;
         public float judgTimer = 0;
@@ -16,36 +16,64 @@ namespace BehaviourTree
         private bool _isAttack = false;
         protected override void OnStart()
         {
-            //if (Agent == null)
-            //    Agent = AIAgent.Instance;
-            if (AIAgent.Instance.GetStateMachine.attackCount > 2)
-                AIAgent.Instance.GetStateMachine.attackCount = 0;
+            if (stateMachine == null)
+                stateMachine = AIAgent.Instance.GetStateMachine;
+            if (stateMachine.attackCount > 2)
+                stateMachine.attackCount = 0;
             _isAttack = false;
-            AIAgent.Instance.GetStateMachine.isNormalAttack = true;
+            stateMachine.isNormalAttack = true;
             AIAgent.Instance.SetAttacRange(attackRange);
+            stateMachine.animator.SetInteger("Attack", stateMachine.attackCount + 1);
             //_curTimer = 0;
         }
 
         protected override void OnStop()
         {
-            AIAgent.Instance.GetStateMachine.isNormalAttack = false;
-            AIAgent.Instance.GetStateMachine.attackCount = 0;
+            Debug.Log("Stop");
+            stateMachine.animator.SetTrigger("Idle");
+            stateMachine.isNormalAttack = false;
+            stateMachine.attackCount = 0;
             _isAttack = false;
 
         }
         protected override State OnUpdate()
         {
+            if (stateMachine == null)
+                stateMachine = AIAgent.Instance.GetStateMachine;
             // ?? 왜 가드를 여기서 올림?
-            if (AIAgent.Instance.GetStateMachine.isGuard && AIAgent.Instance.GetStateMachine.isHit)
+            if (stateMachine.isGuard && stateMachine.isHit)
                 return State.Failure;
+
+
             _curTimer += Time.deltaTime;
-            if(judgTimer > _curTimer)
+
+            #region ComboSystem
+            //AttackLogic();
+
+            //return State.Success;
+            #endregion
+
+            float time = stateMachine.GetAnimPlayTime("Attack" + stateMachine.attackCount.ToString());
+            switch (stateMachine.attackCount)
+            {
+                case 1:
+                    animTimer = 0.25f;
+                    break;
+                case 2:
+                    animTimer = 0.4f;
+                    break;
+                case 3:
+                    animTimer = 0.4f;
+                    break;
+            }
+            #region legarcy
+            if (_curTimer > animTimer)
             {
                 // 애니메이션이 끝난 이후 데미지 판정 -> 데미지를 넣는데 성공하면 다음 공격, 시간이 지나도 공격 못하면 Idle
-                // 애니메이션이 재생 중이라면 Running
-                if(_isAttack == false && AIAgent.Instance.GetStateMachine.attackCount < 2) _isAttack = ActionJudge();
-                if (_curTimer > animTimer && _isAttack)
-                {
+                    // 애니메이션이 재생 중이라면 Running
+                    if (_isAttack == false && stateMachine.attackCount < 2) _isAttack = ActionJudge();
+                    if (_curTimer > animTimer && _isAttack)
+                    {
                     _curTimer = 0;
                     _isAttack = false;
                     return State.Running;
@@ -54,7 +82,50 @@ namespace BehaviourTree
             }
             _curTimer = 0;
             return State.Failure;
+            #endregion
         }
+
+
+        //private void AttackLogic()
+        //{
+        //    float time = stateMachine.GetAnimPlayTime("Attack" + stateMachine.attackCount.ToString());
+        //    float animDelay = 1;
+        //    switch (stateMachine.attackCount)
+        //    {
+        //        case 1:
+        //            animDelay = 0.25f;
+        //            break;
+        //        case 2:
+        //            animDelay = 0.4f;
+        //            break;
+        //        case 3:
+        //            animDelay = 0.4f;
+        //            break;
+        //    }
+        //    Debug.Log($"count: {stateMachine.attackCount} / {time}");
+        //    // 딜레이가 끝난 이후 추가 키 입력이 들어가면? 
+        //    if (_curTimer > animDelay)
+        //    {
+        //        // 공격 진행
+        //        if (_damageInCount == false) AttackJudge();
+        //        if (stateMachine.attackAction.triggered && stateMachine.attackCount < 3)
+        //        {
+        //            stateMachine.ChangeState(stateMachine.playable.attackState);
+        //        }
+        //        // 모션이 끝나면?
+        //        else if (curTimer >= time)
+        //        {
+        //            // 모션이 끝났으니 기본 상태로 되돌아감.
+        //            Debug.Log("Stop");
+
+        //            stateMachine.animator.SetTrigger("Idle");
+        //            stateMachine.attackCount = 0;
+        //            stateMachine.animator.SetInteger("Attack", stateMachine.attackCount);
+        //            stateMachine.ChangeState(stateMachine.playable.idleState);
+        //            return;
+        //        }
+        //    }
+        //}
 
         private bool ActionJudge()
         {

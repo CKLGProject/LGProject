@@ -140,7 +140,7 @@ namespace LGProject.PlayerState
 
 
                         // 이거 AI랑 공용으로 사용중이라 나중에 안되게 해야함.
-                        if(!stateMachine.isKnockback)
+                        if(!stateMachine.isKnockback && stateMachine.currentState != null)
                             stateMachine.ChangeState(stateMachine.playable.landingState);
 
                         stateMachine.isHit = false;

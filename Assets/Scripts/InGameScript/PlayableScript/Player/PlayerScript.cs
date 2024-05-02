@@ -120,7 +120,6 @@ namespace LGProject.PlayerState
         {
             stateMachine.currentState.LogicUpdate();
             velocity = stateMachine.physics.velocity;
-            //Attack = stateMachine.jumpAction.triggered;
             PlatformCheck();
         }
 

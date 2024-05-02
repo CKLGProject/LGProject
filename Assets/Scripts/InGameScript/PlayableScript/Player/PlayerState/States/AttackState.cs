@@ -103,7 +103,6 @@ namespace LGProject.PlayerState
                     animDelay = 0.4f;
                     break;
             }
-            Debug.Log($"count: {stateMachine.attackCount} / {time}");
             // 딜레이가 끝난 이후 추가 키 입력이 들어가면? 
             if (curTimer > animDelay)
             {
