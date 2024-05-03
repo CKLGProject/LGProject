@@ -17,7 +17,7 @@ namespace LGProject.PlayerState  //
             ATTACk,
         }
 
-        // 캐싱 
+        // 캐싱
         public Transform transform;
         public Playable playable;
         public Animator animator;
@@ -30,6 +30,17 @@ namespace LGProject.PlayerState  //
         public InputAction jumpAction;
         public InputAction downAction;
         public InputAction guardAction;
+
+        public IdleState idleState;
+        public MoveState moveState;
+        public JumpState jumpState;
+        public AttackState attackState;
+        public JumpAttackState jumpAttackState;
+        public DashAttackState dashAttackState;
+        public HitState hitState;
+        public GuardState guardState;
+        public DownState downState;
+        public LandingState landingState;
 
         // 스택 큐 -> 입력있을 때 마다 타이머 초기화 1초안 안에 안누르면 초기화?
         private Queue<E_KEYTYPE> comboQueue;
@@ -89,7 +100,6 @@ namespace LGProject.PlayerState  //
 
             psm.isGrounded = false;
             psm.isGuard = false;
-
             try
             {
                 psm.moveAction = psm.playerInput.actions["Move"];
@@ -97,6 +107,25 @@ namespace LGProject.PlayerState  //
                 psm.jumpAction = psm.playerInput.actions["Jump"];
                 psm.downAction = psm.playerInput.actions["Down"];
                 psm.guardAction = psm.playerInput.actions["Guard"];
+
+                psm.idleState = new IdleState(psm);
+                psm.moveState = new MoveState(psm, ref psm.playable.dashSpeed, psm.playable.maximumSpeed);
+                psm.jumpState = new JumpState(psm, ref psm.playable.jumpScale, psm.playable.maximumJump);
+
+                psm.attackState = new AttackState(psm, ref psm.playable.comboDelay, ref psm.playable.aniDelay, ref psm.playable.movingAttack);
+
+                psm.jumpAttackState = new JumpAttackState(psm, psm.playable.maximumSpeed);
+                psm.dashAttackState = new DashAttackState(psm, ref psm.playable.dashAttackDelay);
+
+                psm.hitState = new HitState(psm, 1f);
+                psm.guardState = new GuardState(psm);
+
+                psm.downState = new DownState(psm, 1f);
+
+                psm.landingState = new LandingState(psm);
+
+                psm.Initalize(psm.idleState);
+
             }
             catch
             {

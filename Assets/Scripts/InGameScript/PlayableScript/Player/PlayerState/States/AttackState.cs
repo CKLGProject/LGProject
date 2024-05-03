@@ -113,7 +113,7 @@ namespace LGProject.PlayerState
                 if (damageInCount == false) AttackJudge();
                 if (stateMachine.attackAction.triggered && stateMachine.attackCount < 3)
                 {
-                    stateMachine.ChangeState(stateMachine.playable.attackState);
+                    stateMachine.ChangeState(stateMachine.attackState);
                 }
                 // 모션이 끝나면?
                 else if (curTimer >= time * 0.9f )
@@ -123,7 +123,7 @@ namespace LGProject.PlayerState
                     
                     stateMachine.animator.SetTrigger("Idle");
                     stateMachine.attackCount = 0;
-                    stateMachine.ChangeState(stateMachine.playable.idleState);
+                    stateMachine.ChangeState(stateMachine.idleState);
                     return;
                 }
             }

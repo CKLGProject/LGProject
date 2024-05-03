@@ -50,7 +50,7 @@ namespace LGProject.PlayerState
 
             if (stateMachine.isGrounded)
             {
-                stateMachine.ChangeState(stateMachine.playable.idleState);
+                stateMachine.ChangeState(stateMachine.idleState);
                 return;
             }
         }

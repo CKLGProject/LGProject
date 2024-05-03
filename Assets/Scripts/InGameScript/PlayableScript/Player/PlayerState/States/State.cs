@@ -32,7 +32,7 @@ namespace LGProject.PlayerState
             if(stateMachine.isHit)
             {
                 // 공격을 받았을 때, hitState로 변경해 줌.
-                stateMachine.ChangeState(stateMachine.playable.hitState);
+                stateMachine.ChangeState(stateMachine.hitState);
             }
             Debug.DrawLine(stateMachine.transform.position, stateMachine.transform.position + Vector3.down * 0.1f, Color.red);
 

@@ -49,12 +49,12 @@ namespace LGProject.PlayerState
             if (stateMachine.guardAction.triggered)
             {
                 stateMachine.guardEffect.SetActive(true);
-                stateMachine.ChangeState(stateMachine.playable.guardState);
+                stateMachine.ChangeState(stateMachine.guardState);
                 return;
             }
 
             float a = Mathf.Abs(stateMachine.moveAction.ReadValue<float>());
-            stateMachine.ChangeState(a >= 0.2f ? stateMachine.playable.moveState : stateMachine.playable.idleState);
+            stateMachine.ChangeState(a >= 0.2f ? stateMachine.moveState : stateMachine.idleState);
 
 
         }

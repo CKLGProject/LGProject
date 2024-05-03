@@ -39,7 +39,7 @@ namespace LGProject.PlayerState
             }
             if (_curTimer > stateMachine.GetAnimPlayTime("DashAttack")) 
             {
-                stateMachine.ChangeState(stateMachine.playable.idleState);
+                stateMachine.ChangeState(stateMachine.idleState);
                 return ;
             }
             // 공격 판정 

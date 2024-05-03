@@ -37,7 +37,7 @@ namespace LGProject.PlayerState
 
             if(!stateMachine.guardAction.IsPressed())
             {
-                stateMachine.ChangeState(stateMachine.playable.idleState);
+                stateMachine.ChangeState(stateMachine.idleState);
                 return;
             }
         }
