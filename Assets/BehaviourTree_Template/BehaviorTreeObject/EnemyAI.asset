@@ -82,7 +82,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 52aa76a76aaf432429f80607369448b1
-  position: {x: -1110.3922, y: 444.12006}
+  position: {x: -1110, y: 444}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
@@ -106,7 +106,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: c7b8559125cdffd43ba3e9903da119f6
-  position: {x: -1467, y: 457}
+  position: {x: -1430, y: 443}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
@@ -457,8 +457,8 @@ MonoBehaviour:
   description: 
   dashAttackRange: 2
   jumpAttackRange: 2
-  dashAttackPower: 1
-  jashAttackPower: 1
+  dashAttackPower: 1.2
+  jashAttackPower: 1.2
   judgeTimer: 1.75
   aniDelay: 1
 --- !u!114 &-237580460281809946
@@ -476,7 +476,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: dfda43c592b9cf34896abf766fb804dd
-  position: {x: -1294, y: 458}
+  position: {x: -1270, y: 444}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
@@ -702,7 +702,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 8b7d37cd2e1f54f439b25f49e49a0999
-  position: {x: 23.000017, y: 1111}
+  position: {x: 11.959995, y: 1110}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}

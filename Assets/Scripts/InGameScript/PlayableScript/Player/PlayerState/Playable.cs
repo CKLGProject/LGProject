@@ -143,7 +143,7 @@ namespace LGProject.PlayerState
                         if(!stateMachine.isKnockback && stateMachine.currentState != null)
                             stateMachine.ChangeState(stateMachine.playable.landingState);
 
-                        stateMachine.isHit = false;
+                        //stateMachine.isHit = false;
                     }
                 }
                 else

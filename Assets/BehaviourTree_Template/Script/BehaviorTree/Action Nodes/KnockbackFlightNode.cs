@@ -22,7 +22,6 @@ namespace BehaviourTree
         {
             if(AIAgent.Instance.GetStateMachine.isGrounded)
             {
-                AIAgent.Instance.GetStateMachine.isKnockback = false;
                 AIAgent.Instance.GetStateMachine.animator.SetTrigger("WakeUp");
                 return State.Success;
             }

@@ -123,7 +123,6 @@ namespace LGProject.PlayerState
                     
                     stateMachine.animator.SetTrigger("Idle");
                     stateMachine.attackCount = 0;
-                    stateMachine.animator.SetInteger("Attack", stateMachine.attackCount);
                     stateMachine.ChangeState(stateMachine.playable.idleState);
                     return;
                 }

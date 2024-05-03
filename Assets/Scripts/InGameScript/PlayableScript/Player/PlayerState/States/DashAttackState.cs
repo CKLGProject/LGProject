@@ -90,8 +90,8 @@ namespace LGProject.PlayerState
                     {
                         Vector3 direction = (temp.Item1.GetStateMachine.transform.position - stateMachine.transform.position).normalized;
                         Vector3 v = stateMachine.playable.CaculateVelocity(
-                           temp.Item1.GetStateMachine.transform.position + direction * 1f,
-                              temp.Item1.GetStateMachine.transform.position, 0.5f, 0.5f);
+                           temp.Item1.GetStateMachine.transform.position + direction * 1.2f,
+                              temp.Item1.GetStateMachine.transform.position, 0.5f, 0.75f);
                         // 가드를 올리지 않았을 경우
                         if (temp.Item1 != stateMachine.transform)
                         {

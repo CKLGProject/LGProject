@@ -16,6 +16,7 @@ namespace BehaviourTree
                 Agent = AIAgent.Instance;
             curTimer = 0;
             Agent.effectManager.PlayOneShot(EffectManager.EFFECT.Knockback);
+            Agent.GetStateMachine.isHit = false;
         }
 
         protected override void OnStop()

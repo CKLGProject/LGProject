@@ -39,9 +39,9 @@ namespace BehaviourTree
             if (stateMachine == null)
                 stateMachine = AIAgent.Instance.GetStateMachine;
             // ?? 왜 가드를 여기서 올림?
-            if (stateMachine.isGuard && stateMachine.isHit)
+            if (stateMachine.isGuard || stateMachine.isHit)
             {
-                stateMachine.animator.SetInteger("Attack", stateMachine.attackCount);
+                stateMachine.animator.SetInteger("Attack", 0);
                 return State.Failure;
             }
 
@@ -72,8 +72,8 @@ namespace BehaviourTree
                 //Debug.Log($"{animTimer} / {_time} ");
                 // 애니메이션이 끝난 이후 데미지 판정 -> 데미지를 넣는데 성공하면 다음 공격, 시간이 지나도 공격 못하면 Idle
                 // 애니메이션이 재생 중이라면 Running
-                if (_isAttack == false ) _isAttack = ActionJudge();
-                if (_isAttack && stateMachine.attackCount < 3  && !stateMachine.isHit)
+                if (_isAttack == false && !stateMachine.isHit) _isAttack = ActionJudge();
+                if (_isAttack && stateMachine.attackCount < 3  )
                 {
                     return State.Success;
                 }

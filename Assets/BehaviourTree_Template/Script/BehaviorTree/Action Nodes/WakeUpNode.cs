@@ -15,6 +15,7 @@ namespace BehaviourTree
         {
             //Debug.Log("Wake Up");
             curTimer = 0;
+            AIAgent.Instance.GetStateMachine.isKnockback = false;
         }
 
         protected override void OnStop()
@@ -30,6 +31,8 @@ namespace BehaviourTree
             {
                 return State.Success;
             }
+            if (AIAgent.Instance.GetStateMachine.isHit)
+                return State.Failure;
             return State.Running;
         }
     }
