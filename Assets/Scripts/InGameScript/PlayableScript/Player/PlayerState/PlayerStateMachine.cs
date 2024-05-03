@@ -180,6 +180,18 @@ namespace LGProject.PlayerState  //
             isHit = true;
         }
 
+        public void ResetAnimParameters()
+        {
+            animator.ResetTrigger("Idle");
+            animator.ResetTrigger("DashAttack");
+            animator.ResetTrigger("Hit");
+            animator.ResetTrigger("Guard");
+            animator.ResetTrigger("Jump1");
+            animator.ResetTrigger("Jump2");
+            animator.ResetTrigger("Knockback");
+            animator.ResetTrigger("Landing");
+            animator.ResetTrigger("WakeUp");
+        }
 
         #region ComboMethods
 

@@ -26,7 +26,7 @@ namespace BehaviourTree
         protected override State OnUpdate()
         {
             // 경직 중 공격을 당하면 초기화
-            if(Agent.GetStateMachine.isHit)
+            if(Agent.GetStateMachine.isHit && !Agent.GetStateMachine.isKnockback)
             {
                 // 피격 모션 출력
                 Agent.effectManager.PlayOneShot(EffectManager.EFFECT.Hit);
@@ -34,11 +34,10 @@ namespace BehaviourTree
                 curTiemr = 0;
             }
             curTiemr += Time.deltaTime;
-            if(stunedTimer < curTiemr || !Agent.GetStateMachine.isGrounded || Agent.GetStateMachine.isHit)
+            if(stunedTimer < curTiemr || (Agent.GetStateMachine.isKnockback && Agent.GetStateMachine.isHit))
             {
                 // 나 피격 상태 끝났어!
                 // 그런데 공중에 있냐 체크 해야함
-                //Agent.effectManager.Stop(EffectManager.EFFECT.Hit);
                 return State.Success;
             }
             return State.Running;

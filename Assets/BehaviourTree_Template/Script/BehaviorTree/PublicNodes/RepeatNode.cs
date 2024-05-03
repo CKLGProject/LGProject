@@ -1,4 +1,5 @@
-﻿using System.Collections;
+using NUnit.Framework.Constraints;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,8 +22,26 @@ namespace BehaviourTree
 
         protected override State OnUpdate()
         {
-            child.Update();
-            return State.Running;
+            if (Loop)
+            {
+                child.Update();
+                return State.Running;
+            }
+            else
+            {
+                switch (child.Update())
+                {
+                    case State.Running:
+                        break;
+                    case State.Failure:
+                        return State.Failure;
+                    case State.Success:
+                        break;
+                    default:
+                        break;
+                }
+                return State.Running;
+            }
         }
     }
 }

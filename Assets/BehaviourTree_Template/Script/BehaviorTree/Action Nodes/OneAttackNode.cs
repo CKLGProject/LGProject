@@ -1,6 +1,7 @@
 using LGProject.PlayerState;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 
 
@@ -9,6 +10,7 @@ namespace BehaviourTree
 {
     public class OneAttackNode : ActionNode
     {
+        PlayerStateMachine stateMachine;
         [SerializeField, Range(0f, 2f)] private float dashAttackRange;
         [SerializeField, Range(0f, 2f)] private float jumpAttackRange;
         [SerializeField, Range(0f, 3f)] private float dashAttackPower;
@@ -24,9 +26,12 @@ namespace BehaviourTree
         // 대쉬 어택.
         protected override void OnStart()
         {
-            AIAgent.Instance.GetStateMachine.isDashAttack = true;
+            if (stateMachine == null)
+                stateMachine = AIAgent.Instance.GetStateMachine;
+            stateMachine.isDashAttack = true;
             _curTimer = 0;
-            AIAgent.Instance.SetAttacRange(AIAgent.Instance.GetStateMachine.isGrounded ? dashAttackRange : jumpAttackRange);
+            AIAgent.Instance.SetAttacRange(stateMachine.isGrounded ? dashAttackRange : jumpAttackRange);
+            stateMachine.animator.SetTrigger("DashAttack");
         }
 
         protected override void OnStop()

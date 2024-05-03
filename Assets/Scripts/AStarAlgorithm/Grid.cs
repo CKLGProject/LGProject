@@ -356,7 +356,6 @@ namespace pathFinding
                 }
             }
             totalCount += count;
-            Debug.Log($"Search Point Counting : {totalCount} / {count}");
             return walkableNodeList[rand].worldPosition; ;
         }
 

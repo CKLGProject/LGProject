@@ -25,7 +25,7 @@ namespace BehaviourTree
         // 어디서 부터 들어왔냐에 따라 다음 진행할 노드가 달라짐.
         protected override State OnUpdate()
         {
-            if(!Agent.GetStateMachine.isGrounded)
+            if(Agent.GetStateMachine.isKnockback)
             {
                 //Debug.Log("Flying");
                 return State.Success;

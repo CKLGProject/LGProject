@@ -42,9 +42,7 @@ namespace BehaviourTree
 
         protected override void OnStop()
         {
-            //Vector3 v = agent.GetStateMachine.physics.velocity;
-            //agent.GetStateMachine.physics.velocity = new Vector3(0, v.y, 0);
-            //Debug.Log($"Stop = {agent.GetStateMachine.jumpInCount}");
+
         }
 
         protected override State OnUpdate()
@@ -103,7 +101,6 @@ namespace BehaviourTree
             Vector3 currentWaypoint = new Vector3(Agent.path[Agent.targetIndex].x, Agent.path[Agent.targetIndex].y -0.45f, Agent.path[Agent.targetIndex].z);
             if (Agent.transform.position == currentWaypoint)
             {
-                //startPoint = currentWaypoint;
                 Agent.targetIndex++;
                 if (Agent.targetIndex >= Agent.path.Length)
                 {
@@ -116,25 +113,14 @@ namespace BehaviourTree
             if (AcrossTargetNode(currentWaypoint))
             {
                 // 목표지점가지 점프해야하는데 일단 디버그 찍고 끝내자
-                //Debug.Log("AA");
                 SetJumpVelocity();
             }
-            //CheckDownNode(currentWaypoint);
-            //if ()
-
-
             if (CheckTargetPosition())
             {
                 return false;
             }
             currentWaypoint.z = Agent.transform.position.z;
 
-            //Vector3 direction = currentWaypoint - agent.transform.position;
-            //;
-            //if (agent.GetStateMachine.physics.velocity.x < 3f)
-            //{
-            //    agent.GetStateMachine.physics.velocity += Vector3.right * direction.normalized.x;
-            //}
             Agent.transform.position = Vector3.MoveTowards(Agent.transform.position, currentWaypoint, Agent.speed * Time.deltaTime);
 
             Vector3 direction = currentWaypoint - Agent.transform.position;
@@ -150,8 +136,6 @@ namespace BehaviourTree
 
             if (direction.y < -0.4)
             {
-                //agent.transform.position += Vector3.down * 0.3f;
-                //agent.GetStateMachine.isDown = true;
                 return false;
             }
             return true;
@@ -264,12 +248,11 @@ namespace BehaviourTree
             if (curTimer >= jumpDelay)
             {
                 count++;
-                //Debug.Log($"{curTimer} / {count}");
                 Agent.GetStateMachine.jumpInCount++;
                 Agent.GetStateMachine.JumpVelocity();
                 Agent.GetStateMachine.physics.velocity += Vector3.up * Agent.jumpScale;
                 curTimer = 0;
-                //Debug.Log($"Jump = {Agent.GetStateMachine.physics.velocity}");
+                Agent.GetStateMachine.animator.SetTrigger("Jump" + Agent.GetStateMachine.jumpAction.ToString());
             }
         }
 

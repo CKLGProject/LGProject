@@ -13,8 +13,8 @@ namespace BehaviourTree
             Success
         }
 
-        [HideInInspector] public State state = State.Running;
-        [HideInInspector] public bool started = false;
+        /*[HideInInspector]*/ public State state = State.Running;
+        /*[HideInInspector]*/ public bool started = false;
         [HideInInspector] public string guid;
         // 세팅 후 최종 위치 Vector를 기록하는 변수.
         [HideInInspector] public Vector2 position;
