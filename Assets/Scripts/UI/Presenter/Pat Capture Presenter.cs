@@ -16,16 +16,10 @@ public class PatCapturePresenter : MonoBehaviour
         _model = GetComponent<PatCaptureModel>();
 
         Observable.Timer(TimeSpan.FromSeconds(3))
-            .Subscribe(_ => _model.IsScanning = true);
-
-        _view.OnTrackableCountObservable()
-            .Where(count => count > 0)
-            .Where(_ => _model.IsScanning)
-            .Take(1)
             .Subscribe(_ =>
             {
                 _view.SetActiveInformationMessageText(false);
-                _view.SetActiveCaptureStateUI(true);
+                _view.SetInteractiveCaptureStateUI(true);
             });
     }
 }

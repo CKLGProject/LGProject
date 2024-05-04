@@ -1,7 +1,6 @@
 using NKStudio;
 using R3;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.Interaction.Toolkit;
@@ -17,7 +16,7 @@ public class PatCaptureView : MonoBehaviour
     [SerializeField, RequireInterface(typeof(IARInteractor))]
     private Object arInteractorObject;
 
-    [SerializeField] private Image captureStateUI;
+    [SerializeField] private Button captureButton;
 
     public GameObject SpawnObject;
 
@@ -141,7 +140,7 @@ public class PatCaptureView : MonoBehaviour
 
         return true;
     }
-    
+
     /// <summary>
     /// Info Message 텍스트의 활성화 여부를 설정합니다.
     /// </summary>
@@ -155,12 +154,9 @@ public class PatCaptureView : MonoBehaviour
     /// 캡쳐 버튼의 상호작용 여부를 설정합니다.
     /// </summary>
     /// <param name="isInteractive"></param>
-    public void SetActiveCaptureStateUI(bool isInteractive)
+    public void SetInteractiveCaptureStateUI(bool isInteractive)
     {
-        if (isInteractive)
-            captureStateUI.color = Color.white;
-        else
-            captureStateUI.color = Color.gray;
+        captureButton.interactable = isInteractive;
     }
 
     /// <summary>
