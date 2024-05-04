@@ -1,0 +1,20 @@
+{
+    "name": "LGPresenter",
+    "rootNamespace": "",
+    "references": [
+        "GUID:823e33a90b3e043d4b6df8efafa51f51",
+        "GUID:33797cb8946204258b5250f8dd07ab0d",
+        "GUID:9d0ef74d99009498dbb515b2f6df0968",
+        "GUID:2871a61c47e924d2082279aa2a435953",
+        "GUID:77221876cc6b8244180b96e320b1bcd4"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

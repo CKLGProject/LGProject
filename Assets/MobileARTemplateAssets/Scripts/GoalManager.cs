@@ -35,7 +35,7 @@ public struct Goal
 /// The GoalManager cycles through a list of Goals, each representing
 /// an <see cref="GoalManager.OnboardingGoals"/> state to be completed by the user.
 /// </summary>
-public class GoalManager : UnityEngine.MonoBehaviour
+public class GoalManager : MonoBehaviour
 {
     /// <summary>
     /// State representation for the onboarding goals for the GoalManager.

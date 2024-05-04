@@ -13,7 +13,7 @@ using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
 /// menu again when the create menu button is clicked after dismissal. Manages object deletion in the AR demo scene,
 /// and also handles the toggling between the object creation menu button and the delete button.
 /// </summary>
-public class ARTemplateMenuManager : UnityEngine.MonoBehaviour
+public class ARTemplateMenuManager : MonoBehaviour
 {
     [SerializeField]
     [Tooltip("Button that opens the create menu.")]
@@ -121,12 +121,12 @@ public class ARTemplateMenuManager : UnityEngine.MonoBehaviour
 
     [SerializeField]
     [Tooltip("The interaction group for the AR demo scene.")]
-    UnityEngine.XR.Interaction.Toolkit.Interactors.XRInteractionGroup m_InteractionGroup;
+    XRInteractionGroup m_InteractionGroup;
 
     /// <summary>
     /// The interaction group for the AR demo scene.
     /// </summary>
-    public UnityEngine.XR.Interaction.Toolkit.Interactors.XRInteractionGroup interactionGroup
+    public XRInteractionGroup interactionGroup
     {
         get => m_InteractionGroup;
         set => m_InteractionGroup = value;
@@ -206,7 +206,7 @@ public class ARTemplateMenuManager : UnityEngine.MonoBehaviour
     readonly List<ARFeatheredPlaneMeshVisualizerCompanion> featheredPlaneMeshVisualizerCompanions = new List<ARFeatheredPlaneMeshVisualizerCompanion>();
 
     /// <summary>
-    /// See <see cref="UnityEngine.MonoBehaviour"/>.
+    /// See <see cref="MonoBehaviour"/>.
     /// </summary>
     void OnEnable()
     {
@@ -219,7 +219,7 @@ public class ARTemplateMenuManager : UnityEngine.MonoBehaviour
     }
 
     /// <summary>
-    /// See <see cref="UnityEngine.MonoBehaviour"/>.
+    /// See <see cref="MonoBehaviour"/>.
     /// </summary>
     void OnDisable()
     {
@@ -233,7 +233,7 @@ public class ARTemplateMenuManager : UnityEngine.MonoBehaviour
     }
 
     /// <summary>
-    /// See <see cref="UnityEngine.MonoBehaviour"/>.
+    /// See <see cref="MonoBehaviour"/>.
     /// </summary>
     void Start()
     {
@@ -248,7 +248,7 @@ public class ARTemplateMenuManager : UnityEngine.MonoBehaviour
     }
 
     /// <summary>
-    /// See <see cref="UnityEngine.MonoBehaviour"/>.
+    /// See <see cref="MonoBehaviour"/>.
     /// </summary>
     void Update()
     {
