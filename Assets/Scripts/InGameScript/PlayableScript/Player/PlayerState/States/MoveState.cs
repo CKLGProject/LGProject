@@ -6,12 +6,13 @@ namespace LGProject.PlayerState
 {
     public class MoveState : State
     {
-        float speed = 0;
-        float maximumSpeed = 0;
+        private float _speed = 0;
+        private float _maximumSpeed = 0;
+        private bool _isPlayingMoveEffect = false;
         public MoveState(PlayerStateMachine _stateMachine, ref float _speed, float _maximumSpeed) : base(_stateMachine)
         {
-            speed = _speed;
-            maximumSpeed = _maximumSpeed;
+            this._speed = _speed;
+            this._maximumSpeed = _maximumSpeed;
         }
 
         public override void Enter()
@@ -32,18 +33,20 @@ namespace LGProject.PlayerState
         public override void LogicUpdate()
         {
             base.LogicUpdate();
-            if(stateMachine.isGrounded)
+            if(stateMachine.isGrounded && !_isPlayingMoveEffect)
             {
                 stateMachine.playable.effectManager.Play(EffectManager.EFFECT.Run);
+                _isPlayingMoveEffect = true;
             }
-            else
+            else if(!stateMachine.isGrounded && _isPlayingMoveEffect)
             {
+                _isPlayingMoveEffect = true;
                 stateMachine.playable.effectManager.Stop(EffectManager.EFFECT.Run);
             }
 
             if (Mathf.Abs(stateMachine.moveAction.ReadValue<float>()) <= 0.2f)
             {
-                stateMachine.ChangeState(stateMachine.playable.idleState);
+                stateMachine.ChangeState(stateMachine.idleState);
                 return;
             }
             if (stateMachine.attackAction.triggered)
@@ -53,7 +56,7 @@ namespace LGProject.PlayerState
             }
             if (stateMachine.jumpAction.triggered && stateMachine.jumpInCount < 2)
             {
-                stateMachine.ChangeState(stateMachine.playable.jumpState);
+                stateMachine.ChangeState(stateMachine.jumpState);
                 return;
             }
 
@@ -66,7 +69,7 @@ namespace LGProject.PlayerState
                     stateMachine.isJumpGuard = true;
                 }
                 stateMachine.guardEffect.SetActive(true);
-                stateMachine.ChangeState(stateMachine.playable.guardState);
+                stateMachine.ChangeState(stateMachine.guardState);
                 return;
             }
 
@@ -76,7 +79,7 @@ namespace LGProject.PlayerState
                 stateMachine.StandingVelocity();
                 return;
             }
-            if (stateMachine.physics.velocity.x <= maximumSpeed && stateMachine.physics.velocity.x >= -maximumSpeed)
+            if (stateMachine.physics.velocity.x <= _maximumSpeed && stateMachine.physics.velocity.x >= -_maximumSpeed)
             {
                 // 바로 앞에 적이 있으면 더이상 이동하지 않음(애니메이션은 재생)
                 // 머리와 다리쪽에서 Ray를 쏠 예정
@@ -89,12 +92,12 @@ namespace LGProject.PlayerState
         {
             if (!stateMachine.isGrounded)
             {
-                stateMachine.ChangeState(stateMachine.playable.jumpAttackState);
+                stateMachine.ChangeState(stateMachine.jumpAttackState);
                 return;
             }
             else
             {
-                stateMachine.ChangeState(stateMachine.playable.dashAttackState);
+                stateMachine.ChangeState(stateMachine.dashAttackState);
                 return;
             }
         }

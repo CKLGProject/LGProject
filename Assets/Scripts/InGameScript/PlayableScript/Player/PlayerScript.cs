@@ -74,24 +74,6 @@ namespace LGProject.PlayerState
             stateMachine = new PlayerStateMachine();
             stateMachine = PlayerStateMachine.CreateStateMachine(this.gameObject);
 
-            idleState = new IdleState(stateMachine);
-            moveState = new MoveState(stateMachine, ref dashSpeed, maximumSpeed);
-            jumpState = new JumpState(stateMachine, ref jumpScale, maximumJump);
-
-            attackState = new AttackState(stateMachine, ref comboDelay, ref aniDelay, ref movingAttack);
-
-            jumpAttackState = new JumpAttackState(stateMachine, maximumSpeed);
-            dashAttackState = new DashAttackState(stateMachine, ref dashAttackDelay);
-
-            hitState = new HitState(stateMachine, 1f);
-            guardState = new GuardState(stateMachine);
-
-            downState = new DownState(stateMachine, 1f);
-
-            landingState = new LandingState(stateMachine);
-
-            stateMachine.Initalize(idleState);
-
             //clip1.frameRate;
 
         }

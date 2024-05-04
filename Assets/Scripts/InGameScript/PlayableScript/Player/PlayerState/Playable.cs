@@ -6,21 +6,11 @@ namespace LGProject.PlayerState
 {
     public class Playable : MonoBehaviour
     {
-        public IdleState idleState;
-        public MoveState moveState;
-        public JumpState jumpState;
-        public AttackState attackState;
-        public JumpAttackState jumpAttackState;
-        public DashAttackState dashAttackState;
-        public HitState hitState;
-        public GuardState guardState;
-        public DownState downState;
-        public LandingState landingState;
 
         public Animator Animator;
 
         protected Vector3 velocity = Vector3.zero;
-        public const int maximumJump = 2;
+        public int maximumJump = 2;
         public int maximumSpeed = 4;
 
 
@@ -141,7 +131,7 @@ namespace LGProject.PlayerState
 
                         // 이거 AI랑 공용으로 사용중이라 나중에 안되게 해야함.
                         if(!stateMachine.isKnockback && stateMachine.currentState != null)
-                            stateMachine.ChangeState(stateMachine.playable.landingState);
+                            stateMachine.ChangeState(stateMachine.landingState);
 
                         //stateMachine.isHit = false;
                     }

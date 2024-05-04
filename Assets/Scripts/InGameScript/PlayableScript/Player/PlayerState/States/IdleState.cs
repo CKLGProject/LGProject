@@ -27,7 +27,7 @@ namespace LGProject.PlayerState
             // 키 입력을 대기 받으면 상태가 변경됨.
             if (Mathf.Abs(stateMachine.moveAction.ReadValue<float>()) > 0.2f)
             {
-                stateMachine.ChangeState(stateMachine.playable.moveState);
+                stateMachine.ChangeState(stateMachine.moveState);
                 return;
             }
 
@@ -39,7 +39,7 @@ namespace LGProject.PlayerState
             if (stateMachine.jumpAction.triggered && stateMachine.jumpInCount < 2)
             {
                 //Debug.Log("idleJump");
-                stateMachine.ChangeState(stateMachine.playable.jumpState);
+                stateMachine.ChangeState(stateMachine.jumpState);
                 return;
             }
 
@@ -51,7 +51,7 @@ namespace LGProject.PlayerState
                 {
                     stateMachine.isJumpGuard = true;
                 }
-                stateMachine.ChangeState(stateMachine.playable.guardState);
+                stateMachine.ChangeState(stateMachine.guardState);
                 return;
             }
 
@@ -68,13 +68,13 @@ namespace LGProject.PlayerState
             // 땅에 붙어있으면서 공격을 진행하면?
             if (stateMachine.isGrounded)
             {
-                stateMachine.ChangeState(stateMachine.playable.attackState);
+                stateMachine.ChangeState(stateMachine.attackState);
                 return;
             }
             // 공중에서 공격하면?
             if(!stateMachine.isGrounded)
             {
-                stateMachine.ChangeState(stateMachine.playable.jumpAttackState);
+                stateMachine.ChangeState(stateMachine.jumpAttackState);
                 return;
             }
         }

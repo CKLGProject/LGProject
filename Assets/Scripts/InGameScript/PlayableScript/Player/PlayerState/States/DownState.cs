@@ -49,7 +49,7 @@ namespace LGProject.PlayerState
                 {
                     // 원래는 WakeUp State
                     // Wake UP 중에는 공격을 받아도 무적임.
-                    stateMachine.ChangeState(stateMachine.playable.idleState);
+                    stateMachine.ChangeState(stateMachine.idleState);
                     return;
                 }
             }

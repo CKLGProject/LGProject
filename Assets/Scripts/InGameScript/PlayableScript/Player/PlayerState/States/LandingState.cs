@@ -34,10 +34,10 @@ namespace LGProject.PlayerState
             {
                 if(Mathf.Abs(stateMachine.moveAction.ReadValue<float>())> 0.2f)
                 {
-                    stateMachine.ChangeState(stateMachine.playable.moveState);
+                    stateMachine.ChangeState(stateMachine.moveState);
                 }
                 else
-                    stateMachine.ChangeState(stateMachine.playable.idleState);
+                    stateMachine.ChangeState(stateMachine.idleState);
             }
         }
 
