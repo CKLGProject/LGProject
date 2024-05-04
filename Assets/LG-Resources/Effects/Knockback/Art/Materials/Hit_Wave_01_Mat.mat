@@ -27,7 +27,8 @@ Material:
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _SURFACE_TYPE_TRANSPARENT
-  m_InvalidKeywords: []
+  m_InvalidKeywords:
+  - _OUTLINE_ON_OFF
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -42,6 +43,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _Alpha_Tex:
+        m_Texture: {fileID: 2800000, guid: 1446f3691ac481149805e60b38bd6952, type: 3}
+        m_Scale: {x: 3, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -90,6 +95,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _ScreenTone_Tex:
+        m_Texture: {fileID: 2800000, guid: a16ea4b9eaa975c4e8dd0c9dad86c0b1, type: 3}
+        m_Scale: {x: 60, y: 10}
+        m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -117,9 +126,11 @@ Material:
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _BumpScale: 1
+    - _Cartoon_Shadow: 1
     - _CastShadows: 0
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
+    - _Color_Power: 1.5
     - _Cull: 0
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
@@ -127,19 +138,32 @@ Material:
     - _DstBlend: 10
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
+    - _GRADIANT_MASK_R_OR_G: 0
+    - _GRADIANT_MASK_T_R_F_G: 0
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _Gradation_Length: 0.3
+    - _Gradation_Length: 0.75
+    - _Invert_Tone: 0
     - _MainIntensity: 2
     - _Main_Intensity: 2
     - _Metallic: 0
+    - _OUTLINE_ON_OFF: 1
     - _OcclusionStrength: 1
+    - _Outline: 0
+    - _Outline_Enable_Cartoon_Shadow: 0
+    - _Outline_Thickness: 0.5
     - _Parallax: 0.005
     - _Power: 1.6
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
+    - _ScreenTone_Length: 1.2
+    - _ScreenTone_Size: 30
+    - _ScreenTone_Strength: 5
+    - _Shadow_Offset_U: 0.51
+    - _Shadow_Offset_V: 0.46
+    - _Shadow_Opacity: 1
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -152,10 +176,14 @@ Material:
     - _ZWriteControl: 0
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Cartoon_Shadow_Color: {r: 0, g: 0, b: 1, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Color_01: {r: 0.30588233, g: 1, b: 0.31515378, a: 1}
-    - _Color_02: {r: 0, g: 0.11240196, b: 1, a: 1}
+    - _Color_01: {r: 0.30588233, g: 1, b: 0.33205268, a: 1}
+    - _Color_02: {r: 0.018987656, g: 0, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Gradiant_Offset: {r: 0, g: 0, b: 0, a: 0}
+    - _Gradiant_Tiling: {r: 1, g: 1, b: 0, a: 0}
+    - _Shadow_Color: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Guard_Fire_Mat
+  m_Name: Guard_Mat
   m_Shader: {fileID: -6465566751694194690, guid: f3b3d2e16e939ab4baf2f84af9f577ff,
     type: 3}
   m_Parent: {fileID: 0}
@@ -55,15 +55,15 @@ Material:
     - _0z_Main_Saturation_Switch: 1
     - _AlphaClip: 0
     - _AlphaToMask: 0
-    - _Base_Fresnel_Power: 0.1
-    - _Base_Intensity: 0.3
+    - _Base_Fresnel_Power: 1
+    - _Base_Intensity: 1
     - _Blend: 0
     - _CastShadows: 0
     - _Cull: 2
     - _DstBlend: 10
-    - _Edge_Blur_Stength: 3
+    - _Edge_Blur_Stength: 2
     - _Edge_Fresnel_Power: 5
-    - _Edge_Intensity: 6
+    - _Edge_Intensity: 30
     - _Fresnel_Power: 5
     - _Main_Saturation: 1
     - _QueueControl: 0
@@ -71,18 +71,18 @@ Material:
     - _SrcBlend: 5
     - _Surface: 1
     - _Wave_Intensity: 2
-    - _Wave_Lerp: 0.3
+    - _Wave_Lerp: 0.2
+    - _Wave_Strength: 3
     - _ZTest: 4
     - _ZWrite: 0
     - _ZWriteControl: 0
     m_Colors:
-    - _Base_Color: {r: 0.7490196, g: 0.09900105, b: 0, a: 1}
-    - _Edge_Color: {r: 23.072285, g: 1.8607427, b: 0, a: 0}
+    - _Base_Color: {r: 0, g: 0.12997675, b: 1, a: 1}
+    - _Edge_Color: {r: 0, g: 0.42311624, b: 9.518763, a: 0}
     - _Main_Color: {r: 55.61987, g: 2.6402063, b: 0, a: 0}
-    - _Panner_Speed: {r: 0.1, g: -0.3, b: 0, a: 0}
+    - _Panner_Speed: {r: 0.2, g: -0.5, b: 0, a: 0}
     - _Wave_Tiling: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
-  m_AllowLocking: 1
 --- !u!114 &7791796058952899131
 MonoBehaviour:
   m_ObjectHideFlags: 11
