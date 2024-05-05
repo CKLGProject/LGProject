@@ -7,7 +7,7 @@
       "dependencies": {
         "com.unity.modules.imgui": "1.0.0"
       },
-      "hash": "a8d433d240cecfd9356319ea1315f0e9a956ac77"
+      "hash": "e86fc4f7a1d49c49944bae8adb92c0ae24f25cae"
     },
     "com.nkstudio.scenereference": {
       "version": "https://github.com/NK-Studio/SceneReference.git#UPM",
