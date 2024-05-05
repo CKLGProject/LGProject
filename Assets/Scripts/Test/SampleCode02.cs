@@ -1,5 +1,6 @@
 using LGProjects.Android.Utility;
 using UnityEngine;
+using Utility;
 
 public class SampleCode02 : UnityEngine.MonoBehaviour
 {
@@ -15,6 +16,6 @@ public class SampleCode02 : UnityEngine.MonoBehaviour
 
     private void OnScanFinish(string result)
     {
-        AndroidUtility.Toast(result);
+        LGUtility.Toast(result);
     }
 }

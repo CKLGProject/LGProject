@@ -5,6 +5,17 @@ namespace Utility
 {
     public static class LGUtility
     {
+        public enum EToast
+        {
+            LENGTH_SHORT = 0,
+            LENGTH_LONG = 1
+        }
+
+        private static AndroidJavaObject _androidJavaObject;
+
+        public static AndroidJavaObject AndroidJavaObject => _androidJavaObject ??=
+            new AndroidJavaObject("com.unity3d.player.OverrideUnityPlayerActivity");
+
         public static bool IsEditorGameView()
         {
 #if UNITY_EDITOR
@@ -12,7 +23,7 @@ namespace Utility
 #endif
             return false;
         }
-        
+
         /// <summary>
         /// 현재 터치된 위치를 반환합니다.
         /// </summary>
@@ -56,6 +67,21 @@ namespace Utility
             }
 
             return false;
+        }
+
+
+        /// <summary>
+        /// Toast 메세지를 호출합니다.
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="length"></param>
+        public static void Toast(string message, EToast length = EToast.LENGTH_SHORT)
+        {
+#if UNITY_EDITOR
+            Debug.Log("Toast: " + message);
+#else
+            AndroidJavaObject.Call("Toast", message, (int)length);
+#endif
         }
     }
 }

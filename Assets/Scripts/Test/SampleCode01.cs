@@ -1,10 +1,11 @@
 using LGProjects.Android.Utility;
 using UnityEngine;
+using Utility;
 
-public class SampleCode01 : UnityEngine.MonoBehaviour
+public class SampleCode01 : MonoBehaviour
 {
     public void TestMessage()
     {
-        AndroidUtility.Toast("Hello, World!");
+        LGUtility.Toast("Hello, World!");
     }
 }
