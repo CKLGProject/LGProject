@@ -97,13 +97,16 @@ namespace LGProject.PlayerState
             switch (stateMachine.attackCount)
             {
                 case 1:
-                    animDelay = 0.25f;
+                    animDelay = 0.2f;
+                    time = 0.35f;
                     break;
                 case 2:
-                    animDelay = 0.4f; 
+                    animDelay = 0.4f;
+                    time = 0.6f;
                     break;
                 case 3:
-                    animDelay = 0.4f;
+                    animDelay = 0.2f;
+                    time = 0.6f;
                     break;
             }
             // 딜레이가 끝난 이후 추가 키 입력이 들어가면? 
@@ -116,11 +119,10 @@ namespace LGProject.PlayerState
                     stateMachine.ChangeState(stateMachine.attackState);
                 }
                 // 모션이 끝나면?
-                else if (curTimer >= time * 0.9f )
+                else if (curTimer >= time)
                 {
                     // 모션이 끝났으니 기본 상태로 되돌아감.
                     Debug.Log("Stop");
-                    
                     stateMachine.animator.SetTrigger("Idle");
                     stateMachine.attackCount = 0;
                     stateMachine.ChangeState(stateMachine.idleState);

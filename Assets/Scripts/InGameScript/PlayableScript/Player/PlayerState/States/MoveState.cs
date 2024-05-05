@@ -27,20 +27,21 @@ namespace LGProject.PlayerState
 
         public override void Exit()
         {
-
+            stateMachine.animator.SetFloat("Run", 0);
         }
 
         public override void LogicUpdate()
         {
             base.LogicUpdate();
-            if(stateMachine.isGrounded && !_isPlayingMoveEffect)
+            stateMachine.animator.SetFloat("Run", Mathf.Abs(stateMachine.moveAction.ReadValue<float>()));
+            if (stateMachine.isGrounded && !_isPlayingMoveEffect)
             {
                 stateMachine.playable.effectManager.Play(EffectManager.EFFECT.Run);
                 _isPlayingMoveEffect = true;
             }
             else if(!stateMachine.isGrounded && _isPlayingMoveEffect)
             {
-                _isPlayingMoveEffect = true;
+                _isPlayingMoveEffect = false;
                 stateMachine.playable.effectManager.Stop(EffectManager.EFFECT.Run);
             }
 
@@ -68,7 +69,6 @@ namespace LGProject.PlayerState
                 {
                     stateMachine.isJumpGuard = true;
                 }
-                stateMachine.guardEffect.SetActive(true);
                 stateMachine.ChangeState(stateMachine.guardState);
                 return;
             }
@@ -84,6 +84,11 @@ namespace LGProject.PlayerState
                 // 바로 앞에 적이 있으면 더이상 이동하지 않음(애니메이션은 재생)
                 // 머리와 다리쪽에서 Ray를 쏠 예정
                 stateMachine.physics.velocity += Vector3.right * (stateMachine.moveAction.ReadValue<float>());
+
+                Vector3 left = new Vector3((stateMachine.transform.position + Vector3.right).x + 2f, stateMachine.transform.position.y, stateMachine.transform.position.z);
+                Vector3 right = new Vector3((stateMachine.transform.position + Vector3.left).x - 2f, stateMachine.transform.position.y, stateMachine.transform.position.z);
+
+                stateMachine.transform.LookAt(stateMachine.moveAction.ReadValue<float>() < 0 ? right : left);
             }
 
         }

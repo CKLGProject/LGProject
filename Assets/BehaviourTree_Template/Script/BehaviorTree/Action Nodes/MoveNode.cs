@@ -11,6 +11,7 @@ namespace BehaviourTree
     public class MoveNode : ActionNode
     {
 
+        public LGProject.PlayerState.PlayerStateMachine stateMachine;
         public AIAgent Agent;
         [Space(10f)]
 
@@ -35,14 +36,17 @@ namespace BehaviourTree
             // Path 설정
             if (Agent == null)
                 Agent = AIAgent.Instance;
+            if (stateMachine == null)
+                stateMachine = AIAgent.Instance.GetStateMachine;
             curTimer = jumpDelay;
             Agent.targetIndex = 0;
+            stateMachine.animator.SetFloat("Run", 1f);
             //startPoint = pathFinding.Grid.Instance.NodeFromWorldPoint(agent.transform.position).worldPosition - Vector3.up * 0.45f;
         }
 
         protected override void OnStop()
         {
-
+            stateMachine.animator.SetFloat("Run", 0f);
         }
 
         protected override State OnUpdate()

@@ -25,7 +25,7 @@ namespace LGProject.PlayerState
                 Gizmos.DrawLine(transform.position, transform.position + right * 0.5f);
                 Gizmos.DrawLine(transform.position + (Vector3.up * 0.75f), transform.position + (Vector3.up * 0.75f) + right * 0.5f);
 
-                if (stateMachine.currentState.GetType() == typeof(PlayerState.AttackState))
+                if (stateMachine.currentState.GetType() == typeof(AttackState))
                 {
                     switch (stateMachine.attackCount - 1)
                     {
@@ -41,7 +41,7 @@ namespace LGProject.PlayerState
                     }
                     Gizmos.DrawWireCube(center + right, Vector3.one * 0.5f);
                 }
-                else if (stateMachine.currentState.GetType() == typeof(PlayerState.DashAttackState))
+                else if (stateMachine.currentState.GetType() == typeof(DashAttackState))
                 {
                     Gizmos.color = Color.red;
                     Vector3 hitBoxSize = Vector3.one * 0.7f;
@@ -49,7 +49,7 @@ namespace LGProject.PlayerState
                     //hitBoxSiz
                     Gizmos.DrawWireCube(center + right, hitBoxSize );
                 }
-                else if (stateMachine.currentState.GetType() == typeof(PlayerState.JumpAttackState))
+                else if (stateMachine.currentState.GetType() == typeof(JumpAttackState))
                 {
                     Gizmos.color = Color.red;
                     Vector3 hitBoxSize = Vector3.one * 0.7f;

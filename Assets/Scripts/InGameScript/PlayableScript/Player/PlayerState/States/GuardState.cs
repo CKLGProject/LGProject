@@ -18,6 +18,7 @@ namespace LGProject.PlayerState
             // x,z Velocity를 초기화
             
             stateMachine.StandingVelocity();
+            stateMachine.animator.SetTrigger("Guard");
             stateMachine.playable.effectManager.Play(EffectManager.EFFECT.Guard);
             stateMachine.isGuard = true;
         }
