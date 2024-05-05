@@ -131,6 +131,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1807253659}
     m_Modifications:
+    - target: {fileID: 2880242681151941069, guid: f3f691514bf59b4479533655240902e9,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: ed99dc28adc3d5a47a267e5552d98689, type: 2}
     - target: {fileID: 8149406057731929015, guid: f3f691514bf59b4479533655240902e9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -306,7 +311,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!54 &237840295
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1312,7 +1317,7 @@ PrefabInstance:
     - target: {fileID: 8149406057731929015, guid: f3f691514bf59b4479533655240902e9,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 8149406057731929015, guid: f3f691514bf59b4479533655240902e9,
         type: 3}
@@ -1322,7 +1327,7 @@ PrefabInstance:
     - target: {fileID: 8149406057731929015, guid: f3f691514bf59b4479533655240902e9,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 8149406057731929015, guid: f3f691514bf59b4479533655240902e9,
         type: 3}
@@ -1337,7 +1342,7 @@ PrefabInstance:
     - target: {fileID: 8149406057731929015, guid: f3f691514bf59b4479533655240902e9,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 8149406057731929015, guid: f3f691514bf59b4479533655240902e9,
         type: 3}
@@ -2875,7 +2880,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!136 &1894206058
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3704,6 +3709,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Boss Dummy Prefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 338107022864537229, guid: 3e4e1896c15a1c1408c3a8b157bec057,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2826113700888512422, guid: 3e4e1896c15a1c1408c3a8b157bec057,
         type: 3}

@@ -201,6 +201,10 @@ namespace LGProject.PlayerState  //
                 physics.velocity = velocity;
                 
             }
+            else
+            {
+                physics.velocity = new Vector3(transform.forward.x * -2f, 0, 0);
+            }
             if(velocity != Vector3.zero)
             {
                 animator.SetTrigger("Knockback");
