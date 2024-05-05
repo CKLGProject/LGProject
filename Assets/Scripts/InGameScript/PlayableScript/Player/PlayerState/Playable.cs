@@ -4,37 +4,67 @@ using UnityEngine;
 
 namespace LGProject.PlayerState
 {
+    public struct AttackAnimationProperties
+    {
+        public float FirstAttackDelay;
+        public float SecondAttackDelay;
+        public float ThirdAttackDelay;
+        
+        public float ComboDelay;
+    }
+
     public class Playable : MonoBehaviour
     {
 
         public Animator Animator;
 
         protected Vector3 velocity = Vector3.zero;
-        public int maximumJump = 2;
+        [Tooltip("최대 점프 횟수")]
+        public int maximumJumpCount = 2;
+        [Tooltip("대쉬 최대 속도")]
         public int maximumSpeed = 4;
 
-
+        [Tooltip("이동할 때 증가하는 속도")]
         public float dashSpeed;
+        [Tooltip("한 번 점프할 때의 높이")]
         public float jumpScale;
-        public float hitDelay;
-        public LayerMask PlatformLayer = 1 << 6;
 
 
         // 공격 관련 인스펙터 
-        [Range(1f, 10f)]
+        [Range(0.0f, 1.0f), Tooltip("n초가 끝나면 Idle로 돌아옴")]
         public float FirstAttackDelay = 1f;
+
+        [Range(0.0f, 2.0f), Tooltip("n초의 시간이 경과하면 공격 판정을 시작함.")]
+        public float FirstAttackJudgeDelay = 1f;
+
+        [Range(0.0f, 1.0f), Tooltip("n초가 끝나면 Idle로 돌아옴")]
         public float SecondAttackDelay = 1f;
-        public float ThridAttackDelay = 1f;
-        public float comboDelay = 0;
-        public float dashAttackDelay = 0;
-        public float aniDelay = 0;
-        public bool movingAttack = true;
+
+        [Range(0.0f, 2.0f), Tooltip("n초의 시간이 경과하면 공격 판정을 시작함.")]
+        public float SecondAttackJudgeDelay = 1f;
         
 
-        public LayerMask layer;
+        [Range(0.0f, 1.0f), Tooltip("n초가 끝나면 Idle로 돌아옴")]
+        public float ThridAttackDelay = 1f;
+
+        [Range(0.0f, 2.0f), Tooltip("n초의 시간이 경과하면 공격 판정을 시작함.")]
+        public float ThirdAttackJudgeDelay = 1f;
+
+
+        [Range(0.0f, 1.0f), Tooltip("공격 후 Idle로 돌아오기 까지의 시간")]
+        public float dashAttackDelay = 0;
+
+        [Range(0.0f, 1.0f), Tooltip("피격 후 Idle로 돌아오기 까지의 시간")]
+        public float hitDelay = 0;
+
+        [Range(0.0f, 3.0f), Tooltip("다운 후 Idle로 돌아오기 까지의 시간")]
+        public float wakeUpDelay = 0;
+
+        public bool movingAttack = true;
+
 
         // 공격 방향
-        public bool directionX = false;
+        [HideInInspector] public bool directionX = false;
 
         public EffectManager effectManager;
 

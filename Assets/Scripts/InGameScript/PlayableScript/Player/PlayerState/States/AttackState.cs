@@ -19,19 +19,28 @@ namespace LGProject.PlayerState
 
         //float AttackCont = 0;
         //int maximumCount = 0;
+        float firstAniDelay = 0;
+        float firstAttackDelay = 0;
+        float secondAniDelay = 0;
+        float secondAttackDelay = 0;  
+        float thirdAniDelay = 0;
+        float thirdAttackDelay = 0;
+
         float curTimer;
-        float aniDelay = 0;
-        float comboDelay = 0;
         bool movingAttack = false;
         bool damageInCount = false;
         //float aniDelay
 
-        public AttackState(PlayerStateMachine _stateMachine, ref float _comboDelay, ref float _animDelay, ref bool _movingAttack) : base(_stateMachine)
+        public AttackState(PlayerStateMachine _stateMachine, ref float firstAttack, ref float firstAttackDelay,ref float secondAttack,ref float secondAttackDelay, ref float thirdAttack, ref float thirdAttackDelay) : base(_stateMachine)
         {
-            comboDelay = _comboDelay;
-            aniDelay = _animDelay;
             curTimer = 0;
-            movingAttack = _movingAttack;
+
+            firstAniDelay = firstAttack;
+            this.firstAttackDelay = firstAttackDelay;
+            secondAniDelay = secondAttack;
+            this.secondAniDelay = secondAttackDelay;
+            thirdAniDelay = thirdAttack;
+            this.thirdAniDelay = thirdAttackDelay;
         }
 
         public override void Enter()
@@ -97,16 +106,22 @@ namespace LGProject.PlayerState
             switch (stateMachine.attackCount)
             {
                 case 1:
-                    animDelay = 0.2f;
-                    time = 0.35f;
+                    //animDelay = 0.2f;
+                    animDelay = firstAniDelay;
+                    time = firstAttackDelay;
+                    //time = 0.35f;
                     break;
                 case 2:
-                    animDelay = 0.4f;
-                    time = 0.6f;
+                    //animDelay = 0.4f;
+                    animDelay = secondAniDelay;
+                    time = secondAttackDelay;
+                    //time = 0.6f;
                     break;
                 case 3:
-                    animDelay = 0.2f;
-                    time = 0.6f;
+                    //animDelay = 0.2f;
+                    animDelay = thirdAniDelay;
+                    time = thirdAttackDelay;
+                    //time = 0.6f;
                     break;
             }
             // 딜레이가 끝난 이후 추가 키 입력이 들어가면? 

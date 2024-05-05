@@ -10,7 +10,7 @@ namespace LGProject.PlayerState
         private float _curTimer = 0;
         private float _delay = 0;
         private bool _flight = false;
-        public DownState(PlayerStateMachine _stateMachine, float _delay) : base(_stateMachine)
+        public DownState(PlayerStateMachine _stateMachine, ref float _delay) : base(_stateMachine)
         {
             _curTimer = 0;
             this._delay = _delay;

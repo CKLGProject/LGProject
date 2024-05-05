@@ -37,7 +37,8 @@ namespace LGProject.PlayerState
             {
                 if (damageInCount == false) AttackJudge();
             }
-            if (_curTimer > stateMachine.GetAnimPlayTime("DashAttack")) 
+            //if (_curTimer > stateMachine.GetAnimPlayTime("DashAttack")) 
+            if(_curTimer > _aniDelay)
             {
                 stateMachine.ChangeState(stateMachine.idleState);
                 return ;

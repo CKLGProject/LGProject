@@ -5,7 +5,6 @@ using UnityEngine;
 
 namespace LGProject.PlayerState
 {
-
     public class PlayerScript : Playable
     {
         private void OnDrawGizmos()
@@ -54,13 +53,12 @@ namespace LGProject.PlayerState
                     Gizmos.color = Color.red;
                     Vector3 hitBoxSize = Vector3.one * 0.7f;
                     hitBoxSize.x *= 1.5f;
-                    //hitBoxSiz
                     Gizmos.DrawWireCube(center + right, hitBoxSize);
                 }
             }
             catch
             {
-                //Debug.Log("On Play");
+
             }
         }
 
@@ -73,8 +71,6 @@ namespace LGProject.PlayerState
 
             stateMachine = new PlayerStateMachine();
             stateMachine = PlayerStateMachine.CreateStateMachine(this.gameObject);
-
-            //clip1.frameRate;
 
         }
 
@@ -89,7 +85,6 @@ namespace LGProject.PlayerState
                 string name = stateMachine.animator.runtimeAnimatorController.animationClips[i].name;
                 float time = stateMachine.animator.runtimeAnimatorController.animationClips[i].length;
                 stateMachine.SetAnimPlayTime(name, time);
-                //Debug.Log($"{ stateMachine.animator.runtimeAnimatorController.animationClips[i].name} / { stateMachine.animator.runtimeAnimatorController.animationClips[i].length}'s");
             }
         }
 
