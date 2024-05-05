@@ -6,15 +6,6 @@
             "id": "99aa0ce4-aba2-408f-8783-21dafd7bb6b1",
             "actions": [
                 {
-                    "name": "Attack",
-                    "type": "Button",
-                    "id": "9194d96f-df7a-460d-b2ed-5d5a2539dfe7",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
                     "name": "Move",
                     "type": "Value",
                     "id": "fe0f9b1b-4ae4-47c1-bbfb-af905fa26fce",
@@ -22,6 +13,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Down",
+                    "type": "Button",
+                    "id": "7b83c9f3-7b3a-42f1-982a-f02f030cb8b5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Jump",
@@ -33,13 +33,13 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Down",
+                    "name": "Attack",
                     "type": "Button",
-                    "id": "7b83c9f3-7b3a-42f1-982a-f02f030cb8b5",
+                    "id": "9194d96f-df7a-460d-b2ed-5d5a2539dfe7",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Guard",
@@ -52,28 +52,6 @@
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "b67758d5-d761-4501-8393-b8215dde2e36",
-                    "path": "<Keyboard>/z",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Attack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "28d21aef-fe3b-41ee-b725-1d923cc86499",
-                    "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Attack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "AD",
                     "id": "81fb4027-646b-4a44-acb6-178a24751c25",
@@ -142,34 +120,45 @@
                 },
                 {
                     "name": "",
-                    "id": "fd68120b-bfb1-403c-948c-269525a2e463",
-                    "path": "<Keyboard>/upArrow",
+                    "id": "11a67f84-a278-48e9-850b-3e37ec6baecf",
+                    "path": "<Keyboard>/x",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "Jump",
+                    "action": "Guard",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "55ce1a97-2757-42d3-9dd5-ebd5d92c380c",
+                    "id": "bef96786-06b7-4ff8-92d4-15e0ff9d482f",
                     "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Jump",
+                    "action": "Guard",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "93d3fc04-4465-440e-a787-10bc35a4d7cb",
-                    "path": "<Keyboard>/downArrow",
+                    "id": "28d21aef-fe3b-41ee-b725-1d923cc86499",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b67758d5-d761-4501-8393-b8215dde2e36",
+                    "path": "<Keyboard>/z",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "Down",
+                    "action": "Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -186,23 +175,34 @@
                 },
                 {
                     "name": "",
-                    "id": "11a67f84-a278-48e9-850b-3e37ec6baecf",
-                    "path": "<Keyboard>/x",
+                    "id": "93d3fc04-4465-440e-a787-10bc35a4d7cb",
+                    "path": "<Keyboard>/downArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "Guard",
+                    "action": "Down",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "bef96786-06b7-4ff8-92d4-15e0ff9d482f",
-                    "path": "<Gamepad>/buttonWest",
+                    "id": "55ce1a97-2757-42d3-9dd5-ebd5d92c380c",
+                    "path": "<Gamepad>/leftStick/up",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Guard",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fd68120b-bfb1-403c-948c-269525a2e463",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
