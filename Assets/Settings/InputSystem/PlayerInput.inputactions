@@ -2,21 +2,12 @@
     "name": "PlayerInput",
     "maps": [
         {
-            "name": "PlayerAction",
+            "name": "Player",
             "id": "99aa0ce4-aba2-408f-8783-21dafd7bb6b1",
             "actions": [
                 {
-                    "name": "Move_regarcy",
-                    "type": "Value",
-                    "id": "e26b9210-0b14-4e62-822e-d87e1e2cddee",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
                     "name": "Attack",
-                    "type": "Value",
+                    "type": "Button",
                     "id": "9194d96f-df7a-460d-b2ed-5d5a2539dfe7",
                     "expectedControlType": "Button",
                     "processors": "",
@@ -27,7 +18,7 @@
                     "name": "Move",
                     "type": "Value",
                     "id": "fe0f9b1b-4ae4-47c1-bbfb-af905fa26fce",
-                    "expectedControlType": "Double",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -62,73 +53,29 @@
             ],
             "bindings": [
                 {
-                    "name": "2D Vector",
-                    "id": "5a1ad0aa-69f2-49e9-8bc8-4e84a8fa5261",
-                    "path": "2DVector",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move_regarcy",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "up",
-                    "id": "e669265e-f71f-4c52-a519-0861992f5364",
-                    "path": "<Keyboard>/upArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "PC_INPUT",
-                    "action": "Move_regarcy",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "f77e9105-86a5-4799-8fb0-0312012b4f1d",
-                    "path": "<Keyboard>/downArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "PC_INPUT",
-                    "action": "Move_regarcy",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "ceb470fb-759f-4e22-aff4-90376fc67721",
-                    "path": "<Keyboard>/leftArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "PC_INPUT",
-                    "action": "Move_regarcy",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "46606776-8652-4b72-b494-d9aa94b6be48",
-                    "path": "<Keyboard>/rightArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "PC_INPUT",
-                    "action": "Move_regarcy",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
                     "name": "",
                     "id": "b67758d5-d761-4501-8393-b8215dde2e36",
                     "path": "<Keyboard>/z",
                     "interactions": "",
                     "processors": "",
-                    "groups": "PC_INPUT",
+                    "groups": "Keyboard",
                     "action": "Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "Movement",
+                    "name": "",
+                    "id": "28d21aef-fe3b-41ee-b725-1d923cc86499",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "AD",
                     "id": "81fb4027-646b-4a44-acb6-178a24751c25",
                     "path": "1DAxis",
                     "interactions": "",
@@ -144,7 +91,7 @@
                     "path": "<Keyboard>/leftArrow",
                     "interactions": "",
                     "processors": "",
-                    "groups": "PC_INPUT",
+                    "groups": "Keyboard",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -155,7 +102,40 @@
                     "path": "<Keyboard>/rightArrow",
                     "interactions": "",
                     "processors": "",
-                    "groups": "PC_INPUT",
+                    "groups": "Keyboard",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "LStick",
+                    "id": "5b61ea48-e9d1-4f38-95f7-700fe52fc70e",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "16d24c4e-a35d-44d4-920a-93dd93ad3eba",
+                    "path": "<Gamepad>/leftStick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "04cd91ee-4d49-496f-85fd-1228ca526bf2",
+                    "path": "<Gamepad>/leftStick/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -166,7 +146,18 @@
                     "path": "<Keyboard>/upArrow",
                     "interactions": "",
                     "processors": "",
-                    "groups": "PC_INPUT",
+                    "groups": "Keyboard",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "55ce1a97-2757-42d3-9dd5-ebd5d92c380c",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
                     "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -177,7 +168,18 @@
                     "path": "<Keyboard>/downArrow",
                     "interactions": "",
                     "processors": "",
-                    "groups": "PC_INPUT",
+                    "groups": "Keyboard",
+                    "action": "Down",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3bb9abb6-cf05-4780-bf54-80022c634013",
+                    "path": "<Gamepad>/leftStick/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
                     "action": "Down",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -188,7 +190,18 @@
                     "path": "<Keyboard>/x",
                     "interactions": "",
                     "processors": "",
-                    "groups": "PC_INPUT",
+                    "groups": "Keyboard",
+                    "action": "Guard",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bef96786-06b7-4ff8-92d4-15e0ff9d482f",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
                     "action": "Guard",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -198,8 +211,8 @@
     ],
     "controlSchemes": [
         {
-            "name": "PC_INPUT",
-            "bindingGroup": "PC_INPUT",
+            "name": "Keyboard",
+            "bindingGroup": "Keyboard",
             "devices": [
                 {
                     "devicePath": "<Keyboard>",
@@ -209,11 +222,11 @@
             ]
         },
         {
-            "name": "MOBAILE_INPUT",
-            "bindingGroup": "MOBAILE_INPUT",
+            "name": "Gamepad",
+            "bindingGroup": "Gamepad",
             "devices": [
                 {
-                    "devicePath": "<Touchscreen>",
+                    "devicePath": "<Gamepad>",
                     "isOptional": false,
                     "isOR": false
                 }
