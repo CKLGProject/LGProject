@@ -43,7 +43,7 @@ namespace LGProject.PlayerState  //
         public LandingState landingState;
 
         // 스택 큐 -> 입력있을 때 마다 타이머 초기화 1초안 안에 안누르면 초기화?
-        private Queue<E_KEYTYPE> comboQueue;
+        //private Queue<E_KEYTYPE> comboQueue;
 
 
         public bool isGrounded;
@@ -110,17 +110,17 @@ namespace LGProject.PlayerState  //
 
                 psm.idleState = new IdleState(psm);
                 psm.moveState = new MoveState(psm, ref psm.playable.dashSpeed, psm.playable.maximumSpeed);
-                psm.jumpState = new JumpState(psm, ref psm.playable.jumpScale, psm.playable.maximumJump);
+                psm.jumpState = new JumpState(psm, ref psm.playable.jumpScale, psm.playable.maximumJumpCount);
 
-                psm.attackState = new AttackState(psm, ref psm.playable.comboDelay, ref psm.playable.aniDelay, ref psm.playable.movingAttack);
+                psm.attackState = new AttackState(psm, ref psm.playable.FirstAttackDelay, ref psm.playable.SecondAttackDelay, ref psm.playable.ThridAttackDelay);
 
                 psm.jumpAttackState = new JumpAttackState(psm, psm.playable.maximumSpeed);
                 psm.dashAttackState = new DashAttackState(psm, ref psm.playable.dashAttackDelay);
 
-                psm.hitState = new HitState(psm, 1f);
+                psm.hitState = new HitState(psm, ref psm.playable.hitDelay);
                 psm.guardState = new GuardState(psm);
 
-                psm.downState = new DownState(psm, 1f);
+                psm.downState = new DownState(psm, ref psm.playable.wakeUpDelay);
 
                 psm.landingState = new LandingState(psm);
 

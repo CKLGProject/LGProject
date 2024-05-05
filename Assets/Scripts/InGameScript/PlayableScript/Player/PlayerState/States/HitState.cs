@@ -9,7 +9,7 @@ namespace LGProject.PlayerState
         float stunedTimer;
         float curTimer; 
         // 피격 당했을 떄 날아가나?
-        public HitState(PlayerStateMachine _stateMachine, float _stunedTimer) : base(_stateMachine)
+        public HitState(PlayerStateMachine _stateMachine, ref float _stunedTimer) : base(_stateMachine)
         {
             stunedTimer = _stunedTimer;
         }
