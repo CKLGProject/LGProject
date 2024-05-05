@@ -112,7 +112,7 @@ namespace LGProject.PlayerState  //
                 psm.moveState = new MoveState(psm, ref psm.playable.dashSpeed, psm.playable.maximumSpeed);
                 psm.jumpState = new JumpState(psm, ref psm.playable.jumpScale, psm.playable.maximumJumpCount);
 
-                psm.attackState = new AttackState(psm, ref psm.playable.FirstAttackDelay, ref psm.playable.SecondAttackDelay, ref psm.playable.ThridAttackDelay);
+                psm.attackState = new AttackState(psm, ref psm.playable.FirstAttackJudgeDelay, ref psm.playable.FirstAttackDelay,ref psm.playable.SecondAttackJudgeDelay, ref psm.playable.SecondAttackDelay, ref psm.playable.ThirdAttackJudgeDelay, ref psm.playable.ThridAttackDelay);
 
                 psm.jumpAttackState = new JumpAttackState(psm, psm.playable.maximumSpeed);
                 psm.dashAttackState = new DashAttackState(psm, ref psm.playable.dashAttackDelay);
@@ -241,7 +241,7 @@ namespace LGProject.PlayerState  //
                 return true;
             }
             //comboQueue
-            comboQueue.Enqueue(keyType);
+            //comboQueue.Enqueue(keyType);
             return false;
         }
 
@@ -249,10 +249,10 @@ namespace LGProject.PlayerState  //
 
         public void ComboTimer()
         {
-            if(comboQueue.Count > 0)
-            {
+            //if(comboQueue.Count > 0)
+            //{
 
-            }
+            //}
         }
         #endregion
     }
