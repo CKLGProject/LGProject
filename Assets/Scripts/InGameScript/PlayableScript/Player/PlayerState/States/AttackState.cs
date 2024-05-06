@@ -61,7 +61,7 @@ namespace LGProject.PlayerState
             temp.z = 0;
             stateMachine.physics.velocity = temp;
             stateMachine.animator.SetInteger("Attack", stateMachine.attackCount);
-            //Debug.Log($"AttackCount = {stateMachine.attackCount}");
+            Debug.Log($"AttackCount = {stateMachine.attackCount}");
 
             // 전진 어택
             if (movingAttack)
@@ -185,7 +185,7 @@ namespace LGProject.PlayerState
                         {
                             temp.
                             Item1.GetStateMachine.
-                            HitDamaged(stateMachine.attackCount - 1 < 2 ? Vector3.zero : v);
+                            HitDamaged(stateMachine.attackCount - 1 < 3 ? Vector3.zero : v);
                             damageInCount = true;
 
                             temp.Item1.effectManager.PlayOneShot(EffectManager.EFFECT.Hit);
