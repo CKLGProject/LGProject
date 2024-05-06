@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 85a1b4bdf87b75e4d982a84b3b370fd7
+guid: 8860d595059bd3049a037ae08db34b48
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -126,6 +126,8 @@ ModelImporter:
   - bbbdb3d6173e2e64a9c552c4f9bfb56e
   - ee55d04baca1cb941a3af0e804cd672e
   - 251c82772b9650949b75782924e85425
+  - 23c27ddc8eeffd44b8323830bdd3c32b
+  - 85a1b4bdf87b75e4d982a84b3b370fd7
   - c6c6ae44feac13641af38ffceba89699
   - 52527365a6a83dc469e0f80852faa51c
   importAnimation: 1
