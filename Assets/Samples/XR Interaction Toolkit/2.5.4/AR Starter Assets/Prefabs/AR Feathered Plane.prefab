@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 23747677035716922}
   - component: {fileID: 114973852414686920}
   - component: {fileID: 114999847245811208}
-  - component: {fileID: 6082034917998997483}
+  - component: {fileID: 6019301964294299418}
   m_Layer: 0
   m_Name: AR Feathered Plane
   m_TagString: Untagged
@@ -135,9 +135,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d180956a54db4646a1c6342921672ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TrackingStateVisibilityThreshold: 1
+  m_TrackingStateVisibilityThreshold: 0
   m_HideSubsumed: 1
---- !u!114 &6082034917998997483
+--- !u!114 &6019301964294299418
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

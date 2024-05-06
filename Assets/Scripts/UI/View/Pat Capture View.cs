@@ -1,23 +1,66 @@
-using NKStudio;
+using Data;
+using DG.Tweening;
+using R3;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Playables;
+using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
-using UnityEngine.XR.Interaction.Toolkit;
-using UnityEngine.XR.Interaction.Toolkit.Utilities;
-using Object = UnityEngine.Object;
+using TrackingState = UnityEngine.XR.ARSubsystems.TrackingState;
 
 public class PatCaptureView : MonoBehaviour
 {
     [SerializeField] private Camera arCamera;
     [SerializeField] private GameObject informationMessageText;
+    [SerializeField] private GameObject fxBackground;
+    [SerializeField] private RawImage fxForeground;
+    [SerializeField] private PlayableDirector fxDirector;
 
-    [SerializeField, RequireInterface(typeof(IARInteractor))]
-    private Object arInteractorObject;
+    [SerializeField] private ARTrackedImageManager _arTrackedImageManager;
+    [SerializeField] private Button captureButton;
 
-    public GameObject SpawnObject;
+    [SerializeField] private List<ScanData> ScanDataList;
 
-    private IARInteractor _arInteractor;
-    private XRBaseControllerInteractor _arInteractorAsControllerInteractor;
-    private bool _everHadSelection;
+    private ReactiveProperty<ScanData> _targetObject = new ReactiveProperty<ScanData>();
+
+    private RenderTexture _renderTexture;
+
+    private void OnEnable()
+    {
+        _arTrackedImageManager.trackedImagesChanged += OnTrackedImage;
+    }
+
+
+    private void OnDisable()
+    {
+        _arTrackedImageManager.trackedImagesChanged -= OnTrackedImage;
+    }
+
+    private void OnTrackedImage(ARTrackedImagesChangedEventArgs obj)
+    {
+        foreach (ARTrackedImage trackedImage in obj.updated)
+        {
+            // 무언가라도 트래킹되고 있다면,
+            if (trackedImage.trackingState == TrackingState.Tracking)
+            {
+                ScanData targetObject = ScanDataList
+                    .FirstOrDefault(scanData => trackedImage.referenceImage.name == scanData.ObjectName);
+
+                _targetObject.Value = targetObject;
+                return;
+            }
+        }
+
+        // 아무것도 트래킹 되지 않고 있다면 모두 초기화
+        if (_targetObject.Value != null)
+        {
+            foreach (ScanData spawnObject in ScanDataList)
+                spawnObject.MachineObject.SetActive(false);
+
+            _targetObject.Value = null;
+        }
+    }
 
     /// <summary>
     /// Info Message 텍스트의 활성화 여부를 설정합니다.
@@ -28,94 +71,79 @@ public class PatCaptureView : MonoBehaviour
         informationMessageText.SetActive(isActive);
     }
 
-    private void Start()
+    /// <summary>
+    /// 캡쳐 버튼의 상호작용 여부를 설정합니다.
+    /// </summary>
+    /// <param name="isInteractive"></param>
+    public void SetInteractiveCaptureStateUI(bool isInteractive)
     {
-        arCamera = Camera.main;
-
-        _arInteractor = arInteractorObject as IARInteractor;
-        _arInteractorAsControllerInteractor = arInteractorObject as XRBaseControllerInteractor;
+        captureButton.interactable = isInteractive;
     }
 
     /// <summary>
-    /// 해당 프레임에 터치 입력이 있었다면,
+    /// 버튼을 클릭했을 때의 이벤트를 반환합니다.
     /// </summary>
-    /// <returns>터치 입력시 true를 반환합니다.</returns>
-    private bool GetTouchDown()
+    /// <returns></returns>
+    public Observable<Unit> OnClickCaptureButtonAsObservable()
     {
-        XRControllerState currentControllerState = _arInteractorAsControllerInteractor.xrController.currentControllerState;
-        return currentControllerState.selectInteractionState.activatedThisFrame;   
-    }
-    
-    /// <summary>
-    /// 지속적으로 터치 입력을 받고 있다면,
-    /// </summary>
-    /// <returns>지속적인 입력이 있을 시 true를 반환합니다.</returns>
-    private bool GetTouching()
-    {
-        XRControllerState currentControllerState = _arInteractorAsControllerInteractor.xrController.currentControllerState;
-        return currentControllerState.selectInteractionState.active;   
-    }
-    
-    /// <summary>
-    /// 해당 프레임에서 터치 입력을 떼었다면,
-    /// </summary>
-    /// <returns>터치 입력이 끊길시 false를 반환합니다.</returns>
-    private bool GetTouchUp()
-    {
-        XRControllerState currentControllerState = _arInteractorAsControllerInteractor.xrController.currentControllerState;
-        return currentControllerState.selectInteractionState.deactivatedThisFrame;   
+        return captureButton.OnClickAsObservable();
     }
 
-    private void Update()
+    /// <summary>
+    /// 트래킹되고 있는 오브젝트가 존재하는지 확인합니다.
+    /// </summary>
+    /// <returns>존재한다면 true, 아닐시 false를 반환합니다.</returns>
+    public Observable<bool> ExistsTargetObjectAsObservable()
     {
-        var attemptSpawn = false;
-        
-        if (GetTouchDown())
-            _everHadSelection = _arInteractorAsControllerInteractor.hasSelection;
-        else if (GetTouching())
-            _everHadSelection |= _arInteractorAsControllerInteractor.hasSelection;
-        else if (GetTouchUp())
-            attemptSpawn = !_arInteractorAsControllerInteractor.hasSelection && !_everHadSelection;
+        return _targetObject.Select(targetObject => targetObject != null);
+    }
 
-        if (attemptSpawn && _arInteractor.TryGetCurrentARRaycastHit(out var arRaycastHit))
+    /// <summary>
+    /// 타겟을 활성화 합니다.
+    /// </summary>
+    public void ActiveTargetObject()
+    {
+        _targetObject.Value.MachineObject.SetActive(true);
+    }
+
+    /// <summary>
+    /// 이미지 작아지는 연출 처리
+    /// </summary>
+    private void PlayFrontFX()
+    {
+        Sequence sequence = DOTween.Sequence();
+        sequence.Append(fxForeground.rectTransform.DOScale(Vector3.zero, 2f).SetEase(Ease.InSine));
+        sequence.Join(fxForeground.rectTransform.DORotate(new Vector3(0, 360, 0), 2f).SetEase(Ease.InSine)
+            .SetRelative(true));
+        sequence.Join(DOTween.ToAlpha(() => fxForeground.color, x => fxForeground.color = x, 0.5f, 2f)
+            .SetEase(Ease.InSine));
+        sequence.OnComplete(() =>
         {
-            var arPlane = arRaycastHit.trackable as ARPlane;
-            if (arPlane == null)
-                return;
-
-            TrySpawnObject(arRaycastHit.pose.position, arPlane.normal);
-        }
+            _targetObject.Value.CharacterObject.SetActive(true);
+            fxDirector.Play();
+        });
     }
 
-    /// <summary>
-    /// 주어진 위치에서 <see cref="objectPrefabs"/>에서 객체를 생성하려고 시도합니다. 객체는 <see cref="cameraToFace"/>를 향하는 yaw 회전을 가지며, <see cref="spawnAngleRange"/> 내에서 무작위 각도를 더하거나 뺄 수 있습니다.
-    /// </summary>
-    /// <param name="spawnPoint">객체를 생성할 월드 공간 위치입니다.</param>
-    /// <param name="spawnNormal">스폰 표면의 월드 공간 정규 벡터입니다.</param>
-    /// <returns>스포너가 성공적으로 객체를 생성하면 <see langword="true"/>를 반환합니다. 그렇지 않으면, 예를 들어 스폰 포인트가 카메라의 시야에서 벗어난 경우 <see langword="false"/>를 반환합니다.</returns>
-    /// <remarks>
-    /// 생성할 객체를 선택하는 것은 <see cref="spawnOptionIndex"/>에 기반합니다. 인덱스가 <see cref="objectPrefabs"/>의 범위를 벗어나면, 이 메서드는 목록에서 무작위 프리팹을 선택하여 생성합니다.
-    /// 그렇지 않으면, 인덱스에 있는 프리팹을 생성합니다.
-    /// </remarks>
-    /// <seealso cref="objectSpawned"/>
-    public bool TrySpawnObject(Vector3 spawnPoint, Vector3 spawnNormal)
+    public void PlayScreenRotation()
     {
-        var pointInViewportSpace = arCamera.WorldToViewportPoint(spawnPoint);
-        if (pointInViewportSpace.z < 0f || pointInViewportSpace.x > 1 ||
-            pointInViewportSpace.x < 0 ||
-            pointInViewportSpace.y > 1 || pointInViewportSpace.y < 0)
-        {
-            return false;
-        }
+        _arTrackedImageManager.trackedImagesChanged -= OnTrackedImage;
 
-        var newObject = Instantiate(SpawnObject);
-        newObject.transform.position = spawnPoint;
+        _renderTexture = new RenderTexture(Camera.main.pixelWidth, Camera.main.pixelHeight, 0);
+        Camera.main.targetTexture = _renderTexture;
+        Camera.main.Render();
+        RenderTexture.active = _renderTexture;
 
-        var facePosition = arCamera.transform.position;
-        var forward = facePosition - spawnPoint;
-        BurstMathUtility.ProjectOnPlane(forward, spawnNormal, out var projectedForward);
-        newObject.transform.rotation = Quaternion.LookRotation(projectedForward, spawnNormal);
+        Texture2D texture = new Texture2D(_renderTexture.width, _renderTexture.height);
+        texture.ReadPixels(new Rect(0, 0, _renderTexture.width, _renderTexture.height), 0, 0);
+        texture.Apply();
 
-        return true;
+        Camera.main.targetTexture = null;
+
+        _targetObject.Value.MachineObject.SetActive(false);
+        fxForeground.texture = texture;
+        fxBackground.SetActive(true);
+        fxForeground.gameObject.SetActive(true);
+
+        PlayFrontFX();
     }
 }
