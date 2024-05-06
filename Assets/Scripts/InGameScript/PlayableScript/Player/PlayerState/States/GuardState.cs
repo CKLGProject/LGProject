@@ -27,6 +27,9 @@ namespace LGProject.PlayerState
         {
             base.Exit();
             stateMachine.playable.effectManager.Stop(EffectManager.EFFECT.Guard);
+
+            stateMachine.animator.SetTrigger("Idle");
+            
             stateMachine.isGuard = false;
         }
 

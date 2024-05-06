@@ -19,11 +19,11 @@ namespace LGProject.PlayerState
 
         //float AttackCont = 0;
         //int maximumCount = 0;
-        float firstAniDelay = 0;
+        float firstJudgeDelay = 0;
         float firstAttackDelay = 0;
-        float secondAniDelay = 0;
+        float secondJudgeDelay = 0;
         float secondAttackDelay = 0;  
-        float thirdAniDelay = 0;
+        float thirdJudgeDelay = 0;
         float thirdAttackDelay = 0;
 
         float curTimer;
@@ -31,16 +31,16 @@ namespace LGProject.PlayerState
         bool damageInCount = false;
         //float aniDelay
 
-        public AttackState(PlayerStateMachine _stateMachine, ref float firstAttack, ref float firstAttackDelay,ref float secondAttack,ref float secondAttackDelay, ref float thirdAttack, ref float thirdAttackDelay) : base(_stateMachine)
+        public AttackState(PlayerStateMachine _stateMachine, ref float firstJudgeAttack, ref float firstAttackDelay,ref float secondJudgeAttack,ref float secondAttackDelay, ref float thirdJudgeAttack, ref float thirdAttackDelay) : base(_stateMachine)
         {
             curTimer = 0;
 
-            firstAniDelay = firstAttack;
+            this.firstJudgeDelay = firstJudgeAttack;
             this.firstAttackDelay = firstAttackDelay;
-            secondAniDelay = secondAttack;
-            this.secondAniDelay = secondAttackDelay;
-            thirdAniDelay = thirdAttack;
-            this.thirdAniDelay = thirdAttackDelay;
+            this.secondJudgeDelay = secondJudgeAttack;
+            this.secondAttackDelay = secondAttackDelay;
+            this.thirdJudgeDelay = thirdJudgeAttack;
+            this.thirdAttackDelay = thirdAttackDelay;
         }
 
         public override void Enter()
@@ -71,9 +71,8 @@ namespace LGProject.PlayerState
 
         public override void Exit()
         {
+
         }
-        // 앞에 있는 친구를 때릴 것인가?
-        // 어떻게?
         public override void LogicUpdate()
         {
             base.LogicUpdate();
@@ -107,25 +106,26 @@ namespace LGProject.PlayerState
             {
                 case 1:
                     //animDelay = 0.2f;
-                    animDelay = firstAniDelay;
+                    animDelay = firstJudgeDelay;
                     time = firstAttackDelay;
                     //time = 0.35f;
                     break;
                 case 2:
                     //animDelay = 0.4f;
-                    animDelay = secondAniDelay;
+                    animDelay = secondJudgeDelay;
                     time = secondAttackDelay;
                     //time = 0.6f;
                     break;
                 case 3:
                     //animDelay = 0.2f;
-                    animDelay = thirdAniDelay;
+                    animDelay = thirdJudgeDelay;
                     time = thirdAttackDelay;
                     //time = 0.6f;
                     break;
             }
+            Debug.Log($"sm = {stateMachine.attackCount} / attackDelay = {animDelay} / time {time }");
             // 딜레이가 끝난 이후 추가 키 입력이 들어가면? 
-            if (curTimer > animDelay)
+            if (curTimer > animDelay)   
             {
                 // 공격 진행
                 if (damageInCount == false) AttackJudge();
@@ -178,14 +178,14 @@ namespace LGProject.PlayerState
                     {
                         Vector3 direction = (temp.Item1.GetStateMachine.transform.position - stateMachine.transform.position).normalized;
                         Vector3 v = stateMachine.playable.CaculateVelocity(
-                           temp.Item1.GetStateMachine.transform.position + direction * 0.5f,
+                           temp.Item1.GetStateMachine.transform.position + direction ,
                               temp.Item1.GetStateMachine.transform.position, 0.5f, 1f);
                         // 가드를 올리지 않았을 경우
                         if (temp.Item1 != stateMachine.transform)
                         {
                             temp.
                             Item1.GetStateMachine.
-                            HitDamaged(stateMachine.attackCount - 1 < 3 ? Vector3.zero : v);
+                            HitDamaged(stateMachine.attackCount - 1 < 2 ? Vector3.zero : v);
                             damageInCount = true;
 
                             temp.Item1.effectManager.PlayOneShot(EffectManager.EFFECT.Hit);

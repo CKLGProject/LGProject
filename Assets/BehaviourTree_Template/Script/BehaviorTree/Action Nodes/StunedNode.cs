@@ -8,6 +8,7 @@ namespace BehaviourTree
     public class StunedNode : ActionNode
     {
         public AIAgent Agent;
+        public LGProject.PlayerState.PlayerStateMachine stateMachine;
         [Space(10f)]
         public float stunedTimer;
         private float curTiemr;
@@ -16,6 +17,9 @@ namespace BehaviourTree
         {
             if (Agent == null)
                 Agent = AIAgent.Instance;
+            if (stateMachine == null)
+                stateMachine = Agent.GetStateMachine;
+
         }
 
         protected override void OnStop()

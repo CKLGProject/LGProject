@@ -18,6 +18,7 @@ namespace LGProject.PlayerState
             base.Enter();
             // Velocity는 초기화시키지 않도록 하자.
             Debug.Log($"Enter = {stateMachine.jumpInCount}");
+            stateMachine.animator.SetTrigger("JumpAttack");
         }
 
         public override void Exit()

@@ -9,17 +9,18 @@ namespace LGProject.PlayerState
 
     public class JumpState : State
     {
-        float jumpScale = 0;
-        int maximumCount = 0;
-        float jumpDelay = 0.2f;
+        private float _jumpScale = 0;
+        private int _maximumCount = 0;
+        private float _jumpDelay = 0.2f;
+        private AnimationCurve _animationCurve;
         //Thread callback; 
         
-        public JumpState(PlayerStateMachine _stateMachine, ref float _jumpScale, int _maximumCount) : base(_stateMachine)
+        public JumpState(PlayerStateMachine _stateMachine, ref float jumpScale, int maximumCount, AnimationCurve animationCurve) : base(_stateMachine)
         {
-            jumpScale = _jumpScale;
-            maximumCount = _maximumCount;
-            jumpDelay = 0.2f;
-
+            _jumpScale = jumpScale;
+            _maximumCount = maximumCount;
+            _jumpDelay = 0.2f;
+            _animationCurve = animationCurve;
         }
 
         public override void Enter()
@@ -29,7 +30,7 @@ namespace LGProject.PlayerState
             stateMachine.JumpVelocity();
 
             stateMachine.jumpInCount++;
-            stateMachine.physics.velocity += Vector3.up * jumpScale;
+            stateMachine.physics.velocity += Vector3.up * _jumpScale;
             stateMachine.animator.SetTrigger("Jump" + stateMachine.jumpInCount.ToString());
 
 
