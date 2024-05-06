@@ -1699,7 +1699,7 @@ GameObject:
   m_Component:
   - component: {fileID: 904453419}
   m_Layer: 0
-  m_Name: Lighit
+  m_Name: Light
   m_TagString: Folder
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
