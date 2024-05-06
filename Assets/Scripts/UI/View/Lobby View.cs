@@ -1,6 +1,5 @@
 using R3;
 using ReactiveTouchDown;
-using System;
 using UnityEngine;
 
 public class LobbyView : MonoBehaviour

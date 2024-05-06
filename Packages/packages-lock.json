@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.autodesk.fbx": {
+      "version": "4.2.1",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
     "com.cysharp.r3": {
       "version": "https://github.com/Cysharp/R3.git?path=src/R3.Unity/Assets/R3.Unity",
       "depth": 0,
@@ -36,6 +43,16 @@
       "source": "builtin",
       "dependencies": {}
     },
+    "com.unity.animation.rigging": {
+      "version": "1.2.1",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.burst": "1.4.1",
+        "com.unity.test-framework": "1.1.24"
+      },
+      "url": "https://packages.unity.com"
+    },
     "com.unity.burst": {
       "version": "1.8.13",
       "depth": 1,
@@ -44,6 +61,22 @@
         "com.unity.mathematics": "1.2.1",
         "com.unity.modules.jsonserialize": "1.0.0"
       },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.cinemachine": {
+      "version": "2.9.5",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.test-framework": "1.1.31"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.collab-proxy": {
+      "version": "2.3.1",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {},
       "url": "https://packages.unity.com"
     },
     "com.unity.editorcoroutines": {
@@ -58,6 +91,26 @@
       "depth": 1,
       "source": "registry",
       "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.film-internal-utilities": {
+      "version": "0.18.4-preview",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.modules.uielements": "1.0.0",
+        "com.unity.timeline": "1.2.18"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.formats.fbx": {
+      "version": "4.2.1",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.timeline": "1.7.1",
+        "com.autodesk.fbx": "4.2.1"
+      },
       "url": "https://packages.unity.com"
     },
     "com.unity.ide.rider": {
@@ -76,6 +129,13 @@
       "dependencies": {
         "com.unity.test-framework": "1.1.9"
       },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.ide.vscode": {
+      "version": "1.2.5",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {},
       "url": "https://packages.unity.com"
     },
     "com.unity.inputsystem": {
@@ -125,6 +185,15 @@
       "depth": 0,
       "source": "registry",
       "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.postprocessing": {
+      "version": "3.4.0",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.modules.physics": "1.0.0"
+      },
       "url": "https://packages.unity.com"
     },
     "com.unity.probuilder": {
@@ -237,6 +306,16 @@
         "com.unity.modules.animation": "1.0.0",
         "com.unity.modules.audio": "1.0.0",
         "com.unity.modules.particlesystem": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.toonshader": {
+      "version": "0.10.0-preview",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.film-internal-utilities": "0.18.4-preview",
+        "com.unity.render-pipelines.core": "10.0.0"
       },
       "url": "https://packages.unity.com"
     },

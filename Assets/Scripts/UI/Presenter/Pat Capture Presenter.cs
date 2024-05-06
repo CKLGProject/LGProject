@@ -21,13 +21,16 @@ public class PatCapturePresenter : MonoBehaviour
         // Model
         _model.CanQRCodeCaptureAsObservable
             .Subscribe(canCapture => _view.SetInteractiveCaptureStateUI(canCapture));
-        
+
         // View
         _view.ExistsTargetObjectAsObservable()
             .Subscribe(exists => _model.CanQRCodeCapture = exists);
 
         _view.OnClickCaptureButtonAsObservable()
             .Where(_ => _model.CanQRCodeCapture)
-            .Subscribe(_ => _view.ActiveTargetObject());
+            .Do(_ => _view.ActiveTargetObject())
+            .Delay(TimeSpan.FromMilliseconds(1))
+            .Subscribe(_ => _view.PlayScreenRotation());
+        
     }
 }
