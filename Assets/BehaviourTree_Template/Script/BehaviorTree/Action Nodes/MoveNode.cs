@@ -40,6 +40,9 @@ namespace BehaviourTree
                 stateMachine = AIAgent.Instance.GetStateMachine;
             curTimer = jumpDelay;
             Agent.targetIndex = 0;
+            stateMachine.animator.SetTrigger("Idle");
+            stateMachine.attackCount = 0;
+            stateMachine.animator.SetInteger("Attack",0);
             stateMachine.animator.SetFloat("Run", 1f);
             //startPoint = pathFinding.Grid.Instance.NodeFromWorldPoint(agent.transform.position).worldPosition - Vector3.up * 0.45f;
         }
@@ -256,7 +259,7 @@ namespace BehaviourTree
                 Agent.GetStateMachine.JumpVelocity();
                 Agent.GetStateMachine.physics.velocity += Vector3.up * Agent.jumpScale;
                 curTimer = 0;
-                Agent.GetStateMachine.animator.SetTrigger("Jump" + Agent.GetStateMachine.jumpAction.ToString());
+                Agent.GetStateMachine.animator.SetTrigger("Jump" + Agent.GetStateMachine.jumpInCount.ToString());
             }
         }
 

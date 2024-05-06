@@ -33,9 +33,16 @@ namespace BehaviourTree
             if (Agent.GetStateMachine.isHit)
                 return State.Failure;
             float distance = Vector3.Distance(Agent.transform.position, Agent.player.position);
-            
+
             // 플레이어와의 거리가 가까워야 무엇이든 할 수 있기 때문에 다음과 같이 설정.
-            return distance <= range ? State.Success : State.Failure;
+            if (distance <= range)
+            {
+                Vector3 lookpoint = new Vector3(Agent.player.position.x, Agent.transform.position.y, Agent.player.position.z);
+                // 플레이어를 바라봐라 
+                Agent.transform.LookAt(lookpoint);
+                return State.Success;
+            }
+            return State.Failure;
         }
     }
 

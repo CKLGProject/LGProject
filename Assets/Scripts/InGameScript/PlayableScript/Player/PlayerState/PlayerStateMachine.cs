@@ -60,7 +60,7 @@ namespace LGProject.PlayerState  //
 
         public GameObject guardEffect;
 
-        public int damageGage;
+        public float damageGage = 0;
 
         #region Action_Properties
 
@@ -110,9 +110,9 @@ namespace LGProject.PlayerState  //
 
                 psm.idleState = new IdleState(psm);
                 psm.moveState = new MoveState(psm, ref psm.playable.dashSpeed, psm.playable.maximumSpeed);
-                psm.jumpState = new JumpState(psm, ref psm.playable.jumpScale, psm.playable.maximumJumpCount);
+                psm.jumpState = new JumpState(psm, ref psm.playable.jumpScale, psm.playable.maximumJumpCount, psm.playable.jumpCurve);
 
-                psm.attackState = new AttackState(psm, ref psm.playable.FirstAttackJudgeDelay, ref psm.playable.FirstAttackDelay,ref psm.playable.SecondAttackJudgeDelay, ref psm.playable.SecondAttackDelay, ref psm.playable.ThirdAttackJudgeDelay, ref psm.playable.ThridAttackDelay);
+                psm.attackState = new AttackState(psm, ref psm.playable.FirstAttackJudgeDelay, ref psm.playable.FirstAttackDelay, ref psm.playable.SecondAttackJudgeDelay, ref psm.playable.SecondAttackDelay, ref psm.playable.ThirdAttackJudgeDelay, ref psm.playable.ThridAttackDelay);
 
                 psm.jumpAttackState = new JumpAttackState(psm, psm.playable.maximumSpeed);
                 psm.dashAttackState = new DashAttackState(psm, ref psm.playable.dashAttackDelay);
@@ -196,10 +196,14 @@ namespace LGProject.PlayerState  //
         {
             if (!isGuard)
             {
+                // Gage 상승
+                if(playable.textGUI != null)
+                    playable.textGUI.text = $"{damageGage}";
+                damageGage += 0.11f;
                 animator.SetTrigger("Hit");
                 // 충격에 의한 물리를 제공
+                velocity.x *= damageGage;
                 physics.velocity = velocity;
-                
             }
             else
             {

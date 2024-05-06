@@ -86,6 +86,7 @@ namespace LGProject.PlayerState
                 float time = stateMachine.animator.runtimeAnimatorController.animationClips[i].length;
                 stateMachine.SetAnimPlayTime(name, time);
             }
+            underPlatform = GameObject.Find("Main_Floor (1)").GetComponent<Platform>();
         }
 
         private void FixedUpdate()
@@ -98,6 +99,7 @@ namespace LGProject.PlayerState
             stateMachine.currentState.LogicUpdate();
             velocity = stateMachine.physics.velocity;
             PlatformCheck();
+            NewPlatformCheck();
         }
 
     }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 namespace LGProject.PlayerState
 {
@@ -60,11 +61,17 @@ namespace LGProject.PlayerState
         [Range(0.0f, 3.0f), Tooltip("다운 후 Idle로 돌아오기 까지의 시간")]
         public float wakeUpDelay = 0;
 
+
         public bool movingAttack = true;
 
+        public TextMeshProUGUI textGUI;
+        //public float damageGage = 0;
 
         // 공격 방향
         [HideInInspector] public bool directionX = false;
+        [HideInInspector] public AnimationCurve jumpCurve;
+
+        public Platform underPlatform;
 
         public EffectManager effectManager;
 
@@ -131,14 +138,6 @@ namespace LGProject.PlayerState
             }
         }
 
-        public void NewPlatformCheck()
-        {
-            if(transform.position.y > 1)
-            {
-
-            }
-        }
-
         public void PlatformCheck()
         {
             // 일단 여기에 넣어보자
@@ -175,6 +174,42 @@ namespace LGProject.PlayerState
                         stateMachine.jumpInCount++;
                 }
             }
+        }
+
+        public void NewPlatformCheck()
+        {
+            // 0 이상일 때는 체크하지 않.기.
+            // 왜냐면 올라가고 있기 때문이지
+            if(stateMachine.physics.velocity.y < 0)
+            {
+                // rect와 비교하여 해당 위치보다 아래 있으면 체크하지 않기.
+                // 그럼 경우의 수는 2가지
+                // 바닥을 뚫었는가? 에 대한 체크
+                if(AABBCheck())
+                {
+                    // 위로 올라가야함
+                    Vector3 velocity = stateMachine.physics.velocity;
+                    velocity.y = 0;
+                    transform.position = new Vector3(transform.position.x, underPlatform.rect.y, transform.position.z);
+                    stateMachine.physics.velocity = velocity; 
+                }
+                else
+                {
+                    // 바닥을 뚫지 않음.
+                }
+            }
+        }
+
+        private bool AABBCheck()
+        {
+            if (transform.position.x < underPlatform.rect.x && transform.position.x > underPlatform.rect.width &&
+                transform.position.y < underPlatform.rect.y && transform.position.y > underPlatform.rect.height)
+            {
+                Debug.Log("Hello");
+                return true;
+            }
+            Debug.Log("Bye");
+            return false;
         }
         #endregion
     }

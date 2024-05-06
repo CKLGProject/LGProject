@@ -80,8 +80,8 @@ namespace BehaviourTree
             {
                 Vector3 v = Vector3.zero;
                 v = AIAgent.Instance.CaculateVelocity(
-                   temp.Item1.GetComponent<Playable>().GetStateMachine.transform.position + (temp.Item1.GetComponent<Playable>().GetStateMachine.transform.position - AIAgent.Instance.transform.position).normalized * 0.5f,
-                      temp.Item1.GetComponent<Playable>().GetStateMachine.transform.position, 0.5f, 0.5f);
+                   temp.Item1.GetComponent<Playable>().GetStateMachine.transform.position + (temp.Item1.GetComponent<Playable>().GetStateMachine.transform.position - AIAgent.Instance.transform.position).normalized * 2f,
+                      temp.Item1.GetComponent<Playable>().GetStateMachine.transform.position, 0.5f, 1f);
                 if (temp.Item1 != AIAgent.Instance.transform)
                 {
                     temp.

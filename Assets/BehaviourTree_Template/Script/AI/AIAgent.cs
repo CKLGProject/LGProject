@@ -52,7 +52,6 @@ namespace BehaviourTree
                 string name = stateMachine.animator.runtimeAnimatorController.animationClips[i].name;
                 float time = stateMachine.animator.runtimeAnimatorController.animationClips[i].length;
                 stateMachine.SetAnimPlayTime(name, time);
-                //Debug.Log($"{ stateMachine.animator.runtimeAnimatorController.animationClips[i].name} / { stateMachine.animator.runtimeAnimatorController.animationClips[i].length}'s");
             }
         }
 
