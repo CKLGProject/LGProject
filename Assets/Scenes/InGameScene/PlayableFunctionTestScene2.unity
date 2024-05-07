@@ -2390,15 +2390,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Animator: {fileID: 921508071}
-  maximumJumpCount: 2
-  maximumSpeed: 3
-  dashSpeed: 0
-  jumpScale: 5
+  MaximumJumpCount: 2
+  MaximumSpeed: 4
+  DashSpeed: 0
+  JumpScale: 0
   FirstAttackDelay: 1
   FirstAttackJudgeDelay: 1
   SecondAttackDelay: 1
   SecondAttackJudgeDelay: 1
-  ThridAttackDelay: 1
+  ThirdAttackDelay: 1
   ThirdAttackJudgeDelay: 1
   dashAttackDelay: 0
   hitDelay: 0
@@ -4601,7 +4601,7 @@ PrefabInstance:
     - target: {fileID: 6142601296869339651, guid: 2733f80f426950d4598e4e6317bd7935,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8219133890818253592, guid: 2733f80f426950d4598e4e6317bd7935,
         type: 3}
@@ -4671,6 +4671,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4417936120026488029, guid: e748e159dd59aae4188ea3f4a8ac1c84,
+        type: 3}
+      propertyPath: m_Interpolate
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4910213552037458275, guid: e748e159dd59aae4188ea3f4a8ac1c84,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4726,6 +4731,16 @@ PrefabInstance:
       propertyPath: textGUI
       value: 
       objectReference: {fileID: 1937337712}
+    - target: {fileID: 6559117602054936325, guid: e748e159dd59aae4188ea3f4a8ac1c84,
+        type: 3}
+      propertyPath: JumpScale
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6559117602054936325, guid: e748e159dd59aae4188ea3f4a8ac1c84,
+        type: 3}
+      propertyPath: movingAttack
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6969282849394247417, guid: e748e159dd59aae4188ea3f4a8ac1c84,
         type: 3}
       propertyPath: m_Name

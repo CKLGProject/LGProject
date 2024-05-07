@@ -48,11 +48,7 @@ public class EffectManager : MonoBehaviour
         private static GUIStyle BoldFoldStyle;
 
         /* 스타일 관련 내용 */
-        private static bool _AcidBombSettingFoldOut = false;
         private static bool _FoldOut = false;
-        private static bool _OneShotAcidBombFoldOut = false;
-        private static bool _ShotGunAcidBombFoldOut = false;
-
 
         public override void OnInspectorGUI()
         {
@@ -69,7 +65,7 @@ public class EffectManager : MonoBehaviour
             GUI_DrawLine(5f, 20f);
 
             //GUI_DefaultAcidBomb();
-            GUI_ShowVineAttackState();
+            GUI_ShowEffectProperties();
             //GUI_OneShotSetting();
             //GUI_ShotGunState();
 
@@ -188,7 +184,7 @@ public class EffectManager : MonoBehaviour
             #endregion
         }
 
-        private void GUI_ShowVineAttackState()
+        private void GUI_ShowEffectProperties()
         {
             #region Omit
             if (AttackEffect == null || GuardEffect == null)

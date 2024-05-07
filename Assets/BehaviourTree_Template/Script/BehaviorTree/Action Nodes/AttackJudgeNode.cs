@@ -15,10 +15,13 @@ namespace BehaviourTree
         private float _curTimer = 0;
         private bool _isAttack = false;
         private float _time = 0;
+
         protected override void OnStart()
         {
             if (stateMachine == null)
+            {
                 stateMachine = AIAgent.Instance.GetStateMachine;
+            }
             if (stateMachine.attackCount > 2)
                 stateMachine.attackCount = 0;
             _isAttack = false;
@@ -36,6 +39,7 @@ namespace BehaviourTree
         }
         protected override State OnUpdate()
         {
+            #region Omit
             if (stateMachine == null)
                 stateMachine = AIAgent.Instance.GetStateMachine;
             // ?? 왜 가드를 여기서 올림?
@@ -46,24 +50,20 @@ namespace BehaviourTree
             }
 
             _curTimer += Time.deltaTime;
-
-            #region ComboSystem
-            //AttackLogic();
-
-            //return State.Success;
-            #endregion
-
             
             switch (stateMachine.attackCount)
             {
                 case 1:
-                    animTimer = 0.25f;
+                    //animTimer = 0.25f;
+                    animTimer = stateMachine.playable.FirstAttackDelay;
                     break;
                 case 2:
-                    animTimer = 0.4f;
+                    //animTimer = 0.4f;
+                    animTimer = stateMachine.playable.SecondAttackDelay;
                     break;
                 case 3:
-                    animTimer = 0.4f;
+                    //animTimer = 0.4f;
+                    animTimer = stateMachine.playable.ThirdAttackDelay;
                     break;
             }
             #region legarcy
@@ -90,52 +90,12 @@ namespace BehaviourTree
             }
             return State.Running;
             #endregion
+            #endregion
         }
-
-
-        //private void AttackLogic()
-        //{
-        //    float time = stateMachine.GetAnimPlayTime("Attack" + stateMachine.attackCount.ToString());
-        //    float animDelay = 1;
-        //    switch (stateMachine.attackCount)
-        //    {
-        //        case 1:
-        //            animDelay = 0.25f;
-        //            break;
-        //        case 2:
-        //            animDelay = 0.4f;
-        //            break;
-        //        case 3:
-        //            animDelay = 0.4f;
-        //            break;
-        //    }
-        //    Debug.Log($"count: {stateMachine.attackCount} / {time}");
-        //    // 딜레이가 끝난 이후 추가 키 입력이 들어가면? 
-        //    if (_curTimer > animDelay)
-        //    {
-        //        // 공격 진행
-        //        if (_damageInCount == false) AttackJudge();
-        //        if (stateMachine.attackAction.triggered && stateMachine.attackCount < 3)
-        //        {
-        //            stateMachine.ChangeState(stateMachine.playable.attackState);
-        //        }
-        //        // 모션이 끝나면?
-        //        else if (curTimer >= time)
-        //        {
-        //            // 모션이 끝났으니 기본 상태로 되돌아감.
-        //            Debug.Log("Stop");
-
-        //            stateMachine.animator.SetTrigger("Idle");
-        //            stateMachine.attackCount = 0;
-        //            stateMachine.animator.SetInteger("Attack", stateMachine.attackCount);
-        //            stateMachine.ChangeState(stateMachine.playable.idleState);
-        //            return;
-        //        }
-        //    }
-        //}
 
         private bool ActionJudge()
         {
+            #region Omit
             // 판정 범위 계산.
             Vector3 right = Vector3.right * (AIAgent.Instance.directionX == true ? 1 : -1);
             Vector3 center = AIAgent.Instance.transform.position + right;
@@ -183,6 +143,8 @@ namespace BehaviourTree
                 }
             }
             return false;
+            #endregion
         }
+
     }
 }

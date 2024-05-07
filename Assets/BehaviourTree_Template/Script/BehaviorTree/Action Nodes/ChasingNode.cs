@@ -202,7 +202,7 @@ namespace BehaviourTree
                 count++;
                 Agent.GetStateMachine.jumpInCount++;
                 Agent.GetStateMachine.JumpVelocity();
-                Agent.GetStateMachine.physics.velocity += Vector3.up * Agent.jumpScale;
+                Agent.GetStateMachine.physics.velocity += Vector3.up * Agent.JumpScale;
                 curTimer = 0;
             }
         }

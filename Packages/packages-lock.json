@@ -16,6 +16,21 @@
       },
       "hash": "e86fc4f7a1d49c49944bae8adb92c0ae24f25cae"
     },
+    "com.kyrylokuzyk.arfoundationremote": {
+      "version": "file:../Assets/Plugins/ARFoundationRemoteInstaller/com.kyrylokuzyk.arfoundationremote.tgz",
+      "depth": 0,
+      "source": "local-tarball",
+      "dependencies": {
+        "com.unity.xr.arfoundation": "3.0.1",
+        "com.unity.xr.management": "3.0.4-preview.1",
+        "com.unity.modules.unitywebrequest": "1.0.0",
+        "com.unity.modules.imageconversion": "1.0.0",
+        "com.unity.ugui": "1.0.0",
+        "com.unity.modules.particlesystem": "1.0.0",
+        "com.unity.modules.vr": "1.0.0",
+        "com.unity.modules.imgui": "1.0.0"
+      }
+    },
     "com.nkstudio.scenereference": {
       "version": "https://github.com/NK-Studio/SceneReference.git#UPM",
       "depth": 0,

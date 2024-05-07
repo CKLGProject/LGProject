@@ -44,7 +44,8 @@ namespace BehaviourTree
         protected override State OnUpdate()
         {
             _curTimer += Time.deltaTime;
-            if(judgeTimer > _curTimer)
+            //if(judgeTimer > _curTimer)
+            if(stateMachine.playable.dashAttackDelay > _curTimer)
             {
                 if (_isAttack == false) _isAttack = ActionJudge();
                 if(!AIAgent.Instance.GetStateMachine.isGrounded)

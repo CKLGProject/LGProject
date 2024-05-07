@@ -12,7 +12,9 @@ namespace LGProject.PlayerState
         private float _jumpScale = 0;
         private int _maximumCount = 0;
         private float _jumpDelay = 0.2f;
+        
         private AnimationCurve _animationCurve;
+
         //Thread callback; 
         
         public JumpState(PlayerStateMachine _stateMachine, ref float jumpScale, int maximumCount, AnimationCurve animationCurve) : base(_stateMachine)
@@ -29,6 +31,7 @@ namespace LGProject.PlayerState
 
             stateMachine.JumpVelocity();
 
+            //stateMachine.isJumpping = true;
             stateMachine.jumpInCount++;
             stateMachine.physics.velocity += Vector3.up * _jumpScale;
             stateMachine.animator.SetTrigger("Jump" + stateMachine.jumpInCount.ToString());
@@ -67,6 +70,7 @@ namespace LGProject.PlayerState
             // 공중에 떠있는 코드.
 
         }
+
 
     }
 
