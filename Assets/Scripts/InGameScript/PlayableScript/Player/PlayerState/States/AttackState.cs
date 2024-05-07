@@ -140,7 +140,7 @@ namespace LGProject.PlayerState
                     Debug.Log("Stop");
                     stateMachine.animator.SetTrigger("Idle");
                     stateMachine.attackCount = 0;
-                    stateMachine.ChangeState(stateMachine.idleState);
+                    stateMachine .ChangeState(stateMachine.idleState);
                     return;
                 }
             }

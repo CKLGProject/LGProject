@@ -52,6 +52,7 @@ namespace LGProject.PlayerState  //
         public bool isHit;
         public bool isDown;
         public bool isKnockback;
+        public bool isJumpping;
 
         public bool isNormalAttack;
 
@@ -109,12 +110,12 @@ namespace LGProject.PlayerState  //
                 psm.guardAction = psm.playerInput.actions["Guard"];
 
                 psm.idleState = new IdleState(psm);
-                psm.moveState = new MoveState(psm, ref psm.playable.dashSpeed, psm.playable.maximumSpeed);
-                psm.jumpState = new JumpState(psm, ref psm.playable.jumpScale, psm.playable.maximumJumpCount, psm.playable.jumpCurve);
+                psm.moveState = new MoveState(psm, ref psm.playable.DashSpeed, psm.playable.MaximumSpeed);
+                psm.jumpState = new JumpState(psm, ref psm.playable.JumpScale, psm.playable.MaximumJumpCount, psm.playable.jumpCurve);
 
-                psm.attackState = new AttackState(psm, ref psm.playable.FirstAttackJudgeDelay, ref psm.playable.FirstAttackDelay, ref psm.playable.SecondAttackJudgeDelay, ref psm.playable.SecondAttackDelay, ref psm.playable.ThirdAttackJudgeDelay, ref psm.playable.ThridAttackDelay);
+                psm.attackState = new AttackState(psm, ref psm.playable.FirstAttackJudgeDelay, ref psm.playable.FirstAttackDelay, ref psm.playable.SecondAttackJudgeDelay, ref psm.playable.SecondAttackDelay, ref psm.playable.ThirdAttackJudgeDelay, ref psm.playable.ThirdAttackDelay);
 
-                psm.jumpAttackState = new JumpAttackState(psm, psm.playable.maximumSpeed);
+                psm.jumpAttackState = new JumpAttackState(psm, psm.playable.MaximumSpeed);
                 psm.dashAttackState = new DashAttackState(psm, ref psm.playable.dashAttackDelay);
 
                 psm.hitState = new HitState(psm, ref psm.playable.hitDelay);

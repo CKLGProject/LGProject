@@ -38,7 +38,8 @@ namespace BehaviourTree
                 curTiemr = 0;
             }
             curTiemr += Time.deltaTime;
-            if(stunedTimer < curTiemr || (Agent.GetStateMachine.isKnockback && Agent.GetStateMachine.isHit))
+            //if(stunedTimer < curTiemr || (Agent.GetStateMachine.isKnockback && Agent.GetStateMachine.isHit))
+            if(stateMachine.playable.hitDelay < curTiemr || (Agent.GetStateMachine.isKnockback && Agent.GetStateMachine.isHit))
             {
                 // 나 피격 상태 끝났어!
                 // 그런데 공중에 있냐 체크 해야함

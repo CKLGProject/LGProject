@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEditor;
 
 namespace BehaviourTree
 {
@@ -11,6 +12,304 @@ namespace BehaviourTree
     //
     public class AIAgent : LGProject.PlayerState.Playable
     {
+#if UNITY_EDITOR
+        [CustomEditor(typeof(AIAgent), true)]
+        [CanEditMultipleObjects]
+        public class PlayableEditor : Editor
+        {
+            /*프로퍼티*/
+            /*************************************
+             * 움직임 관련 프로퍼티
+             */
+            private SerializedProperty _maximumJumpCount;
+            private SerializedProperty _maximumSpeed;
+
+            private SerializedProperty _dashSpeed;
+            private SerializedProperty _jumpScale;
+
+            /*************************************
+             * 공격 관련 프로퍼티
+             */
+            private SerializedProperty _firstAttackDelay;
+            private SerializedProperty _firstAttackJudgeDelay;
+
+            private SerializedProperty _secondAttackDelay;
+            private SerializedProperty _secondAttackJudgeDelay;
+
+            private SerializedProperty _thirdAttackDelay;
+            private SerializedProperty _thirdAttackJudgeDelay;
+
+            private SerializedProperty _dashAttackDelay;
+
+            private SerializedProperty _hitDelay;
+
+            private SerializedProperty _wakeUpDelay;
+
+            private static GUIStyle BoldLabelStyle;
+            private static GUIStyle BoldFoldStyle;
+
+            private static bool _movementValuesFoldOut = false;
+            private static bool _actionValuesFoldOut = false;
+            private static bool _hitValuesFoldOut = false;
+
+            public override void OnInspectorGUI()
+            {
+                base.OnInspectorGUI();
+
+                /*****************************************
+                 * 모든 프로퍼티를 인스펙터에 표시
+                 * ***/
+                serializedObject.Update();
+
+                GUI_Initalized();
+                EditorGUILayout.Space(10f);
+                EditorGUILayout.LabelField("Effects settings", BoldLabelStyle);
+                GUI_DrawLine(5f, 20f);
+
+                GUI_ShowMovementProprties();
+                GUI_ShowAttackProperties();
+
+                /**변경사항이 있다면 값을 갱신한다...*/
+                if (GUI.changed)
+                {
+                    serializedObject.ApplyModifiedProperties();
+                }
+            }
+
+            private void GUI_Initalized()
+            {
+                #region Omit
+                if (_maximumJumpCount == null)
+                {
+                    _maximumJumpCount = serializedObject.FindProperty("MaximumJumpCount");
+                }
+
+                if (_maximumSpeed == null)
+                {
+                    _maximumSpeed = serializedObject.FindProperty("MaximumSpeed");
+                }
+
+                if (_dashSpeed == null)
+                {
+                    _dashSpeed = serializedObject.FindProperty("DashSpeed");
+                }
+
+                if (_jumpScale == null)
+                {
+                    _jumpScale = serializedObject.FindProperty("JumpScale");
+                }
+
+                /*************************************
+                 * 공격 관련 프로퍼티
+                 */
+                if (_firstAttackDelay == null)
+                {
+                    _firstAttackDelay = serializedObject.FindProperty("FirstAttackDelay");
+                }
+                if (_firstAttackJudgeDelay == null)
+                    _firstAttackJudgeDelay = serializedObject.FindProperty("FirstAttackJudgeDelay");
+
+                if (_secondAttackDelay == null)
+                    _secondAttackDelay = serializedObject.FindProperty("SecondAttackDelay");
+
+                if (_secondAttackJudgeDelay == null)
+                    _secondAttackJudgeDelay = serializedObject.FindProperty("SecondAttackJudgeDelay");
+
+
+                if (_thirdAttackDelay == null)
+                    _thirdAttackDelay = serializedObject.FindProperty("ThirdAttackDelay");
+
+                if (_thirdAttackJudgeDelay == null)
+                    _thirdAttackJudgeDelay = serializedObject.FindProperty("ThirdAttackJudgeDelay");
+
+                if (_dashAttackDelay == null)
+                    _dashAttackDelay = serializedObject.FindProperty("dashAttackDelay");
+
+                if (_hitDelay == null)
+                    _hitDelay = serializedObject.FindProperty("hitDelay");
+
+                if (_wakeUpDelay == null)
+                    _wakeUpDelay = serializedObject.FindProperty("wakeUpDelay");
+
+                if (BoldLabelStyle == null)
+                {
+                    BoldLabelStyle = new GUIStyle(GUI.skin.label);
+                    BoldLabelStyle.fontStyle = FontStyle.Bold;
+                    BoldLabelStyle.normal.textColor = EditorGUIUtility.isProSkin ? Color.white : Color.black;
+                    BoldLabelStyle.fontSize = 14;
+                }
+                if (BoldFoldStyle == null)
+                {
+                    BoldFoldStyle = new GUIStyle(EditorStyles.foldout);
+                    BoldFoldStyle.fontStyle = FontStyle.Bold;
+                }
+                #endregion
+            }
+
+            private void GUI_DrawLine(float space = 5f, float subOffset = 0f)
+            {
+                #region Omit
+                EditorGUILayout.Space(15f);
+                var rect = EditorGUILayout.BeginHorizontal();
+                Handles.color = Color.gray;
+                Handles.DrawLine(new Vector2(rect.x - 15 + subOffset, rect.y), new Vector2(rect.width + 15 - subOffset * 2, rect.y));
+                EditorGUILayout.EndHorizontal();
+                EditorGUILayout.Space(10f);
+                #endregion
+            }
+
+            private void GUI_ShowMovementProprties()
+            {
+                #region Omit    
+                if (!(_movementValuesFoldOut = EditorGUILayout.Foldout(_movementValuesFoldOut, "Init_MovementValues_Properties", BoldFoldStyle)))
+                {
+                    GUI_DrawLine(5f, 20f);
+                    return;
+                }
+
+                EditorGUI.indentLevel++;
+                using (var changeScope = new EditorGUI.ChangeCheckScope())
+                {
+                    int value = (int)EditorGUILayout.IntField("최대 점프 횟수", _maximumJumpCount.intValue);
+                    if (changeScope.changed)
+                    {
+                        _maximumJumpCount.intValue = value;
+                    }
+                }
+                EditorGUILayout.Space(10f);
+                using (var changeScope = new EditorGUI.ChangeCheckScope())
+                {
+                    int value = (int)EditorGUILayout.IntField("대쉬 최대 속도", _maximumSpeed.intValue);
+                    if (changeScope.changed)
+                    {
+                        _maximumSpeed.intValue = value;
+                    }
+                }
+                EditorGUILayout.Space(10f);
+                using (var changeScope = new EditorGUI.ChangeCheckScope())
+                {
+                    float value = (float)EditorGUILayout.FloatField("이동 시 증가 속도", _dashSpeed.floatValue);
+                    if (changeScope.changed)
+                    {
+                        _dashSpeed.floatValue = value;
+                    }
+                }
+                EditorGUILayout.Space(10f);
+                using (var changeScope = new EditorGUI.ChangeCheckScope())
+                {
+                    float value = (float)EditorGUILayout.FloatField("점프 높이", _jumpScale.floatValue);
+                    if (changeScope.changed)
+                    {
+                        _jumpScale.floatValue = value;
+                    }
+                }
+                EditorGUI.indentLevel--;
+                GUI_DrawLine(5f, 20f);
+                #endregion
+            }
+
+            private void GUI_ShowAttackProperties()
+            {
+                #region Omit
+                if (!(_actionValuesFoldOut = EditorGUILayout.Foldout(_actionValuesFoldOut, "Init_AttackValues_Properties", BoldFoldStyle)))
+                {
+                    GUI_DrawLine(5f, 20f);
+                    return;
+                }
+
+                EditorGUI.indentLevel++;
+
+                using (var changeScope = new EditorGUI.ChangeCheckScope())
+                {
+                    float value = (float)EditorGUILayout.FloatField("첫번째 공격 딜레이", _firstAttackDelay.floatValue);
+                    if (changeScope.changed)
+                    {
+                        _firstAttackDelay.floatValue = value;
+                    }
+                }
+                EditorGUILayout.Space(10f);
+                using (var changeScope = new EditorGUI.ChangeCheckScope())
+                {
+                    float value = (float)EditorGUILayout.FloatField("첫번째 공격 후판정", _firstAttackJudgeDelay.floatValue);
+                    if (changeScope.changed)
+                    {
+                        _firstAttackJudgeDelay.floatValue = value;
+                    }
+                }
+                EditorGUILayout.Space(10f);
+                using (var changeScope = new EditorGUI.ChangeCheckScope())
+                {
+                    float value = (float)EditorGUILayout.FloatField("두번째 공격 딜레이", _secondAttackDelay.floatValue);
+                    if (changeScope.changed)
+                    {
+                        _secondAttackDelay.floatValue = value;
+                    }
+                }
+                EditorGUILayout.Space(10f);
+                using (var changeScope = new EditorGUI.ChangeCheckScope())
+                {
+                    float value = (float)EditorGUILayout.FloatField("두번째 공격 후판정", _secondAttackJudgeDelay.floatValue);
+                    if (changeScope.changed)
+                    {
+                        _secondAttackJudgeDelay.floatValue = value;
+                    }
+                }
+                EditorGUILayout.Space(10f);
+                using (var changeScope = new EditorGUI.ChangeCheckScope())
+                {
+                    float value = (float)EditorGUILayout.FloatField("세번째 공격 딜레이", _thirdAttackDelay.floatValue);
+                    if (changeScope.changed)
+                    {
+                        _thirdAttackDelay.floatValue = value;
+                    }
+                }
+                EditorGUILayout.Space(10f);
+                using (var changeScope = new EditorGUI.ChangeCheckScope())
+                {
+                    float value = (float)EditorGUILayout.FloatField("세번째 공격 후판정", _thirdAttackJudgeDelay.floatValue);
+                    if (changeScope.changed)
+                    {
+                        _thirdAttackJudgeDelay.floatValue = value;
+                    }
+                }
+
+                EditorGUILayout.Space(10f);
+                using (var changeScope = new EditorGUI.ChangeCheckScope())
+                {
+                    float value = (float)EditorGUILayout.FloatField("대쉬공격 후 딜레이", _dashAttackDelay.floatValue);
+                    if (changeScope.changed)
+                    {
+                        _dashAttackDelay.floatValue = value;
+                    }
+                }
+
+                EditorGUILayout.Space(10f);
+                using (var changeScope = new EditorGUI.ChangeCheckScope())
+                {
+                    float value = (float)EditorGUILayout.FloatField("피격 후 딜레이", _hitDelay.floatValue);
+                    if (changeScope.changed)
+                    {
+                        _hitDelay.floatValue = value;
+                    }
+                }
+
+                EditorGUILayout.Space(10f);
+                using (var changeScope = new EditorGUI.ChangeCheckScope())
+                {
+                    float value = (float)EditorGUILayout.FloatField("다운 후 딜레이", _wakeUpDelay.floatValue);
+                    if (changeScope.changed)
+                    {
+                        _wakeUpDelay.floatValue = value;
+                    }
+                }
+                EditorGUI.indentLevel--;
+                GUI_DrawLine(5f, 20f);
+                #endregion  
+            }
+        }
+#endif
+
+
         private static AIAgent instance = null;
         public static AIAgent Instance => instance;
 

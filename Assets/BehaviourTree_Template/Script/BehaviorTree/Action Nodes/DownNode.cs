@@ -7,6 +7,7 @@ namespace BehaviourTree
     public class DownNode : ActionNode
     {
         public AIAgent Agent;
+        private LGProject.PlayerState.PlayerStateMachine stateMachine;
         [Space(10f)]
         public float downTimer;
         private float curTimer;
@@ -14,6 +15,8 @@ namespace BehaviourTree
         {
             if (Agent == null)
                 Agent = AIAgent.Instance;
+            if (stateMachine == null)
+                stateMachine = Agent.GetStateMachine;
             curTimer = 0;
             Agent.effectManager.PlayOneShot(EffectManager.EFFECT.Knockback);
             Agent.GetStateMachine.isHit = false;
@@ -31,7 +34,8 @@ namespace BehaviourTree
 
                 curTimer += Time.deltaTime;
                 // 고정된 누어있는 시간이 존재함.
-                if (Agent.GetStateMachine.GetAnimPlayTime("WakeUp") < curTimer)
+                //if (Agent.GetStateMachine.GetAnimPlayTime("WakeUp") < curTimer)
+                if (stateMachine.playable.wakeUpDelay < curTimer)
                 {
                     // 누어있는 시간이 끝나면 Idle 상태가 되면서 일어남.
                     return State.Success;

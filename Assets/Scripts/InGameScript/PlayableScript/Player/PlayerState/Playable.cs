@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 using TMPro;
 
 namespace LGProject.PlayerState
@@ -16,53 +17,52 @@ namespace LGProject.PlayerState
 
     public class Playable : MonoBehaviour
     {
-
         public Animator Animator;
 
         protected Vector3 velocity = Vector3.zero;
-        [Tooltip("최대 점프 횟수")]
-        public int maximumJumpCount = 2;
-        [Tooltip("대쉬 최대 속도")]
-        public int maximumSpeed = 4;
+        [Tooltip("최대 점프 횟수"), SerializeField, HideInInspector]
+        public int MaximumJumpCount = 2;
+        [Tooltip("대쉬 최대 속도"), SerializeField, HideInInspector]
+        public int MaximumSpeed = 4;
 
-        [Tooltip("이동할 때 증가하는 속도")]
-        public float dashSpeed;
-        [Tooltip("한 번 점프할 때의 높이")]
-        public float jumpScale;
+        [Tooltip("이동할 때 증가하는 속도"), SerializeField, HideInInspector]
+        public float DashSpeed = 0;
+        [Tooltip("한 번 점프할 때의 높이"), SerializeField, HideInInspector]
+        public float JumpScale = 5;
 
 
         // 공격 관련 인스펙터 
-        [Range(0.0f, 1.0f), Tooltip("n초가 끝나면 Idle로 돌아옴")]
+        [Range(0.0f, 1.0f), Tooltip("n초가 끝나면 Idle로 돌아옴"), SerializeField, HideInInspector]
         public float FirstAttackDelay = 1f;
 
-        [Range(0.0f, 2.0f), Tooltip("n초의 시간이 경과하면 공격 판정을 시작함.")]
+        [Range(0.0f, 2.0f), Tooltip("n초의 시간이 경과하면 공격 판정을 시작함."), SerializeField, HideInInspector]
         public float FirstAttackJudgeDelay = 1f;
 
         [Range(0.0f, 1.0f), Tooltip("n초가 끝나면 Idle로 돌아옴")]
         public float SecondAttackDelay = 1f;
 
-        [Range(0.0f, 2.0f), Tooltip("n초의 시간이 경과하면 공격 판정을 시작함.")]
+        [Range(0.0f, 2.0f), Tooltip("n초의 시간이 경과하면 공격 판정을 시작함."), SerializeField, HideInInspector]
         public float SecondAttackJudgeDelay = 1f;
         
 
-        [Range(0.0f, 1.0f), Tooltip("n초가 끝나면 Idle로 돌아옴")]
-        public float ThridAttackDelay = 1f;
+        [Range(0.0f, 1.0f), Tooltip("n초가 끝나면 Idle로 돌아옴"), SerializeField, HideInInspector]
+        public float ThirdAttackDelay = 1f;
 
-        [Range(0.0f, 2.0f), Tooltip("n초의 시간이 경과하면 공격 판정을 시작함.")]
+        [Range(0.0f, 2.0f), Tooltip("n초의 시간이 경과하면 공격 판정을 시작함."), SerializeField, HideInInspector]
         public float ThirdAttackJudgeDelay = 1f;
 
 
-        [Range(0.0f, 1.0f), Tooltip("공격 후 Idle로 돌아오기 까지의 시간")]
+        [Range(0.0f, 1.0f), Tooltip("공격 후 Idle로 돌아오기 까지의 시간"), SerializeField, HideInInspector]
         public float dashAttackDelay = 0;
 
-        [Range(0.0f, 1.0f), Tooltip("피격 후 Idle로 돌아오기 까지의 시간")]
+        [Range(0.0f, 1.0f), Tooltip("피격 후 Idle로 돌아오기 까지의 시간"), SerializeField, HideInInspector]
         public float hitDelay = 0;
 
-        [Range(0.0f, 3.0f), Tooltip("다운 후 Idle로 돌아오기 까지의 시간")]
+        [Range(0.0f, 3.0f), Tooltip("다운 후 Idle로 돌아오기 까지의 시간"), SerializeField, HideInInspector]
         public float wakeUpDelay = 0;
 
 
-        public bool movingAttack = true;
+        [HideInInspector] public bool movingAttack = true;
 
         public TextMeshProUGUI textGUI;
         //public float damageGage = 0;
@@ -74,6 +74,16 @@ namespace LGProject.PlayerState
         public Platform underPlatform;
 
         public EffectManager effectManager;
+
+        float _gravity = -9.8f;
+        float _groundedGravity = -0.05f;
+        float initialJumpVelocity ;
+        float maxJumpHeight = 1.5f;
+        float maxJumpTime = 0.5f;
+
+
+
+
 
         protected PlayerStateMachine stateMachine;
 
@@ -211,7 +221,33 @@ namespace LGProject.PlayerState
             Debug.Log("Bye");
             return false;
         }
-        #endregion
+
+        public void setupJumpVariables()
+        {
+            float timeToApex = maxJumpTime / 2;
+            _gravity = (-2 * maxJumpHeight) / Mathf.Pow(timeToApex, 1.5f);
+            initialJumpVelocity = (2 * maxJumpHeight) / timeToApex;
+        }
+
+        public void handleJump()
+        {
+            if(stateMachine.jumpInCount > 0 && stateMachine.isJumpping)
+            {
+                stateMachine.isJumpping = false;
+                stateMachine.physics.velocity = Vector3.up * initialJumpVelocity;
+            }
+            if(stateMachine.physics.velocity.y > 0)
+            {
+                stateMachine.physics.velocity += Vector3.up * _gravity * Time.deltaTime;
+            }
+        }
+
+#endregion
+
+
+
+
+
     }
 
 }

@@ -42,7 +42,6 @@ namespace LGProject.PlayerState
                 if (curTimer >= stunedTimer)
                 {
                     stateMachine.ChangeState(stateMachine.downState);
-                    stateMachine.damageGage += 10;
                     return;
                 }
             }
