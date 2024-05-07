@@ -5021,7 +5021,7 @@
     "m_Group": {
         "m_Id": "005227e1d065419d8de5ad1adb3e5149"
     },
-    "m_Name": "Gradiant Mask R or G",
+    "m_Name": "Gradiant Mask (T=R, F=G)",
     "m_DrawState": {
         "m_Expanded": true,
         "m_Position": {
@@ -7379,7 +7379,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector4MaterialSlot",
     "m_ObjectId": "b717b3493f7146bf8cacb7142255381a",
     "m_Id": 0,
-    "m_DisplayName": "Cartoon Shadow Color",
+    "m_DisplayName": "Shadow Color",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -8673,7 +8673,7 @@
     "m_Type": "UnityEditor.ShaderGraph.BooleanMaterialSlot",
     "m_ObjectId": "d0ffedcebad142edae18ae12f93c2b2a",
     "m_Id": 0,
-    "m_DisplayName": "Outline",
+    "m_DisplayName": "Outline (Enable Cartoon Shadow)",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
