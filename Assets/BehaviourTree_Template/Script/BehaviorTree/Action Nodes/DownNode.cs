@@ -19,7 +19,7 @@ namespace BehaviourTree
                 stateMachine = Agent.GetStateMachine;
             curTimer = 0;
             Agent.effectManager.PlayOneShot(EffectManager.EFFECT.Knockback);
-            Agent.GetStateMachine.isHit = false;
+            Agent.GetStateMachine.isDamaged = false;
         }
 
         protected override void OnStop()

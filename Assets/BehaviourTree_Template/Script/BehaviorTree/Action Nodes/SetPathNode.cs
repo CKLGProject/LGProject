@@ -37,6 +37,7 @@ namespace BehaviourTree
             #endregion
             if (Agent == null)
                 Agent = AIAgent.Instance;
+            
             // 상대방을 기준으로 공격을 진행해야함.
         }
 
@@ -53,6 +54,8 @@ namespace BehaviourTree
             //{
             //    return State.Failure;
             //}
+            if (Agent.GetStateMachine.isDamaged)
+                return State.Failure;
             if (Agent.path == null)
                 return State.Running;
             else

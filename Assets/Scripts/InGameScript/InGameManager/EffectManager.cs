@@ -1,7 +1,8 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using Cysharp.Threading.Tasks;
 
 public class EffectManager : MonoBehaviour
 {
@@ -20,14 +21,20 @@ public class EffectManager : MonoBehaviour
         //========================================
         //////          GameObject          /////
         //========================================
-        private SerializedProperty AttackEffect;
-        private SerializedProperty AttackOffset;
+        private SerializedProperty FirstAttackEffect;
+        private SerializedProperty FirstAttackOffset;
+
+        private SerializedProperty SecondAttackEffect;
+        private SerializedProperty SecondAttackOffset;
+
+        private SerializedProperty ThirdAttackEffect;
+        private SerializedProperty ThirdAttackOffset;
         
         private SerializedProperty GuardEffect;
         private SerializedProperty GuardOffset;
 
-        private SerializedProperty HitEffect;
-        private SerializedProperty HitOffset;
+        private SerializedProperty DamageEffect;
+        private SerializedProperty DamageOffset;
 
         private SerializedProperty AirborneEffect;
         private SerializedProperty AirborneOffset;
@@ -85,15 +92,41 @@ public class EffectManager : MonoBehaviour
             /***************************************
              * 모든 프로퍼티를 초기화 한다.
              * **/
-            if (AttackEffect == null)
+
+            #region AttackProperty
+
+            if (FirstAttackEffect == null)
             {
-                AttackEffect = serializedObject.FindProperty("_AttackEffect1");
+                FirstAttackEffect = serializedObject.FindProperty("_AttackEffect1");
             }
 
-            if (AttackOffset == null)
+            if (FirstAttackOffset == null)
             {
-                AttackOffset = serializedObject.FindProperty("_AttackOffset");
+                FirstAttackOffset = serializedObject.FindProperty("_AttackOffset1");
             }
+
+            if(SecondAttackEffect == null)
+            {
+                SecondAttackEffect = serializedObject.FindProperty("_AttackEffect2");
+            }
+
+            if(SecondAttackOffset == null)
+            {
+                SecondAttackOffset = serializedObject.FindProperty("_AttackOffset2");
+            }
+
+            if(ThirdAttackEffect == null)
+            {
+                ThirdAttackEffect = serializedObject.FindProperty("_AttackEffect3");
+            }
+
+            if(ThirdAttackOffset == null)
+            {
+                ThirdAttackOffset = serializedObject.FindProperty("_AttackOffset3");
+            }
+            #endregion
+
+            #region GuardProperty
 
             if (GuardEffect == null)
             {
@@ -104,15 +137,18 @@ public class EffectManager : MonoBehaviour
             {
                 GuardOffset = serializedObject.FindProperty("_GuardOffset");
             }
+            #endregion
 
-            if (HitEffect == null)
+            #region DamageProperty
+
+            if (DamageEffect == null)
             {
-                HitEffect = serializedObject.FindProperty("_HitEffect");
+                DamageEffect = serializedObject.FindProperty("_DamageEffect");
             }
 
-            if (HitOffset == null)
+            if (DamageOffset == null)
             {
-                HitOffset = serializedObject.FindProperty("_HitOffset");
+                DamageOffset = serializedObject.FindProperty("_DamageOffset");
             }
 
             if (AirborneEffect == null)
@@ -120,12 +156,12 @@ public class EffectManager : MonoBehaviour
                 AirborneEffect = serializedObject.FindProperty("_AirborneEffect");
             }
 
-            if(AirborneOffset == null)
+            if (AirborneOffset == null)
             {
                 AirborneOffset = serializedObject.FindProperty("_AirborneOffset");
             }
 
-            if (KnockbackEffect== null)
+            if (KnockbackEffect == null)
             {
                 KnockbackEffect = serializedObject.FindProperty("_KnockbackEffect");
             }
@@ -134,6 +170,9 @@ public class EffectManager : MonoBehaviour
             {
                 KnockbackOffset = serializedObject.FindProperty("_KnockbackOffset");
             }
+            #endregion
+
+            #region MovementProperty
 
             if (LandingEffect == null)
             {
@@ -152,9 +191,12 @@ public class EffectManager : MonoBehaviour
 
             if (RunOffset == null)
             {
-                RunOffset = serializedObject.FindProperty("_RunkOffset");
+                RunOffset = serializedObject.FindProperty("_RunOffset");
             }
 
+            #endregion
+
+            #region UltimateEffect
             if (UltimateEffect == null)
             {
                 UltimateEffect = serializedObject.FindProperty("_UltimateEffect");
@@ -164,6 +206,7 @@ public class EffectManager : MonoBehaviour
             {
                 UltimateOffset = serializedObject.FindProperty("_UltimateOffset");
             }
+            #endregion
 
             /******************************************
              * 모든 스타일을 초기화
@@ -187,7 +230,7 @@ public class EffectManager : MonoBehaviour
         private void GUI_ShowEffectProperties()
         {
             #region Omit
-            if (AttackEffect == null || GuardEffect == null)
+            if (FirstAttackEffect == null || GuardEffect == null)
                 return;
             if (!(_FoldOut = EditorGUILayout.Foldout(_FoldOut, "Init_Effects", BoldFoldStyle)))
             {
@@ -196,26 +239,78 @@ public class EffectManager : MonoBehaviour
             }
 
             EditorGUI.indentLevel++;
-            using (var changeScope = new EditorGUI.ChangeCheckScope())
-            {
-                GameObject value = (GameObject)EditorGUILayout.ObjectField("AttackEffectPrefab", AttackEffect.objectReferenceValue, typeof(GameObject), true);
-                if (changeScope.changed)
-                {
-                    AttackEffect.objectReferenceValue = value;
-                }
-            }
+            #region AttackScopes
 
             using (var changeScope = new EditorGUI.ChangeCheckScope())
             {
-                Vector3 value = EditorGUILayout.Vector3Field("Attack Effect Offset", AttackOffset.vector3Value);
+                GameObject value = (GameObject)EditorGUILayout.ObjectField("First Attack Effect Prefab", FirstAttackEffect.objectReferenceValue, typeof(GameObject), true);
                 if (changeScope.changed)
                 {
-                    AttackOffset.vector3Value = value;
+                    FirstAttackEffect.objectReferenceValue = value;
                 }
             }
 
-            EditorGUILayout.Space(15f);
+            EditorGUILayout.Space(10f);
 
+            using (var changeScope = new EditorGUI.ChangeCheckScope())
+            {
+                Vector3 value = EditorGUILayout.Vector3Field("First Attack Effect Offset", FirstAttackOffset.vector3Value);
+                if (changeScope.changed)
+                {
+                    FirstAttackOffset.vector3Value = value;
+                }
+            }
+
+            EditorGUILayout.Space(10f);
+
+            using (var changeScope = new EditorGUI.ChangeCheckScope())
+            {
+                GameObject value = (GameObject)EditorGUILayout.ObjectField("Second Attack Effect Prefab", SecondAttackEffect.objectReferenceValue, typeof(GameObject), true);
+                if(changeScope.changed)
+                {
+                    SecondAttackEffect.objectReferenceValue = value;
+                }
+            }
+
+            EditorGUILayout.Space(10f);
+
+            using (var changeScope = new EditorGUI.ChangeCheckScope())
+            {
+                Vector3 value = EditorGUILayout.Vector3Field("Second Attack Effect Offset", SecondAttackOffset.vector3Value);
+                if (changeScope.changed)
+                {
+                    SecondAttackOffset.vector3Value = value;
+                }
+            }
+
+            EditorGUILayout.Space(10f);
+
+
+            using (var changeScope = new EditorGUI.ChangeCheckScope())
+            {
+                GameObject value = (GameObject)EditorGUILayout.ObjectField("Third Attack Effect Prefab", ThirdAttackEffect.objectReferenceValue, typeof(GameObject), true);
+                if (changeScope.changed)
+                {
+                    ThirdAttackEffect.objectReferenceValue = value;
+                }
+            }
+
+            EditorGUILayout.Space(10f);
+
+            using (var changeScope = new EditorGUI.ChangeCheckScope())
+            {
+                Vector3 value = EditorGUILayout.Vector3Field("Third Attack Effect Offset", ThirdAttackOffset.vector3Value);
+                if (changeScope.changed)
+                {
+                    ThirdAttackOffset.vector3Value = value;
+                }
+            }
+
+            EditorGUILayout.Space(10f);
+
+            #endregion
+
+            #region GuardScope
             using (var changeScope = new EditorGUI.ChangeCheckScope())
             {
                 GameObject value = (GameObject)EditorGUILayout.ObjectField("GuardEffectPrefab", GuardEffect.objectReferenceValue, typeof(GameObject), true);
@@ -224,6 +319,8 @@ public class EffectManager : MonoBehaviour
                     GuardEffect.objectReferenceValue = value;
                 }
             }
+
+            EditorGUILayout.Space(10f);
 
             using (var changeScope = new EditorGUI.ChangeCheckScope())
             {
@@ -234,27 +331,31 @@ public class EffectManager : MonoBehaviour
                 }
             }
 
-            EditorGUILayout.Space(15f);
+            EditorGUILayout.Space(10f);
+            #endregion
 
+            #region DamageScope
             using (var changeScope = new EditorGUI.ChangeCheckScope())
             {
-                GameObject value = (GameObject)EditorGUILayout.ObjectField("HitEffectPrefab", HitEffect.objectReferenceValue, typeof(GameObject), true);
+                GameObject value = (GameObject)EditorGUILayout.ObjectField("Damaged Effect Prefab", DamageEffect.objectReferenceValue, typeof(GameObject), true);
                 if (changeScope.changed)
                 {
-                    HitEffect.objectReferenceValue = value;
+                    DamageEffect.objectReferenceValue = value;
                 }
             }
 
+            EditorGUILayout.Space(10f);
+
             using (var changeScope = new EditorGUI.ChangeCheckScope())
             {
-                Vector3 value = EditorGUILayout.Vector3Field("Hit Effect Offset", HitOffset.vector3Value);
+                Vector3 value = EditorGUILayout.Vector3Field("Damaged Effect Offset", DamageOffset.vector3Value);
                 if (changeScope.changed)
                 {
-                    HitOffset.vector3Value = value;
+                    DamageOffset.vector3Value = value;
                 }
             }
 
-            EditorGUILayout.Space(15f);
+            EditorGUILayout.Space(10f);
 
             using (var changeScope = new EditorGUI.ChangeCheckScope())
             {
@@ -265,16 +366,18 @@ public class EffectManager : MonoBehaviour
                 }
             }
 
+            EditorGUILayout.Space(10f);
+
             using (var changeScope = new EditorGUI.ChangeCheckScope())
             {
-                Vector3 value = EditorGUILayout.Vector3Field("Airborne Effect Offset", HitOffset.vector3Value);
+                Vector3 value = EditorGUILayout.Vector3Field("Airborne Effect Offset", DamageOffset.vector3Value);
                 if (changeScope.changed)
                 {
                     AirborneOffset.vector3Value = value;
                 }
             }
 
-            EditorGUILayout.Space(15f);
+            EditorGUILayout.Space(10f);
 
             using (var changeScope = new EditorGUI.ChangeCheckScope())
             {
@@ -285,16 +388,18 @@ public class EffectManager : MonoBehaviour
                 }
             }
 
-            //using (var changeScope = new EditorGUI.ChangeCheckScope())
-            //{
-            //    Vector3 value = EditorGUILayout.Vector3Field("Hit Effect Offset", KnockbackOffset.vector3Value);
-            //    if (changeScope.changed)
-            //    {
-            //        KnockbackOffset.vector3Value = value;
-            //    }
-            //}
+            using (var changeScope = new EditorGUI.ChangeCheckScope())
+            {
+                Vector3 value = EditorGUILayout.Vector3Field("KnockBack Effect Offset", KnockbackOffset.vector3Value);
+                if (changeScope.changed)
+                {
+                    KnockbackOffset.vector3Value = value;
+                }
+            }
+            #endregion
 
-            EditorGUILayout.Space(15f);
+            #region Movement Scope
+            EditorGUILayout.Space(10f);
 
             using (var changeScope = new EditorGUI.ChangeCheckScope())
             {
@@ -305,6 +410,8 @@ public class EffectManager : MonoBehaviour
                 }
             }
 
+            EditorGUILayout.Space(10f);
+
             using (var changeScope = new EditorGUI.ChangeCheckScope())
             {
                 Vector3 value = EditorGUILayout.Vector3Field("Landing Effect Offset", LandingOffset.vector3Value);
@@ -314,7 +421,7 @@ public class EffectManager : MonoBehaviour
                 }
             }
 
-            EditorGUILayout.Space(15f);
+            EditorGUILayout.Space(10f);
 
             using (var changeScope = new EditorGUI.ChangeCheckScope())
             {
@@ -325,17 +432,21 @@ public class EffectManager : MonoBehaviour
                 }
             }
 
-            //using (var changeScope = new EditorGUI.ChangeCheckScope())
-            //{
-            //    Vector3 value = EditorGUILayout.Vector3Field("Run Effect Offset", RunOffset.vector3Value);
-            //    if (changeScope.changed)
-            //    {
-            //        RunEffect.vector3Value = value;
-            //    }
-            //}
+            EditorGUILayout.Space(10f);
 
-            EditorGUILayout.Space(15f);
+            using (var changeScope = new EditorGUI.ChangeCheckScope())
+            {
+                Vector3 value = EditorGUILayout.Vector3Field("Run Effect Offset", RunOffset.vector3Value);
+                if (changeScope.changed)
+                {
+                    RunEffect.vector3Value = value;
+                }
+            }
 
+            EditorGUILayout.Space(10f);
+            #endregion
+
+            #region Ultimate
             using (var changeScope = new EditorGUI.ChangeCheckScope())
             {
                 GameObject value = (GameObject)EditorGUILayout.ObjectField("Ultimate Effect Prefab", UltimateEffect.objectReferenceValue, typeof(GameObject), true);
@@ -345,14 +456,17 @@ public class EffectManager : MonoBehaviour
                 }
             }
 
-            //using (var changeScope = new EditorGUI.ChangeCheckScope())
-            //{
-            //    Vector3 value = EditorGUILayout.Vector3Field("Ultimate Effect Offset", UltimateOffset.vector3Value);
-            //    if (changeScope.changed)
-            //    {
-            //        UltimateEffect.vector3Value = value;
-            //    }
-            //}
+            EditorGUILayout.Space(10f);
+
+            using (var changeScope = new EditorGUI.ChangeCheckScope())
+            {
+                Vector3 value = EditorGUILayout.Vector3Field("Ultimate Effect Offset", UltimateOffset.vector3Value);
+                if (changeScope.changed)
+                {
+                    UltimateEffect.vector3Value = value;
+                }
+            }
+            #endregion
 
             EditorGUI.indentLevel--;
             GUI_DrawLine(5f, 20f);
@@ -395,7 +509,19 @@ public class EffectManager : MonoBehaviour
     public GameObject _AttackEffect1;
 
     [SerializeField, HideInInspector]
-    public Vector3 _AttackOffset;
+    public GameObject _AttackEffect2;
+
+    [SerializeField, HideInInspector]
+    public GameObject _AttackEffect3;
+
+    [SerializeField, HideInInspector]
+    public Vector3 _AttackOffset1;
+
+    [SerializeField, HideInInspector]
+    public Vector3 _AttackOffset2;
+
+    [SerializeField, HideInInspector]
+    public Vector3 _AttackOffset3;
 
     [SerializeField, HideInInspector]
     public GameObject _GuardEffect;
@@ -404,10 +530,10 @@ public class EffectManager : MonoBehaviour
     public Vector3 _GuardOffset;
 
     [SerializeField, HideInInspector]
-    public GameObject _HitEffect;
+    public GameObject _DamageEffect;
 
     [SerializeField, HideInInspector]
-    public Vector3 _HitOffset;
+    public Vector3 _DamageOffset;
 
     [SerializeField, HideInInspector]
     public GameObject _AirborneEffect;
@@ -419,7 +545,7 @@ public class EffectManager : MonoBehaviour
     public GameObject _KnockbackEffect;
 
     [SerializeField, HideInInspector]
-    public Vector3 _KnockBackOffset;
+    public Vector3 _KnockbackOffset;
 
     [SerializeField, HideInInspector]
     public GameObject _RunEffect;
@@ -436,6 +562,9 @@ public class EffectManager : MonoBehaviour
     [SerializeField, HideInInspector]
     public GameObject _UltimateEffect;
 
+    [SerializeField, HideInInspector]
+    public Vector3 _UltimateOffset;
+
     Dictionary<EFFECT, ParticleSystem> _EffectContainer = new Dictionary<EFFECT, ParticleSystem>();
 
     [SerializeField] private List<ParticleSystem> playList;
@@ -447,13 +576,15 @@ public class EffectManager : MonoBehaviour
     public enum EFFECT
     {
         Attack1 = 0,
-        Guard = 1,
-        Hit = 2,
-        Airborne = 3,
-        Knockback = 4,
-        Run = 5,
-        Landing = 6,
-        Ultimate = 7,
+        Attack2 = 1,
+        Attack3 = 2,
+        Guard = 3,
+        Hit = 4,
+        Airborne = 5,
+        Knockback = 6,
+        Run = 7,
+        Landing = 8,
+        Ultimate = 9,
     }
 
 
@@ -466,14 +597,37 @@ public class EffectManager : MonoBehaviour
     {
         // 일단 여기에 이펙트들을 세팅
         GameObject tempEffect = null;
+        Vector3 posOffset = Vector3.zero;
+        Vector3 rotOffset = Vector3.zero;
         if (_AttackEffect1 != null)
         {
-            tempEffect = Instantiate(_AttackEffect1, transform.position, Quaternion.identity);
+            rotOffset = new Vector3(0, 180, 0);
+            posOffset = _AttackOffset1;
+            tempEffect = Instantiate(_AttackEffect1, transform.position + posOffset, Quaternion.Euler(rotOffset));
             tempEffect.transform.parent = this.transform;
             _EffectContainer.Add(EFFECT.Attack1, tempEffect.GetComponent<ParticleSystem>());
             tempEffect.SetActive(false);
         }
-
+        
+        if (_AttackEffect2 != null)
+        {
+            rotOffset = new Vector3(0, 180, 0);
+            posOffset = _AttackOffset2;
+            tempEffect = Instantiate(_AttackEffect2, transform.position + posOffset, Quaternion.Euler(rotOffset));
+            tempEffect.transform.parent = this.transform;
+            _EffectContainer.Add(EFFECT.Attack2, tempEffect.GetComponent<ParticleSystem>());
+            tempEffect.SetActive(false);
+        }
+        
+        if (_AttackEffect3 != null)
+        {
+            rotOffset = new Vector3(0, 180, 0);
+            posOffset = _AttackOffset3;
+            tempEffect = Instantiate(_AttackEffect3, transform.position + posOffset, Quaternion.Euler(rotOffset));
+            tempEffect.transform.parent = this.transform;
+            _EffectContainer.Add(EFFECT.Attack3, tempEffect.GetComponent<ParticleSystem>());
+            tempEffect.SetActive(false);
+        }
         if (_GuardEffect != null)
         {
             tempEffect = Instantiate(_GuardEffect, transform.position, Quaternion.identity);
@@ -482,9 +636,9 @@ public class EffectManager : MonoBehaviour
             tempEffect.SetActive(false);
         }
 
-        if (_HitEffect != null)
+        if (_DamageEffect != null)
         {
-            tempEffect = Instantiate(_HitEffect, transform.position, Quaternion.identity);
+            tempEffect = Instantiate(_DamageEffect, transform.position, Quaternion.identity);
             tempEffect.transform.parent = this.transform;
             _EffectContainer.Add(EFFECT.Hit, tempEffect.GetComponent<ParticleSystem>());
             tempEffect.SetActive(false);
@@ -573,7 +727,36 @@ public class EffectManager : MonoBehaviour
         }
     }
 
-    public void Play(EFFECT effectType)
+    ///// <summary>
+    ///// Default Delay Value  1
+    ///// </summary>
+    ///// <param name="effectType"></param>
+    ///// <param name="delayTime"></param>
+    //public void PlayToDelay(EFFECT effectType, float delayTime = 1f)
+    //{
+    //    try
+    //    {
+    //        ParticleSystem effect;
+    //        _EffectContainer.TryGetValue(effectType, out effect);
+
+    //        if (effect != null)
+    //        {
+    //            effect.gameObject.SetActive(true);
+
+    //            effect.GetComponent<ParticleSystem>().Play();
+    //        }
+    //        else
+    //        {
+    //            Debug.Log("Notting");
+    //        }
+    //    }
+    //    catch
+    //    {
+    //        Debug.LogError("EffectManager Error");
+    //    }
+    //}
+
+    public async UniTaskVoid Play(EFFECT effectType, float delaySeconds = 0f)
     {
         try
         {
@@ -583,12 +766,13 @@ public class EffectManager : MonoBehaviour
             if (effect != null)
             {
                 effect.gameObject.SetActive(true);
-
+                effect.Stop();
+                await UniTask.Delay(TimeSpan.FromSeconds(delaySeconds));
                 effect.GetComponent<ParticleSystem>().Play();
             }
             else
             {
-                Debug.Log("Notting");
+                Debug.Log("Not thing");
             }
         }
         catch
@@ -596,6 +780,7 @@ public class EffectManager : MonoBehaviour
             Debug.LogError("EffectManager Error");
         }
     }
+
 
     public void Stop(EFFECT effectType)
     {

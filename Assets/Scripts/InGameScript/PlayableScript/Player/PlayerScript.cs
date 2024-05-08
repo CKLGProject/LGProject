@@ -7,7 +7,7 @@ namespace LGProject.PlayerState
 {
     public class PlayerScript : Playable
     {
-
+        #region CUSTOM_ETIDOR
 #if UNITY_EDITOR
         [CustomEditor(typeof(PlayerScript), true)]
         [CanEditMultipleObjects]
@@ -305,7 +305,9 @@ namespace LGProject.PlayerState
             }
         }
 #endif
+        #endregion
 
+        #region Gizmos
         private void OnDrawGizmos()
         {
             // Attack Collider를 한 곳에 고정할 필요가 있음.
@@ -360,6 +362,7 @@ namespace LGProject.PlayerState
 
             }
         }
+        #endregion
 
         private void InitStates()
         {
@@ -371,6 +374,7 @@ namespace LGProject.PlayerState
             stateMachine = new PlayerStateMachine();
             stateMachine = PlayerStateMachine.CreateStateMachine(this.gameObject);
             setupJumpVariables();
+            SetUnderPlatform();
         }
 
         void Start()
@@ -385,7 +389,6 @@ namespace LGProject.PlayerState
                 float time = stateMachine.animator.runtimeAnimatorController.animationClips[i].length;
                 stateMachine.SetAnimPlayTime(name, time);
             }
-            underPlatform = GameObject.Find("Main_Floor (1)").GetComponent<Platform>();
         }
 
         private void FixedUpdate()
@@ -396,10 +399,11 @@ namespace LGProject.PlayerState
         void Update()
         {
             stateMachine.currentState.LogicUpdate();
-            //handleJump();
+            handleJump();
             velocity = stateMachine.physics.velocity;
             PlatformCheck();
             NewPlatformCheck();
+            DeadLineCheck();
         }
 
     }

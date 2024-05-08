@@ -2342,19 +2342,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _AttackEffect1: {fileID: 0}
-  _AttackOffset: {x: 0, y: 0, z: 0}
+  _AttackEffect2: {fileID: 0}
+  _AttackEffect3: {fileID: 0}
+  _AttackOffset1: {x: 0, y: 0, z: 0}
+  _AttackOffset2: {x: 0, y: 0, z: 0}
+  _AttackOffset3: {x: 0, y: 0, z: 0}
   _GuardEffect: {fileID: 6828380774985832577, guid: d62653505d5e72f44b9b3e68d377f861,
     type: 3}
   _GuardOffset: {x: 0, y: 0, z: 0}
-  _HitEffect: {fileID: 2049236942158399456, guid: 752622900d41f074ba777f81b03de0fe,
-    type: 3}
-  _HitOffset: {x: 0, y: 0, z: 0}
+  _DamageEffect: {fileID: 0}
+  _DamageOffset: {x: 0, y: 0, z: 0}
   _AirborneEffect: {fileID: 5015296152975555048, guid: 6edf02fee0102f74b9c412a7d4676434,
     type: 3}
   _AirborneOffset: {x: 0, y: 0, z: 0}
   _KnockbackEffect: {fileID: 2682029315814992228, guid: accd91473619bb345890ff524dd4e26e,
     type: 3}
-  _KnockBackOffset: {x: 0, y: 0, z: 0}
+  _KnockbackOffset: {x: 0, y: 0, z: 0}
   _RunEffect: {fileID: 1235096126941009767, guid: c775dfbf3c36bfb4ca265f3df6de1cf1,
     type: 3}
   _RunOffset: {x: 0, y: 0, z: 0}
@@ -2363,6 +2366,7 @@ MonoBehaviour:
   _LandingOffset: {x: 0, y: 0, z: 0}
   _UltimateEffect: {fileID: 6915349224304202874, guid: c9920e406cb0ed944a113922da7fef5e,
     type: 3}
+  _UltimateOffset: {x: 0, y: 0, z: 0}
   playList: []
 --- !u!114 &1382073904
 MonoBehaviour:
@@ -2405,6 +2409,9 @@ MonoBehaviour:
   wakeUpDelay: 0
   movingAttack: 1
   textGUI: {fileID: 0}
+  AliveOffset: {x: 0, y: 0, z: 0}
+  respawnTime: 0
+  DeadLine: 0
   directionX: 0
   jumpCurve:
     serializedVersion: 2
@@ -4593,6 +4600,35 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2876321095919618213, guid: 2733f80f426950d4598e4e6317bd7935,
+        type: 3}
+      propertyPath: _DamageEffect
+      value: 
+      objectReference: {fileID: 2049236942158399456, guid: 752622900d41f074ba777f81b03de0fe,
+        type: 3}
+    - target: {fileID: 2876321095919618213, guid: 2733f80f426950d4598e4e6317bd7935,
+        type: 3}
+      propertyPath: _AttackEffect1
+      value: 
+      objectReference: {fileID: 4400223982341537954, guid: 5717e2b73954e57449212d869eccfc89,
+        type: 3}
+    - target: {fileID: 2876321095919618213, guid: 2733f80f426950d4598e4e6317bd7935,
+        type: 3}
+      propertyPath: _AttackEffect2
+      value: 
+      objectReference: {fileID: 587711298246763827, guid: 121944f6be158f1469ee0da885226b52,
+        type: 3}
+    - target: {fileID: 2876321095919618213, guid: 2733f80f426950d4598e4e6317bd7935,
+        type: 3}
+      propertyPath: _AttackEffect3
+      value: 
+      objectReference: {fileID: 8233413071931346597, guid: 7e5293ef0d4eee1459650885ed96c7e3,
+        type: 3}
+    - target: {fileID: 2876321095919618213, guid: 2733f80f426950d4598e4e6317bd7935,
+        type: 3}
+      propertyPath: _AttackOffset2.z
+      value: -0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6142601296869339651, guid: 2733f80f426950d4598e4e6317bd7935,
         type: 3}
       propertyPath: m_Name
@@ -4601,7 +4637,7 @@ PrefabInstance:
     - target: {fileID: 6142601296869339651, guid: 2733f80f426950d4598e4e6317bd7935,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8219133890818253592, guid: 2733f80f426950d4598e4e6317bd7935,
         type: 3}
@@ -4631,12 +4667,12 @@ PrefabInstance:
     - target: {fileID: 8219133890818253592, guid: 2733f80f426950d4598e4e6317bd7935,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.7071068
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 8219133890818253592, guid: 2733f80f426950d4598e4e6317bd7935,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8219133890818253592, guid: 2733f80f426950d4598e4e6317bd7935,
         type: 3}
@@ -4646,7 +4682,7 @@ PrefabInstance:
     - target: {fileID: 8219133890818253592, guid: 2733f80f426950d4598e4e6317bd7935,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -90
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 8219133890818253592, guid: 2733f80f426950d4598e4e6317bd7935,
         type: 3}
@@ -4658,6 +4694,36 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1853587625}
+    - target: {fileID: 8866563565161335285, guid: 2733f80f426950d4598e4e6317bd7935,
+        type: 3}
+      propertyPath: DeadLine
+      value: -4.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8866563565161335285, guid: 2733f80f426950d4598e4e6317bd7935,
+        type: 3}
+      propertyPath: hitDelay
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8866563565161335285, guid: 2733f80f426950d4598e4e6317bd7935,
+        type: 3}
+      propertyPath: respawnTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8866563565161335285, guid: 2733f80f426950d4598e4e6317bd7935,
+        type: 3}
+      propertyPath: wakeUpDelay
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8866563565161335285, guid: 2733f80f426950d4598e4e6317bd7935,
+        type: 3}
+      propertyPath: AliveOffset.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8866563565161335285, guid: 2733f80f426950d4598e4e6317bd7935,
+        type: 3}
+      propertyPath: dashAttackDelay
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4671,6 +4737,35 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1461212728011964297, guid: e748e159dd59aae4188ea3f4a8ac1c84,
+        type: 3}
+      propertyPath: _DamageEffect
+      value: 
+      objectReference: {fileID: 2049236942158399456, guid: 752622900d41f074ba777f81b03de0fe,
+        type: 3}
+    - target: {fileID: 1461212728011964297, guid: e748e159dd59aae4188ea3f4a8ac1c84,
+        type: 3}
+      propertyPath: _AttackEffect1
+      value: 
+      objectReference: {fileID: 4400223982341537954, guid: 5717e2b73954e57449212d869eccfc89,
+        type: 3}
+    - target: {fileID: 1461212728011964297, guid: e748e159dd59aae4188ea3f4a8ac1c84,
+        type: 3}
+      propertyPath: _AttackEffect2
+      value: 
+      objectReference: {fileID: 587711298246763827, guid: 121944f6be158f1469ee0da885226b52,
+        type: 3}
+    - target: {fileID: 1461212728011964297, guid: e748e159dd59aae4188ea3f4a8ac1c84,
+        type: 3}
+      propertyPath: _AttackEffect3
+      value: 
+      objectReference: {fileID: 8233413071931346597, guid: 7e5293ef0d4eee1459650885ed96c7e3,
+        type: 3}
+    - target: {fileID: 1461212728011964297, guid: e748e159dd59aae4188ea3f4a8ac1c84,
+        type: 3}
+      propertyPath: _AttackOffset2.z
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 4417936120026488029, guid: e748e159dd59aae4188ea3f4a8ac1c84,
         type: 3}
       propertyPath: m_Interpolate
@@ -4733,13 +4828,33 @@ PrefabInstance:
       objectReference: {fileID: 1937337712}
     - target: {fileID: 6559117602054936325, guid: e748e159dd59aae4188ea3f4a8ac1c84,
         type: 3}
+      propertyPath: DeadLine
+      value: -4.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6559117602054936325, guid: e748e159dd59aae4188ea3f4a8ac1c84,
+        type: 3}
       propertyPath: JumpScale
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6559117602054936325, guid: e748e159dd59aae4188ea3f4a8ac1c84,
         type: 3}
+      propertyPath: respawnTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6559117602054936325, guid: e748e159dd59aae4188ea3f4a8ac1c84,
+        type: 3}
       propertyPath: movingAttack
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6559117602054936325, guid: e748e159dd59aae4188ea3f4a8ac1c84,
+        type: 3}
+      propertyPath: AliveOffset.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6559117602054936325, guid: e748e159dd59aae4188ea3f4a8ac1c84,
+        type: 3}
+      propertyPath: SecondAttackDelay
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 6969282849394247417, guid: e748e159dd59aae4188ea3f4a8ac1c84,
         type: 3}

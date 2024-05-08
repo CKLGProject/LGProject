@@ -36,8 +36,8 @@ namespace LGProject.PlayerState
         public override void LogicUpdate()
         {
             base.LogicUpdate();
-            if (stateMachine.isHit)
-                stateMachine.isHit = false;
+            if (stateMachine.isDamaged)
+                stateMachine.isDamaged = false;
 
             if(!stateMachine.guardAction.IsPressed())
             {

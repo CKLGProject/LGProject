@@ -25,21 +25,21 @@ namespace BehaviourTree
         {
             // 애니메이션 재생
             // 현재 가드를 올렸따!
-            //if (Agent == null)
-            //    Agent = AIAgent.Instance;
+            if (Agent == null)
+                Agent = AIAgent.Instance;
             if (stateMachine == null)
                 stateMachine = AIAgent.Instance.GetStateMachine;
             stateMachine.isGuard = true;
             stateMachine.playable.effectManager.PlayOneShot(EffectManager.EFFECT.Guard);
             curTimer = 0;
             stateMachine.animator.SetTrigger("Guard");
+            stateMachine.animator.SetFloat("Run", 0);
         }
 
         protected override void OnStop()
         {
             stateMachine.playable.effectManager.Stop(EffectManager.EFFECT.Guard);
 
-            stateMachine.animator.SetTrigger("Idle");
         }
 
         // 키를 누르고 있는가? > 이 는 곧 플레이어가 가까이 있을 때,
@@ -48,9 +48,9 @@ namespace BehaviourTree
         // 그럼 내부에 타이머가 존재하겠네?
         protected override State OnUpdate()
         {
-            if(stateMachine.isHit)
+            if(stateMachine.isDamaged)
             {
-                stateMachine.isHit = false;
+                stateMachine.isDamaged = false;
                 curTimer = 0;
             }    
             if(stateMachine.isGuard)
@@ -61,14 +61,16 @@ namespace BehaviourTree
                 {
                     int rand = Random.Range(1, 100);
                     // 0퍼센트면 return failure;
-                    if (rand < percent || guardEnableRange < Vector3.Distance(Agent.transform.position, Agent.player.position))
+                    if (rand < percent || guardEnableRange < Vector3.Distance(stateMachine.transform.position, Agent.player.position))
                     {
                         stateMachine.isGuard = false;
+                        stateMachine.animator.SetTrigger("Idle");
                         return State.Success;
                     }
                 }
                 return State.Running;
             }
+            Debug.Log("AA");
             // 가드를 올리고 있는 상태 -> 흠 이건 잘 모르겠다...
             return State.Success;
         }

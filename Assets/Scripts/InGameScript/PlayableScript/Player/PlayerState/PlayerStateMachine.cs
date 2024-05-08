@@ -49,11 +49,11 @@ namespace LGProject.PlayerState  //
         public bool isGrounded;
         public bool isGuard;
         public bool isJumpGuard;
-        public bool isHit;
+        public bool isDamaged;
         public bool isDown;
         public bool isKnockback;
         public bool isJumpping;
-
+        public bool isDead;
         public bool isNormalAttack;
 
         public bool isDashAttack = false;
@@ -193,6 +193,11 @@ namespace LGProject.PlayerState  //
             physics.velocity = temp;
         }
 
+        public void ResetVelocity()
+        {
+            physics.velocity = Vector3.zero;
+        }
+
         public void HitDamaged(Vector3 velocity)
         {
             if (!isGuard)
@@ -215,7 +220,7 @@ namespace LGProject.PlayerState  //
                 animator.SetTrigger("Knockback");
                 isKnockback = true;
             }
-            isHit = true;
+            isDamaged = true;
         }
 
         public void ResetAnimParameters()

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,6 +13,7 @@ namespace BehaviourTree
         protected override void OnStart()
         {
             startTime = Time.time;
+            
         }
 
         protected override void OnStop()

@@ -46,7 +46,7 @@ namespace BehaviourTree
                 //}
                 return State.Running;
             }
-            if (AIAgent.Instance.GetStateMachine.isHit)
+            if (AIAgent.Instance.GetStateMachine.isDamaged)
                 return State.Failure;
 
             return State.Success;

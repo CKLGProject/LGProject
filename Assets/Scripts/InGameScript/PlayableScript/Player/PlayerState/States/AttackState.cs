@@ -49,24 +49,40 @@ namespace LGProject.PlayerState
             // 어디서 왔는지 체크가 필요할까?
             curTimer = 0;
 
-            if (Mathf.Abs(stateMachine.moveAction.ReadValue<float>() ) > 0.2f)
-            {
-                // 물리 초기화 X 
-                return;
-            }
-
+            //if (Mathf.Abs(stateMachine.moveAction.ReadValue<float>() ) > 0.2f)
+            //{
+            //    // 물리 초기화 X 
+            //    return;
+            //}
+            #region 공격 로직 
             stateMachine.attackCount++;
-            Vector3 temp = stateMachine.physics.velocity;
-            temp.x = 0;
-            temp.z = 0;
-            stateMachine.physics.velocity = temp;
-            stateMachine.animator.SetInteger("Attack", stateMachine.attackCount);
-            Debug.Log($"AttackCount = {stateMachine.attackCount}");
-
-            // 전진 어택
+            stateMachine.StandingVelocity();
+            // 공격하면서 전진.
             if (movingAttack)
                 stateMachine.physics.velocity += Vector3.right * 1.5f;
             damageInCount = false;
+            #endregion
+
+            #region 애니메이션 출력
+            stateMachine.animator.SetInteger("Attack", stateMachine.attackCount);
+            #endregion
+
+            #region 이펙트 출력
+            switch (stateMachine.attackCount)
+            {
+                case 1:
+                    stateMachine.playable.effectManager.Play(EffectManager.EFFECT.Attack1).Forget();
+                    break;
+                case 2:
+                    stateMachine.playable.effectManager.Play(EffectManager.EFFECT.Attack2).Forget();
+                    break;
+                case 3:
+                    stateMachine.playable.effectManager.Play(EffectManager.EFFECT.Attack3, 0.25f).Forget();
+                    break;
+                default:
+                    break;  
+            }
+            #endregion
         }
 
         public override void Exit()
