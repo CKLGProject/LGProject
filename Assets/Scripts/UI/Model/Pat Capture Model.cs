@@ -12,4 +12,13 @@ public class PatCaptureModel : MonoBehaviour
         get => _canQRCodeCapture.Value;
         set => _canQRCodeCapture.Value = value;
     }
+
+    private ReactiveProperty<bool> _canBeCharacterized = new(false);
+    public Observable<bool> CanBeCharacterizedAsObservable => _canBeCharacterized.AsObservable();
+    
+    public bool CanBeCharacterized
+    {
+        get => _canBeCharacterized.Value;
+        set => _canBeCharacterized.Value = value;
+    }
 }

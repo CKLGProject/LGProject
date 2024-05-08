@@ -1,10 +1,15 @@
 using Data;
 using DG.Tweening;
 using R3;
+using ReactiveInputSystem;
+using ReactiveTouchDown;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Playables;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
 using TrackingState = UnityEngine.XR.ARSubsystems.TrackingState;
@@ -16,6 +21,9 @@ public class PatCaptureView : MonoBehaviour
     [SerializeField] private GameObject fxBackground;
     [SerializeField] private RawImage fxForeground;
     [SerializeField] private PlayableDirector fxDirector;
+    [SerializeField] private GameObject TouchArea;
+    [SerializeField] private CanvasGroup UIGroup;
+    [SerializeField] private ObjectRotation objectRotation;
 
     [SerializeField] private ARTrackedImageManager _arTrackedImageManager;
     [SerializeField] private Button captureButton;
@@ -30,8 +38,7 @@ public class PatCaptureView : MonoBehaviour
     {
         _arTrackedImageManager.trackedImagesChanged += OnTrackedImage;
     }
-
-
+    
     private void OnDisable()
     {
         _arTrackedImageManager.trackedImagesChanged -= OnTrackedImage;
@@ -53,13 +60,8 @@ public class PatCaptureView : MonoBehaviour
         }
 
         // 아무것도 트래킹 되지 않고 있다면 모두 초기화
-        if (_targetObject.Value != null)
-        {
-            foreach (ScanData spawnObject in ScanDataList)
-                spawnObject.MachineObject.SetActive(false);
-
+        if (_targetObject.Value != null) 
             _targetObject.Value = null;
-        }
     }
 
     /// <summary>
@@ -103,6 +105,11 @@ public class PatCaptureView : MonoBehaviour
     /// </summary>
     public void ActiveTargetObject()
     {
+        UIGroup.blocksRaycasts = false;
+        DOTween.To(() => UIGroup.alpha, x => UIGroup.alpha = x, 0, 1f).SetEase(Ease.OutSine).SetDelay(0.5f);
+        
+        objectRotation.Active = true;
+        _arTrackedImageManager.trackedImagesChanged -= OnTrackedImage;
         _targetObject.Value.MachineObject.SetActive(true);
     }
 
@@ -126,7 +133,7 @@ public class PatCaptureView : MonoBehaviour
 
     public void PlayScreenRotation()
     {
-        _arTrackedImageManager.trackedImagesChanged -= OnTrackedImage;
+
 
         _renderTexture = new RenderTexture(Camera.main.pixelWidth, Camera.main.pixelHeight, 0);
         Camera.main.targetTexture = _renderTexture;
@@ -145,5 +152,10 @@ public class PatCaptureView : MonoBehaviour
         fxForeground.gameObject.SetActive(true);
 
         PlayFrontFX();
+    }
+
+    public Observable<Unit> OnDoubleTouchObservable()
+    {
+        return TouchArea.DoubleTouchDownAsObservable();
     }
 }
