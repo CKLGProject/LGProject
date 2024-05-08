@@ -1,5 +1,15 @@
 {
   "dependencies": {
+    "com.annulusgames.reactive-input-system": {
+      "version": "https://github.com/AnnulusGames/ReactiveInputSystem.git?path=src/ReactiveInputSystem/Assets/ReactiveInputSystem",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.inputsystem": "1.0.0",
+        "com.cysharp.r3": "0.1.0"
+      },
+      "hash": "9ecf3a8ca32dc39eeb1c3b9da212ec9a9a9a3746"
+    },
     "com.autodesk.fbx": {
       "version": "4.2.1",
       "depth": 1,
@@ -240,7 +250,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "69a32bddcf77c8a75d6d6b1d00f9328b84936579"
+      "hash": "ec8444a53eb3029975487cb3a0ed7d3cc6bcc5e3"
     },
     "com.unity.searcher": {
       "version": "4.9.2",
