@@ -21,7 +21,7 @@ namespace LGProject.PlayerState
             //Vector3.zero;
             //stateMachine.physics.velocity = stateMachine;
 
-            stateMachine.isHit = false;     // 맞았어! 맞았다고! 그만때려!
+            stateMachine.isDamaged = false;     // 맞았어! 맞았다고! 그만때려!
             stateMachine.attackCount = 0;
             //Debug.Log($"{stateMachine.transform.ToString()}who's hit? : {stateMachine.hitPlayer}");
             curTimer = 0;

@@ -19,7 +19,8 @@ namespace BehaviourTree
                 Agent = AIAgent.Instance;
             if (stateMachine == null)
                 stateMachine = Agent.GetStateMachine;
-
+            stateMachine.StandingVelocity();
+            stateMachine.animator.SetFloat("Run", 0f);
         }
 
         protected override void OnStop()
@@ -30,16 +31,16 @@ namespace BehaviourTree
         protected override State OnUpdate()
         {
             // 경직 중 공격을 당하면 초기화
-            if(Agent.GetStateMachine.isHit && !Agent.GetStateMachine.isKnockback)
+            if(Agent.GetStateMachine.isDamaged && !Agent.GetStateMachine.isKnockback)
             {
                 // 피격 모션 출력
                 Agent.effectManager.PlayOneShot(EffectManager.EFFECT.Hit);
-                Agent.GetStateMachine.isHit = false;
+                Agent.GetStateMachine.isDamaged = false;
                 curTiemr = 0;
             }
             curTiemr += Time.deltaTime;
             //if(stunedTimer < curTiemr || (Agent.GetStateMachine.isKnockback && Agent.GetStateMachine.isHit))
-            if(stateMachine.playable.hitDelay < curTiemr || (Agent.GetStateMachine.isKnockback && Agent.GetStateMachine.isHit))
+            if(stateMachine.playable.hitDelay < curTiemr || (Agent.GetStateMachine.isKnockback ))
             {
                 // 나 피격 상태 끝났어!
                 // 그런데 공중에 있냐 체크 해야함

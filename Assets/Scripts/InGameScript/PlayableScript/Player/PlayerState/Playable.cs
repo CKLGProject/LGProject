@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using System;
 using TMPro;
+using Cysharp.Threading.Tasks;
 
 namespace LGProject.PlayerState
 {
@@ -65,6 +67,9 @@ namespace LGProject.PlayerState
         [HideInInspector] public bool movingAttack = true;
 
         public TextMeshProUGUI textGUI;
+        public Vector3 AliveOffset;
+        public float respawnTime;
+        public float DeadLine;
         //public float damageGage = 0;
 
         // 공격 방향
@@ -153,37 +158,34 @@ namespace LGProject.PlayerState
             // 일단 여기에 넣어보자
             Ray ray = new Ray(transform.position + Vector3.up * 0.25f, Vector3.down);
 
-            // 위를 체크하고 싶은데...
-            if (!stateMachine.isDown)
+            if (Physics.Raycast(ray, out hit, 0.3f, 1 << 6))
             {
-                if (Physics.Raycast(ray, out hit, 0.3f, 1 << 6))
+                if (!stateMachine.isGrounded)
                 {
-                    if (!stateMachine.isGrounded)
-                    {
-                        effectManager.Play(EffectManager.EFFECT.Landing);
-                        stateMachine.collider.isTrigger = false;
-                        stateMachine.isGrounded = true;
-                        stateMachine.isJumpGuard = false;
-                        stateMachine.jumpInCount = 0;
-                        stateMachine.StandingVelocity();
+                    effectManager.Play(EffectManager.EFFECT.Landing).Forget();
+                    stateMachine.collider.isTrigger = false;
+                    stateMachine.isGrounded = true;
+                    stateMachine.isJumpGuard = false;
+                    stateMachine.jumpInCount = 0;
+                    stateMachine.StandingVelocity();
 
 
-                        // 이거 AI랑 공용으로 사용중이라 나중에 안되게 해야함.
-                        if(!stateMachine.isKnockback && stateMachine.currentState != null)
-                            stateMachine.ChangeState(stateMachine.landingState);
+                    // 이거 AI랑 공용으로 사용중이라 나중에 안되게 해야함.
+                    if (!stateMachine.isKnockback && stateMachine.currentState != null)
+                        stateMachine.ChangeState(stateMachine.landingState);
 
-                        //stateMachine.isHit = false;
-                    }
-                }
-                else
-                {
-                    stateMachine.isGrounded = false;
-                    stateMachine.collider.isTrigger = true;
-                    stateMachine.animator.SetBool("Flying",stateMachine.jumpInCount < 1 ? true : false);
-                    if(stateMachine.jumpInCount < 1)
-                        stateMachine.jumpInCount++;
+                    //stateMachine.isHit = false;
                 }
             }
+            else
+            {
+                stateMachine.isGrounded = false;
+                stateMachine.collider.isTrigger = true;
+                stateMachine.animator.SetBool("Flying", stateMachine.jumpInCount < 1 ? true : false);
+                if (stateMachine.jumpInCount < 1)
+                    stateMachine.jumpInCount++;
+            }
+            // 위를 체크하고 싶은데...
         }
 
         public void NewPlatformCheck()
@@ -231,18 +233,42 @@ namespace LGProject.PlayerState
 
         public void handleJump()
         {
-            if(stateMachine.jumpInCount > 0 && stateMachine.isJumpping)
+            if(stateMachine.jumpInCount > 0 && stateMachine.isJumpping )
             {
                 stateMachine.isJumpping = false;
                 stateMachine.physics.velocity = Vector3.up * initialJumpVelocity;
             }
-            if(stateMachine.physics.velocity.y > 0)
+            if(stateMachine.physics.velocity.y > 0 && !stateMachine.isKnockback)
             {
                 stateMachine.physics.velocity += Vector3.up * _gravity * Time.deltaTime;
             }
         }
 
-#endregion
+        public void DeadLineCheck()
+        {
+            if(!stateMachine.isDead && transform.position.y < DeadLine)
+            {
+                stateMachine.isDead = true;
+                AliveDelay().Forget();
+            }
+        }
+
+        private async UniTaskVoid AliveDelay()
+        {
+            await UniTask.Delay(TimeSpan.FromSeconds(respawnTime));
+            stateMachine.ResetVelocity();
+            transform.position = underPlatform.transform.position + AliveOffset;
+            stateMachine.isDead = false;
+            stateMachine.damageGage = 0;
+        }
+
+        public void SetUnderPlatform()
+        {
+            underPlatform = GameObject.Find("Main_Floor (1)").GetComponent<Platform>();
+        }
+
+
+        #endregion
 
 
 

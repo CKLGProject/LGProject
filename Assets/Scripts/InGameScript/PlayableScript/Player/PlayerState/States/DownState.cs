@@ -19,19 +19,20 @@ namespace LGProject.PlayerState
         public override void Enter()
         {
             base.Enter();
-            Debug.Log("Down");
             _curTimer = 0;
+            stateMachine.isDown = true;
         }
 
         public override void Exit()
         {
             base.Exit();
+            stateMachine.isDown = false;
             stateMachine.isKnockback = false;
             stateMachine.ResetAnimParameters();
             stateMachine.animator.SetTrigger("WakeUp");
 
         }
-        
+
         public override void LogicUpdate()
         {
             base.LogicUpdate();
@@ -41,7 +42,7 @@ namespace LGProject.PlayerState
                 {
                     _flight = false;
                     stateMachine.playable.effectManager.Stop(EffectManager.EFFECT.Airborne);
-                    stateMachine.playable.effectManager.Play(EffectManager.EFFECT.Knockback);
+                    stateMachine.playable.effectManager.Play(EffectManager.EFFECT.Knockback).Forget();
                 }
                 // 땅에 닿았을 때 누워있는 State
                 _curTimer += Time.deltaTime;
@@ -58,7 +59,7 @@ namespace LGProject.PlayerState
                 if(!_flight)
                 {
                     _flight = true;
-                    stateMachine.playable.effectManager.Play(EffectManager.EFFECT.Airborne);
+                    stateMachine.playable.effectManager.Play(EffectManager.EFFECT.Airborne).Forget();
                 }
                 _curTimer = 0;
             }

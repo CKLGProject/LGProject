@@ -16,8 +16,77 @@ namespace BehaviourTree
         private bool _isAttack = false;
         private float _time = 0;
 
+
+
         protected override void OnStart()
         {
+            StartExceptionHandling();
+        }
+
+        protected override void OnStop()
+        {
+
+        }
+        protected override State OnUpdate()
+        {
+            #region Omit
+            if (stateMachine == null)
+                stateMachine = AIAgent.Instance.GetStateMachine;
+            // ?? 왜 가드를 여기서 올림?
+            if (stateMachine.isGuard || stateMachine.isDamaged)
+            {
+                stateMachine.animator.SetInteger("Attack", 0);
+                return State.Failure;
+            }
+
+            _curTimer += Time.deltaTime;
+            
+            switch (stateMachine.attackCount)
+            {
+                case 1:
+                    //animTimer = 0.25f;
+                    animTimer = stateMachine.playable.FirstAttackJudgeDelay;
+                    break;
+                case 2:
+                    //animTimer = 0.4f;
+                    animTimer = stateMachine.playable.SecondAttackJudgeDelay;
+                    break;
+                case 3:
+                    //animTimer = 0.4f;
+                    animTimer = stateMachine.playable.ThirdAttackJudgeDelay;
+                    break;
+            }
+            #region legarcy
+            if (_curTimer > animTimer)
+            {
+                //Debug.Log($"{animTimer} / {_time} ");
+                // 애니메이션이 끝난 이후 데미지 판정 -> 데미지를 넣는데 성공하면 다음 공격, 시간이 지나도 공격 못하면 Idle
+                // 애니메이션이 재생 중이라면 Running
+                if (_isAttack == false && !stateMachine.isDamaged) _isAttack = ActionJudge();
+                if (_isAttack && stateMachine.attackCount < 3  )
+                {
+                    return State.Success;
+                }
+                else if(_curTimer >= _time && !stateMachine.isDamaged)
+                {
+                    _curTimer = 0;
+                    stateMachine.isNormalAttack = false;
+                    stateMachine.attackCount = 0;
+                    _isAttack = false;
+                    stateMachine.animator.SetTrigger("Idle");
+                    stateMachine.animator.SetFloat("Run", 0);
+                    stateMachine.animator.SetInteger("Attack", stateMachine.attackCount);
+                    return State.Success;
+                }
+            }
+            return State.Running;
+            #endregion
+            #endregion
+        }
+
+        private void StartExceptionHandling()
+        {
+            #region Omit    
             if (stateMachine == null)
             {
                 stateMachine = AIAgent.Instance.GetStateMachine;
@@ -31,65 +100,20 @@ namespace BehaviourTree
             stateMachine.animator.SetInteger("Attack", stateMachine.attackCount);
             _curTimer = 0;
             _time = stateMachine.GetAnimPlayTime("Attack" + (stateMachine.attackCount).ToString());
-        }
-
-        protected override void OnStop()
-        {
-
-        }
-        protected override State OnUpdate()
-        {
-            #region Omit
-            if (stateMachine == null)
-                stateMachine = AIAgent.Instance.GetStateMachine;
-            // ?? 왜 가드를 여기서 올림?
-            if (stateMachine.isGuard || stateMachine.isHit)
-            {
-                stateMachine.animator.SetInteger("Attack", 0);
-                return State.Failure;
-            }
-
-            _curTimer += Time.deltaTime;
-            
             switch (stateMachine.attackCount)
             {
                 case 1:
-                    //animTimer = 0.25f;
-                    animTimer = stateMachine.playable.FirstAttackDelay;
+                    stateMachine.playable.effectManager.Play(EffectManager.EFFECT.Attack1).Forget();
                     break;
                 case 2:
-                    //animTimer = 0.4f;
-                    animTimer = stateMachine.playable.SecondAttackDelay;
+                    stateMachine.playable.effectManager.Play(EffectManager.EFFECT.Attack2).Forget();
                     break;
                 case 3:
-                    //animTimer = 0.4f;
-                    animTimer = stateMachine.playable.ThirdAttackDelay;
+                    stateMachine.playable.effectManager.Play(EffectManager.EFFECT.Attack3, 0.25f).Forget();
+                    break;
+                default:
                     break;
             }
-            #region legarcy
-            if (_curTimer > animTimer)
-            {
-                //Debug.Log($"{animTimer} / {_time} ");
-                // 애니메이션이 끝난 이후 데미지 판정 -> 데미지를 넣는데 성공하면 다음 공격, 시간이 지나도 공격 못하면 Idle
-                // 애니메이션이 재생 중이라면 Running
-                if (_isAttack == false && !stateMachine.isHit) _isAttack = ActionJudge();
-                if (_isAttack && stateMachine.attackCount < 3  )
-                {
-                    return State.Success;
-                }
-                else if(_curTimer >= _time && !stateMachine.isHit)
-                {
-                    _curTimer = 0;
-                    stateMachine.isNormalAttack = false;
-                    stateMachine.attackCount = 0;
-                    _isAttack = false;
-                    stateMachine.animator.SetTrigger("Idle");
-                    stateMachine.animator.SetInteger("Attack", stateMachine.attackCount);
-                    return State.Success;
-                }
-            }
-            return State.Running;
-            #endregion
             #endregion
         }
 

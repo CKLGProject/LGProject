@@ -12,6 +12,7 @@ namespace BehaviourTree
     //
     public class AIAgent : LGProject.PlayerState.Playable
     {
+        #region CUSTOM_EDITOR
 #if UNITY_EDITOR
         [CustomEditor(typeof(AIAgent), true)]
         [CanEditMultipleObjects]
@@ -308,7 +309,7 @@ namespace BehaviourTree
             }
         }
 #endif
-
+        #endregion
 
         private static AIAgent instance = null;
         public static AIAgent Instance => instance;
@@ -340,12 +341,13 @@ namespace BehaviourTree
             stateMachine = new LGProject.PlayerState.PlayerStateMachine();
             stateMachine = LGProject.PlayerState.PlayerStateMachine.CreateStateMachine(this.gameObject);
             
-            InitEffectManager();
         }
 
         private void Start()
         {
+            InitEffectManager();
             effectManager.InitParticles();
+            SetUnderPlatform();
             for (int i = 0; i < stateMachine.animator.runtimeAnimatorController.animationClips.Length; i++)
             {
                 string name = stateMachine.animator.runtimeAnimatorController.animationClips[i].name;
@@ -356,10 +358,11 @@ namespace BehaviourTree
 
         private void Update()
         {
-            isGround = stateMachine.isHit;
             // 일단 여기에 넣어보자
-            IsPushDownKey();
+            handleJump();
             PlatformCheck();
+            NewPlatformCheck();
+            DeadLineCheck();
             // 바라보는 방향 -> 일단 무조건 플레이어를 바라보게 설정
 
         }

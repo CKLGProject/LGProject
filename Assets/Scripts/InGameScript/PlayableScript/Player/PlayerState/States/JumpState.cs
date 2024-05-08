@@ -31,7 +31,7 @@ namespace LGProject.PlayerState
 
             stateMachine.JumpVelocity();
 
-            //stateMachine.isJumpping = true;
+            stateMachine.isJumpping = true;
             stateMachine.jumpInCount++;
             stateMachine.physics.velocity += Vector3.up * _jumpScale;
             stateMachine.animator.SetTrigger("Jump" + stateMachine.jumpInCount.ToString());
