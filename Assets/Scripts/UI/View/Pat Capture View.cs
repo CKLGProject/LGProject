@@ -1,15 +1,11 @@
 using Data;
 using DG.Tweening;
 using R3;
-using ReactiveInputSystem;
 using ReactiveTouchDown;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.Playables;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
 using TrackingState = UnityEngine.XR.ARSubsystems.TrackingState;
@@ -24,6 +20,7 @@ public class PatCaptureView : MonoBehaviour
     [SerializeField] private GameObject TouchArea;
     [SerializeField] private CanvasGroup UIGroup;
     [SerializeField] private ObjectRotation objectRotation;
+    [SerializeField] private Transform lightSphere;
 
     [SerializeField] private ARTrackedImageManager _arTrackedImageManager;
     [SerializeField] private Button captureButton;
@@ -38,7 +35,7 @@ public class PatCaptureView : MonoBehaviour
     {
         _arTrackedImageManager.trackedImagesChanged += OnTrackedImage;
     }
-    
+
     private void OnDisable()
     {
         _arTrackedImageManager.trackedImagesChanged -= OnTrackedImage;
@@ -60,7 +57,7 @@ public class PatCaptureView : MonoBehaviour
         }
 
         // 아무것도 트래킹 되지 않고 있다면 모두 초기화
-        if (_targetObject.Value != null) 
+        if (_targetObject.Value != null)
             _targetObject.Value = null;
     }
 
@@ -82,6 +79,56 @@ public class PatCaptureView : MonoBehaviour
         captureButton.interactable = isInteractive;
     }
 
+
+    /// <summary>
+    /// 타겟을 활성화 합니다.
+    /// </summary>
+    public void ActiveTargetObject()
+    {
+        // 캡처 버튼을 더 이상 누를 수 없겠금 방지
+        UIGroup.blocksRaycasts = false;
+
+        //UI Fade Out
+        DOTween.To(() => UIGroup.alpha, x => UIGroup.alpha = x, 0, 1f).SetEase(Ease.OutSine).SetDelay(0.2f);
+
+        // 오브젝트 회전 활성화
+        objectRotation.Active = true;
+
+        // AR 이미지 타겟팅 기능 비활성화
+        _arTrackedImageManager.trackedImagesChanged -= OnTrackedImage;
+
+        // 타겟팅된 가전제품 활성화
+        _targetObject.Value.MachineObject.SetActive(true);
+    }
+
+    /// <summary>
+    /// 캐릭터 라이즈화 하는 시퀀스를 재생합니다.
+    /// </summary>
+    public void PlayCharacterizeSequence()
+    {
+        fxDirector.Play();
+    }
+
+    /// <summary>
+    /// 머신을 밝게 빛나게 만듭니다.
+    /// </summary>
+    /// <param name="duration"></param>
+    public void PlayMachineIllumination(float duration)
+    {
+        const float targetIntensity = 7f;
+        if (_targetObject.Value.MachineObject.TryGetComponent(out MeshRenderer meshRenderer))
+            meshRenderer.material.DOColor(Color.white * targetIntensity, duration).SetEase(Ease.InOutSine);
+    }
+
+    /// <summary>
+    /// 캐릭터를 보이게 합니다.
+    /// </summary>
+    public void ShowTargetCharacter()
+    {
+        _targetObject.Value.MachineObject.SetActive(false);
+        _targetObject.Value.CharacterObject.SetActive(true);
+    }
+
     /// <summary>
     /// 버튼을 클릭했을 때의 이벤트를 반환합니다.
     /// </summary>
@@ -101,59 +148,9 @@ public class PatCaptureView : MonoBehaviour
     }
 
     /// <summary>
-    /// 타겟을 활성화 합니다.
+    /// 더블 터치를 인식하는 옵저버입니다.
     /// </summary>
-    public void ActiveTargetObject()
-    {
-        UIGroup.blocksRaycasts = false;
-        DOTween.To(() => UIGroup.alpha, x => UIGroup.alpha = x, 0, 1f).SetEase(Ease.OutSine).SetDelay(0.5f);
-        
-        objectRotation.Active = true;
-        _arTrackedImageManager.trackedImagesChanged -= OnTrackedImage;
-        _targetObject.Value.MachineObject.SetActive(true);
-    }
-
-    /// <summary>
-    /// 이미지 작아지는 연출 처리
-    /// </summary>
-    private void PlayFrontFX()
-    {
-        Sequence sequence = DOTween.Sequence();
-        sequence.Append(fxForeground.rectTransform.DOScale(Vector3.zero, 2f).SetEase(Ease.InSine));
-        sequence.Join(fxForeground.rectTransform.DORotate(new Vector3(0, 360, 0), 2f).SetEase(Ease.InSine)
-            .SetRelative(true));
-        sequence.Join(DOTween.ToAlpha(() => fxForeground.color, x => fxForeground.color = x, 0.5f, 2f)
-            .SetEase(Ease.InSine));
-        sequence.OnComplete(() =>
-        {
-            _targetObject.Value.CharacterObject.SetActive(true);
-            fxDirector.Play();
-        });
-    }
-
-    public void PlayScreenRotation()
-    {
-
-
-        _renderTexture = new RenderTexture(Camera.main.pixelWidth, Camera.main.pixelHeight, 0);
-        Camera.main.targetTexture = _renderTexture;
-        Camera.main.Render();
-        RenderTexture.active = _renderTexture;
-
-        Texture2D texture = new Texture2D(_renderTexture.width, _renderTexture.height);
-        texture.ReadPixels(new Rect(0, 0, _renderTexture.width, _renderTexture.height), 0, 0);
-        texture.Apply();
-
-        Camera.main.targetTexture = null;
-
-        _targetObject.Value.MachineObject.SetActive(false);
-        fxForeground.texture = texture;
-        fxBackground.SetActive(true);
-        fxForeground.gameObject.SetActive(true);
-
-        PlayFrontFX();
-    }
-
+    /// <returns></returns>
     public Observable<Unit> OnDoubleTouchObservable()
     {
         return TouchArea.DoubleTouchDownAsObservable();

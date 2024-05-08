@@ -16,7 +16,7 @@ public class PatCapturePresenter : MonoBehaviour
         _model = GetComponent<PatCaptureModel>();
 
         Observable.Timer(TimeSpan.FromSeconds(3))
-            .Subscribe(_ => _view.SetActiveInformationMessageText(false));
+            .Subscribe(_ => _view.SetActiveInformationMessageText(false)).AddTo(this);
 
         // Model
         _model.CanQRCodeCaptureAsObservable
@@ -39,9 +39,6 @@ public class PatCapturePresenter : MonoBehaviour
         // 캐릭터 라이즈가 가능할 때 더블 터치를 하는 옵저버
         _view.OnDoubleTouchObservable()
             .Where(_ => _model.CanBeCharacterized)
-            .Subscribe(_ =>
-            {
-                Debug.Log("더블 터치");
-            });
+            .Subscribe(_ => _view.PlayCharacterizeSequence());
     }
 }
