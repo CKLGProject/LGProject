@@ -20,6 +20,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Product/Choose Character.unity
     guid: 927209608c87843c2aa8b71005ae3d00
+  - enabled: 1
+    path: Assets/Scenes/InGameScene/PlayableFunctionTestScene2.unity
+    guid: d0d2a0ef9cdd52441a9b2c05e8901a1c
   m_configObjects:
     AR Foundation RemoteARFoundationRemoteLoaderSettings: {fileID: 11400000, guid: b62574607372f429585897789a5049fd,
       type: 2}

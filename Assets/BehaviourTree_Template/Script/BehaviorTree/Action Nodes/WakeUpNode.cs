@@ -8,6 +8,7 @@ namespace BehaviourTree
     public class WakeUpNode : ActionNode
     {
         public AIAgent Agent;
+        private LGProject.PlayerState.PlayerStateMachine stateMachine;
         [Space(10f)]
         public float wakeUpTime;
         private float curTimer;
@@ -15,7 +16,10 @@ namespace BehaviourTree
         {
             //Debug.Log("Wake Up");
             curTimer = 0;
-            AIAgent.Instance.GetStateMachine.isKnockback = false;
+            if (stateMachine == null)
+                stateMachine = AIAgent.Instance.GetStateMachine;
+            stateMachine.isKnockback = false;
+            stateMachine.isDamaged = false;
         }
 
         protected override void OnStop()
@@ -29,9 +33,11 @@ namespace BehaviourTree
             // 일어나는 중이면 무적 판정
             if (wakeUpTime < curTimer )
             {
+                stateMachine.animator.SetTrigger("WakeUp");
+                Debug.Log("WakeUp");
                 return State.Success;
             }
-            if (AIAgent.Instance.GetStateMachine.isDamaged)
+            if (stateMachine.isDamaged)
                 return State.Failure;
             return State.Running;
         }
