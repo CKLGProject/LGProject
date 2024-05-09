@@ -169,7 +169,6 @@ namespace LGProject.PlayerState
                     stateMachine.jumpInCount = 0;
                     stateMachine.StandingVelocity();
 
-
                     // 이거 AI랑 공용으로 사용중이라 나중에 안되게 해야함.
                     if (!stateMachine.isKnockback && stateMachine.currentState != null)
                         stateMachine.ChangeState(stateMachine.landingState);
