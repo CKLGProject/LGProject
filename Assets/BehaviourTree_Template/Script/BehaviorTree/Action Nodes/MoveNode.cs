@@ -121,7 +121,7 @@ namespace BehaviourTree
             }
             currentWaypoint.z = _agent.transform.position.z;
 
-            _agent.transform.position = Vector3.MoveTowards(_agent.transform.position, currentWaypoint, _agent.speed * Time.deltaTime);
+            _agent.transform.position = Vector3.MoveTowards(_agent.transform.position, currentWaypoint, _stateMachine.playable.MaximumSpeed * Time.deltaTime);
 
             Vector3 direction = currentWaypoint - _agent.transform.position;
             _agent.directionX = direction.x >= 0.1f ? true : false;
@@ -247,7 +247,7 @@ namespace BehaviourTree
                 _count++;
                 _agent.GetStateMachine.jumpInCount++;
                 _agent.GetStateMachine.JumpVelocity();
-                _agent.GetStateMachine.physics.velocity += Vector3.up * _agent.JumpScale;
+                _agent.HandleJumpping();
                 _curTimer = 0;
                 _agent.GetStateMachine.animator.SetTrigger("Jump" + _agent.GetStateMachine.jumpInCount.ToString());
             }

@@ -7,20 +7,33 @@ namespace BehaviourTree
     public class WeightSelectorNode : CompositeNode
     {
         // 총 가중치
-        [SerializeField] private float totalWeights = 0;
+        [SerializeField] private float totalWeights = -1;
         private int childCurrent = 0;
         private Node currentNode;
        
         
         public WeightSelectorNode()
         {
+            //totalWeights = -1;
+
             onChildAdded += OnChildAdded;
             onChildRemoved += OnChildRemoved;
         }
 
         protected override void OnStart()
         {
-            
+            if(totalWeights <= 0)
+            {
+                foreach(Node child in children)
+                {
+                    if(child is IWeightNode weight)
+                    {
+                        totalWeights += weight.Weight;
+                    }   
+                }
+                if (totalWeights <= 0)
+                    totalWeights = 0;
+            }
         }
 
         protected override void OnStop()

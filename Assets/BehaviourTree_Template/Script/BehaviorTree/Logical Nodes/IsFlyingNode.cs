@@ -8,11 +8,14 @@ namespace BehaviourTree
     public class IsFlyingNode : ActionNode
     {
         public AIAgent Agent;
+        private LGProject.PlayerState.PlayerStateMachine _stateMachine;
 
         protected override void OnStart()
         {
             if (Agent == null)
                 Agent = AIAgent.Instance;
+            if (_stateMachine == null)
+                _stateMachine = AIAgent.Instance.GetStateMachine;
             //Debug.Log("FlyCheck");
         }
 
@@ -25,7 +28,7 @@ namespace BehaviourTree
         // 어디서 부터 들어왔냐에 따라 다음 진행할 노드가 달라짐.
         protected override State OnUpdate()
         {
-            if(Agent.GetStateMachine.isKnockback)
+            if(_stateMachine.isKnockback)
             {
                 //Debug.Log("Flying");
                 return State.Success;

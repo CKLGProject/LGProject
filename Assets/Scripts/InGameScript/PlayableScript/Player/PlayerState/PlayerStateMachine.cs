@@ -99,7 +99,7 @@ namespace LGProject.PlayerState  //
             psm.playerInput = obj.GetComponent<PlayerInput>();
             psm.collider = obj.GetComponent<Collider>();
 
-            psm.isGrounded = false;
+            psm.isGrounded = true;
             psm.isGuard = false;
             try
             {
@@ -202,13 +202,11 @@ namespace LGProject.PlayerState  //
         {
             if (!isGuard)
             {
-                // Gage 상승
-                if(playable.textGUI != null)
-                    playable.textGUI.text = $"{damageGage}";
-                damageGage += 0.11f;
+                damageGage += 8.5f;
+                SetDamageGageOnText();
                 animator.SetTrigger("Hit");
-                // 충격에 의한 물리를 제공
-                velocity.x *= damageGage;
+                // 충격에 의한 물리 공식
+                velocity *= Mathf.Pow(2, (damageGage * 0.01f));
                 physics.velocity = velocity;
             }
             else
@@ -217,10 +215,24 @@ namespace LGProject.PlayerState  //
             }
             if(velocity != Vector3.zero)
             {
+                Debug.Log("Knockback");
                 animator.SetTrigger("Knockback");
                 isKnockback = true;
             }
             isDamaged = true;
+        }
+
+        public void SetDamageGageOnText()
+        {
+            // Gage 상승
+            int a = (int)(damageGage);
+            //= 0;
+            int b = (int)((damageGage - a) * 10);
+
+            if (playable.DamageGageInt != null)
+                playable.DamageGageInt.text = $"<rotate=\"0\">{a}.</rotate>";
+            if (playable.DamageGageDecimal != null)
+                playable.DamageGageDecimal.text = $"<rotate=\"0\">{b}%</rotate>";
         }
 
         public void ResetAnimParameters()
