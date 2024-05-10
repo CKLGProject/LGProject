@@ -134,10 +134,8 @@ namespace BehaviourTree
                 if((temp == null || temp.Item2 >= distance )&& target.transform != stateMachine.transform)
                 {
                     temp = System.Tuple.Create(target.GetComponent<Playable>(), distance);
-                    //Debug.Log(target.name);
                 }
             }
-
             // 공격 범위에 적이 존재하지 않음.
             if(temp == null)
             {
@@ -147,19 +145,19 @@ namespace BehaviourTree
             else
             {
                 Vector3 v = Vector3.zero;
-                if (AIAgent.Instance.GetStateMachine.attackCount >= 3)
+                if (stateMachine.attackCount >= 3)
                 {
                     Vector3 direction = (temp.Item1.GetStateMachine.transform.position - AIAgent.Instance.transform.position).normalized;
                     v = AIAgent.Instance.CaculateVelocity(
                        temp.Item1.GetStateMachine.transform.position + direction,
                           temp.Item1.GetStateMachine.transform.position, 0.5f, 1f);
                 }
-                if (temp.Item1 != AIAgent.Instance.transform/* && !temp.Item1.GetStateMachine.isGuard*/)
+                if (temp.Item1 != stateMachine.transform)
                 {
                     temp.
                     Item1.GetStateMachine.
-                    HitDamaged(AIAgent.Instance.GetStateMachine.attackCount < 3 ? Vector3.zero : v);
-                    temp.Item1.GetStateMachine.hitPlayer = AIAgent.Instance.transform;
+                    HitDamaged(stateMachine.attackCount < 3 ? Vector3.zero : v);
+                    temp.Item1.GetStateMachine.hitPlayer = stateMachine.transform;
 
                     temp.Item1.effectManager.PlayOneShot(EffectManager.EFFECT.Hit);
 

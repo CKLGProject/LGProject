@@ -56,7 +56,6 @@ namespace BehaviourTree
             if(stateMachine.isGuard)
             {
                 curTimer += Time.deltaTime;
-                // 최소 이정도는 기본으로 켜줘야한다.
                 if(curTimer > onTimer)
                 {
                     int rand = Random.Range(1, 100);
@@ -70,8 +69,6 @@ namespace BehaviourTree
                 }
                 return State.Running;
             }
-            Debug.Log("AA");
-            // 가드를 올리고 있는 상태 -> 흠 이건 잘 모르겠다...
             return State.Success;
         }
 
