@@ -399,9 +399,9 @@ namespace LGProject.PlayerState
         void Update()
         {
             stateMachine.currentState.LogicUpdate();
-            handleJump();
+            PlayableGravity();
             velocity = stateMachine.physics.velocity;
-            PlatformCheck();
+            //PlatformCheck();
             NewPlatformCheck();
             DeadLineCheck();
         }

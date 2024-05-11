@@ -6,23 +6,30 @@ namespace BehaviourTree
 {
     public class KnockbackFlightNode : ActionNode
     {
+        private LGProject.PlayerState.PlayerStateMachine _stateMachine;
+        private float _curTimer;
+        private float _WaitTime;
         protected override void OnStart()
         {
-            AIAgent.Instance.effectManager.Play(EffectManager.EFFECT.Airborne);
+            if (_stateMachine == null)
+                _stateMachine = AIAgent.Instance.GetStateMachine;
+            _stateMachine.playable.effectManager.Play(EffectManager.EFFECT.Airborne).Forget();
             //AIAgent.Instance.GetStateMachine.
         }
 
         protected override void OnStop()
         {
-            AIAgent.Instance.effectManager.Stop(EffectManager.EFFECT.Airborne);
+            _stateMachine.playable.effectManager.Stop(EffectManager.EFFECT.Airborne);
 
         }
 
         protected override State OnUpdate()
         {
-            if(AIAgent.Instance.GetStateMachine.isGrounded)
+
+            // 일단 판정을 받아야함.
+            if(!_stateMachine.isKnockback)
             {
-                AIAgent.Instance.GetStateMachine.animator.SetTrigger("WakeUp");
+                _stateMachine.animator.SetTrigger("WakeUp");
                 return State.Success;
             }
 

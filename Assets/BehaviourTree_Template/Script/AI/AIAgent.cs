@@ -359,8 +359,8 @@ namespace BehaviourTree
         private void Update()
         {
             // 일단 여기에 넣어보자
-            handleJump();
-            PlatformCheck();
+            PlayableGravity();
+            //PlatformCheck();
             NewPlatformCheck();
             DeadLineCheck();
             // 바라보는 방향 -> 일단 무조건 플레이어를 바라보게 설정

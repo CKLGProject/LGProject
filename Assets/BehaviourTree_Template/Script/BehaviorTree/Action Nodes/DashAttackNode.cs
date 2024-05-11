@@ -37,13 +37,6 @@ namespace BehaviourTree
             if(judgeTimer > _curTimer)
             {
                 if (_isAttack == false) _isAttack = ActionJudge();
-                //if (_curTimer > aniDelay)
-                //{
-                //    _curTimer = 0;
-                //    //Debug.Log($"ATK Count = {AIAgent.Instance.GetStateMachine.attackCount}");
-                //    //AIAgent.Instance.GetStateMachine.attackCount++;
-                //    return State.Success;
-                //}
                 return State.Running;
             }
             if (AIAgent.Instance.GetStateMachine.isDamaged)

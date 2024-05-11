@@ -104,7 +104,7 @@ namespace BehaviourTree
             }
             currentWaypoint.z = _stateMachine.transform.position.z;
 
-            _stateMachine.transform.position = Vector3.MoveTowards(_stateMachine.transform.position, currentWaypoint, _agent.speed * Time.deltaTime);
+            _stateMachine.transform.position = Vector3.MoveTowards(_stateMachine.transform.position, currentWaypoint, _agent.MaximumSpeed * Time.deltaTime);
 
             Vector3 direction = currentWaypoint - _stateMachine.transform.position;
 
