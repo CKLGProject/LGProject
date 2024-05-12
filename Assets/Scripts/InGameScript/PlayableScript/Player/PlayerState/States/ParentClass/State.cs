@@ -29,7 +29,7 @@ namespace LGProject.PlayerState
 
         public virtual void LogicUpdate()
         {
-            if(stateMachine.isDamaged && !stateMachine.isGuard)
+            if(stateMachine.IsDamaged && !stateMachine.IsGuard)
             {
                 // 공격을 받았을 때, hitState로 변경해 줌.
                 

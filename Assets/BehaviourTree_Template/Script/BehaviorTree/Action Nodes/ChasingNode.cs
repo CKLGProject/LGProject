@@ -67,7 +67,7 @@ namespace BehaviourTree
         private float TargetPointToPlayerPositionDistance()
         {
             float a = Vector3.Distance(_agent.path[_agent.path.Length - 1], _agent.player.position);
-            if (!_agent.GetStateMachine.isGrounded)
+            if (!_agent.GetStateMachine.IsGrounded)
                 a = 0;
             return a;
         }
@@ -129,9 +129,9 @@ namespace BehaviourTree
             Ray ray = new Ray(_stateMachine.transform.position + Vector3.up * 0.25f + Vector3.forward * 0.2f, Vector3.down);
             _curTimer += Time.deltaTime;
             bool case1 = /*Mathf.Abs(direction.x) < 1.5f && */direction.y >= 0.5f;
-            bool case2 = !Physics.Raycast(ray, out hit, 0.45f, 1 << 6) && _stateMachine.jumpInCount < 2;
+            bool case2 = !Physics.Raycast(ray, out hit, 0.45f, 1 << 6) && _stateMachine.JumpInCount < 2;
             // 높은 곳이면 점프를 한다.
-            if ((direction.y >= 1f && Mathf.Abs(direction.x) < 0.75f) && _stateMachine.jumpInCount < 2)
+            if ((direction.y >= 1f && Mathf.Abs(direction.x) < 0.75f) && _stateMachine.JumpInCount < 2)
             {
                 // 점프를 하는 조건
                 // isGrounded가 True거나, timer가 넘어설 경우
@@ -196,9 +196,9 @@ namespace BehaviourTree
         {
             if (_agent.path == null || 
                 _agent.path.Length < 1 || 
-                _stateMachine.isDamaged || 
-                _playerStateMachine.isKnockback || 
-                _playerStateMachine.isDown)
+                _stateMachine.IsDamaged || 
+                _playerStateMachine.IsKnockback || 
+                _playerStateMachine.IsDown)
 
                 return true;
             return false;
@@ -211,7 +211,7 @@ namespace BehaviourTree
             if (_curTimer >= jumpDelay)
             {
                 _count++;
-                _stateMachine.jumpInCount++;
+                _stateMachine.JumpInCount++;
                 _stateMachine.JumpVelocity();
                 _stateMachine.physics.velocity += Vector3.up * _agent.JumpScale;
                 _curTimer = 0;
@@ -229,7 +229,7 @@ namespace BehaviourTree
             }
 
             //_stateMachine.animator.SetTrigger("Idle");
-            _stateMachine.attackCount = 0;
+            _stateMachine.AttackCount = 0;
             _stateMachine.animator.SetInteger("Attack", 0);
             _stateMachine.animator.SetFloat("Run", 1f);
         }

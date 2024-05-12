@@ -19,7 +19,7 @@ namespace BehaviourTree
                 stateMachine = Agent.GetStateMachine;
             curTimer = 0;
             Agent.effectManager.PlayOneShot(EffectManager.EFFECT.Knockback);
-            stateMachine.isDamaged = false;
+            stateMachine.IsDamaged = false;
         }
 
         protected override void OnStop()
@@ -29,12 +29,12 @@ namespace BehaviourTree
 
         protected override State OnUpdate()
         {
-            if (stateMachine.isGrounded)
+            if (stateMachine.IsGrounded)
             {
                     
                 curTimer += Time.deltaTime;
                 // 고정된 누어있는 시간이 존재함.
-                if (stateMachine.playable.wakeUpDelay < curTimer)
+                if (stateMachine.playable.WakeUpDelay < curTimer)
                 {
                     // 누어있는 시간이 끝나면 Idle 상태가 되면서 일어남.
                     return State.Success;

@@ -22,7 +22,7 @@ namespace BehaviourTree
 
         protected override State OnUpdate()
         {
-            return AIAgent.Instance.GetStateMachine.isDamaged ? State.Success : State.Failure;
+            return AIAgent.Instance.GetStateMachine.IsDamaged ? State.Success : State.Failure;
         }
     }
 

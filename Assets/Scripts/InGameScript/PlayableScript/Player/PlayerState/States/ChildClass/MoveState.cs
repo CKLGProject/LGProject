@@ -34,12 +34,12 @@ namespace LGProject.PlayerState
         {
             base.LogicUpdate();
             stateMachine.animator.SetFloat("Run", Mathf.Abs(stateMachine.moveAction.ReadValue<float>()));
-            if (stateMachine.isGrounded && !_isPlayingMoveEffect)
+            if (stateMachine.IsGrounded && !_isPlayingMoveEffect)
             {
-                stateMachine.playable.effectManager.Play(EffectManager.EFFECT.Run);
+                stateMachine.playable.effectManager.Play(EffectManager.EFFECT.Run).Forget();
                 _isPlayingMoveEffect = true;
             }
-            else if(!stateMachine.isGrounded && _isPlayingMoveEffect)
+            else if(!stateMachine.IsGrounded && _isPlayingMoveEffect)
             {
                 _isPlayingMoveEffect = false;
                 stateMachine.playable.effectManager.Stop(EffectManager.EFFECT.Run);
@@ -55,19 +55,19 @@ namespace LGProject.PlayerState
                 AttackLogic();
                 return;
             }
-            if (stateMachine.jumpAction.triggered && stateMachine.jumpInCount < 2)
+            if (stateMachine.jumpAction.triggered && stateMachine.JumpInCount < 2)
             {
                 stateMachine.ChangeState(stateMachine.jumpState);
                 return;
             }
 
             // 점프 가드는 한번만!!
-            if (stateMachine.guardAction.triggered && !stateMachine.isJumpGuard)
+            if (stateMachine.guardAction.triggered && !stateMachine.IsJumpGuard)
             {
                 // 땅에 접촉하지 않은 상태일 때
-                if(!stateMachine.isGrounded )
+                if(!stateMachine.IsGrounded )
                 {
-                    stateMachine.isJumpGuard = true;
+                    stateMachine.IsJumpGuard = true;
                 }
                 stateMachine.ChangeState(stateMachine.guardState);
                 return;
@@ -95,16 +95,21 @@ namespace LGProject.PlayerState
 
         private void AttackLogic()
         {
-            if (!stateMachine.isGrounded)
+            if (!stateMachine.IsGrounded)
             {
                 stateMachine.ChangeState(stateMachine.jumpAttackState);
                 return;
             }
-            else
+            else if(stateMachine.IsGrounded && Mathf.Abs(stateMachine.physics.velocity.x) > 0.2f)
             {
                 stateMachine.ChangeState(stateMachine.dashAttackState);
                 return;
             }
+            else
+            {
+                stateMachine.ChangeState(stateMachine.attackState);
+            } 
+                
         }
 
         public override void PhysicsUpdate()

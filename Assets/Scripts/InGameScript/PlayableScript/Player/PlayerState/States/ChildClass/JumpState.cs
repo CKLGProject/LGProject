@@ -31,11 +31,11 @@ namespace LGProject.PlayerState
 
             stateMachine.JumpVelocity();
 
-            stateMachine.isJumpping = true;
-            stateMachine.jumpInCount++;
+            stateMachine.IsJumpping = true;
+            stateMachine.JumpInCount++;
             stateMachine.playable.HandleJumpping();
             //stateMachine.physics.velocity += Vector3.up * _jumpScale;
-            stateMachine.animator.SetTrigger("Jump" + stateMachine.jumpInCount.ToString());
+            stateMachine.animator.SetTrigger("Jump" + stateMachine.JumpInCount.ToString());
 
 
             // 이걸 n초 뒤에 켜고 싶은데...
@@ -53,7 +53,7 @@ namespace LGProject.PlayerState
 
             if (stateMachine.guardAction.triggered)
             {
-                stateMachine.guardEffect.SetActive(true);
+                //stateMachine.GuardEffect.SetActive(true);
                 stateMachine.ChangeState(stateMachine.guardState);
                 return;
             }

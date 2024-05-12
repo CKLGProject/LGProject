@@ -20,23 +20,19 @@ namespace LGProject.PlayerState
         {
             base.Enter();
             _curTimer = 0;
-            stateMachine.isDown = true;
+            stateMachine.IsDown = true;
         }
 
         public override void Exit()
         {
             base.Exit();
-            stateMachine.isDown = false;
-            stateMachine.isKnockback = false;
-            stateMachine.ResetAnimParameters();
-            stateMachine.animator.SetTrigger("WakeUp");
-
+            stateMachine.IsKnockback = false;
         }
 
         public override void LogicUpdate()
         {
             base.LogicUpdate();
-            if (stateMachine.isGrounded)
+            if (stateMachine.IsGrounded)
             {
                 if (_flight)
                 {
@@ -50,7 +46,7 @@ namespace LGProject.PlayerState
                 {
                     // 원래는 WakeUp State
                     // Wake UP 중에는 공격을 받아도 무적임.
-                    stateMachine.ChangeState(stateMachine.idleState);
+                    stateMachine.ChangeState(stateMachine.wakeUpState);
                     return;
                 }
             }
@@ -60,6 +56,7 @@ namespace LGProject.PlayerState
                 {
                     _flight = true;
                     stateMachine.playable.effectManager.Play(EffectManager.EFFECT.Airborne).Forget();
+
                 }
                 _curTimer = 0;
             }

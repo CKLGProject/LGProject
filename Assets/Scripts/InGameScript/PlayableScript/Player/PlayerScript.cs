@@ -39,6 +39,8 @@ namespace LGProject.PlayerState
 
             private SerializedProperty _hitDelay;
 
+            private SerializedProperty _downWaitDelay;
+
             private SerializedProperty _wakeUpDelay;
 
             private static GUIStyle BoldLabelStyle;
@@ -119,13 +121,16 @@ namespace LGProject.PlayerState
                     _thirdAttackJudgeDelay = serializedObject.FindProperty("ThirdAttackJudgeDelay");
 
                 if (_dashAttackDelay == null)
-                    _dashAttackDelay = serializedObject.FindProperty("dashAttackDelay");
+                    _dashAttackDelay = serializedObject.FindProperty("DashAttackDelay");
 
                 if (_hitDelay == null)
-                    _hitDelay = serializedObject.FindProperty("hitDelay");
+                    _hitDelay = serializedObject.FindProperty("HitDelay");
+
+                if (_downWaitDelay == null)
+                    _downWaitDelay = serializedObject.FindProperty("DownWaitDelay");
 
                 if (_wakeUpDelay == null)
-                    _wakeUpDelay = serializedObject.FindProperty("wakeUpDelay");
+                    _wakeUpDelay = serializedObject.FindProperty("WakeUpDelay");
 
                 if (BoldLabelStyle == null)
                 {
@@ -293,12 +298,23 @@ namespace LGProject.PlayerState
                 EditorGUILayout.Space(10f);
                 using (var changeScope = new EditorGUI.ChangeCheckScope())
                 {
-                    float value = (float)EditorGUILayout.FloatField("다운 후 딜레이", _wakeUpDelay.floatValue);
+                    float value = (float)EditorGUILayout.FloatField("다운 유지 시간", _downWaitDelay.floatValue);
+                    if (changeScope.changed)
+                    {
+                        _downWaitDelay.floatValue = value;
+                    }
+                }
+
+                EditorGUILayout.Space(10f);
+                using (var changeScope = new EditorGUI.ChangeCheckScope())
+                {
+                    float value = (float)EditorGUILayout.FloatField("기상 딜레이", _wakeUpDelay.floatValue);
                     if (changeScope.changed)
                     {
                         _wakeUpDelay.floatValue = value;
                     }
                 }
+
                 EditorGUI.indentLevel--;
                 GUI_DrawLine(5f, 20f);
                 #endregion  
@@ -316,18 +332,16 @@ namespace LGProject.PlayerState
                 Gizmos.color = Color.red;
                 Gizmos.DrawLine(transform.position, transform.position - transform.up * 1f);
 
-
                 Gizmos.color = Color.blue;
-                //Vector3 right = Vector3.right * (stateMachine.moveAction.ReadValue<float>() >= 0 ? +1.5f : -1.5f);
 
                 Vector3 center = transform.position + Vector3.up * 0.5f;
                 Vector3 right = Vector3.right * (directionX == true ? 0.7f : -0.7f);
                 Gizmos.DrawLine(transform.position, transform.position + right * 0.5f);
                 Gizmos.DrawLine(transform.position + (Vector3.up * 0.75f), transform.position + (Vector3.up * 0.75f) + right * 0.5f);
 
-                if (stateMachine.currentState.GetType() == typeof(AttackState))
+                if (stateMachine.CurrentState.GetType() == typeof(AttackState))
                 {
-                    switch (stateMachine.attackCount - 1)
+                    switch (stateMachine.AttackCount - 1)
                     {
                         case 0:
                             Gizmos.color = Color.red;
@@ -341,7 +355,7 @@ namespace LGProject.PlayerState
                     }
                     Gizmos.DrawWireCube(center + right, Vector3.one * 0.5f);
                 }
-                else if (stateMachine.currentState.GetType() == typeof(DashAttackState))
+                else if (stateMachine.CurrentState.GetType() == typeof(DashAttackState))
                 {
                     Gizmos.color = Color.red;
                     Vector3 hitBoxSize = Vector3.one * 0.7f;
@@ -349,7 +363,7 @@ namespace LGProject.PlayerState
                     //hitBoxSiz
                     Gizmos.DrawWireCube(center + right, hitBoxSize );
                 }
-                else if (stateMachine.currentState.GetType() == typeof(JumpAttackState))
+                else if (stateMachine.CurrentState.GetType() == typeof(JumpAttackState))
                 {
                     Gizmos.color = Color.red;
                     Vector3 hitBoxSize = Vector3.one * 0.7f;
@@ -398,14 +412,12 @@ namespace LGProject.PlayerState
 
         void Update()
         {
-            stateMachine.currentState.LogicUpdate();
+            stateMachine.CurrentState.LogicUpdate();
             PlayableGravity();
             velocity = stateMachine.physics.velocity;
             //PlatformCheck();
             NewPlatformCheck();
             DeadLineCheck();
         }
-
     }
-
 }

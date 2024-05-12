@@ -18,8 +18,8 @@ namespace BehaviourTree
             curTimer = 0;
             if (stateMachine == null)
                 stateMachine = AIAgent.Instance.GetStateMachine;
-            stateMachine.isKnockback = false;
-            stateMachine.isDamaged = false;
+            stateMachine.IsKnockback = false;
+            stateMachine.IsDamaged = false;
         }
 
         protected override void OnStop()
@@ -37,7 +37,7 @@ namespace BehaviourTree
                 Debug.Log("WakeUp");
                 return State.Success;
             }
-            if (stateMachine.isDamaged)
+            if (stateMachine.IsDamaged)
                 return State.Failure;
             return State.Running;
         }

@@ -423,9 +423,9 @@ namespace BehaviourTree
 
                 // stateMachine을 사용하긴 하지만, currentNode를 쓰는 것이 아니기 떄문에 판정을 달리 해야한다.
 
-                if (stateMachine.isNormalAttack)
+                if (stateMachine.IsNormalAttack)
                 {
-                    switch (stateMachine.attackCount)
+                    switch (stateMachine.AttackCount)
                     {
                         case 0:
                             Gizmos.color = Color.red;
@@ -441,7 +441,7 @@ namespace BehaviourTree
                     }
                     Gizmos.DrawWireCube(transform.position + right, Vector3.one * .75f);
                 }
-                else if(stateMachine.isDashAttack)
+                else if(stateMachine.IsDashAttack)
                 {
                     Gizmos.color = Color.red;
                     Vector3 hitBoxSize = Vector3.one * 0.75f;
@@ -449,7 +449,7 @@ namespace BehaviourTree
                     //hitBoxSiz
                     Gizmos.DrawWireCube(transform.position + right, hitBoxSize);
                 }
-                else if(stateMachine.isJumpAttack)
+                else if(stateMachine.IsJumpAttack)
                 {
                     Gizmos.color = Color.red;
                     Vector3 hitBoxSize = Vector3.one * 0.75f;
