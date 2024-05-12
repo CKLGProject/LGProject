@@ -54,7 +54,7 @@ namespace BehaviourTree
             //{
             //    return State.Failure;
             //}
-            if (Agent.GetStateMachine.isDamaged)
+            if (Agent.GetStateMachine.IsDamaged)
                 return State.Failure;
             if (Agent.path == null)
                 return State.Running;

@@ -40,13 +40,13 @@ namespace BehaviourTree
         {
             _curTimer += Time.deltaTime;
 
-            if (_stateMachine.isDamaged)
+            if (_stateMachine.IsDamaged)
                 return State.Failure;
 
-            if (_stateMachine.playable.dashAttackDelay > _curTimer)
+            if (_stateMachine.playable.DashAttackDelay > _curTimer)
             {
                 if (_isAttack == false) _isAttack = ActionJudge();
-                if(!_stateMachine.isGrounded && _agent.targetIndex < _agent.path.Length)
+                if(!_stateMachine.IsGrounded && _agent.targetIndex < _agent.path.Length)
                     FollowPath();
                 return State.Running;
             }
@@ -56,7 +56,7 @@ namespace BehaviourTree
 
         bool FollowPath()
         {
-            if (_stateMachine.isGrounded)
+            if (_stateMachine.IsGrounded)
             {
             }
             Vector3 currentWaypoint = new Vector3(_agent.path[_agent.targetIndex].x, _agent.path[_agent.targetIndex].y - 0.45f, _agent.path[_agent.targetIndex].z);
@@ -88,7 +88,7 @@ namespace BehaviourTree
             Vector3 right = Vector3.right * (_agent.directionX == true ? 1 : -1);
             Vector3 center = _agent.transform.position + right;
             Vector3 hitboxSize = Vector3.one * 0.5f;
-            hitboxSize.x *= (_stateMachine.isGrounded ? dashAttackRange : jumpAttackRange);
+            hitboxSize.x *= (_stateMachine.IsGrounded ? dashAttackRange : jumpAttackRange);
             Collider[] targets = Physics.OverlapBox(center,
                 hitboxSize,
                 Quaternion.identity, 1 << 3);
@@ -123,7 +123,7 @@ namespace BehaviourTree
                     GetStateMachine.
                     HitDamaged(v);
                     
-                    temp.Item1.GetComponent<Playable>().GetStateMachine.hitPlayer = AIAgent.Instance.transform;
+                    temp.Item1.GetComponent<Playable>().GetStateMachine.HitPlayer = AIAgent.Instance.transform;
 
                     temp.Item1.GetComponent<Playable>().effectManager.PlayOneShot(EffectManager.EFFECT.Hit);
 
@@ -139,10 +139,10 @@ namespace BehaviourTree
                 _agent = AIAgent.Instance;
             if (_stateMachine == null)
                 _stateMachine = AIAgent.Instance.GetStateMachine;
-            _stateMachine.isDashAttack = true;
+            _stateMachine.IsDashAttack = true;
             _curTimer = 0;
-            AIAgent.Instance.SetAttacRange(_stateMachine.isGrounded ? dashAttackRange : jumpAttackRange);
-            if (!_stateMachine.isGrounded)
+            AIAgent.Instance.SetAttacRange(_stateMachine.IsGrounded ? dashAttackRange : jumpAttackRange);
+            if (!_stateMachine.IsGrounded)
                 _stateMachine.animator.SetTrigger("JumpAttack");
             else
                 _stateMachine.animator.SetTrigger("DashAttack");
@@ -151,7 +151,7 @@ namespace BehaviourTree
 
         private void ExitExceptionHandling()
         {
-            AIAgent.Instance.GetStateMachine.isDashAttack = false;
+            AIAgent.Instance.GetStateMachine.IsDashAttack = false;
             _isAttack = false;
         }
     }

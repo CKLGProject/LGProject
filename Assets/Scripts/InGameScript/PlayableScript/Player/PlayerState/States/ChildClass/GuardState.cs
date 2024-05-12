@@ -20,7 +20,7 @@ namespace LGProject.PlayerState
             stateMachine.StandingVelocity();
             stateMachine.animator.SetTrigger("Guard");
             stateMachine.playable.effectManager.Play(EffectManager.EFFECT.Guard);
-            stateMachine.isGuard = true;
+            stateMachine.IsGuard = true;
         }
 
         public override void Exit()
@@ -30,14 +30,14 @@ namespace LGProject.PlayerState
 
             stateMachine.animator.SetTrigger("Idle");
             
-            stateMachine.isGuard = false;
+            stateMachine.IsGuard = false;
         }
 
         public override void LogicUpdate()
         {
             base.LogicUpdate();
-            if (stateMachine.isDamaged)
-                stateMachine.isDamaged = false;
+            if (stateMachine.IsDamaged)
+                stateMachine.IsDamaged = false;
 
             if(!stateMachine.guardAction.IsPressed())
             {

@@ -66,10 +66,10 @@ namespace BehaviourTree
             if (_agent == null)
                 _agent = AIAgent.Instance;
 
-            if (_stateMachine.isDamaged)
+            if (_stateMachine.IsDamaged)
                 return State.Failure;
 
-            if (_agent.GetStateMachine.isGrounded)
+            if (_agent.GetStateMachine.IsGrounded)
                 _agent.GetStateMachine.playable.effectManager.Play(EffectManager.EFFECT.Run).Forget();
             else
                 _agent.GetStateMachine.playable.effectManager.Stop(EffectManager.EFFECT.Run);
@@ -77,7 +77,7 @@ namespace BehaviourTree
             float distance = Vector3.Distance(_stateMachine.transform.position, _agent.player.position);
 
             // path가 있는지 확인. || 내 앞에 적이 있는 지 확인
-            if ((_agent.path == null || distance <= 1.5f) && _agent.GetStateMachine.isGrounded)
+            if ((_agent.path == null || distance <= 1.5f) && _agent.GetStateMachine.IsGrounded)
             {
                 return State.Failure;
             }
@@ -223,9 +223,9 @@ namespace BehaviourTree
             Ray ray = new Ray(_agent.transform.position + Vector3.up * 0.25f + Vector3.forward * 0.2f, Vector3.down);
             _curTimer += Time.deltaTime;
             bool case1 = /*Mathf.Abs(direction.x) < 1.5f && */direction.y >= 0.5f;
-            bool case2 = !Physics.Raycast(ray, out hit, 0.45f, 1 << 6) && _agent.GetStateMachine.jumpInCount < 2; 
+            bool case2 = !Physics.Raycast(ray, out hit, 0.45f, 1 << 6) && _agent.GetStateMachine.JumpInCount < 2; 
             // 높은 곳이면 점프를 한다.
-            if ((direction.y >= 1f && Mathf.Abs( direction.x ) < 0.75f) && _agent.GetStateMachine.jumpInCount < 2)
+            if ((direction.y >= 1f && Mathf.Abs( direction.x ) < 0.75f) && _agent.GetStateMachine.JumpInCount < 2)
             {
                 // 점프를 하는 조건
                 // isGrounded가 True거나, timer가 넘어설 경우
@@ -245,11 +245,11 @@ namespace BehaviourTree
             if (_curTimer >= jumpDelay)
             {
                 _count++;
-                _agent.GetStateMachine.jumpInCount++;
+                _agent.GetStateMachine.JumpInCount++;
                 _agent.GetStateMachine.JumpVelocity();
                 _agent.HandleJumpping();
                 _curTimer = 0;
-                _agent.GetStateMachine.animator.SetTrigger("Jump" + _agent.GetStateMachine.jumpInCount.ToString());
+                _agent.GetStateMachine.animator.SetTrigger("Jump" + _agent.GetStateMachine.JumpInCount.ToString());
             }
         }
 
@@ -258,7 +258,7 @@ namespace BehaviourTree
             if (_stateMachine == null)
                 _stateMachine = AIAgent.Instance.GetStateMachine;
             //_stateMachine.animator.SetTrigger("Idle");
-            _stateMachine.attackCount = 0;
+            _stateMachine.AttackCount = 0;
             _stateMachine.animator.SetInteger("Attack", 0);
             _stateMachine.animator.SetFloat("Run", 1f);
         }

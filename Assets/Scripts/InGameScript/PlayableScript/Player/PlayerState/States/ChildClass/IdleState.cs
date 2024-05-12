@@ -27,7 +27,7 @@ namespace LGProject.PlayerState
         {
             base.LogicUpdate();
             // 키 입력을 대기 받으면 상태가 변경됨.
-            if (Mathf.Abs(stateMachine.moveAction.ReadValue<float>()) > 0.2f)
+            if (Mathf.Abs(stateMachine.moveAction.ReadValue<float>()) > 0.2f )
             {
                 stateMachine.ChangeState(stateMachine.moveState);
                 return;
@@ -38,7 +38,7 @@ namespace LGProject.PlayerState
                 AttackLogic();
                 return;
             }
-            if (stateMachine.jumpAction.triggered && stateMachine.jumpInCount < 2)
+            if (stateMachine.jumpAction.triggered && stateMachine.JumpInCount < 2)
             {
                 //Debug.Log("idleJump");
                 stateMachine.ChangeState(stateMachine.jumpState);
@@ -46,12 +46,12 @@ namespace LGProject.PlayerState
             }
 
             // 점프 중에는 한 번만 가능하게 한다.
-            if (stateMachine.guardAction.triggered && !stateMachine.isJumpGuard)
+            if (stateMachine.guardAction.triggered && !stateMachine.IsJumpGuard)
             {
                 // 땅에 접촉하지 않은 상태일 때
-                if (!stateMachine.isGrounded)
+                if (!stateMachine.IsGrounded)
                 {
-                    stateMachine.isJumpGuard = true;
+                    stateMachine.IsJumpGuard = true;
                 }
                 stateMachine.ChangeState(stateMachine.guardState);
                 return;
@@ -68,13 +68,13 @@ namespace LGProject.PlayerState
         void AttackLogic()
         {
             // 땅에 붙어있으면서 공격을 진행하면?
-            if (stateMachine.isGrounded)
+            if (stateMachine.IsGrounded)
             {
                 stateMachine.ChangeState(stateMachine.attackState);
                 return;
             }
             // 공중에서 공격하면?
-            if(!stateMachine.isGrounded)
+            if(!stateMachine.IsGrounded)
             {
                 stateMachine.ChangeState(stateMachine.jumpAttackState);
                 return;

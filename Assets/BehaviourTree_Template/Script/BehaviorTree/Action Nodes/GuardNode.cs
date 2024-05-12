@@ -29,7 +29,7 @@ namespace BehaviourTree
                 Agent = AIAgent.Instance;
             if (stateMachine == null)
                 stateMachine = AIAgent.Instance.GetStateMachine;
-            stateMachine.isGuard = true;
+            stateMachine.IsGuard = true;
             stateMachine.playable.effectManager.PlayOneShot(EffectManager.EFFECT.Guard);
             curTimer = 0;
             stateMachine.animator.SetTrigger("Guard");
@@ -48,12 +48,12 @@ namespace BehaviourTree
         // 그럼 내부에 타이머가 존재하겠네?
         protected override State OnUpdate()
         {
-            if(stateMachine.isDamaged)
+            if(stateMachine.IsDamaged)
             {
-                stateMachine.isDamaged = false;
+                stateMachine.IsDamaged = false;
                 curTimer = 0;
             }    
-            if(stateMachine.isGuard)
+            if(stateMachine.IsGuard)
             {
                 curTimer += Time.deltaTime;
                 if(curTimer > onTimer)
@@ -62,7 +62,7 @@ namespace BehaviourTree
                     // 0퍼센트면 return failure;
                     if (rand < percent || guardEnableRange < Vector3.Distance(stateMachine.transform.position, Agent.player.position))
                     {
-                        stateMachine.isGuard = false;
+                        stateMachine.IsGuard = false;
                         stateMachine.animator.SetTrigger("Idle");
                         return State.Success;
                     }

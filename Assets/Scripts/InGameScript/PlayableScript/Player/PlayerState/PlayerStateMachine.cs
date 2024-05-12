@@ -40,39 +40,41 @@ namespace LGProject.PlayerState  //
         public HitState hitState;
         public GuardState guardState;
         public DownState downState;
+        public WakeUpState wakeUpState;
+        public UltimateState ultimateState;
         public LandingState landingState;
 
         // 스택 큐 -> 입력있을 때 마다 타이머 초기화 1초안 안에 안누르면 초기화?
         //private Queue<E_KEYTYPE> comboQueue;
 
+        public bool IsGrounded;
+        public bool IsGuard;
+        public bool IsJumpGuard;
+        public bool IsDamaged;
+        public bool IsDown;
+        public bool IsKnockback;
+        public bool IsJumpping;
+        public bool IsDead;
+        public bool IsNormalAttack;
 
-        public bool isGrounded;
-        public bool isGuard;
-        public bool isJumpGuard;
-        public bool isDamaged;
-        public bool isDown;
-        public bool isKnockback;
-        public bool isJumpping;
-        public bool isDead;
-        public bool isNormalAttack;
+        public bool IsDashAttack = false;
+        public bool IsJumpAttack = false;
 
-        public bool isDashAttack = false;
-        public bool isJumpAttack = false;
+        //public GameObject GuardEffect;
 
-        public GameObject guardEffect;
-
-        public float damageGage = 0;
+        public float DamageGage = 0;
+        public float UltimateGage = 0;
 
         #region Action_Properties
 
 
         #endregion
 
-        public int jumpInCount = 0;
-        public int attackCount = 0;
+        public int JumpInCount = 0;
+        public int AttackCount = 0;
 
-        public State currentState;
-        public Transform hitPlayer;
+        public State CurrentState;
+        public Transform HitPlayer;
 
         private Dictionary<string, float> animClipsInfo = new Dictionary<string, float>();
 
@@ -99,8 +101,8 @@ namespace LGProject.PlayerState  //
             psm.playerInput = obj.GetComponent<PlayerInput>();
             psm.collider = obj.GetComponent<Collider>();
 
-            psm.isGrounded = true;
-            psm.isGuard = false;
+            psm.IsGrounded = true;
+            psm.IsGuard = false;
             try
             {
                 psm.moveAction = psm.playerInput.actions["Move"];
@@ -116,13 +118,14 @@ namespace LGProject.PlayerState  //
                 psm.attackState = new AttackState(psm, ref psm.playable.FirstAttackJudgeDelay, ref psm.playable.FirstAttackDelay, ref psm.playable.SecondAttackJudgeDelay, ref psm.playable.SecondAttackDelay, ref psm.playable.ThirdAttackJudgeDelay, ref psm.playable.ThirdAttackDelay);
 
                 psm.jumpAttackState = new JumpAttackState(psm, psm.playable.MaximumSpeed);
-                psm.dashAttackState = new DashAttackState(psm, ref psm.playable.dashAttackDelay);
+                psm.dashAttackState = new DashAttackState(psm, ref psm.playable.DashAttackDelay);
 
-                psm.hitState = new HitState(psm, ref psm.playable.hitDelay);
+                psm.hitState = new HitState(psm, ref psm.playable.HitDelay);
                 psm.guardState = new GuardState(psm);
 
-                psm.downState = new DownState(psm, ref psm.playable.wakeUpDelay);
-
+                //psm.ultimateState = new HitUltimateState(psm, 10.);
+                psm.downState = new DownState(psm, ref psm.playable.DownWaitDelay);
+                psm.wakeUpState = new WakeUpState(psm, ref psm.playable.WakeUpDelay);
                 psm.landingState = new LandingState(psm);
 
                 psm.Initalize(psm.idleState);
@@ -135,18 +138,23 @@ namespace LGProject.PlayerState  //
             return psm;
         }
 
+        public void SetUltimateState()
+        {
+
+        }
+
         public void Initalize(State startingState)
         {
-            currentState = startingState;
+            CurrentState = startingState;
             startingState.Enter();
         }
 
         public void ChangeState(State nextState)
         {
-            currentState.Exit();
+            CurrentState.Exit();
 
-            currentState = nextState;
-            currentState.Enter();
+            CurrentState = nextState;
+            CurrentState.Enter();
         }
 
         public Transform CheckEnemy()
@@ -200,13 +208,13 @@ namespace LGProject.PlayerState  //
 
         public void HitDamaged(Vector3 velocity)
         {
-            if (!isGuard)
+            if (!IsGuard)
             {
-                damageGage += 8.5f;
+                DamageGage += 8.5f;
                 SetDamageGageOnText();
                 animator.SetTrigger("Hit");
                 // 충격에 의한 물리 공식
-                velocity *= Mathf.Pow(2, (damageGage * 0.01f));
+                velocity *= Mathf.Pow(2, (DamageGage * 0.01f));
                 physics.velocity = velocity;
             }
             else
@@ -217,17 +225,17 @@ namespace LGProject.PlayerState  //
             {
                 Debug.Log("Knockback");
                 animator.SetTrigger("Knockback");
-                isKnockback = true;
+                IsKnockback = true;
             }
-            isDamaged = true;
+            IsDamaged = true;
         }
 
         public void SetDamageGageOnText()
         {
             // Gage 상승
-            int a = (int)(damageGage);
+            int a = (int)(DamageGage);
             //= 0;
-            int b = (int)((damageGage - a) * 10);
+            int b = (int)((DamageGage - a) * 10);
 
             if (playable.DamageGageInt != null)
                 playable.DamageGageInt.text = $"<rotate=\"0\">{a}.</rotate>";
@@ -254,11 +262,11 @@ namespace LGProject.PlayerState  //
         // combo System
         public bool InputCombo(E_KEYTYPE keyType)
         {
-            if(currentState.GetType() == typeof(JumpState) && true) 
+            if(CurrentState.GetType() == typeof(JumpState) && true) 
             {
                 return false;
             }
-            else if(currentState.GetType() == typeof(AttackState))
+            else if(CurrentState.GetType() == typeof(AttackState))
             {
                 return true;
             }

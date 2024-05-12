@@ -21,8 +21,8 @@ namespace LGProject.PlayerState
             //Vector3.zero;
             //stateMachine.physics.velocity = stateMachine;
 
-            stateMachine.isDamaged = false;     // 맞았어! 맞았다고! 그만때려!
-            stateMachine.attackCount = 0;
+            stateMachine.IsDamaged = false;     // 맞았어! 맞았다고! 그만때려!
+            stateMachine.AttackCount = 0;
             //Debug.Log($"{stateMachine.transform.ToString()}who's hit? : {stateMachine.hitPlayer}");
             curTimer = 0;
         }
@@ -36,7 +36,7 @@ namespace LGProject.PlayerState
         public override void LogicUpdate()
         {
             base.LogicUpdate();
-            if(stateMachine.isGrounded)
+            if(stateMachine.IsGrounded)
             {
                 curTimer += Time.deltaTime;
                 if (curTimer >= stunedTimer)

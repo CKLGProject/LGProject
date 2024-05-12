@@ -20,14 +20,14 @@ namespace BehaviourTree
         // 대쉬 어택.
         protected override void OnStart()
         {
-            AIAgent.Instance.GetStateMachine.isDashAttack = true;
+            AIAgent.Instance.GetStateMachine.IsDashAttack = true;
             _curTimer = 0;
             AIAgent.Instance.SetAttacRange(attackRange);
         }
 
         protected override void OnStop()
         {
-            AIAgent.Instance.GetStateMachine.isDashAttack = false;
+            AIAgent.Instance.GetStateMachine.IsDashAttack = false;
         }
 
         // Dash Attack을 할 때 이동 방향을 바라보며 공격을 해야함.
@@ -39,7 +39,7 @@ namespace BehaviourTree
                 if (_isAttack == false) _isAttack = ActionJudge();
                 return State.Running;
             }
-            if (AIAgent.Instance.GetStateMachine.isDamaged)
+            if (AIAgent.Instance.GetStateMachine.IsDamaged)
                 return State.Failure;
 
             return State.Success;
@@ -82,7 +82,7 @@ namespace BehaviourTree
                     GetStateMachine.
                     HitDamaged(v);
                     //damageInCount = true; <- 이건 좀 생각해봐야 할 듯...
-                    temp.Item1.GetComponent<Playable>().GetStateMachine.hitPlayer = AIAgent.Instance.transform;
+                    temp.Item1.GetComponent<Playable>().GetStateMachine.HitPlayer = AIAgent.Instance.transform;
 
                     return true;
                 }

@@ -55,7 +55,7 @@ namespace LGProject.PlayerState
             //    return;
             //}
             #region 공격 로직 
-            stateMachine.attackCount++;
+            stateMachine.AttackCount++;
             stateMachine.StandingVelocity();
             // 공격하면서 전진.
             if (movingAttack)
@@ -64,11 +64,11 @@ namespace LGProject.PlayerState
             #endregion
 
             #region 애니메이션 출력
-            stateMachine.animator.SetInteger("Attack", stateMachine.attackCount);
+            stateMachine.animator.SetInteger("Attack", stateMachine.AttackCount);
             #endregion
 
             #region 이펙트 출력
-            switch (stateMachine.attackCount)
+            switch (stateMachine.AttackCount)
             {
                 case 1:
                     stateMachine.playable.effectManager.Play(EffectManager.EFFECT.Attack1).Forget();
@@ -116,9 +116,9 @@ namespace LGProject.PlayerState
 
         private void AttackLogic()
         {
-            float time = stateMachine.GetAnimPlayTime("Attack" + stateMachine.attackCount.ToString());
+            float time = stateMachine.GetAnimPlayTime("Attack" + stateMachine.AttackCount.ToString());
             float animDelay = 1 ;
-            switch (stateMachine.attackCount)
+            switch (stateMachine.AttackCount)
             {
                 case 1:
                     //animDelay = 0.2f;
@@ -139,13 +139,13 @@ namespace LGProject.PlayerState
                     //time = 0.6f;
                     break;
             }
-            Debug.Log($"sm = {stateMachine.attackCount} / attackDelay = {animDelay} / time {time }");
+            Debug.Log($"sm = {stateMachine.AttackCount} / attackDelay = {animDelay} / time {time }");
             // 딜레이가 끝난 이후 추가 키 입력이 들어가면? 
             if (curTimer > animDelay)   
             {
                 // 공격 진행
                 if (damageInCount == false) AttackJudge();
-                if (stateMachine.attackAction.triggered && stateMachine.attackCount < 3)
+                if (stateMachine.attackAction.triggered && stateMachine.AttackCount < 3)
                 {
                     stateMachine.ChangeState(stateMachine.attackState);
                 }
@@ -155,7 +155,7 @@ namespace LGProject.PlayerState
                     // 모션이 끝났으니 기본 상태로 되돌아감.
                     Debug.Log("Stop");
                     stateMachine.animator.SetTrigger("Idle");
-                    stateMachine.attackCount = 0;
+                    stateMachine.AttackCount = 0;
                     stateMachine .ChangeState(stateMachine.idleState);
                     return;
                 }
@@ -201,7 +201,7 @@ namespace LGProject.PlayerState
                         {
                             temp.
                             Item1.GetStateMachine.
-                            HitDamaged(stateMachine.attackCount - 1 < 2 ? Vector3.zero : v);
+                            HitDamaged(stateMachine.AttackCount - 1 < 2 ? Vector3.zero : v);
                             damageInCount = true;
 
                             temp.Item1.effectManager.PlayOneShot(EffectManager.EFFECT.Hit);

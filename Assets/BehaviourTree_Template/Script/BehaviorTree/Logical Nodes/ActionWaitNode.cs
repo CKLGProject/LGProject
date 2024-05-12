@@ -72,9 +72,9 @@ namespace BehaviourTree
                         temp.
                         Item1.GetComponent<Playable>().
                         GetStateMachine.
-                        HitDamaged(Agent.GetStateMachine.attackCount - 1 < 2 ? Vector3.zero : v);
+                        HitDamaged(Agent.GetStateMachine.AttackCount - 1 < 2 ? Vector3.zero : v);
                         damageInCount = true;
-                        temp.Item1.GetComponent<Playable>().GetStateMachine.hitPlayer = Agent.transform;
+                        temp.Item1.GetComponent<Playable>().GetStateMachine.HitPlayer = Agent.transform;
                         //Debug.Log($"Attack In Count = {stateMachine.attackCount}");
                         return true;
                     }

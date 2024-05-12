@@ -20,7 +20,7 @@ namespace BehaviourTree
 
         protected override void OnStop()
         {
-            Agent.GetStateMachine.isNormalAttack = false;
+            Agent.GetStateMachine.IsNormalAttack = false;
 
         }
 

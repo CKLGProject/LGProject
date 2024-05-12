@@ -33,7 +33,7 @@ namespace BehaviourTree
             if (stateMachine == null)
                 stateMachine = AIAgent.Instance.GetStateMachine;
             // ?? 왜 가드를 여기서 올림?
-            if (stateMachine.isGuard || stateMachine.isDamaged)
+            if (stateMachine.IsGuard || stateMachine.IsDamaged)
             {
                 stateMachine.animator.SetInteger("Attack", 0);
                 return State.Failure;
@@ -41,7 +41,7 @@ namespace BehaviourTree
 
             _curTimer += Time.deltaTime;
             
-            switch (stateMachine.attackCount)
+            switch (stateMachine.AttackCount)
             {
                 case 1:
                     //animTimer = 0.25f;
@@ -62,20 +62,20 @@ namespace BehaviourTree
                 //Debug.Log($"{animTimer} / {_time} ");
                 // 애니메이션이 끝난 이후 데미지 판정 -> 데미지를 넣는데 성공하면 다음 공격, 시간이 지나도 공격 못하면 Idle
                 // 애니메이션이 재생 중이라면 Running
-                if (_isAttack == false && !stateMachine.isDamaged) _isAttack = ActionJudge();
-                if (_isAttack && stateMachine.attackCount < 3  )
+                if (_isAttack == false && !stateMachine.IsDamaged) _isAttack = ActionJudge();
+                if (_isAttack && stateMachine.AttackCount < 3  )
                 {
                     return State.Success;
                 }
-                else if(_curTimer >= _time && !stateMachine.isDamaged)
+                else if(_curTimer >= _time && !stateMachine.IsDamaged)
                 {
                     _curTimer = 0;
-                    stateMachine.isNormalAttack = false;
-                    stateMachine.attackCount = 0;
+                    stateMachine.IsNormalAttack = false;
+                    stateMachine.AttackCount = 0;
                     _isAttack = false;
                     stateMachine.animator.SetTrigger("Idle");
                     stateMachine.animator.SetFloat("Run", 0);
-                    stateMachine.animator.SetInteger("Attack", stateMachine.attackCount);
+                    stateMachine.animator.SetInteger("Attack", stateMachine.AttackCount);
                     return State.Success;
                 }
             }
@@ -91,16 +91,16 @@ namespace BehaviourTree
             {
                 stateMachine = AIAgent.Instance.GetStateMachine;
             }
-            if (stateMachine.attackCount > 2)
-                stateMachine.attackCount = 0;
+            if (stateMachine.AttackCount > 2)
+                stateMachine.AttackCount = 0;
             _isAttack = false;
-            stateMachine.isNormalAttack = true;
+            stateMachine.IsNormalAttack = true;
             AIAgent.Instance.SetAttacRange(attackRange);
-            stateMachine.attackCount++;
-            stateMachine.animator.SetInteger("Attack", stateMachine.attackCount);
+            stateMachine.AttackCount++;
+            stateMachine.animator.SetInteger("Attack", stateMachine.AttackCount);
             _curTimer = 0;
-            _time = stateMachine.GetAnimPlayTime("Attack" + (stateMachine.attackCount).ToString());
-            switch (stateMachine.attackCount)
+            _time = stateMachine.GetAnimPlayTime("Attack" + (stateMachine.AttackCount).ToString());
+            switch (stateMachine.AttackCount)
             {
                 case 1:
                     stateMachine.playable.effectManager.Play(EffectManager.EFFECT.Attack1).Forget();
@@ -145,7 +145,7 @@ namespace BehaviourTree
             else
             {
                 Vector3 v = Vector3.zero;
-                if (stateMachine.attackCount >= 3)
+                if (stateMachine.AttackCount >= 3)
                 {
                     Vector3 direction = (temp.Item1.GetStateMachine.transform.position - AIAgent.Instance.transform.position).normalized;
                     v = AIAgent.Instance.CaculateVelocity(
@@ -156,8 +156,8 @@ namespace BehaviourTree
                 {
                     temp.
                     Item1.GetStateMachine.
-                    HitDamaged(stateMachine.attackCount < 3 ? Vector3.zero : v);
-                    temp.Item1.GetStateMachine.hitPlayer = stateMachine.transform;
+                    HitDamaged(stateMachine.AttackCount < 3 ? Vector3.zero : v);
+                    temp.Item1.GetStateMachine.HitPlayer = stateMachine.transform;
 
                     temp.Item1.effectManager.PlayOneShot(EffectManager.EFFECT.Hit);
 

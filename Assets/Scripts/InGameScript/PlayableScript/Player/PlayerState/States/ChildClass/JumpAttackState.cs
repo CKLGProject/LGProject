@@ -17,7 +17,7 @@ namespace LGProject.PlayerState
         {
             base.Enter();
             // Velocity는 초기화시키지 않도록 하자.
-            Debug.Log($"Enter = {stateMachine.jumpInCount}");
+            Debug.Log($"Enter = {stateMachine.JumpInCount}");
             stateMachine.animator.SetTrigger("JumpAttack");
         }
 
@@ -25,7 +25,7 @@ namespace LGProject.PlayerState
         {
             base.Exit();
             //stateMachine.jumpInCount = 0;
-            Debug.Log($"Exit = {stateMachine.jumpInCount}");
+            Debug.Log($"Exit = {stateMachine.JumpInCount}");
             
         }
 
@@ -49,7 +49,7 @@ namespace LGProject.PlayerState
 
             // 공격 판정 -> 아직 없음.
 
-            if (stateMachine.isGrounded)
+            if (stateMachine.IsGrounded)
             {
                 stateMachine.ChangeState(stateMachine.idleState);
                 return;
