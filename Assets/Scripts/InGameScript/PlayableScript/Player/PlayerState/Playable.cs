@@ -248,7 +248,7 @@ namespace LGProject.PlayerState
                 {
                     stateMachine.IsGrounded = false;
                     stateMachine.collider.isTrigger = true;
-                    Debug.Log("Jump Flying");
+                    //Debug.Log("Jump Flying");
                 }
                 // 피격당해 날아간 상태
                 if(stateMachine.IsKnockback)
@@ -256,7 +256,7 @@ namespace LGProject.PlayerState
                     stateMachine.IsGrounded = false;
                     stateMachine.collider.isTrigger = true;
                     //stateMachine.isKnockback = false;
-                    Debug.Log("Knockback Flying");
+                    //Debug.Log("Knockback Flying");
                 }
             }
         }

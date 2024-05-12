@@ -74,7 +74,7 @@ namespace LGProject.PlayerState  //
         public int AttackCount = 0;
 
         public State CurrentState;
-        public Transform HitPlayer;
+        public Transform hitPlayer;
 
         private Dictionary<string, float> animClipsInfo = new Dictionary<string, float>();
 

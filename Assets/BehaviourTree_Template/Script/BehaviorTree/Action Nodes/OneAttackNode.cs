@@ -123,7 +123,7 @@ namespace BehaviourTree
                     GetStateMachine.
                     HitDamaged(v);
                     
-                    temp.Item1.GetComponent<Playable>().GetStateMachine.HitPlayer = AIAgent.Instance.transform;
+                    temp.Item1.GetComponent<Playable>().GetStateMachine.hitPlayer = AIAgent.Instance.transform;
 
                     temp.Item1.GetComponent<Playable>().effectManager.PlayOneShot(EffectManager.EFFECT.Hit);
 

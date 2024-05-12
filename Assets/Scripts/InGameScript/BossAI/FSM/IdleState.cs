@@ -21,6 +21,7 @@ namespace LGProject.BossAI
         {
             base.Enter();
             _curTimer = 0;
+            _stateMachine.SetAnimationBoolean("Angry", false);
         }
 
         public override void Exit()
