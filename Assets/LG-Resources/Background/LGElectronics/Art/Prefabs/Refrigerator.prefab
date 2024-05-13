@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &5371635474999502858
+--- !u!1001 &6219959688531663681
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -58,16 +58,61 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -7511558181221131132, guid: 3443966602a9e2b42b9ff710db3cc5b0,
+    - target: {fileID: -2908902863300082560, guid: 3443966602a9e2b42b9ff710db3cc5b0,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 3c3a4cd249cba494696bb89af0a1b512, type: 2}
+      objectReference: {fileID: 2100000, guid: fef9fed7c7e1e4a41b006e899d27ba2e, type: 2}
+    - target: {fileID: -2908902863300082560, guid: 3443966602a9e2b42b9ff710db3cc5b0,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: aa5e948763a3ba84bb6f5b10e77c75a6, type: 2}
+    - target: {fileID: 139038718854476479, guid: 3443966602a9e2b42b9ff710db3cc5b0,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: fef9fed7c7e1e4a41b006e899d27ba2e, type: 2}
+    - target: {fileID: 830646054586413381, guid: 3443966602a9e2b42b9ff710db3cc5b0,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: aa5e948763a3ba84bb6f5b10e77c75a6, type: 2}
+    - target: {fileID: 830646054586413381, guid: 3443966602a9e2b42b9ff710db3cc5b0,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: fef9fed7c7e1e4a41b006e899d27ba2e, type: 2}
     - target: {fileID: 919132149155446097, guid: 3443966602a9e2b42b9ff710db3cc5b0,
         type: 3}
       propertyPath: m_Name
       value: Refrigerator
       objectReference: {fileID: 0}
+    - target: {fileID: 1104581176117405025, guid: 3443966602a9e2b42b9ff710db3cc5b0,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: fef9fed7c7e1e4a41b006e899d27ba2e, type: 2}
+    - target: {fileID: 4012902042734320743, guid: 3443966602a9e2b42b9ff710db3cc5b0,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: fef9fed7c7e1e4a41b006e899d27ba2e, type: 2}
+    - target: {fileID: 4012902042734320743, guid: 3443966602a9e2b42b9ff710db3cc5b0,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: aa5e948763a3ba84bb6f5b10e77c75a6, type: 2}
+    - target: {fileID: 5644971709233875600, guid: 3443966602a9e2b42b9ff710db3cc5b0,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: fef9fed7c7e1e4a41b006e899d27ba2e, type: 2}
+    - target: {fileID: 5644971709233875600, guid: 3443966602a9e2b42b9ff710db3cc5b0,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: aa5e948763a3ba84bb6f5b10e77c75a6, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
