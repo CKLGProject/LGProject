@@ -110,11 +110,13 @@ MonoBehaviour:
   SecondAttackJudgeDelay: 0.4
   ThirdAttackDelay: 1
   ThirdAttackJudgeDelay: 0.2
-  dashAttackDelay: 1
-  hitDelay: 1
-  wakeUpDelay: 1
+  DashAttackDelay: 0.5
+  HitDelay: 0.5
+  DownWaitDelay: 0
+  WakeUpDelay: 0.5
   movingAttack: 1
-  textGUI: {fileID: 0}
+  DamageGageInt: {fileID: 0}
+  DamageGageDecimal: {fileID: 0}
   AliveOffset: {x: 0, y: 5, z: 0}
   respawnTime: 1
   DeadLine: -4.8
@@ -250,6 +252,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8014300752184872275, guid: 677a68bf96020ca41b3dfffd46622418,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8b6d37d1a36d0044fb6b8252ec1ff325, type: 2}
     - target: {fileID: 919132149155446097, guid: 677a68bf96020ca41b3dfffd46622418,
         type: 3}
       propertyPath: m_Name

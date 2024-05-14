@@ -14,9 +14,17 @@ namespace LGProject.BossAI
     public class BossPrincipal : MonoBehaviour
     {
 
+        public float MoveWaitTime = 0f;
+        public float AttackDelayTime = 0;
+        public float MoveSpeed = 2f;
+        //public float 
+
         public CURRENTSTATE[] States;
-        public Animator Animator;
+        public PlayerState.Playable[] playableCharacters;
+
         private AiStateMachine _stateMachine;
+
+        [SerializeField] private bool angry; 
 
 
         // Start is called before the first frame update
@@ -24,14 +32,18 @@ namespace LGProject.BossAI
         {
             _stateMachine = AiStateMachine.CreateAIStateMachine(this.gameObject);
             _stateMachine.InitStateArray(States);
-            //_stateMachine.Initalize(_stateMachine.CurrentState);
+            _stateMachine.PlayersProperties = playableCharacters;
             //_stateMachine.
+
         }
 
         // Update is called once per frame
         void Update()
         {
-            _stateMachine.CurrentState.Update();
+            if(_stateMachine.CurrentState != null)
+                _stateMachine.CurrentState.Update();
+
         }
+
     }
 }

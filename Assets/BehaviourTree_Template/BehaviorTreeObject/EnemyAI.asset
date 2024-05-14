@@ -43,6 +43,30 @@ MonoBehaviour:
   description: "\uACF5\uACA9 \uBE48\uB3C4 : 4"
   child: {fileID: -1024075571135447831}
   weight: 7
+--- !u!114 &-7742227205409017021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6babec2a44aec92419c275b704eb9284, type: 3}
+  m_Name: SequencerNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 3e0ef4672235ee445b751af11d55c721
+  position: {x: 217, y: 1592}
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    moveToObject: {fileID: 0}
+  description: 
+  children:
+  - {fileID: 8494814206541073582}
+  - {fileID: -227460586683960606}
+  current: 0
 --- !u!114 &-7617570576366680649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -103,7 +127,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 52aa76a76aaf432429f80607369448b1
-  position: {x: -1110, y: 444}
+  position: {x: -1110, y: 443}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
@@ -111,7 +135,7 @@ MonoBehaviour:
     \uCD9C\uB825\uB428.\n\uACF5\uC911\uC5D0 \uB4E0 \uC0C1\uD0DC\uBA74 \uD0C0\uC774\uBA38\uAC00
     \uB3CC\uC9C0 \uC54A\uC74C."
   Agent: {fileID: 0}
-  downTimer: 1.5
+  downTimer: 1
 --- !u!114 &-6895995334728390926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,6 +205,28 @@ MonoBehaviour:
   - {fileID: 2799212600432384785}
   - {fileID: -8567596068002769329}
   totalWeights: 0
+--- !u!114 &-5132085179448640655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba188e7c4d935a447ae30ffa5c8d1ba4, type: 3}
+  m_Name: WakeUpNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 117ab0154c9e23b4a92e6e42038ee647
+  position: {x: -950, y: 443}
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    moveToObject: {fileID: 0}
+  description: 
+  Agent: {fileID: 0}
+  wakeUpTime: 1
 --- !u!114 &-5131589572804364399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -342,6 +388,28 @@ MonoBehaviour:
   - {fileID: -3365876471015206217}
   - {fileID: -9180242412524900767}
   current: 0
+--- !u!114 &-2517229804141624606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6babec2a44aec92419c275b704eb9284, type: 3}
+  m_Name: SequencerNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: abacd2689e49b424ca90923f8f307d9a
+  position: {x: 0, y: 0}
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    moveToObject: {fileID: 0}
+  description: 
+  children: []
+  current: 0
 --- !u!114 &-1878908651922025553
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -366,7 +434,7 @@ MonoBehaviour:
   - {fileID: -6895995334728390926}
   - {fileID: -237580460281809946}
   - {fileID: -7252241123171764499}
-  - {fileID: 6263507584445490026}
+  - {fileID: -5132085179448640655}
   current: 0
 --- !u!114 &-1744441891106547989
 MonoBehaviour:
@@ -483,6 +551,27 @@ MonoBehaviour:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
   description: 
+--- !u!114 &-227460586683960606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1aa872d1ab0ac5b4ea5ff254b581eb0e, type: 3}
+  m_Name: WaitNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 331b5edaafff3bf47b39ebec93e05537
+  position: {x: 319, y: 1740}
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    moveToObject: {fileID: 0}
+  description: 
+  duration: 0.5
 --- !u!114 &-223067373621195579
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -498,7 +587,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 70975d112ca6b514985609e76bc3b871
-  position: {x: -767, y: 1566}
+  position: {x: -883.6041, y: 1589}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
@@ -529,7 +618,6 @@ MonoBehaviour:
   - {fileID: -1878908651922025553}
   - {fileID: -6895995334728390926}
   - {fileID: -7252241123171764499}
-  - {fileID: 6263507584445490026}
   - {fileID: 3063406251304216790}
   - {fileID: -3162985567936443679}
   - {fileID: 3974259158523110251}
@@ -564,11 +652,13 @@ MonoBehaviour:
   - {fileID: 4013841926600570912}
   - {fileID: -7401467733963597700}
   - {fileID: -237580460281809946}
-  - {fileID: 4044355298578056170}
   - {fileID: -3344889167935912117}
   - {fileID: -3103206215624935640}
   - {fileID: -3365876471015206217}
   - {fileID: -9180242412524900767}
+  - {fileID: -5132085179448640655}
+  - {fileID: -7742227205409017021}
+  - {fileID: -227460586683960606}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
@@ -612,7 +702,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: ab26e4c0eb23d4547a931e9d64584c15
-  position: {x: -607, y: 1566}
+  position: {x: -723.6041, y: 1589}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
@@ -661,7 +751,7 @@ MonoBehaviour:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
   description: 
-  child: {fileID: 8494814206541073582}
+  child: {fileID: -7742227205409017021}
   weight: 2
 --- !u!114 &2612944177186896387
 MonoBehaviour:
@@ -818,27 +908,6 @@ MonoBehaviour:
     moveToObject: {fileID: 0}
   description: 
   jumpDelay: 0
---- !u!114 &4044355298578056170
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1aa872d1ab0ac5b4ea5ff254b581eb0e, type: 3}
-  m_Name: WaitNode
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: 394087052a89bcc4dac3774c15b364ec
-  position: {x: -927, y: 1566}
-  blackboard:
-    moveToPosition: {x: 0, y: 0, z: 0}
-    moveToObject: {fileID: 0}
-  description: 
-  duration: 1
 --- !u!114 &4382182258252794628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -978,7 +1047,7 @@ MonoBehaviour:
     moveToObject: {fileID: 0}
   description: 
   duration: 1
---- !u!114 &6263507584445490026
+--- !u!114 &6324703863798284182
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -987,20 +1056,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba188e7c4d935a447ae30ffa5c8d1ba4, type: 3}
-  m_Name: WakeUpNode
+  m_Script: {fileID: 11500000, guid: 1aa872d1ab0ac5b4ea5ff254b581eb0e, type: 3}
+  m_Name: WaitNode
   m_EditorClassIdentifier: 
   state: 0
   started: 0
-  guid: 7556b628ad359e4418ccc721c1064b93
-  position: {x: -950, y: 444}
+  guid: 778cb78bea2f89e40b6cc0267f9af139
+  position: {x: 0, y: 0}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
-  description: "\uB204\uC6CC\uC788\uC744 \uB54C \uC77C\uC5B4\uB098\uB294 \uB178\uB4DC\n\uC77C\uC5B4\uB098\uB294
-    \uB2F9\uC2DC\uC5D4 \uBB34\uC801."
-  Agent: {fileID: 0}
-  wakeUpTime: 2
+  description: 
+  duration: 1
 --- !u!114 &6515957432640582364
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1059,13 +1126,12 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 849f0717ef5113c449616e9bdee2072b
-  position: {x: -876.65, y: 1417.0002}
+  position: {x: -817, y: 1431}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
   description: 
   children:
-  - {fileID: 4044355298578056170}
   - {fileID: -223067373621195579}
   - {fileID: 482850488651942529}
   current: 0
@@ -1155,7 +1221,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: a212794a1d4c4a04db3978da3275f579
-  position: {x: 257.15002, y: 1592.0002}
+  position: {x: 159, y: 1740}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}

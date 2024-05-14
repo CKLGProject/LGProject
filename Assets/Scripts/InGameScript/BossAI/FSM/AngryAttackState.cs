@@ -9,6 +9,7 @@ namespace LGProject.BossAI
     {
         private float _curTimer;
         private float _waitTimer;
+
         public AngryAttackState(AiStateMachine stateMachine, float waitTimer) : base(stateMachine)
         {
             _waitTimer = waitTimer;
@@ -18,6 +19,7 @@ namespace LGProject.BossAI
         {
             base.Enter();
             _curTimer = 0;
+            _stateMachine.SetAnimationTrigger("Angry Attack");
         }
 
         public override void Update()
@@ -35,5 +37,11 @@ namespace LGProject.BossAI
         {
             base.Exit();
         }
+
+        // 공격 시 플레이어를 타격함.
+
+
+
+
     }
 }

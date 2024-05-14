@@ -16,7 +16,6 @@ namespace BehaviourTree
                 Agent = AIAgent.Instance;
             if (_stateMachine == null)
                 _stateMachine = AIAgent.Instance.GetStateMachine;
-            //Debug.Log("FlyCheck");
         }
 
         protected override void OnStop()
@@ -30,10 +29,8 @@ namespace BehaviourTree
         {
             if(_stateMachine.IsKnockback)
             {
-                //Debug.Log("Flying");
                 return State.Success;
             }
-            //Debug.Log("On The Ground");
             return State.Failure;
         }
     }

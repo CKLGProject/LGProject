@@ -37,7 +37,6 @@ namespace LGProject.PlayerState
             {
                 if (damageInCount == false) AttackJudge();
             }
-            //if (_curTimer > stateMachine.GetAnimPlayTime("DashAttack")) 
             if(_curTimer > _aniDelay)
             {
                 stateMachine.ChangeState(stateMachine.idleState);
@@ -90,8 +89,10 @@ namespace LGProject.PlayerState
                     try
                     {
                         Vector3 direction = (temp.Item1.GetStateMachine.transform.position - stateMachine.transform.position).normalized;
+                        direction.x *= 2;
+                        direction.y *= 1.5f;
                         Vector3 v = stateMachine.playable.CaculateVelocity(
-                           temp.Item1.GetStateMachine.transform.position + direction * 2f,
+                           temp.Item1.GetStateMachine.transform.position + direction,
                               temp.Item1.GetStateMachine.transform.position, 0.5f, 1f);
                         // 가드를 올리지 않았을 경우
                         if (temp.Item1 != stateMachine.transform)

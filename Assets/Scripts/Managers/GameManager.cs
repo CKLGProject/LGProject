@@ -12,4 +12,6 @@ public class GameManager : MonoBehaviour
         // 화면이 꺼지지 않도록 처리
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
     }
+
+
 }

@@ -8,7 +8,7 @@ namespace BehaviourTree
     public class StunedNode : ActionNode
     {
         public AIAgent Agent;
-        public LGProject.PlayerState.PlayerStateMachine stateMachine;
+        public LGProject.PlayerState.PlayerStateMachine _stateMachine;
         [Space(10f)]
         public float stunedTimer;
         private float curTiemr;
@@ -17,10 +17,9 @@ namespace BehaviourTree
         {
             if (Agent == null)
                 Agent = AIAgent.Instance;
-            if (stateMachine == null)
-                stateMachine = Agent.GetStateMachine;
-            stateMachine.StandingVelocity();
-            stateMachine.animator.SetFloat("Run", 0f);
+            if (_stateMachine == null)
+                _stateMachine = Agent.GetStateMachine;  
+            _stateMachine.animator.SetFloat("Run", 0f);
         }
 
         protected override void OnStop()
@@ -40,10 +39,8 @@ namespace BehaviourTree
             }
             curTiemr += Time.deltaTime;
             //if(stunedTimer < curTiemr || (Agent.GetStateMachine.isKnockback && Agent.GetStateMachine.isHit))
-            if(stateMachine.playable.HitDelay < curTiemr || (Agent.GetStateMachine.IsKnockback ))
+            if(_stateMachine.playable.HitDelay < curTiemr || (Agent.GetStateMachine.IsKnockback ))
             {
-                // 나 피격 상태 끝났어!
-                // 그런데 공중에 있냐 체크 해야함
                 return State.Success;
             }
             return State.Running;
