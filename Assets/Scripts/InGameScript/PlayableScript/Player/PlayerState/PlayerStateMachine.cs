@@ -201,6 +201,19 @@ namespace LGProject.PlayerState  //
             physics.velocity = temp;
         }
 
+        public void Update()
+        {
+            playable.IsGrounded = IsGrounded;
+            playable.IsGuard = IsGuard;
+            playable.IsJumpGuard = IsJumpGuard;
+            playable.IsDamaged = IsDamaged;
+            playable.IsDown = IsDown;
+            playable.IsKnockback = IsKnockback;
+            playable.IsJumpping = IsJumpping;
+            playable.IsDead = IsDead;
+            playable.IsNormalAttack = IsNormalAttack;
+    }
+
         public void ResetVelocity()
         {
             physics.velocity = Vector3.zero;
@@ -208,24 +221,28 @@ namespace LGProject.PlayerState  //
 
         public void HitDamaged(Vector3 velocity)
         {
+            // 누어 있는 상태에선 데미지를 입지 않는다.
+            if (IsDown)
+                return;
             if (!IsGuard)
             {
                 DamageGage += 8.5f;
                 SetDamageGageOnText();
+                IsNormalAttack = false;
                 animator.SetTrigger("Hit");
                 // 충격에 의한 물리 공식
                 velocity *= Mathf.Pow(2, (DamageGage * 0.01f));
                 physics.velocity = velocity;
+                if (velocity != Vector3.zero)
+                {
+                    //GameObject.Instantiate(new GameObject(), transform.position + velocity, Quaternion.identity);
+                    animator.SetTrigger("Knockback");
+                    IsKnockback = true;
+                }
             }
             else
             {
                 physics.velocity = new Vector3(transform.forward.x * -2f, 0, 0);
-            }
-            if(velocity != Vector3.zero)
-            {
-                Debug.Log("Knockback");
-                animator.SetTrigger("Knockback");
-                IsKnockback = true;
             }
             IsDamaged = true;
         }

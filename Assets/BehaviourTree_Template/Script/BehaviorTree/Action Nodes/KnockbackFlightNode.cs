@@ -29,7 +29,6 @@ namespace BehaviourTree
             // 일단 판정을 받아야함.
             if(!_stateMachine.IsKnockback)
             {
-                _stateMachine.animator.SetTrigger("WakeUp");
                 return State.Success;
             }
 

@@ -4961,8 +4961,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28c13e0d702c8bb41b3ad7ea3b70cf70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MoveWaitTime: 0
+  AttackDelayTime: 0
+  MoveSpeed: 2
   States: 000000000100000003000000
-  Animator: {fileID: 0}
+  playableCharacters: []
+  angry: 0
 --- !u!1 &1592470975
 GameObject:
   m_ObjectHideFlags: 0
@@ -7555,44 +7559,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2876321095919618213, guid: 2733f80f426950d4598e4e6317bd7935,
-        type: 3}
-      propertyPath: _DamageEffect
-      value: 
-      objectReference: {fileID: 2049236942158399456, guid: 752622900d41f074ba777f81b03de0fe,
-        type: 3}
-    - target: {fileID: 2876321095919618213, guid: 2733f80f426950d4598e4e6317bd7935,
-        type: 3}
-      propertyPath: _AttackEffect1
-      value: 
-      objectReference: {fileID: 4400223982341537954, guid: 5717e2b73954e57449212d869eccfc89,
-        type: 3}
-    - target: {fileID: 2876321095919618213, guid: 2733f80f426950d4598e4e6317bd7935,
-        type: 3}
-      propertyPath: _AttackEffect2
-      value: 
-      objectReference: {fileID: 587711298246763827, guid: 121944f6be158f1469ee0da885226b52,
-        type: 3}
-    - target: {fileID: 2876321095919618213, guid: 2733f80f426950d4598e4e6317bd7935,
-        type: 3}
-      propertyPath: _AttackEffect3
-      value: 
-      objectReference: {fileID: 8233413071931346597, guid: 7e5293ef0d4eee1459650885ed96c7e3,
-        type: 3}
-    - target: {fileID: 2876321095919618213, guid: 2733f80f426950d4598e4e6317bd7935,
-        type: 3}
-      propertyPath: _AttackOffset2.z
-      value: -0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 6142601296869339651, guid: 2733f80f426950d4598e4e6317bd7935,
         type: 3}
       propertyPath: m_Name
       value: E_PlayableA
-      objectReference: {fileID: 0}
-    - target: {fileID: 6142601296869339651, guid: 2733f80f426950d4598e4e6317bd7935,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8219133890818253592, guid: 2733f80f426950d4598e4e6317bd7935,
         type: 3}
@@ -7651,54 +7621,14 @@ PrefabInstance:
       objectReference: {fileID: 1853587625}
     - target: {fileID: 8866563565161335285, guid: 2733f80f426950d4598e4e6317bd7935,
         type: 3}
-      propertyPath: DeadLine
-      value: -4.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 8866563565161335285, guid: 2733f80f426950d4598e4e6317bd7935,
-        type: 3}
-      propertyPath: hitDelay
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8866563565161335285, guid: 2733f80f426950d4598e4e6317bd7935,
-        type: 3}
-      propertyPath: respawnTime
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8866563565161335285, guid: 2733f80f426950d4598e4e6317bd7935,
-        type: 3}
-      propertyPath: wakeUpDelay
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8866563565161335285, guid: 2733f80f426950d4598e4e6317bd7935,
-        type: 3}
-      propertyPath: MaximumSpeed
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8866563565161335285, guid: 2733f80f426950d4598e4e6317bd7935,
-        type: 3}
-      propertyPath: AliveOffset.y
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8866563565161335285, guid: 2733f80f426950d4598e4e6317bd7935,
-        type: 3}
       propertyPath: DamageGageInt
       value: 
       objectReference: {fileID: 732036608}
     - target: {fileID: 8866563565161335285, guid: 2733f80f426950d4598e4e6317bd7935,
         type: 3}
-      propertyPath: dashAttackDelay
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8866563565161335285, guid: 2733f80f426950d4598e4e6317bd7935,
-        type: 3}
       propertyPath: DamageGageDecimal
       value: 
       objectReference: {fileID: 1453957029}
-    - target: {fileID: 8881860252120503662, guid: 2733f80f426950d4598e4e6317bd7935,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 8b6d37d1a36d0044fb6b8252ec1ff325, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

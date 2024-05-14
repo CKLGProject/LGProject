@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System;
 using Cysharp.Threading.Tasks;
+using Cinemachine;
 
 namespace LGProject.BossAI
 {
@@ -14,7 +13,7 @@ namespace LGProject.BossAI
         private float _attackDelayTimer;
         private float _moveSpeed;
         private ArmType _targetArm;
-
+        private CinemachineVirtualCamera _camera;
         private bool _endPlay;
         private Transform target;
         public AttackState(AiStateMachine stateMachine, float waitTimer, float attackDelayTimer, float moveSpeed) : base(stateMachine)
@@ -75,7 +74,8 @@ namespace LGProject.BossAI
             await UniTask.Delay(TimeSpan.FromSeconds(_waitTimer));
             _stateMachine.SetAnimationTrigger("Normal Attack");
 
-
+            
+            // Shake를 주고 싶은데.
             await UniTask.Delay(TimeSpan.FromSeconds(_attackDelayTimer));
             _endPlay = true;
             //target = _stateMachine.OriginPos[(int)_targetArm]

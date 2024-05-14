@@ -21,7 +21,7 @@ namespace LGProject.PlayerState
     {
         public Animator Animator;
 
-        protected Vector3 velocity = Vector3.zero;
+        [SerializeField] protected Vector3 velocity = Vector3.zero;
         [Tooltip("최대 점프 횟수"), SerializeField, HideInInspector]
         public int MaximumJumpCount = 2;
         [Tooltip("대쉬 최대 속도"), SerializeField, HideInInspector]
@@ -66,6 +66,7 @@ namespace LGProject.PlayerState
         [Range(0.0f, 3.0f), Tooltip("기상 후 Idle로 돌아오기 까지의 시간"), SerializeField, HideInInspector]
         public float WakeUpDelay = 0;
 
+        [HideInInspector] public int LifePoint = 3;
 
         [HideInInspector] public bool movingAttack = true;
 
@@ -74,6 +75,7 @@ namespace LGProject.PlayerState
         public Vector3 AliveOffset;
         public float respawnTime;
         public float DeadLine;
+
         //public float damageGage = 0;
 
         // 공격 방향
@@ -83,6 +85,18 @@ namespace LGProject.PlayerState
         public Platform underPlatform;
 
         public EffectManager effectManager;
+
+        public bool IsGrounded;
+        public bool IsGuard;
+        public bool IsJumpGuard;
+        public bool IsDamaged;
+        public bool IsDown;
+        public bool IsKnockback;
+        public bool IsJumpping;
+        public bool IsDead;
+        public bool IsNormalAttack;
+        //public Vector3 velocity;
+
 
         float _gravity = -9.8f;
         float _groundedGravity = -0.05f;
@@ -220,19 +234,19 @@ namespace LGProject.PlayerState
             stateMachine.IsKnockback = false;
             stateMachine.JumpInCount = 0;
             stateMachine.StandingVelocity();
-
         }
 
         public void NewPlatformCheck()
         {
             // 0 이상일 때는 체크하지 않.기.
             // 왜냐면 올라가고 있기 때문이지
-            if(stateMachine.physics.velocity.y < 0)
+            if(stateMachine.physics.velocity.y < -0.1f &&
+                (!stateMachine.IsGrounded || stateMachine.IsKnockback))
             {
                 // rect와 비교하여 해당 위치보다 아래 있으면 체크하지 않기.
                 // 그럼 경우의 수는 2가지
                 // 바닥을 뚫었는가? 에 대한 체크
-                if(AABBPlatformCheck())
+                if (AABBPlatformCheck())
                 {
                     if (stateMachine.IsKnockback)
                         KncokbackLandingCheck();
@@ -255,7 +269,7 @@ namespace LGProject.PlayerState
                 {
                     stateMachine.IsGrounded = false;
                     stateMachine.collider.isTrigger = true;
-                    //stateMachine.isKnockback = false;
+                    stateMachine.IsKnockback = true;
                     //Debug.Log("Knockback Flying");
                 }
             }
@@ -266,7 +280,7 @@ namespace LGProject.PlayerState
             if (transform.position.x < underPlatform.rect.x && transform.position.x > underPlatform.rect.width &&
                 transform.position.y < underPlatform.rect.y && transform.position.y > underPlatform.rect.height)
             {
-                Debug.Log("Across Platform");
+                //Debug.Log("Across Platform");
                 return true;
             }
             //Debug.Log("On The Platform");
@@ -289,6 +303,7 @@ namespace LGProject.PlayerState
             }
             if(stateMachine.physics.velocity.y > 0 && !stateMachine.IsKnockback)
             {
+
             }
         }
 
@@ -313,7 +328,11 @@ namespace LGProject.PlayerState
             if(!stateMachine.IsDead && transform.position.y < DeadLine)
             {
                 stateMachine.IsDead = true;
-                AliveDelay().Forget();
+                InGameUIManager.Instance.LifeDown(this.transform, ref LifePoint);
+                if(LifePoint > 0)
+                {
+                    AliveDelay().Forget();
+                }
             }
         }
 

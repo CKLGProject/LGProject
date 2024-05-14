@@ -44,6 +44,8 @@ namespace BehaviourTree
 
             private SerializedProperty _hitDelay;
 
+            private SerializedProperty _downWaitDelay;
+
             private SerializedProperty _wakeUpDelay;
 
             private static GUIStyle BoldLabelStyle;
@@ -124,13 +126,16 @@ namespace BehaviourTree
                     _thirdAttackJudgeDelay = serializedObject.FindProperty("ThirdAttackJudgeDelay");
 
                 if (_dashAttackDelay == null)
-                    _dashAttackDelay = serializedObject.FindProperty("dashAttackDelay");
+                    _dashAttackDelay = serializedObject.FindProperty("DashAttackDelay");
 
                 if (_hitDelay == null)
-                    _hitDelay = serializedObject.FindProperty("hitDelay");
+                    _hitDelay = serializedObject.FindProperty("HitDelay");
+
+                if (_downWaitDelay == null)
+                    _downWaitDelay = serializedObject.FindProperty("DownWaitDelay");
 
                 if (_wakeUpDelay == null)
-                    _wakeUpDelay = serializedObject.FindProperty("wakeUpDelay");
+                    _wakeUpDelay = serializedObject.FindProperty("WakeUpDelay");
 
                 if (BoldLabelStyle == null)
                 {
@@ -297,6 +302,16 @@ namespace BehaviourTree
                 EditorGUILayout.Space(10f);
                 using (var changeScope = new EditorGUI.ChangeCheckScope())
                 {
+                    float value = (float)EditorGUILayout.FloatField("다운 유지 시간", _downWaitDelay.floatValue);
+                    if (changeScope.changed)
+                    {
+                        _downWaitDelay.floatValue = value;
+                    }
+                }
+
+                EditorGUILayout.Space(10f);
+                using (var changeScope = new EditorGUI.ChangeCheckScope())
+                {
                     float value = (float)EditorGUILayout.FloatField("다운 후 딜레이", _wakeUpDelay.floatValue);
                     if (changeScope.changed)
                     {
@@ -360,6 +375,7 @@ namespace BehaviourTree
         {
             // 일단 여기에 넣어보자
             PlayableGravity();
+            GetStateMachine.Update();
             //PlatformCheck();
             NewPlatformCheck();
             DeadLineCheck();

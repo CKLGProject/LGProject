@@ -7,36 +7,38 @@ namespace BehaviourTree
     public class DownNode : ActionNode
     {
         public AIAgent Agent;
-        private LGProject.PlayerState.PlayerStateMachine stateMachine;
+        private LGProject.PlayerState.PlayerStateMachine _stateMachine;
         [Space(10f)]
         public float downTimer;
         private float curTimer;
         protected override void OnStart()
         {
+            Debug.Log("DownNodeStart");
             if (Agent == null)
                 Agent = AIAgent.Instance;
-            if (stateMachine == null)
-                stateMachine = Agent.GetStateMachine;
+            if (_stateMachine == null)
+                _stateMachine = Agent.GetStateMachine;
             curTimer = 0;
             Agent.effectManager.PlayOneShot(EffectManager.EFFECT.Knockback);
-            stateMachine.IsDamaged = false;
+            _stateMachine.IsDamaged = false;
+            _stateMachine.IsDown = true;
         }
 
         protected override void OnStop()
         {
-
+            Debug.Log("DownNodeStop");
         }
 
         protected override State OnUpdate()
         {
-            if (stateMachine.IsGrounded)
+            if (_stateMachine.IsGrounded)
             {
-                    
                 curTimer += Time.deltaTime;
                 // 고정된 누어있는 시간이 존재함.
-                if (stateMachine.playable.WakeUpDelay < curTimer)
+                if (_stateMachine.playable.DownWaitDelay < curTimer)
                 {
                     // 누어있는 시간이 끝나면 Idle 상태가 되면서 일어남.
+                    _stateMachine.animator.SetTrigger("WakeUp");
                     return State.Success;
                 }
             }

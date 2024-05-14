@@ -139,7 +139,7 @@ namespace LGProject.PlayerState
                     //time = 0.6f;
                     break;
             }
-            Debug.Log($"sm = {stateMachine.AttackCount} / attackDelay = {animDelay} / time {time }");
+            //Debug.Log($"sm = {stateMachine.AttackCount} / attackDelay = {animDelay} / time {time }");
             // 딜레이가 끝난 이후 추가 키 입력이 들어가면? 
             if (curTimer > animDelay)   
             {
@@ -153,7 +153,6 @@ namespace LGProject.PlayerState
                 else if (curTimer >= time)
                 {
                     // 모션이 끝났으니 기본 상태로 되돌아감.
-                    Debug.Log("Stop");
                     stateMachine.animator.SetTrigger("Idle");
                     stateMachine.AttackCount = 0;
                     stateMachine .ChangeState(stateMachine.idleState);
@@ -178,7 +177,7 @@ namespace LGProject.PlayerState
                 foreach (var t in targets)
                 {
                     float distance = Vector3.Distance(center, t.transform.position);
-                    if (temp == null || (temp.Item2 >= distance && t.transform != stateMachine.transform))
+                    if ((temp == null || temp.Item2 >= distance )&& t.transform != stateMachine.transform)
                     {
                         temp = System.Tuple.Create(t.GetComponent<Playable>(), distance);
                     }

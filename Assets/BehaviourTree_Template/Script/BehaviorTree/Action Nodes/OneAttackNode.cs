@@ -112,12 +112,17 @@ namespace BehaviourTree
             }
             else
             {
-                Vector3 direction = temp.Item1.GetStateMachine.transform.position - AIAgent.Instance.transform.position;
-
-                Vector3 v = AIAgent.Instance.CaculateVelocity(direction * dashAttackPower, AIAgent.Instance.transform.position, 0.5f, 1f);
+                Vector3 direction = (temp.Item1.GetStateMachine.transform.position - _stateMachine.transform.position).normalized;
+                Vector3 v = Vector3.zero;
+                direction.x *= 2;
+                direction.y *= 1.5f;
+                v = AIAgent.Instance.CaculateVelocity(
+                   temp.Item1.GetStateMachine.transform.position + direction,
+                   temp.Item1.GetStateMachine.transform.position, 0.5f, 1f);
 
                 if (temp.Item1 != AIAgent.Instance.transform/* && !temp.Item1.GetStateMachine.isGuard*/)
                 {
+                    Debug.Log($"v = {v}, direct = {direction}");
                     temp.
                     Item1.GetComponent<Playable>().
                     GetStateMachine.
@@ -141,6 +146,7 @@ namespace BehaviourTree
                 _stateMachine = AIAgent.Instance.GetStateMachine;
             _stateMachine.IsDashAttack = true;
             _curTimer = 0;
+            
             AIAgent.Instance.SetAttacRange(_stateMachine.IsGrounded ? dashAttackRange : jumpAttackRange);
             if (!_stateMachine.IsGrounded)
                 _stateMachine.animator.SetTrigger("JumpAttack");
