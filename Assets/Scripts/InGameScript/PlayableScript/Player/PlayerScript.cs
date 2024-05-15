@@ -28,12 +28,15 @@ namespace LGProject.PlayerState
              */
             private SerializedProperty _firstAttackDelay;
             private SerializedProperty _firstAttackJudgeDelay;
+            private SerializedProperty _firstAttackMovingValue;
 
             private SerializedProperty _secondAttackDelay;
             private SerializedProperty _secondAttackJudgeDelay;
+            private SerializedProperty _secondAttackMovingValue;
 
             private SerializedProperty _thirdAttackDelay;
             private SerializedProperty _thirdAttackJudgeDelay;
+            private SerializedProperty _thirdAttackMovingValue;
 
             private SerializedProperty _dashAttackDelay;
 
@@ -106,6 +109,9 @@ namespace LGProject.PlayerState
                 }
                 if (_firstAttackJudgeDelay == null)
                     _firstAttackJudgeDelay = serializedObject.FindProperty("FirstAttackJudgeDelay");
+                
+                if(_firstAttackMovingValue == null)
+                    _firstAttackDelay = serializedObject.FindProperty("FirstAttackMovingValue");
 
                 if (_secondAttackDelay == null)
                     _secondAttackDelay = serializedObject.FindProperty("SecondAttackDelay");
@@ -113,12 +119,17 @@ namespace LGProject.PlayerState
                 if (_secondAttackJudgeDelay == null)
                     _secondAttackJudgeDelay = serializedObject.FindProperty("SecondAttackJudgeDelay");
 
+                if(_secondAttackMovingValue == null)
+                    _secondAttackMovingValue = serializedObject.FindProperty("SecondAttackMovingValue");
 
                 if (_thirdAttackDelay == null)
                     _thirdAttackDelay = serializedObject.FindProperty("ThirdAttackDelay");
 
                 if (_thirdAttackJudgeDelay == null)
                     _thirdAttackJudgeDelay = serializedObject.FindProperty("ThirdAttackJudgeDelay");
+
+                if (_thirdAttackMovingValue == null)
+                    _thirdAttackMovingValue = serializedObject.FindProperty("ThirdAttackMovingValue");
 
                 if (_dashAttackDelay == null)
                     _dashAttackDelay = serializedObject.FindProperty("DashAttackDelay");
@@ -229,6 +240,7 @@ namespace LGProject.PlayerState
                         _firstAttackDelay.floatValue = value;
                     }
                 }
+
                 EditorGUILayout.Space(10f);
                 using (var changeScope = new EditorGUI.ChangeCheckScope())
                 {
@@ -238,6 +250,17 @@ namespace LGProject.PlayerState
                         _firstAttackJudgeDelay.floatValue = value;
                     }
                 }
+
+                EditorGUILayout.Space(10f);
+                using (var changeScope = new EditorGUI.ChangeCheckScope())
+                {
+                    float value = (float)EditorGUILayout.FloatField("첫번째 공격 이동 판정", _firstAttackMovingValue.floatValue);
+                    if (changeScope.changed)
+                    {
+                        _firstAttackMovingValue.floatValue = value;
+                    }
+                }
+
                 EditorGUILayout.Space(10f);
                 using (var changeScope = new EditorGUI.ChangeCheckScope())
                 {
@@ -247,6 +270,7 @@ namespace LGProject.PlayerState
                         _secondAttackDelay.floatValue = value;
                     }
                 }
+
                 EditorGUILayout.Space(10f);
                 using (var changeScope = new EditorGUI.ChangeCheckScope())
                 {
@@ -256,6 +280,17 @@ namespace LGProject.PlayerState
                         _secondAttackJudgeDelay.floatValue = value;
                     }
                 }
+
+                EditorGUILayout.Space(10f);
+                using (var changeScope = new EditorGUI.ChangeCheckScope())
+                {
+                    float value = (float)EditorGUILayout.FloatField("두번째 공격 이동 판정", _secondAttackMovingValue.floatValue);
+                    if (changeScope.changed)
+                    {
+                        _secondAttackMovingValue.floatValue = value;
+                    }
+                }
+
                 EditorGUILayout.Space(10f);
                 using (var changeScope = new EditorGUI.ChangeCheckScope())
                 {
@@ -265,6 +300,7 @@ namespace LGProject.PlayerState
                         _thirdAttackDelay.floatValue = value;
                     }
                 }
+
                 EditorGUILayout.Space(10f);
                 using (var changeScope = new EditorGUI.ChangeCheckScope())
                 {
@@ -272,6 +308,16 @@ namespace LGProject.PlayerState
                     if (changeScope.changed)
                     {
                         _thirdAttackJudgeDelay.floatValue = value;
+                    }
+                }
+
+                EditorGUILayout.Space(10f);
+                using (var changeScope = new EditorGUI.ChangeCheckScope())
+                {
+                    float value = (float)EditorGUILayout.FloatField("세번째 공격 이동 판정", _thirdAttackMovingValue.floatValue);
+                    if (changeScope.changed)
+                    {
+                        _thirdAttackMovingValue.floatValue = value;
                     }
                 }
 

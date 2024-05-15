@@ -49,17 +49,12 @@ namespace LGProject.PlayerState
             // 어디서 왔는지 체크가 필요할까?
             curTimer = 0;
 
-            //if (Mathf.Abs(stateMachine.moveAction.ReadValue<float>() ) > 0.2f)
-            //{
-            //    // 물리 초기화 X 
-            //    return;
-            //}
             #region 공격 로직 
             stateMachine.AttackCount++;
             stateMachine.StandingVelocity();
             // 공격하면서 전진.
-            if (movingAttack)
-                stateMachine.physics.velocity += Vector3.right * 1.5f;
+            if (stateMachine.playable.movingAttack)
+                stateMachine.physics.velocity += stateMachine.playable.directionX ? Vector3.right * 1.5f : Vector3.left * 1.5f;
             damageInCount = false;
             #endregion
 
@@ -155,6 +150,7 @@ namespace LGProject.PlayerState
                     // 모션이 끝났으니 기본 상태로 되돌아감.
                     stateMachine.animator.SetTrigger("Idle");
                     stateMachine.AttackCount = 0;
+                    stateMachine.animator.SetInteger("Attack", 0);
                     stateMachine .ChangeState(stateMachine.idleState);
                     return;
                 }

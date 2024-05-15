@@ -152,7 +152,6 @@ namespace LGProject.PlayerState  //
         public void ChangeState(State nextState)
         {
             CurrentState.Exit();
-
             CurrentState = nextState;
             CurrentState.Enter();
         }
