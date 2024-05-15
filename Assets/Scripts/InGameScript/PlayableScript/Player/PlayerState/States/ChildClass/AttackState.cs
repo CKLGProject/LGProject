@@ -157,7 +157,15 @@ namespace LGProject.PlayerState
                 if (damageInCount == false) AttackJudge();
                 if (stateMachine.attackAction.triggered && stateMachine.AttackCount < 3)
                 {
-                    stateMachine.ChangeState(stateMachine.attackState);
+                    // 다음 공격의 게이지가 100일 경우 Ultimate공격을 진행 아닐 경우 attackState
+                    if (stateMachine.UltimateGage >= 100)
+                    {
+                        stateMachine.ChangeState(stateMachine.ultimateState);
+                    }
+                    else
+                    {
+                        stateMachine.ChangeState(stateMachine.attackState);
+                    }
                 }
                 // 모션이 끝나면?
                 else if (curTimer >= time)
@@ -166,7 +174,7 @@ namespace LGProject.PlayerState
                     stateMachine.animator.SetTrigger("Idle");
                     stateMachine.AttackCount = 0;
                     stateMachine.animator.SetInteger("Attack", 0);
-                    stateMachine .ChangeState(stateMachine.idleState);
+                    stateMachine.ChangeState(stateMachine.idleState);
                     return;
                 }
             }
@@ -213,6 +221,9 @@ namespace LGProject.PlayerState
                             Item1.GetStateMachine.
                             HitDamaged(stateMachine.AttackCount - 1 < 2 ? Vector3.zero : v);
                             damageInCount = true;
+
+                            // 100 % gage로 일단 계산
+                            stateMachine.UltimateGage += 10;
 
                             temp.Item1.effectManager.PlayOneShot(EffectManager.EFFECT.Hit);
                         }

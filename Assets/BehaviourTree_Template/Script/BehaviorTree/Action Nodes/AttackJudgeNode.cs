@@ -162,6 +162,7 @@ namespace BehaviourTree
 
                     temp.Item1.effectManager.PlayOneShot(EffectManager.EFFECT.Hit);
 
+                    _stateMachine.animator.SetInteger("Attack", 0);
                     return true;
                 }
             }

@@ -18,8 +18,8 @@ namespace LGProject.PlayerState
             // x,z Velocity를 초기화
             
             stateMachine.StandingVelocity();
-            stateMachine.animator.SetTrigger("Guard");
-            stateMachine.playable.effectManager.Play(EffectManager.EFFECT.Guard);
+            stateMachine.animator.SetBool("Guard",true);
+            stateMachine.playable.effectManager.Play(EffectManager.EFFECT.Guard).Forget();
             stateMachine.IsGuard = true;
         }
 
@@ -28,8 +28,8 @@ namespace LGProject.PlayerState
             base.Exit();
             stateMachine.playable.effectManager.Stop(EffectManager.EFFECT.Guard);
 
-            stateMachine.animator.SetTrigger("Idle");
-            
+            stateMachine.animator.SetBool("Guard", false);
+
             stateMachine.IsGuard = false;
         }
 

@@ -38,6 +38,7 @@ namespace LGProject.PlayerState
                 AttackLogic();
                 return;
             }
+
             if (stateMachine.jumpAction.triggered && stateMachine.JumpInCount < 2)
             {
                 //Debug.Log("idleJump");
@@ -68,7 +69,12 @@ namespace LGProject.PlayerState
         void AttackLogic()
         {
             // 땅에 붙어있으면서 공격을 진행하면?
-            if (stateMachine.IsGrounded)
+            if(stateMachine.UltimateGage >= 100)
+            {
+                stateMachine.ChangeState(stateMachine.ultimateState);
+                return;
+            }
+            else if (stateMachine.IsGrounded)
             {
                 stateMachine.ChangeState(stateMachine.attackState);
                 return;

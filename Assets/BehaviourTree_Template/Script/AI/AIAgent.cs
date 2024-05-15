@@ -185,10 +185,10 @@ namespace BehaviourTree
                 EditorGUILayout.Space(10f);
                 using (var changeScope = new EditorGUI.ChangeCheckScope())
                 {
-                    int value = (int)EditorGUILayout.IntField("대쉬 최대 속도", _maximumSpeed.intValue);
+                    float value = (float)EditorGUILayout.FloatField("대쉬 최대 속도", _maximumSpeed.floatValue);
                     if (changeScope.changed)
                     {
-                        _maximumSpeed.intValue = value;
+                        _maximumSpeed.floatValue = value;
                     }
                 }
                 EditorGUILayout.Space(10f);
