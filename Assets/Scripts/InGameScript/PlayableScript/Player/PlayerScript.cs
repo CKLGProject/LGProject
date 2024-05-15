@@ -111,7 +111,7 @@ namespace LGProject.PlayerState
                     _firstAttackJudgeDelay = serializedObject.FindProperty("FirstAttackJudgeDelay");
                 
                 if(_firstAttackMovingValue == null)
-                    _firstAttackDelay = serializedObject.FindProperty("FirstAttackMovingValue");
+                    _firstAttackMovingValue = serializedObject.FindProperty("FirstAttackMovingValue");
 
                 if (_secondAttackDelay == null)
                     _secondAttackDelay = serializedObject.FindProperty("SecondAttackDelay");
@@ -191,7 +191,7 @@ namespace LGProject.PlayerState
                 EditorGUILayout.Space(10f);
                 using (var changeScope = new EditorGUI.ChangeCheckScope())
                 {
-                    float value = (float)EditorGUILayout.FloatField("대쉬 최대 속도", _maximumSpeed.intValue);
+                    float value = (float)EditorGUILayout.FloatField("대쉬 최대 속도", _maximumSpeed.floatValue);
                     if (changeScope.changed)
                     {
                         _maximumSpeed.floatValue = value;

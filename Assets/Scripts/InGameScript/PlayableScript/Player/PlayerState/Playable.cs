@@ -25,7 +25,7 @@ namespace LGProject.PlayerState
         [Tooltip("최대 점프 횟수"), SerializeField, HideInInspector]
         public int MaximumJumpCount = 2;
         [Tooltip("대쉬 최대 속도"), SerializeField, HideInInspector]
-        public int MaximumSpeed = 4;
+        public float MaximumSpeed = 4;
 
         [Tooltip("이동할 때 증가하는 속도"), SerializeField, HideInInspector]
         public float DashSpeed = 0;
@@ -298,8 +298,8 @@ namespace LGProject.PlayerState
         public void setupJumpVariables()
         {
             float timeToApex = maxJumpTime / 2;
-            _gravity = (-2 * maxJumpHeight) / Mathf.Pow(timeToApex, 1.5f);
-            initialJumpVelocity = (2 * maxJumpHeight) / timeToApex;
+            _gravity = (-2 * JumpScale) / Mathf.Pow(timeToApex, 1.5f);
+            initialJumpVelocity = (2 * JumpScale) / timeToApex;
         }
 
         public void handleJump()

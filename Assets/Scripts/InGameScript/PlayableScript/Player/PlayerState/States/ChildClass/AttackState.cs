@@ -52,9 +52,24 @@ namespace LGProject.PlayerState
             #region 공격 로직 
             stateMachine.AttackCount++;
             stateMachine.StandingVelocity();
+            float moveValue = 0;
+            switch (stateMachine.AttackCount)
+            {
+                case 1:
+                    moveValue = stateMachine.playable.FirstAttackMovingValue;
+                    break;
+                case 2:
+                    moveValue = stateMachine.playable.SecondAttackMovingValue;
+                    break;
+                case 3:
+                    moveValue = stateMachine.playable.ThirdAttackMovingValue;
+                    break;
+                default:
+                    break;
+            }
             // 공격하면서 전진.
             if (stateMachine.playable.movingAttack)
-                stateMachine.physics.velocity += stateMachine.playable.directionX ? Vector3.right * 1.5f : Vector3.left * 1.5f;
+                stateMachine.physics.velocity += stateMachine.playable.directionX ? Vector3.right * moveValue : Vector3.left * moveValue;
             damageInCount = false;
             #endregion
 
