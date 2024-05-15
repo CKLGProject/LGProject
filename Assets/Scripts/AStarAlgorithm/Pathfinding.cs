@@ -76,16 +76,16 @@ namespace pathFinding
 
                     foreach (Node neighbour in grid.GetNeighbours(currentNode))
                     {
-                        // 2024-04-26 -> 10½Ã 59ºÐ
-                        // walkableÀÌ´õ¶óµµ ÀÏ´Ü ³Ö°í °æ·Î ÀÌµ¿À» ÇÒ ¶§ ÀçÆÇ´ÜÇÏÀÚ.
-                        // ´ÙÀ½ ¸ñÇ¥°¡ walkableÀÏ °æ¿ì ±× ´ÙÀ½ ¸ñÇ¥¿Í ºñ±³ÇßÀ» ¶§.
-                        // x + 2ÀÏ °æ¿ì Á¡ÇÁÇØ¼­ ³Ñ¾î°¡°í, y+2ÀÏ °æ¿ì Á¡ÇÁ¸¦ ÇÑ´Ù. 
-                        // ¸¸¾à ´ÙÀ½°ú °°Àº »óÈ²ÀÏ ¶© ¾î¶°ÇÑ°¡?
-                        // ¡à ¡á <- ¿ÞÂÊÀÌ ´ÙÀ½ ¸ñÀûÁö 2
-                        // ¡á ¡á <- ¿À¸¥ÂÊÀÌ ´ÙÀ½ ¸ñÀûÁö 1, 
-                        // ¡á ¡à 
-                        // À§ÀÇ »óÈ²¿¡¼­´Â ºñ±³ÇÏ¿´À» ¶§ x´Â +1ÀÌÁö¸¸
-                        // y°¡ +2ÀÌ¹Ç·Î y+ 2À§Ä¡±îÁö Á¡ÇÁ¸¦ ÇØ¼­ ÀÌµ¿ÇÏ°Ô ÇÏÀÚ
+                        // 2024-04-26 -> 10ì‹œ 59ë¶„
+                        // walkableì´ë”ë¼ë„ ì¼ë‹¨ ë„£ê³  ê²½ë¡œ ì´ë™ì„ í•  ë•Œ ìž¬íŒë‹¨í•˜ìž.
+                        // ë‹¤ìŒ ëª©í‘œê°€ walkableì¼ ê²½ìš° ê·¸ ë‹¤ìŒ ëª©í‘œì™€ ë¹„êµí–ˆì„ ë•Œ.
+                        // x + 2ì¼ ê²½ìš° ì í”„í•´ì„œ ë„˜ì–´ê°€ê³ , y+2ì¼ ê²½ìš° ì í”„ë¥¼ í•œë‹¤. 
+                        // ë§Œì•½ ë‹¤ìŒê³¼ ê°™ì€ ìƒí™©ì¼ ë• ì–´ë– í•œê°€?
+                        // â–¡ â–  <- ì™¼ìª½ì´ ë‹¤ìŒ ëª©ì ì§€ 2
+                        // â–  â–  <- ì˜¤ë¥¸ìª½ì´ ë‹¤ìŒ ëª©ì ì§€ 1, 
+                        // â–  â–¡ 
+                        // ìœ„ì˜ ìƒí™©ì—ì„œëŠ” ë¹„êµí•˜ì˜€ì„ ë•Œ xëŠ” +1ì´ì§€ë§Œ
+                        // yê°€ +2ì´ë¯€ë¡œ y+ 2ìœ„ì¹˜ê¹Œì§€ ì í”„ë¥¼ í•´ì„œ ì´ë™í•˜ê²Œ í•˜ìž
 
 
                         if (!neighbour.walkable || closeSet.Contains(neighbour))
@@ -107,7 +107,7 @@ namespace pathFinding
                         //if (!grid[checkX + 1, neighbour.gridY].walkable || !grid[neighbour.gridX, checkY + 1].walkable) continue;
                         #endregion
 
-                        // ´ë°¢¼± ÀÌµ¿ ½Ã, ÇØ´ç ÀÌµ¿ Ç×Çâ ex) -1, -1 À§Ä¡ÀÇ °æ¿ì (0, -1), (-1, 0)À§Ä¡ µÑ ´Ù ¿­·ÁÀÖ´ÂÁö Ã¼Å© ÇØ¾ßÇÔ.
+                        // ëŒ€ê°ì„  ì´ë™ ì‹œ, í•´ë‹¹ ì´ë™ í•­í–¥ ex) -1, -1 ìœ„ì¹˜ì˜ ê²½ìš° (0, -1), (-1, 0)ìœ„ì¹˜ ë‘˜ ë‹¤ ì—´ë ¤ìžˆëŠ”ì§€ ì²´í¬ í•´ì•¼í•¨.
                         int gCostDistance = GetDistance(currentNode, neighbour);
                         int newMovementCostToNeighbour = currentNode.gCost + gCostDistance + neighbour.movementPenalty;
                         if (newMovementCostToNeighbour < neighbour.gCost || !openSet.Contains(neighbour))
@@ -131,12 +131,12 @@ namespace pathFinding
                 pathSuccess = wayPoint.Length > 0;
             }
 
-            // ¿©±â¼­ º¸ÅëÀº ¿òÁ÷ÀÌ°Ô ÇÔ.
+            // ì—¬ê¸°ì„œ ë³´í†µì€ ì›€ì§ì´ê²Œ í•¨.
             if(callback != null)    
                 callback(new PathResult(wayPoint, pathSuccess, request.callback));
             else
             {
-                Debug.Log("¿òÁ÷ÀÓÀ» Á÷Á¢ ±¸ÇöÇØ¾ßÇÏ´Â ·ÎÁ÷");
+                Debug.Log("ì›€ì§ìž„ì„ ì§ì ‘ êµ¬í˜„í•´ì•¼í•˜ëŠ” ë¡œì§");
             }
         }
 

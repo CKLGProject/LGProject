@@ -30,7 +30,7 @@ namespace LGProject.PlayerState
         {
             base.LogicUpdate();
             curTimer += Time.deltaTime;
-            if (curTimer > stateMachine.GetAnimPlayTime("JumpEnd"))
+            if (curTimer > 0.25f)
             {
                 if(Mathf.Abs(stateMachine.moveAction.ReadValue<float>())> 0.2f)
                 {

@@ -3294,7 +3294,7 @@ Transform:
   m_GameObject: {fileID: 963853262}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.6666667, y: 1, z: -9.5}
+  m_LocalPosition: {x: -2, y: 1, z: -9.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4542,10 +4542,13 @@ MonoBehaviour:
   JumpScale: 0
   FirstAttackDelay: 1
   FirstAttackJudgeDelay: 1
+  FirstAttackMovingValue: 1
   SecondAttackDelay: 1
   SecondAttackJudgeDelay: 1
+  SecondAttackMovingValue: 1
   ThirdAttackDelay: 1
   ThirdAttackJudgeDelay: 1
+  ThirdAttackMovingValue: 1
   DashAttackDelay: 0
   HitDelay: 0
   DownWaitDelay: 0
@@ -8250,7 +8253,7 @@ PrefabInstance:
     - target: {fileID: 6142601296869339651, guid: 2733f80f426950d4598e4e6317bd7935,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8219133890818253592, guid: 2733f80f426950d4598e4e6317bd7935,
         type: 3}
@@ -8507,8 +8510,14 @@ PrefabInstance:
     - target: {fileID: 6559117602054936325, guid: e748e159dd59aae4188ea3f4a8ac1c84,
         type: 3}
       propertyPath: JumpScale
-      value: 5
+      value: 1.1
       objectReference: {fileID: 0}
+    - target: {fileID: 6559117602054936325, guid: e748e159dd59aae4188ea3f4a8ac1c84,
+        type: 3}
+      propertyPath: dummyClip
+      value: 
+      objectReference: {fileID: 1827226128182048838, guid: 8860d595059bd3049a037ae08db34b48,
+        type: 3}
     - target: {fileID: 6559117602054936325, guid: e748e159dd59aae4188ea3f4a8ac1c84,
         type: 3}
       propertyPath: WakeUpDelay
@@ -8526,8 +8535,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6559117602054936325, guid: e748e159dd59aae4188ea3f4a8ac1c84,
         type: 3}
+      propertyPath: MaximumSpeed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6559117602054936325, guid: e748e159dd59aae4188ea3f4a8ac1c84,
+        type: 3}
       propertyPath: movingAttack
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6559117602054936325, guid: e748e159dd59aae4188ea3f4a8ac1c84,
         type: 3}
@@ -8551,6 +8565,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6559117602054936325, guid: e748e159dd59aae4188ea3f4a8ac1c84,
         type: 3}
+      propertyPath: ThirdAttackDelay
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6559117602054936325, guid: e748e159dd59aae4188ea3f4a8ac1c84,
+        type: 3}
       propertyPath: DamageGageDecimal
       value: 
       objectReference: {fileID: 1010493416}
@@ -8563,6 +8582,11 @@ PrefabInstance:
         type: 3}
       propertyPath: SecondAttackJudgeDelay
       value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6559117602054936325, guid: e748e159dd59aae4188ea3f4a8ac1c84,
+        type: 3}
+      propertyPath: ThirdAttackMovingValue
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6969282849394247417, guid: e748e159dd59aae4188ea3f4a8ac1c84,
         type: 3}

@@ -25,7 +25,7 @@ namespace LGProject.PlayerState
         [Tooltip("최대 점프 횟수"), SerializeField, HideInInspector]
         public int MaximumJumpCount = 2;
         [Tooltip("대쉬 최대 속도"), SerializeField, HideInInspector]
-        public int MaximumSpeed = 4;
+        public float MaximumSpeed = 4;
 
         [Tooltip("이동할 때 증가하는 속도"), SerializeField, HideInInspector]
         public float DashSpeed = 0;
@@ -40,12 +40,17 @@ namespace LGProject.PlayerState
         [Range(0.0f, 2.0f), Tooltip("n초의 시간이 경과하면 공격 판정을 시작함."), SerializeField, HideInInspector]
         public float FirstAttackJudgeDelay = 1f;
 
+        [SerializeField, HideInInspector]
+        public float FirstAttackMovingValue = 1f;
+
         [Range(0.0f, 1.0f), Tooltip("n초가 끝나면 Idle로 돌아옴"), SerializeField, HideInInspector]
         public float SecondAttackDelay = 1f;
 
         [Range(0.0f, 2.0f), Tooltip("n초의 시간이 경과하면 공격 판정을 시작함."), SerializeField, HideInInspector]
         public float SecondAttackJudgeDelay = 1f;
-        
+
+        [SerializeField, HideInInspector]
+        public float SecondAttackMovingValue = 1f;
 
         [Range(0.0f, 1.0f), Tooltip("n초가 끝나면 Idle로 돌아옴"), SerializeField, HideInInspector]
         public float ThirdAttackDelay = 1f;
@@ -53,6 +58,8 @@ namespace LGProject.PlayerState
         [Range(0.0f, 2.0f), Tooltip("n초의 시간이 경과하면 공격 판정을 시작함."), SerializeField, HideInInspector]
         public float ThirdAttackJudgeDelay = 1f;
 
+        [SerializeField, HideInInspector]
+        public float ThirdAttackMovingValue = 1f;
 
         [Range(0.0f, 1.0f), Tooltip("공격 후 Idle로 돌아오기 까지의 시간"), SerializeField, HideInInspector]
         public float DashAttackDelay = 0;
@@ -68,7 +75,7 @@ namespace LGProject.PlayerState
 
         [HideInInspector] public int LifePoint = 3;
 
-        [HideInInspector] public bool movingAttack = true;
+        public bool movingAttack = true;
 
         public TextMeshProUGUI DamageGageInt;
         public TextMeshProUGUI DamageGageDecimal;
@@ -291,8 +298,8 @@ namespace LGProject.PlayerState
         public void setupJumpVariables()
         {
             float timeToApex = maxJumpTime / 2;
-            _gravity = (-2 * maxJumpHeight) / Mathf.Pow(timeToApex, 1.5f);
-            initialJumpVelocity = (2 * maxJumpHeight) / timeToApex;
+            _gravity = (-2 * JumpScale) / Mathf.Pow(timeToApex, 1.5f);
+            initialJumpVelocity = (2 * JumpScale) / timeToApex;
         }
 
         public void handleJump()
@@ -350,7 +357,6 @@ namespace LGProject.PlayerState
         {
             underPlatform = GameObject.Find("Main_Floor (1)").GetComponent<Platform>();
         }
-
 
         #endregion
 
