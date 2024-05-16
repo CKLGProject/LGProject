@@ -53,7 +53,7 @@ namespace BehaviourTree
 
             private static bool _movementValuesFoldOut = false;
             private static bool _actionValuesFoldOut = false;
-            private static bool _hitValuesFoldOut = false;
+            //private static bool _hitValuesFoldOut = false;
 
             public override void OnInspectorGUI()
             {
@@ -185,10 +185,10 @@ namespace BehaviourTree
                 EditorGUILayout.Space(10f);
                 using (var changeScope = new EditorGUI.ChangeCheckScope())
                 {
-                    int value = (int)EditorGUILayout.IntField("대쉬 최대 속도", _maximumSpeed.intValue);
+                    float value = (float)EditorGUILayout.FloatField("대쉬 최대 속도", _maximumSpeed.floatValue);
                     if (changeScope.changed)
                     {
-                        _maximumSpeed.intValue = value;
+                        _maximumSpeed.floatValue = value;
                     }
                 }
                 EditorGUILayout.Space(10f);
@@ -363,6 +363,7 @@ namespace BehaviourTree
             InitEffectManager();
             effectManager.InitParticles();
             SetUnderPlatform();
+            UltimateGageImage.fillAmount = 0;
             for (int i = 0; i < stateMachine.animator.runtimeAnimatorController.animationClips.Length; i++)
             {
                 string name = stateMachine.animator.runtimeAnimatorController.animationClips[i].name;

@@ -95,7 +95,12 @@ namespace LGProject.PlayerState
 
         private void AttackLogic()
         {
-            if (!stateMachine.IsGrounded)
+            if (stateMachine.UltimateGage >= 100)
+            {
+                stateMachine.ChangeState(stateMachine.ultimateState);
+                return;
+            }
+            else if (!stateMachine.IsGrounded)
             {
                 stateMachine.ChangeState(stateMachine.jumpAttackState);
                 return;

@@ -32,7 +32,7 @@ namespace BehaviourTree
             stateMachine.IsGuard = true;
             stateMachine.playable.effectManager.PlayOneShot(EffectManager.EFFECT.Guard);
             curTimer = 0;
-            stateMachine.animator.SetTrigger("Guard");
+            stateMachine.animator.SetBool("Guard", true);
             stateMachine.animator.SetFloat("Run", 0);
         }
 
@@ -63,7 +63,7 @@ namespace BehaviourTree
                     if (rand < percent || guardEnableRange < Vector3.Distance(stateMachine.transform.position, Agent.player.position))
                     {
                         stateMachine.IsGuard = false;
-                        stateMachine.animator.SetTrigger("Idle");
+                        stateMachine.animator.SetBool("Guard", false);
                         return State.Success;
                     }
                 }

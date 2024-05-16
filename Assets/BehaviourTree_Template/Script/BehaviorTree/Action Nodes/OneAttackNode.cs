@@ -17,8 +17,8 @@ namespace BehaviourTree
         [SerializeField, Range(0f, 3f)] private float dashAttackPower;
         [SerializeField, Range(0f, 3f)] private float jashAttackPower;
         [Space(10f)]
-        [SerializeField] private float _judgeTimer = 0;
-        [SerializeField] private float _aniDelay = 0;
+        //[SerializeField] private float _judgeTimer = 0;
+        //[SerializeField] private float _aniDelay = 0;
 
         private float _curTimer;
 
@@ -86,9 +86,9 @@ namespace BehaviourTree
         {
             // 판정 범위 계산.
             Vector3 right = Vector3.right * (_agent.directionX == true ? 1 : -1);
-            Vector3 center = _agent.transform.position + right;
+            Vector3 center = _agent.transform.position + right + Vector3.up * 0.5f;
             Vector3 hitboxSize = Vector3.one * 0.5f;
-            hitboxSize.x *= (_stateMachine.IsGrounded ? dashAttackRange : jumpAttackRange);
+            hitboxSize.x *= (_stateMachine.IsGrounded ? 1.3f : 1.3f);
             Collider[] targets = Physics.OverlapBox(center,
                 hitboxSize,
                 Quaternion.identity, 1 << 3);
@@ -127,11 +127,17 @@ namespace BehaviourTree
                     Item1.GetComponent<Playable>().
                     GetStateMachine.
                     HitDamaged(v);
-                    
-                    temp.Item1.GetComponent<Playable>().GetStateMachine.hitPlayer = AIAgent.Instance.transform;
 
-                    temp.Item1.GetComponent<Playable>().effectManager.PlayOneShot(EffectManager.EFFECT.Hit);
+                    //temp.Item1.GetComponent<Playable>().GetStateMachine.hitPlayer = AIAgent.Instance.transform;
 
+                    if (!temp.Item1.GetStateMachine.IsGuard && !temp.Item1.GetStateMachine.IsDown)
+                    {// 100 % gage로 일단 계산
+                        _stateMachine.UltimateGage += 10;
+
+                        _stateMachine.playable.UltimateGageImage.fillAmount = _stateMachine.UltimateGage / 100f;
+
+                        temp.Item1.effectManager.PlayOneShot(EffectManager.EFFECT.Hit);
+                    }
                     return true;
                 }
             }

@@ -9,7 +9,7 @@ namespace BehaviourTree
     {
         private PlayerStateMachine _stateMachine;
         //[Space(10f)]
-        [SerializeField, Range(0f, 2f)] private float attackRange;
+        //[SerializeField, Range(0f, 2f)] private float attackRange;
         public float judgTimer = 0;
         public float animTimer = 0;
         private float _curTimer = 0;
@@ -96,7 +96,7 @@ namespace BehaviourTree
                 _stateMachine.AttackCount = 0;
             _isAttack = false;
             _stateMachine.IsNormalAttack = true;
-            AIAgent.Instance.SetAttacRange(attackRange);
+            //AIAgent.Instance.SetAttacRange(attackRange);
             _stateMachine.AttackCount++;
             _stateMachine.animator.SetInteger("Attack", _stateMachine.AttackCount);
             _curTimer = 0;
@@ -122,10 +122,10 @@ namespace BehaviourTree
         {
             #region Omit
             // 판정 범위 계산.
-            Vector3 right = Vector3.right * (AIAgent.Instance.directionX == true ? 1 : -1);
-            Vector3 center = AIAgent.Instance.transform.position + right;
+            Vector3 right = Vector3.right * (AIAgent.Instance.directionX == true ? 0.7f : -0.7f);
+            Vector3 center = AIAgent.Instance.transform.position + right + Vector3.up * 0.5f;
 
-            Collider[] targets = Physics.OverlapBox(center, Vector3.one * attackRange, Quaternion.identity, 1 << 3);
+            Collider[] targets = Physics.OverlapBox(center, Vector3.one * 0.5f, Quaternion.identity, 1 << 3);
             System.Tuple<Playable, float> temp = null;
 
             // 자기 공격에 자기가 맞음.
@@ -162,6 +162,7 @@ namespace BehaviourTree
 
                     temp.Item1.effectManager.PlayOneShot(EffectManager.EFFECT.Hit);
 
+                    _stateMachine.animator.SetInteger("Attack", 0);
                     return true;
                 }
             }

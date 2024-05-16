@@ -9,9 +9,9 @@ namespace LGProject.PlayerState
 
     public class JumpState : State
     {
-        private float _jumpScale = 0;
-        private int _maximumCount = 0;
-        private float _jumpDelay = 0.2f;
+        //private float _jumpScale = 0;
+        //private int _maximumCount = 0;
+        //private float _jumpDelay = 0.2f;
         
         private AnimationCurve _animationCurve;
 
@@ -19,10 +19,10 @@ namespace LGProject.PlayerState
         
         public JumpState(PlayerStateMachine _stateMachine, ref float jumpScale, int maximumCount, AnimationCurve animationCurve) : base(_stateMachine)
         {
-            _jumpScale = jumpScale;
-            _maximumCount = maximumCount;
-            _jumpDelay = 0.2f;
-            _animationCurve = animationCurve;
+            //_jumpScale = jumpScale;
+            //_maximumCount = maximumCount;
+            //_jumpDelay = 0.2f;
+            //_animationCurve = animationCurve;
         }
 
         public override void Enter()

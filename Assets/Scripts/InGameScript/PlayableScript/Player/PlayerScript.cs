@@ -51,7 +51,7 @@ namespace LGProject.PlayerState
 
             private static bool _movementValuesFoldOut = false;
             private static bool _actionValuesFoldOut = false;
-            private static bool _hitValuesFoldOut = false;
+            //private static bool _hitValuesFoldOut = false;
 
             public override void OnInspectorGUI()
             {
@@ -441,9 +441,10 @@ namespace LGProject.PlayerState
         {
             InitStates();
             InitEffectManager();
-
+            //stateMachine.UltimateGage = 100;
             effectManager.InitParticles();
-            for(int i = 0; i < stateMachine.animator.runtimeAnimatorController.animationClips.Length; i++)
+            UltimateGageImage.fillAmount = 0;
+            for (int i = 0; i < stateMachine.animator.runtimeAnimatorController.animationClips.Length; i++)
             {
                 string name = stateMachine.animator.runtimeAnimatorController.animationClips[i].name;
                 float time = stateMachine.animator.runtimeAnimatorController.animationClips[i].length;
@@ -462,7 +463,6 @@ namespace LGProject.PlayerState
             stateMachine.CurrentState.LogicUpdate();
             PlayableGravity();
             velocity = stateMachine.physics.velocity;
-            //PlatformCheck();
             NewPlatformCheck();
             DeadLineCheck();
         }
