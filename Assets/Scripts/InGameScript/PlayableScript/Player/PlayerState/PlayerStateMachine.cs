@@ -124,7 +124,7 @@ namespace LGProject.PlayerState  //
                 psm.hitState = new HitState(psm, ref psm.playable.HitDelay);
                 psm.guardState = new GuardState(psm);
 
-                //psm.ultimateState = new HitUltimateState(psm, 10.);
+                psm.ultimateState = new HitUltimateState(psm);
                 psm.downState = new DownState(psm, ref psm.playable.DownWaitDelay);
                 psm.wakeUpState = new WakeUpState(psm, ref psm.playable.WakeUpDelay);
                 psm.landingState = new LandingState(psm);
@@ -139,6 +139,7 @@ namespace LGProject.PlayerState  //
             return psm;
         }
 
+        // 캐릭터 별로 State맞추기
         public void SetUltimateState()
         {
 

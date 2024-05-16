@@ -53,7 +53,7 @@ namespace BehaviourTree
 
             private static bool _movementValuesFoldOut = false;
             private static bool _actionValuesFoldOut = false;
-            private static bool _hitValuesFoldOut = false;
+            //private static bool _hitValuesFoldOut = false;
 
             public override void OnInspectorGUI()
             {
@@ -363,6 +363,7 @@ namespace BehaviourTree
             InitEffectManager();
             effectManager.InitParticles();
             SetUnderPlatform();
+            UltimateGageImage.fillAmount = 0;
             for (int i = 0; i < stateMachine.animator.runtimeAnimatorController.animationClips.Length; i++)
             {
                 string name = stateMachine.animator.runtimeAnimatorController.animationClips[i].name;
