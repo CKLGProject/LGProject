@@ -330,7 +330,17 @@ MonoBehaviour:
     path: Assets/Scenes/Product/Choose Character.unity
   additiveScenes: []
   SkipMode: 0
+  SkipAction:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: df7b2713-542b-4cbf-9eb8-a26aa3d0df98
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
   MinimumLoadingTime: 0
+  DontUseAsync: 0
   DestroyOnCompleted: 0
   onLoading:
     m_PersistentCalls:
@@ -490,7 +500,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &286389935
 RectTransform:
   m_ObjectHideFlags: 0
@@ -524,8 +534,6 @@ GameObject:
   - component: {fileID: 547796474}
   - component: {fileID: 547796473}
   - component: {fileID: 547796472}
-  - component: {fileID: 547796475}
-  - component: {fileID: 547796476}
   m_Layer: 5
   m_Name: Login-View
   m_TagString: Untagged
@@ -616,35 +624,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!114 &547796475
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 547796470}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f5069899482b49cc87476f6b6229b29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LoginViewContainer: {fileID: 286389934}
-  NicknameInputField: {fileID: 941987348}
-  LoginButton: {fileID: 2027173804}
-  LobbySceneLoader: {fileID: 1886463926}
-  ChooseCharacterSceneLoader: {fileID: 69632592}
---- !u!114 &547796476
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 547796470}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5353dd51f6b4cde840c9fb98b1818c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &833046406
 GameObject:
   m_ObjectHideFlags: 0
@@ -1063,6 +1042,7 @@ Transform:
   - {fileID: 2126533411}
   - {fileID: 69632591}
   - {fileID: 1886463925}
+  - {fileID: 1401217887}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1167588344
@@ -1097,6 +1077,68 @@ Transform:
   - {fileID: 547796471}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1401217886
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1401217887}
+  - component: {fileID: 1401217890}
+  - component: {fileID: 1401217888}
+  m_Layer: 0
+  m_Name: Login View
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1401217887
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1401217886}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1162940905}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1401217888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1401217886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5353dd51f6b4cde840c9fb98b1818c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1401217890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1401217886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f5069899482b49cc87476f6b6229b29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LoginViewContainer: {fileID: 286389934}
+  NicknameInputField: {fileID: 941987348}
+  LoginButton: {fileID: 2027173804}
+  LobbySceneLoader: {fileID: 1886463926}
+  ChooseCharacterSceneLoader: {fileID: 69632592}
 --- !u!1 &1425892799
 GameObject:
   m_ObjectHideFlags: 0
@@ -1472,7 +1514,17 @@ MonoBehaviour:
     path: Assets/Scenes/Product/Lobby.unity
   additiveScenes: []
   SkipMode: 0
+  SkipAction:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 6512e6ff-9324-4158-b749-6acf609d2330
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
   MinimumLoadingTime: 0
+  DontUseAsync: 0
   DestroyOnCompleted: 0
   onLoading:
     m_PersistentCalls:

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6480812839290896414}
   - component: {fileID: 9190113457872704753}
   m_Layer: 5
-  m_Name: Name-Text (1)
+  m_Name: Pat Name-Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 8421214285194264442}
   - component: {fileID: 8982525411495708568}
   m_Layer: 5
-  m_Name: Player-Image
+  m_Name: Character-Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -357,7 +357,7 @@ GameObject:
   - component: {fileID: 2854456257225855032}
   - component: {fileID: 613447438062248318}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Card
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -436,7 +436,7 @@ GameObject:
   - component: {fileID: 1113635984933257817}
   - component: {fileID: 5112079439649804025}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Pat Profile-Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
