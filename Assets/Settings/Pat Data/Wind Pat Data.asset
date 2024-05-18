@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e2bb708d0aa442babdff0812b0d45ab, type: 3}
-  m_Name: Fire Pat Data
+  m_Name: Wind Pat Data
   m_EditorClassIdentifier: 
-  PatName: "\uC2A4\uCF54\uCE58\uC719"
+  PatName: "\uC5D0\uB9AC\uC628"
+  PatType: 3
   PatProfileImage:
-  - {fileID: 21300000, guid: a0fec4e317b8e46048c36872565fbddc, type: 3}
-  - {fileID: 21300000, guid: 8df194d43898e4cdcbec9147bd523ba3, type: 3}
-  - {fileID: 21300000, guid: 5d3b1779ae2184eb3960b556a5d0c80f, type: 3}
+  - {fileID: 21300000, guid: 303bd5c0ec4164a64801ca02fb332904, type: 3}
+  - {fileID: 21300000, guid: f9a3d0939656b4328986a5d7dce95960, type: 3}
+  - {fileID: 21300000, guid: 611b638db30334dd082911aebb809bd6, type: 3}

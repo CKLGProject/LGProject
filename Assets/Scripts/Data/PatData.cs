@@ -2,10 +2,20 @@ using UnityEngine;
 
 namespace Data
 {
+    public enum EPatType
+    {
+        None,
+        Scorchwing, // 스코치윙
+        Icebound, // 아이스바운드
+        Aerion, // 에리온
+        Electra // 일렉트라
+    }
+    
     [CreateAssetMenu(fileName = "Pat Data", menuName = "LG Data/Pat Data")]
     public class PatData : ScriptableObject
     {
         public string PatName;
+        public EPatType PatType;
         public Sprite[] PatProfileImage;
 
         /// <summary>

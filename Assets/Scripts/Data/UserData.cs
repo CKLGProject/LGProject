@@ -4,20 +4,19 @@ namespace Data
 {
     public enum ECharacterType
     {
+        None,
         Hit,
         Frost,
         C,
         Storm,
         E
     }
-    
-    [System.Serializable]
+
     public class UserData
     {
-        private ECharacterType _currentCharacter = 0;
-
-        public string Nickname { get; set; }
+        public ECharacterType CharacterType;
+        public string Nickname;
         public Dictionary<ECharacterType, bool> HasCharacterMap;
-        public PatData[] PatDataList;
+        public Pat Pat;
     }
 }

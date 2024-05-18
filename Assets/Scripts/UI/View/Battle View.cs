@@ -1,5 +1,7 @@
+using Data;
 using R3;
 using System;
+using System.Linq;
 using System.Text;
 using TMPro;
 using UnityEngine;
@@ -8,13 +10,6 @@ using UnityEngine.UI;
 
 public class BattleView : MonoBehaviour
 {
-    public enum Target
-    {
-        None,
-        User,
-        AI
-    }
-
     [Serializable]
     public class CardUI
     {
@@ -31,8 +26,7 @@ public class BattleView : MonoBehaviour
 
     [Header("AI")] [SerializeField] private CardUI aiCardUI;
 
-    // 유저 프로필 이미지
-    [SerializeField] private Image aiProfileImage;
+    [SerializeField] private CharacterImageData[] characterImageDataList;
 
 
     private int _dotCount;
@@ -42,14 +36,18 @@ public class BattleView : MonoBehaviour
     /// </summary>
     /// <param name="target"></param>
     /// <param name="value"></param>
-    public void SetCharacterProfileImage(Target target ,Sprite value)
+    public void SetCharacterProfileImage(ActorType target, Sprite value)
     {
         switch (target)
         {
-            case Target.User:
+            case ActorType.User:
+                if (!userCardUI.CharacterImage)
+                    return;
                 userCardUI.CharacterImage.sprite = value;
                 break;
-            case Target.AI:
+            case ActorType.AI:
+                if (!aiCardUI.CharacterImage)
+                    return;
                 aiCardUI.CharacterImage.sprite = value;
                 break;
             default:
@@ -58,19 +56,23 @@ public class BattleView : MonoBehaviour
     }
 
     /// <summary>
-    /// 유저 정령 프로필 이미지를 value로 변경합니다.
+    /// 캐릭터 이미지를 value로 변경합니다.
     /// </summary>
-    /// <param name="target"></param>
-    /// <param name="value"></param>
-    public void SetUserProfileImage(Target target ,Sprite value)
+    /// <param name="target">타겟 액터</param>
+    /// <param name="value">캐릭터 타입</param>
+    public void SetCharacterImage(ActorType target, ECharacterType value)
     {
         switch (target)
         {
-            case Target.User:
-                userCardUI.PatImage.sprite = value;
+            case ActorType.User:
+                if (!userCardUI.CharacterImage)
+                    return;
+                userCardUI.CharacterImage.sprite = CalculateCharacterImage(value);
                 break;
-            case Target.AI:
-                aiCardUI.PatImage.sprite = value;
+            case ActorType.AI:
+                if (!aiCardUI.CharacterImage)
+                    return;
+                aiCardUI.CharacterImage.sprite = CalculateCharacterImage(value);
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(target), target, null);
@@ -101,14 +103,18 @@ public class BattleView : MonoBehaviour
     /// <summary>
     /// 유저 이름 텍스트를 value로 설정합니다.
     /// </summary>
-    public void SetUserNameText(Target target, string value)
+    public void SetUserNameText(ActorType target, string value)
     {
         switch (target)
         {
-            case Target.User:
+            case ActorType.User:
+                if (!userCardUI.NameText)
+                    return;
                 userCardUI.NameText.text = value;
                 break;
-            case Target.AI:
+            case ActorType.AI:
+                if (!aiCardUI.NameText)
+                    return;
                 aiCardUI.NameText.text = value;
                 break;
             default:
@@ -119,15 +125,21 @@ public class BattleView : MonoBehaviour
     /// <summary>
     /// 펫 이름 텍스트를 value로 설정합니다.
     /// </summary>
-    public void SetPatNameText(Target target, string value)
+    public void SetPatUI(ActorType target, Sprite value)
     {
         switch (target)
         {
-            case Target.User:
-                userCardUI.PatNameText.text = value;
+            case ActorType.User:
+                if (!userCardUI.PatImage)
+                    return;
+                //TODO:여기에 정령 이름 부분이 필요시 들어간다.
+                userCardUI.PatImage.sprite = value;
                 break;
-            case Target.AI:
-                aiCardUI.PatNameText.text = value;
+            case ActorType.AI:
+                if (!aiCardUI.PatImage)
+                    return;
+                //TODO:여기에 정령 이름 부분이 필요시 들어간다.
+                aiCardUI.PatImage.sprite = value;
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(target), target, null);
@@ -141,5 +153,17 @@ public class BattleView : MonoBehaviour
     public Observable<Unit> UpdateLoadingTextObservable()
     {
         return Observable.Interval(TimeSpan.FromSeconds(0.25f));
+    }
+
+    /// <summary>
+    /// characterType에 알맞는 캐릭터 이미지를 반환합니다.
+    /// </summary>
+    /// <param name="characterType">캐릭터 타입</param>
+    /// <returns>캐릭터 이미지</returns>
+    private Sprite CalculateCharacterImage(ECharacterType characterType)
+    {
+        return (from characterImageData in characterImageDataList
+            where characterType == characterImageData.CharacterType
+            select characterImageData.CharacterProfileImage).FirstOrDefault();
     }
 }
