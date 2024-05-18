@@ -4692,7 +4692,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 39.530487
+  field of view: 32.87901
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
@@ -7550,9 +7550,9 @@ RectTransform:
   - {fileID: 773763322}
   m_Father: {fileID: 1701064828}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1662, y: -156}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -268, y: -156}
   m_SizeDelta: {x: 361.87598, y: 174.10901}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1998812760
