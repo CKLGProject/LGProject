@@ -19,12 +19,12 @@ namespace BehaviourTree
         protected override void OnStart()
         {
             StartExceptionHandling();
-            Debug.Log("AttackJudgeNodeStart");
+            //Debug.Log("AttackJudgeNodeStart");
         }
 
         protected override void OnStop()
         {
-            Debug.Log("AttackJudgeNodeEnd");
+            //Debug.Log("AttackJudgeNodeEnd");
         }
         protected override State OnUpdate()
         {
@@ -92,7 +92,9 @@ namespace BehaviourTree
                 _stateMachine = AIAgent.Instance.GetStateMachine;
             }
             if (_stateMachine.AttackCount > 2)
+            {
                 _stateMachine.AttackCount = 0;
+            }
             _isAttack = false;
             _stateMachine.IsNormalAttack = true;
             //AIAgent.Instance.SetAttacRange(attackRange);
@@ -121,7 +123,7 @@ namespace BehaviourTree
         {
             #region Omit
             // 판정 범위 계산.
-            Vector3 right = Vector3.right * (AIAgent.Instance.directionX == true ? 0.7f : -0.7f);
+            Vector3 right = Vector3.right * (AIAgent.Instance.directionX == true ? 1f : -1f);
             Vector3 center = AIAgent.Instance.transform.position + right + Vector3.up * 0.5f;
 
             Collider[] targets = Physics.OverlapBox(center, Vector3.one * 0.5f, Quaternion.identity, 1 << 3);

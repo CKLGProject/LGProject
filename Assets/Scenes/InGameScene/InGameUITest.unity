@@ -3871,23 +3871,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Animator: {fileID: 921508071}
+  velocity: {x: 0, y: 0, z: 0}
   MaximumJumpCount: 2
   MaximumSpeed: 4
   DashSpeed: 0
   JumpScale: 0
   FirstAttackDelay: 1
   FirstAttackJudgeDelay: 1
+  FirstAttackMovingValue: 1
   SecondAttackDelay: 1
   SecondAttackJudgeDelay: 1
+  SecondAttackMovingValue: 1
   ThirdAttackDelay: 1
   ThirdAttackJudgeDelay: 1
+  ThirdAttackMovingValue: 1
   DashAttackDelay: 0
   HitDelay: 0
   DownWaitDelay: 0
   WakeUpDelay: 0
+  LifePoint: 3
   movingAttack: 1
   DamageGageInt: {fileID: 0}
   DamageGageDecimal: {fileID: 0}
+  UltimateGageImage: {fileID: 0}
   AliveOffset: {x: 0, y: 0, z: 0}
   respawnTime: 0
   DeadLine: 0
@@ -3900,6 +3906,15 @@ MonoBehaviour:
     m_RotationOrder: 4
   underPlatform: {fileID: 0}
   effectManager: {fileID: 0}
+  IsGrounded: 0
+  IsGuard: 0
+  IsJumpGuard: 0
+  IsDamaged: 0
+  IsDown: 0
+  IsKnockback: 0
+  IsJumpping: 0
+  IsDead: 0
+  IsNormalAttack: 0
   target: {fileID: 0}
   grid: {fileID: 0}
   path: []

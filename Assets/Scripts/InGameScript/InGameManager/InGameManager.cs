@@ -4,62 +4,72 @@ using UnityEngine;
 using Cysharp.Threading.Tasks;
 
 
-public class InGameManager : MonoBehaviour
+namespace LGProject
 {
-    private static InGameManager instance;
-    public static InGameManager Instance
+
+    public class InGameManager : MonoBehaviour
     {
-        get
+        private static InGameManager instance;
+        public static InGameManager Instance
         {
-            return instance;
+            get
+            {
+                return instance;
+            }
+        }
+
+        public LGProject.PlayerState.Playable LeftPlayer;
+        public LGProject.PlayerState.Playable RightPlayer;
+        public bool IsStart = false;
+
+        /*****************************************************
+         * public Methods
+         * **/
+        public void SetPlayers()
+        {
+
+        }
+
+
+
+        /*****************************************************
+         * Private Methods
+         * **/
+        private void Awake()
+        {
+            if (instance == null)
+                instance = this;
+            GameStart().Forget();
+        }
+
+        // Start is called before the first frame update
+        private void Start()
+        {
+
+        }
+
+        // Update is called once per frame
+        private void Update()
+        {
+
+        }
+
+        async UniTaskVoid GameStart()
+        {
+            //InGameUIManager.Instance.CountText.text = $"<rotate=\"0\">{3}</rotate>";
+            //await UniTask.Delay(System.TimeSpan.FromSeconds(1));
+            for (int i = 3; i > 0; --i)
+            {
+                InGameUIManager.Instance.CountText.text = $"<rotate=\"0\">{i}</rotate>";
+                Debug.Log($"{i}");
+                await UniTask.Delay(System.TimeSpan.FromSeconds(1));
+            }
+            InGameUIManager.Instance.CountText.text = $"<rotate=\"0\">Start!!</rotate>";
+            IsStart = true;
+            await UniTask.Delay(System.TimeSpan.FromSeconds(1f));
+            InGameUIManager.Instance.CountText.gameObject.SetActive(false);
+
         }
     }
 
-    public LGProject.PlayerState.Playable LeftPlayer;
-    public LGProject.PlayerState.Playable RightPlayer;
-    public bool IsStart = false;
-
-    /*****************************************************
-     * public Methods
-     * **/
-    public void SetPlayers()
-    {
-
-    }
-
-
-
-    /*****************************************************
-     * Private Methods
-     * **/
-    private void Awake()
-    {
-        if (instance == null)
-            instance = this;
-        GameStart().Forget();
-    }
-
-    // Start is called before the first frame update
-    private void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    private void Update()
-    {
-        
-    }
-
-    async UniTaskVoid GameStart()
-    {
-        for(int i = 1; i < 4; i++)
-        {
-            Debug.Log($"{i}");
-            await UniTask.Delay(1);
-        }
-        Debug.Log("Start!!");
-        IsStart = true;
-
-    }
 }

@@ -20,7 +20,7 @@ namespace LGProject.PlayerState
 
         public virtual void Enter()
         {
-            Debug.Log($"Enter State = {this.ToString()}");
+            //Debug.Log($"Enter State = {this.ToString()}");
         }
 
         public virtual void PhysicsUpdate()

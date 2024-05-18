@@ -38,6 +38,7 @@ namespace LGProject.PlayerState  //
         public JumpAttackState jumpAttackState;
         public DashAttackState dashAttackState;
         public HitState hitState;
+        public KnockbackState knockbackState;
         public GuardState guardState;
         public DownState downState;
         public WakeUpState wakeUpState;
@@ -124,6 +125,7 @@ namespace LGProject.PlayerState  //
 
                 psm.hitState = new HitState(psm, ref psm.playable.HitDelay);
                 psm.guardState = new GuardState(psm);
+                psm.knockbackState = new KnockbackState(psm);
 
                 psm.ultimateState = new HitUltimateState(psm);
                 psm.downState = new DownState(psm, ref psm.playable.DownWaitDelay);
@@ -224,7 +226,7 @@ namespace LGProject.PlayerState  //
         public void HitDamaged(Vector3 velocity)
         {
             // 누어 있는 상태에선 데미지를 입지 않는다.
-            if (IsDown && IsUltimate)
+            if (IsDown || IsUltimate )
                 return;
             if (!IsGuard)
             {

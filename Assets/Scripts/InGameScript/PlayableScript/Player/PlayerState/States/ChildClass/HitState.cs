@@ -36,9 +36,9 @@ namespace LGProject.PlayerState
         public override void LogicUpdate()
         {
             base.LogicUpdate();
-            if(stateMachine.IsGrounded)
+            if(!stateMachine.IsGrounded)
             {
-                stateMachine.ChangeState(stateMachine.downState);
+                stateMachine.ChangeState(stateMachine.knockbackState);
                 return;
                 //curTimer += Time.deltaTime;
                 //if (curTimer >= stunedTimer)
@@ -50,7 +50,7 @@ namespace LGProject.PlayerState
                 // 공중에서 피격당할 시 Idle state가 아닌 Down State로 변경
                 // Down State의 경우 땅에 닿을 때(is Grounded = true) 까지
                 // Down State를 유지해야 하며, 
-                //stateMachine.ChangeState(stateMachine.downState);
+                stateMachine.ChangeState(stateMachine.idleState);
             }
 
         }

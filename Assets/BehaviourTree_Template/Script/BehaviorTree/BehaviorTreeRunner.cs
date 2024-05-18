@@ -21,7 +21,7 @@ namespace BehaviourTree
 
         private void Update()
         {
-            if(InGameManager.Instance.IsStart)
+            if(LGProject.InGameManager.Instance.IsStart)
                 tree.Update();
         }
     }

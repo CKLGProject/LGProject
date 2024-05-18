@@ -462,6 +462,7 @@ namespace LGProject.PlayerState
             if(InGameManager.Instance.IsStart)
             {
                 stateMachine.CurrentState.LogicUpdate();
+                stateMachine.Update();
                 PlayableGravity();
                 velocity = stateMachine.physics.velocity;
                 NewPlatformCheck();

@@ -2460,6 +2460,7 @@ MonoBehaviour:
   - {fileID: 1427213110}
   - {fileID: 963332946}
   - {fileID: 1998812760}
+  CountText: {fileID: 715961760}
   _leftPlayer: {fileID: 1853587625}
   _rightPlayer: {fileID: 109120066}
 --- !u!1 &689274985
@@ -2550,7 +2551,7 @@ GameObject:
   - component: {fileID: 715961760}
   - component: {fileID: 715961759}
   m_Layer: 5
-  m_Name: Text (TMP) (1)
+  m_Name: CountUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2570,10 +2571,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1701064828}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 34.79599}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &715961759
 MonoBehaviour:
@@ -2643,8 +2644,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -4842,7 +4843,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 39.5059
+  field of view: 39.525444
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
@@ -8842,7 +8843,7 @@ PrefabInstance:
     - target: {fileID: 8866563565161335285, guid: 2733f80f426950d4598e4e6317bd7935,
         type: 3}
       propertyPath: DeadLine
-      value: -4.8
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 8866563565161335285, guid: 2733f80f426950d4598e4e6317bd7935,
         type: 3}
