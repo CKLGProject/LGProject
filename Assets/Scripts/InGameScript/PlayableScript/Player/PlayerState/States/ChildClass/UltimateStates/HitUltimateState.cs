@@ -39,6 +39,7 @@ namespace LGProject.PlayerState
         public override void Exit()
         {
             base.Exit();
+            stateMachine.IsUltimate = false;
         }
 
         public override void LogicUpdate()
@@ -119,7 +120,6 @@ namespace LGProject.PlayerState
         {
             await UniTask.Delay(TimeSpan.FromSeconds(0.175f));
             _isMove = true;
-            stateMachine.IsUltimate = false;
             Time.timeScale = 1f;
             stateMachine.playable.effectManager.Stop(EffectManager.EFFECT.Ultimate);
             stateMachine.animator.updateMode = AnimatorUpdateMode.Normal;

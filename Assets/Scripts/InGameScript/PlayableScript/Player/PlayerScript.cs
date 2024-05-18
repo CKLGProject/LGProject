@@ -459,7 +459,7 @@ namespace LGProject.PlayerState
 
         void Update()
         {
-            //velocity = 
+
             stateMachine.CurrentState.LogicUpdate();
             PlayableGravity();
             velocity = stateMachine.physics.velocity;

@@ -21,6 +21,7 @@ namespace LGProject.PlayerState
             base.Enter();
             _curTimer = 0;
             stateMachine.IsDown = true;
+            stateMachine.animator.SetTrigger("Landing");
         }
 
         public override void Exit()

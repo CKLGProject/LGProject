@@ -241,6 +241,7 @@ namespace LGProject.PlayerState  //
                     animator.SetTrigger("Knockback");
                     IsKnockback = true;
                 }
+                //playable.effectManager.Play(EffectManager.EFFECT.Hit).Forget();
             }
             else
             {

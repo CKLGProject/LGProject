@@ -7,6 +7,7 @@ namespace LGProject.PlayerState
     {
         public UltimateState(PlayerStateMachine _stateMachine) : base(_stateMachine)
         {
+
         }
 
         public override void Enter()
