@@ -441,7 +441,7 @@ namespace LGProject.PlayerState
         {
             InitStates();
             InitEffectManager();
-            //stateMachine.UltimateGage = 100;
+            stateMachine.UltimateGage = 100;
             effectManager.InitParticles();
             UltimateGageImage.fillAmount = 0;
             for (int i = 0; i < stateMachine.animator.runtimeAnimatorController.animationClips.Length; i++)

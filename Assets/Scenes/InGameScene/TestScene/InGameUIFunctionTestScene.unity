@@ -8618,6 +8618,11 @@ PrefabInstance:
       propertyPath: _AttackOffset2.z
       value: -0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 4246712564485102162, guid: 2733f80f426950d4598e4e6317bd7935,
+        type: 3}
+      propertyPath: m_UpdateMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6142601296869339651, guid: 2733f80f426950d4598e4e6317bd7935,
         type: 3}
       propertyPath: m_Name
@@ -8818,7 +8823,7 @@ PrefabInstance:
     - target: {fileID: 4197115238591175659, guid: e748e159dd59aae4188ea3f4a8ac1c84,
         type: 3}
       propertyPath: m_UpdateMode
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4417936120026488029, guid: e748e159dd59aae4188ea3f4a8ac1c84,
         type: 3}

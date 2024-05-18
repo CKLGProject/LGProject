@@ -56,6 +56,7 @@ namespace LGProject.PlayerState  //
         public bool IsJumpping;
         public bool IsDead;
         public bool IsNormalAttack;
+        public bool IsUltimate;
 
         public bool IsDashAttack = false;
         public bool IsJumpAttack = false;
@@ -223,7 +224,7 @@ namespace LGProject.PlayerState  //
         public void HitDamaged(Vector3 velocity)
         {
             // 누어 있는 상태에선 데미지를 입지 않는다.
-            if (IsDown)
+            if (IsDown && IsUltimate)
                 return;
             if (!IsGuard)
             {
@@ -273,6 +274,15 @@ namespace LGProject.PlayerState  //
             animator.ResetTrigger("Landing");
             animator.ResetTrigger("WakeUp");
         }
+
+        public void UltimateGageisFull()
+        {
+            if(UltimateGage >= 100)
+            {
+                playable.ShowUltimateEffect();
+            }
+        }
+
 
         #region ComboMethods
 

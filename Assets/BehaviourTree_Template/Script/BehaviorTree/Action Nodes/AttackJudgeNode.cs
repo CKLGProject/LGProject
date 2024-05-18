@@ -58,12 +58,12 @@ namespace BehaviourTree
             #region legarcy
             if (_curTimer > animTimer)
             {
+                _stateMachine.animator.SetInteger("Attack", 0);
                 // 애니메이션이 끝난 이후 데미지 판정 -> 데미지를 넣는데 성공하면 다음 공격, 시간이 지나도 공격 못하면 Idle
                 // 애니메이션이 재생 중이라면 Running
                 if (_isAttack == false && !_stateMachine.IsDamaged) _isAttack = ActionJudge();
                 if (_isAttack && _stateMachine.AttackCount < 3  )
                 {
-                    Debug.Log("Case 1");
                     return State.Success;
 
                 }

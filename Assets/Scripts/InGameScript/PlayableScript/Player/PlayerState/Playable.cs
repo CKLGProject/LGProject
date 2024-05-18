@@ -358,6 +358,11 @@ namespace LGProject.PlayerState
             underPlatform = GameObject.Find("Main_Floor (1)").GetComponent<Platform>();
         }
 
+        public void ShowUltimateEffect()
+        {
+            effectManager.Play(EffectManager.EFFECT.Ultimate).Forget();
+        }
+
         #endregion
 
 

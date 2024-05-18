@@ -110,7 +110,7 @@ namespace LGProject.PlayerState
 
                                 stateMachine.playable.UltimateGageImage.fillAmount = stateMachine.UltimateGage / 100f;
 
-                                temp.Item1.effectManager.PlayOneShot(EffectManager.EFFECT.Hit);
+                                //temp.Item1.effectManager.PlayOneShot(EffectManager.EFFECT.Hit);
                             }
                         }
                     }
