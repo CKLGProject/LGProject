@@ -14,12 +14,12 @@ public class LoginPresenter : MonoBehaviour
         if (IsFirstLogin())
             _view.SetActive(true);
         else
-            _view.Connect(LoginView.MoveScene.Lobby);
+            _view.Connect();
 
         _view.LoginButton.onClick
             .AsObservable()
             .Where(_ => _view.IsNicknameNotEmpty())
-            .Subscribe(_ => _view.Connect(LoginView.MoveScene.ChooseCharacter, true))
+            .Subscribe(_ => _view.Connect(true))
             .AddTo(this);
     }
 

@@ -10,11 +10,14 @@ namespace Data
         Storm,
         E
     }
+    
+    [System.Serializable]
     public class UserData
     {
-        private int _currentCharacter = 0;
+        private ECharacterType _currentCharacter = 0;
 
+        public string Nickname { get; set; }
         public Dictionary<ECharacterType, bool> HasCharacterMap;
-        public PatData PatData;
+        public PatData[] PatDataList;
     }
 }

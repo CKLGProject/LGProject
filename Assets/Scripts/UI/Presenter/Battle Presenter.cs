@@ -21,7 +21,7 @@ public class BattlePresenter : MonoBehaviour
         _battleView = GetComponent<BattleView>();
 
         // 유저 이름을 설정합니다.
-        string userName = PlayerPrefs.GetString("Nickname", "Guest");
+        string userName = CurrentGameManager.GetNickname();
         _battleView.SetUserNameText(BattleView.Target.User, userName);
 
         //TODO:유저 프로필 이미지를 설정해야합니다.

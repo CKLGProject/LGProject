@@ -1,16 +1,23 @@
 using Data;
+using System.Collections.Generic;
 using UnityEngine;
 using USingleton.AutoSingleton;
 
 [Singleton(nameof(GameManager))]
 public class GameManager : MonoBehaviour
 {
-    public string Nickname { get; set; }
-
-    [field: SerializeField] public PatData[] PatDataList { get; private set; }
+    public UserData UserData;
 
     private void Start()
     {
+        // 닉네임 설정
+        string nickName = PlayerPrefs.GetString("Nickname","Guest");
+        UserData.Nickname = nickName;
+        
+        // 기본으로 히트 캐릭터 수록
+        UserData.HasCharacterMap = new Dictionary<ECharacterType, bool>();
+        UserData.HasCharacterMap.Add(ECharacterType.Hit, true);
+
         // 화면이 꺼지지 않도록 처리
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
     }
@@ -21,7 +28,7 @@ public class GameManager : MonoBehaviour
     /// <returns>정령 개수</returns>
     public int GetPatDataCount()
     {
-        return PatDataList.Length;
+        return UserData.PatDataList.Length;
     }
 
     /// <summary>
@@ -31,7 +38,7 @@ public class GameManager : MonoBehaviour
     /// <returns>펫 이름</returns>
     public string GetPatName(int index)
     {
-        return PatDataList[index].PatName;
+        return UserData.PatDataList[index].PatName;
     }
 
     /// <summary>
@@ -42,6 +49,24 @@ public class GameManager : MonoBehaviour
     /// <returns>펫 프로필 이미지</returns>
     public Sprite GetPatProfileImage(int index, int level)
     {
-        return PatDataList[index].PatProfileImage[level];
+        return UserData.PatDataList[index].PatProfileImage[level];
+    }
+
+    /// <summary>
+    /// 닉네임을 설정합니다.
+    /// </summary>
+    /// <param name="value">설정할 닉네임</param>
+    public void SetNickname(string value)
+    {
+        UserData.Nickname = value;
+    }
+
+    /// <summary>
+    /// 유저 닉네임을 반환합니다.
+    /// </summary>
+    /// <returns>유저 닉네임</returns>
+    public string GetNickname()
+    {
+        return  UserData.Nickname;
     }
 }

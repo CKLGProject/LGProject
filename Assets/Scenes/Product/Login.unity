@@ -278,79 +278,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 38922533}
   m_CullTransparentMesh: 1
---- !u!1 &69632590
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 69632591}
-  - component: {fileID: 69632592}
-  m_Layer: 0
-  m_Name: Load Character View
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &69632591
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 69632590}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1162940905}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &69632592
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 69632590}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89fc4b73d3bdf43aeac288614f778a97, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LoadStyle: 0
-  UseAsync: 0
-  editorAutoLoad: 0
-  loadScene:
-    sceneAsset: {fileID: 102900000, guid: 927209608c87843c2aa8b71005ae3d00, type: 3}
-    path: Assets/Scenes/Product/Choose Character.unity
-  additiveScenes: []
-  SkipMode: 0
-  SkipAction:
-    m_Name: 
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: df7b2713-542b-4cbf-9eb8-a26aa3d0df98
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  MinimumLoadingTime: 0
-  DontUseAsync: 0
-  DestroyOnCompleted: 0
-  onLoading:
-    m_PersistentCalls:
-      m_Calls: []
-  onLoadCompleted:
-    m_PersistentCalls:
-      m_Calls: []
-  onCompleted:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &131951619
 GameObject:
   m_ObjectHideFlags: 0
@@ -1040,7 +967,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2126533411}
-  - {fileID: 69632591}
   - {fileID: 1886463925}
   - {fileID: 1401217887}
   m_Father: {fileID: 0}
@@ -1138,7 +1064,7 @@ MonoBehaviour:
   NicknameInputField: {fileID: 941987348}
   LoginButton: {fileID: 2027173804}
   LobbySceneLoader: {fileID: 1886463926}
-  ChooseCharacterSceneLoader: {fileID: 69632592}
+  ChooseCharacterSceneLoader: {fileID: 0}
 --- !u!1 &1425892799
 GameObject:
   m_ObjectHideFlags: 0
