@@ -19,9 +19,6 @@ namespace BehaviourTree
         // 앞으로 가는 와중 길이 없으면, 점프를 한다. 점프의 경우 2단까지 가능하나
         // 2단 점프의 경우는 아직 로직을 생각 안해둠.
 
-        [SerializeField] private float coolDown = 2;
-        private float _curTimer;
-
         protected override void OnStart()
         {
             #region Legarcy
@@ -49,18 +46,14 @@ namespace BehaviourTree
         protected override State OnUpdate()
         {
             // 타이머를 재생해서 0이 되면 실행되게 하기
-            //_curTimer += Time.deltaTime;
-            //if (_curTimer < coolDown)
-            //{
-            //    return State.Failure;
-            //}
+
             if (Agent.GetStateMachine.IsDamaged)
                 return State.Failure;
             if (Agent.path == null)
                 return State.Running;
             else
             {
-                _curTimer = 0;
+                //_curTimer = 0;
                 PathRequestManager.RequestPath(new PathRequest(Agent.transform.position, Grid.Instance.GetRandPoint(Agent.player.position), Agent.GetPath));
                 return State.Success;
             }

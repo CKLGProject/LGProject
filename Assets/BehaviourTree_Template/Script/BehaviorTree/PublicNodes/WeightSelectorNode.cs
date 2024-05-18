@@ -8,7 +8,6 @@ namespace BehaviourTree
     {
         // 총 가중치
         [SerializeField] private float totalWeights = -1;
-        private int childCurrent = 0;
         private Node currentNode;
        
         

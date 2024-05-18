@@ -21,6 +21,7 @@ namespace LGProject.PlayerState
 
             stateMachine.ResetAnimParameters();
             stateMachine.animator.SetTrigger("WakeUp");
+            stateMachine.animator.SetFloat("Run", 0);
         }
 
         public override void Exit()

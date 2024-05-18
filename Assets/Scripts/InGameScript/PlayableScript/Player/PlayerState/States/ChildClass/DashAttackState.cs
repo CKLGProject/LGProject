@@ -60,14 +60,15 @@ namespace LGProject.PlayerState
 
         public void AttackJudge()
         {
-
             if (!damageInCount)
             {
                 Vector3 right = Vector3.right * (stateMachine.playable.directionX == true ? 1 : -1);
                 Vector3 center = stateMachine.transform.position + right + Vector3.up * 0.5f;
                 // 생각보다 판정이 후하진 않게 하기
                 // hit box의 크기를 따라감.
-                Collider[] targets = Physics.OverlapBox(center, Vector3.one * 0.5f, Quaternion.identity, 1 << 3);
+                Vector3 hitBox = Vector3.one * 0.7f;
+                hitBox.x *= 1.3f;
+                Collider[] targets = Physics.OverlapBox(center, hitBox, Quaternion.identity, 1 << 3);
                 // 박스 내부에 들어온 적을 생각했을 때, Playable Character와 가까운 적을 타겟으로 삼는다.
                 System.Tuple<Playable, float> temp = null;
 
@@ -76,10 +77,10 @@ namespace LGProject.PlayerState
                     float distance = Vector3.Distance(center, t.transform.position);
                     if (temp == null || (temp.Item2 >= distance && t.transform != stateMachine.transform))
                     {
-                        temp = System.Tuple.Create(t.GetComponent<Playable>(), distance);
+                        if(t.transform != stateMachine.transform)
+                            temp = System.Tuple.Create(t.GetComponent<Playable>(), distance);
                     }
                 }
-
                 if (temp == null)
                 {
                     damageInCount = false;
@@ -102,7 +103,15 @@ namespace LGProject.PlayerState
                             HitDamaged(v);
                             damageInCount = true;
 
-                            temp.Item1.effectManager.PlayOneShot(EffectManager.EFFECT.Hit);
+
+                            if (!temp.Item1.GetStateMachine.IsGuard && !temp.Item1.GetStateMachine.IsDown)
+                            {// 100 % gage로 일단 계산
+                                stateMachine.UltimateGage += 10;
+
+                                stateMachine.playable.UltimateGageImage.fillAmount = stateMachine.UltimateGage / 100f;
+
+                                temp.Item1.effectManager.PlayOneShot(EffectManager.EFFECT.Hit);
+                            }
                         }
                     }
                     catch

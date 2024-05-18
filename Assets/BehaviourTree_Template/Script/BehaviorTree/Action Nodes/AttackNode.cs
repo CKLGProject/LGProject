@@ -7,10 +7,9 @@ namespace BehaviourTree
     public class AttackNode : ActionNode
     {
         public AIAgent Agent;
-        [Space(10f)]
         // 공격을 진행하는 노드 
         // 애니메이션을 실행함.
-        int count = 0;
+        //int count = 0;
         protected override void OnStart()
         {
             // 애니메이션 실행

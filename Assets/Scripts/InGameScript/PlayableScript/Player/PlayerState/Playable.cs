@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System;
+using UnityEngine.UI;
 using TMPro;
 using Cysharp.Threading.Tasks;
 
@@ -79,6 +80,8 @@ namespace LGProject.PlayerState
 
         public TextMeshProUGUI DamageGageInt;
         public TextMeshProUGUI DamageGageDecimal;
+        public Image UltimateGageImage;
+
         public Vector3 AliveOffset;
         public float respawnTime;
         public float DeadLine;
@@ -108,7 +111,7 @@ namespace LGProject.PlayerState
         float _gravity = -9.8f;
         float _groundedGravity = -0.05f;
         float initialJumpVelocity ;
-        float maxJumpHeight = 1.5f;
+        //float maxJumpHeight = 1.5f;
         float maxJumpTime = 0.5f;
 
         protected PlayerStateMachine stateMachine;
@@ -269,7 +272,6 @@ namespace LGProject.PlayerState
                 {
                     stateMachine.IsGrounded = false;
                     stateMachine.collider.isTrigger = true;
-                    //Debug.Log("Jump Flying");
                 }
                 // 피격당해 날아간 상태
                 if(stateMachine.IsKnockback)
@@ -277,7 +279,6 @@ namespace LGProject.PlayerState
                     stateMachine.IsGrounded = false;
                     stateMachine.collider.isTrigger = true;
                     stateMachine.IsKnockback = true;
-                    //Debug.Log("Knockback Flying");
                 }
             }
         }
@@ -287,10 +288,9 @@ namespace LGProject.PlayerState
             if (transform.position.x < underPlatform.rect.x && transform.position.x > underPlatform.rect.width &&
                 transform.position.y < underPlatform.rect.y && transform.position.y > underPlatform.rect.height)
             {
-                //Debug.Log("Across Platform");
                 return true;
             }
-            //Debug.Log("On The Platform");
+
             return false;
         }
 

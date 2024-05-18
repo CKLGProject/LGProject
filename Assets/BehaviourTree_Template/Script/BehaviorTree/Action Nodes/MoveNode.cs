@@ -97,36 +97,42 @@ namespace BehaviourTree
         {
             if (_agent == null)
                 _agent = AIAgent.Instance;
-
-            _curTimer += Time.deltaTime;
-            Vector3 currentWaypoint = new Vector3(_agent.path[_agent.targetIndex].x, _agent.path[_agent.targetIndex].y -0.45f, _agent.path[_agent.targetIndex].z);
-            if (Mathf.Abs(Vector3.Distance(_agent.transform.position, currentWaypoint)) < 0.25f)
+            try
             {
-                _agent.targetIndex++;
-                if (_agent.targetIndex >= _agent.path.Length)
+                _curTimer += Time.deltaTime;
+                Vector3 currentWaypoint = new Vector3(_agent.path[_agent.targetIndex].x, _agent.path[_agent.targetIndex].y - 0.45f, _agent.path[_agent.targetIndex].z);
+                if (Mathf.Abs(Vector3.Distance(_agent.transform.position, currentWaypoint)) < 0.25f)
+                {
+                    _agent.targetIndex++;
+                    if (_agent.targetIndex >= _agent.path.Length)
+                        return false;
+
+                    currentWaypoint = new Vector3(_agent.path[_agent.targetIndex].x, _agent.path[_agent.targetIndex].y - 0.45f, _agent.path[_agent.targetIndex].z);
+                }
+
+                // 대각선 위인지 체크
+                if (AcrossTargetNode(currentWaypoint))
+                {
+                    // 목표지점가지 점프해야하는데 일단 디버그 찍고 끝내자
+                    SetJumpVelocity();
+                }
+                if (CheckTargetPosition())
+                {
                     return false;
+                }
+                currentWaypoint.z = _agent.transform.position.z;
 
-                currentWaypoint = new Vector3(_agent.path[_agent.targetIndex].x, _agent.path[_agent.targetIndex].y - 0.45f, _agent.path[_agent.targetIndex].z);
-            }
+                _agent.transform.position = Vector3.MoveTowards(_agent.transform.position, currentWaypoint, _stateMachine.playable.MaximumSpeed * Time.deltaTime);
 
-            // 대각선 위인지 체크
-            if (AcrossTargetNode(currentWaypoint))
-            {
-                // 목표지점가지 점프해야하는데 일단 디버그 찍고 끝내자
-                SetJumpVelocity();
+                Vector3 direction = currentWaypoint - _agent.transform.position;
+                _agent.directionX = direction.x >= 0.1f ? true : false;
+                Vector3 rot = new Vector3(currentWaypoint.x, _agent.transform.position.y, _agent.transform.position.z);
+                _agent.transform.LookAt(rot);
             }
-            if (CheckTargetPosition())
+            catch
             {
                 return false;
             }
-            currentWaypoint.z = _agent.transform.position.z;
-
-            _agent.transform.position = Vector3.MoveTowards(_agent.transform.position, currentWaypoint, _stateMachine.playable.MaximumSpeed * Time.deltaTime);
-
-            Vector3 direction = currentWaypoint - _agent.transform.position;
-            _agent.directionX = direction.x >= 0.1f ? true : false;
-            Vector3 rot = new Vector3(currentWaypoint.x, _agent.transform.position.y, _agent.transform.position.z);
-            _agent.transform.LookAt(rot);
             return true;
         }
 

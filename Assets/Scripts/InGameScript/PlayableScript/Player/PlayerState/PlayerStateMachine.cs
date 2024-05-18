@@ -116,6 +116,7 @@ namespace LGProject.PlayerState  //
                 psm.jumpState = new JumpState(psm, ref psm.playable.JumpScale, psm.playable.MaximumJumpCount, psm.playable.jumpCurve);
 
                 psm.attackState = new AttackState(psm, ref psm.playable.FirstAttackJudgeDelay, ref psm.playable.FirstAttackDelay, ref psm.playable.SecondAttackJudgeDelay, ref psm.playable.SecondAttackDelay, ref psm.playable.ThirdAttackJudgeDelay, ref psm.playable.ThirdAttackDelay);
+                psm.ultimateState = new UltimateState(psm);
 
                 psm.jumpAttackState = new JumpAttackState(psm, psm.playable.MaximumSpeed);
                 psm.dashAttackState = new DashAttackState(psm, ref psm.playable.DashAttackDelay);
@@ -123,7 +124,7 @@ namespace LGProject.PlayerState  //
                 psm.hitState = new HitState(psm, ref psm.playable.HitDelay);
                 psm.guardState = new GuardState(psm);
 
-                //psm.ultimateState = new HitUltimateState(psm, 10.);
+                psm.ultimateState = new HitUltimateState(psm);
                 psm.downState = new DownState(psm, ref psm.playable.DownWaitDelay);
                 psm.wakeUpState = new WakeUpState(psm, ref psm.playable.WakeUpDelay);
                 psm.landingState = new LandingState(psm);
@@ -138,6 +139,7 @@ namespace LGProject.PlayerState  //
             return psm;
         }
 
+        // 캐릭터 별로 State맞추기
         public void SetUltimateState()
         {
 
@@ -264,7 +266,7 @@ namespace LGProject.PlayerState  //
             animator.ResetTrigger("Idle");
             animator.ResetTrigger("DashAttack");
             animator.ResetTrigger("Hit");
-            animator.ResetTrigger("Guard");
+            //animator.ResetTrigger("Guard");
             animator.ResetTrigger("Jump1");
             animator.ResetTrigger("Jump2");
             animator.ResetTrigger("Knockback");

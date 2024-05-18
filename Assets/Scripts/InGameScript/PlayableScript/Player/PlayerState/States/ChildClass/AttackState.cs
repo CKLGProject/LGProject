@@ -27,9 +27,7 @@ namespace LGProject.PlayerState
         float thirdAttackDelay = 0;
 
         float curTimer;
-        bool movingAttack = false;
         bool damageInCount = false;
-        //float aniDelay
 
         public AttackState(PlayerStateMachine _stateMachine, ref float firstJudgeAttack, ref float firstAttackDelay,ref float secondJudgeAttack,ref float secondAttackDelay, ref float thirdJudgeAttack, ref float thirdAttackDelay) : base(_stateMachine)
         {
@@ -157,7 +155,15 @@ namespace LGProject.PlayerState
                 if (damageInCount == false) AttackJudge();
                 if (stateMachine.attackAction.triggered && stateMachine.AttackCount < 3)
                 {
-                    stateMachine.ChangeState(stateMachine.attackState);
+                    // 다음 공격의 게이지가 100일 경우 Ultimate공격을 진행 아닐 경우 attackState
+                    if (stateMachine.UltimateGage >= 100)
+                    {
+                        stateMachine.ChangeState(stateMachine.ultimateState);
+                    }
+                    else
+                    {
+                        stateMachine.ChangeState(stateMachine.attackState);
+                    }
                 }
                 // 모션이 끝나면?
                 else if (curTimer >= time)
@@ -166,7 +172,7 @@ namespace LGProject.PlayerState
                     stateMachine.animator.SetTrigger("Idle");
                     stateMachine.AttackCount = 0;
                     stateMachine.animator.SetInteger("Attack", 0);
-                    stateMachine .ChangeState(stateMachine.idleState);
+                    stateMachine.ChangeState(stateMachine.idleState);
                     return;
                 }
             }
@@ -177,7 +183,7 @@ namespace LGProject.PlayerState
 
             if (!damageInCount)
             {
-                Vector3 right = Vector3.right * (stateMachine.playable.directionX == true ? 1 : -1);
+                Vector3 right = Vector3.right * (stateMachine.playable.directionX == true ? 0.7f : -0.7f);
                 Vector3 center = stateMachine.transform.position + right + Vector3.up * 0.5f;
                 // 생각보다 판정이 후하진 않게 하기
                 // hit box의 크기를 따라감.
@@ -193,7 +199,6 @@ namespace LGProject.PlayerState
                         temp = System.Tuple.Create(t.GetComponent<Playable>(), distance);
                     }
                 }
-
                 if (temp == null)
                 {
                     damageInCount = false;
@@ -214,7 +219,14 @@ namespace LGProject.PlayerState
                             HitDamaged(stateMachine.AttackCount - 1 < 2 ? Vector3.zero : v);
                             damageInCount = true;
 
-                            temp.Item1.effectManager.PlayOneShot(EffectManager.EFFECT.Hit);
+                            if (!temp.Item1.GetStateMachine.IsGuard && !temp.Item1.GetStateMachine.IsDown)
+                            {// 100 % gage로 일단 계산
+                                stateMachine.UltimateGage += 10;
+
+                                stateMachine.playable.UltimateGageImage.fillAmount = stateMachine.UltimateGage / 100f;
+
+                                temp.Item1.effectManager.PlayOneShot(EffectManager.EFFECT.Hit);
+                            }
                         }
                     }
                     catch
