@@ -1,5 +1,7 @@
 using Data;
+using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using USingleton.AutoSingleton;
@@ -9,10 +11,10 @@ using Random = UnityEngine.Random;
 public class GameManager : MonoBehaviour
 {
     // 유저 데이터
-    public readonly UserData UserData = new();
+    private readonly UserData _userData = new();
     
     // AI 데이터
-    public readonly AIData AIData = new();
+    private readonly AIData _aiData = new();
 
     [SerializeField] private PatData[] patDataList;
     [SerializeField] private AIModel[] aiModelList;
@@ -20,7 +22,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         // 초기화
-        UserData.Init();
+        InitUserData();
 
         // 화면이 꺼지지 않도록 처리
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
@@ -32,7 +34,7 @@ public class GameManager : MonoBehaviour
     /// <param name="value">설정할 닉네임</param>
     public void SetNickname(string value)
     {
-        UserData.Nickname = value;
+        _userData.Nickname = value;
     }
 
     /// <summary>
@@ -41,7 +43,7 @@ public class GameManager : MonoBehaviour
     /// <returns>유저 닉네임</returns>
     public string GetNickname()
     {
-        return UserData.Nickname;
+        return _userData.Nickname;
     }
 
     /// <summary>
@@ -53,9 +55,9 @@ public class GameManager : MonoBehaviour
         switch (actorType)
         {
             case ActorType.User:
-                return UserData.CharacterType;
+                return _userData.CharacterType;
             case ActorType.AI:
-                return AIData.CharacterType;
+                return _aiData.CharacterType;
         }
 
         return ECharacterType.None;
@@ -70,9 +72,9 @@ public class GameManager : MonoBehaviour
         switch (actorType)
         {
             case ActorType.User:
-                return UserData.Pat;
+                return _userData.Pat;
             case ActorType.AI:
-                return AIData.Pat;
+                return _aiData.Pat;
         }
 
         return null;
@@ -87,17 +89,43 @@ public class GameManager : MonoBehaviour
         AIModel model = GetRandomAIModel();
 
         // 캐릭터 타입 바인딩
-        AIData.CharacterType = model.CharacterType;
+        _aiData.CharacterType = model.CharacterType;
 
         // 정령 데이터 바인딩
         PatData patData = FindPatDataByPatType(model.PatType);
-        AIData.Pat.PatData = patData;
+        _aiData.Pat.PatData = patData;
 
         // 펫 레벨 바인딩
-        if (AIData.Pat.PatData)
-            AIData.Pat.Level = model.PatLevel;
+        if (_aiData.Pat.PatData)
+            _aiData.Pat.Level = model.PatLevel;
         else
-            AIData.Pat.Level = -1;
+            _aiData.Pat.Level = -1;
+    }
+
+    /// <summary>
+    /// User Data를 초기화합니다.
+    /// </summary>
+    private void InitUserData()
+    {
+        // 캐릭터 설정
+        _userData.CharacterType = (ECharacterType)PlayerPrefs.GetInt("Character", (int)ECharacterType.Hit);
+
+        // 닉네임 설정
+        string nickName = PlayerPrefs.GetString("Nickname", "Guest");
+        _userData.Nickname = nickName;
+
+        // 기본으로 히트 캐릭터 수록
+        string hasCharacterMapJson = PlayerPrefs.GetString("HasCharacterMap", "{}");
+        _userData. HasCharacterMap = JsonConvert.DeserializeObject<Dictionary<ECharacterType, bool>>(hasCharacterMapJson);
+
+        if (_userData.HasCharacterMap.Count == 0) 
+            _userData.HasCharacterMap.Add(ECharacterType.Hit, true);
+        
+        // 펫 설정
+        _userData.Pat = new();
+        _userData.Pat.PatType = (EPatType)PlayerPrefs.GetInt("Pat", (int)EPatType.None);
+        _userData.Pat.PatData = FindPatDataByPatType(_userData.Pat.PatType);
+        _userData.Pat.Level = PlayerPrefs.GetInt("Pat Level", 0);
     }
     
     /// <summary>
@@ -105,7 +133,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     /// <returns>AI 모델</returns>
     /// <exception cref="InvalidOperationException">AI 모델이 비어있을 경우</exception>
-    public AIModel GetRandomAIModel()
+    private AIModel GetRandomAIModel()
     {
         if (aiModelList == null || aiModelList.Length == 0)
             throw new InvalidOperationException("AIModelList가 비어 있습니다.");
@@ -119,7 +147,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     /// <param name="patType">찾을 정령 타입</param>
     /// <returns>정령 데이터</returns>
-    public PatData FindPatDataByPatType(EPatType patType)
+    private PatData FindPatDataByPatType(EPatType patType)
     {
         return patDataList.FirstOrDefault(patData => patData.PatType == patType);
     }

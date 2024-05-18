@@ -38,15 +38,16 @@ public class BattleView : MonoBehaviour
     /// <param name="value"></param>
     public void SetCharacterProfileImage(ActorType target, Sprite value)
     {
-        if (!userCardUI.CharacterImage)
-            return;
-
         switch (target)
         {
             case ActorType.User:
+                if (!userCardUI.CharacterImage)
+                    return;
                 userCardUI.CharacterImage.sprite = value;
                 break;
             case ActorType.AI:
+                if (!aiCardUI.CharacterImage)
+                    return;
                 aiCardUI.CharacterImage.sprite = value;
                 break;
             default:
@@ -61,15 +62,16 @@ public class BattleView : MonoBehaviour
     /// <param name="value">캐릭터 타입</param>
     public void SetCharacterImage(ActorType target, ECharacterType value)
     {
-        if (!userCardUI.CharacterImage)
-            return;
-
         switch (target)
         {
             case ActorType.User:
+                if (!userCardUI.CharacterImage)
+                    return;
                 userCardUI.CharacterImage.sprite = CalculateCharacterImage(value);
                 break;
             case ActorType.AI:
+                if (!aiCardUI.CharacterImage)
+                    return;
                 aiCardUI.CharacterImage.sprite = CalculateCharacterImage(value);
                 break;
             default:
@@ -103,15 +105,16 @@ public class BattleView : MonoBehaviour
     /// </summary>
     public void SetUserNameText(ActorType target, string value)
     {
-        if (!userCardUI.NameText)
-            return;
-
         switch (target)
         {
             case ActorType.User:
+                if (!userCardUI.NameText)
+                    return;
                 userCardUI.NameText.text = value;
                 break;
             case ActorType.AI:
+                if (!aiCardUI.NameText)
+                    return;
                 aiCardUI.NameText.text = value;
                 break;
             default:
@@ -124,16 +127,17 @@ public class BattleView : MonoBehaviour
     /// </summary>
     public void SetPatUI(ActorType target, Sprite value)
     {
-        if (!userCardUI.PatNameText)
-            return;
-
         switch (target)
         {
             case ActorType.User:
+                if (!userCardUI.PatImage)
+                    return;
                 //TODO:여기에 정령 이름 부분이 필요시 들어간다.
                 userCardUI.PatImage.sprite = value;
                 break;
             case ActorType.AI:
+                if (!aiCardUI.PatImage)
+                    return;
                 //TODO:여기에 정령 이름 부분이 필요시 들어간다.
                 aiCardUI.PatImage.sprite = value;
                 break;

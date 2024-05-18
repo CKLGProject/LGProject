@@ -15,7 +15,7 @@ namespace Data
         public Sprite GetProfileImage()
         {
             if (Level < 0)
-                return null;
+                return PatData.PatProfileImage[0];
             
             return PatData.PatProfileImage[Level];
         }
