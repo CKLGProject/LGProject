@@ -1,3 +1,4 @@
+using LGProject.PlayerState;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,7 +21,8 @@ namespace BehaviourTree
 
         private void Update()
         {
-            tree.Update();
+            if(InGameManager.Instance.IsStart)
+                tree.Update();
         }
     }
 }

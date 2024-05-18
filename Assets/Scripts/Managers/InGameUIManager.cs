@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 namespace LGProject
 {
     public class InGameUIManager : MonoBehaviour
@@ -20,7 +21,7 @@ namespace LGProject
 
         public GameObject WinImage;
         public GameObject LoseImage;
-
+       
         public GameObject[] LeftPlayerLife;
         public GameObject[] RightPlayerLife;
 

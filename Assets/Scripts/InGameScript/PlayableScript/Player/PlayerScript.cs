@@ -459,12 +459,14 @@ namespace LGProject.PlayerState
 
         void Update()
         {
-
-            stateMachine.CurrentState.LogicUpdate();
-            PlayableGravity();
-            velocity = stateMachine.physics.velocity;
-            NewPlatformCheck();
-            DeadLineCheck();
+            if(InGameManager.Instance.IsStart)
+            {
+                stateMachine.CurrentState.LogicUpdate();
+                PlayableGravity();
+                velocity = stateMachine.physics.velocity;
+                NewPlatformCheck();
+                DeadLineCheck();
+            }
         }
     }
 }

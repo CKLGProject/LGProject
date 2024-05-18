@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cysharp.Threading.Tasks;
 
 
 public class InGameManager : MonoBehaviour
@@ -16,6 +17,7 @@ public class InGameManager : MonoBehaviour
 
     public LGProject.PlayerState.Playable LeftPlayer;
     public LGProject.PlayerState.Playable RightPlayer;
+    public bool IsStart = false;
 
     /*****************************************************
      * public Methods
@@ -34,7 +36,7 @@ public class InGameManager : MonoBehaviour
     {
         if (instance == null)
             instance = this;
-
+        GameStart().Forget();
     }
 
     // Start is called before the first frame update
@@ -47,5 +49,17 @@ public class InGameManager : MonoBehaviour
     private void Update()
     {
         
+    }
+
+    async UniTaskVoid GameStart()
+    {
+        for(int i = 1; i < 4; i++)
+        {
+            Debug.Log($"{i}");
+            await UniTask.Delay(1);
+        }
+        Debug.Log("Start!!");
+        IsStart = true;
+
     }
 }

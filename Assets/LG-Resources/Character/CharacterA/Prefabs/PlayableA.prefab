@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4910213552037458275}
+  - component: {fileID: 6559117602054936325}
   - component: {fileID: 1335163795397542594}
   - component: {fileID: 4417936120026488029}
-  - component: {fileID: 6559117602054936325}
   - component: {fileID: 6249669094861835219}
   - component: {fileID: 1461212728011964297}
   m_Layer: 3
@@ -37,6 +37,63 @@ Transform:
   - {fileID: 7845000925598368145}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6559117602054936325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6969282849394247417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a53c88bfe88964c4894527fdea4a2a8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Animator: {fileID: 4197115238591175659}
+  velocity: {x: 0, y: 0, z: 0}
+  MaximumJumpCount: 2
+  MaximumSpeed: 4
+  DashSpeed: 0
+  JumpScale: 5
+  FirstAttackDelay: 0.35
+  FirstAttackJudgeDelay: 0.2
+  FirstAttackMovingValue: 1
+  SecondAttackDelay: 0.6
+  SecondAttackJudgeDelay: 0.4
+  SecondAttackMovingValue: 1
+  ThirdAttackDelay: 1
+  ThirdAttackJudgeDelay: 0.2
+  ThirdAttackMovingValue: 1
+  DashAttackDelay: 0
+  HitDelay: 0
+  DownWaitDelay: 0
+  WakeUpDelay: 0
+  LifePoint: 3
+  movingAttack: 0
+  DamageGageInt: {fileID: 0}
+  DamageGageDecimal: {fileID: 0}
+  UltimateGageImage: {fileID: 0}
+  AliveOffset: {x: 0, y: 5, z: 0}
+  respawnTime: 1
+  DeadLine: -4.8
+  directionX: 1
+  jumpCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  underPlatform: {fileID: 0}
+  effectManager: {fileID: 0}
+  IsGrounded: 0
+  IsGuard: 0
+  IsJumpGuard: 0
+  IsDamaged: 0
+  IsDown: 0
+  IsKnockback: 0
+  IsJumpping: 0
+  IsDead: 0
+  IsNormalAttack: 0
 --- !u!136 &1335163795397542594
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -87,46 +144,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 88
   m_CollisionDetection: 0
---- !u!114 &6559117602054936325
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6969282849394247417}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a53c88bfe88964c4894527fdea4a2a8b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Animator: {fileID: 4197115238591175659}
-  MaximumJumpCount: 2
-  MaximumSpeed: 4
-  DashSpeed: 0
-  JumpScale: 5
-  FirstAttackDelay: 0.35
-  FirstAttackJudgeDelay: 0.2
-  SecondAttackDelay: 0.6
-  SecondAttackJudgeDelay: 0.4
-  ThirdAttackDelay: 1
-  ThirdAttackJudgeDelay: 0.2
-  dashAttackDelay: 1
-  hitDelay: 1
-  wakeUpDelay: 1
-  movingAttack: 0
-  textGUI: {fileID: 0}
-  AliveOffset: {x: 0, y: 5, z: 0}
-  respawnTime: 1
-  DeadLine: -4.8
-  directionX: 1
-  jumpCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  underPlatform: {fileID: 0}
-  effectManager: {fileID: 0}
 --- !u!114 &6249669094861835219
 MonoBehaviour:
   m_ObjectHideFlags: 0
