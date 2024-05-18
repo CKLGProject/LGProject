@@ -20,7 +20,7 @@ namespace LGProject.PlayerState
 
         public virtual void Enter()
         {
-            Debug.Log($"Enter State = {this.ToString()}");
+            //Debug.Log($"Enter State = {this.ToString()}");
         }
 
         public virtual void PhysicsUpdate()
@@ -35,17 +35,6 @@ namespace LGProject.PlayerState
                 
                 stateMachine.ChangeState(stateMachine.hitState);
             }
-            Debug.DrawLine(stateMachine.transform.position, stateMachine.transform.position + Vector3.down * 0.1f, Color.red);
-
-            //if (Physics.Raycast(stateMachine.transform.position + Vector3.down, Vector3.down, out hit, maxDistance: 0.5f))
-            //{
-            //    stateMachine.isGrounded = true;
-            //    stateMachine.jumpInCount = 0;
-            //}
-            //else
-            //{
-            //    stateMachine.isGrounded = false;
-            //}
         }
 
         public virtual  void Exit()

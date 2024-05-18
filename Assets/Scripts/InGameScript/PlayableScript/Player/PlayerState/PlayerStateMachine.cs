@@ -38,6 +38,7 @@ namespace LGProject.PlayerState  //
         public JumpAttackState jumpAttackState;
         public DashAttackState dashAttackState;
         public HitState hitState;
+        public KnockbackState knockbackState;
         public GuardState guardState;
         public DownState downState;
         public WakeUpState wakeUpState;
@@ -56,6 +57,7 @@ namespace LGProject.PlayerState  //
         public bool IsJumpping;
         public bool IsDead;
         public bool IsNormalAttack;
+        public bool IsUltimate;
 
         public bool IsDashAttack = false;
         public bool IsJumpAttack = false;
@@ -123,6 +125,7 @@ namespace LGProject.PlayerState  //
 
                 psm.hitState = new HitState(psm, ref psm.playable.HitDelay);
                 psm.guardState = new GuardState(psm);
+                psm.knockbackState = new KnockbackState(psm);
 
                 psm.ultimateState = new HitUltimateState(psm);
                 psm.downState = new DownState(psm, ref psm.playable.DownWaitDelay);
@@ -223,7 +226,7 @@ namespace LGProject.PlayerState  //
         public void HitDamaged(Vector3 velocity)
         {
             // 누어 있는 상태에선 데미지를 입지 않는다.
-            if (IsDown)
+            if (IsDown || IsUltimate )
                 return;
             if (!IsGuard)
             {
@@ -240,6 +243,7 @@ namespace LGProject.PlayerState  //
                     animator.SetTrigger("Knockback");
                     IsKnockback = true;
                 }
+                //playable.effectManager.Play(EffectManager.EFFECT.Hit).Forget();
             }
             else
             {
@@ -273,6 +277,15 @@ namespace LGProject.PlayerState  //
             animator.ResetTrigger("Landing");
             animator.ResetTrigger("WakeUp");
         }
+
+        public void UltimateGageisFull()
+        {
+            if(UltimateGage >= 100)
+            {
+                playable.ShowUltimateEffect();
+            }
+        }
+
 
         #region ComboMethods
 

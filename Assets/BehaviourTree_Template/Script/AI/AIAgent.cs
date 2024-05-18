@@ -375,8 +375,8 @@ namespace BehaviourTree
         private void Update()
         {
             // 일단 여기에 넣어보자
-            PlayableGravity();
-            GetStateMachine.Update();
+                PlayableGravity();
+                GetStateMachine.Update();
             //PlatformCheck();
             NewPlatformCheck();
             DeadLineCheck();

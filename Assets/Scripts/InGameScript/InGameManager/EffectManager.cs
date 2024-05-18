@@ -727,35 +727,6 @@ public class EffectManager : MonoBehaviour
         }
     }
 
-    ///// <summary>
-    ///// Default Delay Value  1
-    ///// </summary>
-    ///// <param name="effectType"></param>
-    ///// <param name="delayTime"></param>
-    //public void PlayToDelay(EFFECT effectType, float delayTime = 1f)
-    //{
-    //    try
-    //    {
-    //        ParticleSystem effect;
-    //        _EffectContainer.TryGetValue(effectType, out effect);
-
-    //        if (effect != null)
-    //        {
-    //            effect.gameObject.SetActive(true);
-
-    //            effect.GetComponent<ParticleSystem>().Play();
-    //        }
-    //        else
-    //        {
-    //            Debug.Log("Notting");
-    //        }
-    //    }
-    //    catch
-    //    {
-    //        Debug.LogError("EffectManager Error");
-    //    }
-    //}
-
     public async UniTaskVoid Play(EFFECT effectType, float delaySeconds = 0f)
     {
         try

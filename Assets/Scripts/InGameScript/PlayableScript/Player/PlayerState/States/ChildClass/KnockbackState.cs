@@ -1,21 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 namespace LGProject.PlayerState
 {
-    public class UltimateState : State
+    public class KnockbackState : State
     {
-        public UltimateState(PlayerStateMachine _stateMachine) : base(_stateMachine)
+        public KnockbackState(PlayerStateMachine _stateMachine) : base(_stateMachine)
         {
-
         }
 
         public override void Enter()
         {
             base.Enter();
-            // 얼티밋을 사용하면 게이지가 닮.
-            stateMachine.UltimateGage = 0;
-            stateMachine.playable.UltimateGageImage.fillAmount = 0;
+            // 날아가는 중임을 체크
+            stateMachine.IsKnockback = true;
         }
 
         public override void Exit()
@@ -26,13 +25,16 @@ namespace LGProject.PlayerState
         public override void LogicUpdate()
         {
             base.LogicUpdate();
+            if(stateMachine.IsGrounded)
+            {
+                stateMachine.ChangeState(stateMachine.downState);
+            }
         }
 
         public override void PhysicsUpdate()
         {
             base.PhysicsUpdate();
         }
-
     }
 
 }

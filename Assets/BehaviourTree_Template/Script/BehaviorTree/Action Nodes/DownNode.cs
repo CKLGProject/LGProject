@@ -19,6 +19,7 @@ namespace BehaviourTree
             if (_stateMachine == null)
                 _stateMachine = Agent.GetStateMachine;
             curTimer = 0;
+            _stateMachine.animator.SetTrigger("Landing");
             Agent.effectManager.PlayOneShot(EffectManager.EFFECT.Knockback);
             _stateMachine.IsDamaged = false;
             _stateMachine.IsDown = true;

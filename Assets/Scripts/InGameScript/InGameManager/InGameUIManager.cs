@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+
 
 namespace LGProject
 {
@@ -21,8 +23,11 @@ namespace LGProject
         public GameObject WinImage;
         public GameObject LoseImage;
 
+       
         public GameObject[] LeftPlayerLife;
         public GameObject[] RightPlayerLife;
+
+        public TextMeshProUGUI CountText;
 
         [SerializeField] private Transform _leftPlayer;
         [SerializeField] private Transform _rightPlayer;

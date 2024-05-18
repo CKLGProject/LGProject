@@ -149,8 +149,9 @@ namespace LGProject.PlayerState
             }
             //Debug.Log($"sm = {stateMachine.AttackCount} / attackDelay = {animDelay} / time {time }");
             // 딜레이가 끝난 이후 추가 키 입력이 들어가면? 
-            if (curTimer > animDelay)   
+            if (curTimer > animDelay)
             {
+                stateMachine.animator.SetInteger("Attack", 0);
                 // 공격 진행
                 if (damageInCount == false) AttackJudge();
                 if (stateMachine.attackAction.triggered && stateMachine.AttackCount < 3)
@@ -222,10 +223,12 @@ namespace LGProject.PlayerState
                             if (!temp.Item1.GetStateMachine.IsGuard && !temp.Item1.GetStateMachine.IsDown)
                             {// 100 % gage로 일단 계산
                                 stateMachine.UltimateGage += 10;
+                                stateMachine.UltimateGageisFull();
 
                                 stateMachine.playable.UltimateGageImage.fillAmount = stateMachine.UltimateGage / 100f;
 
                                 temp.Item1.effectManager.PlayOneShot(EffectManager.EFFECT.Hit);
+
                             }
                         }
                     }

@@ -441,7 +441,7 @@ namespace LGProject.PlayerState
         {
             InitStates();
             InitEffectManager();
-            //stateMachine.UltimateGage = 100;
+            stateMachine.UltimateGage = 100;
             effectManager.InitParticles();
             UltimateGageImage.fillAmount = 0;
             for (int i = 0; i < stateMachine.animator.runtimeAnimatorController.animationClips.Length; i++)
@@ -459,12 +459,15 @@ namespace LGProject.PlayerState
 
         void Update()
         {
-            //velocity = 
-            stateMachine.CurrentState.LogicUpdate();
-            PlayableGravity();
-            velocity = stateMachine.physics.velocity;
-            NewPlatformCheck();
-            DeadLineCheck();
+            if(InGameManager.Instance.IsStart)
+            {
+                stateMachine.CurrentState.LogicUpdate();
+                stateMachine.Update();
+                PlayableGravity();
+                velocity = stateMachine.physics.velocity;
+                NewPlatformCheck();
+                DeadLineCheck();
+            }
         }
     }
 }

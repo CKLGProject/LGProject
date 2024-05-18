@@ -19,12 +19,12 @@ namespace BehaviourTree
         protected override void OnStart()
         {
             StartExceptionHandling();
-            Debug.Log("AttackJudgeNodeStart");
+            //Debug.Log("AttackJudgeNodeStart");
         }
 
         protected override void OnStop()
         {
-            Debug.Log("AttackJudgeNodeEnd");
+            //Debug.Log("AttackJudgeNodeEnd");
         }
         protected override State OnUpdate()
         {
@@ -58,12 +58,12 @@ namespace BehaviourTree
             #region legarcy
             if (_curTimer > animTimer)
             {
+                _stateMachine.animator.SetInteger("Attack", 0);
                 // 애니메이션이 끝난 이후 데미지 판정 -> 데미지를 넣는데 성공하면 다음 공격, 시간이 지나도 공격 못하면 Idle
                 // 애니메이션이 재생 중이라면 Running
                 if (_isAttack == false && !_stateMachine.IsDamaged) _isAttack = ActionJudge();
                 if (_isAttack && _stateMachine.AttackCount < 3  )
                 {
-                    Debug.Log("Case 1");
                     return State.Success;
 
                 }
@@ -76,7 +76,6 @@ namespace BehaviourTree
                     _stateMachine.animator.SetTrigger("Idle");
                     _stateMachine.animator.SetFloat("Run", 0);
                     _stateMachine.animator.SetInteger("Attack", _stateMachine.AttackCount);
-                    Debug.Log("Case 2");
                     return State.Success;
                 }
             }
@@ -93,7 +92,9 @@ namespace BehaviourTree
                 _stateMachine = AIAgent.Instance.GetStateMachine;
             }
             if (_stateMachine.AttackCount > 2)
+            {
                 _stateMachine.AttackCount = 0;
+            }
             _isAttack = false;
             _stateMachine.IsNormalAttack = true;
             //AIAgent.Instance.SetAttacRange(attackRange);
@@ -122,7 +123,7 @@ namespace BehaviourTree
         {
             #region Omit
             // 판정 범위 계산.
-            Vector3 right = Vector3.right * (AIAgent.Instance.directionX == true ? 0.7f : -0.7f);
+            Vector3 right = Vector3.right * (AIAgent.Instance.directionX == true ? 1f : -1f);
             Vector3 center = AIAgent.Instance.transform.position + right + Vector3.up * 0.5f;
 
             Collider[] targets = Physics.OverlapBox(center, Vector3.one * 0.5f, Quaternion.identity, 1 << 3);

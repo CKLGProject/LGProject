@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 using System;
 using UnityEngine.UI;
 using TMPro;
@@ -297,7 +294,7 @@ namespace LGProject.PlayerState
 
         public void setupJumpVariables()
         {
-            float timeToApex = maxJumpTime / 2;
+            float timeToApex = maxJumpTime / 2; 
             _gravity = (-2 * JumpScale) / Mathf.Pow(timeToApex, 1.5f);
             initialJumpVelocity = (2 * JumpScale) / timeToApex;
         }
@@ -347,15 +344,25 @@ namespace LGProject.PlayerState
         {
             await UniTask.Delay(TimeSpan.FromSeconds(respawnTime));
             stateMachine.ResetVelocity();
-            transform.position = underPlatform.transform.position + AliveOffset;
+            transform.position = Vector3.forward * -9.5f + AliveOffset;
             stateMachine.IsDead = false;
             stateMachine.DamageGage = 0;
             stateMachine.SetDamageGageOnText();
+
+            stateMachine.animator.SetTrigger("Hit");
+            stateMachine.IsDamaged = true;
+            stateMachine.IsKnockback = true;
+            stateMachine.animator.SetTrigger("Knockback");
         }
 
         public void SetUnderPlatform()
         {
             underPlatform = GameObject.Find("Main_Floor (1)").GetComponent<Platform>();
+        }
+
+        public void ShowUltimateEffect()
+        {
+            effectManager.Play(EffectManager.EFFECT.Ultimate).Forget();
         }
 
         #endregion

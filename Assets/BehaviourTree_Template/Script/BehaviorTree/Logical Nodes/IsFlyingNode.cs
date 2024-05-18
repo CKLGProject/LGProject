@@ -31,7 +31,7 @@ namespace BehaviourTree
             {
                 return State.Success;
             }
-            return State.Failure;
+            return State.Success;
         }
     }
 
