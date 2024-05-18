@@ -68,7 +68,7 @@ namespace LGProject.PlayerState
         // 이동 경로에 적이 존재하는가에 대한 의문
         private bool PathCheck()
         {
-            if(Physics.Raycast(stateMachine.transform.position + Vector3.up * .5f, stateMachine.playable.directionX ?  Vector3.right : Vector3.left, out hit, 6f))
+            if(Physics.Raycast(stateMachine.transform.position + Vector3.up * .5f, stateMachine.playable.directionX ?  Vector3.right : Vector3.left, out hit, 6 * .25f))
             {
                 return true;
             }

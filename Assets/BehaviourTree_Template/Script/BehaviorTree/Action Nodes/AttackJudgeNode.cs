@@ -76,7 +76,6 @@ namespace BehaviourTree
                     _stateMachine.animator.SetTrigger("Idle");
                     _stateMachine.animator.SetFloat("Run", 0);
                     _stateMachine.animator.SetInteger("Attack", _stateMachine.AttackCount);
-                    Debug.Log("Case 2");
                     return State.Success;
                 }
             }
