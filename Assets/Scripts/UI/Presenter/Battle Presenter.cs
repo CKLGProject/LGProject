@@ -1,3 +1,4 @@
+using Data;
 using R3;
 using System;
 using System.Collections;
@@ -24,16 +25,15 @@ public class BattlePresenter : MonoBehaviour
         string userName = CurrentGameManager.GetNickname();
         _battleView.SetUserNameText(BattleView.Target.User, userName);
 
-        //TODO:유저 프로필 이미지를 설정해야합니다.
-        // _battleView.SetUserProfileImage();
+        // 유저 프로필 이미지를 설정합니다.
+        ECharacterType character = CurrentGameManager.CurrentCharacter();
+        _battleView.SetUserProfileImage(BattleView.Target.User, character);
         
         // 유저 정령 처리
-        int patDataMaxCount = CurrentGameManager.GetPatDataCount();
-        int userPatRandom = Random.Range(0, patDataMaxCount);
-        _battleView.SetPatNameText(BattleView.Target.User, "Fuxk");
+        EPatType pat = CurrentGameManager.CurrentPat(); 
+        _battleView.SetPatNameText(BattleView.Target.User, pat);
 
-
-
+        
         // 로딩 텍스트 렌더링 옵저버
         _battleView.UpdateLoadingTextObservable()
             .Subscribe(_ => _battleView.UpdateLoadingText()).AddTo(this);

@@ -1,5 +1,7 @@
+using Data;
 using R3;
 using System;
+using System.Linq;
 using System.Text;
 using TMPro;
 using UnityEngine;
@@ -31,9 +33,8 @@ public class BattleView : MonoBehaviour
 
     [Header("AI")] [SerializeField] private CardUI aiCardUI;
 
-    // 유저 프로필 이미지
-    [SerializeField] private Image aiProfileImage;
-
+    [SerializeField] private CharacterImageData[] characterImageDataList;
+    [SerializeField] private PatData[] patDataList;
 
     private int _dotCount;
 
@@ -42,8 +43,11 @@ public class BattleView : MonoBehaviour
     /// </summary>
     /// <param name="target"></param>
     /// <param name="value"></param>
-    public void SetCharacterProfileImage(Target target ,Sprite value)
+    public void SetCharacterProfileImage(Target target, Sprite value)
     {
+        if (!userCardUI.CharacterImage)
+            return;
+
         switch (target)
         {
             case Target.User:
@@ -62,8 +66,34 @@ public class BattleView : MonoBehaviour
     /// </summary>
     /// <param name="target"></param>
     /// <param name="value"></param>
-    public void SetUserProfileImage(Target target ,Sprite value)
+    public void SetUserProfileImage(Target target, ECharacterType value)
     {
+        if (!userCardUI.PatImage)
+            return;
+
+        switch (target)
+        {
+            case Target.User:
+                userCardUI.PatImage.sprite = CalculateCharacterImage(value);
+                break;
+            case Target.AI:
+                aiCardUI.PatImage.sprite = CalculateCharacterImage(value);
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(target), target, null);
+        }
+    }
+
+    /// <summary>
+    /// 유저 정령 프로필 이미지를 value로 변경합니다.
+    /// </summary>
+    /// <param name="target"></param>
+    /// <param name="value"></param>
+    public void SetUserProfileImage(Target target, Sprite value)
+    {
+        if (!userCardUI.PatImage)
+            return;
+
         switch (target)
         {
             case Target.User:
@@ -103,6 +133,9 @@ public class BattleView : MonoBehaviour
     /// </summary>
     public void SetUserNameText(Target target, string value)
     {
+        if (!userCardUI.NameText)
+            return;
+
         switch (target)
         {
             case Target.User:
@@ -119,15 +152,19 @@ public class BattleView : MonoBehaviour
     /// <summary>
     /// 펫 이름 텍스트를 value로 설정합니다.
     /// </summary>
-    public void SetPatNameText(Target target, string value)
+    public void SetPatUI(Target target, EPatType value)
     {
+        if (!userCardUI.PatNameText)
+            return;
+
         switch (target)
         {
             case Target.User:
-                userCardUI.PatNameText.text = value;
+                userCardUI.PatNameText.text = CalculatePatName(value);
+                userCardUI.PatImage.sprite =
                 break;
             case Target.AI:
-                aiCardUI.PatNameText.text = value;
+                aiCardUI.PatNameText.text = CalculatePatName(value);;
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(target), target, null);
@@ -141,5 +178,31 @@ public class BattleView : MonoBehaviour
     public Observable<Unit> UpdateLoadingTextObservable()
     {
         return Observable.Interval(TimeSpan.FromSeconds(0.25f));
+    }
+
+    /// <summary>
+    /// characterType에 알맞는 캐릭터 이미지를 반환합니다.
+    /// </summary>
+    /// <param name="characterType">캐릭터 타입</param>
+    /// <returns>캐릭터 이미지</returns>
+    private Sprite CalculateCharacterImage(ECharacterType characterType)
+    {
+        return (from data in characterImageDataList
+                where data.CharacterType == characterType
+                select data.CharacterProfileImage)
+            .FirstOrDefault();
+    }
+
+    /// <summary>
+    /// patType에 알맞는 캐릭터 이름을 반환합니다.
+    /// </summary>
+    /// <param name="patType">정령 타입</param>
+    /// <returns>캐릭터 이미지</returns>
+    private string CalculatePatName(EPatType patType)
+    {
+        return (from data in patDataList
+                where data.PatType == patType
+                select data.PatName)
+            .FirstOrDefault();
     }
 }
