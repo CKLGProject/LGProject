@@ -1,5 +1,6 @@
 using R3;
 using UnityEngine;
+using USingleton;
 
 [RequireComponent(typeof(LobbyView))]
 [RequireComponent(typeof(LobbyModel))]
@@ -61,6 +62,7 @@ public class LobbyPresenter : MonoBehaviour
 
     private void OnClickMatchButton(Unit obj)
     {
+        Singleton.Instance<GameManager>().RandomChoiceAI();
        _lobbyView.OnClickMatch?.Invoke();
     }
 }

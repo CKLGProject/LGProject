@@ -1,6 +1,5 @@
 using R3;
 using UnityEngine;
-using USingleton;
 
 [RequireComponent(typeof(LoginView))]
 public class LoginPresenter : MonoBehaviour
@@ -12,7 +11,7 @@ public class LoginPresenter : MonoBehaviour
         _view = GetComponent<LoginView>();
 
         if (IsFirstLogin())
-            _view.SetActive(true);
+            _view.ShowLoginView();
         else
             _view.Connect();
 

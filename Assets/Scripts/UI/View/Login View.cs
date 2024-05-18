@@ -4,12 +4,11 @@ using UnityEngine;
 using UnityEngine.SceneSystem;
 using UnityEngine.UI;
 using USingleton;
+using Utility;
 
 public class LoginView : MonoBehaviour
 {
-
-
-    public GameObject LoginViewContainer;
+    public Container LoginViewContainer;
     public TMP_InputField NicknameInputField;
     public Button LoginButton;
     public SceneLoader LobbySceneLoader;
@@ -49,11 +48,10 @@ public class LoginView : MonoBehaviour
     }
 
     /// <summary>
-    /// 로그인 뷰의 활성화 상태를 설정합니다.
+    /// 로그인 뷰를 활성화 상태로 만듭니다.
     /// </summary>
-    /// <param name="isActive">활성화 상태</param>
-    public void SetActive(bool isActive)
+    public void ShowLoginView()
     {
-        LoginViewContainer.SetActive(isActive);
+        LoginViewContainer.PositionReset();
     }
 }

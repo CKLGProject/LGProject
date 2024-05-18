@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Thunder Pat Data
   m_EditorClassIdentifier: 
   PatName: "\uC77C\uB809\uD2B8\uB77C"
+  PatType: 4
   PatProfileImage:
   - {fileID: 21300000, guid: d401a8826f7de41d98fac53839394a2b, type: 3}
   - {fileID: 21300000, guid: de05e5a3efac849e0bf02ce8f4af15ca, type: 3}

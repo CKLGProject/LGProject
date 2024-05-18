@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28b57489ca6f438dbfe0f33b47fc5833, type: 3}
-  m_Name: Frost Image Data
+  m_Script: {fileID: 11500000, guid: 8fcfb2a97e534d888b22e46885140236, type: 3}
+  m_Name: Hit Model
   m_EditorClassIdentifier: 
-  CharacterType: 2
-  CharacterProfileImage: {fileID: 21300000, guid: a9af83325e52e4347bad025b591b1317,
-    type: 3}
+  CharacterType: 1
+  PatType: 1
+  PatLevel: 0

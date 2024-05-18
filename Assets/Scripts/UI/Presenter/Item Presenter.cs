@@ -1,6 +1,3 @@
-using System;
-using UnityEngine;
-
 namespace Ranking
 {
     public class ItemPresenter : UnityEngine.MonoBehaviour

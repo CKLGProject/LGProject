@@ -1,14 +1,25 @@
 using Data;
+using System;
+using System.Linq;
 using UnityEngine;
 using USingleton.AutoSingleton;
+using Random = UnityEngine.Random;
 
 [Singleton(nameof(GameManager))]
 public class GameManager : MonoBehaviour
 {
-    public UserData UserData;
+    // 유저 데이터
+    public readonly UserData UserData = new();
+    
+    // AI 데이터
+    public readonly AIData AIData = new();
+
+    [SerializeField] private PatData[] patDataList;
+    [SerializeField] private AIModel[] aiModelList;
 
     private void Start()
     {
+        // 초기화
         UserData.Init();
 
         // 화면이 꺼지지 않도록 처리
@@ -34,20 +45,82 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 유저의 현재 캐릭터를 반환합니다.
+    /// 해당 액터의 현재 캐릭터를 반환합니다.
     /// </summary>
     /// <returns>캐릭터 타입</returns>
-    public ECharacterType CurrentCharacter()
+    public ECharacterType GetCharacter(ActorType actorType)
     {
-        return UserData.CurrentCharacter;
+        switch (actorType)
+        {
+            case ActorType.User:
+                return UserData.CharacterType;
+            case ActorType.AI:
+                return AIData.CharacterType;
+        }
+
+        return ECharacterType.None;
     }
     
     /// <summary>
-    /// 유저의 현재 펫을 반환합니다.
+    /// 해당 액터의 현재 정령을 반환합니다.
     /// </summary>
-    /// <returns>펫 타입</returns>
-    public EPatType CurrentPat()
+    /// <returns>정령 타입</returns>
+    public Pat GetPat(ActorType actorType)
     {
-        return UserData.CurrentPat;
+        switch (actorType)
+        {
+            case ActorType.User:
+                return UserData.Pat;
+            case ActorType.AI:
+                return AIData.Pat;
+        }
+
+        return null;
+    }
+
+    /// <summary>
+    /// AI 모델을 랜덤하게 선택합니다.
+    /// </summary>
+    public void RandomChoiceAI()
+    {
+        // 모델 선택
+        AIModel model = GetRandomAIModel();
+
+        // 캐릭터 타입 바인딩
+        AIData.CharacterType = model.CharacterType;
+
+        // 정령 데이터 바인딩
+        PatData patData = FindPatDataByPatType(model.PatType);
+        AIData.Pat.PatData = patData;
+
+        // 펫 레벨 바인딩
+        if (AIData.Pat.PatData)
+            AIData.Pat.Level = model.PatLevel;
+        else
+            AIData.Pat.Level = -1;
+    }
+    
+    /// <summary>
+    /// AI 모델 중 랜덤하게 1개를 반환합니다.
+    /// </summary>
+    /// <returns>AI 모델</returns>
+    /// <exception cref="InvalidOperationException">AI 모델이 비어있을 경우</exception>
+    public AIModel GetRandomAIModel()
+    {
+        if (aiModelList == null || aiModelList.Length == 0)
+            throw new InvalidOperationException("AIModelList가 비어 있습니다.");
+
+        int randomIndex = Random.Range(0, aiModelList.Length);
+        return aiModelList[randomIndex];
+    }
+
+    /// <summary>
+    /// 정령 타입으로 정령 데이터를 반환합니다.
+    /// </summary>
+    /// <param name="patType">찾을 정령 타입</param>
+    /// <returns>정령 데이터</returns>
+    public PatData FindPatDataByPatType(EPatType patType)
+    {
+        return patDataList.FirstOrDefault(patData => patData.PatType == patType);
     }
 }

@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -5,6 +6,7 @@ namespace Data
 {
     public enum ECharacterType
     {
+        None,
         Hit,
         Frost,
         C,
@@ -12,35 +14,36 @@ namespace Data
         E
     }
 
-    public struct PatInfo
-    {
-        public EPatType PatType;
-        public int Level;
-    }
-
-    [System.Serializable]
     public class UserData
     {
-        public ECharacterType CurrentCharacter;
+        public ECharacterType CharacterType;
         public string Nickname;
         public Dictionary<ECharacterType, bool> HasCharacterMap;
-        public PatInfo CurrentPat;
+        public readonly Pat Pat = new();
 
+        /// <summary>
+        /// User 데이터 초기화
+        /// </summary>
         public void Init()
         {
-            // 펫 설정
-            CurrentPat.PatType = (EPatType)PlayerPrefs.GetInt("Pat", (int)EPatType.None);
-            
             // 캐릭터 설정
-            CurrentCharacter = (ECharacterType)PlayerPrefs.GetInt("Character", (int)ECharacterType.Hit);
+            CharacterType = (ECharacterType)PlayerPrefs.GetInt("Character", (int)ECharacterType.Hit);
 
             // 닉네임 설정
             string nickName = PlayerPrefs.GetString("Nickname", "Guest");
             Nickname = nickName;
 
             // 기본으로 히트 캐릭터 수록
-            HasCharacterMap = new Dictionary<ECharacterType, bool>();
-            HasCharacterMap.Add(ECharacterType.Hit, true);
+            string hasCharacterMapJson = PlayerPrefs.GetString("HasCharacterMap", "{}");
+            HasCharacterMap = JsonConvert.DeserializeObject<Dictionary<ECharacterType, bool>>(hasCharacterMapJson);
+
+            if (HasCharacterMap.Count == 0) 
+                HasCharacterMap.Add(ECharacterType.Hit, true);
+
+            // 펫 설정
+            Pat.PatType = (EPatType)PlayerPrefs.GetInt("Pat", (int)EPatType.None);
+            Pat.PatData = singlt
+            Pat.Level = PlayerPrefs.GetInt("Pat Level", -1);
         }
     }
 }

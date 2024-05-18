@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28b57489ca6f438dbfe0f33b47fc5833, type: 3}
   m_Name: Hit Image Data
   m_EditorClassIdentifier: 
-  CharacterType: 0
+  CharacterType: 1
   CharacterProfileImage: {fileID: 21300000, guid: 5307840dd1441af4481dce0a035f97b7,
     type: 3}

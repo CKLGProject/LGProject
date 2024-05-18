@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
+  m_IndirectSpecularColor: {r: 0.12729266, g: 0.13414232, b: 0.12114291, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1277,8 +1277,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1671780979}
   - component: {fileID: 1671780982}
-  - component: {fileID: 1671780981}
   - component: {fileID: 1671780980}
+  - component: {fileID: 1671780981}
   m_Layer: 0
   m_Name: Battle View
   m_TagString: Untagged
@@ -1342,11 +1342,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5a0079c30aef289489ee433b440a56ab, type: 2}
   - {fileID: 11400000, guid: 7c4eebc04054b234abbaa5e2cb789a77, type: 2}
   - {fileID: 11400000, guid: faebbfb46b7e8014eb73c737cc9bfdac, type: 2}
-  patDataList:
-  - {fileID: 11400000, guid: 415e3f6f7f76640f2b757b7e9ef9e136, type: 2}
-  - {fileID: 11400000, guid: 29091777240d940099adb929c0fdb6af, type: 2}
-  - {fileID: 11400000, guid: 49e7dab4f7aa24aada45e94c8e1628c1, type: 2}
-  - {fileID: 11400000, guid: 570b5cc60e386423ea93eed3a9eaa8e9, type: 2}
 --- !u!114 &1671780982
 MonoBehaviour:
   m_ObjectHideFlags: 0

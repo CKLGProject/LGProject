@@ -1,9 +1,7 @@
 {
     "name": "LGData",
     "rootNamespace": "",
-    "references": [
-        ""
-    ],
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

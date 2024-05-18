@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Ice Pat Data
   m_EditorClassIdentifier: 
   PatName: "\uC544\uC774\uC2A4\uBC14\uC6B4\uB4DC"
+  PatType: 2
   PatProfileImage:
   - {fileID: 21300000, guid: 62afa6a732b48418aa3ddc1ec1856e5e, type: 3}
   - {fileID: 21300000, guid: 3cd33d0824c7e455695fe930b79b6feb, type: 3}

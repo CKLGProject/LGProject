@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28b57489ca6f438dbfe0f33b47fc5833, type: 3}
   m_Name: Storm Image Data
   m_EditorClassIdentifier: 
-  CharacterType: 3
+  CharacterType: 4
   CharacterProfileImage: {fileID: 21300000, guid: d020bb24cda57e740b20591b11f87106,
     type: 3}
