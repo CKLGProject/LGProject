@@ -89,7 +89,7 @@ namespace LGProject.BossAI
             {
                 if (lowGagePlayer == null)
                     lowGagePlayer = player;
-                else if (lowGagePlayer.GetStateMachine.DamageGage > player.GetStateMachine.DamageGage)
+                else if (lowGagePlayer.GetStateMachine.playable.DamageGage > player.GetStateMachine.playable.DamageGage)
                 {
                     // 작을 경우 lowGagePlayer를 변경해준다.
                     lowGagePlayer = player;

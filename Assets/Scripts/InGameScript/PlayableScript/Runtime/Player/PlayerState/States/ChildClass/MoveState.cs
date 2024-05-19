@@ -95,7 +95,7 @@ namespace LGProject.PlayerState
 
         private void AttackLogic()
         {
-            if (stateMachine.UltimateGage >= 100)
+            if (stateMachine.playable.UltimateGage >= 100)
             {
                 stateMachine.ChangeState(stateMachine.ultimateState);
                 return;

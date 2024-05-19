@@ -107,7 +107,7 @@ namespace LGProject.PlayerState
             Vector3 direction = (targetStateMachine.transform.position - stateMachine.transform.position).normalized;
             direction.x *= 2;
             direction.y *= 1.5f;
-            KnockbackValue = stateMachine.playable.CaculateVelocity(
+            KnockbackValue = stateMachine.playable.CalculateVelocity(
                targetStateMachine.transform.position + direction,
                   targetStateMachine.transform.position, 0.5f, 3f);
 

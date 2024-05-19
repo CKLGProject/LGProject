@@ -153,7 +153,7 @@ namespace LGProject.PlayerState
                 if (stateMachine.attackAction.triggered && stateMachine.AttackCount < 3)
                 {
                     // 다음 공격의 게이지가 100일 경우 Ultimate공격을 진행 아닐 경우 attackState
-                    if (stateMachine.UltimateGage >= 100)
+                    if (stateMachine.playable.UltimateGage >= 100)
                     {
                         stateMachine.ChangeState(stateMachine.ultimateState);
                     }
@@ -205,7 +205,7 @@ namespace LGProject.PlayerState
                     try
                     {
                         Vector3 direction = (temp.Item1.GetStateMachine.transform.position - stateMachine.transform.position).normalized;
-                        Vector3 v = stateMachine.playable.CaculateVelocity(
+                        Vector3 v = stateMachine.playable.CalculateVelocity(
                            temp.Item1.GetStateMachine.transform.position + direction ,
                               temp.Item1.GetStateMachine.transform.position, 0.5f, 1f);
                         // 가드를 올리지 않았을 경우
@@ -218,10 +218,10 @@ namespace LGProject.PlayerState
 
                             if (!temp.Item1.GetStateMachine.IsGuard && !temp.Item1.GetStateMachine.IsDown)
                             {// 100 % gage로 일단 계산
-                                stateMachine.UltimateGage += 10;
+                                stateMachine.playable.SetUltimateGage(stateMachine.playable.UltimateGage + 10);
                                 stateMachine.UltimateGageisFull();
 
-                                stateMachine.playable.UltimateGageImage.fillAmount = stateMachine.UltimateGage / 100f;
+                                stateMachine.playable.UltimateGageImage.fillAmount = stateMachine.playable.UltimateGage / 100f;
 
                                 temp.Item1.effectManager.PlayOneShot(EffectManager.EFFECT.Hit);
 

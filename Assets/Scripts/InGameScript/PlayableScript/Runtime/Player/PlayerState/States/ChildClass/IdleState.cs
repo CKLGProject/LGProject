@@ -69,7 +69,7 @@ namespace LGProject.PlayerState
         void AttackLogic()
         {
             // 땅에 붙어있으면서 공격을 진행하면?
-            if(stateMachine.UltimateGage >= 100)
+            if(stateMachine.playable.UltimateGage >= 100)
             {
                 stateMachine.ChangeState(stateMachine.ultimateState);
                 return;

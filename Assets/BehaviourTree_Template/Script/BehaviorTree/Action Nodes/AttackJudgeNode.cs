@@ -150,7 +150,7 @@ namespace BehaviourTree
                 if (_stateMachine.AttackCount >= 3)
                 {
                     Vector3 direction = (temp.Item1.GetStateMachine.transform.position - AIAgent.Instance.transform.position).normalized;
-                    v = AIAgent.Instance.CaculateVelocity(
+                    v = AIAgent.Instance.CalculateVelocity(
                        temp.Item1.GetStateMachine.transform.position + direction,
                           temp.Item1.GetStateMachine.transform.position, 0.5f, 1f);
                 }

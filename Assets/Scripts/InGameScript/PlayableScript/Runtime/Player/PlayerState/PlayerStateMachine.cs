@@ -1,9 +1,10 @@
+using Data;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace LGProject.PlayerState  // 
+namespace LGProject.PlayerState // 
 {
     public class PlayerStateMachine
     {
@@ -24,6 +25,7 @@ namespace LGProject.PlayerState  //
         public Rigidbody physics;
         public PlayerInput playerInput;
         public Collider collider;
+        public BattleModel battleModel;
 
         public InputAction moveAction;
         public InputAction attackAction;
@@ -64,11 +66,7 @@ namespace LGProject.PlayerState  //
 
         //public GameObject GuardEffect;
 
-        public float DamageGage = 0;
-        public float UltimateGage = 0;
-
         #region Action_Properties
-
 
         #endregion
 
@@ -87,8 +85,7 @@ namespace LGProject.PlayerState  //
 
         public float GetAnimPlayTime(string clipName)
         {
-            float value = 0;
-            animClipsInfo.TryGetValue(clipName, out value);
+            animClipsInfo.TryGetValue(clipName, out float value);
             return value;
         }
 
@@ -102,6 +99,7 @@ namespace LGProject.PlayerState  //
             psm.physics = obj.GetComponent<Rigidbody>();
             psm.playerInput = obj.GetComponent<PlayerInput>();
             psm.collider = obj.GetComponent<Collider>();
+            psm.battleModel = Object.FindAnyObjectByType<BattleModel>();
 
             psm.IsGrounded = true;
             psm.IsGuard = false;
@@ -115,9 +113,13 @@ namespace LGProject.PlayerState  //
 
                 psm.idleState = new IdleState(psm);
                 psm.moveState = new MoveState(psm, ref psm.playable.DashSpeed, psm.playable.MaximumSpeed);
-                psm.jumpState = new JumpState(psm, ref psm.playable.JumpScale, psm.playable.MaximumJumpCount, psm.playable.jumpCurve);
+                psm.jumpState = new JumpState(psm, ref psm.playable.JumpScale, psm.playable.MaximumJumpCount,
+                    psm.playable.jumpCurve);
 
-                psm.attackState = new AttackState(psm, ref psm.playable.FirstAttackJudgeDelay, ref psm.playable.FirstAttackDelay, ref psm.playable.SecondAttackJudgeDelay, ref psm.playable.SecondAttackDelay, ref psm.playable.ThirdAttackJudgeDelay, ref psm.playable.ThirdAttackDelay);
+                psm.attackState = new AttackState(psm, ref psm.playable.FirstAttackJudgeDelay,
+                    ref psm.playable.FirstAttackDelay, ref psm.playable.SecondAttackJudgeDelay,
+                    ref psm.playable.SecondAttackDelay, ref psm.playable.ThirdAttackJudgeDelay,
+                    ref psm.playable.ThirdAttackDelay);
                 psm.ultimateState = new UltimateState(psm);
 
                 psm.jumpAttackState = new JumpAttackState(psm, psm.playable.MaximumSpeed);
@@ -133,19 +135,19 @@ namespace LGProject.PlayerState  //
                 psm.landingState = new LandingState(psm);
 
                 psm.Initalize(psm.idleState);
-
             }
             catch
             {
-                Debug.LogWarning("Player Component에 Input System과 관련된 Component가 존재하지 않습니다.\n때문에 Playerable Character가 움직이지 않을 수도 있습니다.");
+                Debug.LogWarning(
+                    "Player Component에 Input System과 관련된 Component가 존재하지 않습니다.\n때문에 Playerable Character가 움직이지 않을 수도 있습니다.");
             }
+
             return psm;
         }
 
         // 캐릭터 별로 State맞추기
         public void SetUltimateState()
         {
-
         }
 
         public void Initalize(State startingState)
@@ -175,8 +177,8 @@ namespace LGProject.PlayerState  //
             {
                 return hit.transform;
             }
-            
-            if(Physics.Raycast(upRay, out hit, .5f, 1 << 3))
+
+            if (Physics.Raycast(upRay, out hit, .5f, 1 << 3))
             {
                 return hit.transform;
             }
@@ -216,7 +218,7 @@ namespace LGProject.PlayerState  //
             playable.IsJumpping = IsJumpping;
             playable.IsDead = IsDead;
             playable.IsNormalAttack = IsNormalAttack;
-    }
+        }
 
         public void ResetVelocity()
         {
@@ -226,16 +228,16 @@ namespace LGProject.PlayerState  //
         public void HitDamaged(Vector3 velocity)
         {
             // 누어 있는 상태에선 데미지를 입지 않는다.
-            if (IsDown || IsUltimate )
+            if (IsDown || IsUltimate)
                 return;
             if (!IsGuard)
             {
-                DamageGage += 8.5f;
-                SetDamageGageOnText();
+                playable.SetDamageGage(playable.DamageGage + 8.5f);
+                battleModel.SyncDamageGage(playable.ActorType, playable.DamageGage);
                 IsNormalAttack = false;
                 animator.SetTrigger("Hit");
                 // 충격에 의한 물리 공식
-                velocity *= Mathf.Pow(2, (DamageGage * 0.01f));
+                velocity *= Mathf.Pow(2, (playable.DamageGage * 0.01f));
                 physics.velocity = velocity;
                 if (velocity != Vector3.zero)
                 {
@@ -249,20 +251,8 @@ namespace LGProject.PlayerState  //
             {
                 physics.velocity = new Vector3(transform.forward.x * -2f, 0, 0);
             }
+
             IsDamaged = true;
-        }
-
-        public void SetDamageGageOnText()
-        {
-            // Gage 상승
-            int a = (int)(DamageGage);
-            //= 0;
-            int b = (int)((DamageGage - a) * 10);
-
-            if (playable.DamageGageInt != null)
-                playable.DamageGageInt.text = $"<rotate=\"0\">{a}.</rotate>";
-            if (playable.DamageGageDecimal != null)
-                playable.DamageGageDecimal.text = $"<rotate=\"0\">{b}%</rotate>";
         }
 
         public void ResetAnimParameters()
@@ -280,7 +270,7 @@ namespace LGProject.PlayerState  //
 
         public void UltimateGageisFull()
         {
-            if(UltimateGage >= 100)
+            if (playable.UltimateGage >= 100)
             {
                 playable.ShowUltimateEffect();
             }
@@ -289,23 +279,22 @@ namespace LGProject.PlayerState  //
 
         #region ComboMethods
 
-
         // combo System
         public bool InputCombo(E_KEYTYPE keyType)
         {
-            if(CurrentState.GetType() == typeof(JumpState) && true) 
+            if (CurrentState.GetType() == typeof(JumpState) && true)
             {
                 return false;
             }
-            else if(CurrentState.GetType() == typeof(AttackState))
+            else if (CurrentState.GetType() == typeof(AttackState))
             {
                 return true;
             }
+
             //comboQueue
             //comboQueue.Enqueue(keyType);
             return false;
         }
-
 
 
         public void ComboTimer()
@@ -315,7 +304,7 @@ namespace LGProject.PlayerState  //
 
             //}
         }
+
         #endregion
     }
-
 }

@@ -18,6 +18,10 @@ public class BattleView : MonoBehaviour
     [SerializeField] private TextMeshProUGUI aiNameText;
     [SerializeField] private TextMeshProUGUI countText;
 
+    [Header("Percent")]
+    [SerializeField] private PercentageFX userDamageGageFX;
+    [SerializeField] private PercentageFX aiDamageGageFX;
+
     /// <summary>
     /// 뷰를 전부 안보이도록 처리합니다.
     /// </summary>
@@ -41,6 +45,24 @@ public class BattleView : MonoBehaviour
                 break;
             case ActorType.AI:
                 aiHealthFX.SyncHealthUI(lifePoint);
+                break;
+        }
+    }
+
+    /// <summary>
+    /// 데미지 게이지 UI를 업데이트 합니다.
+    /// </summary>
+    /// <param name="actorType">타겟 액터</param>
+    /// <param name="damageGage">데미지 게이지</param>
+    public void UpdateDamageGageUI(ActorType actorType, float damageGage)
+    {
+        switch (actorType)
+        {
+            case ActorType.User:
+                userDamageGageFX.UpdateDamageGageText(damageGage);
+                break;
+            case ActorType.AI:
+                aiDamageGageFX.UpdateDamageGageText(damageGage);
                 break;
         }
     }

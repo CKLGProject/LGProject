@@ -19,7 +19,7 @@ namespace LGProject.PlayerState
     public class Playable : MonoBehaviour
     {
         public Animator Animator;
-        [SerializeField] private ActorType actorType;
+        [field: SerializeField] public ActorType ActorType { get; private set; }
         [SerializeField] private BattleModel battleModel;
 
         [SerializeField] protected Vector3 velocity = Vector3.zero;
@@ -78,15 +78,17 @@ namespace LGProject.PlayerState
 
         public bool movingAttack = true;
 
-        public TextMeshProUGUI DamageGageInt;
-        public TextMeshProUGUI DamageGageDecimal;
         public Image UltimateGageImage;
 
         public Vector3 AliveOffset;
         public float respawnTime;
         public float DeadLine;
 
-        //public float damageGage = 0;
+        public float DamageGage { get; protected set; }
+        public void SetDamageGage(float value) => DamageGage = value;
+        
+        public float UltimateGage { get; protected set; }
+        public void SetUltimateGage(float value) => UltimateGage = value;
 
         // 공격 방향
         [HideInInspector] public bool directionX = false;
@@ -118,20 +120,14 @@ namespace LGProject.PlayerState
 
         protected virtual void Awake()
         {
-            battleModel.InitHealth(actorType, LifePoint);
+            battleModel.InitHealth(ActorType, LifePoint);
         }
 
-        protected PlayerStateMachine stateMachine;
+        protected PlayerStateMachine StateMachine;
 
-        public PlayerStateMachine GetStateMachine
-        {
-            get
-            {
-                return stateMachine;
-            }
-        }
+        public PlayerStateMachine GetStateMachine => StateMachine;
 
-        public Vector3 CaculateVelocity(Vector3 target, Vector3 origin, float time, float height = 1.5f)
+        public Vector3 CalculateVelocity(Vector3 target, Vector3 origin, float time, float height = 1.5f)
         {
             #region Omit
 
@@ -159,7 +155,7 @@ namespace LGProject.PlayerState
         protected void InitEffectManager()
         {
             effectManager = GetComponent<EffectManager>();
-            stateMachine.SetDamageGageOnText();
+            battleModel.SyncDamageGage(ActorType, DamageGage);
             if (effectManager == null)
             {
                 Debug.LogError("EffectManager 없음");
@@ -176,12 +172,12 @@ namespace LGProject.PlayerState
 
         public void IsPushDownKey()
         {
-            if (stateMachine.IsDown)
+            if (StateMachine.IsDown)
             {
                 curTimer += Time.deltaTime;
                 if (downTimer < curTimer)
                 {
-                    stateMachine.IsDown = false;
+                    StateMachine.IsDown = false;
                     curTimer = 0;
                 }
             }
@@ -194,29 +190,29 @@ namespace LGProject.PlayerState
 
             if (Physics.Raycast(ray, out hit, 0.3f, 1 << 6))
             {
-                if (!stateMachine.IsGrounded)
+                if (!StateMachine.IsGrounded)
                 {
                     effectManager.Play(EffectManager.EFFECT.Landing).Forget();
-                    stateMachine.collider.isTrigger = false;
-                    stateMachine.IsGrounded = true;
-                    stateMachine.IsJumpGuard = false;
-                    stateMachine.JumpInCount = 0;
-                    stateMachine.StandingVelocity();
+                    StateMachine.collider.isTrigger = false;
+                    StateMachine.IsGrounded = true;
+                    StateMachine.IsJumpGuard = false;
+                    StateMachine.JumpInCount = 0;
+                    StateMachine.StandingVelocity();
 
                     // 이거 AI랑 공용으로 사용중이라 나중에 안되게 해야함.
-                    if (!stateMachine.IsKnockback && stateMachine.CurrentState != null)
-                        stateMachine.ChangeState(stateMachine.landingState);
+                    if (!StateMachine.IsKnockback && StateMachine.CurrentState != null)
+                        StateMachine.ChangeState(StateMachine.landingState);
 
                     //stateMachine.isHit = false;
                 }
             }
             else
             {
-                stateMachine.IsGrounded = false;
-                stateMachine.collider.isTrigger = true;
-                stateMachine.animator.SetBool("Flying", stateMachine.JumpInCount < 1 ? true : false);
-                if (stateMachine.JumpInCount < 1)
-                    stateMachine.JumpInCount++;
+                StateMachine.IsGrounded = false;
+                StateMachine.collider.isTrigger = true;
+                StateMachine.animator.SetBool("Flying", StateMachine.JumpInCount < 1 ? true : false);
+                if (StateMachine.JumpInCount < 1)
+                    StateMachine.JumpInCount++;
             }
             // 위를 체크하고 싶은데...
         }
@@ -224,70 +220,70 @@ namespace LGProject.PlayerState
         private void JumpLandingCheck()
         {
             effectManager.Play(EffectManager.EFFECT.Landing).Forget();
-            Vector3 velocity = stateMachine.physics.velocity;
+            Vector3 velocity = StateMachine.physics.velocity;
             velocity.y = 0;
             transform.position = new Vector3(transform.position.x, underPlatform.rect.y, transform.position.z);
 
-            stateMachine.physics.velocity = velocity;
-            stateMachine.collider.isTrigger = false;
-            stateMachine.IsGrounded = true;
-            stateMachine.IsJumpGuard = false;
-            stateMachine.JumpInCount = 0;
-            stateMachine.StandingVelocity();
-            if (stateMachine.CurrentState != null)
-                stateMachine.ChangeState(stateMachine.landingState);
+            StateMachine.physics.velocity = velocity;
+            StateMachine.collider.isTrigger = false;
+            StateMachine.IsGrounded = true;
+            StateMachine.IsJumpGuard = false;
+            StateMachine.JumpInCount = 0;
+            StateMachine.StandingVelocity();
+            if (StateMachine.CurrentState != null)
+                StateMachine.ChangeState(StateMachine.landingState);
         }
 
         private void KncokbackLandingCheck()
         {
             effectManager.Play(EffectManager.EFFECT.Knockback).Forget();
 
-            Vector3 velocity = stateMachine.physics.velocity;
+            Vector3 velocity = StateMachine.physics.velocity;
             velocity.y = 0;
             transform.position = new Vector3(transform.position.x, underPlatform.rect.y, transform.position.z);
 
-            stateMachine.physics.velocity = Vector3.zero;
-            stateMachine.collider.isTrigger = false;
-            stateMachine.IsGrounded = true;
-            stateMachine.IsKnockback = false;
-            stateMachine.JumpInCount = 0;
-            stateMachine.StandingVelocity();
+            StateMachine.physics.velocity = Vector3.zero;
+            StateMachine.collider.isTrigger = false;
+            StateMachine.IsGrounded = true;
+            StateMachine.IsKnockback = false;
+            StateMachine.JumpInCount = 0;
+            StateMachine.StandingVelocity();
         }
 
         public void NewPlatformCheck()
         {
             // 0 이상일 때는 체크하지 않.기.
             // 왜냐면 올라가고 있기 때문이지
-            if (stateMachine.physics.velocity.y < -0.1f &&
-                (!stateMachine.IsGrounded || stateMachine.IsKnockback))
+            if (StateMachine.physics.velocity.y < -0.1f &&
+                (!StateMachine.IsGrounded || StateMachine.IsKnockback))
             {
                 // rect와 비교하여 해당 위치보다 아래 있으면 체크하지 않기.
                 // 그럼 경우의 수는 2가지
                 // 바닥을 뚫었는가? 에 대한 체크
                 if (AABBPlatformCheck())
                 {
-                    if (stateMachine.IsKnockback)
+                    if (StateMachine.IsKnockback)
                         KncokbackLandingCheck();
-                    else if (!stateMachine.IsGrounded)
+                    else if (!StateMachine.IsGrounded)
                         JumpLandingCheck();
                 }
             }
             // 하늘로 날아올랐다는 것을 표시
-            else if (stateMachine.physics.velocity.y > 0)
+            else if (StateMachine.physics.velocity.y > 0)
             {
                 // 점프를 한 상황일 때
-                if (stateMachine.IsJumpping)
+                if (StateMachine.IsJumpping)
                 {
-                    stateMachine.IsGrounded = false;
-                    stateMachine.collider.isTrigger = true;
+                    StateMachine.IsGrounded = false;
+                    StateMachine.collider.isTrigger = true;
                 }
 
                 // 피격당해 날아간 상태
-                if (stateMachine.IsKnockback)
+                if (StateMachine.IsKnockback)
                 {
-                    stateMachine.IsGrounded = false;
-                    stateMachine.collider.isTrigger = true;
-                    stateMachine.IsKnockback = true;
+                    StateMachine.IsGrounded = false;
+                    StateMachine.collider.isTrigger = true;
+                    StateMachine.IsKnockback = true;
                 }
             }
         }
@@ -313,12 +309,12 @@ namespace LGProject.PlayerState
 
         public void handleJump()
         {
-            if (stateMachine.JumpInCount > 0 && stateMachine.IsJumpping)
+            if (StateMachine.JumpInCount > 0 && StateMachine.IsJumpping)
             {
-                stateMachine.IsJumpping = false;
+                StateMachine.IsJumpping = false;
             }
 
-            if (stateMachine.physics.velocity.y > 0 && !stateMachine.IsKnockback)
+            if (StateMachine.physics.velocity.y > 0 && !StateMachine.IsKnockback)
             {
             }
         }
@@ -326,25 +322,25 @@ namespace LGProject.PlayerState
         // 점프 후 내려오는 것
         public void PlayableGravity()
         {
-            if (!stateMachine.IsGrounded)
-                stateMachine.physics.velocity += Vector3.up * _gravity * Time.deltaTime;
+            if (!StateMachine.IsGrounded)
+                StateMachine.physics.velocity += Vector3.up * _gravity * Time.deltaTime;
             else
-                stateMachine.physics.velocity += Vector3.up * _groundedGravity * Time.deltaTime;
+                StateMachine.physics.velocity += Vector3.up * _groundedGravity * Time.deltaTime;
         }
 
         public void HandleJumpping()
         {
             // 키 입력으로 점프
-            stateMachine.physics.velocity = Vector3.up * initialJumpVelocity;
+            StateMachine.physics.velocity = Vector3.up * initialJumpVelocity;
         }
 
         public void DeadLineCheck()
         {
-            if (!stateMachine.IsDead && transform.position.y < DeadLine)
+            if (!StateMachine.IsDead && transform.position.y < DeadLine)
             {
-                stateMachine.IsDead = true;
+                StateMachine.IsDead = true;
                 LifePoint -= 1; // 체력 감소
-                battleModel.SyncHealth(actorType, LifePoint);
+                battleModel.SyncHealth(ActorType, LifePoint);
                 if (LifePoint > 0)
                 {
                     AliveDelay().Forget();
@@ -355,16 +351,16 @@ namespace LGProject.PlayerState
         private async UniTaskVoid AliveDelay()
         {
             await UniTask.Delay(TimeSpan.FromSeconds(respawnTime));
-            stateMachine.ResetVelocity();
+            StateMachine.ResetVelocity();
             transform.position = Vector3.forward * -9.5f + AliveOffset;
-            stateMachine.IsDead = false;
-            stateMachine.DamageGage = 0;
-            stateMachine.SetDamageGageOnText();
+            StateMachine.IsDead = false;
+            DamageGage = 0;
+            battleModel.SyncDamageGage(ActorType, DamageGage);
 
-            stateMachine.animator.SetTrigger("Hit");
-            stateMachine.IsDamaged = true;
-            stateMachine.IsKnockback = true;
-            stateMachine.animator.SetTrigger("Knockback");
+            StateMachine.animator.SetTrigger("Hit");
+            StateMachine.IsDamaged = true;
+            StateMachine.IsKnockback = true;
+            StateMachine.animator.SetTrigger("Knockback");
         }
 
         public void SetUnderPlatform()

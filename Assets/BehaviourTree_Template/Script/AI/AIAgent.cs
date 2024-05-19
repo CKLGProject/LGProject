@@ -354,8 +354,8 @@ namespace BehaviourTree
                 instance = this;
             
             Random.seed = System.DateTime.Now.Millisecond;
-            stateMachine = new LGProject.PlayerState.PlayerStateMachine();
-            stateMachine = LGProject.PlayerState.PlayerStateMachine.CreateStateMachine(this.gameObject);
+            StateMachine = new LGProject.PlayerState.PlayerStateMachine();
+            StateMachine = LGProject.PlayerState.PlayerStateMachine.CreateStateMachine(this.gameObject);
         }
 
         private void Start()
@@ -364,11 +364,11 @@ namespace BehaviourTree
             effectManager.InitParticles();
             SetUnderPlatform();
             UltimateGageImage.fillAmount = 0;
-            for (int i = 0; i < stateMachine.animator.runtimeAnimatorController.animationClips.Length; i++)
+            for (int i = 0; i < StateMachine.animator.runtimeAnimatorController.animationClips.Length; i++)
             {
-                string name = stateMachine.animator.runtimeAnimatorController.animationClips[i].name;
-                float time = stateMachine.animator.runtimeAnimatorController.animationClips[i].length;
-                stateMachine.SetAnimPlayTime(name, time);
+                string name = StateMachine.animator.runtimeAnimatorController.animationClips[i].name;
+                float time = StateMachine.animator.runtimeAnimatorController.animationClips[i].length;
+                StateMachine.SetAnimPlayTime(name, time);
             }
         }
 
@@ -440,9 +440,9 @@ namespace BehaviourTree
 
                 // stateMachine을 사용하긴 하지만, currentNode를 쓰는 것이 아니기 떄문에 판정을 달리 해야한다.
 
-                if (stateMachine.IsNormalAttack)
+                if (StateMachine.IsNormalAttack)
                 {
-                    switch (stateMachine.AttackCount)
+                    switch (StateMachine.AttackCount)
                     {
                         case 0:
                             Gizmos.color = Color.red;
@@ -458,7 +458,7 @@ namespace BehaviourTree
                     }
                     Gizmos.DrawWireCube(transform.position + right, Vector3.one * .75f);
                 }
-                else if(stateMachine.IsDashAttack)
+                else if(StateMachine.IsDashAttack)
                 {
                     Gizmos.color = Color.red;
                     Vector3 hitBoxSize = Vector3.one * 0.75f;
@@ -466,7 +466,7 @@ namespace BehaviourTree
                     //hitBoxSiz
                     Gizmos.DrawWireCube(transform.position + right, hitBoxSize);
                 }
-                else if(stateMachine.IsJumpAttack)
+                else if(StateMachine.IsJumpAttack)
                 {
                     Gizmos.color = Color.red;
                     Vector3 hitBoxSize = Vector3.one * 0.75f;

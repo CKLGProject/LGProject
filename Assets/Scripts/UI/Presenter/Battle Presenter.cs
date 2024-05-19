@@ -53,6 +53,16 @@ public class BattlePresenter : MonoBehaviour
             .Subscribe(_ => _battleView.ShowWinPopup())
             .AddTo(this);
 
+        // 유저의 데미지 게이지를 갱신하는 옵저버
+        _battleModel.UserDamageGageObservable
+            .Subscribe(damageGage => _battleView.UpdateDamageGageUI(ActorType.User, damageGage))
+            .AddTo(this);
+        
+        // AI의 데미지 게이지를 갱신하는 옵저버
+        _battleModel.AIDamageGageObservable
+            .Subscribe(damageGage => _battleView.UpdateDamageGageUI(ActorType.AI, damageGage))
+            .AddTo(this);
+
         // 카운트 다운 옵저버
         _battleModel.CountDownObservable
             .Subscribe(count => _battleView.UpdateCountDownUI(count))

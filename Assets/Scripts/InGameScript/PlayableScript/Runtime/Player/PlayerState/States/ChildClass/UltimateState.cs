@@ -14,7 +14,7 @@ namespace LGProject.PlayerState
         {
             base.Enter();
             // 얼티밋을 사용하면 게이지가 닮.
-            stateMachine.UltimateGage = 0;
+            stateMachine.playable.SetUltimateGage(0);
             stateMachine.playable.UltimateGageImage.fillAmount = 0;
         }
 
