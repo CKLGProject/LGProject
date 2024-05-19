@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace LGProject.PlayerState
 {
-    public class PlayerScript : Playable
+    public class Player : Playable
     {
         private void InitStates()
         {

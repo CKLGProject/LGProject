@@ -2,9 +2,9 @@ using LGProject.PlayerState;
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(PlayerScript), true)]
+[CustomEditor(typeof(Player), true)]
 [CanEditMultipleObjects]
-public class PlayerScriptEditor : Editor
+public class PlayerEditor : Editor
 {
     /*프로퍼티*/
     /*************************************
