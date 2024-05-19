@@ -346,16 +346,16 @@ namespace BehaviourTree
         //public Animator animator;
 
         [System.Obsolete]
-        private void Awake()
+        protected override void Awake()
         {
-            if (instance == null)
-            {
+            base.Awake();
+            
+            if (instance == null) 
                 instance = this;
-            }
+            
             Random.seed = System.DateTime.Now.Millisecond;
             stateMachine = new LGProject.PlayerState.PlayerStateMachine();
             stateMachine = LGProject.PlayerState.PlayerStateMachine.CreateStateMachine(this.gameObject);
-            
         }
 
         private void Start()

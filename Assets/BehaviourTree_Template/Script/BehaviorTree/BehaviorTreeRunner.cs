@@ -1,7 +1,9 @@
+using LGProject;
 using LGProject.PlayerState;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using USingleton;
 
 namespace BehaviourTree
 {
@@ -21,7 +23,7 @@ namespace BehaviourTree
 
         private void Update()
         {
-            if(LGProject.InGameManager.Instance.IsStart)
+            if(BattleSceneManager.Instance.IsStart)
                 tree.Update();
         }
     }

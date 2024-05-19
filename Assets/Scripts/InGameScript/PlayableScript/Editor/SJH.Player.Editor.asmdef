@@ -1,11 +1,12 @@
 {
-    "name": "LGModel",
+    "name": "SJH.Player.Editor",
     "rootNamespace": "",
     "references": [
-        "GUID:2871a61c47e924d2082279aa2a435953",
-        "GUID:77221876cc6b8244180b96e320b1bcd4"
+        "GUID:a57a77eb24fa344258e7804f44ec739e"
     ],
-    "includePlatforms": [],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,

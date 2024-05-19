@@ -1,52 +1,68 @@
 using Data;
+using LGProject;
 using R3;
+using R3.Triggers;
+using ReactiveCountdown;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using USingleton;
 
-[RequireComponent(typeof(BattleModel))]
 [RequireComponent(typeof(BattleView))]
+[RequireComponent(typeof(BattleModel))]
 public class BattlePresenter : MonoBehaviour
 {
-    private BattleModel _battleModel;
     private BattleView _battleView;
+    private BattleModel _battleModel;
 
     private GameManager CurrentGameManager => Singleton.Instance<GameManager>();
 
     private void Start()
     {
-        _battleModel = GetComponent<BattleModel>();
         _battleView = GetComponent<BattleView>();
+        _battleModel = GetComponent<BattleModel>();
 
-        #region User
+        // 이름 설정
+        string nickName = CurrentGameManager.GetNickname();
+        _battleView.SetNameText(ActorType.User, nickName);
+        _battleView.SetNameText(ActorType.AI, "AI");
 
-        // 유저 이름을 설정합니다.
-        string userName = CurrentGameManager.GetNickname();
-        _battleView.SetUserNameText(ActorType.User, userName);
+        // 뷰를 전부 안보이도록 처리
+        _battleView.AllHideView();
 
-        // 유저 프로필 이미지를 설정합니다.
-        ECharacterType userCharacter = CurrentGameManager.GetCharacter(ActorType.User);
-        _battleView.SetCharacterImage(ActorType.User, userCharacter);
+        // 유저의 생명 포인트에 따라 UI를 업데이트하는 옵저버
+        _battleModel.UserHealthObservable
+            .Subscribe(lifePoint => _battleView.UpdateLifPointUI(ActorType.User, lifePoint))
+            .AddTo(this);
 
-        // 유저 정령 UI를 설정한다.
-        Sprite userPatImage = CurrentGameManager.GetPat(ActorType.User).GetProfileImage();
-        _battleView.SetPatUI(ActorType.User, userPatImage);
+        // AI의 생명 포인트에 따라 UI를 업데이트하는 옵저버
+        _battleModel.AIHealthObservable
+            .Subscribe(lifePoint => _battleView.UpdateLifPointUI(ActorType.AI, lifePoint))
+            .AddTo(this);
 
-        #endregion
+        // 유저의 생명이 0이 되었을 때 Lose Popup을 띄우는 옵저버
+        _battleModel.UserHealthObservable
+            .Where(lifePoint => lifePoint == 0)
+            .Subscribe(_ => _battleView.ShowLosePopup())
+            .AddTo(this);
 
-        #region AI
+        // AI의 생명이 0이 되었을 때 Wid Popup을 띄우는 옵저버
+        _battleModel.AIHealthObservable
+            .Where(lifePoint => lifePoint == 0)
+            .Subscribe(_ => _battleView.ShowWinPopup())
+            .AddTo(this);
 
-        // AI 프로필 이미지를 설정합니다.
-        ECharacterType aiCharacter = CurrentGameManager.GetCharacter(ActorType.AI);
-        _battleView.SetCharacterImage(ActorType.AI, aiCharacter);
-        
-        // AI 정령 UI를 설정한다.
-        Sprite aiPatImage = CurrentGameManager.GetPat(ActorType.AI).GetProfileImage();
-        _battleView.SetPatUI(ActorType.AI, aiPatImage);
+        // 카운트 다운 옵저버
+        _battleModel.CountDownObservable
+            .Subscribe(count => _battleView.UpdateCountDownUI(count))
+            .AddTo(this);
 
-        #endregion
-
-        // 로딩 텍스트 렌더링 옵저버
-        _battleView.UpdateLoadingTextObservable()
-            .Subscribe(_ => _battleView.UpdateLoadingText()).AddTo(this);
+        // 카운트 다운 옵저버
+        this.CountdownAsObservable(BattleModel.CountMax)
+            .Subscribe(
+                count => _battleModel.SetCountdown(count),
+                _ => BattleSceneManager.Instance.GameStart())
+            .AddTo(this);
     }
 }

@@ -1,9 +1,8 @@
 {
-    "name": "LGModel",
+    "name": "NK.UIFX",
     "rootNamespace": "",
     "references": [
-        "GUID:2871a61c47e924d2082279aa2a435953",
-        "GUID:77221876cc6b8244180b96e320b1bcd4"
+        "GUID:3ced0319c1fb94930a99a9f64f7580c0"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

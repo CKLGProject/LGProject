@@ -3,6 +3,7 @@ using System;
 using UnityEngine.UI;
 using TMPro;
 using Cysharp.Threading.Tasks;
+using Data;
 
 namespace LGProject.PlayerState
 {
@@ -11,22 +12,27 @@ namespace LGProject.PlayerState
         public float FirstAttackDelay;
         public float SecondAttackDelay;
         public float ThirdAttackDelay;
-        
+
         public float ComboDelay;
     }
 
     public class Playable : MonoBehaviour
     {
         public Animator Animator;
+        [SerializeField] private ActorType actorType;
+        [SerializeField] private BattleModel battleModel;
 
         [SerializeField] protected Vector3 velocity = Vector3.zero;
+
         [Tooltip("최대 점프 횟수"), SerializeField, HideInInspector]
         public int MaximumJumpCount = 2;
+
         [Tooltip("대쉬 최대 속도"), SerializeField, HideInInspector]
         public float MaximumSpeed = 4;
 
         [Tooltip("이동할 때 증가하는 속도"), SerializeField, HideInInspector]
         public float DashSpeed = 0;
+
         [Tooltip("한 번 점프할 때의 높이"), SerializeField, HideInInspector]
         public float JumpScale = 5;
 
@@ -38,8 +44,7 @@ namespace LGProject.PlayerState
         [Range(0.0f, 2.0f), Tooltip("n초의 시간이 경과하면 공격 판정을 시작함."), SerializeField, HideInInspector]
         public float FirstAttackJudgeDelay = 1f;
 
-        [SerializeField, HideInInspector]
-        public float FirstAttackMovingValue = 1f;
+        [SerializeField, HideInInspector] public float FirstAttackMovingValue = 1f;
 
         [Range(0.0f, 1.0f), Tooltip("n초가 끝나면 Idle로 돌아옴"), SerializeField, HideInInspector]
         public float SecondAttackDelay = 1f;
@@ -47,8 +52,7 @@ namespace LGProject.PlayerState
         [Range(0.0f, 2.0f), Tooltip("n초의 시간이 경과하면 공격 판정을 시작함."), SerializeField, HideInInspector]
         public float SecondAttackJudgeDelay = 1f;
 
-        [SerializeField, HideInInspector]
-        public float SecondAttackMovingValue = 1f;
+        [SerializeField, HideInInspector] public float SecondAttackMovingValue = 1f;
 
         [Range(0.0f, 1.0f), Tooltip("n초가 끝나면 Idle로 돌아옴"), SerializeField, HideInInspector]
         public float ThirdAttackDelay = 1f;
@@ -56,8 +60,7 @@ namespace LGProject.PlayerState
         [Range(0.0f, 2.0f), Tooltip("n초의 시간이 경과하면 공격 판정을 시작함."), SerializeField, HideInInspector]
         public float ThirdAttackJudgeDelay = 1f;
 
-        [SerializeField, HideInInspector]
-        public float ThirdAttackMovingValue = 1f;
+        [SerializeField, HideInInspector] public float ThirdAttackMovingValue = 1f;
 
         [Range(0.0f, 1.0f), Tooltip("공격 후 Idle로 돌아오기 까지의 시간"), SerializeField, HideInInspector]
         public float DashAttackDelay = 0;
@@ -107,9 +110,16 @@ namespace LGProject.PlayerState
 
         float _gravity = -9.8f;
         float _groundedGravity = -0.05f;
-        float initialJumpVelocity ;
+
+        float initialJumpVelocity;
+
         //float maxJumpHeight = 1.5f;
         float maxJumpTime = 0.5f;
+
+        protected virtual void Awake()
+        {
+            battleModel.InitHealth(actorType, LifePoint);
+        }
 
         protected PlayerStateMachine stateMachine;
 
@@ -119,19 +129,19 @@ namespace LGProject.PlayerState
             {
                 return stateMachine;
             }
-
         }
 
         public Vector3 CaculateVelocity(Vector3 target, Vector3 origin, float time, float height = 1.5f)
         {
             #region Omit
+
             // define the distance x and y first;
             Vector3 distance = target - origin;
             Vector3 distanceXZ = distance; // x와 z의 평면이면 기본적으로 거리는 같은 벡터.
             distanceXZ.y = 0f; // y는 0으로 설정.
-                               //Forward = origin;
-                               // Create a float the represent our distance
-            float Sy = distance.y;    // 세로 높이의 거리를 지정.
+            //Forward = origin;
+            // Create a float the represent our distance
+            float Sy = distance.y; // 세로 높이의 거리를 지정.
             float Sxz = distanceXZ.magnitude;
 
             // 속도 추가
@@ -142,6 +152,7 @@ namespace LGProject.PlayerState
             result *= Vxz;
             result.y = Vy;
             return result;
+
             #endregion
         }
 
@@ -149,7 +160,7 @@ namespace LGProject.PlayerState
         {
             effectManager = GetComponent<EffectManager>();
             stateMachine.SetDamageGageOnText();
-            if(effectManager == null)
+            if (effectManager == null)
             {
                 Debug.LogError("EffectManager 없음");
             }
@@ -157,6 +168,7 @@ namespace LGProject.PlayerState
 
 
         #region CheckFields
+
         private RaycastHit hit;
 
         float curTimer = 0;
@@ -222,9 +234,8 @@ namespace LGProject.PlayerState
             stateMachine.IsJumpGuard = false;
             stateMachine.JumpInCount = 0;
             stateMachine.StandingVelocity();
-            if(stateMachine.CurrentState != null)
+            if (stateMachine.CurrentState != null)
                 stateMachine.ChangeState(stateMachine.landingState);
-
         }
 
         private void KncokbackLandingCheck()
@@ -247,7 +258,7 @@ namespace LGProject.PlayerState
         {
             // 0 이상일 때는 체크하지 않.기.
             // 왜냐면 올라가고 있기 때문이지
-            if(stateMachine.physics.velocity.y < -0.1f &&
+            if (stateMachine.physics.velocity.y < -0.1f &&
                 (!stateMachine.IsGrounded || stateMachine.IsKnockback))
             {
                 // rect와 비교하여 해당 위치보다 아래 있으면 체크하지 않기.
@@ -262,16 +273,17 @@ namespace LGProject.PlayerState
                 }
             }
             // 하늘로 날아올랐다는 것을 표시
-            else if(stateMachine.physics.velocity.y > 0)
+            else if (stateMachine.physics.velocity.y > 0)
             {
                 // 점프를 한 상황일 때
-                if(stateMachine.IsJumpping)
+                if (stateMachine.IsJumpping)
                 {
                     stateMachine.IsGrounded = false;
                     stateMachine.collider.isTrigger = true;
                 }
+
                 // 피격당해 날아간 상태
-                if(stateMachine.IsKnockback)
+                if (stateMachine.IsKnockback)
                 {
                     stateMachine.IsGrounded = false;
                     stateMachine.collider.isTrigger = true;
@@ -294,20 +306,20 @@ namespace LGProject.PlayerState
 
         public void setupJumpVariables()
         {
-            float timeToApex = maxJumpTime / 2; 
+            float timeToApex = maxJumpTime / 2;
             _gravity = (-2 * JumpScale) / Mathf.Pow(timeToApex, 1.5f);
             initialJumpVelocity = (2 * JumpScale) / timeToApex;
         }
 
         public void handleJump()
         {
-            if(stateMachine.JumpInCount > 0 && stateMachine.IsJumpping )
+            if (stateMachine.JumpInCount > 0 && stateMachine.IsJumpping)
             {
                 stateMachine.IsJumpping = false;
             }
-            if(stateMachine.physics.velocity.y > 0 && !stateMachine.IsKnockback)
-            {
 
+            if (stateMachine.physics.velocity.y > 0 && !stateMachine.IsKnockback)
+            {
             }
         }
 
@@ -324,16 +336,16 @@ namespace LGProject.PlayerState
         {
             // 키 입력으로 점프
             stateMachine.physics.velocity = Vector3.up * initialJumpVelocity;
-
         }
 
         public void DeadLineCheck()
         {
-            if(!stateMachine.IsDead && transform.position.y < DeadLine)
+            if (!stateMachine.IsDead && transform.position.y < DeadLine)
             {
                 stateMachine.IsDead = true;
-                InGameUIManager.Instance.LifeDown(this.transform, ref LifePoint);
-                if(LifePoint > 0)
+                LifePoint -= 1; // 체력 감소
+                battleModel.SyncHealth(actorType, LifePoint);
+                if (LifePoint > 0)
                 {
                     AliveDelay().Forget();
                 }
@@ -366,11 +378,5 @@ namespace LGProject.PlayerState
         }
 
         #endregion
-
-
-
-
-
     }
-
 }
