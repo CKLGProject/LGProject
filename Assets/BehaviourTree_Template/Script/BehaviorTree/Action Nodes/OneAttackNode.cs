@@ -116,7 +116,7 @@ namespace BehaviourTree
                 Vector3 v = Vector3.zero;
                 direction.x *= 2;
                 direction.y *= 1.5f;
-                v = AIAgent.Instance.CaculateVelocity(
+                v = AIAgent.Instance.CalculateVelocity(
                    temp.Item1.GetStateMachine.transform.position + direction,
                    temp.Item1.GetStateMachine.transform.position, 0.5f, 1f);
 
@@ -132,9 +132,7 @@ namespace BehaviourTree
 
                     if (!temp.Item1.GetStateMachine.IsGuard && !temp.Item1.GetStateMachine.IsDown)
                     {// 100 % gage로 일단 계산
-                        _stateMachine.UltimateGage += 10;
-
-                        _stateMachine.playable.UltimateGageImage.fillAmount = _stateMachine.UltimateGage / 100f;
+                        _stateMachine.playable.SetUltimateGage(_stateMachine.playable.UltimateGage + 10);
 
                         temp.Item1.effectManager.PlayOneShot(EffectManager.EFFECT.Hit);
                     }

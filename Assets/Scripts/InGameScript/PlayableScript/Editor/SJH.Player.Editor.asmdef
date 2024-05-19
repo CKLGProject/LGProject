@@ -1,0 +1,18 @@
+{
+    "name": "SJH.Player.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:a57a77eb24fa344258e7804f44ec739e"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

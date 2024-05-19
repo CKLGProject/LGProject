@@ -2,7 +2,8 @@
     "name": "LGModel",
     "rootNamespace": "",
     "references": [
-        "GUID:2871a61c47e924d2082279aa2a435953"
+        "GUID:2871a61c47e924d2082279aa2a435953",
+        "GUID:77221876cc6b8244180b96e320b1bcd4"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -22,7 +22,7 @@ namespace BehaviourTree
             // 플레이어 
             pathFinding.PathRequestManager.RequestPath(new pathFinding.PathRequest(_stateMachine.transform.position, _agent.player.position, _agent.GetPath));
 
-            chasingPoint = pathFinding.Grid.Instance.NodeFromWorldPoint(_stateMachine.transform.position).worldPosition;
+            chasingPoint = pathFinding.Grid.Instance.NodeFromWorldPoint(_stateMachine.transform.position).WorldPosition;
             
         }
 
@@ -33,8 +33,7 @@ namespace BehaviourTree
 
         protected override State OnUpdate()
         {
-
-            // path가 있는지 확인. || 내가 피해를 입은 경우 |}| 최종 경로에 도착한 경우 || 플레이어가 공중에 떠있을때 || 플레이어가 누워있을 때
+            // path가 있는지 확인. || 내가 피해를 입은 경우 |}| 최종 경로에 도착한 경우 || 플레이어가 공중에 떠있을때 || 플레이어가 누워있을 때 || 플레이어가 떨어졌을 때,
             if (EscapeConditions())
             {
                 return State.Failure;
@@ -178,7 +177,7 @@ namespace BehaviourTree
             if (_agent.target == null)
                 return false;
             // 타겟 노드
-            Vector3 targetPos = pathFinding.Grid.Instance.NodeFromWorldPoint(_agent.target.position).worldPosition;
+            Vector3 targetPos = pathFinding.Grid.Instance.NodeFromWorldPoint(_agent.target.position).WorldPosition;
             // 최종 목표
             Vector3 FinTarget = _agent.path[_agent.path.Length - 1];
 
@@ -198,7 +197,8 @@ namespace BehaviourTree
                 _agent.path.Length < 1 || 
                 _stateMachine.IsDamaged || 
                 _playerStateMachine.IsKnockback || 
-                _playerStateMachine.IsDown)
+                _playerStateMachine.IsDown ||
+                _playerStateMachine.transform.position.y < -0.5f)
 
                 return true;
             return false;

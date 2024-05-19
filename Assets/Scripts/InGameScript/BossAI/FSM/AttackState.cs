@@ -15,7 +15,8 @@ namespace LGProject.BossAI
         private ArmType _targetArm;
         private CinemachineVirtualCamera _camera;
         private bool _endPlay;
-        private Transform target;
+        private Transform _target;
+        
         public AttackState(AiStateMachine stateMachine, float waitTimer, float attackDelayTimer, float moveSpeed) : base(stateMachine)
         {
             _waitTimer = waitTimer;
@@ -33,8 +34,8 @@ namespace LGProject.BossAI
             // 플레이어의 위치를 찾아 먼저 손을 결정 
             // n초 후 공격 지시,
             FuckingAttack().Forget();
-            target = FindLowGagePlayer();
-            _targetArm = _stateMachine.GetArmType(target.position);
+            _target = FindLowGagePlayer();
+            _targetArm = _stateMachine.GetArmType(_target.position);
         }
 
         public override void Exit()
@@ -60,7 +61,7 @@ namespace LGProject.BossAI
             // 이동 지시                                                                    A 부터 B까지 초당 n의 속도로 이동하기 
             // 각 팔은 서로의 영역 0 이상의 범위를 침범하지 않는다.
             ////if()
-            _stateMachine.MoveArm(target.position, _moveSpeed, _targetArm);
+            _stateMachine.MoveArm(_target.position, _moveSpeed, _targetArm);
             //_stateMachine.Transform.position = Vector3.MoveTowards(_stateMachine.Transform.position, target.position, 0.5f * Time.deltaTime);
  
 
@@ -89,7 +90,7 @@ namespace LGProject.BossAI
             {
                 if (lowGagePlayer == null)
                     lowGagePlayer = player;
-                else if (lowGagePlayer.GetStateMachine.DamageGage > player.GetStateMachine.DamageGage)
+                else if (lowGagePlayer.GetStateMachine.playable.DamageGage > player.GetStateMachine.playable.DamageGage)
                 {
                     // 작을 경우 lowGagePlayer를 변경해준다.
                     lowGagePlayer = player;

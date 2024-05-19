@@ -6,28 +6,28 @@ using UnityEngine.Assertions.Must;
 
 namespace pathFinding
 {
-    // ÀÌ°É State·Î °¡¸£±â
+    // ï¿½Ì°ï¿½ Stateï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     public class Unit : MonoBehaviour
     {
         //Thread Research;
         public Transform target;
         public Grid grid;
         public Vector3[] path;
-        public bool chasing = false;
-        public bool finding = false;
+        public bool chasing;
+        public bool finding;
 
-        float speed = 1;
-        int targetIndex;
+        private float _speed = 1;
+        private int _targetIndex;
 
         private void Start()
         {
-            PathRequestManager.RequestPath(new PathRequest( this.transform.position, target.position, OnPathFound));
+            PathRequestManager.RequestPath(new PathRequest( transform.position, target.position, OnPathFound));
         }
 
         private void Update()
         {
             if (!chasing && !finding)
-                PathRequestManager.RequestPath(new PathRequest(this.transform.position, target.position, OnPathFound));
+                PathRequestManager.RequestPath(new PathRequest(transform.position, target.position, OnPathFound));
         }
 
 
@@ -36,23 +36,23 @@ namespace pathFinding
             if (pathSuccessful)
             {
                 chasing = true;
-                targetIndex = 0;
+                _targetIndex = 0;
                 path = newPath;
-                StopCoroutine("FollowPath");
-                StartCoroutine("FollowPath");
+                StopCoroutine(FollowPath());
+                StartCoroutine(FollowPath());
             }
         }
 
-        // ¸ñÇ¥¹°ÀÇ ÀÌµ¿ÀÌ °¨ÁöµÇ¸é Ã¼Å©¸¦ ÇÔ.
-        // Rect·Î Ä­ ´ç ¹üÀ§¸¦ »ý¼ºÇÏ°í »ý¼ºµÈ ¹üÀ§¸¦ Ã¼Å©ÇÏ´Â Çü½Ä
+        // ï¿½ï¿½Ç¥ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç¸ï¿½ Ã¼Å©ï¿½ï¿½ ï¿½ï¿½.
+        // Rectï¿½ï¿½ Ä­ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã¼Å©ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½
         public bool CheckTargetPosition()
         {
-            // Å¸°Ù ³ëµå
-            Vector3 targetPos = grid.NodeFromWorldPoint(target.position).worldPosition;
-            // ÃÖÁ¾ ¸ñÇ¥
-            Vector3 FinTarget = path[path.Length - 1];
+            // Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½
+            Vector3 targetPos = grid.NodeFromWorldPoint(target.position).WorldPosition;
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¥
+            Vector3 finTarget = path[path.Length - 1];
 
-            float distance = Mathf.Abs(Vector3.Distance(targetPos, FinTarget));
+            float distance = Mathf.Abs(Vector3.Distance(targetPos, finTarget));
 
             // 1.5 * n
             if (distance > 1.5f * 4)
@@ -63,7 +63,7 @@ namespace pathFinding
             return false;
         }
 
-        IEnumerator FollowPath()
+        private IEnumerator FollowPath()
         {
             int count = 0;
             Vector3 currentWaypoint = path[0];
@@ -72,14 +72,14 @@ namespace pathFinding
                 count++;
                 if (transform.position == currentWaypoint)
                 {
-                    targetIndex++;
-                    if (targetIndex >= path.Length)
+                    _targetIndex++;
+                    if (_targetIndex >= path.Length)
                     {
                         finding = true;
                         chasing = false;
                         yield break;
                     }
-                    currentWaypoint = path[targetIndex];
+                    currentWaypoint = path[_targetIndex];
                 }
                 if (count > 100000)
                 {
@@ -94,7 +94,7 @@ namespace pathFinding
 
                 currentWaypoint.z = transform.position.z;
 
-                transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
+                transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, _speed * Time.deltaTime);
                 yield return null;
             }
         }
@@ -103,12 +103,12 @@ namespace pathFinding
         {
             if (path != null)
             {
-                for (int i = targetIndex; i < path.Length; i++)
+                for (int i = _targetIndex; i < path.Length; i++)
                 {
                     Gizmos.color = Color.black;
                     Vector3 temp = new Vector3(path[i].x, path[i].y, path[i].z - 0.5f);
                     Gizmos.DrawCube(temp, Vector3.one * .5f);
-                    if (i == targetIndex)
+                    if (i == _targetIndex)
                     {
                         Gizmos.DrawLine(transform.position, path[i]);
                     }

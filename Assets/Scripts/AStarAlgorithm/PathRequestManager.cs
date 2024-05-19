@@ -8,27 +8,28 @@ namespace pathFinding
 {
     public struct PathRequest
     {
-        public Vector3 pathStart;
-        public Vector3 pathEnd;
-        public Action<Vector3[], bool> callback;
-        public PathRequest(Vector3 _start, Vector3 _end, Action<Vector3[], bool> _callback)
+        public Vector3 PathStart;
+        public Vector3 PathEnd;
+        public readonly Action<Vector3[], bool> Callback;
+        
+        public PathRequest(Vector3 start, Vector3 end, Action<Vector3[], bool> callback)
         {
-            pathStart = _start;
-            pathEnd = _end;
-            callback = _callback;
+            PathStart = start;
+            PathEnd = end;
+            Callback = callback;
         }
     }
     public struct PathResult
     {
-        public Vector3[] path;
-        public bool success;
-        public Action<Vector3[], bool> callback;
+        public Vector3[] Path;
+        public bool Success;
+        public Action<Vector3[], bool> Callback;
 
         public PathResult(Vector3[] path, bool success, Action<Vector3[], bool> callback)
         {
-            this.path = path;
-            this.success = success;
-            this.callback = callback;
+            Path = path;
+            Success = success;
+            Callback = callback;
         }
     }
 
@@ -38,33 +39,30 @@ namespace pathFinding
         //Queue<PathRequest> pathRequestQueue = new Queue<PathRequest>();
         //PathRequest currentPathRequest;
 
-        Queue<PathResult> results = new Queue<PathResult>();
-        
-
-
-        Pathfinding pathfinding;
+        private Queue<PathResult> _results = new Queue<PathResult>();
+        private Pathfinding _pathfinding;
 
         //bool isProcessingPath;
 
-        static PathRequestManager instance;
+        private static PathRequestManager _instance;
 
         private void Awake()
         {
-            instance = this;
-            pathfinding = GetComponent<Pathfinding>();
+            _instance = this;
+            _pathfinding = GetComponent<Pathfinding>();
         }
 
         private void Update()
         {
-            if(results.Count > 0)
+            if(_results.Count > 0)
             {
-                int itemsInQueue = results.Count;
-                lock(results)
+                int itemsInQueue = _results.Count;
+                lock(_results)
                 {
                     for(int i =0; i < itemsInQueue; i++)
                     {
-                        PathResult result = results.Dequeue();
-                        result.callback(result.path, result.success);
+                        PathResult result = _results.Dequeue();
+                        result.Callback(result.Path, result.Success);
                     }
                 }
             }
@@ -74,7 +72,7 @@ namespace pathFinding
         {
             ThreadStart threadStart = delegate
             {
-                instance.pathfinding.FindPath(request, instance.FinishedProcessingPath);
+                _instance._pathfinding.FindPath(request, _instance.FinishedProcessingPath);
             };
             threadStart.Invoke();
 
@@ -84,9 +82,9 @@ namespace pathFinding
         {
             //originalRequest.callback(path, success);
             //PathResult result = new PathResult(path, success, originalRequest.callback);
-            lock (results)
+            lock (_results)
             {
-                results.Enqueue(result);
+                _results.Enqueue(result);
             }
         }
 
@@ -115,11 +113,11 @@ namespace pathFinding
         //    TryProcessNext();
         //}
 
-        // ÁöÁ¤ÇÑ À§Ä¡ÀÇ ³ëµå¿¡ ÀÌµ¿ÇÒ ¼ö ÀÖ´ÂÁö Ã¼Å©
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½å¿¡ ï¿½Ìµï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½ Ã¼Å©
         public static bool IsMovementPoint(Vector3 point)
         {
-            // Æ÷ÀÎÆ® ±îÁö ÀÌµ¿ÀÌ °¡´ÉÇÑ°¡?.
-            return instance.pathfinding.IsMovementPoint(point) ? true : false;
+            // ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ°ï¿½?.
+            return _instance._pathfinding.IsMovementPoint(point) ? true : false;
         }
 
 

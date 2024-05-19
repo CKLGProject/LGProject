@@ -1,10 +1,7 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using Data;
 using Postgrest;
 using Postgrest.Responses;
-using UnityEngine;
 using Client = Supabase.Client;
 
 namespace Ranking

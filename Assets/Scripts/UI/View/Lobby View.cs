@@ -2,6 +2,7 @@ using R3;
 using ReactiveTouchDown;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using Utility;
 
@@ -11,18 +12,12 @@ public class LobbyView : MonoBehaviour
     [SerializeField] private TextMeshProUGUI levelText;
     [SerializeField] private TextMeshProUGUI coinText;
     [SerializeField] private TextMeshProUGUI plugText;
-    
+
     /// <summary>
     /// 매치 버튼
     /// </summary>
-    [Header("Buttons")] [SerializeField]
-    private GameObject matchButton;
-
-    /// <summary>
-    /// 모집 버튼
-    /// </summary>
-    [SerializeField] private GameObject recruitButton;
-
+    [Header("Buttons")] [SerializeField] private GameObject matchButton;
+    
     /// <summary>
     /// 랭킹 버튼
     /// </summary>
@@ -60,6 +55,10 @@ public class LobbyView : MonoBehaviour
 
     [Tooltip("미구현 메세지")] [SerializeField] private string errorMessage;
 
+    [Header("Event")]
+    public UnityEvent OnClickRanking;
+    public UnityEvent OnClickMatch;
+
     /// <summary>
     /// 매치 버튼 옵저버입니다.
     /// </summary>
@@ -67,15 +66,6 @@ public class LobbyView : MonoBehaviour
     public Observable<Unit> MatchButtonAsObservable()
     {
         return matchButton.TouchDownAsObservable();
-    }
-
-    /// <summary>
-    /// 모집 버튼 옵저버입니다.
-    /// </summary>
-    /// <returns>RecruitButton Observer</returns>
-    public Observable<Unit> RecruitButtonAsObservable()
-    {
-        return recruitButton.TouchDownAsObservable();
     }
 
     /// <summary>
@@ -148,7 +138,7 @@ public class LobbyView : MonoBehaviour
     {
         LGUtility.Toast(errorMessage);
     }
-    
+
     /// <summary>
     /// 닉네임을 설정합니다.
     /// </summary>
@@ -157,7 +147,7 @@ public class LobbyView : MonoBehaviour
     {
         nickNameText.text = nickName;
     }
-    
+
     /// <summary>
     /// 레벨을 설정합니다.
     /// </summary>
@@ -166,7 +156,7 @@ public class LobbyView : MonoBehaviour
     {
         levelText.text = level.ToString();
     }
-    
+
     /// <summary>
     /// 코인을 설정합니다.
     /// </summary>
@@ -175,7 +165,7 @@ public class LobbyView : MonoBehaviour
     {
         coinText.text = coin.ToString("N0");
     }
-    
+
     /// <summary>
     /// 플러그를 설정합니다.
     /// </summary>

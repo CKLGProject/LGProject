@@ -1,6 +1,5 @@
 using R3;
 using UnityEngine;
-using USingleton;
 
 [RequireComponent(typeof(LoginView))]
 public class LoginPresenter : MonoBehaviour
@@ -12,14 +11,14 @@ public class LoginPresenter : MonoBehaviour
         _view = GetComponent<LoginView>();
 
         if (IsFirstLogin())
-            _view.SetActive(true);
+            _view.ShowLoginView();
         else
-            _view.Connect(LoginView.MoveScene.Lobby);
+            _view.Connect();
 
         _view.LoginButton.onClick
             .AsObservable()
             .Where(_ => _view.IsNicknameNotEmpty())
-            .Subscribe(_ => _view.Connect(LoginView.MoveScene.ChooseCharacter, true))
+            .Subscribe(_ => _view.Connect(true))
             .AddTo(this);
     }
 

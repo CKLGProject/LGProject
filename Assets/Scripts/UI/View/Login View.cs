@@ -4,20 +4,14 @@ using UnityEngine;
 using UnityEngine.SceneSystem;
 using UnityEngine.UI;
 using USingleton;
+using Utility;
 
 public class LoginView : MonoBehaviour
 {
-    public enum MoveScene
-    {
-        Lobby,
-        ChooseCharacter
-    }
-
-    public GameObject LoginViewContainer;
+    public Container LoginViewContainer;
     public TMP_InputField NicknameInputField;
     public Button LoginButton;
     public SceneLoader LobbySceneLoader;
-    public SceneLoader ChooseCharacterSceneLoader;
     
     // Constants
     private const int SuccessfulFirstLogin = 1;
@@ -25,30 +19,23 @@ public class LoginView : MonoBehaviour
     /// <summary>
     /// 로비 씬으로 연결합니다.
     /// </summary>
-    /// <param name="moveScene">이동할 씬</param>
     /// <param name="useInputField">연결하면서 입력필드의 닉네임을 사용할 것인가?</param>
-    public void Connect(MoveScene moveScene, bool useInputField = false)
+    public void Connect(bool useInputField = false)
     {
         if (useInputField)
         {
             PlayerPrefs.SetInt("IsFirstLogin", SuccessfulFirstLogin);
             PlayerPrefs.SetString("Nickname", NicknameInputField.text);
-            Singleton.Instance<GameManager>().Nickname = NicknameInputField.text;
+            Singleton.Instance<GameManager>().SetNickname(NicknameInputField.text);
         }
-        else
-            Singleton.Instance<GameManager>().Nickname = PlayerPrefs.GetString("Nickname");
+        //TODO:GameManager Start에서 기본으로 처리됩니다.
+        // else
+        // {
+        //     string nickName = PlayerPrefs.GetString("Nickname","Guest");
+        //     Singleton.Instance<GameManager>().SetNickname(nickName);
+        // }
 
-        switch (moveScene)
-        {
-            case MoveScene.Lobby:
-                LobbySceneLoader.gameObject.SetActive(true);
-                break;
-            case MoveScene.ChooseCharacter:
-                ChooseCharacterSceneLoader.gameObject.SetActive(true);
-                break;
-            default:
-                throw new ArgumentOutOfRangeException(nameof(moveScene), moveScene, null);
-        }
+        LobbySceneLoader.gameObject.SetActive(true);
     }
 
     /// <summary>
@@ -61,11 +48,10 @@ public class LoginView : MonoBehaviour
     }
 
     /// <summary>
-    /// 로그인 뷰의 활성화 상태를 설정합니다.
+    /// 로그인 뷰를 활성화 상태로 만듭니다.
     /// </summary>
-    /// <param name="isActive">활성화 상태</param>
-    public void SetActive(bool isActive)
+    public void ShowLoginView()
     {
-        LoginViewContainer.SetActive(isActive);
+        LoginViewContainer.PositionReset();
     }
 }

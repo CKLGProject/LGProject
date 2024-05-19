@@ -1,0 +1,23 @@
+{
+    "name": "SJH.Player",
+    "rootNamespace": "",
+    "references": [
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:f51ebe6a0ceec4240a699833d6309b23",
+        "GUID:75469ad4d38634e559750d17036d5f7c",
+        "GUID:f586bbd152fa14b1ea5dcfff72a3e833",
+        "GUID:69fe19427126b419caeccf0e9b80fe6d",
+        "GUID:66967020341e241e7b723c90ad82167a",
+        "GUID:2871a61c47e924d2082279aa2a435953",
+        "GUID:33797cb8946204258b5250f8dd07ab0d"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

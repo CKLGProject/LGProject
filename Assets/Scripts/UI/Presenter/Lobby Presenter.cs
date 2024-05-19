@@ -1,5 +1,6 @@
 using R3;
 using UnityEngine;
+using USingleton;
 
 [RequireComponent(typeof(LobbyView))]
 [RequireComponent(typeof(LobbyModel))]
@@ -30,9 +31,6 @@ public class LobbyPresenter : MonoBehaviour
         _lobbyView.MatchButtonAsObservable()
             .Subscribe(OnClickMatchButton);
 
-        _lobbyView.RecruitButtonAsObservable()
-            .Subscribe(OnClickRecruitButton);
-
         _lobbyView.RankButtonAsObservable()
             .Subscribe(OnClickRankButton);
 
@@ -59,16 +57,12 @@ public class LobbyPresenter : MonoBehaviour
 
     private void OnClickRankButton(Unit obj)
     {
-        Debug.Log("랭킹 이동");
-    }
-
-    private void OnClickRecruitButton(Unit obj)
-    {
-        Debug.Log("모집 이동");
+       _lobbyView.OnClickRanking?.Invoke();
     }
 
     private void OnClickMatchButton(Unit obj)
     {
-        Debug.Log("매치 이동");
+        Singleton.Instance<GameManager>().RandomChoiceAI();
+       _lobbyView.OnClickMatch?.Invoke();
     }
 }
