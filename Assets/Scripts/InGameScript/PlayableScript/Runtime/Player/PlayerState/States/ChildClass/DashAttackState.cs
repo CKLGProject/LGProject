@@ -103,9 +103,6 @@ namespace LGProject.PlayerState
                             if (!temp.Item1.GetStateMachine.IsGuard && !temp.Item1.GetStateMachine.IsDown)
                             {// 100 % gage로 일단 계산
                                 stateMachine.playable.SetUltimateGage(stateMachine.playable.UltimateGage + 10);
-
-                                stateMachine.playable.UltimateGageImage.fillAmount = stateMachine.playable.UltimateGage / 100f;
-
                                 temp.Item1.effectManager.PlayOneShot(EffectManager.EFFECT.Hit);
                             }
                         }

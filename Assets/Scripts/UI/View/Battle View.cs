@@ -4,6 +4,7 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 
 public class BattleView : MonoBehaviour
@@ -22,6 +23,11 @@ public class BattleView : MonoBehaviour
     [SerializeField] private PercentageFX userDamageGageFX;
     [SerializeField] private PercentageFX aiDamageGageFX;
 
+    [Header("EnergyBar")]
+    [SerializeField] private Image userEnergyBar;
+    [SerializeField] private Image aiEnergyBar;
+    
+
     /// <summary>
     /// 뷰를 전부 안보이도록 처리합니다.
     /// </summary>
@@ -29,6 +35,24 @@ public class BattleView : MonoBehaviour
     {
         losePopup.SetActive(false);
         winPopup.SetActive(false);
+    }
+
+    /// <summary>
+    /// 에너지바 UI를 업데이트 합니다.
+    /// </summary>
+    /// <param name="actorType">타겟 액터</param>
+    /// <param name="value">에너지 값</param>
+    public void UpdateEnergyBarUI(ActorType actorType, float value)
+    {
+        switch (actorType)
+        {
+            case ActorType.User:
+                userEnergyBar.fillAmount = value / 100;
+                break;
+            case ActorType.AI:
+                aiEnergyBar.fillAmount = value / 100;
+                break;
+        }
     }
 
     /// <summary>

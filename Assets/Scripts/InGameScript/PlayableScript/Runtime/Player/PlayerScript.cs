@@ -21,9 +21,9 @@ namespace LGProject.PlayerState
         {
             InitStates();
             InitEffectManager();
-            UltimateGage = 100;
+            SetUltimateGage(0);
             effectManager.InitParticles();
-            UltimateGageImage.fillAmount = 0;
+
             for (int i = 0; i < StateMachine.animator.runtimeAnimatorController.animationClips.Length; i++)
             {
                 string name = StateMachine.animator.runtimeAnimatorController.animationClips[i].name;

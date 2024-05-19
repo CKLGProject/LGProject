@@ -8,11 +8,14 @@ public class BattleModel : MonoBehaviour
     // 카운트 다운 값
     public const int CountMax = 3;
 
-    private SerializableReactiveProperty<int> _userHealthProperty = new(3);
-    private SerializableReactiveProperty<int> _aiHealthProperty = new(3);
+    private readonly SerializableReactiveProperty<int> _userHealthProperty = new(3);
+    private readonly SerializableReactiveProperty<int> _aiHealthProperty = new(3);
     private SerializableReactiveProperty<int> _countDownProperty;
-    private SerializableReactiveProperty<float> _userDamageGage = new ();
-    private SerializableReactiveProperty<float> _aiDamageGage = new ();
+    private readonly SerializableReactiveProperty<float> _userDamageGageProperty = new ();
+    private readonly SerializableReactiveProperty<float> _aiDamageGageProperty = new ();
+    private readonly SerializableReactiveProperty<float> _userUltimateEnergyProperty = new ();
+    private readonly SerializableReactiveProperty<float> _aiUltimateEnergyProperty = new ();
+    
 
     private void Awake()
     {
@@ -56,6 +59,24 @@ public class BattleModel : MonoBehaviour
     }
 
     /// <summary>
+    /// Ultimate Energy를 싱크하는 함수
+    /// </summary>
+    /// <param name="actorType">타겟 액터</param>
+    /// <param name="value"></param>
+    public void SyncUltimateEnergy(ActorType actorType, float value)
+    {
+        switch (actorType)
+        {
+            case ActorType.User:
+                _userUltimateEnergyProperty.Value = value;
+                break;
+            case ActorType.AI:
+                _aiUltimateEnergyProperty.Value = value;
+                break;
+        }
+    }
+
+    /// <summary>
     /// 데미지 게이지를 싱크하는 함수
     /// </summary>
     /// <param name="actorType">타겟 액터</param>
@@ -65,10 +86,10 @@ public class BattleModel : MonoBehaviour
         switch (actorType)
         {
             case ActorType.User:
-                _userDamageGage.Value = damageGage;
+                _userDamageGageProperty.Value = damageGage;
                 break;
             case ActorType.AI:
-                _aiDamageGage.Value = damageGage;
+                _aiDamageGageProperty.Value = damageGage;
                 break;
         }
     }
@@ -85,6 +106,8 @@ public class BattleModel : MonoBehaviour
     public Observable<int> UserHealthObservable => _userHealthProperty.AsObservable();
     public Observable<int> AIHealthObservable => _aiHealthProperty.AsObservable();
     public Observable<int> CountDownObservable => _countDownProperty.AsObservable();
-    public Observable<float> UserDamageGageObservable => _userDamageGage.AsObservable();
-    public Observable<float> AIDamageGageObservable => _aiDamageGage.AsObservable();
+    public Observable<float> UserDamageGageObservable => _userDamageGageProperty.AsObservable();
+    public Observable<float> AIDamageGageObservable => _aiDamageGageProperty.AsObservable();
+    public Observable<float> UserUltimateEnergyObservable => _userUltimateEnergyProperty.AsObservable();
+    public Observable<float> AIUltimateEnergyObservable => _aiUltimateEnergyProperty.AsObservable();
 }

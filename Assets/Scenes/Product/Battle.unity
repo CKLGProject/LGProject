@@ -3949,7 +3949,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 148.555, y: -32.601997}
-  m_SizeDelta: {x: 0, y: 34.796}
+  m_SizeDelta: {x: 61.57, y: 34.796}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1010493415
 MonoBehaviour:
@@ -6913,6 +6913,8 @@ MonoBehaviour:
   countText: {fileID: 1420751655}
   userDamageGageFX: {fileID: 1452560116}
   aiDamageGageFX: {fileID: 575662701}
+  userEnergyBar: {fileID: 278785080}
+  aiEnergyBar: {fileID: 451422725}
 --- !u!4 &1853587625 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4910213552037458275, guid: e748e159dd59aae4188ea3f4a8ac1c84,

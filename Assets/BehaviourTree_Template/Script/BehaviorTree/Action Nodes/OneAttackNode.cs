@@ -134,8 +134,6 @@ namespace BehaviourTree
                     {// 100 % gage로 일단 계산
                         _stateMachine.playable.SetUltimateGage(_stateMachine.playable.UltimateGage + 10);
 
-                        _stateMachine.playable.UltimateGageImage.fillAmount = _stateMachine.playable.UltimateGage / 100f;
-
                         temp.Item1.effectManager.PlayOneShot(EffectManager.EFFECT.Hit);
                     }
                     return true;

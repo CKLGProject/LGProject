@@ -78,17 +78,20 @@ namespace LGProject.PlayerState
 
         public bool movingAttack = true;
 
-        public Image UltimateGageImage;
-
         public Vector3 AliveOffset;
         public float respawnTime;
         public float DeadLine;
 
-        public float DamageGage { get; protected set; }
+        public float DamageGage { get; private set; }
         public void SetDamageGage(float value) => DamageGage = value;
-        
-        public float UltimateGage { get; protected set; }
-        public void SetUltimateGage(float value) => UltimateGage = value;
+
+        public float UltimateGage { get; private set; }
+
+        public void SetUltimateGage(float value)
+        {
+            UltimateGage = Mathf.Clamp(value, 0, 100);
+            battleModel.SyncUltimateEnergy(ActorType, UltimateGage);
+        }
 
         // 공격 방향
         [HideInInspector] public bool directionX = false;

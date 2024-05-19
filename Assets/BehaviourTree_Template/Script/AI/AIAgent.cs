@@ -51,8 +51,8 @@ namespace BehaviourTree
             private static GUIStyle BoldLabelStyle;
             private static GUIStyle BoldFoldStyle;
 
-            private static bool _movementValuesFoldOut = false;
-            private static bool _actionValuesFoldOut = false;
+            private static bool _movementValuesFoldOut;
+            private static bool _actionValuesFoldOut;
             //private static bool _hitValuesFoldOut = false;
 
             public override void OnInspectorGUI()
@@ -227,7 +227,7 @@ namespace BehaviourTree
 
                 using (var changeScope = new EditorGUI.ChangeCheckScope())
                 {
-                    float value = (float)EditorGUILayout.FloatField("첫번째 공격 딜레이", _firstAttackDelay.floatValue);
+                    float value = EditorGUILayout.FloatField("첫번째 공격 딜레이", _firstAttackDelay.floatValue);
                     if (changeScope.changed)
                     {
                         _firstAttackDelay.floatValue = value;
@@ -236,7 +236,7 @@ namespace BehaviourTree
                 EditorGUILayout.Space(10f);
                 using (var changeScope = new EditorGUI.ChangeCheckScope())
                 {
-                    float value = (float)EditorGUILayout.FloatField("첫번째 공격 후판정", _firstAttackJudgeDelay.floatValue);
+                    float value = EditorGUILayout.FloatField("첫번째 공격 후판정", _firstAttackJudgeDelay.floatValue);
                     if (changeScope.changed)
                     {
                         _firstAttackJudgeDelay.floatValue = value;
@@ -245,7 +245,7 @@ namespace BehaviourTree
                 EditorGUILayout.Space(10f);
                 using (var changeScope = new EditorGUI.ChangeCheckScope())
                 {
-                    float value = (float)EditorGUILayout.FloatField("두번째 공격 딜레이", _secondAttackDelay.floatValue);
+                    float value = EditorGUILayout.FloatField("두번째 공격 딜레이", _secondAttackDelay.floatValue);
                     if (changeScope.changed)
                     {
                         _secondAttackDelay.floatValue = value;
@@ -254,7 +254,7 @@ namespace BehaviourTree
                 EditorGUILayout.Space(10f);
                 using (var changeScope = new EditorGUI.ChangeCheckScope())
                 {
-                    float value = (float)EditorGUILayout.FloatField("두번째 공격 후판정", _secondAttackJudgeDelay.floatValue);
+                    float value = EditorGUILayout.FloatField("두번째 공격 후판정", _secondAttackJudgeDelay.floatValue);
                     if (changeScope.changed)
                     {
                         _secondAttackJudgeDelay.floatValue = value;
@@ -263,7 +263,7 @@ namespace BehaviourTree
                 EditorGUILayout.Space(10f);
                 using (var changeScope = new EditorGUI.ChangeCheckScope())
                 {
-                    float value = (float)EditorGUILayout.FloatField("세번째 공격 딜레이", _thirdAttackDelay.floatValue);
+                    float value = EditorGUILayout.FloatField("세번째 공격 딜레이", _thirdAttackDelay.floatValue);
                     if (changeScope.changed)
                     {
                         _thirdAttackDelay.floatValue = value;
@@ -272,7 +272,7 @@ namespace BehaviourTree
                 EditorGUILayout.Space(10f);
                 using (var changeScope = new EditorGUI.ChangeCheckScope())
                 {
-                    float value = (float)EditorGUILayout.FloatField("세번째 공격 후판정", _thirdAttackJudgeDelay.floatValue);
+                    float value = EditorGUILayout.FloatField("세번째 공격 후판정", _thirdAttackJudgeDelay.floatValue);
                     if (changeScope.changed)
                     {
                         _thirdAttackJudgeDelay.floatValue = value;
@@ -282,7 +282,7 @@ namespace BehaviourTree
                 EditorGUILayout.Space(10f);
                 using (var changeScope = new EditorGUI.ChangeCheckScope())
                 {
-                    float value = (float)EditorGUILayout.FloatField("대쉬공격 후 딜레이", _dashAttackDelay.floatValue);
+                    float value = EditorGUILayout.FloatField("대쉬공격 후 딜레이", _dashAttackDelay.floatValue);
                     if (changeScope.changed)
                     {
                         _dashAttackDelay.floatValue = value;
@@ -292,7 +292,7 @@ namespace BehaviourTree
                 EditorGUILayout.Space(10f);
                 using (var changeScope = new EditorGUI.ChangeCheckScope())
                 {
-                    float value = (float)EditorGUILayout.FloatField("피격 후 딜레이", _hitDelay.floatValue);
+                    float value = EditorGUILayout.FloatField("피격 후 딜레이", _hitDelay.floatValue);
                     if (changeScope.changed)
                     {
                         _hitDelay.floatValue = value;
@@ -302,7 +302,7 @@ namespace BehaviourTree
                 EditorGUILayout.Space(10f);
                 using (var changeScope = new EditorGUI.ChangeCheckScope())
                 {
-                    float value = (float)EditorGUILayout.FloatField("다운 유지 시간", _downWaitDelay.floatValue);
+                    float value = EditorGUILayout.FloatField("다운 유지 시간", _downWaitDelay.floatValue);
                     if (changeScope.changed)
                     {
                         _downWaitDelay.floatValue = value;
@@ -312,7 +312,7 @@ namespace BehaviourTree
                 EditorGUILayout.Space(10f);
                 using (var changeScope = new EditorGUI.ChangeCheckScope())
                 {
-                    float value = (float)EditorGUILayout.FloatField("다운 후 딜레이", _wakeUpDelay.floatValue);
+                    float value = EditorGUILayout.FloatField("다운 후 딜레이", _wakeUpDelay.floatValue);
                     if (changeScope.changed)
                     {
                         _wakeUpDelay.floatValue = value;
@@ -326,7 +326,7 @@ namespace BehaviourTree
 #endif
         #endregion
 
-        private static AIAgent instance = null;
+        private static AIAgent instance;
         public static AIAgent Instance => instance;
 
         private float _attackRange;
@@ -334,8 +334,8 @@ namespace BehaviourTree
         public Transform target;
         public Grid grid;
         public Vector3[] path;
-        public bool chasing = false;
-        public bool finding = false;
+        public bool chasing;
+        public bool finding;
 
         public float speed = 10;
         public int targetIndex;
@@ -363,7 +363,7 @@ namespace BehaviourTree
             InitEffectManager();
             effectManager.InitParticles();
             SetUnderPlatform();
-            UltimateGageImage.fillAmount = 0;
+            SetUltimateGage(0);
             for (int i = 0; i < StateMachine.animator.runtimeAnimatorController.animationClips.Length; i++)
             {
                 string name = StateMachine.animator.runtimeAnimatorController.animationClips[i].name;

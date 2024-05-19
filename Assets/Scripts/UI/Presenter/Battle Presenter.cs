@@ -57,11 +57,19 @@ public class BattlePresenter : MonoBehaviour
         _battleModel.UserDamageGageObservable
             .Subscribe(damageGage => _battleView.UpdateDamageGageUI(ActorType.User, damageGage))
             .AddTo(this);
-        
+
         // AI의 데미지 게이지를 갱신하는 옵저버
         _battleModel.AIDamageGageObservable
             .Subscribe(damageGage => _battleView.UpdateDamageGageUI(ActorType.AI, damageGage))
             .AddTo(this);
+
+        // User의 Ultimate Energy를 갱신하는 옵저버
+        _battleModel.UserUltimateEnergyObservable
+            .Subscribe(ultimateGage => _battleView.UpdateEnergyBarUI(ActorType.User, ultimateGage));
+        
+        // AI의 Ultimate Energy를 갱신하는 옵저버
+        _battleModel.AIUltimateEnergyObservable
+            .Subscribe(ultimateGage => _battleView.UpdateEnergyBarUI(ActorType.AI, ultimateGage));
 
         // 카운트 다운 옵저버
         _battleModel.CountDownObservable

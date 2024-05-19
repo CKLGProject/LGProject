@@ -13,9 +13,9 @@ namespace LGProject.PlayerState
         public override void Enter()
         {
             base.Enter();
+            
             // 얼티밋을 사용하면 게이지가 닮.
             stateMachine.playable.SetUltimateGage(0);
-            stateMachine.playable.UltimateGageImage.fillAmount = 0;
         }
 
         public override void Exit()
