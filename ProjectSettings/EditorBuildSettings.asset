@@ -25,7 +25,7 @@ EditorBuildSettings:
     guid: 22e2aabea0d5c4210a5de2c00589fe2d
   - enabled: 1
     path: Assets/Scenes/Product/Battle.unity
-    guid: 89894ab5103e9f6479112d93686d1e0b
+    guid: 3fea480b0a4a09e469e5bacba8abad2b
   - enabled: 1
     path: Assets/Scenes/InGameScene/InGameUITest.unity
     guid: 90330ba138dfede4881aaa7d9791b797
