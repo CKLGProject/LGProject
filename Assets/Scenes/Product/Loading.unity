@@ -556,7 +556,7 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
-  MinimumLoadingTime: 10
+  MinimumLoadingTime: 3
   DontUseAsync: 0
   DestroyOnCompleted: 0
   onLoading:

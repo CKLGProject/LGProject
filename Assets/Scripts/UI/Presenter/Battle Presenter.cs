@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using Data;
 using LGProject;
 using R3;
@@ -6,6 +7,8 @@ using ReactiveCountdown;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using UnityEngine;
 using USingleton;
 
@@ -44,13 +47,21 @@ public class BattlePresenter : MonoBehaviour
         // 유저의 생명이 0이 되었을 때 Lose Popup을 띄우는 옵저버
         _battleModel.UserHealthObservable
             .Where(lifePoint => lifePoint == 0)
-            .Subscribe(_ => _battleView.ShowLosePopup())
+            .Subscribe(_ =>
+            {
+                BattleSceneManager.Instance.GameEnd();
+                _battleView.ShowLosePopup();
+            })
             .AddTo(this);
 
         // AI의 생명이 0이 되었을 때 Wid Popup을 띄우는 옵저버
         _battleModel.AIHealthObservable
             .Where(lifePoint => lifePoint == 0)
-            .Subscribe(_ => _battleView.ShowWinPopup())
+            .Subscribe(_ =>
+            {
+                BattleSceneManager.Instance.GameEnd();
+                _battleView.ShowWinPopup();
+            })
             .AddTo(this);
 
         // 유저의 데미지 게이지를 갱신하는 옵저버
@@ -66,10 +77,15 @@ public class BattlePresenter : MonoBehaviour
         // User의 Ultimate Energy를 갱신하는 옵저버
         _battleModel.UserUltimateEnergyObservable
             .Subscribe(ultimateGage => _battleView.UpdateEnergyBarUI(ActorType.User, ultimateGage));
-        
+
         // AI의 Ultimate Energy를 갱신하는 옵저버
         _battleModel.AIUltimateEnergyObservable
             .Subscribe(ultimateGage => _battleView.UpdateEnergyBarUI(ActorType.AI, ultimateGage));
+
+        // 게임 종료를 체크하는 옵저버
+        Observable.FromAsync(GameEndObservable)
+            .Subscribe(_ => _battleView.GoHome())
+            .AddTo(this);
 
         // 카운트 다운 옵저버
         _battleModel.CountDownObservable
@@ -82,5 +98,11 @@ public class BattlePresenter : MonoBehaviour
                 count => _battleModel.SetCountdown(count),
                 _ => BattleSceneManager.Instance.GameStart())
             .AddTo(this);
+    }
+
+    private async ValueTask GameEndObservable(CancellationToken token)
+    {
+        await UniTask.WaitUntil(() => BattleSceneManager.Instance.IsEnd, cancellationToken: token);
+        await UniTask.Delay(TimeSpan.FromSeconds(3), cancellationToken: token);
     }
 }

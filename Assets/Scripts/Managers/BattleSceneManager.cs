@@ -1,9 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Cysharp.Threading.Tasks;
-using System;
-using USingleton.SelfSingleton;
 
 
 namespace LGProject
@@ -14,6 +9,7 @@ namespace LGProject
         private BattleModel _battleModel;
 
         public bool IsStart { get; private set; }
+        public bool IsEnd { get; private set; }
 
         /*****************************************************
          * public Methods
@@ -41,6 +37,14 @@ namespace LGProject
         {
             IsStart = true;
         }
-        
+
+        /// <summary>
+        /// 게임을 종료시킵니다.
+        /// </summary>
+        public void GameEnd()
+        {
+            IsStart = false;
+            IsEnd = true;
+        }
     }
 }

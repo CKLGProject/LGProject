@@ -5054,7 +5054,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 39.515087
+  field of view: 32.886932
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
@@ -7956,6 +7956,79 @@ RectTransform:
   m_AnchoredPosition: {x: 268, y: -133}
   m_SizeDelta: {x: 361.87598, y: 174.10901}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1813361105
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1813361106}
+  - component: {fileID: 1813361107}
+  m_Layer: 0
+  m_Name: Lobby Scene Loader
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1813361106
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1813361105}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2136376970}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1813361107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1813361105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89fc4b73d3bdf43aeac288614f778a97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LoadStyle: 0
+  UseAsync: 0
+  editorAutoLoad: 0
+  loadScene:
+    sceneAsset: {fileID: 102900000, guid: 91caf55ad9aa496419e1bbe442ae9c59, type: 3}
+    path: Assets/Scenes/Product/Lobby.unity
+  additiveScenes: []
+  SkipMode: 3
+  SkipAction:
+    m_Name: Skip
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 9817a40d-8d9a-4d52-93aa-2d823802b111
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  MinimumLoadingTime: 0
+  DontUseAsync: 1
+  DestroyOnCompleted: 0
+  onLoading:
+    m_PersistentCalls:
+      m_Calls: []
+  onLoadCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  onCompleted:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1825406798
 GameObject:
   m_ObjectHideFlags: 0
@@ -8037,6 +8110,7 @@ MonoBehaviour:
   aiDamageGageFX: {fileID: 575662701}
   userEnergyBar: {fileID: 278785080}
   aiEnergyBar: {fileID: 451422725}
+  homeSceneLoader: {fileID: 1813361107}
 --- !u!1001 &1853252161
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9792,6 +9866,7 @@ Transform:
   - {fileID: 437606397}
   - {fileID: 733477839}
   - {fileID: 1825406799}
+  - {fileID: 1813361106}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2139118184

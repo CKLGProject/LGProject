@@ -3,6 +3,7 @@ using Data;
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneSystem;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
@@ -26,6 +27,10 @@ public class BattleView : MonoBehaviour
     [Header("EnergyBar")]
     [SerializeField] private Image userEnergyBar;
     [SerializeField] private Image aiEnergyBar;
+
+    [FormerlySerializedAs("homeSceneLoader")]
+    [Header("Home Scene")]
+    [SerializeField] private SceneLoader lobbySceneLoader;
     
 
     /// <summary>
@@ -144,5 +149,13 @@ public class BattleView : MonoBehaviour
     {
         await UniTask.Delay(TimeSpan.FromSeconds(1));
         countText.gameObject.SetActive(false);
+    }
+
+    /// <summary>
+    /// 홈 씬으로 이동합니다.
+    /// </summary>
+    public void GoHome()
+    {
+        lobbySceneLoader.AllowCompletion();
     }
 }
