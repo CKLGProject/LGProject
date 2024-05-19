@@ -5054,7 +5054,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 32.886932
+  field of view: 39.4998
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
@@ -8110,7 +8110,7 @@ MonoBehaviour:
   aiDamageGageFX: {fileID: 575662701}
   userEnergyBar: {fileID: 278785080}
   aiEnergyBar: {fileID: 451422725}
-  homeSceneLoader: {fileID: 1813361107}
+  lobbySceneLoader: {fileID: 1813361107}
 --- !u!1001 &1853252161
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10115,7 +10115,7 @@ PrefabInstance:
     - target: {fileID: 8866563565161335285, guid: 2733f80f426950d4598e4e6317bd7935,
         type: 3}
       propertyPath: DeadLine
-      value: -4.8
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 8866563565161335285, guid: 2733f80f426950d4598e4e6317bd7935,
         type: 3}

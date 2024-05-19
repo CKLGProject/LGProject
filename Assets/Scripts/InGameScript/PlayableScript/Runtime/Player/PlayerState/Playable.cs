@@ -38,40 +38,40 @@ namespace LGProject.PlayerState
 
 
         // 공격 관련 인스펙터 
-        [Range(0.0f, 1.0f), Tooltip("n초가 끝나면 Idle로 돌아옴"), SerializeField, HideInInspector]
+        [HideInInspector]
         public float FirstAttackDelay = 1f;
 
-        [Range(0.0f, 2.0f), Tooltip("n초의 시간이 경과하면 공격 판정을 시작함."), SerializeField, HideInInspector]
+        [HideInInspector]
         public float FirstAttackJudgeDelay = 1f;
 
-        [SerializeField, HideInInspector] public float FirstAttackMovingValue = 1f;
+        [HideInInspector] public float FirstAttackMovingValue = 1f;
 
-        [Range(0.0f, 1.0f), Tooltip("n초가 끝나면 Idle로 돌아옴"), SerializeField, HideInInspector]
+        [HideInInspector]
         public float SecondAttackDelay = 1f;
 
-        [Range(0.0f, 2.0f), Tooltip("n초의 시간이 경과하면 공격 판정을 시작함."), SerializeField, HideInInspector]
+        [HideInInspector]
         public float SecondAttackJudgeDelay = 1f;
 
-        [SerializeField, HideInInspector] public float SecondAttackMovingValue = 1f;
+        [HideInInspector] public float SecondAttackMovingValue = 1f;
 
-        [Range(0.0f, 1.0f), Tooltip("n초가 끝나면 Idle로 돌아옴"), SerializeField, HideInInspector]
+        [HideInInspector]
         public float ThirdAttackDelay = 1f;
 
-        [Range(0.0f, 2.0f), Tooltip("n초의 시간이 경과하면 공격 판정을 시작함."), SerializeField, HideInInspector]
+        [HideInInspector]
         public float ThirdAttackJudgeDelay = 1f;
 
-        [SerializeField, HideInInspector] public float ThirdAttackMovingValue = 1f;
+        [HideInInspector] public float ThirdAttackMovingValue = 1f;
 
-        [Range(0.0f, 1.0f), Tooltip("공격 후 Idle로 돌아오기 까지의 시간"), SerializeField, HideInInspector]
+        [HideInInspector]
         public float DashAttackDelay = 0;
 
-        [Range(0.0f, 1.0f), Tooltip("피격 후 Idle로 돌아오기 까지의 시간"), SerializeField, HideInInspector]
+        [HideInInspector]
         public float HitDelay = 0;
 
-        [Range(0.0f, 1.0f), Tooltip("다운 후 기상 까지 걸리는 시간"), SerializeField, HideInInspector]
+        [HideInInspector]
         public float DownWaitDelay = 0;
 
-        [Range(0.0f, 3.0f), Tooltip("기상 후 Idle로 돌아오기 까지의 시간"), SerializeField, HideInInspector]
+        [HideInInspector]
         public float WakeUpDelay = 0;
 
         [HideInInspector] public int LifePoint = 3;
@@ -345,6 +345,7 @@ namespace LGProject.PlayerState
             if (!StateMachine.IsDead && transform.position.y < DeadLine)
             {
                 StateMachine.IsDead = true;
+                UltimateGage /= 2;
                 LifePoint -= 1; // 체력 감소
                 battleModel.SyncHealth(ActorType, LifePoint);
                 if (LifePoint > 0)

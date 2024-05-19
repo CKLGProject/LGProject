@@ -27,11 +27,11 @@ namespace BehaviourTree
         // 어디서 부터 들어왔냐에 따라 다음 진행할 노드가 달라짐.
         protected override State OnUpdate()
         {
-            if(_stateMachine.IsKnockback)
+            if(!_stateMachine.IsGrounded)
             {
                 return State.Success;
             }
-            return State.Success;
+            return State.Failure;
         }
     }
 
