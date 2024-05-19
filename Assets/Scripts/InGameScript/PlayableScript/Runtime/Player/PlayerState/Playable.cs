@@ -172,6 +172,9 @@ namespace LGProject.PlayerState
 
         float curTimer = 0;
         float downTimer = 0.5f;
+        private static readonly int Flying = Animator.StringToHash("Flying");
+        private static readonly int Hit = Animator.StringToHash("Hit");
+        private static readonly int Knockback = Animator.StringToHash("Knockback");
 
         public void IsPushDownKey()
         {
@@ -213,7 +216,7 @@ namespace LGProject.PlayerState
             {
                 StateMachine.IsGrounded = false;
                 StateMachine.collider.isTrigger = true;
-                StateMachine.animator.SetBool("Flying", StateMachine.JumpInCount < 1 ? true : false);
+                StateMachine.animator.SetBool(Flying, StateMachine.JumpInCount < 1 ? true : false);
                 if (StateMachine.JumpInCount < 1)
                     StateMachine.JumpInCount++;
             }
@@ -303,14 +306,14 @@ namespace LGProject.PlayerState
         }
 
 
-        public void setupJumpVariables()
+        public void SetupJumpVariables()
         {
             float timeToApex = maxJumpTime / 2;
             _gravity = (-2 * JumpScale) / Mathf.Pow(timeToApex, 1.5f);
             initialJumpVelocity = (2 * JumpScale) / timeToApex;
         }
 
-        public void handleJump()
+        public void HandleJump()
         {
             if (StateMachine.JumpInCount > 0 && StateMachine.IsJumpping)
             {
@@ -360,10 +363,10 @@ namespace LGProject.PlayerState
             DamageGage = 0;
             battleModel.SyncDamageGage(ActorType, DamageGage);
 
-            StateMachine.animator.SetTrigger("Hit");
+            StateMachine.animator.SetTrigger(Hit);
             StateMachine.IsDamaged = true;
             StateMachine.IsKnockback = true;
-            StateMachine.animator.SetTrigger("Knockback");
+            StateMachine.animator.SetTrigger(Knockback);
         }
 
         public void SetUnderPlatform()

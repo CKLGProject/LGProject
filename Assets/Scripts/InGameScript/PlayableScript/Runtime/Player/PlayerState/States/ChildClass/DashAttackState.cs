@@ -6,21 +6,24 @@ namespace LGProject.PlayerState
     // 상속은 다음 기회에 
     public class DashAttackState : State
     {
-        private float _curTimer;
-        private float _aniDelay = 0;
-        private bool damageInCount;
-        public DashAttackState(PlayerStateMachine _stateMachine, ref float _aniDelay) : base(_stateMachine)
+        private float _currentTimer;
+        private float _animationDelay;
+        private bool _damageInCount;
+        
+        private static readonly int DashAttack = Animator.StringToHash("DashAttack");
+
+        public DashAttackState(PlayerStateMachine stateMachine, ref float animationDelay) : base(stateMachine)
         {
-            this._aniDelay = _aniDelay;
+            _animationDelay = animationDelay;
             //aniDelay = 
         }
 
         public override void Enter()
         {
             base.Enter();
-            _curTimer = 0;
-            stateMachine.animator.SetTrigger("DashAttack");
-            damageInCount = false;
+            _currentTimer = 0;
+            StateMachine.animator.SetTrigger(DashAttack);
+            _damageInCount = false;
             // velocity 초기화 X
             // 그런데 브레이크는 걸면 좋을 듯? 대충 Drag값 조절해서 끼이익 하는 느낌을 줘보자.
             //Debug.Log("Sert");
@@ -28,14 +31,17 @@ namespace LGProject.PlayerState
         public override void LogicUpdate()
         {
             base.LogicUpdate();
-            _curTimer += Time.deltaTime;
-            if(_curTimer > 0.2f )
+            _currentTimer += Time.deltaTime;
+            
+            if(_currentTimer > 0.2f )
             {
-                if (damageInCount == false) AttackJudge();
+                if (_damageInCount == false) 
+                    AttackJudge();
             }
-            if(_curTimer > _aniDelay)
+            
+            if(_currentTimer > _animationDelay)
             {
-                stateMachine.ChangeState(stateMachine.idleState);
+                StateMachine.ChangeState(StateMachine.idleState);
                 return ;
             }
             // 공격 판정 
@@ -56,10 +62,10 @@ namespace LGProject.PlayerState
 
         public void AttackJudge()
         {
-            if (!damageInCount)
+            if (!_damageInCount)
             {
-                Vector3 right = Vector3.right * (stateMachine.playable.directionX == true ? 1 : -1);
-                Vector3 center = stateMachine.transform.position + right + Vector3.up * 0.5f;
+                Vector3 right = Vector3.right * (StateMachine.playable.directionX == true ? 1 : -1);
+                Vector3 center = StateMachine.transform.position + right + Vector3.up * 0.5f;
                 // 생각보다 판정이 후하진 않게 하기
                 // hit box의 크기를 따라감.
                 Vector3 hitBox = Vector3.one * 0.7f;
@@ -71,38 +77,38 @@ namespace LGProject.PlayerState
                 foreach (var t in targets)
                 {
                     float distance = Vector3.Distance(center, t.transform.position);
-                    if (temp == null || (temp.Item2 >= distance && t.transform != stateMachine.transform))
+                    if (temp == null || (temp.Item2 >= distance && t.transform != StateMachine.transform))
                     {
-                        if(t.transform != stateMachine.transform)
+                        if(t.transform != StateMachine.transform)
                             temp = System.Tuple.Create(t.GetComponent<Playable>(), distance);
                     }
                 }
                 if (temp == null)
                 {
-                    damageInCount = false;
+                    _damageInCount = false;
                 }
                 else
                 {
                     try
                     {
-                        Vector3 direction = (temp.Item1.GetStateMachine.transform.position - stateMachine.transform.position).normalized;
+                        Vector3 direction = (temp.Item1.GetStateMachine.transform.position - StateMachine.transform.position).normalized;
                         direction.x *= 2;
                         direction.y *= 1.5f;
-                        Vector3 v = stateMachine.playable.CalculateVelocity(
+                        Vector3 v = StateMachine.playable.CalculateVelocity(
                            temp.Item1.GetStateMachine.transform.position + direction,
                               temp.Item1.GetStateMachine.transform.position, 0.5f, 1f);
                         // 가드를 올리지 않았을 경우
-                        if (temp.Item1 != stateMachine.transform)
+                        if (temp.Item1 != StateMachine.transform)
                         {
                             temp.
                             Item1.GetStateMachine.
                             HitDamaged(v);
-                            damageInCount = true;
+                            _damageInCount = true;
 
 
                             if (!temp.Item1.GetStateMachine.IsGuard && !temp.Item1.GetStateMachine.IsDown)
                             {// 100 % gage로 일단 계산
-                                stateMachine.playable.SetUltimateGage(stateMachine.playable.UltimateGage + 10);
+                                StateMachine.playable.SetUltimateGage(StateMachine.playable.UltimateGage + 10);
                                 temp.Item1.effectManager.PlayOneShot(EffectManager.EFFECT.Hit);
                             }
                         }

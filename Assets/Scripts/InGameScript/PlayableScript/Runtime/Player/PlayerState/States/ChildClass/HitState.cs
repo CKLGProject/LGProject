@@ -6,12 +6,13 @@ namespace LGProject.PlayerState
 {
     public class HitState : State
     {
-        float stunedTimer;
-        float curTimer; 
+        private float _stunTimer;
+
+        private float _currentTimer; 
         // 피격 당했을 떄 날아가나?
-        public HitState(PlayerStateMachine _stateMachine, ref float _stunedTimer) : base(_stateMachine)
+        public HitState(PlayerStateMachine stateMachine, ref float stunTimer) : base(stateMachine)
         {
-            stunedTimer = _stunedTimer;
+            _stunTimer = stunTimer;
         }
         public override void Enter()
         {
@@ -21,24 +22,24 @@ namespace LGProject.PlayerState
             //Vector3.zero;
             //stateMachine.physics.velocity = stateMachine;
 
-            stateMachine.IsDamaged = false;     // 맞았어! 맞았다고! 그만때려!
-            stateMachine.AttackCount = 0;
+            StateMachine.IsDamaged = false;     // 맞았어! 맞았다고! 그만때려!
+            StateMachine.AttackCount = 0;
             //Debug.Log($"{stateMachine.transform.ToString()}who's hit? : {stateMachine.hitPlayer}");
-            curTimer = 0;
+            _currentTimer = 0;
         }
 
         public override void Exit()
         {
             base.Exit();
-            curTimer = 0;
+            _currentTimer = 0;
         }
 
         public override void LogicUpdate()
         {
             base.LogicUpdate();
-            if(!stateMachine.IsGrounded)
+            if(!StateMachine.IsGrounded)
             {
-                stateMachine.ChangeState(stateMachine.knockbackState);
+                StateMachine.ChangeState(StateMachine.knockbackState);
                 return;
                 //curTimer += Time.deltaTime;
                 //if (curTimer >= stunedTimer)
@@ -50,7 +51,7 @@ namespace LGProject.PlayerState
                 // 공중에서 피격당할 시 Idle state가 아닌 Down State로 변경
                 // Down State의 경우 땅에 닿을 때(is Grounded = true) 까지
                 // Down State를 유지해야 하며, 
-                stateMachine.ChangeState(stateMachine.idleState);
+                StateMachine.ChangeState(StateMachine.idleState);
             }
 
         }

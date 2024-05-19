@@ -7,36 +7,39 @@ namespace LGProject.PlayerState
 {
     public class WakeUpState : State
     {
-        private float _curTimer = 0;
-        private float _delay = 0;
-        public WakeUpState(PlayerStateMachine _stateMachine, ref float _delay) : base(_stateMachine)
+        private float _currentTimer;
+        private float _delay;
+        private static readonly int WakeUp = Animator.StringToHash("WakeUp");
+        private static readonly int Run = Animator.StringToHash("Run");
+
+        public WakeUpState(PlayerStateMachine stateMachine, ref float delay) : base(stateMachine)
         {
-            this._delay = _delay;   
+            _delay = delay;   
         }
 
         public override void Enter()
         {
             base.Enter();
-            _curTimer = 0;
+            _currentTimer = 0;
 
-            stateMachine.ResetAnimParameters();
-            stateMachine.animator.SetTrigger("WakeUp");
-            stateMachine.animator.SetFloat("Run", 0);
+            StateMachine.ResetAnimParameters();
+            StateMachine.animator.SetTrigger(WakeUp);
+            StateMachine.animator.SetFloat(Run, 0);
         }
 
         public override void Exit()
         {
             base.Exit();
-            stateMachine.IsDown = false;
+            StateMachine.IsDown = false;
         }
 
         public override void LogicUpdate()
         {
             base.LogicUpdate();
-            _curTimer += Time.deltaTime;
-            if(_curTimer >= _delay)
+            _currentTimer += Time.deltaTime;
+            if(_currentTimer >= _delay)
             {
-                stateMachine.ChangeState(stateMachine.idleState);
+                StateMachine.ChangeState(StateMachine.idleState);
                 return;
             }
 

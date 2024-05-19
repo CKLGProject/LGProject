@@ -22,7 +22,7 @@ namespace BehaviourTree
             // 플레이어 
             pathFinding.PathRequestManager.RequestPath(new pathFinding.PathRequest(_stateMachine.transform.position, _agent.player.position, _agent.GetPath));
 
-            chasingPoint = pathFinding.Grid.Instance.NodeFromWorldPoint(_stateMachine.transform.position).worldPosition;
+            chasingPoint = pathFinding.Grid.Instance.NodeFromWorldPoint(_stateMachine.transform.position).WorldPosition;
             
         }
 
@@ -177,7 +177,7 @@ namespace BehaviourTree
             if (_agent.target == null)
                 return false;
             // 타겟 노드
-            Vector3 targetPos = pathFinding.Grid.Instance.NodeFromWorldPoint(_agent.target.position).worldPosition;
+            Vector3 targetPos = pathFinding.Grid.Instance.NodeFromWorldPoint(_agent.target.position).WorldPosition;
             // 최종 목표
             Vector3 FinTarget = _agent.path[_agent.path.Length - 1];
 

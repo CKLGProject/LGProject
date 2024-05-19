@@ -20,7 +20,7 @@ namespace LGProject.PlayerState
         private RaycastHit hit;
         public HitUltimateState(PlayerStateMachine _stateMachine) : base(_stateMachine)
         {
-            _nodeList = pathFinding.Grid.Instance.walkableNodeList;
+            _nodeList = pathFinding.Grid.Instance.WalkableNodeList;
             _nodeList.Reverse();
             //_delay = _delayTime;
         }
@@ -28,9 +28,9 @@ namespace LGProject.PlayerState
         public override void Enter()
         {
             base.Enter();
-            stateMachine.animator.SetTrigger("Ultimate");
-            stateMachine.IsUltimate = true;
-            stateMachine.animator.updateMode = AnimatorUpdateMode.UnscaledTime;
+            StateMachine.animator.SetTrigger("Ultimate");
+            StateMachine.IsUltimate = true;
+            StateMachine.animator.updateMode = AnimatorUpdateMode.UnscaledTime;
             _isMove = false;
             WaitStart().Forget();
             Time.timeScale = 0.1f;
@@ -39,7 +39,7 @@ namespace LGProject.PlayerState
         public override void Exit()
         {
             base.Exit();
-            stateMachine.IsUltimate = false;
+            StateMachine.IsUltimate = false;
         }
 
         public override void LogicUpdate()
@@ -48,15 +48,15 @@ namespace LGProject.PlayerState
             // 로직의 경우 한 번 누르면 작동함.
             // 바라보고 있는 방향으로 돌진
             // velociy 돌진이 아니라 해당 위치까지 이동을 시켜주는 것이 좋음
-            float distance = Vector3.Distance(stateMachine.transform.position, _movingPoint);
+            float distance = Vector3.Distance(StateMachine.transform.position, _movingPoint);
             if (distance >= 1f && _isMove)
             {
 
                 // 현재 6칸 / 6m 이동 중 6m사이에 적이 있으면 해당 적 앞에서 멈추고 애니메이션 실행 
-                stateMachine.transform.position = Vector3.MoveTowards(stateMachine.transform.position, _movingPoint, 1000f * Time.deltaTime);
+                StateMachine.transform.position = Vector3.MoveTowards(StateMachine.transform.position, _movingPoint, 1000f * Time.deltaTime);
             }
             else if (_isMove)
-                stateMachine.ChangeState(stateMachine.idleState);
+                StateMachine.ChangeState(StateMachine.idleState);
 
         }
 
@@ -68,7 +68,7 @@ namespace LGProject.PlayerState
         // 이동 경로에 적이 존재하는가에 대한 의문
         private bool PathCheck()
         {
-            if(Physics.Raycast(stateMachine.transform.position + Vector3.up * .5f, stateMachine.playable.directionX ?  Vector3.right : Vector3.left, out hit, 6 * .25f))
+            if(Physics.Raycast(StateMachine.transform.position + Vector3.up * .5f, StateMachine.playable.directionX ?  Vector3.right : Vector3.left, out hit, 6 * .25f))
             {
                 return true;
             }
@@ -84,30 +84,30 @@ namespace LGProject.PlayerState
         {
             int pointX = 0;
             int pointY = 0;
-            pathFinding.Node node = pathFinding.Grid.Instance.NodeFromWorldPoint(stateMachine.transform.position);
-            pointX = node.gridX;
-            pointY = node.gridY;
+            pathFinding.Node node = pathFinding.Grid.Instance.NodeFromWorldPoint(StateMachine.transform.position);
+            pointX = node.GridX;
+            pointY = node.GridY;
             // 맥스치는 0 ~ 19 1/3만큼 이동할 것이다 그럼?;
             int point = 19 / 3; // 6;
-            pointX = stateMachine.playable.directionX ? pointX + point : pointX - point;
+            pointX = StateMachine.playable.directionX ? pointX + point : pointX - point;
             pointX = pointX < 1 ? 1 : pointX;
             pointX = pointX > 19 ? 18 : pointX;
 
             _movingNode = _nodeList[pointX];
-            _movingPoint = new Vector3(_movingNode.worldPosition.x, stateMachine.transform.position.y, stateMachine.transform.position.z);
+            _movingPoint = new Vector3(_movingNode.WorldPosition.x, StateMachine.transform.position.y, StateMachine.transform.position.z);
         }
 
         private void MovementTargetPointSet()
         {
             PlayerStateMachine targetStateMachine = hit.transform.GetComponent<Playable>().GetStateMachine;
             pathFinding.Node node = pathFinding.Grid.Instance.NodeFromWorldPoint(hit.transform.position);
-            _movingPoint = node.worldPosition;
+            _movingPoint = node.WorldPosition;
             // 그리고 타겟에게 피해를 입힘.
             Vector3 KnockbackValue = Vector3.zero;
-            Vector3 direction = (targetStateMachine.transform.position - stateMachine.transform.position).normalized;
+            Vector3 direction = (targetStateMachine.transform.position - StateMachine.transform.position).normalized;
             direction.x *= 2;
             direction.y *= 1.5f;
-            KnockbackValue = stateMachine.playable.CalculateVelocity(
+            KnockbackValue = StateMachine.playable.CalculateVelocity(
                targetStateMachine.transform.position + direction,
                   targetStateMachine.transform.position, 0.5f, 3f);
 
@@ -121,8 +121,8 @@ namespace LGProject.PlayerState
             await UniTask.Delay(TimeSpan.FromSeconds(0.175f));
             _isMove = true;
             Time.timeScale = 1f;
-            stateMachine.playable.effectManager.Stop(EffectManager.EFFECT.Ultimate);
-            stateMachine.animator.updateMode = AnimatorUpdateMode.Normal;
+            StateMachine.playable.effectManager.Stop(EffectManager.EFFECT.Ultimate);
+            StateMachine.animator.updateMode = AnimatorUpdateMode.Normal;
             //stateMachine.animator.stop
             // 플레이어 앞에 있는 놈들 전부 잡아 족쳐
             if (PathCheck())

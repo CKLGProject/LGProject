@@ -17,7 +17,7 @@ namespace LGProject.PlayerState
 
         //Thread callback; 
         
-        public JumpState(PlayerStateMachine _stateMachine, ref float jumpScale, int maximumCount, AnimationCurve animationCurve) : base(_stateMachine)
+        public JumpState(PlayerStateMachine stateMachine, ref float jumpScale, int maximumCount, AnimationCurve animationCurve) : base(stateMachine)
         {
             //_jumpScale = jumpScale;
             //_maximumCount = maximumCount;
@@ -29,13 +29,13 @@ namespace LGProject.PlayerState
         {
             base.Enter();
 
-            stateMachine.JumpVelocity();
+            StateMachine.JumpVelocity();
 
-            stateMachine.IsJumpping = true;
-            stateMachine.JumpInCount++;
-            stateMachine.playable.HandleJumpping();
+            StateMachine.IsJumpping = true;
+            StateMachine.JumpInCount++;
+            StateMachine.playable.HandleJumpping();
             //stateMachine.physics.velocity += Vector3.up * _jumpScale;
-            stateMachine.animator.SetTrigger("Jump" + stateMachine.JumpInCount.ToString());
+            StateMachine.animator.SetTrigger("Jump" + StateMachine.JumpInCount);
 
 
             // 이걸 n초 뒤에 켜고 싶은데...
@@ -51,15 +51,15 @@ namespace LGProject.PlayerState
         {
             base.LogicUpdate();
 
-            if (stateMachine.guardAction.triggered)
+            if (StateMachine.guardAction.triggered)
             {
                 //stateMachine.GuardEffect.SetActive(true);
-                stateMachine.ChangeState(stateMachine.guardState);
+                StateMachine.ChangeState(StateMachine.guardState);
                 return;
             }
 
-            float a = Mathf.Abs(stateMachine.moveAction.ReadValue<float>());
-            stateMachine.ChangeState(a >= 0.2f ? stateMachine.moveState : stateMachine.idleState);
+            float a = Mathf.Abs(StateMachine.moveAction.ReadValue<float>());
+            StateMachine.ChangeState(a >= 0.2f ? StateMachine.moveState : StateMachine.idleState);
 
 
         }

@@ -1,21 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace LGProject.PlayerState
 {
     public abstract class State
     {
-        protected PlayerStateMachine stateMachine;
+        protected readonly PlayerStateMachine StateMachine;
 
-        RaycastHit hit;
+        private RaycastHit _hit;
 
         // 키 입력에 다른 Action을 출력
 
-        public State(PlayerState.PlayerStateMachine _stateMachine) 
+        public State(PlayerStateMachine stateMachine) 
         {
-            stateMachine = _stateMachine;
+            StateMachine = stateMachine;
         }
 
         public virtual void Enter()
@@ -29,11 +26,11 @@ namespace LGProject.PlayerState
 
         public virtual void LogicUpdate()
         {
-            if(stateMachine.IsDamaged && !stateMachine.IsGuard)
+            if(StateMachine.IsDamaged && !StateMachine.IsGuard)
             {
                 // 공격을 받았을 때, hitState로 변경해 줌.
                 
-                stateMachine.ChangeState(stateMachine.hitState);
+                StateMachine.ChangeState(StateMachine.hitState);
             }
         }
 

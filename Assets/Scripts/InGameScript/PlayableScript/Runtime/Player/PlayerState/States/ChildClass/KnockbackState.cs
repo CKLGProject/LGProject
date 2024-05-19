@@ -6,7 +6,7 @@ namespace LGProject.PlayerState
 {
     public class KnockbackState : State
     {
-        public KnockbackState(PlayerStateMachine _stateMachine) : base(_stateMachine)
+        public KnockbackState(PlayerStateMachine stateMachine) : base(stateMachine)
         {
         }
 
@@ -14,7 +14,7 @@ namespace LGProject.PlayerState
         {
             base.Enter();
             // 날아가는 중임을 체크
-            stateMachine.IsKnockback = true;
+            StateMachine.IsKnockback = true;
         }
 
         public override void Exit()
@@ -25,9 +25,9 @@ namespace LGProject.PlayerState
         public override void LogicUpdate()
         {
             base.LogicUpdate();
-            if(stateMachine.IsGrounded)
+            if(StateMachine.IsGrounded)
             {
-                stateMachine.ChangeState(stateMachine.downState);
+                StateMachine.ChangeState(StateMachine.downState);
             }
         }
 

@@ -13,7 +13,7 @@ namespace LGProject.PlayerState
 
             StateMachine = new PlayerStateMachine();
             StateMachine = PlayerStateMachine.CreateStateMachine(gameObject);
-            setupJumpVariables();
+            SetupJumpVariables();
             SetUnderPlatform();
         }
 

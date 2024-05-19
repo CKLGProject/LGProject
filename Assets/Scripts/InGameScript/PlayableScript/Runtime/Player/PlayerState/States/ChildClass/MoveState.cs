@@ -6,13 +6,15 @@ namespace LGProject.PlayerState
 {
     public class MoveState : State
     {
-        private float _speed = 0;
-        private float _maximumSpeed = 0;
-        private bool _isPlayingMoveEffect = false;
-        public MoveState(PlayerStateMachine _stateMachine, ref float _speed, float _maximumSpeed) : base(_stateMachine)
+        private float _speed;
+        private float _maximumSpeed;
+        private bool _isPlayingMoveEffect;
+        private static readonly int Run = Animator.StringToHash("Run");
+
+        public MoveState(PlayerStateMachine stateMachine, ref float speed, float maximumSpeed) : base(stateMachine)
         {
-            this._speed = _speed;
-            this._maximumSpeed = _maximumSpeed;
+            _speed = speed;
+            _maximumSpeed = maximumSpeed;
         }
 
         public override void Enter()
@@ -20,101 +22,107 @@ namespace LGProject.PlayerState
             base.Enter();
 
             // 방향 판정
-            stateMachine.playable.directionX = stateMachine.moveAction.ReadValue<float>() >= 0.1f ? true : false;
-        
-        
+            StateMachine.playable.directionX = StateMachine.moveAction.ReadValue<float>() >= 0.1f ? true : false;
         }
 
         public override void Exit()
         {
-            stateMachine.animator.SetFloat("Run", 0);
+            StateMachine.animator.SetFloat(Run, 0);
         }
 
         public override void LogicUpdate()
         {
             base.LogicUpdate();
-            stateMachine.animator.SetFloat("Run", Mathf.Abs(stateMachine.moveAction.ReadValue<float>()));
-            if (stateMachine.IsGrounded && !_isPlayingMoveEffect)
+
+            float moveThreshold = Mathf.Abs(StateMachine.moveAction.ReadValue<float>());
+            StateMachine.animator.SetFloat(Run, moveThreshold);
+            if (StateMachine.IsGrounded && !_isPlayingMoveEffect)
             {
-                stateMachine.playable.effectManager.Play(EffectManager.EFFECT.Run).Forget();
+                StateMachine.playable.effectManager.Play(EffectManager.EFFECT.Run).Forget();
                 _isPlayingMoveEffect = true;
             }
-            else if(!stateMachine.IsGrounded && _isPlayingMoveEffect)
+            else if (!StateMachine.IsGrounded && _isPlayingMoveEffect)
             {
                 _isPlayingMoveEffect = false;
-                stateMachine.playable.effectManager.Stop(EffectManager.EFFECT.Run);
+                StateMachine.playable.effectManager.Stop(EffectManager.EFFECT.Run);
             }
 
-            if (Mathf.Abs(stateMachine.moveAction.ReadValue<float>()) <= 0.2f)
+            if (moveThreshold <= 0.2f)
             {
-                stateMachine.ChangeState(stateMachine.idleState);
+                StateMachine.ChangeState(StateMachine.idleState);
                 return;
             }
-            if (stateMachine.attackAction.triggered)
+
+            if (StateMachine.attackAction.triggered)
             {
                 AttackLogic();
                 return;
             }
-            if (stateMachine.jumpAction.triggered && stateMachine.JumpInCount < 2)
+
+            if (StateMachine.jumpAction.triggered && StateMachine.JumpInCount < 2)
             {
-                stateMachine.ChangeState(stateMachine.jumpState);
+                StateMachine.ChangeState(StateMachine.jumpState);
                 return;
             }
 
             // 점프 가드는 한번만!!
-            if (stateMachine.guardAction.triggered && !stateMachine.IsJumpGuard)
+            if (StateMachine.guardAction.triggered && !StateMachine.IsJumpGuard)
             {
                 // 땅에 접촉하지 않은 상태일 때
-                if(!stateMachine.IsGrounded )
+                if (!StateMachine.IsGrounded)
                 {
-                    stateMachine.IsJumpGuard = true;
+                    StateMachine.IsJumpGuard = true;
                 }
-                stateMachine.ChangeState(stateMachine.guardState);
+
+                StateMachine.ChangeState(StateMachine.guardState);
                 return;
             }
 
             // 진행 방향에 적이 있어?
-            if (stateMachine.CheckEnemy())
+            if (StateMachine.CheckEnemy())
             {
-                stateMachine.StandingVelocity();
+                StateMachine.StandingVelocity();
                 return;
             }
-            if (stateMachine.physics.velocity.x <= _maximumSpeed && stateMachine.physics.velocity.x >= -_maximumSpeed)
+
+            if (StateMachine.physics.velocity.x <= _maximumSpeed && StateMachine.physics.velocity.x >= -_maximumSpeed)
             {
                 // 바로 앞에 적이 있으면 더이상 이동하지 않음(애니메이션은 재생)
                 // 머리와 다리쪽에서 Ray를 쏠 예정
-                stateMachine.physics.velocity += Vector3.right * (stateMachine.moveAction.ReadValue<float>());
+                StateMachine.physics.velocity += Vector3.right * (StateMachine.moveAction.ReadValue<float>());
 
-                Vector3 left = new Vector3((stateMachine.transform.position + Vector3.right).x + 2f, stateMachine.transform.position.y, stateMachine.transform.position.z);
-                Vector3 right = new Vector3((stateMachine.transform.position + Vector3.left).x - 2f, stateMachine.transform.position.y, stateMachine.transform.position.z);
+                Vector3 left = new Vector3((StateMachine.transform.position + Vector3.right).x + 2f,
+                    StateMachine.transform.position.y, StateMachine.transform.position.z);
+                Vector3 right = new Vector3((StateMachine.transform.position + Vector3.left).x - 2f,
+                    StateMachine.transform.position.y, StateMachine.transform.position.z);
 
-                stateMachine.transform.LookAt(stateMachine.moveAction.ReadValue<float>() < 0 ? right : left);
+                StateMachine.transform.LookAt(StateMachine.moveAction.ReadValue<float>() < 0 ? right : left);
             }
-
         }
 
         private void AttackLogic()
         {
-            if (stateMachine.playable.UltimateGage >= 100)
+            if (StateMachine.playable.UltimateGage >= 100)
             {
-                stateMachine.ChangeState(stateMachine.ultimateState);
+                StateMachine.ChangeState(StateMachine.ultimateState);
                 return;
             }
-            else if (!stateMachine.IsGrounded)
+
+            if (!StateMachine.IsGrounded)
             {
-                stateMachine.ChangeState(stateMachine.jumpAttackState);
+                StateMachine.ChangeState(StateMachine.jumpAttackState);
                 return;
             }
-            else if(stateMachine.IsGrounded && Mathf.Abs(stateMachine.physics.velocity.x) > 0.2f)
+
+            if (StateMachine.IsGrounded && Mathf.Abs(StateMachine.physics.velocity.x) > 0.2f)
             {
-                stateMachine.ChangeState(stateMachine.dashAttackState);
+                StateMachine.ChangeState(StateMachine.dashAttackState);
                 return;
             }
             else
             {
-                stateMachine.ChangeState(stateMachine.attackState);
-            } 
-                
+                StateMachine.ChangeState(StateMachine.attackState);
+            }
         }
 
         public override void PhysicsUpdate()
@@ -122,5 +130,4 @@ namespace LGProject.PlayerState
             base.PhysicsUpdate();
         }
     }
-
 }

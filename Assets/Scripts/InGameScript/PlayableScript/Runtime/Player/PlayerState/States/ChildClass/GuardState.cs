@@ -6,7 +6,9 @@ namespace LGProject.PlayerState
 {
     public class GuardState : State
     {
-        public GuardState(PlayerStateMachine _stateMachine) : base(_stateMachine)
+        private static readonly int Guard = Animator.StringToHash("Guard");
+
+        public GuardState(PlayerStateMachine stateMachine) : base(stateMachine)
         {
 
         }
@@ -17,31 +19,31 @@ namespace LGProject.PlayerState
 
             // x,z Velocity를 초기화
             
-            stateMachine.StandingVelocity();
-            stateMachine.animator.SetBool("Guard",true);
-            stateMachine.playable.effectManager.Play(EffectManager.EFFECT.Guard).Forget();
-            stateMachine.IsGuard = true;
+            StateMachine.StandingVelocity();
+            StateMachine.animator.SetBool(Guard,true);
+            StateMachine.playable.effectManager.Play(EffectManager.EFFECT.Guard).Forget();
+            StateMachine.IsGuard = true;
         }
 
         public override void Exit()
         {
             base.Exit();
-            stateMachine.playable.effectManager.Stop(EffectManager.EFFECT.Guard);
+            StateMachine.playable.effectManager.Stop(EffectManager.EFFECT.Guard);
 
-            stateMachine.animator.SetBool("Guard", false);
+            StateMachine.animator.SetBool(Guard, false);
 
-            stateMachine.IsGuard = false;
+            StateMachine.IsGuard = false;
         }
 
         public override void LogicUpdate()
         {
             base.LogicUpdate();
-            if (stateMachine.IsDamaged)
-                stateMachine.IsDamaged = false;
+            if (StateMachine.IsDamaged)
+                StateMachine.IsDamaged = false;
 
-            if(!stateMachine.guardAction.IsPressed())
+            if(!StateMachine.guardAction.IsPressed())
             {
-                stateMachine.ChangeState(stateMachine.idleState);
+                StateMachine.ChangeState(StateMachine.idleState);
                 return;
             }
         }

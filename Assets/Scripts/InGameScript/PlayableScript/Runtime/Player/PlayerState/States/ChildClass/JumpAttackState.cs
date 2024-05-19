@@ -7,25 +7,27 @@ namespace LGProject.PlayerState
 {
     public class JumpAttackState : State
     {
-        float maximumSpeed;
-        public JumpAttackState(PlayerStateMachine _stateMachine, float _maximumSpeed) : base(_stateMachine)
+        private float _maximumSpeed;
+        private static readonly int JumpAttack = Animator.StringToHash("JumpAttack");
+
+        public JumpAttackState(PlayerStateMachine stateMachine, float maximumSpeed) : base(stateMachine)
         {
-            maximumSpeed = _maximumSpeed;
+            _maximumSpeed = maximumSpeed;
         }
 
         public override void Enter()
         {
             base.Enter();
             // Velocity는 초기화시키지 않도록 하자.
-            Debug.Log($"Enter = {stateMachine.JumpInCount}");
-            stateMachine.animator.SetTrigger("JumpAttack");
+            Debug.Log($"Enter = {StateMachine.JumpInCount}");
+            StateMachine.animator.SetTrigger(JumpAttack);
         }
 
         public override void Exit()
         {
             base.Exit();
             //stateMachine.jumpInCount = 0;
-            Debug.Log($"Exit = {stateMachine.JumpInCount}");
+            Debug.Log($"Exit = {StateMachine.JumpInCount}");
             
         }
 
@@ -36,22 +38,22 @@ namespace LGProject.PlayerState
             // 점프 공격을 한 상태에서 체공 시간을 늘릴 것인가?
             // 1단 점프를 한 후 공격을 한 상태라면 2단 점프가 가능하게 할 것인가?
 
-            if (Mathf.Abs(stateMachine.moveAction.ReadValue<float>()) >= 0.2f)
+            if (Mathf.Abs(StateMachine.moveAction.ReadValue<float>()) >= 0.2f)
             {
                 // 진행 방향에 적이 있어? 없으면 이동
-                if (stateMachine.CheckEnemy() == null && stateMachine.physics.velocity.x <= maximumSpeed && stateMachine.physics.velocity.x >= -maximumSpeed)
-                    stateMachine.physics.velocity += Vector3.right * (stateMachine.moveAction.ReadValue<float>());
+                if (StateMachine.CheckEnemy() == null && StateMachine.physics.velocity.x <= _maximumSpeed && StateMachine.physics.velocity.x >= -_maximumSpeed)
+                    StateMachine.physics.velocity += Vector3.right * (StateMachine.moveAction.ReadValue<float>());
             }
             else
             {
-                stateMachine.StandingVelocity();
+                StateMachine.StandingVelocity();
             }
 
             // 공격 판정 -> 아직 없음.
 
-            if (stateMachine.IsGrounded)
+            if (StateMachine.IsGrounded)
             {
-                stateMachine.ChangeState(stateMachine.idleState);
+                StateMachine.ChangeState(StateMachine.idleState);
                 return;
             }
         }

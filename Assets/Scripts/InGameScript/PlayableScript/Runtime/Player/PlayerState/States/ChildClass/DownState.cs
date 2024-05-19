@@ -7,48 +7,50 @@ namespace LGProject.PlayerState
     // 누워 있는 State
     public class DownState : State
     {
-        private float _curTimer = 0;
-        private float _delay = 0;
-        private bool _flight = false;
-        public DownState(PlayerStateMachine _stateMachine, ref float _delay) : base(_stateMachine)
+        private float _currentTimer;
+        private float _delay;
+        private bool _flight;
+        private static readonly int Landing = Animator.StringToHash("Landing");
+
+        public DownState(PlayerStateMachine stateMachine, ref float delay) : base(stateMachine)
         {
-            _curTimer = 0;
-            this._delay = _delay;
+            _currentTimer = 0;
+            _delay = delay;
         }
 
         public override void Enter()
         {
             base.Enter();
-            _curTimer = 0;
-            stateMachine.IsDown = true;
-            stateMachine.animator.SetTrigger("Landing");
-            stateMachine.ResetVelocity();
+            _currentTimer = 0;
+            StateMachine.IsDown = true;
+            StateMachine.animator.SetTrigger(Landing);
+            StateMachine.ResetVelocity();
         }
 
         public override void Exit()
         {
             base.Exit();
-            stateMachine.IsKnockback = false;
+            StateMachine.IsKnockback = false;
         }
 
         public override void LogicUpdate()
         {
             base.LogicUpdate();
-            if (stateMachine.IsGrounded)
+            if (StateMachine.IsGrounded)
             {
                 if (_flight)
                 {
                     _flight = false;
-                    stateMachine.playable.effectManager.Stop(EffectManager.EFFECT.Airborne);
-                    stateMachine.playable.effectManager.Play(EffectManager.EFFECT.Knockback).Forget();
+                    StateMachine.playable.effectManager.Stop(EffectManager.EFFECT.Airborne);
+                    StateMachine.playable.effectManager.Play(EffectManager.EFFECT.Knockback).Forget();
                 }
                 // 땅에 닿았을 때 누워있는 State
-                _curTimer += Time.deltaTime;
-                if (_curTimer >= _delay)
+                _currentTimer += Time.deltaTime;
+                if (_currentTimer >= _delay)
                 {
                     // 원래는 WakeUp State
                     // Wake UP 중에는 공격을 받아도 무적임.
-                    stateMachine.ChangeState(stateMachine.wakeUpState);
+                    StateMachine.ChangeState(StateMachine.wakeUpState);
                     return;
                 }
             }
@@ -57,10 +59,10 @@ namespace LGProject.PlayerState
                 if(!_flight)
                 {
                     _flight = true;
-                    stateMachine.playable.effectManager.Play(EffectManager.EFFECT.Airborne).Forget();
+                    StateMachine.playable.effectManager.Play(EffectManager.EFFECT.Airborne).Forget();
 
                 }
-                _curTimer = 0;
+                _currentTimer = 0;
             }
         }
 

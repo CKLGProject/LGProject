@@ -6,8 +6,12 @@ namespace LGProject.PlayerState
 {
     public class IdleState : State
     {
+        private static readonly int Idle = Animator.StringToHash("Idle");
+        private static readonly int Run = Animator.StringToHash("Run");
+        private static readonly int Attack = Animator.StringToHash("Attack");
+        private static readonly int Landing = Animator.StringToHash("Landing");
 
-        public IdleState(PlayerStateMachine _stateMachine) : base (_stateMachine)
+        public IdleState(PlayerStateMachine stateMachine) : base (stateMachine)
         {
 
         }
@@ -16,75 +20,78 @@ namespace LGProject.PlayerState
         {
             // 입장 시 내부 정보를 초기화.
             base.Enter();
-            stateMachine.StandingVelocity();
-            stateMachine.animator.SetTrigger("Idle");
-            stateMachine.animator.SetFloat("Run", 0);
-            stateMachine.animator.SetInteger("Attack", 0);
-            stateMachine.animator.ResetTrigger("Landing");
+            StateMachine.StandingVelocity();
+            StateMachine.animator.SetTrigger(Idle);
+            StateMachine.animator.SetFloat(Run, 0);
+            StateMachine.animator.SetInteger(Attack, 0);
+            StateMachine.animator.ResetTrigger(Landing);
         }
 
         public override void LogicUpdate()
         {
             base.LogicUpdate();
             // 키 입력을 대기 받으면 상태가 변경됨.
-            if (Mathf.Abs(stateMachine.moveAction.ReadValue<float>()) > 0.2f )
+            if (Mathf.Abs(StateMachine.moveAction.ReadValue<float>()) > 0.2f )
             {
-                stateMachine.ChangeState(stateMachine.moveState);
+                StateMachine.ChangeState(StateMachine.moveState);
                 return;
             }
 
-            if (stateMachine.attackAction.triggered)
+            if (StateMachine.attackAction.triggered)
             {
                 AttackLogic();
                 return;
             }
 
-            if (stateMachine.jumpAction.triggered && stateMachine.JumpInCount < 2)
+            if (StateMachine.jumpAction.triggered && StateMachine.JumpInCount < 2)
             {
                 //Debug.Log("idleJump");
-                stateMachine.ChangeState(stateMachine.jumpState);
+                StateMachine.ChangeState(StateMachine.jumpState);
                 return;
             }
 
             // 점프 중에는 한 번만 가능하게 한다.
-            if (stateMachine.guardAction.triggered && !stateMachine.IsJumpGuard)
+            if (StateMachine.guardAction.triggered && !StateMachine.IsJumpGuard)
             {
                 // 땅에 접촉하지 않은 상태일 때
-                if (!stateMachine.IsGrounded)
+                if (!StateMachine.IsGrounded)
                 {
-                    stateMachine.IsJumpGuard = true;
+                    StateMachine.IsJumpGuard = true;
                 }
-                stateMachine.ChangeState(stateMachine.guardState);
+                StateMachine.ChangeState(StateMachine.guardState);
                 return;
             }
 
             //bool Down = guardAction.ReadValue<bool>();
 
-            if (stateMachine.downAction.triggered)
+            if (StateMachine.downAction.triggered)
             {
                 Debug.Log($"Down = {true}");
             }
         }
 
-        void AttackLogic()
+        private void AttackLogic()
         {
             // 땅에 붙어있으면서 공격을 진행하면?
-            if(stateMachine.playable.UltimateGage >= 100)
+            if(StateMachine.playable.UltimateGage >= 100)
             {
-                stateMachine.ChangeState(stateMachine.ultimateState);
+                StateMachine.ChangeState(StateMachine.ultimateState);
                 return;
             }
-            else if (stateMachine.IsGrounded)
+
+            if (StateMachine.IsGrounded)
             {
-                stateMachine.ChangeState(stateMachine.attackState);
+                StateMachine.ChangeState(StateMachine.attackState);
                 return;
             }
+            
             // 공중에서 공격하면?
-            if(!stateMachine.IsGrounded)
+            if(!StateMachine.IsGrounded)
             {
-                stateMachine.ChangeState(stateMachine.jumpAttackState);
+                StateMachine.ChangeState(StateMachine.jumpAttackState);
                 return;
             }
+            
         }
 
         public override void PhysicsUpdate()

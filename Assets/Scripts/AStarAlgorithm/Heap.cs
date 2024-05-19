@@ -1,35 +1,31 @@
 using System;
-using UnityEngine;
 
 namespace pathFinding
 {
-
-    // C# 기본 Array 중 하나인 List보다 A* 길찾기를 좀 더 효율적으로 작성할 수 있음.
     public class Heap<T> where T : IHeapItem<T>
     {
-        T[] items;
-        int currentItemCount;
+        private readonly T[] _items;
 
         public Heap(int maxHeapSize)
         {
-            items = new T[maxHeapSize];
+            _items = new T[maxHeapSize];
         }
 
         public void Add(T item)
         {
-            item.HeapIndex = currentItemCount;
-            items[currentItemCount] = item;
+            item.HeapIndex = Count;
+            _items[Count] = item;
             SortUp(item);
-            currentItemCount++;
+            Count++;
         }
 
         public T RemoveFirst()
         {
-            T firstItem = items[0];
-            currentItemCount--;
-            items[0] = items[currentItemCount];
-            items[0].HeapIndex = 0;
-            SortDown(items[0]);
+            T firstItem = _items[0];
+            Count--;
+            _items[0] = _items[Count];
+            _items[0].HeapIndex = 0;
+            SortDown(_items[0]);
             return firstItem;
         }
 
@@ -38,42 +34,35 @@ namespace pathFinding
             SortUp(item);
         }
 
-        public int Count
-        {
-            get
-            {
-                return currentItemCount;
-            }
-        }
+        public int Count { get; private set; }
 
         public bool Contains(T item)
         {
-            return Equals(items[item.HeapIndex], item);
+            return Equals(_items[item.HeapIndex], item);
         }
 
-        void SortDown(T item)
+        private void SortDown(T item)
         {
             while (true)
             {
                 int childIndexLeft = item.HeapIndex * 2 + 1;
                 int childIndexRight = item.HeapIndex * 2 + 2;
-                int swapIndex = 0;
 
-                if (childIndexLeft < currentItemCount)
+                if (childIndexLeft < Count)
                 {
-                    swapIndex = childIndexLeft;
+                    int swapIndex = childIndexLeft;
 
-                    if (childIndexRight < currentItemCount)
+                    if (childIndexRight < Count)
                     {
-                        if (items[childIndexLeft].CompareTo(items[childIndexRight]) < 0)
+                        if (_items[childIndexLeft].CompareTo(_items[childIndexRight]) < 0)
                         {
                             swapIndex = childIndexRight;
                         }
                     }
 
-                    if (item.CompareTo(items[swapIndex]) < 0)
+                    if (item.CompareTo(_items[swapIndex]) < 0)
                     {
-                        Swap(item, items[swapIndex]);
+                        Swap(item, _items[swapIndex]);
                     }
                     else
                     {
@@ -87,13 +76,13 @@ namespace pathFinding
             }
         }
 
-        void SortUp(T item)
+        private void SortUp(T item)
         {
             int parentIndex = (item.HeapIndex - 1) / 2;
 
             while (true)
             {
-                T parentItem = items[parentIndex];
+                T parentItem = _items[parentIndex];
 
                 if (item.CompareTo(parentItem) > 0)
                     Swap(item, parentItem);
@@ -103,28 +92,21 @@ namespace pathFinding
             }
         }
 
-        void Swap(T itemA, T itemB)
+        private void Swap(T itemA, T itemB)
         {
-            items[itemA.HeapIndex] = itemB;
-            items[itemB.HeapIndex] = itemA;
+            _items[itemA.HeapIndex] = itemB;
+            _items[itemB.HeapIndex] = itemA;
 
-            int itemAIndex = itemA.HeapIndex;
-            itemA.HeapIndex = itemB.HeapIndex;
-            itemB.HeapIndex = itemAIndex;
+            (itemA.HeapIndex, itemB.HeapIndex) = (itemB.HeapIndex, itemA.HeapIndex);
         }
-
     }
 
-    public interface IHeapItem<T> : IComparable<T>
+    public interface IHeapItem<in T> : IComparable<T>
     {
         public int HeapIndex
         {
             get;
             set;
         }
-
-
     }
-
-
 }

@@ -178,7 +178,7 @@ namespace BehaviourTree
             if (_agent.target == null)
                 return false;
             // 타겟 노드
-            Vector3 targetPos = pathFinding.Grid.Instance.NodeFromWorldPoint(_agent.target.position).worldPosition;
+            Vector3 targetPos = pathFinding.Grid.Instance.NodeFromWorldPoint(_agent.target.position).WorldPosition;
             // 최종 목표
             Vector3 FinTarget = _agent.path[_agent.path.Length - 1];
 

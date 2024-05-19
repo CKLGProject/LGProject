@@ -77,6 +77,17 @@ namespace LGProject.PlayerState //
         public Transform hitPlayer;
 
         private Dictionary<string, float> animClipsInfo = new Dictionary<string, float>();
+        
+        // Constant
+        private static readonly int Hit = Animator.StringToHash("Hit");
+        private static readonly int Knockback = Animator.StringToHash("Knockback");
+        private static readonly int Idle = Animator.StringToHash("Idle");
+        private static readonly int DashAttack = Animator.StringToHash("DashAttack");
+        private static readonly int Jump1 = Animator.StringToHash("Jump1");
+        private static readonly int Jump2 = Animator.StringToHash("Jump2");
+        private static readonly int Landing = Animator.StringToHash("Landing");
+        private static readonly int WakeUp = Animator.StringToHash("WakeUp");
+        private static readonly int Guard = Animator.StringToHash("Guard");
 
         public void SetAnimPlayTime(string clipName, float time)
         {
@@ -235,14 +246,14 @@ namespace LGProject.PlayerState //
                 playable.SetDamageGage(playable.DamageGage + 8.5f);
                 battleModel.SyncDamageGage(playable.ActorType, playable.DamageGage);
                 IsNormalAttack = false;
-                animator.SetTrigger("Hit");
+                animator.SetTrigger(Hit);
                 // 충격에 의한 물리 공식
                 velocity *= Mathf.Pow(2, (playable.DamageGage * 0.01f));
                 physics.velocity = velocity;
                 if (velocity != Vector3.zero)
                 {
                     //GameObject.Instantiate(new GameObject(), transform.position + velocity, Quaternion.identity);
-                    animator.SetTrigger("Knockback");
+                    animator.SetTrigger(Knockback);
                     IsKnockback = true;
                 }
                 //playable.effectManager.Play(EffectManager.EFFECT.Hit).Forget();
@@ -257,15 +268,15 @@ namespace LGProject.PlayerState //
 
         public void ResetAnimParameters()
         {
-            animator.ResetTrigger("Idle");
-            animator.ResetTrigger("DashAttack");
-            animator.ResetTrigger("Hit");
-            //animator.ResetTrigger("Guard");
-            animator.ResetTrigger("Jump1");
-            animator.ResetTrigger("Jump2");
-            animator.ResetTrigger("Knockback");
-            animator.ResetTrigger("Landing");
-            animator.ResetTrigger("WakeUp");
+            animator.ResetTrigger(Idle);
+            animator.ResetTrigger(DashAttack);
+            animator.ResetTrigger(Hit);
+            //animator.ResetTrigger(Guard);
+            animator.ResetTrigger(Jump1);
+            animator.ResetTrigger(Jump2);
+            animator.ResetTrigger(Knockback);
+            animator.ResetTrigger(Landing);
+            animator.ResetTrigger(WakeUp);
         }
 
         public void UltimateGageisFull()

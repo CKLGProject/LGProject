@@ -6,9 +6,10 @@ namespace LGProject.PlayerState
 {
     public class LandingState : State
     {
-        float curTimer = 0;
+        private float _currentTimer;
+        private static readonly int Landing = Animator.StringToHash("Landing");
 
-        public LandingState(PlayerStateMachine _stateMachine) : base (_stateMachine)
+        public LandingState(PlayerStateMachine stateMachine) : base (stateMachine)
         {
             
         }
@@ -16,9 +17,9 @@ namespace LGProject.PlayerState
         public override void Enter()
         {
             base.Enter();
-            stateMachine.StandingVelocity();
-            stateMachine.animator.SetTrigger("Landing");
-            curTimer = 0;
+            StateMachine.StandingVelocity();
+            StateMachine.animator.SetTrigger(Landing);
+            _currentTimer = 0;
         }
 
         public override void Exit()
@@ -29,15 +30,13 @@ namespace LGProject.PlayerState
         public override void LogicUpdate()
         {
             base.LogicUpdate();
-            curTimer += Time.deltaTime;
-            if (curTimer > 0.25f)
+            _currentTimer += Time.deltaTime;
+            if (_currentTimer > 0.25f)
             {
-                if(Mathf.Abs(stateMachine.moveAction.ReadValue<float>())> 0.2f)
-                {
-                    stateMachine.ChangeState(stateMachine.moveState);
-                }
+                if (Mathf.Abs(StateMachine.moveAction.ReadValue<float>()) > 0.2f)
+                    StateMachine.ChangeState(StateMachine.moveState);
                 else
-                    stateMachine.ChangeState(stateMachine.idleState);
+                    StateMachine.ChangeState(StateMachine.idleState);
             }
         }
 

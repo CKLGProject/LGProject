@@ -1,62 +1,40 @@
 using UnityEngine;
-using System.Collections;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System;
 
 namespace pathFinding
 {
     public class Node : IHeapItem<Node>
     {
-        int heapIndex;
+        public bool Walkable;
+        public Vector3 WorldPosition;
+        public int GridX;
+        public int GridY;
+        public int MovementPenalty;
 
-        public bool walkable;
-        public Vector3 worldPosition;
-        public int gridX;
-        public int gridY;
-        public int movementPenalty;
+        public int GCost;
+        public int HCost;
+        public Node Parent;
 
-        public int gCost;
-        public int hCost;
-        public Node parent;
+        public bool Platform;
 
-        public bool platform;
-
-        public Node(bool _walkable, Vector3 _worldPos, int _gridX, int _gridY, int _penalty)
+        public Node(bool walkable, Vector3 worldPos, int gridX, int gridY, int penalty)
         {
-            walkable = _walkable;
-            worldPosition = _worldPos;
-            gridX = _gridX;
-            gridY = _gridY;
-            movementPenalty = _penalty;
+            Walkable = walkable;
+            WorldPosition = worldPos;
+            GridX = gridX;
+            GridY = gridY;
+            MovementPenalty = penalty;
         }
 
-        public int fCost
-        {
-            get
-            {
-                return gCost + hCost;
-            }
-        }
+        public int FCost => GCost + HCost;
 
-        public int HeapIndex
-        {
-            get
-            {
-                return heapIndex;
-            }
-            set
-            {
-                heapIndex = value;
-            }
-        }
+        public int HeapIndex { get; set; }
 
         public int CompareTo(Node other)
         {
-            int compare = fCost.CompareTo(other.fCost);
-            if (compare == 0)
-            {
-                compare = hCost.CompareTo(other.hCost);
-            }
+            int compare = FCost.CompareTo(other.FCost);
+            
+            if (compare == 0) 
+                compare = HCost.CompareTo(other.HCost);
 
             return -compare;
         }
