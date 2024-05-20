@@ -117,6 +117,7 @@ Material:
     - _0zPowerSwitch: 0
     - _0z_Power_Switch: 1
     - _1xStepOffsetSwitch: 0
+    - _1x_Intensity_Switch: 0
     - _1x_Saturation_Switch: 0
     - _AddPrecomputedVelocity: 0
     - _Alpha: 0
@@ -142,6 +143,7 @@ Material:
     - _Gradation_On_Off: 0
     - _MainIntensity: 1
     - _MainPower: 1
+    - _Main_Intensity: 1
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
