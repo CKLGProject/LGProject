@@ -33,7 +33,7 @@ namespace BehaviourTree
             if(Agent.GetStateMachine.IsDamaged && !Agent.GetStateMachine.IsKnockback)
             {
                 // 피격 모션 출력
-                Agent.effectManager.PlayOneShot(EffectManager.EFFECT.Hit);
+                //Agent.effectManager.PlayOneShot(EffectManager.EFFECT.Hit);
                 Agent.GetStateMachine.IsDamaged = false;
                 curTiemr = 0;
             }

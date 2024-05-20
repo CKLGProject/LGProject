@@ -92,6 +92,11 @@ namespace LGProject.PlayerState
             battleModel.SyncUltimateEnergy(ActorType, UltimateGage);
         }
 
+        public void Cheat()
+        {
+            UltimateGage = 100;
+        }
+
         // 공격 방향
         [HideInInspector] public bool directionX = false;
         [HideInInspector] public AnimationCurve jumpCurve;
@@ -172,9 +177,11 @@ namespace LGProject.PlayerState
 
         float curTimer = 0;
         float downTimer = 0.5f;
+        private static readonly int Landing = Animator.StringToHash("Landing");
         private static readonly int Flying = Animator.StringToHash("Flying");
         private static readonly int Hit = Animator.StringToHash("Hit");
         private static readonly int Knockback = Animator.StringToHash("Knockback");
+        //private static readonly int 
 
         public void IsPushDownKey()
         {
@@ -230,20 +237,23 @@ namespace LGProject.PlayerState
             velocity.y = 0;
             transform.position = new Vector3(transform.position.x, UnderPlatform.rect.y, transform.position.z);
 
+
             StateMachine.physics.velocity = velocity;
             StateMachine.collider.isTrigger = false;
             StateMachine.IsGrounded = true;
             StateMachine.IsJumpGuard = false;
             StateMachine.JumpInCount = 0;
             StateMachine.StandingVelocity();
-            if (StateMachine.CurrentState != null)
-                StateMachine.ChangeState(StateMachine.landingState);
+            StateMachine.animator.SetTrigger(Landing);
+            //if (StateMachine.CurrentState != null)
+            //{
+            //    StateMachine.ChangeState(StateMachine.landingState);
+            //}
         }
 
         private void KncokbackLandingCheck()
         {
             effectManager.Play(EffectManager.EFFECT.Knockback).Forget();
-
             Vector3 velocity = StateMachine.physics.velocity;
             velocity.y = 0;
             transform.position = new Vector3(transform.position.x, UnderPlatform.rect.y, transform.position.z);
@@ -309,7 +319,11 @@ namespace LGProject.PlayerState
         {
             if (!DeadZone.TriggerdSpace(transform) && !IsDead)
             {
+                // 밖을 벗어났다는 뜻이기 때문에 리스트에서 지워줘야함.
+                
                 StateMachine.IsDead = true;
+                // 죽으면 어레이에서 빼주기.
+                DeadZone.SubTarget(transform);
                 UltimateGage /= 2;
                 LifePoint -= 1; // 체력 감소
                 battleModel.SyncHealth(ActorType, LifePoint);
@@ -318,6 +332,10 @@ namespace LGProject.PlayerState
                     AliveDelay().Forget();
                 }
             }
+        }
+
+        public void DieCameraForcus()
+        {
 
         }
 
@@ -374,16 +392,26 @@ namespace LGProject.PlayerState
         private async UniTaskVoid AliveDelay()
         {
             await UniTask.Delay(TimeSpan.FromSeconds(respawnTime));
+            DeadZone.AddTarget(transform);
             StateMachine.ResetVelocity();
             transform.position = Vector3.forward * -9.5f + AliveOffset;
             StateMachine.IsDead = false;
             DamageGage = 0;
             battleModel.SyncDamageGage(ActorType, DamageGage);
 
-            StateMachine.animator.SetTrigger(Hit);
-            StateMachine.IsDamaged = true;
-            StateMachine.IsKnockback = true;
-            StateMachine.animator.SetTrigger(Knockback);
+            StateMachine.animator.SetTrigger("Jump1");
+            //await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
+            //StateMachine.animator.SetBool(Flying, false);
+            StateMachine.IsDamaged = false;
+            StateMachine.IsKnockback = false;
+            StateMachine.IsGrounded = false;
+            
+
+
+            //StateMachine.animator.SetTrigger(Hit);
+            //StateMachine.IsDamaged = true;
+            //StateMachine.IsKnockback = true;
+            //StateMachine.animator.SetTrigger(Knockback);
         }
 
         public void SetUnderPlatform()

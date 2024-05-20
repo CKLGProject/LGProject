@@ -13,21 +13,21 @@ namespace BehaviourTree
         private float curTimer;
         protected override void OnStart()
         {
-            Debug.Log("DownNodeStart");
+            //Debug.Log("DownNodeStart");
             if (Agent == null)
                 Agent = AIAgent.Instance;
             if (_stateMachine == null)
                 _stateMachine = Agent.GetStateMachine;
             curTimer = 0;
             _stateMachine.animator.SetTrigger("Landing");
-            Agent.effectManager.PlayOneShot(EffectManager.EFFECT.Knockback);
+            Agent.effectManager.Play(EffectManager.EFFECT.Knockback).Forget();
             _stateMachine.IsDamaged = false;
             _stateMachine.IsDown = true;
         }
 
         protected override void OnStop()
         {
-            Debug.Log("DownNodeStop");
+
         }
 
         protected override State OnUpdate()

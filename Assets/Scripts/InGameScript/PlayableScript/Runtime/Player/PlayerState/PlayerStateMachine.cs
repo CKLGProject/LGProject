@@ -236,12 +236,12 @@ namespace LGProject.PlayerState //
             physics.velocity = Vector3.zero;
         }
 
-        public void HitDamaged(Vector3 velocity)
+        public void HitDamaged(Vector3 velocity, PlayerStateMachine EnemyStateMachine = null)
         {
             // 누어 있는 상태에선 데미지를 입지 않는다.
-            if (IsDown || IsUltimate)
+            if (IsDown || IsUltimate || (EnemyStateMachine != null && !EnemyStateMachine.IsUltimate))
                 return;
-            if (!IsGuard)
+            if (!IsGuard || (EnemyStateMachine != null && EnemyStateMachine.IsUltimate))
             {
                 physics.velocity = Vector3.zero;
                 playable.SetDamageGage(playable.DamageGage + 8.5f);
@@ -253,15 +253,24 @@ namespace LGProject.PlayerState //
                 physics.velocity = velocity;
                 if (velocity != Vector3.zero)
                 {
-                    //GameObject.Instantiate(new GameObject(), transform.position + velocity, Quaternion.identity);
                     animator.SetTrigger(Knockback);
                     IsKnockback = true;
                 }
-                //playable.effectManager.Play(EffectManager.EFFECT.Hit).Forget();
+                if(EnemyStateMachine != null && EnemyStateMachine.IsUltimate)
+                {
+                    playable.effectManager.PlayOneShot(EffectManager.EFFECT.UltimateHit);
+                }
+                else
+                {
+                    playable.effectManager.Play(EffectManager.EFFECT.Hit).Forget();
+                }
+
+                playable.effectManager.Stop(EffectManager.EFFECT.Guard);
+                playable.Animator.SetBool(Guard, false);
             }
             else
             {
-                physics.velocity = new Vector3(transform.forward.x * -2f, 0, 0);
+                //physics.velocity = new Vector3(transform.forward.x * -2f, 0, 0);
             }
 
             IsDamaged = true;

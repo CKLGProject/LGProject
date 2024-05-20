@@ -161,8 +161,6 @@ namespace BehaviourTree
                     HitDamaged(_stateMachine.AttackCount < 3 ? Vector3.zero : v);
                     temp.Item1.GetStateMachine.hitPlayer = _stateMachine.transform;
 
-                    temp.Item1.effectManager.PlayOneShot(EffectManager.EFFECT.Hit);
-
                     _stateMachine.animator.SetInteger("Attack", 0);
                     return true;
                 }

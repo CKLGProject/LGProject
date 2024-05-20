@@ -18,6 +18,10 @@ namespace LGProject.PlayerState
         private bool _isMove;
 
         private RaycastHit hit;
+
+        private static readonly int Ultimate = Animator.StringToHash("Ultimate");
+
+
         public HitUltimateState(PlayerStateMachine _stateMachine) : base(_stateMachine)
         {
             _nodeList = pathFinding.Grid.Instance.WalkableNodeList;
@@ -28,7 +32,10 @@ namespace LGProject.PlayerState
         public override void Enter()
         {
             base.Enter();
-            StateMachine.animator.SetTrigger("Ultimate");
+            StateMachine.animator.SetTrigger(Ultimate);
+            StateMachine.playable.effectManager.Play(EffectManager.EFFECT.UltimatePreCenter).Forget();
+            StateMachine.playable.effectManager.Play(EffectManager.EFFECT.UltimatePreRHand).Forget();
+
             StateMachine.IsUltimate = true;
             StateMachine.animator.updateMode = AnimatorUpdateMode.UnscaledTime;
             _isMove = false;
@@ -68,16 +75,13 @@ namespace LGProject.PlayerState
         // 이동 경로에 적이 존재하는가에 대한 의문
         private bool PathCheck()
         {
-            if(Physics.Raycast(StateMachine.transform.position + Vector3.up * .5f, StateMachine.playable.directionX ?  Vector3.right : Vector3.left, out hit, 6 * .25f))
+            if(Physics.Raycast(StateMachine.transform.position + Vector3.up * .5f, StateMachine.playable.directionX ?  Vector3.right : Vector3.left, out hit, 4f))
             {
+                Debug.Log(hit.transform.name);
                 return true;
             }
+            Debug.Log("null");
             return false;
-        }
-
-        private void AttackJudge()
-        {
-
         }
 
         private void MovementPointSet()
@@ -111,7 +115,9 @@ namespace LGProject.PlayerState
                targetStateMachine.transform.position + direction,
                   targetStateMachine.transform.position, 0.5f, 3f);
 
-            targetStateMachine.HitDamaged(KnockbackValue);
+            //targetStateMachine.playable.effectManager.PlayOneShot(EffectManager.EFFECT.UltimateHit);
+
+            targetStateMachine.HitDamaged(KnockbackValue, StateMachine);
 
 
         }
@@ -123,6 +129,10 @@ namespace LGProject.PlayerState
             Time.timeScale = 1f;
             StateMachine.playable.effectManager.Stop(EffectManager.EFFECT.Ultimate);
             StateMachine.animator.updateMode = AnimatorUpdateMode.Normal;
+            StateMachine.playable.effectManager.Play(EffectManager.EFFECT.UltimateDash).Forget();
+            StateMachine.playable.effectManager.Stop(EffectManager.EFFECT.UltimatePreCenter);
+            StateMachine.playable.effectManager.Stop(EffectManager.EFFECT.UltimatePreRHand);
+
             //stateMachine.animator.stop
             // 플레이어 앞에 있는 놈들 전부 잡아 족쳐
             if (PathCheck())

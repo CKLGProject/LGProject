@@ -30,7 +30,7 @@ namespace BehaviourTree
             if (stateMachine == null)
                 stateMachine = AIAgent.Instance.GetStateMachine;
             stateMachine.IsGuard = true;
-            stateMachine.playable.effectManager.PlayOneShot(EffectManager.EFFECT.Guard);
+            stateMachine.playable.effectManager.Play(EffectManager.EFFECT.Guard).Forget();
             curTimer = 0;
             stateMachine.animator.SetBool("Guard", true);
             stateMachine.animator.SetFloat("Run", 0);

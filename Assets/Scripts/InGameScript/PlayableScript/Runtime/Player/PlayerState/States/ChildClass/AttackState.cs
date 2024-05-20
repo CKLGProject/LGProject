@@ -157,6 +157,8 @@ namespace LGProject.PlayerState
                     // 다음 공격의 게이지가 100일 경우 Ultimate공격을 진행 아닐 경우 attackState
                     if (StateMachine.playable.UltimateGage >= 100)
                     {
+                        StateMachine.AttackCount = 0;
+                        StateMachine.animator.SetInteger(Attack ,0);
                         StateMachine.ChangeState(StateMachine.ultimateState);
                     }
                     else
@@ -219,12 +221,10 @@ namespace LGProject.PlayerState
                             _damageInCount = true;
 
                             if (!temp.Item1.GetStateMachine.IsGuard && !temp.Item1.GetStateMachine.IsDown)
-                            {// 100 % gage로 일단 계산
+                            {
+                                // 100 % gage로 일단 계산
                                 StateMachine.playable.SetUltimateGage(StateMachine.playable.UltimateGage + 10);
                                 StateMachine.UltimateGageisFull();
-
-                                temp.Item1.effectManager.PlayOneShot(EffectManager.EFFECT.Hit);
-
                             }
                         }
                     }

@@ -364,6 +364,7 @@ namespace BehaviourTree
             effectManager.InitParticles();
             SetUnderPlatform();
             SetUltimateGage(0);
+            transform.rotation = Quaternion.Euler(new Vector3(0, -90, 0));
             for (int i = 0; i < StateMachine.animator.runtimeAnimatorController.animationClips.Length; i++)
             {
                 string name = StateMachine.animator.runtimeAnimatorController.animationClips[i].name;
@@ -379,7 +380,8 @@ namespace BehaviourTree
                 GetStateMachine.Update();
             //PlatformCheck();
             NewPlatformCheck();
-            DeadLineCheck();
+            //DeadLineCheck();
+            DeadSpaceCheck();
             // 바라보는 방향 -> 일단 무조건 플레이어를 바라보게 설정
 
         }

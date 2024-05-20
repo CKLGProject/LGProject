@@ -31,14 +31,32 @@ namespace LGProject
             if (pTransform.position.x < DeadSpace.x && pTransform.position.x > DeadSpace.width &&
                 pTransform.position.y < DeadSpace.y && pTransform.position.y > DeadSpace.height)
             {
-                for(int i =0; i <
-                TargetGroup.GetComponent<CinemachineTargetGroup>().m_Targets.Length; i++)
-                {
-                    // 없을 경우 추가 있을 경우 넘김
-                }
                 return true;
             }
             return false;
+        }
+
+        public void SubTarget(Transform pTransform)
+        {
+            Debug.Log(TargetGroup.GetComponent<CinemachineTargetGroup>().FindMember(pTransform));
+            int num = TargetGroup.GetComponent<CinemachineTargetGroup>().FindMember(pTransform);
+            TargetGroup.GetComponent<CinemachineTargetGroup>().m_Targets[num].target = null;
+        }
+        
+        public void AddTarget(Transform pTransform)
+        {
+            Debug.Log(TargetGroup.GetComponent<CinemachineTargetGroup>().FindMember(pTransform));
+            if(TargetGroup.GetComponent<CinemachineTargetGroup>().FindMember(pTransform) == -1)
+            {
+                for(int i =0; i < TargetGroup.GetComponent<CinemachineTargetGroup>().m_Targets.Length; i++)
+                {
+                    if (TargetGroup.GetComponent<CinemachineTargetGroup>().m_Targets[i].target == null)
+                    {
+                        TargetGroup.GetComponent<CinemachineTargetGroup>().m_Targets[i].target = pTransform;
+                        return;
+                    }
+                }
+            }
         }
     }
 }
