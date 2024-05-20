@@ -26,6 +26,7 @@ namespace LGProject.PlayerState
             StateMachine.AttackCount = 0;
             //Debug.Log($"{stateMachine.transform.ToString()}who's hit? : {stateMachine.hitPlayer}");
             _currentTimer = 0;
+
         }
 
         public override void Exit()

@@ -80,7 +80,6 @@ namespace LGProject.PlayerState
 
         public Vector3 AliveOffset;
         public float respawnTime;
-        public float DeadLine;
 
         public float DamageGage { get; private set; }
         public void SetDamageGage(float value) => DamageGage = value;
@@ -97,7 +96,8 @@ namespace LGProject.PlayerState
         [HideInInspector] public bool directionX = false;
         [HideInInspector] public AnimationCurve jumpCurve;
 
-        public Platform underPlatform;
+        public Platform UnderPlatform;
+        public DeadZone DeadZone;
 
         public EffectManager effectManager;
 
@@ -228,7 +228,7 @@ namespace LGProject.PlayerState
             effectManager.Play(EffectManager.EFFECT.Landing).Forget();
             Vector3 velocity = StateMachine.physics.velocity;
             velocity.y = 0;
-            transform.position = new Vector3(transform.position.x, underPlatform.rect.y, transform.position.z);
+            transform.position = new Vector3(transform.position.x, UnderPlatform.rect.y, transform.position.z);
 
             StateMachine.physics.velocity = velocity;
             StateMachine.collider.isTrigger = false;
@@ -246,7 +246,7 @@ namespace LGProject.PlayerState
 
             Vector3 velocity = StateMachine.physics.velocity;
             velocity.y = 0;
-            transform.position = new Vector3(transform.position.x, underPlatform.rect.y, transform.position.z);
+            transform.position = new Vector3(transform.position.x, UnderPlatform.rect.y, transform.position.z);
 
             StateMachine.physics.velocity = Vector3.zero;
             StateMachine.collider.isTrigger = false;
@@ -296,13 +296,29 @@ namespace LGProject.PlayerState
 
         private bool AABBPlatformCheck()
         {
-            if (transform.position.x < underPlatform.rect.x && transform.position.x > underPlatform.rect.width &&
-                transform.position.y < underPlatform.rect.y && transform.position.y > underPlatform.rect.height)
+            if (transform.position.x < UnderPlatform.rect.x && transform.position.x > UnderPlatform.rect.width &&
+                transform.position.y < UnderPlatform.rect.y && transform.position.y > UnderPlatform.rect.height)
             {
                 return true;
             }
 
             return false;
+        }
+
+        public void DeadSpaceCheck()
+        {
+            if (!DeadZone.TriggerdSpace(transform) && !IsDead)
+            {
+                StateMachine.IsDead = true;
+                UltimateGage /= 2;
+                LifePoint -= 1; // 체력 감소
+                battleModel.SyncHealth(ActorType, LifePoint);
+                if (LifePoint > 0)
+                {
+                    AliveDelay().Forget();
+                }
+            }
+
         }
 
 
@@ -342,17 +358,17 @@ namespace LGProject.PlayerState
 
         public void DeadLineCheck()
         {
-            if (!StateMachine.IsDead && transform.position.y < DeadLine)
-            {
-                StateMachine.IsDead = true;
-                UltimateGage /= 2;
-                LifePoint -= 1; // 체력 감소
-                battleModel.SyncHealth(ActorType, LifePoint);
-                if (LifePoint > 0)
-                {
-                    AliveDelay().Forget();
-                }
-            }
+            //if (!StateMachine.IsDead && transform.position.y < DeadLine)
+            //{
+            //    StateMachine.IsDead = true;
+            //    UltimateGage /= 2;
+            //    LifePoint -= 1; // 체력 감소
+            //    battleModel.SyncHealth(ActorType, LifePoint);
+            //    if (LifePoint > 0)
+            //    {
+            //        AliveDelay().Forget();
+            //    }
+            //}
         }
 
         private async UniTaskVoid AliveDelay()
@@ -372,7 +388,8 @@ namespace LGProject.PlayerState
 
         public void SetUnderPlatform()
         {
-            underPlatform = GameObject.Find("Main_Floor (1)").GetComponent<Platform>();
+            UnderPlatform = GameObject.Find("Main_Floor (1)").GetComponent<Platform>();
+            DeadZone = GameObject.Find("DeadZone").GetComponent<DeadZone>();
         }
 
         public void ShowUltimateEffect()

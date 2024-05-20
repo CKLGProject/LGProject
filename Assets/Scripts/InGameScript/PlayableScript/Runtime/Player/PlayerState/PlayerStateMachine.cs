@@ -243,6 +243,7 @@ namespace LGProject.PlayerState //
                 return;
             if (!IsGuard)
             {
+                physics.velocity = Vector3.zero;
                 playable.SetDamageGage(playable.DamageGage + 8.5f);
                 battleModel.SyncDamageGage(playable.ActorType, playable.DamageGage);
                 IsNormalAttack = false;

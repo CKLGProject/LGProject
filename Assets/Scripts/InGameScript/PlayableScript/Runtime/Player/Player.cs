@@ -41,7 +41,8 @@ namespace LGProject.PlayerState
                 PlayableGravity();
                 velocity = StateMachine.physics.velocity;
                 NewPlatformCheck();
-                DeadLineCheck();
+                DeadSpaceCheck();
+                //DeadLineCheck();
             }
         }
 

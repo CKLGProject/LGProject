@@ -109,7 +109,7 @@ public class BattleView : MonoBehaviour
     /// </summary>
     public void ShowWinPopup()
     {
-        losePopup.SetActive(true);
+        winPopup.SetActive(true);
     }
 
     /// <summary>
