@@ -5339,7 +5339,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 30
+  field of view: 39.53586
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
@@ -5366,7 +5366,7 @@ Transform:
   m_GameObject: {fileID: 1353022552}
   serializedVersion: 2
   m_LocalRotation: {x: 0.04981371, y: 1e-45, z: 0, w: 0.99875855}
-  m_LocalPosition: {x: -2, y: 4, z: -19.5}
+  m_LocalPosition: {x: 0, y: 4, z: -19.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7307,7 +7307,7 @@ Transform:
   m_GameObject: {fileID: 1620233447}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2, y: 1, z: -9.5}
+  m_LocalPosition: {x: 0, y: 1, z: -9.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8118,7 +8118,7 @@ Transform:
   m_GameObject: {fileID: 1760387847}
   serializedVersion: 2
   m_LocalRotation: {x: 0.04981371, y: 1e-45, z: -0, w: 0.99875855}
-  m_LocalPosition: {x: -2, y: 4, z: -19.5}
+  m_LocalPosition: {x: 0, y: 4, z: -19.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10282,7 +10282,7 @@ PrefabInstance:
     - target: {fileID: 6142601296869339651, guid: 2733f80f426950d4598e4e6317bd7935,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8219133890818253592, guid: 2733f80f426950d4598e4e6317bd7935,
         type: 3}

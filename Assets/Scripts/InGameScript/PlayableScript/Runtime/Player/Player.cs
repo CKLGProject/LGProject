@@ -22,7 +22,7 @@ namespace LGProject.PlayerState
             InitStates();
             InitEffectManager();
             SetUltimateGage(0);
-            effectManager.InitParticles(); Cheat();
+            effectManager.InitParticles();
 
             for (int i = 0; i < StateMachine.animator.runtimeAnimatorController.animationClips.Length; i++)
             {

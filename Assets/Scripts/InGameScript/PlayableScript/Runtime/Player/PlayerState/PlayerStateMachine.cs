@@ -60,6 +60,7 @@ namespace LGProject.PlayerState //
         public bool IsDead;
         public bool IsNormalAttack;
         public bool IsUltimate;
+        public bool IsSuperArmor;
 
         public bool IsDashAttack = false;
         public bool IsJumpAttack = false;
@@ -239,7 +240,7 @@ namespace LGProject.PlayerState //
         public void HitDamaged(Vector3 velocity, PlayerStateMachine EnemyStateMachine = null)
         {
             // 누어 있는 상태에선 데미지를 입지 않는다.
-            if (IsDown || IsUltimate || (EnemyStateMachine != null && !EnemyStateMachine.IsUltimate))
+            if (IsDown || IsUltimate || IsSuperArmor ||(EnemyStateMachine != null && !EnemyStateMachine.IsUltimate))
                 return;
             if (!IsGuard || (EnemyStateMachine != null && EnemyStateMachine.IsUltimate))
             {

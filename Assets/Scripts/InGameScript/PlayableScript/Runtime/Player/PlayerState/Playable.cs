@@ -405,14 +405,19 @@ namespace LGProject.PlayerState
             StateMachine.IsDamaged = false;
             StateMachine.IsKnockback = false;
             StateMachine.IsGrounded = false;
+            StateMachine.IsSuperArmor = true;
             
-
+            // 무적 2초
+            await UniTask.Delay(TimeSpan.FromSeconds(2f));
+            StateMachine.IsSuperArmor = false;
 
             //StateMachine.animator.SetTrigger(Hit);
             //StateMachine.IsDamaged = true;
             //StateMachine.IsKnockback = true;
             //StateMachine.animator.SetTrigger(Knockback);
         }
+
+
 
         public void SetUnderPlatform()
         {
