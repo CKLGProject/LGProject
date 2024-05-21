@@ -2060,8 +2060,8 @@ MonoBehaviour:
   UseAsync: 0
   editorAutoLoad: 0
   loadScene:
-    sceneAsset: {fileID: 102900000, guid: 3fea480b0a4a09e469e5bacba8abad2b, type: 3}
-    path: Assets/Scenes/Product/Battle.unity
+    sceneAsset: {fileID: 102900000, guid: 88dd0b09ca7d94e4d9fc46e84783e817, type: 3}
+    path: Assets/Scenes/Stage_Sunset.unity
   additiveScenes: []
   SkipMode: 3
   SkipAction:

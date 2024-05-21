@@ -35,7 +35,8 @@ public class BattleView : MonoBehaviour
 
     [Header("Timer")]
     [SerializeField] private TextMeshProUGUI timerText;
-
+    [Header("StartLogo")]
+    [SerializeField] private Image StartImage;
 
     /// <summary>
     /// 뷰를 전부 안보이도록 처리합니다.
@@ -153,15 +154,18 @@ public class BattleView : MonoBehaviour
             countText.text = $"<rotate=\"0\">{count}</rotate>";
         else
         {
-            countText.text = $"<rotate=\"0\">Start!!</rotate>";
+            //countText.text = $"<rotate=\"0\">Start!!</rotate>";
             DisappearCountTextAfterOneSecond().Forget();
         }
     }
 
     private async UniTaskVoid DisappearCountTextAfterOneSecond()
     {
-        await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
         countText.gameObject.SetActive(false);
+        StartImage.gameObject.SetActive(true);
+        await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
+
+        StartImage.gameObject.SetActive(false);
     }
 
     /// <summary>
