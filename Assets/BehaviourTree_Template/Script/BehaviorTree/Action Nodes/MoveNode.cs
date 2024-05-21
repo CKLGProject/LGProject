@@ -67,7 +67,7 @@ namespace BehaviourTree
             if (_agent == null)
                 _agent = AIAgent.Instance;
 
-            if (_stateMachine.IsDamaged)
+            if (_stateMachine.IsDamaged || _stateMachine.IsDead)
                 return State.Failure;
 
             if (_agent.GetStateMachine.IsGrounded)

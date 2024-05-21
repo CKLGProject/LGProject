@@ -32,6 +32,7 @@ namespace LGProject.PlayerState
         public override void Enter()
         {
             base.Enter();
+            StateMachine.ResetVelocity();
             StateMachine.animator.SetTrigger(Ultimate);
             StateMachine.playable.effectManager.Play(EffectManager.EFFECT.UltimatePreCenter).Forget();
             StateMachine.playable.effectManager.Play(EffectManager.EFFECT.UltimatePreRHand).Forget();

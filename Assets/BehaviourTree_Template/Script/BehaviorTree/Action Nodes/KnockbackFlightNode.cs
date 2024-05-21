@@ -26,6 +26,13 @@ namespace BehaviourTree
         protected override State OnUpdate()
         {
 
+            if (_stateMachine.IsDead)
+            {
+                _stateMachine.IsKnockback = false;
+                _stateMachine.IsDamaged = false;
+                _stateMachine.IsDamaged = false;
+                return State.Failure;
+            }
             // 일단 판정을 받아야함.
             if(!_stateMachine.IsKnockback)
             {

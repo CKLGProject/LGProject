@@ -406,6 +406,8 @@ namespace LGProject.PlayerState
             StateMachine.IsKnockback = false;
             StateMachine.IsGrounded = false;
             StateMachine.IsSuperArmor = true;
+            if(StateMachine.CurrentState != null)
+                StateMachine.ChangeState(StateMachine.idleState);
             
             // 무적 2초
             await UniTask.Delay(TimeSpan.FromSeconds(2f));
