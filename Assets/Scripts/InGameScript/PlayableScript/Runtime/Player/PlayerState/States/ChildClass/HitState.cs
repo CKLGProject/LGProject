@@ -13,6 +13,7 @@ namespace LGProject.PlayerState
         public HitState(PlayerStateMachine stateMachine, ref float stunTimer) : base(stateMachine)
         {
             _stunTimer = stunTimer;
+            //_stunTimer = stunTimer;
         }
         public override void Enter()
         {
@@ -22,7 +23,6 @@ namespace LGProject.PlayerState
             //Vector3.zero;
             //stateMachine.physics.velocity = stateMachine;
 
-            StateMachine.IsDamaged = false;     // 맞았어! 맞았다고! 그만때려!
             StateMachine.AttackCount = 0;
             //Debug.Log($"{stateMachine.transform.ToString()}who's hit? : {stateMachine.hitPlayer}");
             _currentTimer = 0;
@@ -38,7 +38,9 @@ namespace LGProject.PlayerState
         public override void LogicUpdate()
         {
             base.LogicUpdate();
-            if(!StateMachine.IsGrounded)
+
+            StateMachine.IsDamaged = false;
+            if (!StateMachine.IsGrounded)
             {
                 StateMachine.ChangeState(StateMachine.knockbackState);
                 return;
@@ -49,10 +51,14 @@ namespace LGProject.PlayerState
             }
             else
             {
+                _currentTimer += Time.deltaTime;
                 // 공중에서 피격당할 시 Idle state가 아닌 Down State로 변경
                 // Down State의 경우 땅에 닿을 때(is Grounded = true) 까지
                 // Down State를 유지해야 하며, 
-                StateMachine.ChangeState(StateMachine.idleState);
+                if(_currentTimer > _stunTimer)
+                {
+                    StateMachine.ChangeState(StateMachine.idleState);
+                }
             }
 
         }

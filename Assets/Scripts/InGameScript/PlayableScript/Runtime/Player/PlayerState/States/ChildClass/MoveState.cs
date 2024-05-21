@@ -32,7 +32,10 @@ namespace LGProject.PlayerState
 
         public override void LogicUpdate()
         {
+            // 아하! 여기서 문제가 생기는구나!
             base.LogicUpdate();
+            if (StateMachine.IsKnockback || StateMachine.IsDamaged)
+                return;
 
             float moveThreshold = Mathf.Abs(StateMachine.moveAction.ReadValue<float>());
             StateMachine.animator.SetFloat(Run, moveThreshold);
@@ -97,6 +100,11 @@ namespace LGProject.PlayerState
                     StateMachine.transform.position.y, StateMachine.transform.position.z);
 
                 StateMachine.transform.LookAt(StateMachine.moveAction.ReadValue<float>() < 0 ? right : left);
+
+                Vector3 euler = StateMachine.transform.GetChild(1).GetComponent<RectTransform>().localRotation.eulerAngles;
+                Debug.Log($"{euler} / {StateMachine.transform.GetChild(1).GetComponent<RectTransform>().transform.name}");
+                StateMachine.transform.GetChild(1).GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, StateMachine.moveAction.ReadValue<float>() < 0 ? 90 :-90, 0);
+
             }
         }
 

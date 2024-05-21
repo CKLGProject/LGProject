@@ -23,7 +23,10 @@ namespace LGProject.PlayerState
             base.Enter();
             _currentTimer = 0;
             StateMachine.animator.SetTrigger(DashAttack);
+            StateMachine.physics.velocity = Vector3.zero;
             _damageInCount = false;
+            StateMachine.physics.velocity += Vector3.right * (StateMachine.moveAction.ReadValue<float>()) * 5f;
+
             // velocity 초기화 X
             // 그런데 브레이크는 걸면 좋을 듯? 대충 Drag값 조절해서 끼이익 하는 느낌을 줘보자.
             //Debug.Log("Sert");
@@ -64,7 +67,7 @@ namespace LGProject.PlayerState
         {
             if (!_damageInCount)
             {
-                Vector3 right = Vector3.right * (StateMachine.playable.directionX == true ? 1 : -1);
+                Vector3 right = Vector3.right * (StateMachine.playable.directionX == true ? 0.5f : -0.5f);
                 Vector3 center = StateMachine.transform.position + right + Vector3.up * 0.5f;
                 // 생각보다 판정이 후하진 않게 하기
                 // hit box의 크기를 따라감.

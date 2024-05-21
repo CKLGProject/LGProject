@@ -23,6 +23,7 @@ namespace LGProject.PlayerState
             base.Enter();
             _currentTimer = 0;
             StateMachine.IsDown = true;
+            StateMachine.animator.SetInteger("Attack", 0);
             StateMachine.animator.SetTrigger(Landing);
             StateMachine.ResetVelocity();
         }

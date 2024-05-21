@@ -29,7 +29,7 @@ namespace LGProject.PlayerState
             if(StateMachine.IsDamaged && !StateMachine.IsGuard)
             {
                 // 공격을 받았을 때, hitState로 변경해 줌.
-                
+                //StateMachine.physics.velocity = Vector3.zero;
                 StateMachine.ChangeState(StateMachine.hitState);
             }
         }

@@ -11,11 +11,14 @@ namespace LGProject
         public bool IsStart { get; private set; }
         public bool IsEnd { get; private set; }
 
+        public float Timer { get; private set; }
+
         /*****************************************************
          * public Methods
          * **/
         public void SetPlayers()
         {
+
         }
 
         /*****************************************************
@@ -36,6 +39,7 @@ namespace LGProject
         public void GameStart()
         {
             IsStart = true;
+            Timer = 180;
         }
 
         /// <summary>
