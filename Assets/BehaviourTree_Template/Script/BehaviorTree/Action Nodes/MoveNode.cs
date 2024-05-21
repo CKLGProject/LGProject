@@ -38,6 +38,7 @@ namespace BehaviourTree
             if (_agent == null)
                 _agent = AIAgent.Instance;
             StateMachineLogic();
+            _stateMachine.physics.velocity = Vector3.zero;
             _curTimer = jumpDelay;
             _agent.targetIndex = 0;
         }
@@ -101,7 +102,7 @@ namespace BehaviourTree
             {
                 _curTimer += Time.deltaTime;
                 Vector3 currentWaypoint = new Vector3(_agent.path[_agent.targetIndex].x, _agent.path[_agent.targetIndex].y - 0.45f, _agent.path[_agent.targetIndex].z);
-                if (Mathf.Abs(Vector3.Distance(_agent.transform.position, currentWaypoint)) < 0.25f)
+                if (Mathf.Abs(Vector3.Distance(_agent.transform.position, currentWaypoint)) < 0.5f)
                 {
                     _agent.targetIndex++;
                     if (_agent.targetIndex >= _agent.path.Length)

@@ -98,6 +98,17 @@ public class BattlePresenter : MonoBehaviour
                 count => _battleModel.SetCountdown(count),
                 _ => BattleSceneManager.Instance.GameStart())
             .AddTo(this);
+
+        this.GameCountDownTimerObservable(BattleModel.TimerMax)
+            .Subscribe(
+                count => _battleModel.SetTimerCountdown(count),
+                _ => BattleSceneManager.Instance.GameEnd()).AddTo(this);
+
+        _battleModel.GameCountDownTimerObservable
+            .Subscribe(count => _battleView.SetTimerText(count))
+            .AddTo(this);
+
+
     }
 
     private async ValueTask GameEndObservable(CancellationToken token)

@@ -123,7 +123,8 @@ namespace BehaviourTree
         {
             #region Omit
             // 판정 범위 계산.
-            Vector3 right = Vector3.right * (AIAgent.Instance.directionX == true ? 1f : -1f);
+            Vector3 pDirct = AIAgent.Instance.player.position - _stateMachine.transform.position ;
+            Vector3 right = Vector3.right * (pDirct.x > 0 ? 1f : -1f);
             Vector3 center = AIAgent.Instance.transform.position + right + Vector3.up * 0.5f;
 
             Collider[] targets = Physics.OverlapBox(center, Vector3.one * 0.5f, Quaternion.identity, 1 << 3);
@@ -160,8 +161,6 @@ namespace BehaviourTree
                     Item1.GetStateMachine.
                     HitDamaged(_stateMachine.AttackCount < 3 ? Vector3.zero : v);
                     temp.Item1.GetStateMachine.hitPlayer = _stateMachine.transform;
-
-                    temp.Item1.effectManager.PlayOneShot(EffectManager.EFFECT.Hit);
 
                     _stateMachine.animator.SetInteger("Attack", 0);
                     return true;

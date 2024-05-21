@@ -7,6 +7,7 @@ public class BattleModel : MonoBehaviour
 {
     // 카운트 다운 값
     public const int CountMax = 3;
+    public const int TimerMax = 180;
 
     private readonly SerializableReactiveProperty<int> _userHealthProperty = new(3);
     private readonly SerializableReactiveProperty<int> _aiHealthProperty = new(3);
@@ -15,7 +16,7 @@ public class BattleModel : MonoBehaviour
     private readonly SerializableReactiveProperty<float> _aiDamageGageProperty = new ();
     private readonly SerializableReactiveProperty<float> _userUltimateEnergyProperty = new ();
     private readonly SerializableReactiveProperty<float> _aiUltimateEnergyProperty = new ();
-    
+    private readonly SerializableReactiveProperty<float> _gameCountDownTimerProperty = new ();
 
     private void Awake()
     {
@@ -103,6 +104,11 @@ public class BattleModel : MonoBehaviour
         _countDownProperty.Value = value;
     }
 
+    public void SetTimerCountdown(float value)
+    {
+        _gameCountDownTimerProperty.Value = value;
+    }
+
     public Observable<int> UserHealthObservable => _userHealthProperty.AsObservable();
     public Observable<int> AIHealthObservable => _aiHealthProperty.AsObservable();
     public Observable<int> CountDownObservable => _countDownProperty.AsObservable();
@@ -110,4 +116,5 @@ public class BattleModel : MonoBehaviour
     public Observable<float> AIDamageGageObservable => _aiDamageGageProperty.AsObservable();
     public Observable<float> UserUltimateEnergyObservable => _userUltimateEnergyProperty.AsObservable();
     public Observable<float> AIUltimateEnergyObservable => _aiUltimateEnergyProperty.AsObservable();
+    public Observable<float> GameCountDownTimerObservable => _gameCountDownTimerProperty.AsObservable();
 }

@@ -14,7 +14,7 @@ namespace BehaviourTree
         private float curTimer;
         protected override void OnStart()
         {
-            Debug.Log("WakeUpStateStart");
+            //Debug.Log("WakeUpStateStart");
             curTimer = 0;
             if (_stateMachine == null)
                 _stateMachine = AIAgent.Instance.GetStateMachine;
@@ -24,7 +24,7 @@ namespace BehaviourTree
 
         protected override void OnStop()
         {
-            Debug.Log("WakeUpStateStop");
+            //Debug.Log("WakeUpStateStop");
             _stateMachine.IsDown = false;
         }
 

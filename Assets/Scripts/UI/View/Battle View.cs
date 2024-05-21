@@ -31,7 +31,11 @@ public class BattleView : MonoBehaviour
     [FormerlySerializedAs("homeSceneLoader")]
     [Header("Home Scene")]
     [SerializeField] private SceneLoader lobbySceneLoader;
-    
+
+
+    [Header("Timer")]
+    [SerializeField] private TextMeshProUGUI timerText;
+
 
     /// <summary>
     /// 뷰를 전부 안보이도록 처리합니다.
@@ -109,8 +113,17 @@ public class BattleView : MonoBehaviour
     /// </summary>
     public void ShowWinPopup()
     {
-        losePopup.SetActive(true);
+        winPopup.SetActive(true);
     }
+
+    /// <summary>
+    /// 타이머를 체크하여 게임 시간을 알려주는 Text에 기록합니다.
+    /// </summary>
+    public void SetTimerText(float value)
+    {
+        timerText.text = $"{(int)value}";
+    }
+
 
     /// <summary>
     /// 이름 텍스트를 value로 변경합니다.
@@ -147,7 +160,7 @@ public class BattleView : MonoBehaviour
 
     private async UniTaskVoid DisappearCountTextAfterOneSecond()
     {
-        await UniTask.Delay(TimeSpan.FromSeconds(1));
+        await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
         countText.gameObject.SetActive(false);
     }
 

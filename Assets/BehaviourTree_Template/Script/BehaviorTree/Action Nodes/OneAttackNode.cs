@@ -131,10 +131,9 @@ namespace BehaviourTree
                     //temp.Item1.GetComponent<Playable>().GetStateMachine.hitPlayer = AIAgent.Instance.transform;
 
                     if (!temp.Item1.GetStateMachine.IsGuard && !temp.Item1.GetStateMachine.IsDown)
-                    {// 100 % gage로 일단 계산
+                    {
+                        // 100 % gage로 일단 계산
                         _stateMachine.playable.SetUltimateGage(_stateMachine.playable.UltimateGage + 10);
-
-                        temp.Item1.effectManager.PlayOneShot(EffectManager.EFFECT.Hit);
                     }
                     return true;
                 }

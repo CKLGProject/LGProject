@@ -80,7 +80,6 @@ namespace LGProject.PlayerState
 
         public Vector3 AliveOffset;
         public float respawnTime;
-        public float DeadLine;
 
         public float DamageGage { get; private set; }
         public void SetDamageGage(float value) => DamageGage = value;
@@ -93,11 +92,17 @@ namespace LGProject.PlayerState
             battleModel.SyncUltimateEnergy(ActorType, UltimateGage);
         }
 
+        public void Cheat()
+        {
+            UltimateGage = 100;
+        }
+
         // 공격 방향
         [HideInInspector] public bool directionX = false;
         [HideInInspector] public AnimationCurve jumpCurve;
 
-        public Platform underPlatform;
+        public Platform UnderPlatform;
+        public DeadZone DeadZone;
 
         public EffectManager effectManager;
 
@@ -172,9 +177,11 @@ namespace LGProject.PlayerState
 
         float curTimer = 0;
         float downTimer = 0.5f;
+        private static readonly int Landing = Animator.StringToHash("Landing");
         private static readonly int Flying = Animator.StringToHash("Flying");
         private static readonly int Hit = Animator.StringToHash("Hit");
         private static readonly int Knockback = Animator.StringToHash("Knockback");
+        //private static readonly int 
 
         public void IsPushDownKey()
         {
@@ -228,7 +235,8 @@ namespace LGProject.PlayerState
             effectManager.Play(EffectManager.EFFECT.Landing).Forget();
             Vector3 velocity = StateMachine.physics.velocity;
             velocity.y = 0;
-            transform.position = new Vector3(transform.position.x, underPlatform.rect.y, transform.position.z);
+            transform.position = new Vector3(transform.position.x, UnderPlatform.rect.y, transform.position.z);
+
 
             StateMachine.physics.velocity = velocity;
             StateMachine.collider.isTrigger = false;
@@ -236,17 +244,19 @@ namespace LGProject.PlayerState
             StateMachine.IsJumpGuard = false;
             StateMachine.JumpInCount = 0;
             StateMachine.StandingVelocity();
-            if (StateMachine.CurrentState != null)
-                StateMachine.ChangeState(StateMachine.landingState);
+            StateMachine.animator.SetTrigger(Landing);
+            //if (StateMachine.CurrentState != null)
+            //{
+            //    StateMachine.ChangeState(StateMachine.landingState);
+            //}
         }
 
         private void KncokbackLandingCheck()
         {
             effectManager.Play(EffectManager.EFFECT.Knockback).Forget();
-
             Vector3 velocity = StateMachine.physics.velocity;
             velocity.y = 0;
-            transform.position = new Vector3(transform.position.x, underPlatform.rect.y, transform.position.z);
+            transform.position = new Vector3(transform.position.x, UnderPlatform.rect.y, transform.position.z);
 
             StateMachine.physics.velocity = Vector3.zero;
             StateMachine.collider.isTrigger = false;
@@ -296,13 +306,37 @@ namespace LGProject.PlayerState
 
         private bool AABBPlatformCheck()
         {
-            if (transform.position.x < underPlatform.rect.x && transform.position.x > underPlatform.rect.width &&
-                transform.position.y < underPlatform.rect.y && transform.position.y > underPlatform.rect.height)
+            if (transform.position.x < UnderPlatform.rect.x && transform.position.x > UnderPlatform.rect.width &&
+                transform.position.y < UnderPlatform.rect.y && transform.position.y > UnderPlatform.rect.height)
             {
                 return true;
             }
 
             return false;
+        }
+
+        public void DeadSpaceCheck()
+        {
+            if (!DeadZone.TriggerdSpace(transform) && !IsDead)
+            {
+                // 밖을 벗어났다는 뜻이기 때문에 리스트에서 지워줘야함.
+                
+                StateMachine.IsDead = true;
+                // 죽으면 어레이에서 빼주기.
+                DeadZone.SubTarget(transform);
+                UltimateGage /= 2;
+                LifePoint -= 1; // 체력 감소
+                battleModel.SyncHealth(ActorType, LifePoint);
+                if (LifePoint > 0)
+                {
+                    AliveDelay().Forget();
+                }
+            }
+        }
+
+        public void DieCameraForcus()
+        {
+
         }
 
 
@@ -342,37 +376,53 @@ namespace LGProject.PlayerState
 
         public void DeadLineCheck()
         {
-            if (!StateMachine.IsDead && transform.position.y < DeadLine)
-            {
-                StateMachine.IsDead = true;
-                UltimateGage /= 2;
-                LifePoint -= 1; // 체력 감소
-                battleModel.SyncHealth(ActorType, LifePoint);
-                if (LifePoint > 0)
-                {
-                    AliveDelay().Forget();
-                }
-            }
+            //if (!StateMachine.IsDead && transform.position.y < DeadLine)
+            //{
+            //    StateMachine.IsDead = true;
+            //    UltimateGage /= 2;
+            //    LifePoint -= 1; // 체력 감소
+            //    battleModel.SyncHealth(ActorType, LifePoint);
+            //    if (LifePoint > 0)
+            //    {
+            //        AliveDelay().Forget();
+            //    }
+            //}
         }
 
         private async UniTaskVoid AliveDelay()
         {
             await UniTask.Delay(TimeSpan.FromSeconds(respawnTime));
+            DeadZone.AddTarget(transform);
             StateMachine.ResetVelocity();
             transform.position = Vector3.forward * -9.5f + AliveOffset;
             StateMachine.IsDead = false;
             DamageGage = 0;
             battleModel.SyncDamageGage(ActorType, DamageGage);
 
-            StateMachine.animator.SetTrigger(Hit);
-            StateMachine.IsDamaged = true;
-            StateMachine.IsKnockback = true;
-            StateMachine.animator.SetTrigger(Knockback);
+            StateMachine.animator.SetTrigger("Jump1");
+            //await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
+            //StateMachine.animator.SetBool(Flying, false);
+            StateMachine.IsDamaged = false;
+            StateMachine.IsKnockback = false;
+            StateMachine.IsGrounded = false;
+            StateMachine.IsSuperArmor = true;
+            
+            // 무적 2초
+            await UniTask.Delay(TimeSpan.FromSeconds(2f));
+            StateMachine.IsSuperArmor = false;
+
+            //StateMachine.animator.SetTrigger(Hit);
+            //StateMachine.IsDamaged = true;
+            //StateMachine.IsKnockback = true;
+            //StateMachine.animator.SetTrigger(Knockback);
         }
+
+
 
         public void SetUnderPlatform()
         {
-            underPlatform = GameObject.Find("Main_Floor (1)").GetComponent<Platform>();
+            UnderPlatform = GameObject.Find("Main_Floor (1)").GetComponent<Platform>();
+            DeadZone = GameObject.Find("DeadZone").GetComponent<DeadZone>();
         }
 
         public void ShowUltimateEffect()
