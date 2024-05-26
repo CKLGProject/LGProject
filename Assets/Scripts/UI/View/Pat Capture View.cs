@@ -20,7 +20,7 @@ public class PatCaptureView : MonoBehaviour
     [SerializeField] private GameObject TouchArea;
     [SerializeField] private CanvasGroup UIGroup;
     [SerializeField] private ObjectRotation objectRotation;
-    [SerializeField] private Transform lightSphere;
+    [SerializeField] private LightController lightController;
 
     [SerializeField] private ARTrackedImageManager _arTrackedImageManager;
     [SerializeField] private Button captureButton;
@@ -116,8 +116,8 @@ public class PatCaptureView : MonoBehaviour
     public void PlayMachineIllumination(float duration)
     {
         const float targetIntensity = 7f;
-        if (_targetObject.Value.MachineObject.TryGetComponent(out MeshRenderer meshRenderer))
-            meshRenderer.material.DOColor(Color.white * targetIntensity, duration).SetEase(Ease.InOutSine);
+        DOTween.To(x => lightController.LightIntensity = x, 0, targetIntensity, duration).SetEase(Ease.InOutSine);
+        DOTween.To(x => lightController.LightAlpha = x, 0, 1, duration).SetEase(Ease.InOutSine);
     }
 
     /// <summary>
