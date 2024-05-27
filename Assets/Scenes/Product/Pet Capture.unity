@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18018535, g: 0.22559482, b: 0.30677685, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -621,7 +621,6 @@ MonoBehaviour:
   TouchArea: {fileID: 2012110168}
   UIGroup: {fileID: 1141293789}
   objectRotation: {fileID: 208130402}
-  lightSphere: {fileID: 1002646017}
   lightController: {fileID: 1201955953}
   _arTrackedImageManager: {fileID: 1593171652}
   captureButton: {fileID: 587089214}
@@ -1848,7 +1847,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 587089212}
   m_OnClick:
     m_PersistentCalls:
@@ -1929,7 +1928,7 @@ PrefabInstance:
     - target: {fileID: 6525950812691162640, guid: c0bca6e87c6259d4f9c09e998aec3dc0,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7069190447503080703, guid: c0bca6e87c6259d4f9c09e998aec3dc0,
         type: 3}

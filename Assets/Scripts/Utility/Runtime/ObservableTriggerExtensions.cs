@@ -22,7 +22,7 @@ namespace ReactiveTouchDown
             return GetOrAddComponent<ObservableDoubleTouchDownTrigger>(component.gameObject)
                 .OnTouchDownAsObservable(component);
         }
-        
+
         private static T GetOrAddComponent<T>(GameObject gameObject)
             where T : Component
         {
@@ -46,7 +46,7 @@ namespace ReactiveTouchDown
         {
             _inputAction.Enable();
         }
-        
+
         private void OnDisable()
         {
             _inputAction.Disable();
@@ -55,7 +55,7 @@ namespace ReactiveTouchDown
         private void Awake()
         {
             _camera = Camera.main;
-            _inputAction = new InputAction("touch", binding: "<Pointer>/press");
+            _inputAction = InputSystem.actions.FindActionMap("System").FindAction("Tap");
             _inputAction.performed += OnTouch;
         }
 
@@ -66,11 +66,11 @@ namespace ReactiveTouchDown
 
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
-                if (hit.collider.gameObject.GetInstanceID() == _instance) 
+                if (hit.collider.gameObject.GetInstanceID() == _instance)
                     _onTouchDown?.OnNext(Unit.Default);
-            } 
+            }
         }
-        
+
         public Subject<Unit> OnTouchDownAsObservable(GameObject component)
         {
             _instance = component.gameObject.GetInstanceID();
@@ -82,40 +82,43 @@ namespace ReactiveTouchDown
             _onTouchDown?.OnCompleted();
         }
     }
-    
+
     public class ObservableDoubleTouchDownTrigger : ObservableTriggerBase
     {
         private int _instance;
         private Subject<Unit> _onTouchDown;
         private Camera _camera;
-        private InputAction _inputAction;
+        private Vector2 _touchPosition;
 
-        private void OnEnable()
-        {
-            _inputAction.Enable();
-        }
-        
-        private void OnDisable()
-        {
-            _inputAction.Disable();
-        }
+        // private void OnEnable()
+        // {
+        //     _inputAction.Enable();
+        // }
+        //
+        // private void OnDisable()
+        // {
+        //     _inputAction.Disable();
+        // }
 
         private void Awake()
         {
             _camera = Camera.main;
-            _inputAction = new InputAction("doubleTap", binding: "<Pointer>/press", interactions: "multiTap(tapCount=2)");
-            _inputAction.performed += OnDoubleTouch;
+            InputSystem.actions.FindActionMap("System").FindAction("Double Tap").performed += OnDoubleTouch;;
+            InputSystem.actions.FindActionMap("System").FindAction("Position").performed += OnPosition;
+        }
+
+        private void OnPosition(InputAction.CallbackContext obj)
+        {
+            _touchPosition = obj.ReadValue<Vector2>();
         }
 
         private void OnDoubleTouch(InputAction.CallbackContext obj)
         {
-            Vector2 clickPosition = Pointer.current.position.ReadValue();
-            
-            Ray ray = _camera.ScreenPointToRay(clickPosition);
+            Ray ray = _camera.ScreenPointToRay(_touchPosition);
 
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
-                if (hit.collider.gameObject.GetInstanceID() == _instance) 
+                if (hit.collider.gameObject.GetInstanceID() == _instance)
                     _onTouchDown?.OnNext(Unit.Default);
             }
         }

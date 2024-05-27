@@ -95,10 +95,10 @@ public class PatCaptureView : MonoBehaviour
         objectRotation.Active = true;
 
         // AR 이미지 타겟팅 기능 비활성화
-        _arTrackedImageManager.trackedImagesChanged -= OnTrackedImage;
+        // _arTrackedImageManager.trackedImagesChanged -= OnTrackedImage;
 
         // 타겟팅된 가전제품 활성화
-        _targetObject.Value.MachineObject.SetActive(true);
+        // _targetObject.Value.MachineObject.SetActive(true); // Debug
     }
 
     /// <summary>

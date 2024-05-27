@@ -19,7 +19,8 @@ public class PatCapturePresenter : MonoBehaviour
 
         // Model
         _model.CanQRCodeCaptureAsObservable
-            .Subscribe(canCapture => _view.SetInteractiveCaptureStateUI(canCapture));
+            //.Subscribe(canCapture => _view.SetInteractiveCaptureStateUI(canCapture));
+            .Subscribe(canCapture => _view.SetInteractiveCaptureStateUI(true));
 
         // View
         // 현재 트래킹되고 있는 오브젝트가 있는지 파악하는 옵저버
@@ -28,7 +29,7 @@ public class PatCapturePresenter : MonoBehaviour
 
         // 캡쳐 버튼을 클릭했을 때 해당 타겟 매쉬를 활성화하는 옵저버
         _view.OnClickCaptureButtonAsObservable()
-            .Where(_ => _model.CanQRCodeCapture)
+            //.Where(_ => _model.CanQRCodeCapture)
             .Subscribe(_ =>
             {
                 _model.CanBeCharacterized = true;
