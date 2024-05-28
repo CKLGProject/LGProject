@@ -57,7 +57,7 @@ public class LobbyPresenter : MonoBehaviour
 
     private void OnClickRankButton(Unit obj)
     {
-       _lobbyView.OnClickRanking?.Invoke();
+       _lobbyView.OnClickCapture?.Invoke();
     }
 
     private void OnClickMatchButton(Unit obj)

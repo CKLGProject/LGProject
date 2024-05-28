@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Assets/LG-Resources/USS/LGStyle%20Sheet.uss?fileID=7433441132597879392&amp;guid=70b963dcfd4ab486cb8c59f4fc73c9ac&amp;type=3#LGStyle Sheet" />
+    <ui:Label tabindex="-1" text="Light Controller" parse-escape-sequences="true" display-tooltip-when-elided="true" name="title" class="TitleStyle" />
+    <ui:VisualElement style="padding-right: 3%; padding-left: 3%;">
+        <ui:Slider label="Alpha" high-value="100" name="alpha-slider" />
+        <ui:Slider label="Intensity" high-value="100" name="intensity-slider" />
+    </ui:VisualElement>
+</ui:UXML>

@@ -3,6 +3,7 @@ using ReactiveTouchDown;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Utility;
 
@@ -56,7 +57,7 @@ public class LobbyView : MonoBehaviour
     [Tooltip("미구현 메세지")] [SerializeField] private string errorMessage;
 
     [Header("Event")]
-    public UnityEvent OnClickRanking;
+    public UnityEvent OnClickCapture;
     public UnityEvent OnClickMatch;
 
     /// <summary>

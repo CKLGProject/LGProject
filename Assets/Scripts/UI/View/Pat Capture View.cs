@@ -12,26 +12,28 @@ using TrackingState = UnityEngine.XR.ARSubsystems.TrackingState;
 
 public class PatCaptureView : MonoBehaviour
 {
+    [Header("AR")]
     [SerializeField] private Camera arCamera;
-    [SerializeField] private GameObject informationMessageText;
-    [SerializeField] private GameObject fxBackground;
-    [SerializeField] private RawImage fxForeground;
-    [SerializeField] private PlayableDirector fxDirector;
-    [SerializeField] private GameObject TouchArea;
-    [SerializeField] private CanvasGroup UIGroup;
-    [SerializeField] private ObjectRotation objectRotation;
-    [SerializeField] private LightController lightController;
-
     [SerializeField] private ARTrackedImageManager _arTrackedImageManager;
+    
+    [Header("Interaction")]
+    [SerializeField] private GameObject TouchArea;
+    [SerializeField] private ObjectRotation objectRotation;
+    
+    [Header("UI")]
+    [SerializeField] private CanvasGroup UIGroup;
     [SerializeField] private Button captureButton;
+    [SerializeField] private GameObject informationMessageText;
 
+    [Header("Timeline")]
+    [SerializeField] private PlayableDirector fxDirector;
+    [SerializeField] private LightController lightController;
+    
     [SerializeField] private List<ScanData> ScanDataList;
-
     [SerializeField] private Transform objectContent;
 
-    private ReactiveProperty<ScanData> _targetObject = new ReactiveProperty<ScanData>();
-
     private RenderTexture _renderTexture;
+    private ReactiveProperty<ScanData> _targetObject = new ReactiveProperty<ScanData>();
 
     private void OnEnable()
     {
@@ -97,10 +99,10 @@ public class PatCaptureView : MonoBehaviour
         objectRotation.Active = true;
 
         // AR 이미지 타겟팅 기능 비활성화
-        // _arTrackedImageManager.trackedImagesChanged -= OnTrackedImage;
+        _arTrackedImageManager.trackedImagesChanged -= OnTrackedImage;
 
         // 타겟팅된 가전제품 활성화
-        // _targetObject.Value.MachineObject.SetActive(true); // Debug
+        _targetObject.Value.MachineObject.SetActive(true); // Debug
     }
 
     /// <summary>
@@ -127,6 +129,9 @@ public class PatCaptureView : MonoBehaviour
     /// </summary>
     public void ShowTargetCharacter()
     {
+        if (Application.isEditor)
+            return;
+        
         _targetObject.Value.MachineObject.SetActive(false);
         _targetObject.Value.CharacterObject.SetActive(true);
     }

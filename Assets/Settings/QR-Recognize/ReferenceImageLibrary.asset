@@ -27,33 +27,3 @@ MonoBehaviour:
     m_SpecifySize: 1
     m_Name: Refrigerator
     m_Texture: {fileID: 0}
-  - m_SerializedGuid:
-      m_GuidLow: 5147262762939179797
-      m_GuidHigh: 17423274476066367904
-    m_SerializedTextureGuid:
-      m_GuidLow: 13001469078482025521
-      m_GuidHigh: 3476818365784041145
-    m_Size: {x: 0.1, y: 0.1}
-    m_SpecifySize: 1
-    m_Name: BeamProjector
-    m_Texture: {fileID: 0}
-  - m_SerializedGuid:
-      m_GuidLow: 4869455696529587712
-      m_GuidHigh: 16683070630969425573
-    m_SerializedTextureGuid:
-      m_GuidLow: 2608097430099922999
-      m_GuidHigh: 7784993282474967897
-    m_Size: {x: 0.1, y: 0.1}
-    m_SpecifySize: 1
-    m_Name: AirConditioner
-    m_Texture: {fileID: 0}
-  - m_SerializedGuid:
-      m_GuidLow: 4632793136234844435
-      m_GuidHigh: 13651329781721687222
-    m_SerializedTextureGuid:
-      m_GuidLow: 2608097430099922999
-      m_GuidHigh: 7784993282474967897
-    m_Size: {x: 0.1, y: 0.1}
-    m_SpecifySize: 1
-    m_Name: MicrowaveOven
-    m_Texture: {fileID: 0}
