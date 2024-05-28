@@ -27,6 +27,8 @@ public class PatCaptureView : MonoBehaviour
 
     [SerializeField] private List<ScanData> ScanDataList;
 
+    [SerializeField] private Transform objectContent;
+
     private ReactiveProperty<ScanData> _targetObject = new ReactiveProperty<ScanData>();
 
     private RenderTexture _renderTexture;
@@ -127,6 +129,14 @@ public class PatCaptureView : MonoBehaviour
     {
         _targetObject.Value.MachineObject.SetActive(false);
         _targetObject.Value.CharacterObject.SetActive(true);
+    }
+
+    /// <summary>
+    /// 회전을 원래대로 되돌립니다.
+    /// </summary>
+    public void ResetTransformObjects()
+    {
+        objectContent.rotation = Quaternion.identity;
     }
 
     /// <summary>
