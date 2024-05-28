@@ -11,6 +11,8 @@ namespace BehaviourTree
         [Space(10f)]
         public float downTimer;
         private float curTimer;
+        private static readonly int Landing = Animator.StringToHash("Landing");
+        private static readonly int WakeUp = Animator.StringToHash("WakeUp");
         protected override void OnStart()
         {
             //Debug.Log("DownNodeStart");
@@ -19,7 +21,7 @@ namespace BehaviourTree
             if (_stateMachine == null)
                 _stateMachine = Agent.GetStateMachine;
             curTimer = 0;
-            _stateMachine.animator.SetTrigger("Landing");
+            _stateMachine.animator.SetTrigger(Landing);
             Agent.effectManager.Play(EffectManager.EFFECT.Knockback).Forget();
             _stateMachine.IsDamaged = false;
             _stateMachine.IsDown = true;
@@ -39,7 +41,7 @@ namespace BehaviourTree
                 if (_stateMachine.playable.DownWaitDelay < curTimer)
                 {
                     // 누어있는 시간이 끝나면 Idle 상태가 되면서 일어남.
-                    _stateMachine.animator.SetTrigger("WakeUp");
+                    _stateMachine.animator.SetTrigger(WakeUp);
                     return State.Success;
                 }
             }

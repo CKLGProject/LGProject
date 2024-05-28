@@ -244,7 +244,7 @@ namespace LGProject.PlayerState
             StateMachine.IsJumpGuard = false;
             StateMachine.JumpInCount = 0;
             StateMachine.StandingVelocity();
-            StateMachine.animator.SetTrigger(Landing);
+
             //if (StateMachine.CurrentState != null)
             //{
             //    StateMachine.ChangeState(StateMachine.landingState);
@@ -407,7 +407,7 @@ namespace LGProject.PlayerState
             StateMachine.IsGrounded = false;
             StateMachine.IsSuperArmor = true;
             if(StateMachine.CurrentState != null)
-                StateMachine.ChangeState(StateMachine.idleState);
+                StateMachine.ChangeState(StateMachine.landingState);
             
             // 무적 2초
             await UniTask.Delay(TimeSpan.FromSeconds(2f));
