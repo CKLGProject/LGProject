@@ -254,6 +254,7 @@ GameObject:
   - component: {fileID: 16371188}
   - component: {fileID: 16371190}
   - component: {fileID: 16371189}
+  - component: {fileID: 16371191}
   m_Layer: 5
   m_Name: Time_txt (1)
   m_TagString: Untagged
@@ -377,6 +378,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 16371187}
   m_CullTransparentMesh: 1
+--- !u!114 &16371191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 16371187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab96f9a40825b1f4a825269dd2ddff9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 1896813931}
+  offset: {x: 0, y: 1.5, z: 0}
 --- !u!1 &26457170
 GameObject:
   m_ObjectHideFlags: 3
@@ -424,7 +439,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 3, z: -10}
+  m_FollowOffset: {x: 0, y: 3, z: -12}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -445,7 +460,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f7633c93f0364a418841eeb8b058634, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TrackedObjectOffset: {x: 0, y: 2, z: 0}
+  m_TrackedObjectOffset: {x: 0, y: 0.5, z: 0}
   m_LookaheadTime: 0
   m_LookaheadSmoothing: 0
   m_LookaheadIgnoreY: 0
@@ -456,9 +471,9 @@ MonoBehaviour:
   m_DeadZoneWidth: 0
   m_DeadZoneHeight: 0
   m_SoftZoneWidth: 0.8
-  m_SoftZoneHeight: 2
+  m_SoftZoneHeight: 0.8
   m_BiasX: 0
-  m_BiasY: -0.35
+  m_BiasY: 0
   m_CenterOnActivate: 1
   m_GroupFramingSize: 0.3
   m_FramingMode: 2
@@ -4122,7 +4137,7 @@ PrefabInstance:
     - target: {fileID: 6142601296869339651, guid: 2733f80f426950d4598e4e6317bd7935,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8219133890818253592, guid: 2733f80f426950d4598e4e6317bd7935,
         type: 3}
@@ -4207,7 +4222,7 @@ PrefabInstance:
     - target: {fileID: 8866563565161335285, guid: 2733f80f426950d4598e4e6317bd7935,
         type: 3}
       propertyPath: respawnTime
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8866563565161335285, guid: 2733f80f426950d4598e4e6317bd7935,
         type: 3}
@@ -4273,6 +4288,11 @@ PrefabInstance:
         type: 3}
       propertyPath: SecondAttackJudgeDelay
       value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8866563565161335285, guid: 2733f80f426950d4598e4e6317bd7935,
+        type: 3}
+      propertyPath: ThirdAttackMovingValue
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8866563565161335285, guid: 2733f80f426950d4598e4e6317bd7935,
         type: 3}
@@ -7221,8 +7241,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 996713019}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.04981371, y: 1e-45, z: -0, w: 0.99875855}
-  m_LocalPosition: {x: -2, y: 4, z: -19.5}
+  m_LocalRotation: {x: 0.10251728, y: 0.0000000042789328, z: -4.4098794e-10, w: 0.99473125}
+  m_LocalPosition: {x: -1, y: 4, z: -21.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10026,7 +10046,7 @@ MonoBehaviour:
   m_UpdateMethod: 2
   m_Targets:
   - target: {fileID: 1896813931}
-    weight: 1
+    weight: 3
     radius: 0
   - target: {fileID: 537158981}
     weight: 1
@@ -10040,7 +10060,7 @@ Transform:
   m_GameObject: {fileID: 1316624601}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2, y: 1, z: -9.5}
+  m_LocalPosition: {x: -1, y: 1, z: -9.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10565,8 +10585,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1353022552}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.04981371, y: 1e-45, z: 0, w: 0.99875855}
-  m_LocalPosition: {x: -2, y: 4, z: -19.5}
+  m_LocalRotation: {x: 0.10251728, y: 0.0000000042789328, z: -4.4098794e-10, w: 0.99473125}
+  m_LocalPosition: {x: -1, y: 4, z: -21.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -18163,7 +18183,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2138745495}
   m_Layer: 0
-  m_Name: UI (1)
+  m_Name: UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

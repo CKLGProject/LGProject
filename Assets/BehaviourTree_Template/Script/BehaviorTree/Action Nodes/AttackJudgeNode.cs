@@ -87,6 +87,7 @@ namespace BehaviourTree
         private void StartExceptionHandling()
         {
             #region Omit    
+            float moveValue = 0;
             if (_stateMachine == null)
             {
                 _stateMachine = AIAgent.Instance.GetStateMachine;
@@ -106,16 +107,23 @@ namespace BehaviourTree
             {
                 case 1:
                     _stateMachine.playable.effectManager.Play(EffectManager.EFFECT.Attack1).Forget();
+                    moveValue = _stateMachine.playable.FirstAttackMovingValue;
                     break;
                 case 2:
                     _stateMachine.playable.effectManager.Play(EffectManager.EFFECT.Attack2).Forget();
+                    moveValue = _stateMachine.playable.SecondAttackMovingValue;
                     break;
                 case 3:
+                    moveValue = _stateMachine.playable.ThirdAttackMovingValue;
                     _stateMachine.playable.effectManager.Play(EffectManager.EFFECT.Attack3, 0.25f).Forget();
                     break;
                 default:
                     break;
             }
+            // 공격하면서 전진.
+            if (_stateMachine.playable.movingAttack)
+                _stateMachine.physics.velocity += _stateMachine.playable.directionX ? Vector3.right * moveValue : Vector3.left * moveValue;
+
             #endregion
         }
 

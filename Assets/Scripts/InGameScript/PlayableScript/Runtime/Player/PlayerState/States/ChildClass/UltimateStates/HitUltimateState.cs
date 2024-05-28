@@ -78,7 +78,7 @@ namespace LGProject.PlayerState
         {
             if(Physics.Raycast(StateMachine.transform.position + Vector3.up * .5f, StateMachine.playable.directionX ?  Vector3.right : Vector3.left, out hit, 4f))
             {
-                Debug.Log(hit.transform.name);
+                //Debug.Log(hit.transform.name);
                 return true;
             }
             Debug.Log("null");
@@ -118,7 +118,7 @@ namespace LGProject.PlayerState
 
             //targetStateMachine.playable.effectManager.PlayOneShot(EffectManager.EFFECT.UltimateHit);
 
-            targetStateMachine.HitDamaged(KnockbackValue, StateMachine);
+            targetStateMachine.HitDamaged(KnockbackValue, 0.2f, StateMachine);
 
 
         }
@@ -144,8 +144,6 @@ namespace LGProject.PlayerState
             {
                 MovementPointSet();
             }
-
         }
-
     }
 }

@@ -38,14 +38,14 @@ namespace LGProject
 
         public void SubTarget(Transform pTransform)
         {
-            Debug.Log(TargetGroup.GetComponent<CinemachineTargetGroup>().FindMember(pTransform));
+            //Debug.Log(TargetGroup.GetComponent<CinemachineTargetGroup>().FindMember(pTransform));
             int num = TargetGroup.GetComponent<CinemachineTargetGroup>().FindMember(pTransform);
             TargetGroup.GetComponent<CinemachineTargetGroup>().m_Targets[num].target = null;
         }
         
         public void AddTarget(Transform pTransform)
         {
-            Debug.Log(TargetGroup.GetComponent<CinemachineTargetGroup>().FindMember(pTransform));
+            //Debug.Log(TargetGroup.GetComponent<CinemachineTargetGroup>().FindMember(pTransform));
             if(TargetGroup.GetComponent<CinemachineTargetGroup>().FindMember(pTransform) == -1)
             {
                 for(int i =0; i < TargetGroup.GetComponent<CinemachineTargetGroup>().m_Targets.Length; i++)

@@ -26,11 +26,16 @@ namespace LGProject.PlayerState
 
         public virtual void LogicUpdate()
         {
+            if(StateMachine.IsKnockback)
+            {
+                StateMachine.ChangeState(StateMachine.knockbackState);
+                return;
+            }
             if (StateMachine.IsDamaged && !StateMachine.IsGuard)
             {
                 // 공격을 받았을 때, hitState로 변경해 줌.
-                //StateMachine.physics.velocity = Vector3.zero;
                 StateMachine.ChangeState(StateMachine.hitState);
+                return;
             }
         }
 
@@ -51,11 +56,12 @@ namespace LGProject.PlayerState
                     StateMachine.transform.position.y, StateMachine.transform.position.z);
                 Vector3 right = new Vector3((StateMachine.transform.position + Vector3.left).x - 2f,
                     StateMachine.transform.position.y, StateMachine.transform.position.z);
-
-                StateMachine.transform.LookAt(StateMachine.moveAction.ReadValue<float>() < 0 ? right : left);
-
+                if(StateMachine.moveAction.ReadValue<float>() < 0)
+                    StateMachine.transform.LookAt(right);
+                if (StateMachine.moveAction.ReadValue<float>() > 0)
+                    StateMachine.transform.LookAt(left);
                 Vector3 euler = StateMachine.transform.GetChild(1).GetComponent<RectTransform>().localRotation.eulerAngles;
-                Debug.Log($"{euler} / {StateMachine.transform.GetChild(1).GetComponent<RectTransform>().transform.name}");
+                //Debug.Log($"{euler} / {StateMachine.transform.GetChild(1).GetComponent<RectTransform>().transform.name}");
                 StateMachine.transform.GetChild(1).GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, StateMachine.moveAction.ReadValue<float>() < 0 ? 90 : -90, 0);
             }
             if (StateMachine.moveAction.ReadValue<float>() == 0)

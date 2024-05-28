@@ -33,12 +33,15 @@ namespace BehaviourTree
              */
             private SerializedProperty _firstAttackDelay;
             private SerializedProperty _firstAttackJudgeDelay;
+            private SerializedProperty _firstAttackMovingValueProperty;
 
             private SerializedProperty _secondAttackDelay;
             private SerializedProperty _secondAttackJudgeDelay;
+            private SerializedProperty _secondAttackMovingValueProperty;
 
             private SerializedProperty _thirdAttackDelay;
             private SerializedProperty _thirdAttackJudgeDelay;
+            private SerializedProperty _thirdAttackMovingValueProperty;
 
             private SerializedProperty _dashAttackDelay;
 
@@ -112,11 +115,17 @@ namespace BehaviourTree
                 if (_firstAttackJudgeDelay == null)
                     _firstAttackJudgeDelay = serializedObject.FindProperty("FirstAttackJudgeDelay");
 
+                if (_firstAttackMovingValueProperty == null)
+                    _firstAttackMovingValueProperty = serializedObject.FindProperty("FirstAttackMovingValue");
+
                 if (_secondAttackDelay == null)
                     _secondAttackDelay = serializedObject.FindProperty("SecondAttackDelay");
 
                 if (_secondAttackJudgeDelay == null)
                     _secondAttackJudgeDelay = serializedObject.FindProperty("SecondAttackJudgeDelay");
+
+                if (_secondAttackMovingValueProperty == null)
+                    _secondAttackMovingValueProperty = serializedObject.FindProperty("SecondAttackMovingValue");
 
 
                 if (_thirdAttackDelay == null)
@@ -124,6 +133,9 @@ namespace BehaviourTree
 
                 if (_thirdAttackJudgeDelay == null)
                     _thirdAttackJudgeDelay = serializedObject.FindProperty("ThirdAttackJudgeDelay");
+
+                if (_thirdAttackMovingValueProperty == null)
+                    _thirdAttackMovingValueProperty = serializedObject.FindProperty("ThirdAttackMovingValue");
 
                 if (_dashAttackDelay == null)
                     _dashAttackDelay = serializedObject.FindProperty("DashAttackDelay");
@@ -242,6 +254,17 @@ namespace BehaviourTree
                         _firstAttackJudgeDelay.floatValue = value;
                     }
                 }
+
+                EditorGUILayout.Space(10f);
+                using (var changeScope = new EditorGUI.ChangeCheckScope())
+                {
+                    float value = EditorGUILayout.FloatField("첫번째 공격 이동 거리", _firstAttackMovingValueProperty.floatValue);
+                    if (changeScope.changed)
+                    {
+                        _firstAttackMovingValueProperty.floatValue = value;
+                    }
+                }
+
                 EditorGUILayout.Space(10f);
                 using (var changeScope = new EditorGUI.ChangeCheckScope())
                 {
@@ -260,6 +283,17 @@ namespace BehaviourTree
                         _secondAttackJudgeDelay.floatValue = value;
                     }
                 }
+
+                EditorGUILayout.Space(10f);
+                using (var changeScope = new EditorGUI.ChangeCheckScope())
+                {
+                    float value = EditorGUILayout.FloatField("두번째 공격 이동 거리", _secondAttackMovingValueProperty.floatValue);
+                    if (changeScope.changed)
+                    {
+                        _secondAttackMovingValueProperty.floatValue = value;
+                    }
+                }
+
                 EditorGUILayout.Space(10f);
                 using (var changeScope = new EditorGUI.ChangeCheckScope())
                 {
@@ -276,6 +310,16 @@ namespace BehaviourTree
                     if (changeScope.changed)
                     {
                         _thirdAttackJudgeDelay.floatValue = value;
+                    }
+                }
+
+                EditorGUILayout.Space(10f);
+                using (var changeScope = new EditorGUI.ChangeCheckScope())
+                {
+                    float value = EditorGUILayout.FloatField("세번째 공격 이동 거리", _thirdAttackMovingValueProperty.floatValue);
+                    if (changeScope.changed)
+                    {
+                        _thirdAttackMovingValueProperty.floatValue = value;
                     }
                 }
 

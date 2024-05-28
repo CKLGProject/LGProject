@@ -33,7 +33,7 @@ namespace BehaviourTree
             // 플레이어와의 거리를 비교하여 반환.
             // 플레이어의 경우 하나밖에 없기 때문에 agent에서 관리를 해줘야할까?
             // 일단 관리를 해주다가 추후 정적 클래스로 변경 하는 것으로 하자.
-            if (_stateMachine.IsDamaged || _stateMachine.IsDown)
+            if (_stateMachine.IsDamaged || _stateMachine.IsDown || _stateMachine.IsDead)
                 return State.Failure;
             float distance = Vector3.Distance(_stateMachine.transform.position, Agent.player.position);
 

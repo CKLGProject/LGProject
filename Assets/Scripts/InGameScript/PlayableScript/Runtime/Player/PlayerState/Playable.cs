@@ -259,6 +259,7 @@ namespace LGProject.PlayerState
             transform.position = new Vector3(transform.position.x, UnderPlatform.rect.y, transform.position.z);
 
             StateMachine.physics.velocity = Vector3.zero;
+            Debug.Log("HelloWorld");
             StateMachine.collider.isTrigger = false;
             StateMachine.IsGrounded = true;
             StateMachine.IsKnockback = false;
@@ -389,6 +390,7 @@ namespace LGProject.PlayerState
             //}
         }
 
+        // 현재 재생성 문제 해결 중 
         private async UniTaskVoid AliveDelay()
         {
             await UniTask.Delay(TimeSpan.FromSeconds(respawnTime));
@@ -400,8 +402,8 @@ namespace LGProject.PlayerState
             battleModel.SyncDamageGage(ActorType, DamageGage);
 
             StateMachine.animator.SetTrigger("Jump1");
-            //await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
-            //StateMachine.animator.SetBool(Flying, false);
+
+            StateMachine.animator.SetTrigger("Landing");
             StateMachine.IsDamaged = false;
             StateMachine.IsKnockback = false;
             StateMachine.IsGrounded = false;

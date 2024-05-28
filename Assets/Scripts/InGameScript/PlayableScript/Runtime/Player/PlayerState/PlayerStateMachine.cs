@@ -1,8 +1,9 @@
-using Data;
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Cysharp.Threading.Tasks;
+using Object = UnityEngine.Object;
 
 namespace LGProject.PlayerState // 
 {
@@ -73,6 +74,9 @@ namespace LGProject.PlayerState //
 
         public int JumpInCount = 0;
         public int AttackCount = 0;
+        
+        // 이건 어떻게 깎이게 할 것인가?
+        public float GuardGage = 0;
 
         public State CurrentState;
         public Transform hitPlayer;
@@ -237,7 +241,7 @@ namespace LGProject.PlayerState //
             physics.velocity = Vector3.zero;
         }
 
-        public void HitDamaged(Vector3 velocity, PlayerStateMachine EnemyStateMachine = null)
+        public void HitDamaged(Vector3 velocity, float nockbackDelay = 0.1f,PlayerStateMachine EnemyStateMachine = null)
         {
             // 누어 있는 상태에선 데미지를 입지 않는다.
             if (IsDown || IsUltimate || IsSuperArmor ||(EnemyStateMachine != null && !EnemyStateMachine.IsUltimate))
@@ -248,18 +252,21 @@ namespace LGProject.PlayerState //
                 playable.SetDamageGage(playable.DamageGage + 8.5f);
                 battleModel.SyncDamageGage(playable.ActorType, playable.DamageGage);
                 IsNormalAttack = false;
-                animator.SetTrigger(Hit);
                 // 충격에 의한 물리 공식
                 velocity *= Mathf.Pow(2, (playable.DamageGage * 0.01f));
-                physics.velocity = velocity;
                 if (velocity != Vector3.zero)
                 {
+                    SetVelocity(velocity, nockbackDelay).Forget();
                     animator.SetTrigger(Knockback);
-                    IsKnockback = true;
+                    //animator.SetTrigger(Knockback);
+                }
+                else
+                {
+                    animator.SetTrigger(Hit);
                 }
                 if(EnemyStateMachine != null && EnemyStateMachine.IsUltimate)
                 {
-                    playable.effectManager.PlayOneShot(EffectManager.EFFECT.UltimateHit);
+                    playable.effectManager.PlayOneShot(EffectManager.EFFECT.UltimateHit, Vector3.left);
                 }
                 else
                 {
@@ -271,10 +278,16 @@ namespace LGProject.PlayerState //
             }
             else
             {
-                //physics.velocity = new Vector3(transform.forward.x * -2f, 0, 0);
+                physics.velocity = new Vector3(transform.forward.x * -1.5f, 0, 0);
             }
-
             IsDamaged = true;
+        }
+
+        private async UniTaskVoid SetVelocity(Vector3 velocity, float nockbackDelay = 0.2f )
+        {
+            await UniTask.Delay(TimeSpan.FromSeconds(nockbackDelay));
+            physics.velocity = velocity;
+            IsKnockback = true;
         }
 
         public void ResetAnimParameters()

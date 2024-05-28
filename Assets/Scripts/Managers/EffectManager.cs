@@ -849,7 +849,7 @@ public class EffectManager : MonoBehaviour
     }
 
 
-    public void PlayOneShot(EFFECT effectType)
+    public void PlayOneShot(EFFECT effectType, Vector3 offset)
     {
         try
         {
@@ -859,6 +859,7 @@ public class EffectManager : MonoBehaviour
             if (effect != null)
             {
                 GameObject obj = Instantiate(effect.gameObject, transform.position, Quaternion.Euler(0, 180, 0));
+                obj.transform.position += offset;
                 obj.SetActive(true);
 
                 obj.GetComponent<ParticleSystem>().Play();

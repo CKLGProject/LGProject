@@ -198,7 +198,8 @@ namespace BehaviourTree
                 _stateMachine.IsDamaged || 
                 _playerStateMachine.IsKnockback || 
                 _playerStateMachine.IsDown ||
-                _playerStateMachine.transform.position.y < -0.5f)
+                _playerStateMachine.transform.position.y < -0.5f ||
+                _stateMachine.IsDead)
 
                 return true;
             return false;

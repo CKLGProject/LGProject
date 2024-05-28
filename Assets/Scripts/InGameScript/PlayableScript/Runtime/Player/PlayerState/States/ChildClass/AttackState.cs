@@ -217,7 +217,7 @@ namespace LGProject.PlayerState
                         {
                             temp.
                             Item1.GetStateMachine.
-                            HitDamaged(StateMachine.AttackCount - 1 < 2 ? Vector3.zero : v);
+                            HitDamaged(StateMachine.AttackCount - 1 < 2 ? Vector3.zero : v, 0.1f);
                             _damageInCount = true;
 
                             if (!temp.Item1.GetStateMachine.IsGuard && !temp.Item1.GetStateMachine.IsDown)

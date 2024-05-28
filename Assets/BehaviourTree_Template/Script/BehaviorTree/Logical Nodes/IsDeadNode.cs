@@ -16,13 +16,14 @@ namespace BehaviourTree
 
         protected override void OnStop()
         {
-
         }
 
         protected override State OnUpdate()
         {
             if (_stateMachine.IsDead)
+            {
                 return State.Success;
+            }
             return State.Failure;
 
         }
