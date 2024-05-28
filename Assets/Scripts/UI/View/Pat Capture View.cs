@@ -1,3 +1,5 @@
+// #define LG_DEBUG
+
 using Data;
 using DG.Tweening;
 using R3;
@@ -14,6 +16,7 @@ public class PatCaptureView : MonoBehaviour
 {
     [Header("AR")]
     [SerializeField] private Camera arCamera;
+    [SerializeField] private ARSession arSession;
     [SerializeField] private ARTrackedImageManager _arTrackedImageManager;
     
     [Header("Interaction")]
@@ -29,7 +32,7 @@ public class PatCaptureView : MonoBehaviour
     [SerializeField] private PlayableDirector fxDirector;
     [SerializeField] private LightController lightController;
     
-    [SerializeField] private List<ScanData> ScanDataList;
+    [SerializeField] private List<ScanData> scanDataList;
     [SerializeField] private Transform objectContent;
 
     private RenderTexture _renderTexture;
@@ -37,11 +40,22 @@ public class PatCaptureView : MonoBehaviour
 
     private void OnEnable()
     {
+#if LG_DEBUG
+        ScanData sampleObject = scanDataList[0];
+        _targetObject.Value = sampleObject;
+        captureButton.interactable = true;
+        return;
+#endif
+        
         _arTrackedImageManager.trackedImagesChanged += OnTrackedImage;
     }
 
     private void OnDisable()
     {
+#if LG_DEBUG
+        return;        
+#endif
+        
         _arTrackedImageManager.trackedImagesChanged -= OnTrackedImage;
     }
 
@@ -52,7 +66,7 @@ public class PatCaptureView : MonoBehaviour
             // 무언가라도 트래킹되고 있다면,
             if (trackedImage.trackingState == TrackingState.Tracking)
             {
-                ScanData targetObject = ScanDataList
+                ScanData targetObject = scanDataList
                     .FirstOrDefault(scanData => trackedImage.referenceImage.name == scanData.ObjectName);
 
                 _targetObject.Value = targetObject;
@@ -82,8 +96,7 @@ public class PatCaptureView : MonoBehaviour
     {
         captureButton.interactable = isInteractive;
     }
-
-
+    
     /// <summary>
     /// 타겟을 활성화 합니다.
     /// </summary>
@@ -91,18 +104,18 @@ public class PatCaptureView : MonoBehaviour
     {
         // 캡처 버튼을 더 이상 누를 수 없겠금 방지
         UIGroup.blocksRaycasts = false;
-
+        
+        // AR 이미지 타겟팅 기능 비활성화
+        _arTrackedImageManager.trackedImagesChanged -= OnTrackedImage;
+        
         //UI Fade Out
         DOTween.To(() => UIGroup.alpha, x => UIGroup.alpha = x, 0, 1f).SetEase(Ease.OutSine).SetDelay(0.2f);
 
         // 오브젝트 회전 활성화
         objectRotation.Active = true;
-
-        // AR 이미지 타겟팅 기능 비활성화
-        _arTrackedImageManager.trackedImagesChanged -= OnTrackedImage;
-
+        
         // 타겟팅된 가전제품 활성화
-        _targetObject.Value.MachineObject.SetActive(true); // Debug
+        _targetObject.Value.MachineObject.SetActive(true);
     }
 
     /// <summary>
@@ -125,13 +138,18 @@ public class PatCaptureView : MonoBehaviour
     }
 
     /// <summary>
+    /// 카메라 기능을 끕니다.
+    /// </summary>
+    public void OffCamera()
+    {
+        arSession.enabled = false;
+    }
+
+    /// <summary>
     /// 캐릭터를 보이게 합니다.
     /// </summary>
     public void ShowTargetCharacter()
     {
-        if (Application.isEditor)
-            return;
-        
         _targetObject.Value.MachineObject.SetActive(false);
         _targetObject.Value.CharacterObject.SetActive(true);
     }

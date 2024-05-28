@@ -1,3 +1,4 @@
+// #define LG_DEBUG
 using R3;
 using System;
 using UnityEngine;
@@ -18,17 +19,22 @@ public class PatCapturePresenter : MonoBehaviour
             .Subscribe(_ => _view.SetActiveInformationMessageText(false)).AddTo(this);
 
         // Model
+#if !LG_DEBUG
         _model.CanQRCodeCaptureAsObservable
             .Subscribe(canCapture => _view.SetInteractiveCaptureStateUI(canCapture));
+#endif
+
 
         // View
         // 현재 트래킹되고 있는 오브젝트가 있는지 파악하는 옵저버
+#if !LG_DEBUG
         _view.ExistsTargetObjectAsObservable()
             .Subscribe(exists => _model.CanQRCodeCapture = exists);
+#endif
 
         // 캡쳐 버튼을 클릭했을 때 해당 타겟 매쉬를 활성화하는 옵저버
         _view.OnClickCaptureButtonAsObservable()
-            .Where(_ => _model.CanQRCodeCapture)
+            //.Where(_ => _model.CanQRCodeCapture)
             .Subscribe(_ =>
             {
                 _model.CanBeCharacterized = true;
