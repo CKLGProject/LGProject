@@ -6,6 +6,7 @@ using R3;
 using ReactiveTouchDown;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.UI;
@@ -14,24 +15,23 @@ using TrackingState = UnityEngine.XR.ARSubsystems.TrackingState;
 
 public class PatCaptureView : MonoBehaviour
 {
-    [Header("AR")]
-    [SerializeField] private Camera arCamera;
+    [Header("AR")] [SerializeField] private Camera arCamera;
     [SerializeField] private ARSession arSession;
     [SerializeField] private ARTrackedImageManager _arTrackedImageManager;
-    
-    [Header("Interaction")]
-    [SerializeField] private GameObject TouchArea;
+
+    [Header("Interaction")] [SerializeField]
+    private GameObject TouchArea;
+
     [SerializeField] private ObjectRotation objectRotation;
-    
-    [Header("UI")]
-    [SerializeField] private CanvasGroup UIGroup;
+
+    [Header("UI")] [SerializeField] private CanvasGroup UIGroup;
     [SerializeField] private Button captureButton;
     [SerializeField] private GameObject informationMessageText;
+    [SerializeField] private TextMeshProUGUI guideMessageText;
 
-    [Header("Timeline")]
-    [SerializeField] private PlayableDirector fxDirector;
+    [Header("Timeline")] [SerializeField] private PlayableDirector fxDirector;
     [SerializeField] private LightController lightController;
-    
+
     [SerializeField] private List<ScanData> scanDataList;
     [SerializeField] private Transform objectContent;
 
@@ -46,16 +46,16 @@ public class PatCaptureView : MonoBehaviour
         captureButton.interactable = true;
         return;
 #endif
-        
+
         _arTrackedImageManager.trackedImagesChanged += OnTrackedImage;
     }
 
     private void OnDisable()
     {
 #if LG_DEBUG
-        return;        
+        return;
 #endif
-        
+
         _arTrackedImageManager.trackedImagesChanged -= OnTrackedImage;
     }
 
@@ -96,7 +96,7 @@ public class PatCaptureView : MonoBehaviour
     {
         captureButton.interactable = isInteractive;
     }
-    
+
     /// <summary>
     /// 타겟을 활성화 합니다.
     /// </summary>
@@ -104,16 +104,16 @@ public class PatCaptureView : MonoBehaviour
     {
         // 캡처 버튼을 더 이상 누를 수 없겠금 방지
         UIGroup.blocksRaycasts = false;
-        
+
         // AR 이미지 타겟팅 기능 비활성화
         _arTrackedImageManager.trackedImagesChanged -= OnTrackedImage;
-        
+
         //UI Fade Out
         DOTween.To(() => UIGroup.alpha, x => UIGroup.alpha = x, 0, 1f).SetEase(Ease.OutSine).SetDelay(0.2f);
 
         // 오브젝트 회전 활성화
         objectRotation.Active = true;
-        
+
         // 타겟팅된 가전제품 활성화
         _targetObject.Value.MachineObject.SetActive(true);
     }
@@ -124,6 +124,16 @@ public class PatCaptureView : MonoBehaviour
     public void PlayCharacterizeSequence()
     {
         fxDirector.Play();
+    }
+
+    /// <summary>
+    /// 터치 가이드 텍스트를 보이게 합니다.
+    /// </summary>
+    public void ShowTouchGuideText()
+    {
+        string message = _targetObject.Value.GuideMessage;
+        guideMessageText.text = message;
+        guideMessageText.gameObject.SetActive(true);
     }
 
     /// <summary>

@@ -25,5 +25,5 @@ MonoBehaviour:
       m_GuidHigh: 11416804611985999209
     m_Size: {x: 0.1, y: 0.1}
     m_SpecifySize: 1
-    m_Name: Refrigerator
+    m_Name: Oven
     m_Texture: {fileID: 0}
