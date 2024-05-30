@@ -34,16 +34,23 @@ public class PatCapturePresenter : MonoBehaviour
 
         // 캡쳐 버튼을 클릭했을 때 해당 타겟 매쉬를 활성화하는 옵저버
         _view.OnClickCaptureButtonAsObservable()
-            //.Where(_ => _model.CanQRCodeCapture)
+            .Where(_ => _model.CanQRCodeCapture)
             .Subscribe(_ =>
             {
                 _model.CanBeCharacterized = true;
                 _view.ActiveTargetObject();
             });
 
+        // 리셋 버튼을 클릭했을 때 옵저버
+        _view.OnResetButtonClickObservable()
+            .Subscribe(_ => _view.ResetTransformObjects())
+            .AddTo(this);
+
         // 캐릭터 라이즈가 가능할 때 더블 터치를 하는 옵저버
-        _view.OnDoubleTouchObservable()
-            .Where(_ => _model.CanBeCharacterized)
-            .Subscribe(_ => _view.PlayCharacterizeSequence());
+        // _view.OnCharacterizeAsObservable()
+        //     .Where()
+        //     .Where(_ => _model.CanBeCharacterized)
+        //     .Take(1)
+        //     .Subscribe(_ => _view.PlayCharacterizeSequence());
     }
 }

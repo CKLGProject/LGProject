@@ -4,6 +4,7 @@ using Data;
 using DG.Tweening;
 using R3;
 using ReactiveTouchDown;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -18,16 +19,20 @@ public class PatCaptureView : MonoBehaviour
     [Header("AR")] [SerializeField] private Camera arCamera;
     [SerializeField] private ARSession arSession;
     [SerializeField] private ARTrackedImageManager _arTrackedImageManager;
-
-    [Header("Interaction")] [SerializeField]
-    private GameObject TouchArea;
-
     [SerializeField] private ObjectRotation objectRotation;
+
+    [Header("Gesture Controller")] [SerializeField]
+    private PinchController pinchController;
+
+    [SerializeField] private SwipeController swipeController;
+    [SerializeField] private DoubleTapController doubleTapController;
 
     [Header("UI")] [SerializeField] private CanvasGroup UIGroup;
     [SerializeField] private Button captureButton;
     [SerializeField] private GameObject informationMessageText;
     [SerializeField] private TextMeshProUGUI guideMessageText;
+    [SerializeField] private CanvasGroup informationMessageGroup;
+    [SerializeField] private Button resetButton;
 
     [Header("Timeline")] [SerializeField] private PlayableDirector fxDirector;
     [SerializeField] private LightController lightController;
@@ -37,6 +42,8 @@ public class PatCaptureView : MonoBehaviour
 
     private RenderTexture _renderTexture;
     private ReactiveProperty<ScanData> _targetObject = new ReactiveProperty<ScanData>();
+
+    private Subject<Unit> _onCharacterize = new Subject<Unit>();
 
     private void OnEnable()
     {
@@ -48,6 +55,30 @@ public class PatCaptureView : MonoBehaviour
 #endif
 
         _arTrackedImageManager.trackedImagesChanged += OnTrackedImage;
+    }
+
+    private void Start()
+    {
+        informationMessageGroup.alpha = 0;
+        resetButton.gameObject.SetActive(false);
+
+        swipeController.OnSwipeObservable
+            .Where(_ => objectContent.eulerAngles == Vector3.zero)
+            .Where(_ => CompareTargetGesture(GestureType.ScrollDown))
+            .Subscribe(_ => _onCharacterize.OnNext(Unit.Default))
+            .AddTo(this);
+
+        doubleTapController.OnDoubleTouchObservable()
+            .Where(_ => objectContent.eulerAngles == Vector3.zero)
+            .Where(_ => CompareTargetGesture(GestureType.DoubleTap))
+            .Subscribe(_ => _onCharacterize.OnNext(Unit.Default))
+            .AddTo(this);
+
+        pinchController.OnPinchOutObservable
+            .Where(_ => objectContent.eulerAngles == Vector3.zero)
+            .Where(_ => CompareTargetGesture(GestureType.Pinch))
+            .Subscribe(_ => _onCharacterize.OnNext(Unit.Default))
+            .AddTo(this);
     }
 
     private void OnDisable()
@@ -110,6 +141,20 @@ public class PatCaptureView : MonoBehaviour
 
         //UI Fade Out
         DOTween.To(() => UIGroup.alpha, x => UIGroup.alpha = x, 0, 1f).SetEase(Ease.OutSine).SetDelay(0.2f);
+
+        // Info Message Fade In & Out
+        Sequence sequence = DOTween.Sequence();
+        sequence.Append(DOTween.To(() => informationMessageGroup.alpha, x => informationMessageGroup.alpha = x, 1, 1f)
+            .SetEase(Ease.InSine));
+        sequence.Append(DOTween.To(() => informationMessageGroup.alpha, x => informationMessageGroup.alpha = x, 0, 1f)
+            .SetEase(Ease.OutSine).SetDelay(3f));
+        sequence.Play();
+
+        // 리셋 버튼 활성화
+        resetButton.gameObject.SetActive(true);
+        
+        // 제스처 애니메이션 재생
+        _targetObject.Value.GestureUI.SetActive(true);
 
         // 오브젝트 회전 활성화
         objectRotation.Active = true;
@@ -190,12 +235,29 @@ public class PatCaptureView : MonoBehaviour
         return _targetObject.Select(targetObject => targetObject != null);
     }
 
-    /// <summary>
-    /// 더블 터치를 인식하는 옵저버입니다.
-    /// </summary>
-    /// <returns></returns>
-    public Observable<Unit> OnDoubleTouchObservable()
+    public Observable<Unit> OnCharacterizeAsObservable()
     {
-        return TouchArea.DoubleTouchDownAsObservable();
+        return _onCharacterize;
+    }
+
+    public Observable<Unit> OnResetButtonClickObservable()
+    {
+        return resetButton.OnClickAsObservable();
+    }
+
+    /// <summary>
+    /// 타겟 오브젝트가 해당 제스처와 동일한지 체크합니다.
+    /// </summary>
+    /// <param name="gestureType">체크할 제스처</param>
+    /// <returns>true or false</returns>
+    private bool CompareTargetGesture(GestureType gestureType)
+    {
+        if (_targetObject.Value == null)
+            return false;
+
+        if (_targetObject.Value.GestureType == gestureType)
+            return true;
+
+        return false;
     }
 }

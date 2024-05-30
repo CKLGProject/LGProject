@@ -3,6 +3,14 @@ using UnityEngine;
 
 namespace Data
 {
+    public enum GestureType
+    {
+        None,
+        DoubleTap,
+        ScrollDown,
+        Pinch
+    }
+    
     [Serializable]
     public class ScanData
     {
@@ -11,5 +19,6 @@ namespace Data
         public GameObject CharacterObject;
         public string GuideMessage;
         public GameObject GestureUI;
+        public GestureType GestureType;
     }
 }
