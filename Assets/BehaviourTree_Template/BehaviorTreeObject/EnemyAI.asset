@@ -36,13 +36,13 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 4884de2bd7b34db4b8d6f1b997c484d8
-  position: {x: -128, y: 964}
+  position: {x: -128.0001, y: 962}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
   description: "\uACF5\uACA9 \uBE48\uB3C4 : 4"
   child: {fileID: -1024075571135447831}
-  weight: 7
+  weight: 4
 --- !u!114 &-7742227205409017021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -501,7 +501,7 @@ MonoBehaviour:
     moveToObject: {fileID: 0}
   description: 
   child: {fileID: -892536741043771492}
-  weight: 4
+  weight: 7
 --- !u!114 &-1173981029038407488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -816,7 +816,7 @@ MonoBehaviour:
     moveToObject: {fileID: 0}
   description: 
   child: {fileID: -7742227205409017021}
-  weight: 2
+  weight: 3
 --- !u!114 &2612944177186896387
 MonoBehaviour:
   m_ObjectHideFlags: 0

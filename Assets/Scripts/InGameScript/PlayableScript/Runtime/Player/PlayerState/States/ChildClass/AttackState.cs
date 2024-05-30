@@ -65,7 +65,7 @@ namespace LGProject.PlayerState
             }
             // 공격하면서 전진.
             if (StateMachine.playable.movingAttack)
-                StateMachine.physics.velocity += StateMachine.playable.directionX ? Vector3.right * moveValue : Vector3.left * moveValue;
+                StateMachine.physics.velocity += StateMachine.transform.forward * moveValue;
             _damageInCount = false;
             #endregion
 

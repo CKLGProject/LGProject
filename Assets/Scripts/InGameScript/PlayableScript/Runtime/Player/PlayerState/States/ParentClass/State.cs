@@ -60,9 +60,9 @@ namespace LGProject.PlayerState
                     StateMachine.transform.LookAt(right);
                 if (StateMachine.moveAction.ReadValue<float>() > 0)
                     StateMachine.transform.LookAt(left);
-                Vector3 euler = StateMachine.transform.GetChild(1).GetComponent<RectTransform>().localRotation.eulerAngles;
+                //Vector3 euler = StateMachine.transform.GetChild(1).GetComponent<RectTransform>().localRotation.eulerAngles;
                 //Debug.Log($"{euler} / {StateMachine.transform.GetChild(1).GetComponent<RectTransform>().transform.name}");
-                StateMachine.transform.GetChild(1).GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, StateMachine.moveAction.ReadValue<float>() < 0 ? 90 : -90, 0);
+                //StateMachine.transform.GetChild(1).GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, StateMachine.moveAction.ReadValue<float>() < 0 ? 90 : -90, 0);
             }
             if (StateMachine.moveAction.ReadValue<float>() == 0)
                 StateMachine.StandingVelocity();

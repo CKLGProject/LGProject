@@ -25,6 +25,7 @@ namespace BehaviourTree
             Agent.effectManager.Play(EffectManager.EFFECT.Knockback).Forget();
             _stateMachine.IsDamaged = false;
             _stateMachine.IsDown = true;
+            _stateMachine.IsGrounded = true;
         }
 
         protected override void OnStop()

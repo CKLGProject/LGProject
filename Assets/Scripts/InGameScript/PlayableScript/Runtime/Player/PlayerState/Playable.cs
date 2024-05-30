@@ -90,6 +90,8 @@ namespace LGProject.PlayerState
         {
             UltimateGage = Mathf.Clamp(value, 0, 100);
             battleModel.SyncUltimateEnergy(ActorType, UltimateGage);
+            //if(UltimateGage >= 100)
+            //    battleModel.SyncUltimate
         }
 
         public void Cheat()
@@ -169,7 +171,45 @@ namespace LGProject.PlayerState
                 Debug.LogError("EffectManager 없음");
             }
         }
+        private void OnTriggerStay(Collider other)
+        {
+            if(other.CompareTag("Player") && !StateMachine.IsGrounded)
+            {
+                // 부딧힌 대상으로부터 n만큼의 거리를 벌려야함.
+                float directionX = transform.position.x - other.transform.position.x;
+                //float radius = StateMachine.collider.GetComponent<CapsuleCollider>().radius;
+                directionX = directionX > 0 ? 4.5f : -4.5f;
+                if(Mathf.Abs(StateMachine.physics.velocity.x) == 0)
+                {
+                    
+                    // 목표지점 세팅
+                    Vector3 targetPoint = other.transform.position + Vector3.right * directionX;
+                    StateMachine.transform.Translate(targetPoint * Time.deltaTime);
+                    Debug.Log(targetPoint);
+                }
+                else
+                {
+                    StateMachine.physics.velocity += Vector3.right * directionX;
+                }
+                Vector3 zResetPos = StateMachine.transform.position;
+                zResetPos.z = -9.5f;
+                StateMachine.transform.position = zResetPos;
+                Debug.Log(StateMachine.physics.velocity);
+            }
+        }
 
+        private void OnTriggerExit(Collider other)
+        {
+            if(other.CompareTag("Player") && !StateMachine.IsGrounded)
+            {
+                StateMachine.StandingVelocity();
+            }
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            //Debug.Log("Bye");
+        }
 
         #region CheckFields
 
@@ -259,7 +299,6 @@ namespace LGProject.PlayerState
             transform.position = new Vector3(transform.position.x, UnderPlatform.rect.y, transform.position.z);
 
             StateMachine.physics.velocity = Vector3.zero;
-            Debug.Log("HelloWorld");
             StateMachine.collider.isTrigger = false;
             StateMachine.IsGrounded = true;
             StateMachine.IsKnockback = false;
@@ -271,6 +310,9 @@ namespace LGProject.PlayerState
         {
             // 0 이상일 때는 체크하지 않.기.
             // 왜냐면 올라가고 있기 때문이지
+            //if (!StateMachine.IsGrounded && Mathf.Abs(StateMachine.physics.velocity.y) == 0)
+            //    StateMachine.IsGrounded = true;
+
             if (StateMachine.physics.velocity.y < -0.1f &&
                 (!StateMachine.IsGrounded || StateMachine.IsKnockback))
             {

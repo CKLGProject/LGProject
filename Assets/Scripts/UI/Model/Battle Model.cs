@@ -15,7 +15,9 @@ public class BattleModel : MonoBehaviour
     private readonly SerializableReactiveProperty<float> _userDamageGageProperty = new ();
     private readonly SerializableReactiveProperty<float> _aiDamageGageProperty = new ();
     private readonly SerializableReactiveProperty<float> _userUltimateEnergyProperty = new ();
+    private readonly SerializableReactiveProperty<bool>  _userUltimateEnergyIconProperty = new ();
     private readonly SerializableReactiveProperty<float> _aiUltimateEnergyProperty = new ();
+    private readonly SerializableReactiveProperty<bool>  _aiUltimateEnergyIconProperty = new ();
     private readonly SerializableReactiveProperty<float> _gameCountDownTimerProperty = new ();
 
     private void Awake()
@@ -70,9 +72,11 @@ public class BattleModel : MonoBehaviour
         {
             case ActorType.User:
                 _userUltimateEnergyProperty.Value = value;
+                _userUltimateEnergyIconProperty.Value = value >= 100 ? true : false;
                 break;
             case ActorType.AI:
                 _aiUltimateEnergyProperty.Value = value;
+                _aiUltimateEnergyIconProperty.Value = value >= 100 ? true : false;
                 break;
         }
     }
@@ -115,6 +119,8 @@ public class BattleModel : MonoBehaviour
     public Observable<float> UserDamageGageObservable => _userDamageGageProperty.AsObservable();
     public Observable<float> AIDamageGageObservable => _aiDamageGageProperty.AsObservable();
     public Observable<float> UserUltimateEnergyObservable => _userUltimateEnergyProperty.AsObservable();
+    public Observable<bool> UserUltimateEnergyIconObservable => _userUltimateEnergyIconProperty.AsObservable();
+    public Observable<bool> AIUltimateEnergyIconObservable => _aiUltimateEnergyIconProperty.AsObservable();
     public Observable<float> AIUltimateEnergyObservable => _aiUltimateEnergyProperty.AsObservable();
     public Observable<float> GameCountDownTimerObservable => _gameCountDownTimerProperty.AsObservable();
 }

@@ -121,8 +121,6 @@ namespace BehaviourTree
                     break;
             }
             // 공격하면서 전진.
-            if (_stateMachine.playable.movingAttack)
-                _stateMachine.physics.velocity += _stateMachine.playable.directionX ? Vector3.right * moveValue : Vector3.left * moveValue;
 
             #endregion
         }
@@ -167,10 +165,17 @@ namespace BehaviourTree
                 {
                     temp.
                     Item1.GetStateMachine.
-                    HitDamaged(_stateMachine.AttackCount < 3 ? Vector3.zero : v);
+                    HitDamaged(_stateMachine.AttackCount < 3 ? Vector3.zero : v, 0, _stateMachine);
                     temp.Item1.GetStateMachine.hitPlayer = _stateMachine.transform;
 
                     _stateMachine.animator.SetInteger("Attack", 0);
+
+                    if (_stateMachine.playable.movingAttack)
+                    {
+                        // temp 방향으로 공격하자
+                        float moveValue = (temp.Item1.transform.position - _stateMachine.transform.position).normalized.x;
+                        _stateMachine.physics.velocity += Vector3.right * moveValue;
+                    }
                     return true;
                 }
             }

@@ -69,14 +69,8 @@ namespace LGProject.PlayerState
             }
 
             // 점프 가드는 한번만!!
-            if (StateMachine.guardAction.triggered && !StateMachine.IsJumpGuard)
+            if (StateMachine.guardAction.triggered && StateMachine.GuardGage > 0)
             {
-                // 땅에 접촉하지 않은 상태일 때
-                if (!StateMachine.IsGrounded)
-                {
-                    StateMachine.IsJumpGuard = true;
-                }
-
                 StateMachine.ChangeState(StateMachine.guardState);
                 return;
             }

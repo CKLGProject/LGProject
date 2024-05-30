@@ -27,6 +27,10 @@ public class BattleView : MonoBehaviour
     [Header("EnergyBar")]
     [SerializeField] private Image userEnergyBar;
     [SerializeField] private Image aiEnergyBar;
+    [SerializeField] private Image userEnergyIcon;
+    [SerializeField] private Image aiEnergyIcon;
+    [SerializeField] private Sprite ultimateReadySprite;
+    [SerializeField] private Sprite ultimateReadyYetSprite;
 
     [FormerlySerializedAs("homeSceneLoader")]
     [Header("Home Scene")]
@@ -37,6 +41,7 @@ public class BattleView : MonoBehaviour
     [SerializeField] private TextMeshProUGUI timerText;
     [Header("StartLogo")]
     [SerializeField] private Image StartImage;
+
 
     /// <summary>
     /// 뷰를 전부 안보이도록 처리합니다.
@@ -61,6 +66,22 @@ public class BattleView : MonoBehaviour
                 break;
             case ActorType.AI:
                 aiEnergyBar.fillAmount = value / 100;
+                break;
+        }
+    }
+
+    /// <summary>
+    /// 에너지바가 가득 차면 UI를 업데이트 합니다.
+    /// </summary>
+    public void UpdateEnergyIconUI(ActorType actorType, bool ready)
+    {
+        switch (actorType)
+        {
+            case ActorType.User:
+                userEnergyIcon.sprite = ready ? ultimateReadySprite : ultimateReadyYetSprite;
+                break;
+            case ActorType.AI:
+                aiEnergyIcon.sprite = ready ? ultimateReadySprite : ultimateReadyYetSprite;
                 break;
         }
     }

@@ -58,9 +58,11 @@ namespace LGProject.PlayerState
                 StateMachine.ChangeState(StateMachine.jumpState);
             }
 
-            if (StateMachine.guardAction.triggered)
+            // 가드 게이지가 1이상일 경우 발동
+            if (StateMachine.guardAction.triggered && StateMachine.GuardGage > 0 && !StateMachine.IsJumpGuard)
             {
                 //stateMachine.GuardEffect.SetActive(true);
+                StateMachine.IsJumpGuard = true;
                 StateMachine.ChangeState(StateMachine.guardState);
                 return;
             }

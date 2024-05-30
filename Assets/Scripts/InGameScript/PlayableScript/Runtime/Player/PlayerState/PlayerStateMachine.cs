@@ -76,7 +76,7 @@ namespace LGProject.PlayerState //
         public int AttackCount = 0;
         
         // 이건 어떻게 깎이게 할 것인가?
-        public float GuardGage = 0;
+        public float GuardGage = 100;
 
         public State CurrentState;
         public Transform hitPlayer;
@@ -92,7 +92,7 @@ namespace LGProject.PlayerState //
         private static readonly int Jump2 = Animator.StringToHash("Jump2");
         private static readonly int Landing = Animator.StringToHash("Landing");
         private static readonly int WakeUp = Animator.StringToHash("WakeUp");
-        private static readonly int Guard = Animator.StringToHash("Guard");
+        private static readonly int GuardEnd = Animator.StringToHash("GuardEnd");
 
         public void SetAnimPlayTime(string clipName, float time)
         {
@@ -246,6 +246,11 @@ namespace LGProject.PlayerState //
             // 누어 있는 상태에선 데미지를 입지 않는다.
             if (IsDown || IsUltimate || IsSuperArmor ||(EnemyStateMachine != null && !EnemyStateMachine.IsUltimate))
                 return;
+            if(IsGuard)
+            {
+                //GuardGage -= 25;
+                physics.velocity = new Vector3(transform.forward.x * -2.5f, 0, 0);
+            }
             if (!IsGuard || (EnemyStateMachine != null && EnemyStateMachine.IsUltimate))
             {
                 physics.velocity = Vector3.zero;
@@ -258,12 +263,12 @@ namespace LGProject.PlayerState //
                 {
                     SetVelocity(velocity, nockbackDelay).Forget();
                     animator.SetTrigger(Knockback);
-                    //animator.SetTrigger(Knockback);
                 }
                 else
                 {
                     animator.SetTrigger(Hit);
                 }
+
                 if(EnemyStateMachine != null && EnemyStateMachine.IsUltimate)
                 {
                     playable.effectManager.PlayOneShot(EffectManager.EFFECT.UltimateHit, Vector3.left);
@@ -272,14 +277,9 @@ namespace LGProject.PlayerState //
                 {
                     playable.effectManager.Play(EffectManager.EFFECT.Hit).Forget();
                 }
-
                 playable.effectManager.Stop(EffectManager.EFFECT.Guard);
-                playable.Animator.SetBool(Guard, false);
             }
-            else
-            {
-                physics.velocity = new Vector3(transform.forward.x * -1.5f, 0, 0);
-            }
+
             IsDamaged = true;
         }
 
@@ -301,6 +301,7 @@ namespace LGProject.PlayerState //
             animator.ResetTrigger(Knockback);
             animator.ResetTrigger(Landing);
             animator.ResetTrigger(WakeUp);
+            animator.ResetTrigger(GuardEnd);
         }
 
         public void UltimateGageisFull()

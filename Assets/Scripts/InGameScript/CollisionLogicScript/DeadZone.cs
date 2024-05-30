@@ -16,8 +16,6 @@ namespace LGProject
         {
             Gizmos.color = Color.red;
             Gizmos.DrawWireCube(transform.position, DeadLineBoxScale);
-
-
         }
 
         private void Awake()
