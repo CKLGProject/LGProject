@@ -1,9 +1,8 @@
 // #define LG_DEBUG
-
+using Cysharp.Threading.Tasks;
 using Data;
 using DG.Tweening;
 using R3;
-using ReactiveTouchDown;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,17 +18,16 @@ public class PatCaptureView : MonoBehaviour
     [Header("AR")] [SerializeField] private Camera arCamera;
     [SerializeField] private ARSession arSession;
     [SerializeField] private ARTrackedImageManager _arTrackedImageManager;
-    [SerializeField] private ObjectRotation objectRotation;
 
-    [Header("Gesture Controller")] [SerializeField]
-    private PinchController pinchController;
-
+    [Header("Gesture Controller")]
+    [SerializeField] private PinchController pinchController;
     [SerializeField] private SwipeController swipeController;
     [SerializeField] private DoubleTapController doubleTapController;
-
+    
     [Header("UI")] [SerializeField] private CanvasGroup UIGroup;
     [SerializeField] private Button captureButton;
     [SerializeField] private GameObject informationMessageText;
+    [SerializeField] private CanvasGroup guideMessageGroup;
     [SerializeField] private TextMeshProUGUI guideMessageText;
     [SerializeField] private CanvasGroup informationMessageGroup;
     [SerializeField] private Button resetButton;
@@ -39,11 +37,13 @@ public class PatCaptureView : MonoBehaviour
 
     [SerializeField] private List<ScanData> scanDataList;
     [SerializeField] private Transform objectContent;
+    [SerializeField] private ObjectRotation objectRotation;
 
     private RenderTexture _renderTexture;
     private ReactiveProperty<ScanData> _targetObject = new ReactiveProperty<ScanData>();
 
     private Subject<Unit> _onCharacterize = new Subject<Unit>();
+    private static readonly int Open = Animator.StringToHash("Open");
 
     private void OnEnable()
     {
@@ -59,23 +59,24 @@ public class PatCaptureView : MonoBehaviour
 
     private void Start()
     {
+        guideMessageGroup.alpha = 0;
         informationMessageGroup.alpha = 0;
-        resetButton.gameObject.SetActive(false);
+        SetActiveResetButton(false);
 
         swipeController.OnSwipeObservable
-            .Where(_ => objectContent.eulerAngles == Vector3.zero)
+            .Where(_=> objectRotation.Active == false)
             .Where(_ => CompareTargetGesture(GestureType.ScrollDown))
             .Subscribe(_ => _onCharacterize.OnNext(Unit.Default))
             .AddTo(this);
 
         doubleTapController.OnDoubleTouchObservable()
-            .Where(_ => objectContent.eulerAngles == Vector3.zero)
+            .Where(_=> objectRotation.Active == false)
             .Where(_ => CompareTargetGesture(GestureType.DoubleTap))
             .Subscribe(_ => _onCharacterize.OnNext(Unit.Default))
             .AddTo(this);
 
         pinchController.OnPinchOutObservable
-            .Where(_ => objectContent.eulerAngles == Vector3.zero)
+            .Where(_=> objectRotation.Active == false)
             .Where(_ => CompareTargetGesture(GestureType.Pinch))
             .Subscribe(_ => _onCharacterize.OnNext(Unit.Default))
             .AddTo(this);
@@ -151,10 +152,7 @@ public class PatCaptureView : MonoBehaviour
         sequence.Play();
 
         // 리셋 버튼 활성화
-        resetButton.gameObject.SetActive(true);
-        
-        // 제스처 애니메이션 재생
-        _targetObject.Value.GestureUI.SetActive(true);
+        ShowResetButton().Forget();
 
         // 오브젝트 회전 활성화
         objectRotation.Active = true;
@@ -162,12 +160,35 @@ public class PatCaptureView : MonoBehaviour
         // 타겟팅된 가전제품 활성화
         _targetObject.Value.MachineObject.SetActive(true);
     }
+    
+    /// <summary>
+    /// 오브젝트 회전을 비활성화 합니다.
+    /// </summary>
+    public void DisableObjectRotation()
+    {
+        objectRotation.Active = false;
+    }
+
+    /// <summary>
+    /// 3초 딜레이 후 리셋 버튼을 보이게 합니다.
+    /// </summary>
+    private async UniTaskVoid ShowResetButton()
+    {
+        await UniTask.Delay(TimeSpan.FromSeconds(3), cancellationToken: destroyCancellationToken);
+        SetActiveResetButton(true);
+    }
 
     /// <summary>
     /// 캐릭터 라이즈화 하는 시퀀스를 재생합니다.
     /// </summary>
-    public void PlayCharacterizeSequence()
+    public async UniTaskVoid PlayCharacterizeSequence()
     {
+        if(_targetObject.Value.MachineObject.TryGetComponent(out Animator targetAnimator)) 
+            targetAnimator.SetTrigger(Open);
+        
+        // 일단 2초 정도.. 대기
+        await UniTask.Delay(TimeSpan.FromSeconds(1));
+        
         fxDirector.Play();
     }
 
@@ -176,6 +197,8 @@ public class PatCaptureView : MonoBehaviour
     /// </summary>
     public void ShowTouchGuideText()
     {
+        SetActiveGuideMessageText(true);
+        
         string message = _targetObject.Value.GuideMessage;
         guideMessageText.text = message;
         guideMessageText.gameObject.SetActive(true);
@@ -259,5 +282,30 @@ public class PatCaptureView : MonoBehaviour
             return true;
 
         return false;
+    }
+
+    /// <summary>
+    /// 제스처 UI를 보이게 합니다.
+    /// </summary>
+    public void SetActiveGestureUI(bool isActive)
+    {
+        _targetObject.Value.GestureUI.SetActive(isActive);
+    }
+    
+    /// <summary>
+    /// 리셋 버튼의 활성화 여부를 설정합니다.
+    /// </summary>
+    public void SetActiveResetButton(bool isActive)
+    {
+        resetButton.gameObject.SetActive(isActive);
+    }
+    
+    /// <summary>
+    /// 해당 가전제품을 활성화 하는 방법의 텍스트의 활성화 여부를 설정합니다.
+    /// </summary>
+    /// <param name="isActive"></param>
+    public void SetActiveGuideMessageText(bool isActive)
+    {
+        guideMessageText.gameObject.SetActive(isActive);
     }
 }

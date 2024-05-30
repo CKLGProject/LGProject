@@ -1,4 +1,5 @@
 // #define LG_DEBUG
+
 using R3;
 using System;
 using UnityEngine;
@@ -34,7 +35,9 @@ public class PatCapturePresenter : MonoBehaviour
 
         // 캡쳐 버튼을 클릭했을 때 해당 타겟 매쉬를 활성화하는 옵저버
         _view.OnClickCaptureButtonAsObservable()
+#if !LG_DEBUG
             .Where(_ => _model.CanQRCodeCapture)
+#endif
             .Subscribe(_ =>
             {
                 _model.CanBeCharacterized = true;
@@ -43,14 +46,25 @@ public class PatCapturePresenter : MonoBehaviour
 
         // 리셋 버튼을 클릭했을 때 옵저버
         _view.OnResetButtonClickObservable()
-            .Subscribe(_ => _view.ResetTransformObjects())
+            .Subscribe(_ =>
+            {
+                _view.ShowTouchGuideText();
+                _view.SetActiveResetButton(false);
+                _view.SetActiveGestureUI(true);
+                _view.DisableObjectRotation();
+                _view.ResetTransformObjects();
+            })
             .AddTo(this);
 
         // 캐릭터 라이즈가 가능할 때 더블 터치를 하는 옵저버
-        // _view.OnCharacterizeAsObservable()
-        //     .Where()
-        //     .Where(_ => _model.CanBeCharacterized)
-        //     .Take(1)
-        //     .Subscribe(_ => _view.PlayCharacterizeSequence());
+        _view.OnCharacterizeAsObservable()
+            .Where(_ => _model.CanBeCharacterized)
+            .Take(1)
+            .Subscribe(_ =>
+            {
+                _view.SetActiveGuideMessageText(false);
+                _view.SetActiveGestureUI(false);
+                _view.PlayCharacterizeSequence().Forget();
+            });
     }
 }
