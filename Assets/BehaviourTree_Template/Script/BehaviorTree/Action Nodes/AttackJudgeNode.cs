@@ -169,7 +169,6 @@ namespace BehaviourTree
                     temp.Item1.GetStateMachine.hitPlayer = _stateMachine.transform;
 
                     _stateMachine.animator.SetInteger("Attack", 0);
-
                     if (_stateMachine.playable.movingAttack)
                     {
                         // temp 방향으로 공격하자

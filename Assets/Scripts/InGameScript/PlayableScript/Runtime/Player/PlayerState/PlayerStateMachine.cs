@@ -244,7 +244,7 @@ namespace LGProject.PlayerState //
         public void HitDamaged(Vector3 velocity, float nockbackDelay = 0.1f,PlayerStateMachine EnemyStateMachine = null)
         {
             // 누어 있는 상태에선 데미지를 입지 않는다.
-            if (IsDown || IsUltimate || IsSuperArmor ||(EnemyStateMachine != null && !EnemyStateMachine.IsUltimate))
+            if (IsDown || IsUltimate || IsSuperArmor ||(EnemyStateMachine != null && IsUltimate))
                 return;
             if(IsGuard)
             {

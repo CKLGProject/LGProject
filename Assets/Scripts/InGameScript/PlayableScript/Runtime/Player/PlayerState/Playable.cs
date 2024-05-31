@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using TMPro;
 using Cysharp.Threading.Tasks;
 using Data;
+using LGProject.CollisionZone;
 
 namespace LGProject.PlayerState
 {
@@ -21,6 +22,7 @@ namespace LGProject.PlayerState
         public Animator Animator;
         [field: SerializeField] public ActorType ActorType { get; private set; }
         [SerializeField] private BattleModel battleModel;
+        [SerializeField] private CollisionObserver CollisionObserver;
 
         [SerializeField] protected Vector3 velocity = Vector3.zero;
 
@@ -358,15 +360,22 @@ namespace LGProject.PlayerState
             return false;
         }
 
+        public void CameraCheck()
+        {
+            CollisionObserver.CallZoneFunction(ZoneType.CameraZone, transform);
+        }
+
         public void DeadSpaceCheck()
         {
-            if (!DeadZone.TriggerdSpace(transform) && !IsDead)
+            //if (!DeadZone.TriggerSpace(transform) && !IsDead)
+            if (CollisionObserver.CallZoneFunction(ZoneType.DeadZone, transform) && !IsDead)
             {
                 // 밖을 벗어났다는 뜻이기 때문에 리스트에서 지워줘야함.
                 
                 StateMachine.IsDead = true;
                 // 죽으면 어레이에서 빼주기.
-                DeadZone.SubTarget(transform);
+                
+                //DeadZone.SubTarget(transform);
                 UltimateGage /= 2;
                 LifePoint -= 1; // 체력 감소
                 battleModel.SyncHealth(ActorType, LifePoint);
@@ -417,26 +426,11 @@ namespace LGProject.PlayerState
             StateMachine.physics.velocity = Vector3.up * initialJumpVelocity;
         }
 
-        public void DeadLineCheck()
-        {
-            //if (!StateMachine.IsDead && transform.position.y < DeadLine)
-            //{
-            //    StateMachine.IsDead = true;
-            //    UltimateGage /= 2;
-            //    LifePoint -= 1; // 체력 감소
-            //    battleModel.SyncHealth(ActorType, LifePoint);
-            //    if (LifePoint > 0)
-            //    {
-            //        AliveDelay().Forget();
-            //    }
-            //}
-        }
-
         // 현재 재생성 문제 해결 중 
         private async UniTaskVoid AliveDelay()
         {
             await UniTask.Delay(TimeSpan.FromSeconds(respawnTime));
-            DeadZone.AddTarget(transform);
+            //DeadZone.AddTarget(transform);
             StateMachine.ResetVelocity();
             transform.position = Vector3.forward * -9.5f + AliveOffset;
             StateMachine.IsDead = false;
@@ -456,19 +450,12 @@ namespace LGProject.PlayerState
             // 무적 2초
             await UniTask.Delay(TimeSpan.FromSeconds(2f));
             StateMachine.IsSuperArmor = false;
-
-            //StateMachine.animator.SetTrigger(Hit);
-            //StateMachine.IsDamaged = true;
-            //StateMachine.IsKnockback = true;
-            //StateMachine.animator.SetTrigger(Knockback);
         }
-
-
 
         public void SetUnderPlatform()
         {
             UnderPlatform = GameObject.Find("Main_Floor (1)").GetComponent<Platform>();
-            DeadZone = GameObject.Find("DeadZone").GetComponent<DeadZone>();
+            DeadZone = GameObject.Find("Collision Zone System").GetComponent<DeadZone>();
         }
 
         public void ShowUltimateEffect()
