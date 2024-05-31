@@ -16,11 +16,11 @@ GameObject:
   - component: {fileID: 2876321095919618213}
   m_Layer: 3
   m_Name: E_PlayableA
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8219133890818253592
 Transform:
   m_ObjectHideFlags: 0
@@ -50,34 +50,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Animator: {fileID: 4246712564485102162}
-  actorType: 0
+  <ActorType>k__BackingField: 2
   battleModel: {fileID: 0}
+  CollisionObserver: {fileID: 0}
   velocity: {x: 0, y: 0, z: 0}
   MaximumJumpCount: 2
   MaximumSpeed: 4
   DashSpeed: 0
   JumpScale: 5
-  FirstAttackDelay: 0.4
+  FirstAttackDelay: 0.5
   FirstAttackJudgeDelay: 0.2
   FirstAttackMovingValue: 1
   SecondAttackDelay: 0.6
-  SecondAttackJudgeDelay: 0.4
+  SecondAttackJudgeDelay: 0.2
   SecondAttackMovingValue: 1
   ThirdAttackDelay: 1
   ThirdAttackJudgeDelay: 0.2
   ThirdAttackMovingValue: 1
   DashAttackDelay: 0.5
   HitDelay: 0.5
-  DownWaitDelay: 0
-  WakeUpDelay: 0.5
+  DownWaitDelay: 1
+  WakeUpDelay: 0.75
   LifePoint: 3
   movingAttack: 1
-  DamageGageInt: {fileID: 0}
-  DamageGageDecimal: {fileID: 0}
-  UltimateGageImage: {fileID: 0}
-  AliveOffset: {x: 0, y: 5, z: 0}
+  AliveOffset: {x: 0, y: 0, z: 0}
   respawnTime: 1
-  DeadLine: -4.8
   directionX: 0
   jumpCurve:
     serializedVersion: 2
@@ -85,7 +82,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  underPlatform: {fileID: 0}
+  UnderPlatform: {fileID: 0}
   effectManager: {fileID: 0}
   IsGrounded: 0
   IsGuard: 0
@@ -210,6 +207,14 @@ MonoBehaviour:
   _UltimateEffect: {fileID: 6915349224304202874, guid: c9920e406cb0ed944a113922da7fef5e,
     type: 3}
   _UltimateOffset: {x: 0, y: 0, z: 0}
+  _UltimateHit: {fileID: 6866455104661860424, guid: 4173614d681eb5341af65e6009e6b37a,
+    type: 3}
+  _UltimateDash: {fileID: 6866455104661860424, guid: b95a913ed249cb94799d76f84fbb1aa9,
+    type: 3}
+  _UltimateAirborn: {fileID: 5015296152975555048, guid: 8f3f5197a189b9847a0e94b9c33c423e,
+    type: 3}
+  _UltimatePreCenter: {fileID: 0}
+  _UltimatePre_RHand_FX: {fileID: 0}
   playList: []
 --- !u!1001 &7747826582891407299
 PrefabInstance:

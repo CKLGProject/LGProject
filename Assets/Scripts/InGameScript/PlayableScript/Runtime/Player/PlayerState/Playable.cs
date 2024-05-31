@@ -130,6 +130,7 @@ namespace LGProject.PlayerState
 
         protected virtual void Awake()
         {
+            InitializeInfo();
             battleModel.InitHealth(ActorType, LifePoint);
         }
 
@@ -237,6 +238,16 @@ namespace LGProject.PlayerState
             }
         }
 
+        #region Initialize
+        public void InitializeInfo()
+        {
+            battleModel = GameObject.Find("Battle UI System").GetComponent<BattleModel>();
+            CollisionObserver = GameObject.Find("Collision Zone System").GetComponent<CollisionObserver>();
+
+        }
+        #endregion
+
+        #region CollisionCheckMethods
         public void PlatformCheck()
         {
             // 일단 여기에 넣어보자
@@ -368,12 +379,12 @@ namespace LGProject.PlayerState
         {
             //if (!DeadZone.TriggerSpace(transform) && !IsDead)
             if (CollisionObserver.CallZoneFunction(ZoneType.DeadZone, transform) && !IsDead)
-            {   
+            {
                 // 밖을 벗어났다는 뜻이기 때문에 리스트에서 지워줘야함.
-                
+
                 StateMachine.IsDead = true;
                 // 죽으면 어레이에서 빼주기.
-                
+
                 //DeadZone.SubTarget(transform);
                 UltimateGage /= 2;
                 LifePoint -= 1; // 체력 감소
@@ -385,29 +396,13 @@ namespace LGProject.PlayerState
             }
         }
 
-        public void DieCameraForcus()
-        {
-
-        }
-
+        #endregion
 
         public void SetupJumpVariables()
         {
             float timeToApex = maxJumpTime / 2;
             _gravity = (-2 * JumpScale) / Mathf.Pow(timeToApex, 1.5f);
             initialJumpVelocity = (2 * JumpScale) / timeToApex;
-        }
-
-        public void HandleJump()
-        {
-            if (StateMachine.JumpInCount > 0 && StateMachine.IsJumpping)
-            {
-                StateMachine.IsJumpping = false;
-            }
-
-            if (StateMachine.physics.velocity.y > 0 && !StateMachine.IsKnockback)
-            {
-            }
         }
 
         // 점프 후 내려오는 것
@@ -454,7 +449,6 @@ namespace LGProject.PlayerState
         public void SetUnderPlatform()
         {
             UnderPlatform = GameObject.Find("Main_Floor (1)").GetComponent<Platform>();
-            //DeadZone = GameObject.Find("Collision Zone System").GetComponent<>();
         }
 
         public void ShowUltimateEffect()
