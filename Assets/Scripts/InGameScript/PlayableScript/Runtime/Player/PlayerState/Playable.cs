@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using TMPro;
 using Cysharp.Threading.Tasks;
 using Data;
+using LGProject.CollisionZone;
 
 namespace LGProject.PlayerState
 {
@@ -21,6 +22,7 @@ namespace LGProject.PlayerState
         public Animator Animator;
         [field: SerializeField] public ActorType ActorType { get; private set; }
         [SerializeField] private BattleModel battleModel;
+        [SerializeField] private CollisionObserver CollisionObserver;
 
         [SerializeField] protected Vector3 velocity = Vector3.zero;
 
@@ -90,6 +92,8 @@ namespace LGProject.PlayerState
         {
             UltimateGage = Mathf.Clamp(value, 0, 100);
             battleModel.SyncUltimateEnergy(ActorType, UltimateGage);
+            //if(UltimateGage >= 100)
+            //    battleModel.SyncUltimate
         }
 
         public void Cheat()
@@ -169,7 +173,45 @@ namespace LGProject.PlayerState
                 Debug.LogError("EffectManager 없음");
             }
         }
+        private void OnTriggerStay(Collider other)
+        {
+            if(other.CompareTag("Player") && !StateMachine.IsGrounded)
+            {
+                // 부딧힌 대상으로부터 n만큼의 거리를 벌려야함.
+                float directionX = transform.position.x - other.transform.position.x;
+                //float radius = StateMachine.collider.GetComponent<CapsuleCollider>().radius;
+                directionX = directionX > 0 ? 4.5f : -4.5f;
+                if(Mathf.Abs(StateMachine.physics.velocity.x) == 0)
+                {
+                    
+                    // 목표지점 세팅
+                    Vector3 targetPoint = other.transform.position + Vector3.right * directionX;
+                    StateMachine.transform.Translate(targetPoint * Time.deltaTime);
+                    Debug.Log(targetPoint);
+                }
+                else
+                {
+                    StateMachine.physics.velocity += Vector3.right * directionX;
+                }
+                Vector3 zResetPos = StateMachine.transform.position;
+                zResetPos.z = -9.5f;
+                StateMachine.transform.position = zResetPos;
+                Debug.Log(StateMachine.physics.velocity);
+            }
+        }
 
+        private void OnTriggerExit(Collider other)
+        {
+            if(other.CompareTag("Player") && !StateMachine.IsGrounded)
+            {
+                StateMachine.StandingVelocity();
+            }
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            //Debug.Log("Bye");
+        }
 
         #region CheckFields
 
@@ -244,7 +286,7 @@ namespace LGProject.PlayerState
             StateMachine.IsJumpGuard = false;
             StateMachine.JumpInCount = 0;
             StateMachine.StandingVelocity();
-            StateMachine.animator.SetTrigger(Landing);
+
             //if (StateMachine.CurrentState != null)
             //{
             //    StateMachine.ChangeState(StateMachine.landingState);
@@ -270,6 +312,9 @@ namespace LGProject.PlayerState
         {
             // 0 이상일 때는 체크하지 않.기.
             // 왜냐면 올라가고 있기 때문이지
+            //if (!StateMachine.IsGrounded && Mathf.Abs(StateMachine.physics.velocity.y) == 0)
+            //    StateMachine.IsGrounded = true;
+
             if (StateMachine.physics.velocity.y < -0.1f &&
                 (!StateMachine.IsGrounded || StateMachine.IsKnockback))
             {
@@ -315,15 +360,22 @@ namespace LGProject.PlayerState
             return false;
         }
 
+        public void CameraCheck()
+        {
+            CollisionObserver.CallZoneFunction(ZoneType.CameraZone, transform);
+        }
+
         public void DeadSpaceCheck()
         {
-            if (!DeadZone.TriggerdSpace(transform) && !IsDead)
+            //if (!DeadZone.TriggerSpace(transform) && !IsDead)
+            if (CollisionObserver.CallZoneFunction(ZoneType.DeadZone, transform) && !IsDead)
             {
                 // 밖을 벗어났다는 뜻이기 때문에 리스트에서 지워줘야함.
                 
                 StateMachine.IsDead = true;
                 // 죽으면 어레이에서 빼주기.
-                DeadZone.SubTarget(transform);
+                
+                //DeadZone.SubTarget(transform);
                 UltimateGage /= 2;
                 LifePoint -= 1; // 체력 감소
                 battleModel.SyncHealth(ActorType, LifePoint);
@@ -374,25 +426,11 @@ namespace LGProject.PlayerState
             StateMachine.physics.velocity = Vector3.up * initialJumpVelocity;
         }
 
-        public void DeadLineCheck()
-        {
-            //if (!StateMachine.IsDead && transform.position.y < DeadLine)
-            //{
-            //    StateMachine.IsDead = true;
-            //    UltimateGage /= 2;
-            //    LifePoint -= 1; // 체력 감소
-            //    battleModel.SyncHealth(ActorType, LifePoint);
-            //    if (LifePoint > 0)
-            //    {
-            //        AliveDelay().Forget();
-            //    }
-            //}
-        }
-
+        // 현재 재생성 문제 해결 중 
         private async UniTaskVoid AliveDelay()
         {
             await UniTask.Delay(TimeSpan.FromSeconds(respawnTime));
-            DeadZone.AddTarget(transform);
+            //DeadZone.AddTarget(transform);
             StateMachine.ResetVelocity();
             transform.position = Vector3.forward * -9.5f + AliveOffset;
             StateMachine.IsDead = false;
@@ -400,31 +438,24 @@ namespace LGProject.PlayerState
             battleModel.SyncDamageGage(ActorType, DamageGage);
 
             StateMachine.animator.SetTrigger("Jump1");
-            //await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
-            //StateMachine.animator.SetBool(Flying, false);
+
+            StateMachine.animator.SetTrigger("Landing");
             StateMachine.IsDamaged = false;
             StateMachine.IsKnockback = false;
             StateMachine.IsGrounded = false;
             StateMachine.IsSuperArmor = true;
             if(StateMachine.CurrentState != null)
-                StateMachine.ChangeState(StateMachine.idleState);
+                StateMachine.ChangeState(StateMachine.landingState);
             
             // 무적 2초
             await UniTask.Delay(TimeSpan.FromSeconds(2f));
             StateMachine.IsSuperArmor = false;
-
-            //StateMachine.animator.SetTrigger(Hit);
-            //StateMachine.IsDamaged = true;
-            //StateMachine.IsKnockback = true;
-            //StateMachine.animator.SetTrigger(Knockback);
         }
-
-
 
         public void SetUnderPlatform()
         {
             UnderPlatform = GameObject.Find("Main_Floor (1)").GetComponent<Platform>();
-            DeadZone = GameObject.Find("DeadZone").GetComponent<DeadZone>();
+            DeadZone = GameObject.Find("Collision Zone System").GetComponent<DeadZone>();
         }
 
         public void ShowUltimateEffect()

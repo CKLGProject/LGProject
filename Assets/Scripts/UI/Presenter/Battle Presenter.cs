@@ -82,6 +82,12 @@ public class BattlePresenter : MonoBehaviour
         _battleModel.AIUltimateEnergyObservable
             .Subscribe(ultimateGage => _battleView.UpdateEnergyBarUI(ActorType.AI, ultimateGage));
 
+        // User의 Ultimate Energy가 가득 찼음을 알리는 옵저버
+        _battleModel.UserUltimateEnergyIconObservable.Subscribe(ultimateReady => _battleView.UpdateEnergyIconUI(ActorType.User, ultimateReady));
+
+        // AI의 Ultimate Energy가 가득 찼음을 알리는 옵저버
+        _battleModel.AIUltimateEnergyIconObservable.Subscribe(ultimateReady => _battleView.UpdateEnergyIconUI(ActorType.AI, ultimateReady));
+
         // 게임 종료를 체크하는 옵저버
         Observable.FromAsync(GameEndObservable)
             .Subscribe(_ => _battleView.GoHome())

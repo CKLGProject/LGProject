@@ -42,6 +42,7 @@ namespace LGProject.PlayerState
                 velocity = StateMachine.physics.velocity;
                 NewPlatformCheck();
                 DeadSpaceCheck();
+                CameraCheck();
             }
         }
 

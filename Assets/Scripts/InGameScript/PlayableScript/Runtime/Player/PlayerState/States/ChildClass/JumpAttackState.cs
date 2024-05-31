@@ -19,7 +19,7 @@ namespace LGProject.PlayerState
         {
             base.Enter();
             // Velocity는 초기화시키지 않도록 하자.
-            Debug.Log($"Enter = {StateMachine.JumpInCount}");
+            //Debug.Log($"Enter = {StateMachine.JumpInCount}");
             StateMachine.animator.SetTrigger(JumpAttack);
         }
 
@@ -27,7 +27,7 @@ namespace LGProject.PlayerState
         {
             base.Exit();
             //stateMachine.jumpInCount = 0;
-            Debug.Log($"Exit = {StateMachine.JumpInCount}");
+            //Debug.Log($"Exit = {StateMachine.JumpInCount}");
             
         }
 

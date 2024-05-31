@@ -87,6 +87,7 @@ namespace BehaviourTree
         private void StartExceptionHandling()
         {
             #region Omit    
+            float moveValue = 0;
             if (_stateMachine == null)
             {
                 _stateMachine = AIAgent.Instance.GetStateMachine;
@@ -106,16 +107,21 @@ namespace BehaviourTree
             {
                 case 1:
                     _stateMachine.playable.effectManager.Play(EffectManager.EFFECT.Attack1).Forget();
+                    moveValue = _stateMachine.playable.FirstAttackMovingValue;
                     break;
                 case 2:
                     _stateMachine.playable.effectManager.Play(EffectManager.EFFECT.Attack2).Forget();
+                    moveValue = _stateMachine.playable.SecondAttackMovingValue;
                     break;
                 case 3:
+                    moveValue = _stateMachine.playable.ThirdAttackMovingValue;
                     _stateMachine.playable.effectManager.Play(EffectManager.EFFECT.Attack3, 0.25f).Forget();
                     break;
                 default:
                     break;
             }
+            // 공격하면서 전진.
+
             #endregion
         }
 
@@ -159,10 +165,16 @@ namespace BehaviourTree
                 {
                     temp.
                     Item1.GetStateMachine.
-                    HitDamaged(_stateMachine.AttackCount < 3 ? Vector3.zero : v);
+                    HitDamaged(_stateMachine.AttackCount < 3 ? Vector3.zero : v, 0, _stateMachine);
                     temp.Item1.GetStateMachine.hitPlayer = _stateMachine.transform;
 
                     _stateMachine.animator.SetInteger("Attack", 0);
+                    if (_stateMachine.playable.movingAttack)
+                    {
+                        // temp 방향으로 공격하자
+                        float moveValue = (temp.Item1.transform.position - _stateMachine.transform.position).normalized.x;
+                        _stateMachine.physics.velocity += Vector3.right * moveValue;
+                    }
                     return true;
                 }
             }

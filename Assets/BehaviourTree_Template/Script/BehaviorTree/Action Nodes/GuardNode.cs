@@ -32,7 +32,8 @@ namespace BehaviourTree
             stateMachine.IsGuard = true;
             stateMachine.playable.effectManager.Play(EffectManager.EFFECT.Guard).Forget();
             curTimer = 0;
-            stateMachine.animator.SetBool("Guard", true);
+            stateMachine.animator.SetTrigger("GuardStart");
+            //stateMachine.animator.SetBool("Guard", true);
             stateMachine.animator.SetFloat("Run", 0);
         }
 
@@ -63,7 +64,8 @@ namespace BehaviourTree
                     if (rand < percent || guardEnableRange < Vector3.Distance(stateMachine.transform.position, Agent.player.position))
                     {
                         stateMachine.IsGuard = false;
-                        stateMachine.animator.SetBool("Guard", false);
+                        //stateMachine.animator.SetBool("Guard", false);
+                        stateMachine.animator.SetTrigger("GuardEnd");
                         return State.Success;
                     }
                 }

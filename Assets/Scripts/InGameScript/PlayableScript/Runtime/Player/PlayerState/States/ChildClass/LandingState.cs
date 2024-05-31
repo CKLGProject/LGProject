@@ -18,7 +18,6 @@ namespace LGProject.PlayerState
         {
             base.Enter();
             StateMachine.StandingVelocity();
-            Debug.Log("AA");
             StateMachine.animator.SetTrigger(Landing);
             _currentTimer = 0;
         }

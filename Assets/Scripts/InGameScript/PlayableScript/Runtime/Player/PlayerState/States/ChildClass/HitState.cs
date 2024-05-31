@@ -42,6 +42,7 @@ namespace LGProject.PlayerState
             StateMachine.IsDamaged = false;
             if (!StateMachine.IsGrounded)
             {
+                Debug.Log("점프 공격을 맞음");
                 StateMachine.ChangeState(StateMachine.knockbackState);
                 return;
                 //curTimer += Time.deltaTime;

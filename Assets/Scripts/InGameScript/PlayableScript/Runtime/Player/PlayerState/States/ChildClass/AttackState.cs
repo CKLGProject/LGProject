@@ -65,7 +65,7 @@ namespace LGProject.PlayerState
             }
             // 공격하면서 전진.
             if (StateMachine.playable.movingAttack)
-                StateMachine.physics.velocity += StateMachine.playable.directionX ? Vector3.right * moveValue : Vector3.left * moveValue;
+                StateMachine.physics.velocity += StateMachine.transform.forward * moveValue;
             _damageInCount = false;
             #endregion
 
@@ -217,7 +217,7 @@ namespace LGProject.PlayerState
                         {
                             temp.
                             Item1.GetStateMachine.
-                            HitDamaged(StateMachine.AttackCount - 1 < 2 ? Vector3.zero : v);
+                            HitDamaged(StateMachine.AttackCount - 1 < 2 ? Vector3.zero : v, 0.1f);
                             _damageInCount = true;
 
                             if (!temp.Item1.GetStateMachine.IsGuard && !temp.Item1.GetStateMachine.IsDown)

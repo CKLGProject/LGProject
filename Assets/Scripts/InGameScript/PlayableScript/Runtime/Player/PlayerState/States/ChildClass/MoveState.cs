@@ -69,14 +69,8 @@ namespace LGProject.PlayerState
             }
 
             // 점프 가드는 한번만!!
-            if (StateMachine.guardAction.triggered && !StateMachine.IsJumpGuard)
+            if (StateMachine.guardAction.triggered && StateMachine.GuardGage > 0)
             {
-                // 땅에 접촉하지 않은 상태일 때
-                if (!StateMachine.IsGrounded)
-                {
-                    StateMachine.IsJumpGuard = true;
-                }
-
                 StateMachine.ChangeState(StateMachine.guardState);
                 return;
             }
@@ -88,24 +82,25 @@ namespace LGProject.PlayerState
                 return;
             }
 
-            if (StateMachine.physics.velocity.x <= _maximumSpeed && StateMachine.physics.velocity.x >= -_maximumSpeed)
-            {
-                // 바로 앞에 적이 있으면 더이상 이동하지 않음(애니메이션은 재생)
-                // 머리와 다리쪽에서 Ray를 쏠 예정
-                StateMachine.physics.velocity += Vector3.right * (StateMachine.moveAction.ReadValue<float>());
+            Movement(_maximumSpeed);
 
-                Vector3 left = new Vector3((StateMachine.transform.position + Vector3.right).x + 2f,
-                    StateMachine.transform.position.y, StateMachine.transform.position.z);
-                Vector3 right = new Vector3((StateMachine.transform.position + Vector3.left).x - 2f,
-                    StateMachine.transform.position.y, StateMachine.transform.position.z);
+            //if (StateMachine.physics.velocity.x <= _maximumSpeed && StateMachine.physics.velocity.x >= -_maximumSpeed)
+            //{
+            //    // 바로 앞에 적이 있으면 더이상 이동하지 않음(애니메이션은 재생)
+            //    // 머리와 다리쪽에서 Ray를 쏠 예정
+            //    StateMachine.physics.velocity += Vector3.right * (StateMachine.moveAction.ReadValue<float>());
 
-                StateMachine.transform.LookAt(StateMachine.moveAction.ReadValue<float>() < 0 ? right : left);
+            //    Vector3 left = new Vector3((StateMachine.transform.position + Vector3.right).x + 2f,
+            //        StateMachine.transform.position.y, StateMachine.transform.position.z);
+            //    Vector3 right = new Vector3((StateMachine.transform.position + Vector3.left).x - 2f,
+            //        StateMachine.transform.position.y, StateMachine.transform.position.z);
 
-                Vector3 euler = StateMachine.transform.GetChild(1).GetComponent<RectTransform>().localRotation.eulerAngles;
-                Debug.Log($"{euler} / {StateMachine.transform.GetChild(1).GetComponent<RectTransform>().transform.name}");
-                StateMachine.transform.GetChild(1).GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, StateMachine.moveAction.ReadValue<float>() < 0 ? 90 :-90, 0);
+            //    StateMachine.transform.LookAt(StateMachine.moveAction.ReadValue<float>() < 0 ? right : left);
 
-            }
+            //    Vector3 euler = StateMachine.transform.GetChild(1).GetComponent<RectTransform>().localRotation.eulerAngles;
+            //    Debug.Log($"{euler} / {StateMachine.transform.GetChild(1).GetComponent<RectTransform>().transform.name}");
+            //    StateMachine.transform.GetChild(1).GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, StateMachine.moveAction.ReadValue<float>() < 0 ? 90 :-90, 0);
+            //}
         }
 
         private void AttackLogic()

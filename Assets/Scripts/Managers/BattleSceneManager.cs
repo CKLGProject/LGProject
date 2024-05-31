@@ -10,7 +10,6 @@ namespace LGProject
 
         public bool IsStart { get; private set; }
         public bool IsEnd { get; private set; }
-
         public float Timer { get; private set; }
 
         /*****************************************************

@@ -260,7 +260,7 @@ public class PlayerEditor : Editor
         EditorGUILayout.Space(10f);
         using (var changeScope = new EditorGUI.ChangeCheckScope())
         {
-            float value = EditorGUILayout.FloatField("첫번째 공격 이동 판정", _firstAttackMovingValueProperty.floatValue);
+            float value = EditorGUILayout.FloatField("첫번째 공격 이동 거리", _firstAttackMovingValueProperty.floatValue);
             if (changeScope.changed)
             {
                 _firstAttackMovingValueProperty.floatValue = value;
@@ -290,7 +290,7 @@ public class PlayerEditor : Editor
         EditorGUILayout.Space(10f);
         using (var changeScope = new EditorGUI.ChangeCheckScope())
         {
-            float value = EditorGUILayout.FloatField("두번째 공격 이동 판정", _secondAttackMovingValueProperty.floatValue);
+            float value = EditorGUILayout.FloatField("두번째 공격 이동 거리", _secondAttackMovingValueProperty.floatValue);
             if (changeScope.changed)
             {
                 _secondAttackMovingValueProperty.floatValue = value;
@@ -320,7 +320,7 @@ public class PlayerEditor : Editor
         EditorGUILayout.Space(10f);
         using (var changeScope = new EditorGUI.ChangeCheckScope())
         {
-            float value = EditorGUILayout.FloatField("세번째 공격 이동 판정", _thirdAttackMovingValueProperty.floatValue);
+            float value = EditorGUILayout.FloatField("세번째 공격 이동 거리", _thirdAttackMovingValueProperty.floatValue);
             if (changeScope.changed)
             {
                 _thirdAttackMovingValueProperty.floatValue = value;

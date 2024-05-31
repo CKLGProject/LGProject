@@ -1,8 +1,9 @@
-using Data;
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Cysharp.Threading.Tasks;
+using Object = UnityEngine.Object;
 
 namespace LGProject.PlayerState // 
 {
@@ -73,6 +74,9 @@ namespace LGProject.PlayerState //
 
         public int JumpInCount = 0;
         public int AttackCount = 0;
+        
+        // 이건 어떻게 깎이게 할 것인가?
+        public float GuardGage = 100;
 
         public State CurrentState;
         public Transform hitPlayer;
@@ -88,7 +92,7 @@ namespace LGProject.PlayerState //
         private static readonly int Jump2 = Animator.StringToHash("Jump2");
         private static readonly int Landing = Animator.StringToHash("Landing");
         private static readonly int WakeUp = Animator.StringToHash("WakeUp");
-        private static readonly int Guard = Animator.StringToHash("Guard");
+        private static readonly int GuardEnd = Animator.StringToHash("GuardEnd");
 
         public void SetAnimPlayTime(string clipName, float time)
         {
@@ -237,44 +241,53 @@ namespace LGProject.PlayerState //
             physics.velocity = Vector3.zero;
         }
 
-        public void HitDamaged(Vector3 velocity, PlayerStateMachine EnemyStateMachine = null)
+        public void HitDamaged(Vector3 velocity, float nockbackDelay = 0.1f,PlayerStateMachine EnemyStateMachine = null)
         {
             // 누어 있는 상태에선 데미지를 입지 않는다.
-            if (IsDown || IsUltimate || IsSuperArmor ||(EnemyStateMachine != null && !EnemyStateMachine.IsUltimate))
+            if (IsDown || IsUltimate || IsSuperArmor ||(EnemyStateMachine != null && IsUltimate))
                 return;
+            if(IsGuard)
+            {
+                //GuardGage -= 25;
+                physics.velocity = new Vector3(transform.forward.x * -2.5f, 0, 0);
+            }
             if (!IsGuard || (EnemyStateMachine != null && EnemyStateMachine.IsUltimate))
             {
                 physics.velocity = Vector3.zero;
                 playable.SetDamageGage(playable.DamageGage + 8.5f);
                 battleModel.SyncDamageGage(playable.ActorType, playable.DamageGage);
                 IsNormalAttack = false;
-                animator.SetTrigger(Hit);
                 // 충격에 의한 물리 공식
                 velocity *= Mathf.Pow(2, (playable.DamageGage * 0.01f));
-                physics.velocity = velocity;
                 if (velocity != Vector3.zero)
                 {
+                    SetVelocity(velocity, nockbackDelay).Forget();
                     animator.SetTrigger(Knockback);
-                    IsKnockback = true;
                 }
+                else
+                {
+                    animator.SetTrigger(Hit);
+                }
+
                 if(EnemyStateMachine != null && EnemyStateMachine.IsUltimate)
                 {
-                    playable.effectManager.PlayOneShot(EffectManager.EFFECT.UltimateHit);
+                    playable.effectManager.PlayOneShot(EffectManager.EFFECT.UltimateHit, Vector3.left);
                 }
                 else
                 {
                     playable.effectManager.Play(EffectManager.EFFECT.Hit).Forget();
                 }
-
                 playable.effectManager.Stop(EffectManager.EFFECT.Guard);
-                playable.Animator.SetBool(Guard, false);
-            }
-            else
-            {
-                //physics.velocity = new Vector3(transform.forward.x * -2f, 0, 0);
             }
 
             IsDamaged = true;
+        }
+
+        private async UniTaskVoid SetVelocity(Vector3 velocity, float nockbackDelay = 0.2f )
+        {
+            await UniTask.Delay(TimeSpan.FromSeconds(nockbackDelay));
+            physics.velocity = velocity;
+            IsKnockback = true;
         }
 
         public void ResetAnimParameters()
@@ -288,6 +301,7 @@ namespace LGProject.PlayerState //
             animator.ResetTrigger(Knockback);
             animator.ResetTrigger(Landing);
             animator.ResetTrigger(WakeUp);
+            animator.ResetTrigger(GuardEnd);
         }
 
         public void UltimateGageisFull()

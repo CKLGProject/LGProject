@@ -38,7 +38,8 @@ namespace BehaviourTree
             if (_agent == null)
                 _agent = AIAgent.Instance;
             StateMachineLogic();
-            _stateMachine.physics.velocity = Vector3.zero;
+            //Debug.Log("Hello");
+            //_stateMachine.physics.velocity = Vector3.zero;
             _curTimer = jumpDelay;
             _agent.targetIndex = 0;
         }

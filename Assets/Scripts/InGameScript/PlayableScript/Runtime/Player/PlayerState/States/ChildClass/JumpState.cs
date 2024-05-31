@@ -28,7 +28,7 @@ namespace LGProject.PlayerState
         public override void Enter()
         {
             base.Enter();
-
+             
             StateMachine.JumpVelocity();
 
             StateMachine.IsJumpping = true;
@@ -51,17 +51,27 @@ namespace LGProject.PlayerState
         {
             base.LogicUpdate();
 
-            if (StateMachine.guardAction.triggered)
+            // 점프 후 이동과 추가 점프를 체크해야함.
+            if (StateMachine.JumpInCount < 2 && StateMachine.jumpAction.triggered)
+            {
+                // 점프 다시 시작. 점프는 두번만 인식하기
+                StateMachine.ChangeState(StateMachine.jumpState);
+            }
+
+            // 가드 게이지가 1이상일 경우 발동
+            if (StateMachine.guardAction.triggered && StateMachine.GuardGage > 0 && !StateMachine.IsJumpGuard)
             {
                 //stateMachine.GuardEffect.SetActive(true);
+                StateMachine.IsJumpGuard = true;
                 StateMachine.ChangeState(StateMachine.guardState);
                 return;
             }
-
-            float a = Mathf.Abs(StateMachine.moveAction.ReadValue<float>());
-            StateMachine.ChangeState(a >= 0.2f ? StateMachine.moveState : StateMachine.idleState);
-
-
+            if(StateMachine.IsGrounded)
+            {
+                StateMachine.ChangeState(StateMachine.landingState);
+            }
+            Movement(3f);
+            //if (StateMachine.)
         }
 
         public override void PhysicsUpdate()
