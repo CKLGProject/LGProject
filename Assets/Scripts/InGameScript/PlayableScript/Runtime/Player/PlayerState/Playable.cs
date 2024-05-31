@@ -92,8 +92,6 @@ namespace LGProject.PlayerState
         {
             UltimateGage = Mathf.Clamp(value, 0, 100);
             battleModel.SyncUltimateEnergy(ActorType, UltimateGage);
-            //if(UltimateGage >= 100)
-            //    battleModel.SyncUltimate
         }
 
         public void Cheat()
@@ -106,7 +104,7 @@ namespace LGProject.PlayerState
         [HideInInspector] public AnimationCurve jumpCurve;
 
         public Platform UnderPlatform;
-        public DeadZone DeadZone;
+        //public DeadZone DeadZone;
 
         public EffectManager effectManager;
 
@@ -369,7 +367,7 @@ namespace LGProject.PlayerState
         {
             //if (!DeadZone.TriggerSpace(transform) && !IsDead)
             if (CollisionObserver.CallZoneFunction(ZoneType.DeadZone, transform) && !IsDead)
-            {
+            {   
                 // 밖을 벗어났다는 뜻이기 때문에 리스트에서 지워줘야함.
                 
                 StateMachine.IsDead = true;
@@ -455,7 +453,7 @@ namespace LGProject.PlayerState
         public void SetUnderPlatform()
         {
             UnderPlatform = GameObject.Find("Main_Floor (1)").GetComponent<Platform>();
-            DeadZone = GameObject.Find("Collision Zone System").GetComponent<DeadZone>();
+            //DeadZone = GameObject.Find("Collision Zone System").GetComponent<>();
         }
 
         public void ShowUltimateEffect()

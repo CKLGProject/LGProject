@@ -235,6 +235,7 @@ MonoBehaviour:
   Animator: {fileID: 272405858}
   <ActorType>k__BackingField: 0
   battleModel: {fileID: 0}
+  CollisionObserver: {fileID: 0}
   velocity: {x: 0, y: 0, z: 0}
   MaximumJumpCount: 2
   MaximumSpeed: 4
@@ -265,7 +266,6 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   UnderPlatform: {fileID: 0}
-  DeadZone: {fileID: 0}
   effectManager: {fileID: 0}
   IsGrounded: 0
   IsGuard: 0
@@ -2843,8 +2843,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 57.715, y: -25}
-  m_SizeDelta: {x: 115.43, y: 50}
+  m_AnchoredPosition: {x: 57.72, y: -25}
+  m_SizeDelta: {x: 115.44, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &732036607
 MonoBehaviour:
@@ -3942,7 +3942,7 @@ GameObject:
   - component: {fileID: 942647552}
   - component: {fileID: 942647553}
   m_Layer: 0
-  m_Name: DeadZone
+  m_Name: Dead Zone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3961,7 +3961,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2136376970}
+  m_Father: {fileID: 1286533969}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &942647553
 MonoBehaviour:
@@ -3975,15 +3975,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8868a122798b524089ecf596793bcff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DeadSpace:
+  RectSpace:
     serializedVersion: 2
     x: 0
     y: 0
     width: 0
     height: 0
-  DeadLineBoxScale: {x: 15, y: 5.5, z: 1}
-  prefab: {fileID: 0}
-  TargetGroup: {fileID: 0}
+  CollisionLineBoxScale: {x: 16, y: 10, z: 1}
+  Offset: {x: 0, y: 0, z: 0}
+  CollisionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1 &963332946
 GameObject:
   m_ObjectHideFlags: 0
@@ -4472,8 +4472,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 148.555, y: -32.601997}
-  m_SizeDelta: {x: 0, y: 34.796}
+  m_AnchoredPosition: {x: 148.565, y: -32.601997}
+  m_SizeDelta: {x: 61.57, y: 34.796}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1010493415
 MonoBehaviour:
@@ -5060,6 +5060,57 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1193909293}
   m_CullTransparentMesh: 1
+--- !u!1 &1286533968
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1286533969}
+  - component: {fileID: 1286533970}
+  m_Layer: 0
+  m_Name: Collision Zone System
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1286533969
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1286533968}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 942647552}
+  - {fileID: 2086653025}
+  m_Father: {fileID: 2136376970}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1286533970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1286533968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92b7a37557c877c4782b60a438ae3a08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DeadZoneContainer:
+  - {fileID: 942647553}
+  CameraZoneContainer:
+  - {fileID: 2086653026}
+  PlatformZone: {fileID: 0}
 --- !u!1001 &1300112216
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5416,7 +5467,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 39.523403
+  field of view: 39.541508
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
@@ -6272,7 +6323,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 146.215, y: -32.601997}
+  m_AnchoredPosition: {x: 146.225, y: -32.601997}
   m_SizeDelta: {x: 61.57, y: 34.796}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1453957028
@@ -8622,6 +8673,12 @@ MonoBehaviour:
   aiDamageGageFX: {fileID: 575662701}
   userEnergyBar: {fileID: 278785080}
   aiEnergyBar: {fileID: 451422725}
+  userEnergyIcon: {fileID: 313295775}
+  aiEnergyIcon: {fileID: 1193909295}
+  ultimateReadySprite: {fileID: 21300000, guid: 183bbe6feaf2b2a4884544c391514cf2,
+    type: 3}
+  ultimateReadyYetSprite: {fileID: 21300000, guid: 92b3e4969c1982c4aabc3508544068bb,
+    type: 3}
   lobbySceneLoader: {fileID: 1813361107}
   timerText: {fileID: 1347533555}
   StartImage: {fileID: 611088173}
@@ -9250,8 +9307,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 58.885, y: -25}
-  m_SizeDelta: {x: 117.77, y: 50}
+  m_AnchoredPosition: {x: 58.89, y: -25}
+  m_SizeDelta: {x: 117.78, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1933427089
 MonoBehaviour:
@@ -10077,6 +10134,60 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2068786900}
   m_CullTransparentMesh: 1
+--- !u!1 &2086653024
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2086653025}
+  - component: {fileID: 2086653026}
+  m_Layer: 0
+  m_Name: Camera Zone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2086653025
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2086653024}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 3, z: -9.8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1286533969}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2086653026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2086653024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ba08c0cb0a94bb48b6b3c5a4310afa7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RectSpace:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
+  CollisionLineBoxScale: {x: 10, y: 5, z: 1}
+  Offset: {x: 0, y: 0, z: 0}
+  CollisionColor: {r: 1, g: 0.94832873, b: 0, a: 1}
+  TargetGroup: {fileID: 0}
 --- !u!1 &2099030106
 GameObject:
   m_ObjectHideFlags: 0
@@ -10305,7 +10416,7 @@ Transform:
   - {fileID: 733477839}
   - {fileID: 1825406799}
   - {fileID: 1813361106}
-  - {fileID: 942647552}
+  - {fileID: 1286533969}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2139118184
@@ -10646,6 +10757,11 @@ PrefabInstance:
       objectReference: {fileID: 451422725}
     - target: {fileID: 8866563565161335285, guid: 2733f80f426950d4598e4e6317bd7935,
         type: 3}
+      propertyPath: CollisionObserver
+      value: 
+      objectReference: {fileID: 1286533970}
+    - target: {fileID: 8866563565161335285, guid: 2733f80f426950d4598e4e6317bd7935,
+        type: 3}
       propertyPath: DamageGageDecimal
       value: 
       objectReference: {fileID: 1453957029}
@@ -10905,6 +11021,11 @@ PrefabInstance:
       propertyPath: UlimateGageImage
       value: 
       objectReference: {fileID: 278785080}
+    - target: {fileID: 6559117602054936325, guid: e748e159dd59aae4188ea3f4a8ac1c84,
+        type: 3}
+      propertyPath: CollisionObserver
+      value: 
+      objectReference: {fileID: 1286533970}
     - target: {fileID: 6559117602054936325, guid: e748e159dd59aae4188ea3f4a8ac1c84,
         type: 3}
       propertyPath: DamageGageDecimal
