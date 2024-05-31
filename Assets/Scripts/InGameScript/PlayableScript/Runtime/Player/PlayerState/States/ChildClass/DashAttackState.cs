@@ -105,7 +105,7 @@ namespace LGProject.PlayerState
                         {
                             temp.
                             Item1.GetStateMachine.
-                            HitDamaged(v);
+                            HitDamaged(v, 0, StateMachine);
                             _damageInCount = true;
 
 

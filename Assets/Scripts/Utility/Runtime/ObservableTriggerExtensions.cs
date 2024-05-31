@@ -61,13 +61,20 @@ namespace ReactiveTouchDown
 
         private void OnTouch(InputAction.CallbackContext obj)
         {
-            Vector2 clickPosition = Pointer.current.position.ReadValue();
-            Ray ray = _camera.ScreenPointToRay(clickPosition);
-
-            if (Physics.Raycast(ray, out RaycastHit hit))
+            if(_camera != null)
             {
-                if (hit.collider.gameObject.GetInstanceID() == _instance)
-                    _onTouchDown?.OnNext(Unit.Default);
+                Vector2 clickPosition = Pointer.current.position.ReadValue();
+                Ray ray = _camera.ScreenPointToRay(clickPosition);
+
+                if (Physics.Raycast(ray, out RaycastHit hit))
+                {
+                    if (hit.collider.gameObject.GetInstanceID() == _instance)
+                        _onTouchDown?.OnNext(Unit.Default);
+                }
+            }
+            else
+            {
+                Debug.LogWarning("Camera is null");
             }
         }
 

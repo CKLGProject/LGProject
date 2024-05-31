@@ -5467,7 +5467,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 39.541508
+  field of view: 30
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
@@ -5494,7 +5494,7 @@ Transform:
   m_GameObject: {fileID: 1353022552}
   serializedVersion: 2
   m_LocalRotation: {x: 0.04981371, y: 1e-45, z: 0, w: 0.99875855}
-  m_LocalPosition: {x: 0, y: 4, z: -19.5}
+  m_LocalPosition: {x: -2, y: 4, z: -19.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7435,7 +7435,7 @@ Transform:
   m_GameObject: {fileID: 1620233447}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -9.5}
+  m_LocalPosition: {x: -2, y: 1, z: -9.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8322,7 +8322,7 @@ Transform:
   m_GameObject: {fileID: 1760387847}
   serializedVersion: 2
   m_LocalRotation: {x: 0.04981371, y: 1e-45, z: -0, w: 0.99875855}
-  m_LocalPosition: {x: 0, y: 4, z: -19.5}
+  m_LocalPosition: {x: -2, y: 4, z: -19.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10615,6 +10615,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5015296152975555048, guid: 8f3f5197a189b9847a0e94b9c33c423e,
         type: 3}
+    - target: {fileID: 4114847688042460542, guid: 2733f80f426950d4598e4e6317bd7935,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6142601296869339651, guid: 2733f80f426950d4598e4e6317bd7935,
         type: 3}
       propertyPath: m_Name
@@ -10623,7 +10628,12 @@ PrefabInstance:
     - target: {fileID: 6142601296869339651, guid: 2733f80f426950d4598e4e6317bd7935,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6142601296869339651, guid: 2733f80f426950d4598e4e6317bd7935,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 8219133890818253592, guid: 2733f80f426950d4598e4e6317bd7935,
         type: 3}
@@ -11065,6 +11075,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6969282849394247417, guid: e748e159dd59aae4188ea3f4a8ac1c84,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 8904399688858621143, guid: e748e159dd59aae4188ea3f4a8ac1c84,
         type: 3}

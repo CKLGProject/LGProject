@@ -66,6 +66,11 @@ namespace LGProject.PlayerState
                 StateMachine.ChangeState(StateMachine.guardState);
                 return;
             }
+
+            if(StateMachine.attackAction.triggered )
+            {
+                StateMachine.ChangeState(StateMachine.jumpAttackState);
+            }
             if(StateMachine.IsGrounded)
             {
                 StateMachine.ChangeState(StateMachine.landingState);

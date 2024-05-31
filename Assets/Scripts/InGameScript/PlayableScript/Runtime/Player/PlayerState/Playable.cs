@@ -175,6 +175,7 @@ namespace LGProject.PlayerState
         {
             if(other.CompareTag("Player") && !StateMachine.IsGrounded)
             {
+                Debug.Log("AA");
                 // 부딧힌 대상으로부터 n만큼의 거리를 벌려야함.
                 float directionX = transform.position.x - other.transform.position.x;
                 //float radius = StateMachine.collider.GetComponent<CapsuleCollider>().radius;
