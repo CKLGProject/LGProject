@@ -9,7 +9,7 @@ namespace LGProject.PlayerState
     {
         private float _maximumSpeed;
         private static readonly int JumpAttack = Animator.StringToHash("JumpAttack");
-
+        private static readonly int Landing = Animator.StringToHash("Landing");
         public JumpAttackState(PlayerStateMachine stateMachine, float maximumSpeed) : base(stateMachine)
         {
             _maximumSpeed = maximumSpeed;
@@ -28,7 +28,9 @@ namespace LGProject.PlayerState
             base.Exit();
             //stateMachine.jumpInCount = 0;
             //Debug.Log($"Exit = {StateMachine.JumpInCount}");
-            
+            StateMachine.animator.SetTrigger(Landing);
+
+
         }
 
         public override void LogicUpdate()

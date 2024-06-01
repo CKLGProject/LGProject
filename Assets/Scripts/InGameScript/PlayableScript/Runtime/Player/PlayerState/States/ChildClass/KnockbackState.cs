@@ -25,7 +25,7 @@ namespace LGProject.PlayerState
 
         public override void LogicUpdate()
         {
-            base.LogicUpdate();
+            //base.LogicUpdate();
             if(StateMachine.IsGrounded)
             {
                 StateMachine.ChangeState(StateMachine.downState);

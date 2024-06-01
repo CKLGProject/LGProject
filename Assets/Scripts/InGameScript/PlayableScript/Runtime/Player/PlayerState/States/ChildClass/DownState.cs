@@ -23,6 +23,7 @@ namespace LGProject.PlayerState
             base.Enter();
             _currentTimer = 0;
             StateMachine.IsDown = true;
+            StateMachine.IsKnockback = false;
             StateMachine.animator.SetInteger("Attack", 0);
             StateMachine.animator.SetTrigger(Landing);
             StateMachine.ResetVelocity();
@@ -31,12 +32,11 @@ namespace LGProject.PlayerState
         public override void Exit()
         {
             base.Exit();
-            StateMachine.IsKnockback = false;
         }
 
         public override void LogicUpdate()
         {
-            base.LogicUpdate();
+            //base.LogicUpdate();
             if (StateMachine.IsGrounded)
             {
                 if (_flight)

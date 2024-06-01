@@ -35,7 +35,7 @@ namespace LGProject.PlayerState
 
         public override void LogicUpdate()
         {
-            base.LogicUpdate();
+            //base.LogicUpdate();
             _currentTimer += Time.deltaTime;
             if(_currentTimer >= _delay)
             {

@@ -17,11 +17,15 @@ namespace LGProject.PlayerState
             SetUnderPlatform();
         }
 
+
         private void Start()
         {
             InitStates();
             InitEffectManager();
             SetUltimateGage(0);
+            // 소환될 때 게임에 있는 매니저들을 불러옴
+
+
             effectManager.InitParticles();
 
             for (int i = 0; i < StateMachine.animator.runtimeAnimatorController.animationClips.Length; i++)

@@ -17,7 +17,7 @@ namespace LGProject.PlayerState
 
         public virtual void Enter()
         {
-            //Debug.Log($"Enter State = {this.ToString()}");
+            Debug.Log($"Enter State = {this.ToString()}");
         }
 
         public virtual void PhysicsUpdate()
@@ -28,6 +28,7 @@ namespace LGProject.PlayerState
         {
             if(StateMachine.IsKnockback)
             {
+                Debug.Log("Next State?");
                 StateMachine.ChangeState(StateMachine.knockbackState);
                 return;
             }
@@ -51,7 +52,7 @@ namespace LGProject.PlayerState
                 // 바로 앞에 적이 있으면 더이상 이동하지 않음(애니메이션은 재생)
                 // 머리와 다리쪽에서 Ray를 쏠 예정
                 StateMachine.physics.velocity += Vector3.right * (StateMachine.moveAction.ReadValue<float>());
-
+                
                 Vector3 left = new Vector3((StateMachine.transform.position + Vector3.right).x + 2f,
                     StateMachine.transform.position.y, StateMachine.transform.position.z);
                 Vector3 right = new Vector3((StateMachine.transform.position + Vector3.left).x - 2f,

@@ -92,8 +92,6 @@ namespace LGProject.PlayerState
         {
             UltimateGage = Mathf.Clamp(value, 0, 100);
             battleModel.SyncUltimateEnergy(ActorType, UltimateGage);
-            //if(UltimateGage >= 100)
-            //    battleModel.SyncUltimate
         }
 
         public void Cheat()
@@ -106,7 +104,7 @@ namespace LGProject.PlayerState
         [HideInInspector] public AnimationCurve jumpCurve;
 
         public Platform UnderPlatform;
-        public DeadZone DeadZone;
+        //public DeadZone DeadZone;
 
         public EffectManager effectManager;
 
@@ -132,6 +130,7 @@ namespace LGProject.PlayerState
 
         protected virtual void Awake()
         {
+            InitializeInfo();
             battleModel.InitHealth(ActorType, LifePoint);
         }
 
@@ -177,6 +176,7 @@ namespace LGProject.PlayerState
         {
             if(other.CompareTag("Player") && !StateMachine.IsGrounded)
             {
+                Debug.Log("AA");
                 // 부딧힌 대상으로부터 n만큼의 거리를 벌려야함.
                 float directionX = transform.position.x - other.transform.position.x;
                 //float radius = StateMachine.collider.GetComponent<CapsuleCollider>().radius;
@@ -238,6 +238,16 @@ namespace LGProject.PlayerState
             }
         }
 
+        #region Initialize
+        public void InitializeInfo()
+        {
+            battleModel = GameObject.Find("Battle UI System").GetComponent<BattleModel>();
+            CollisionObserver = GameObject.Find("Collision Zone System").GetComponent<CollisionObserver>();
+
+        }
+        #endregion
+
+        #region CollisionCheckMethods
         public void PlatformCheck()
         {
             // 일단 여기에 넣어보자
@@ -256,8 +266,9 @@ namespace LGProject.PlayerState
 
                     // 이거 AI랑 공용으로 사용중이라 나중에 안되게 해야함.
                     if (!StateMachine.IsKnockback && StateMachine.CurrentState != null)
+                    {
                         StateMachine.ChangeState(StateMachine.landingState);
-
+                    }
                     //stateMachine.isHit = false;
                 }
             }
@@ -371,10 +382,10 @@ namespace LGProject.PlayerState
             if (CollisionObserver.CallZoneFunction(ZoneType.DeadZone, transform) && !IsDead)
             {
                 // 밖을 벗어났다는 뜻이기 때문에 리스트에서 지워줘야함.
-                
+
                 StateMachine.IsDead = true;
                 // 죽으면 어레이에서 빼주기.
-                
+
                 //DeadZone.SubTarget(transform);
                 UltimateGage /= 2;
                 LifePoint -= 1; // 체력 감소
@@ -386,29 +397,13 @@ namespace LGProject.PlayerState
             }
         }
 
-        public void DieCameraForcus()
-        {
-
-        }
-
+        #endregion
 
         public void SetupJumpVariables()
         {
             float timeToApex = maxJumpTime / 2;
             _gravity = (-2 * JumpScale) / Mathf.Pow(timeToApex, 1.5f);
             initialJumpVelocity = (2 * JumpScale) / timeToApex;
-        }
-
-        public void HandleJump()
-        {
-            if (StateMachine.JumpInCount > 0 && StateMachine.IsJumpping)
-            {
-                StateMachine.IsJumpping = false;
-            }
-
-            if (StateMachine.physics.velocity.y > 0 && !StateMachine.IsKnockback)
-            {
-            }
         }
 
         // 점프 후 내려오는 것
@@ -444,6 +439,7 @@ namespace LGProject.PlayerState
             StateMachine.IsKnockback = false;
             StateMachine.IsGrounded = false;
             StateMachine.IsSuperArmor = true;
+            StateMachine.IsDashAttack = false;
             if(StateMachine.CurrentState != null)
                 StateMachine.ChangeState(StateMachine.landingState);
             
@@ -455,7 +451,6 @@ namespace LGProject.PlayerState
         public void SetUnderPlatform()
         {
             UnderPlatform = GameObject.Find("Main_Floor (1)").GetComponent<Platform>();
-            DeadZone = GameObject.Find("Collision Zone System").GetComponent<DeadZone>();
         }
 
         public void ShowUltimateEffect()

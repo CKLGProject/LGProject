@@ -24,7 +24,7 @@ namespace LGProject.PlayerState
             StateMachine.animator.SetTrigger(Idle);
             StateMachine.animator.SetFloat(Run, 0);
             StateMachine.animator.SetInteger(Attack, 0);
-            StateMachine.animator.ResetTrigger(Landing);
+            //StateMachine.animator.ResetTrigger(Landing);
         }
 
         public override void LogicUpdate()

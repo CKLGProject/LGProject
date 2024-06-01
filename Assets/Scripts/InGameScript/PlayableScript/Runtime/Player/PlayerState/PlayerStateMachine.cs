@@ -249,7 +249,7 @@ namespace LGProject.PlayerState //
             if(IsGuard)
             {
                 //GuardGage -= 25;
-                physics.velocity = new Vector3(transform.forward.x * -2.5f, 0, 0);
+                physics.velocity = new Vector3((EnemyStateMachine.transform.position - transform.position).normalized.x * -2.5f, 0, 0);
             }
             if (!IsGuard || (EnemyStateMachine != null && EnemyStateMachine.IsUltimate))
             {
