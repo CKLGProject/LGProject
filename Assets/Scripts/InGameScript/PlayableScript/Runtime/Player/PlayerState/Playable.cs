@@ -266,8 +266,9 @@ namespace LGProject.PlayerState
 
                     // 이거 AI랑 공용으로 사용중이라 나중에 안되게 해야함.
                     if (!StateMachine.IsKnockback && StateMachine.CurrentState != null)
+                    {
                         StateMachine.ChangeState(StateMachine.landingState);
-
+                    }
                     //stateMachine.isHit = false;
                 }
             }
@@ -438,6 +439,7 @@ namespace LGProject.PlayerState
             StateMachine.IsKnockback = false;
             StateMachine.IsGrounded = false;
             StateMachine.IsSuperArmor = true;
+            StateMachine.IsDashAttack = false;
             if(StateMachine.CurrentState != null)
                 StateMachine.ChangeState(StateMachine.landingState);
             
