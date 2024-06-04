@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 using USingleton.AutoSingleton;
 using Random = UnityEngine.Random;
 
@@ -16,7 +17,7 @@ public class GameManager : MonoBehaviour
     // AI 데이터
     private readonly AIData _aiData = new();
 
-    [SerializeField] private PatData[] patDataList;
+    [FormerlySerializedAs("patDataList")] [SerializeField] private PetData[] petDataList;
     [SerializeField] private AIModel[] aiModelList;
 
     private void Start()
@@ -67,14 +68,14 @@ public class GameManager : MonoBehaviour
     /// 해당 액터의 현재 정령을 반환합니다.
     /// </summary>
     /// <returns>정령 타입</returns>
-    public Pat GetPat(ActorType actorType)
+    public Pet GetPat(ActorType actorType)
     {
         switch (actorType)
         {
             case ActorType.User:
-                return _userData.Pat;
+                return _userData.Pet;
             case ActorType.AI:
-                return _aiData.Pat;
+                return _aiData.Pet;
         }
 
         return null;
@@ -92,14 +93,14 @@ public class GameManager : MonoBehaviour
         _aiData.CharacterType = model.CharacterType;
 
         // 정령 데이터 바인딩
-        PatData patData = FindPatDataByPatType(model.PatType);
-        _aiData.Pat.PatData = patData;
+        PetData petData = FindPatDataByPatType(model.petType);
+        _aiData.Pet.PetData = petData;
 
         // 펫 레벨 바인딩
-        if (_aiData.Pat.PatData)
-            _aiData.Pat.Level = model.PatLevel;
+        if (_aiData.Pet.PetData)
+            _aiData.Pet.Level = model.PatLevel;
         else
-            _aiData.Pat.Level = -1;
+            _aiData.Pet.Level = -1;
     }
 
     /// <summary>
@@ -122,10 +123,10 @@ public class GameManager : MonoBehaviour
             _userData.HasCharacterMap.Add(ECharacterType.Hit, true);
         
         // 펫 설정
-        _userData.Pat = new();
-        _userData.Pat.PatType = (EPatType)PlayerPrefs.GetInt("Pat", (int)EPatType.None);
-        _userData.Pat.PatData = FindPatDataByPatType(_userData.Pat.PatType);
-        _userData.Pat.Level = PlayerPrefs.GetInt("Pat Level", 0);
+        _userData.Pet = new();
+        _userData.Pet.PetType = (EPetType)PlayerPrefs.GetInt("Pat", (int)EPetType.None);
+        _userData.Pet.PetData = FindPatDataByPatType(_userData.Pet.PetType);
+        _userData.Pet.Level = PlayerPrefs.GetInt("Pat Level", 0);
     }
     
     /// <summary>
@@ -145,10 +146,10 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// 정령 타입으로 정령 데이터를 반환합니다.
     /// </summary>
-    /// <param name="patType">찾을 정령 타입</param>
+    /// <param name="petType">찾을 정령 타입</param>
     /// <returns>정령 데이터</returns>
-    private PatData FindPatDataByPatType(EPatType patType)
+    private PetData FindPatDataByPatType(EPetType petType)
     {
-        return patDataList.FirstOrDefault(patData => patData.PatType == patType);
+        return petDataList.FirstOrDefault(patData => patData.petType == petType);
     }
 }

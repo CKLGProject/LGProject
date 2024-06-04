@@ -1,3 +1,4 @@
+using Data;
 using R3;
 using UnityEngine;
 using USingleton;
@@ -13,6 +14,9 @@ public class LobbyPresenter : MonoBehaviour
     {
         _lobbyView = GetComponent<LobbyView>();
         _lobbyModel = GetComponent<LobbyModel>();
+
+        ECharacterType choiceCharacter = Singleton.Instance<GameManager>().GetCharacter(ActorType.User);
+        _lobbyView.ShowCharacter(choiceCharacter);
         
         // Model
         _lobbyModel.NicknameObservable

@@ -2,10 +2,10 @@ using UnityEngine;
 
 namespace Data
 {
-    public class Pat
+    public class Pet
     {
-        public EPatType PatType;
-        public PatData PatData;
+        public EPetType PetType;
+        public PetData PetData;
         public int Level;
 
         /// <summary>
@@ -15,9 +15,9 @@ namespace Data
         public Sprite GetProfileImage()
         {
             if (Level < 0)
-                return PatData.PatProfileImage[0];
+                return PetData.PetProfileImage[0];
             
-            return PatData.PatProfileImage[Level];
+            return PetData.PetProfileImage[Level];
         }
     }
 }

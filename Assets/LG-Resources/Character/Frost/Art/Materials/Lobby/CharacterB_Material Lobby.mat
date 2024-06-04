@@ -7,9 +7,9 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Hit_Material_Lobby
+  m_Name: CharacterB_Material Lobby
   m_Shader: {fileID: 4800000, guid: 6459b2db96a08ca41b0f9b39dc7ad59e, type: 3}
-  m_Parent: {fileID: 2100000, guid: 8b6d37d1a36d0044fb6b8252ec1ff325, type: 2}
+  m_Parent: {fileID: 2100000, guid: 19d1762e3ac60854cb9720725f9aae72, type: 2}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - N_F_EAL_ON
@@ -57,6 +57,6 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
-    - _OutlineExtrudeMethod: 0
+    - _OutlineWidth: 0.5
     m_Colors: []
   m_BuildTextureStacks: []

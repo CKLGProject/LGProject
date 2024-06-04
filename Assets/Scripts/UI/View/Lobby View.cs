@@ -1,5 +1,7 @@
+using Data;
 using R3;
 using ReactiveTouchDown;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -9,6 +11,10 @@ using Utility;
 
 public class LobbyView : MonoBehaviour
 {
+    [Header("Character")]
+    [SerializeField] private GameObject hit;
+    [SerializeField] private GameObject frost;
+    
     [Header("Text")] [SerializeField] private TextMeshProUGUI nickNameText;
     [SerializeField] private TextMeshProUGUI levelText;
     [SerializeField] private TextMeshProUGUI coinText;
@@ -174,5 +180,34 @@ public class LobbyView : MonoBehaviour
     public void SetPlug(uint plug)
     {
         plugText.text = plug.ToString("N0");
+    }
+    
+    /// <summary>
+    /// 캐릭터를 보이게 합니다.
+    /// </summary>
+    /// <param name="characterType">보이게할 캐릭터 타입</param>
+    /// <exception cref="ArgumentOutOfRangeException"></exception>
+    public void ShowCharacter(ECharacterType characterType)
+    {
+        switch (characterType)
+        {
+            case ECharacterType.None:
+                break;
+            case ECharacterType.Hit:
+                hit.SetActive(true);
+                break;
+            case ECharacterType.Frost:
+                frost.SetActive(true);
+                break;
+            case ECharacterType.C:
+                break;
+            case ECharacterType.Storm:
+                break;
+            case ECharacterType.E:
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(characterType), characterType, null);
+        }
+        
     }
 }

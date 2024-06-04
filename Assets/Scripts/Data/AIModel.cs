@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Data
 {
@@ -6,12 +7,12 @@ namespace Data
     public class AIModel : ScriptableObject
     {
         public ECharacterType CharacterType;
-        public EPatType PatType;
+        [FormerlySerializedAs("PatType")] public EPetType petType;
         public int PatLevel;
 
         public override string ToString()
         {
-            return $"{CharacterType}, {PatType}, Pat Level : {PatLevel}";
+            return $"{CharacterType}, {petType}, Pat Level : {PatLevel}";
         }
     }
 }

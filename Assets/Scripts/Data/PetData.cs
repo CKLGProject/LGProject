@@ -1,8 +1,9 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Data
 {
-    public enum EPatType
+    public enum EPetType
     {
         None,
         Scorchwing, // 스코치윙
@@ -12,11 +13,11 @@ namespace Data
     }
     
     [CreateAssetMenu(fileName = "Pat Data", menuName = "LG Data/Pat Data")]
-    public class PatData : ScriptableObject
+    public class PetData : ScriptableObject
     {
-        public string PatName;
-        public EPatType PatType;
-        public Sprite[] PatProfileImage;
+        [FormerlySerializedAs("PatName")] public string PetName;
+        [FormerlySerializedAs("PatType")] public EPetType petType;
+        [FormerlySerializedAs("PatProfileImage")] public Sprite[] PetProfileImage;
 
         /// <summary>
         /// 정령의 단계에 따라 프로필 이미지를 반환합니다.
@@ -25,7 +26,7 @@ namespace Data
         /// <returns>정령 이미지</returns>
         public Sprite GetProfileImage(int level)
         {
-            return PatProfileImage[level];
+            return PetProfileImage[level];
         }
     }
 }
