@@ -186,8 +186,10 @@ public class PatCaptureView : MonoBehaviour
         if(_targetObject.Value.MachineObject.TryGetComponent(out Animator targetAnimator)) 
             targetAnimator.SetTrigger(Open);
         
-        // 일단 2초 정도.. 대기
-        await UniTask.Delay(TimeSpan.FromSeconds(1));
+        const float delayTime = 0.7f;
+        
+        // 일단 delayTime 정도.. 대기
+        await UniTask.Delay(TimeSpan.FromSeconds(delayTime));
         
         fxDirector.Play();
     }
@@ -306,6 +308,7 @@ public class PatCaptureView : MonoBehaviour
     /// <param name="isActive"></param>
     public void SetActiveGuideMessageText(bool isActive)
     {
+        guideMessageGroup.alpha = isActive ? 1 : 0;
         guideMessageText.gameObject.SetActive(isActive);
     }
 }
