@@ -1,7 +1,9 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace LGProject.PlayerState
 {
+    [RequireComponent(typeof(PlayerInput))]
     public class Player : Playable
     {
         private void InitStates()

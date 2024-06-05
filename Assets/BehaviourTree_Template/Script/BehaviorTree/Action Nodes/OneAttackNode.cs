@@ -151,9 +151,9 @@ namespace BehaviourTree
             _curTimer = 0;
             
             AIAgent.Instance.SetAttacRange(_stateMachine.IsGrounded ? dashAttackRange : jumpAttackRange);
-            if (!_stateMachine.IsGrounded)
-                _stateMachine.animator.SetTrigger("JumpAttack");
-            else
+            //if (!_stateMachine.IsGrounded)
+            //    _stateMachine.animator.SetTrigger("JumpAttack");
+            //else
                 _stateMachine.animator.SetTrigger("DashAttack");
             _stateMachine.animator.SetFloat("Run", 0);
         }
