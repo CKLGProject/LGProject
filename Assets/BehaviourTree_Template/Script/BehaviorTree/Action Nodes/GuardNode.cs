@@ -33,8 +33,9 @@ namespace BehaviourTree
             stateMachine.playable.effectManager.Play(EffectManager.EFFECT.Guard).Forget();
             curTimer = 0;
             stateMachine.animator.SetTrigger("GuardStart");
-            //stateMachine.animator.SetBool("Guard", true);
             stateMachine.animator.SetFloat("Run", 0);
+            // 가드를 올렸으니 가드에 대한 업데이트를 해줌.
+            stateMachine.DataSet(LGProject.DATA_TYPE.Guard);
         }
 
         protected override void OnStop()

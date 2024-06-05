@@ -8,19 +8,13 @@ using LGProject.CollisionZone;
 
 namespace LGProject.PlayerState
 {
-    public struct AttackAnimationProperties
-    {
-        public float FirstAttackDelay;
-        public float SecondAttackDelay;
-        public float ThirdAttackDelay;
 
-        public float ComboDelay;
-    }
-
+    [RequireComponent(typeof(Rigidbody), typeof(CapsuleCollider), typeof(EffectManager)) ]
     public class Playable : MonoBehaviour
     {
         public Animator Animator;
         [field: SerializeField] public ActorType ActorType { get; private set; }
+        [field : SerializeField] public CharacterType CharacterType { get; private set; }
         [SerializeField] private BattleModel battleModel;
         [SerializeField] private CollisionObserver CollisionObserver;
 
@@ -119,7 +113,6 @@ namespace LGProject.PlayerState
         public bool IsNormalAttack;
         //public Vector3 velocity;
 
-
         float _gravity = -9.8f;
         float _groundedGravity = -0.05f;
 
@@ -176,7 +169,6 @@ namespace LGProject.PlayerState
         {
             if(other.CompareTag("Player") && !StateMachine.IsGrounded)
             {
-                Debug.Log("AA");
                 // 부딧힌 대상으로부터 n만큼의 거리를 벌려야함.
                 float directionX = transform.position.x - other.transform.position.x;
                 //float radius = StateMachine.collider.GetComponent<CapsuleCollider>().radius;
@@ -223,6 +215,7 @@ namespace LGProject.PlayerState
         private static readonly int Flying = Animator.StringToHash("Flying");
         private static readonly int Hit = Animator.StringToHash("Hit");
         private static readonly int Knockback = Animator.StringToHash("Knockback");
+        private static readonly int WakeUp = Animator.StringToHash("WakeUp");   
         //private static readonly int 
 
         public void IsPushDownKey()
@@ -290,7 +283,6 @@ namespace LGProject.PlayerState
             velocity.y = 0;
             transform.position = new Vector3(transform.position.x, UnderPlatform.rect.y, transform.position.z);
 
-
             StateMachine.physics.velocity = velocity;
             StateMachine.collider.isTrigger = false;
             StateMachine.IsGrounded = true;
@@ -298,10 +290,6 @@ namespace LGProject.PlayerState
             StateMachine.JumpInCount = 0;
             StateMachine.StandingVelocity();
 
-            //if (StateMachine.CurrentState != null)
-            //{
-            //    StateMachine.ChangeState(StateMachine.landingState);
-            //}
         }
 
         private void KncokbackLandingCheck()
@@ -334,6 +322,7 @@ namespace LGProject.PlayerState
                 // 바닥을 뚫었는가? 에 대한 체크
                 if (AABBPlatformCheck())
                 {
+                    StateMachine.animator.SetTrigger(Landing);
                     if (StateMachine.IsKnockback)
                         KncokbackLandingCheck();
                     else if (!StateMachine.IsGrounded)

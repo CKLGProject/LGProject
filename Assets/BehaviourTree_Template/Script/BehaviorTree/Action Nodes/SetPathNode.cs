@@ -12,6 +12,7 @@ namespace BehaviourTree
     public class SetPathNode : ActionNode
     {
         public AIAgent Agent;
+        //public LGProject.PlayerState.PlayerStateMachine
         // 움직일 포인트를 찍어줌
         // 움직일 포인트가 찍히면 MoveNode로 움직임을 체크하고 목표지점에 도달할 때까지
         // (Ex -> 0.5거리 이하 )

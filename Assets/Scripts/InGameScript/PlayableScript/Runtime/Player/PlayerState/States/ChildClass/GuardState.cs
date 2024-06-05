@@ -20,6 +20,7 @@ namespace LGProject.PlayerState
             // x,z Velocity를 초기화
 
             StateMachine.StandingVelocity();
+            StateMachine.animator.ResetTrigger("GuardEnd");
             StateMachine.animator.SetTrigger("GuardStart");
             //StateMachine.animator.SetBool(Guard, true);
             StateMachine.playable.effectManager.Play(EffectManager.EFFECT.Guard).Forget();

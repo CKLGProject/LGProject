@@ -1,20 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using Cysharp.Threading.Tasks;
 
 namespace LGProject.PlayerState
 {
     public class FrostUltimateState : UltimateState
     {
-        private float _curTimer;
-        private float _delay;
-        public FrostUltimateState(PlayerStateMachine _stateMachine, float _delayTime) : base(_stateMachine)
+        // 자기 강화 궁극기
+        // 지속시간 5초
+
+        private bool _isMove;
+
+        private static readonly int Ultimate = Animator.StringToHash("Ultimate");
+        
+
+        public FrostUltimateState(PlayerStateMachine _stateMachine) : base(_stateMachine)
         {
-            _delay = _delayTime;
+
         }
         public override void Enter()
         {
             base.Enter();
+            // 시간 설정
+            //StateMachine.SetUltimateState();
+            StateMachine.ResetVelocity();
+            StateMachine.animator.SetTrigger(Ultimate);
+
+            StateMachine.IsUltimate = true;
+            StateMachine.animator.updateMode = AnimatorUpdateMode.UnscaledTime;
+            _isMove = false;
+            WaitStart().Forget();
+            Time.timeScale = 0.1f;
         }
 
         public override void Exit()
@@ -26,11 +44,30 @@ namespace LGProject.PlayerState
         {
             base.LogicUpdate();
 
+            if(_isMove)
+            {
+                StateMachine.ChangeState(StateMachine.idleState);
+            }
         }
 
         public override void PhysicsUpdate()
         {
             base.PhysicsUpdate();
+
+        }
+
+        protected async UniTaskVoid WaitStart()
+        {
+            await UniTask.Delay(TimeSpan.FromSeconds(0.175f));
+            _isMove = true;
+            Time.timeScale = 1f;
+            StateMachine.playable.effectManager.Stop(EffectManager.EFFECT.Ultimate);
+            //StateMachine.animator.updateMode = AnimatorUpdateMode.Normal;
+            //StateMachine.playable.effectManager.Play(EffectManager.EFFECT.UltimateDash).Forget();
+            //StateMachine.playable.effectManager.Stop(EffectManager.EFFECT.UltimatePreCenter);
+            //StateMachine.playable.effectManager.Stop(EffectManager.EFFECT.UltimatePreRHand);
+
+            //stateMachine.animator.stop
 
         }
     }

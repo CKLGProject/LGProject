@@ -20,7 +20,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4910213552037458275
 Transform:
   m_ObjectHideFlags: 0
@@ -51,6 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Animator: {fileID: 4197115238591175659}
   <ActorType>k__BackingField: 1
+  <CharType>k__BackingField: 1
   battleModel: {fileID: 0}
   CollisionObserver: {fileID: 0}
   velocity: {x: 0, y: 0, z: 0}

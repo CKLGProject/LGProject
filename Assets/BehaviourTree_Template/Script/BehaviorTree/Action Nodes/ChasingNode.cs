@@ -23,7 +23,7 @@ namespace BehaviourTree
             pathFinding.PathRequestManager.RequestPath(new pathFinding.PathRequest(_stateMachine.transform.position, _agent.player.position, _agent.GetPath));
 
             chasingPoint = pathFinding.Grid.Instance.NodeFromWorldPoint(_stateMachine.transform.position).WorldPosition;
-            
+            _stateMachine.DataSet(LGProject.DATA_TYPE.Chasing);
         }
 
         protected override void OnStop()

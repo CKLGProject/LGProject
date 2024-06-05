@@ -40,9 +40,11 @@ namespace BehaviourTree
         {
             _curTimer += Time.deltaTime;
 
-            if (_stateMachine.IsDamaged)
+            if (_stateMachine.IsDamaged || _stateMachine.IsKnockback)
+            {
+                Debug.Log("AA");
                 return State.Failure;
-
+            }
             if (_stateMachine.playable.DashAttackDelay > _curTimer)
             {
                 if (_isAttack == false) _isAttack = ActionJudge();
@@ -56,9 +58,9 @@ namespace BehaviourTree
 
         bool FollowPath()
         {
-            if (_stateMachine.IsGrounded)
-            {
-            }
+            //if (_stateMachine.IsGrounded)
+            //{
+            //}
             Vector3 currentWaypoint = new Vector3(_agent.path[_agent.targetIndex].x, _agent.path[_agent.targetIndex].y - 0.45f, _agent.path[_agent.targetIndex].z);
             if (_stateMachine.transform.position == currentWaypoint)
             {
@@ -126,11 +128,11 @@ namespace BehaviourTree
                     temp.
                     Item1.GetComponent<Playable>().
                     GetStateMachine.
-                    HitDamaged(v, 0, _stateMachine);
+                    HitDamaged(v, 0, _stateMachine, LGProject.DATA_TYPE.DashAttackHit);
 
                     //temp.Item1.GetComponent<Playable>().GetStateMachine.hitPlayer = AIAgent.Instance.transform;
 
-                    if (!temp.Item1.GetStateMachine.IsGuard && !temp.Item1.GetStateMachine.IsDown)
+                    if (!temp.Item1.GetStateMachine.IsGuard && !temp.Item1.GetStateMachine.IsDown )
                     {
                         // 100 % gage로 일단 계산
                         _stateMachine.playable.SetUltimateGage(_stateMachine.playable.UltimateGage + 10);
@@ -151,9 +153,9 @@ namespace BehaviourTree
             _curTimer = 0;
             
             AIAgent.Instance.SetAttacRange(_stateMachine.IsGrounded ? dashAttackRange : jumpAttackRange);
-            if (!_stateMachine.IsGrounded)
-                _stateMachine.animator.SetTrigger("JumpAttack");
-            else
+            //if (!_stateMachine.IsGrounded)
+            //    _stateMachine.animator.SetTrigger("JumpAttack");
+            //else
                 _stateMachine.animator.SetTrigger("DashAttack");
             _stateMachine.animator.SetFloat("Run", 0);
         }

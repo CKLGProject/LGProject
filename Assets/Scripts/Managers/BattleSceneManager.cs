@@ -33,7 +33,7 @@ namespace LGProject
         }
 
         /// <summary>
-        /// 게임을 시작시킵니디다.
+        /// 게임을 시작시킵니다.
         /// </summary>
         public void GameStart()
         {
@@ -48,6 +48,9 @@ namespace LGProject
         {
             IsStart = false;
             IsEnd = true;
+            // 여기서 호출하고 싶은데..
+            FileManager.Instance.SaveData();
+            
         }
     }
 }
