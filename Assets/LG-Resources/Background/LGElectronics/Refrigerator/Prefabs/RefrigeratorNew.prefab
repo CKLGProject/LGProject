@@ -83,6 +83,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7272911518199237601, guid: fed75c1f7fa4e2344801da1fbf4998cf,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: -6111855447536548426, guid: fed75c1f7fa4e2344801da1fbf4998cf,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -168,6 +173,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: RefrigeratorNew
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fed75c1f7fa4e2344801da1fbf4998cf,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fed75c1f7fa4e2344801da1fbf4998cf,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1025791771068237214, guid: fed75c1f7fa4e2344801da1fbf4998cf,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 1324879569908074342, guid: fed75c1f7fa4e2344801da1fbf4998cf,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -178,6 +198,16 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: 6223854438245f14884aab3dbedf92ee, type: 2}
+    - target: {fileID: 2493450254362952833, guid: fed75c1f7fa4e2344801da1fbf4998cf,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3151968421770915019, guid: fed75c1f7fa4e2344801da1fbf4998cf,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4768183254874315708, guid: fed75c1f7fa4e2344801da1fbf4998cf,
         type: 3}
       propertyPath: m_LocalRotation.w
@@ -213,8 +243,44 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: 6223854438245f14884aab3dbedf92ee, type: 2}
+    - target: {fileID: 8871154589832837912, guid: fed75c1f7fa4e2344801da1fbf4998cf,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fed75c1f7fa4e2344801da1fbf4998cf,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4941288836190428335}
   m_SourcePrefab: {fileID: 100100000, guid: fed75c1f7fa4e2344801da1fbf4998cf, type: 3}
+--- !u!1 &7398625084743892175 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: fed75c1f7fa4e2344801da1fbf4998cf,
+    type: 3}
+  m_PrefabInstance: {fileID: 7668604876296356254}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &4941288836190428335
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7398625084743892175}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 3a0d501b6a0434328b66b5e3d49d1aa6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
