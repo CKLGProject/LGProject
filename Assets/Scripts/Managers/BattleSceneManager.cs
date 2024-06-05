@@ -6,7 +6,6 @@ namespace LGProject
     public class BattleSceneManager : MonoBehaviour
     {
         public static BattleSceneManager Instance { get; private set; }
-        private BattleModel _battleModel;
 
         public bool IsStart { get; private set; }
         public bool IsEnd { get; private set; }

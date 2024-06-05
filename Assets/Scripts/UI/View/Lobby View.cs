@@ -5,16 +5,14 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Utility;
 
 public class LobbyView : MonoBehaviour
 {
-    [Header("Character")]
-    [SerializeField] private GameObject hit;
+    [Header("Character")] [SerializeField] private GameObject hit;
     [SerializeField] private GameObject frost;
-    
+
     [Header("Text")] [SerializeField] private TextMeshProUGUI nickNameText;
     [SerializeField] private TextMeshProUGUI levelText;
     [SerializeField] private TextMeshProUGUI coinText;
@@ -24,7 +22,7 @@ public class LobbyView : MonoBehaviour
     /// 매치 버튼
     /// </summary>
     [Header("Buttons")] [SerializeField] private GameObject matchButton;
-    
+
     /// <summary>
     /// 랭킹 버튼
     /// </summary>
@@ -62,8 +60,7 @@ public class LobbyView : MonoBehaviour
 
     [Tooltip("미구현 메세지")] [SerializeField] private string errorMessage;
 
-    [Header("Event")]
-    public UnityEvent OnClickCapture;
+    [Header("Event")] public UnityEvent OnClickCapture;
     public UnityEvent OnClickMatch;
 
     /// <summary>
@@ -181,7 +178,7 @@ public class LobbyView : MonoBehaviour
     {
         plugText.text = plug.ToString("N0");
     }
-    
+
     /// <summary>
     /// 캐릭터를 보이게 합니다.
     /// </summary>
@@ -189,17 +186,18 @@ public class LobbyView : MonoBehaviour
     /// <exception cref="ArgumentOutOfRangeException"></exception>
     public void ShowCharacter(ECharacterType characterType)
     {
+        hit.SetActive(false);
+        frost.SetActive(false);
+        
         switch (characterType)
         {
-            case ECharacterType.None:
-                break;
             case ECharacterType.Hit:
                 hit.SetActive(true);
                 break;
             case ECharacterType.Frost:
                 frost.SetActive(true);
                 break;
-            case ECharacterType.C:
+            case ECharacterType.Cane:
                 break;
             case ECharacterType.Storm:
                 break;
@@ -208,6 +206,5 @@ public class LobbyView : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException(nameof(characterType), characterType, null);
         }
-        
     }
 }
