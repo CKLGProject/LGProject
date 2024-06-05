@@ -165,7 +165,7 @@ namespace BehaviourTree
                 {
                     temp.
                     Item1.GetStateMachine.
-                    HitDamaged(_stateMachine.AttackCount < 3 ? Vector3.zero : v, 0, _stateMachine);
+                    HitDamaged(_stateMachine.AttackCount < 3 ? Vector3.zero : v, 0, _stateMachine, LGProject.DATA_TYPE.NormalAttackHit);
                     temp.Item1.GetStateMachine.hitPlayer = _stateMachine.transform;
 
                     _stateMachine.animator.SetInteger("Attack", 0);

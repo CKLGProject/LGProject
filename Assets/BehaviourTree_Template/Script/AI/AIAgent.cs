@@ -5,25 +5,8 @@ using UnityEditor;
 namespace BehaviourTree
 {
 
-    public struct DATA
-    {
-        int NormalAttackCount;
-        int DashAttackCount;
-
-        int NormalAttackHitCount;
-        int DashAttackHitCount;
-
-        int JumpCount;
-        int ChasingCount;
-        int NormalMoveCount;
-
-        int GuardCount;
-    }
-
     public class AIAgent : LGProject.PlayerState.Playable
     {
-
-
         private static AIAgent instance;
         public static AIAgent Instance => instance;
 
@@ -40,10 +23,7 @@ namespace BehaviourTree
 
         public Transform player;
         public bool isGround;
-
-        //[HideInInspector] public int 
-
-        //public Animator animator;
+    
 
         #region magicMathods
         [System.Obsolete]
@@ -77,15 +57,14 @@ namespace BehaviourTree
         private void Update()
         {
             // 일단 여기에 넣어보자
-                PlayableGravity();
-                GetStateMachine.Update();
+            PlayableGravity();
+            GetStateMachine.Update();
             //PlatformCheck();
             NewPlatformCheck();
             //DeadLineCheck();
             DeadSpaceCheck();
             CameraCheck();
             // 바라보는 방향 -> 일단 무조건 플레이어를 바라보게 설정
-
         }
 
         private void OnDrawGizmos()

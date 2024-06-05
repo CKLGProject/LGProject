@@ -19,7 +19,6 @@ namespace BehaviourTree
         protected override void OnStop()
         {
             _stateMachine.playable.effectManager.Stop(EffectManager.EFFECT.Airborne);
-
         }
 
         protected override State OnUpdate()
@@ -29,7 +28,7 @@ namespace BehaviourTree
             {
                 _stateMachine.IsKnockback = false;
                 _stateMachine.IsDamaged = false;
-                _stateMachine.animator.SetTrigger("Landing");
+                //_stateMachine.animator.SetTrigger("Landing");
                 return State.Failure;
             }
             // 일단 판정을 받아야함.

@@ -16,6 +16,7 @@ namespace LGProject.PlayerState
         private AnimationCurve _animationCurve;
 
         //Thread callback; 
+        private static readonly int Landing = Animator.StringToHash("Landing");
         
         public JumpState(PlayerStateMachine stateMachine, ref float jumpScale, int maximumCount, AnimationCurve animationCurve) : base(stateMachine)
         {
@@ -30,12 +31,13 @@ namespace LGProject.PlayerState
             base.Enter();
              
             StateMachine.JumpVelocity();
-
+            StateMachine.animator.ResetTrigger(Landing);
             StateMachine.IsJumpping = true;
             StateMachine.JumpInCount++;
             StateMachine.playable.HandleJumpping();
             //stateMachine.physics.velocity += Vector3.up * _jumpScale;
             StateMachine.animator.SetTrigger("Jump" + StateMachine.JumpInCount);
+            FileManager.Instance.SetInGameData(DATA_TYPE.Jump);
 
 
             // 이걸 n초 뒤에 켜고 싶은데...

@@ -7,18 +7,18 @@ using Object = UnityEngine.Object;
 
 namespace LGProject.PlayerState // 
 {
+    public enum DAMAGE_TYPE
+    {
+        NormalAttack,
+        DashAttack,
+        JumpAttack,
+        Guard,
+        Chasing,
+        Movement,
+    }
+
     public class PlayerStateMachine
     {
-        public enum E_KEYTYPE
-        {
-            UP,
-            DOWN,
-            LEFT,
-            RIGHT,
-            JUMP,
-            ATTACk,
-        }
-
         // 캐싱
         public Transform transform;
         public Playable playable;
@@ -66,8 +66,6 @@ namespace LGProject.PlayerState //
         public bool IsDashAttack = false;
         public bool IsJumpAttack = false;
 
-        //public GameObject GuardEffect;
-
         #region Action_Properties
 
         #endregion
@@ -96,7 +94,7 @@ namespace LGProject.PlayerState //
 
         public void SetAnimPlayTime(string clipName, float time)
         {
-            animClipsInfo.Add(clipName, time);
+            //animClipsInfo.Add(clipName, time);
         }
 
         public float GetAnimPlayTime(string clipName)
@@ -145,12 +143,12 @@ namespace LGProject.PlayerState //
                 psm.guardState = new GuardState(psm);
                 psm.knockbackState = new KnockbackState(psm);
 
-                psm.ultimateState = new HitUltimateState(psm);
                 psm.downState = new DownState(psm, ref psm.playable.DownWaitDelay);
                 psm.wakeUpState = new WakeUpState(psm, ref psm.playable.WakeUpDelay);
                 psm.landingState = new LandingState(psm);
 
-                psm.Initalize(psm.idleState);
+                psm.Initalize(psm.idleState); 
+                //SetUltimateState();
             }
             catch
             {
@@ -162,8 +160,25 @@ namespace LGProject.PlayerState //
         }
 
         // 캐릭터 별로 State맞추기
-        public void SetUltimateState()
+        public void SetUltimateState(Data.CharacterType charcterType)
         {
+            switch (charcterType)
+            {
+                case Data.CharacterType.None:
+
+                    break;
+                case Data.CharacterType.Hit:
+                    ultimateState = new HitUltimateState(this);
+                    break;
+                case Data.CharacterType.Frost:
+                    ultimateState = new FrostUltimateState(this);
+                    break;
+                case Data.CharacterType.Cain:
+
+                    break;
+                default:
+                    break;
+            }
         }
 
         public void Initalize(State startingState)
@@ -240,9 +255,55 @@ namespace LGProject.PlayerState //
         {
             physics.velocity = Vector3.zero;
         }
-
-        public void HitDamaged(Vector3 velocity, float nockbackDelay = 0.1f,PlayerStateMachine EnemyStateMachine = null)
+        public void DataSet(DATA_TYPE damageType)
         {
+            UpdateData(damageType);
+        }
+
+        private void UpdateData(DATA_TYPE damageType)
+        {
+            try
+            {
+                switch (damageType)
+                {
+                    case DATA_TYPE.NormalAttack:
+                        FileManager.Instance.SetInGameData(DATA_TYPE.NormalAttack);
+                        break;
+                    case DATA_TYPE.DashAttack:
+                        FileManager.Instance.SetInGameData(DATA_TYPE.DashAttack);
+                        break;
+                    case DATA_TYPE.NormalAttackHit:
+                        FileManager.Instance.SetInGameData(DATA_TYPE.NormalAttackHit);
+                        break;
+                    case DATA_TYPE.DashAttackHit:
+                        FileManager.Instance.SetInGameData(DATA_TYPE.DashAttackHit);
+                        break;
+                    case DATA_TYPE.Jump:
+                        FileManager.Instance.SetInGameData(DATA_TYPE.Jump);
+                        break;
+                    case DATA_TYPE.Chasing:
+                        FileManager.Instance.SetInGameData(DATA_TYPE.Chasing);
+                        break;
+                    case DATA_TYPE.Movement:
+                        FileManager.Instance.SetInGameData(DATA_TYPE.Movement);
+                        break;
+                    case DATA_TYPE.Guard:
+                        FileManager.Instance.SetInGameData(DATA_TYPE.Guard);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            catch
+            {
+                Debug.Log("Don't have File Manager");
+            }
+
+        }
+
+        public void HitDamaged(Vector3 velocity, float nockbackDelay ,PlayerStateMachine EnemyStateMachine , DATA_TYPE dataType)
+        {
+            UpdateData(dataType);
             // 누어 있는 상태에선 데미지를 입지 않는다.
             if (IsDown || IsUltimate || IsSuperArmor ||(EnemyStateMachine != null && IsUltimate))
                 return;
@@ -295,7 +356,6 @@ namespace LGProject.PlayerState //
             animator.ResetTrigger(Idle);
             animator.ResetTrigger(DashAttack);
             animator.ResetTrigger(Hit);
-            //animator.ResetTrigger(Guard);
             animator.ResetTrigger(Jump1);
             animator.ResetTrigger(Jump2);
             animator.ResetTrigger(Knockback);
@@ -311,36 +371,5 @@ namespace LGProject.PlayerState //
                 playable.ShowUltimateEffect();
             }
         }
-
-
-        #region ComboMethods
-
-        // combo System
-        public bool InputCombo(E_KEYTYPE keyType)
-        {
-            if (CurrentState.GetType() == typeof(JumpState) && true)
-            {
-                return false;
-            }
-            else if (CurrentState.GetType() == typeof(AttackState))
-            {
-                return true;
-            }
-
-            //comboQueue
-            //comboQueue.Enqueue(keyType);
-            return false;
-        }
-
-
-        public void ComboTimer()
-        {
-            //if(comboQueue.Count > 0)
-            //{
-
-            //}
-        }
-
-        #endregion
     }
 }

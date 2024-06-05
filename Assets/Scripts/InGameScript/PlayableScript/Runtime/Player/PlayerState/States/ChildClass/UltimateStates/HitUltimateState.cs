@@ -118,7 +118,7 @@ namespace LGProject.PlayerState
 
             //targetStateMachine.playable.effectManager.PlayOneShot(EffectManager.EFFECT.UltimateHit);
 
-            targetStateMachine.HitDamaged(KnockbackValue, 0.2f, StateMachine);
+            targetStateMachine.HitDamaged(KnockbackValue, 0.2f, StateMachine, DATA_TYPE.JumpAttackHit);
 
 
         }
@@ -135,7 +135,7 @@ namespace LGProject.PlayerState
             StateMachine.playable.effectManager.Stop(EffectManager.EFFECT.UltimatePreRHand);
 
             //stateMachine.animator.stop
-            // 플레이어 앞에 있는 놈들 전부 잡아 족쳐
+
             if (PathCheck())
             {
                 MovementTargetPointSet();

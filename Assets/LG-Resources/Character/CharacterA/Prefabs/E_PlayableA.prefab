@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7742156390799983650}
   - component: {fileID: 4114847688042460542}
   - component: {fileID: 2876321095919618213}
+  - component: {fileID: 2735284328782316872}
   m_Layer: 3
   m_Name: E_PlayableA
   m_TagString: Player
@@ -51,6 +52,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Animator: {fileID: 4246712564485102162}
   <ActorType>k__BackingField: 2
+  <CharType>k__BackingField: 1
   battleModel: {fileID: 0}
   CollisionObserver: {fileID: 0}
   velocity: {x: 0, y: 0, z: 0}
@@ -66,15 +68,15 @@ MonoBehaviour:
   SecondAttackMovingValue: 1
   ThirdAttackDelay: 1
   ThirdAttackJudgeDelay: 0.2
-  ThirdAttackMovingValue: 1
-  DashAttackDelay: 0.5
+  ThirdAttackMovingValue: 3
+  DashAttackDelay: 0.75
   HitDelay: 0.5
   DownWaitDelay: 1
   WakeUpDelay: 0.75
   LifePoint: 3
   movingAttack: 1
-  AliveOffset: {x: 0, y: 0, z: 0}
-  respawnTime: 1
+  AliveOffset: {x: 0, y: 1.5, z: 0}
+  respawnTime: 2
   directionX: 0
   jumpCurve:
     serializedVersion: 2
@@ -216,6 +218,27 @@ MonoBehaviour:
   _UltimatePreCenter: {fileID: 0}
   _UltimatePre_RHand_FX: {fileID: 0}
   playList: []
+--- !u!114 &2735284328782316872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6142601296869339651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18224260a6e0e4e4996490f0b3fa777d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RectSpace:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
+  CollisionLineBoxScale: {x: 0.5, y: 1.5, z: 0.5}
+  Offset: {x: 0, y: 0.75, z: 0}
+  CollisionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1001 &7747826582891407299
 PrefabInstance:
   m_ObjectHideFlags: 0

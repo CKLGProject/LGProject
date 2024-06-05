@@ -27,21 +27,15 @@ namespace BehaviourTree
         private float _curTimer = 0;
         private int _count = 0;
         
-        //private Vector3 startPoint = Vector3.zero;
-        //private int targetIndex = 0;
-        //int count = 0;
-        ////Vector3 currentWaypoint = Vec;
-
         protected override void OnStart()
         {
             // Path 설정
             if (_agent == null)
                 _agent = AIAgent.Instance;
             StateMachineLogic();
-            //Debug.Log("Hello");
-            //_stateMachine.physics.velocity = Vector3.zero;
             _curTimer = jumpDelay;
             _agent.targetIndex = 0;
+            _stateMachine.DataSet(LGProject.DATA_TYPE.Movement);  
         }
 
         protected override void OnStop()

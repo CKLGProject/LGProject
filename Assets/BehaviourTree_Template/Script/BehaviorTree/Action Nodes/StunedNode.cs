@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 namespace BehaviourTree
 {
     public class StunedNode : ActionNode
@@ -18,8 +17,13 @@ namespace BehaviourTree
             if (Agent == null)
                 Agent = AIAgent.Instance;
             if (_stateMachine == null)
-                _stateMachine = Agent.GetStateMachine;  
+                _stateMachine = Agent.GetStateMachine;
+            _stateMachine.IsGuard = false;
+            _stateMachine.animator.ResetTrigger("Landing");
+            _stateMachine.animator.ResetTrigger("Knockback");
+            _stateMachine.animator.ResetTrigger("WakeUp");
             _stateMachine.animator.SetFloat("Run", 0f);
+
         }
 
         protected override void OnStop()
@@ -33,14 +37,14 @@ namespace BehaviourTree
             if(Agent.GetStateMachine.IsDamaged && !Agent.GetStateMachine.IsKnockback)
             {
                 // 피격 모션 출력
-                //Agent.effectManager.PlayOneShot(EffectManager.EFFECT.Hit);
                 Agent.GetStateMachine.IsDamaged = false;
                 curTiemr = 0;
             }
             curTiemr += Time.deltaTime;
-            //if(stunedTimer < curTiemr || (Agent.GetStateMachine.isKnockback && Agent.GetStateMachine.isHit))
+   
             if(_stateMachine.playable.HitDelay < curTiemr || (Agent.GetStateMachine.IsKnockback ))
             {
+                
                 return State.Success;
             }
             return State.Running;

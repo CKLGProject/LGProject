@@ -105,14 +105,13 @@ namespace LGProject.PlayerState
                         {
                             temp.
                             Item1.GetStateMachine.
-                            HitDamaged(v, 0, StateMachine);
+                            HitDamaged(v, 0, StateMachine, DATA_TYPE.DashAttackHit);
                             _damageInCount = true;
 
-
-                            if (!temp.Item1.GetStateMachine.IsGuard && !temp.Item1.GetStateMachine.IsDown)
-                            {// 100 % gage로 일단 계산
+                            if (!temp.Item1.GetStateMachine.IsGuard && !temp.Item1.GetStateMachine.IsDown && !temp.Item1.GetStateMachine.IsSuperArmor && !StateMachine.IsUltimate)
+                            {
+                                // 100 % gage로 일단 계산
                                 StateMachine.playable.SetUltimateGage(StateMachine.playable.UltimateGage + 10);
-
                             }
                         }
                     }

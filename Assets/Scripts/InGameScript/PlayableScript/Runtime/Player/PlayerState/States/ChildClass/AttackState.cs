@@ -217,10 +217,10 @@ namespace LGProject.PlayerState
                         {
                             temp.
                             Item1.GetStateMachine.
-                            HitDamaged(StateMachine.AttackCount - 1 < 2 ? Vector3.zero : v, 0.1f, StateMachine);
+                            HitDamaged(StateMachine.AttackCount - 1 < 2 ? Vector3.zero : v, 0.1f, StateMachine, DATA_TYPE.NormalAttackHit);
                             _damageInCount = true;
 
-                            if (!temp.Item1.GetStateMachine.IsGuard && !temp.Item1.GetStateMachine.IsDown)
+                            if (!temp.Item1.GetStateMachine.IsGuard && !temp.Item1.GetStateMachine.IsDown && !temp.Item1.GetStateMachine.IsSuperArmor && !StateMachine.IsUltimate)
                             {
                                 // 100 % gage로 일단 계산
                                 StateMachine.playable.SetUltimateGage(StateMachine.playable.UltimateGage + 10);
