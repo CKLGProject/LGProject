@@ -127,7 +127,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 52aa76a76aaf432429f80607369448b1
-  position: {x: -995, y: 928.00006}
+  position: {x: -994.9999, y: 928}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
@@ -151,7 +151,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: c7b8559125cdffd43ba3e9903da119f6
-  position: {x: -1315, y: 928.00006}
+  position: {x: -1314.7972, y: 928.0199}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
@@ -265,7 +265,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 117ab0154c9e23b4a92e6e42038ee647
-  position: {x: -835, y: 928.00006}
+  position: {x: -834.79724, y: 928.0199}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
@@ -469,7 +469,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: e5e33875e377676408b25f8db00d83b5
-  position: {x: -964.99994, y: 775}
+  position: {x: -964.79724, y: 775.0199}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
@@ -609,7 +609,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: dfda43c592b9cf34896abf766fb804dd
-  position: {x: -1155, y: 929.00006}
+  position: {x: -1155, y: 927.99994}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
@@ -742,7 +742,7 @@ MonoBehaviour:
   state: 0
   started: 1
   guid: 0ff1fb66cd2cd974bae964fdd4c5d8d0
-  position: {x: -1075, y: 620}
+  position: {x: -1074.7972, y: 620.0199}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
@@ -1016,7 +1016,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: f17ebf5bf62ba4549a0d16486fdba4ab
-  position: {x: -1125, y: 775}
+  position: {x: -1124.7971, y: 775.0199}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
@@ -1169,7 +1169,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: eae37f0b7115c144c8edb618dc04bf57
-  position: {x: -1291, y: 775}
+  position: {x: -1290.7972, y: 775.0199}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}

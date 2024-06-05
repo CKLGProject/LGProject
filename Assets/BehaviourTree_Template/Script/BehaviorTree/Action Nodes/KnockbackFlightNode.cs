@@ -7,7 +7,8 @@ namespace BehaviourTree
     public class KnockbackFlightNode : ActionNode
     {
         private LGProject.PlayerState.PlayerStateMachine _stateMachine;
-
+        private float _curTimer;
+        private float _WaitTime;
         protected override void OnStart()
         {
             if (_stateMachine == null)
@@ -29,7 +30,7 @@ namespace BehaviourTree
             {
                 _stateMachine.IsKnockback = false;
                 _stateMachine.IsDamaged = false;
-                _stateMachine.animator.SetTrigger("Landing");
+                _stateMachine.IsDamaged = false;
                 return State.Failure;
             }
             // 일단 판정을 받아야함.

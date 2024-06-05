@@ -28,7 +28,7 @@ namespace LGProject.CollisionZone
             //objList.Add(Instantiate(prefab, new Vector3((center.x + offset.x) * 0.5f, (center.y - offset.y) * 0.5f, -9.5f), Quaternion.identity));
             //objList.Add(Instantiate(prefab, new Vector3((center.x - offset.x) * 0.5f, (center.y - offset.y) * 0.5f, -9.5f), Quaternion.identity));
 
-            rect.Set((center.x + offset.x * 0.5f) , (center.y + offset.y * 0.5f) , (center.x - offset.x * 0.5f) , (center.y - offset.y * 0.5f) );
+            rect.Set((center.x + offset.x) * 0.5f, (center.y + offset.y) * 0.5f, (center.x - offset.x) * 0.5f, (center.y - offset.y) * 0.5f);
 
         }
     }

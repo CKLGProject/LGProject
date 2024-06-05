@@ -17,7 +17,6 @@ namespace LGProject.PlayerState
         public float ComboDelay;
     }
 
-    [RequireComponent(typeof(Rigidbody), typeof(CapsuleCollider), typeof(EffectManager)) ]
     public class Playable : MonoBehaviour
     {
         public Animator Animator;
@@ -291,6 +290,7 @@ namespace LGProject.PlayerState
             velocity.y = 0;
             transform.position = new Vector3(transform.position.x, UnderPlatform.rect.y, transform.position.z);
 
+
             StateMachine.physics.velocity = velocity;
             StateMachine.collider.isTrigger = false;
             StateMachine.IsGrounded = true;
@@ -298,6 +298,10 @@ namespace LGProject.PlayerState
             StateMachine.JumpInCount = 0;
             StateMachine.StandingVelocity();
 
+            //if (StateMachine.CurrentState != null)
+            //{
+            //    StateMachine.ChangeState(StateMachine.landingState);
+            //}
         }
 
         private void KncokbackLandingCheck()
