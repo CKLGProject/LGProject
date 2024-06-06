@@ -28,8 +28,10 @@ namespace LGProject.PlayerState
             StateMachine.ResetVelocity();
             StateMachine.animator.SetTrigger(Ultimate);
 
-            StateMachine.IsUltimate = true;
+            StateMachine.IsUseUltimate = true;
             StateMachine.animator.updateMode = AnimatorUpdateMode.UnscaledTime;
+            StateMachine.playable.effectManager.Play(EffectManager.EFFECT.Ultimate).Forget();
+
             _isMove = false;
             WaitStart().Forget();
             Time.timeScale = 0.1f;
@@ -46,6 +48,7 @@ namespace LGProject.PlayerState
 
             if(_isMove)
             {
+                StateMachine.IsUltimate = true;
                 StateMachine.ChangeState(StateMachine.idleState);
             }
         }
@@ -61,14 +64,12 @@ namespace LGProject.PlayerState
             await UniTask.Delay(TimeSpan.FromSeconds(0.175f));
             _isMove = true;
             Time.timeScale = 1f;
-            StateMachine.playable.effectManager.Stop(EffectManager.EFFECT.Ultimate);
+            //StateMachine.playable.effectManager.Stop(EffectManager.EFFECT.Ultimate);
             //StateMachine.animator.updateMode = AnimatorUpdateMode.Normal;
             //StateMachine.playable.effectManager.Play(EffectManager.EFFECT.UltimateDash).Forget();
             //StateMachine.playable.effectManager.Stop(EffectManager.EFFECT.UltimatePreCenter);
             //StateMachine.playable.effectManager.Stop(EffectManager.EFFECT.UltimatePreRHand);
-
-            //stateMachine.animator.stop
-
+            StateMachine.IsUseUltimate = false;
         }
     }
 }

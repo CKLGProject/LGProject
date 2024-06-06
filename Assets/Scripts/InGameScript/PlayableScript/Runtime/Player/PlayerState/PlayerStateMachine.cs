@@ -60,6 +60,7 @@ namespace LGProject.PlayerState //
         public bool IsJumpping;
         public bool IsDead;
         public bool IsNormalAttack;
+        public bool IsUseUltimate;
         public bool IsUltimate;
         public bool IsSuperArmor;
 
@@ -305,14 +306,14 @@ namespace LGProject.PlayerState //
         {
             UpdateData(dataType);
             // 누어 있는 상태에선 데미지를 입지 않는다.
-            if (IsDown || IsUltimate || IsSuperArmor ||(EnemyStateMachine != null && IsUltimate))
+            if (IsDown || IsUseUltimate || IsSuperArmor ||(EnemyStateMachine != null && IsUseUltimate))
                 return;
             if(IsGuard)
             {
                 //GuardGage -= 25;
                 physics.velocity = new Vector3((EnemyStateMachine.transform.position - transform.position).normalized.x * -2.5f, 0, 0);
             }
-            if (!IsGuard || (EnemyStateMachine != null && EnemyStateMachine.IsUltimate))
+            if (!IsGuard || (EnemyStateMachine != null && EnemyStateMachine.IsUseUltimate))
             {
                 physics.velocity = Vector3.zero;
                 playable.SetDamageGage(playable.DamageGage + 8.5f);
@@ -330,7 +331,7 @@ namespace LGProject.PlayerState //
                     animator.SetTrigger(Hit);
                 }
 
-                if(EnemyStateMachine != null && EnemyStateMachine.IsUltimate)
+                if(EnemyStateMachine != null && EnemyStateMachine.IsUseUltimate)
                 {
                     playable.effectManager.PlayOneShot(EffectManager.EFFECT.UltimateHit, Vector3.left);
                 }

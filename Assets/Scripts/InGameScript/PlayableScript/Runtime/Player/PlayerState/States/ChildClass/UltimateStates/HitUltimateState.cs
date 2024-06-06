@@ -37,7 +37,7 @@ namespace LGProject.PlayerState
             StateMachine.playable.effectManager.Play(EffectManager.EFFECT.UltimatePreCenter).Forget();
             StateMachine.playable.effectManager.Play(EffectManager.EFFECT.UltimatePreRHand).Forget();
 
-            StateMachine.IsUltimate = true;
+            StateMachine.IsUseUltimate = true;
             StateMachine.animator.updateMode = AnimatorUpdateMode.UnscaledTime;
             _isMove = false;
             WaitStart().Forget();
@@ -47,7 +47,7 @@ namespace LGProject.PlayerState
         public override void Exit()
         {
             base.Exit();
-            StateMachine.IsUltimate = false;
+            StateMachine.IsUseUltimate = false;
         }
 
         public override void LogicUpdate()

@@ -111,6 +111,7 @@ namespace LGProject.PlayerState
         public bool IsJumpping;
         public bool IsDead;
         public bool IsNormalAttack;
+        public bool IsUltimate;
         //public Vector3 velocity;
 
         float _gravity = -9.8f;
@@ -388,6 +389,25 @@ namespace LGProject.PlayerState
 
         #endregion
 
+        #region UpdateFunction
+
+        private float ultimateTime = 0;
+        private float ultimateFailTime = 5;
+        protected void UpdateUltimateTimer()
+        {
+            if (StateMachine.IsUltimate)
+            {
+                ultimateTime += Time.deltaTime;
+                // 얼티밋을 사용할 때는 공격을 받을 순 있으나 다수의 기능이 추가됨.
+                // 이 상태에서는 타이머가 흘러가며 타이머가 완료되면 다수의 기능이 종료됨.
+                if(ultimateTime > ultimateFailTime)
+                {
+                    StateMachine.IsUltimate = false;
+                    ultimateTime = 0;
+                    effectManager.Stop(EffectManager.EFFECT.Ultimate);
+                }
+            }
+        }
         public void SetupJumpVariables()
         {
             float timeToApex = maxJumpTime / 2;
@@ -429,13 +449,14 @@ namespace LGProject.PlayerState
             StateMachine.IsGrounded = false;
             StateMachine.IsSuperArmor = true;
             StateMachine.IsDashAttack = false;
-            if(StateMachine.CurrentState != null)
+            if (StateMachine.CurrentState != null)
                 StateMachine.ChangeState(StateMachine.landingState);
-            
+
             // 무적 2초
             await UniTask.Delay(TimeSpan.FromSeconds(2f));
             StateMachine.IsSuperArmor = false;
         }
+        #endregion
 
         public void SetUnderPlatform()
         {

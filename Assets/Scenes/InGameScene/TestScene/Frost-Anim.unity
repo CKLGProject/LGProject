@@ -10192,6 +10192,7 @@ MonoBehaviour:
   IsJumpping: 0
   IsDead: 0
   IsNormalAttack: 0
+  IsUltimate: 0
   target: {fileID: 0}
   grid: {fileID: 0}
   path: []
@@ -15511,6 +15512,7 @@ MonoBehaviour:
   IsJumpping: 0
   IsDead: 0
   IsNormalAttack: 0
+  IsUltimate: 0
 --- !u!114 &2040097839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15541,7 +15543,8 @@ MonoBehaviour:
   _RunOffset: {x: 0, y: 0, z: 0}
   _LandingEffect: {fileID: 0}
   _LandingOffset: {x: 0, y: 0, z: 0}
-  _UltimateEffect: {fileID: 0}
+  _UltimateEffect: {fileID: 6915349224304202874, guid: c9920e406cb0ed944a113922da7fef5e,
+    type: 3}
   _UltimateOffset: {x: 0, y: 0, z: 0}
   _UltimateHit: {fileID: 0}
   _UltimateDash: {fileID: 0}
