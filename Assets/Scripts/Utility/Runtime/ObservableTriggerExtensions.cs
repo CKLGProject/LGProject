@@ -72,10 +72,6 @@ namespace ReactiveTouchDown
                         _onTouchDown?.OnNext(Unit.Default);
                 }
             }
-            else
-            {
-                Debug.LogWarning("Camera is null");
-            }
         }
 
         public Subject<Unit> OnTouchDownAsObservable(GameObject component)
