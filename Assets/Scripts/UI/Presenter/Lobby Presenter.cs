@@ -7,18 +7,27 @@ using USingleton;
 [RequireComponent(typeof(LobbyModel))]
 public class LobbyPresenter : MonoBehaviour
 {
+    private LobbyPopupView _lobbyPopupView;
+    private LobbyPopupModel _lobbyPopupModel;
+    
     private LobbyView _lobbyView;
     private LobbyModel _lobbyModel;
 
     private void Start()
     {
         _lobbyView = GetComponent<LobbyView>();
+        _lobbyPopupView = FindAnyObjectByType<LobbyPopupView>();
+        
         _lobbyModel = GetComponent<LobbyModel>();
+        _lobbyPopupModel = FindAnyObjectByType<LobbyPopupModel>();
 
-        ECharacterType choiceCharacter = Singleton.Instance<GameManager>().GetCharacter(ActorType.User);
-        _lobbyView.ShowCharacter(choiceCharacter);
+        // ECharacterType choiceCharacter = Singleton.Instance<GameManager>().GetCharacter(ActorType.User);
+        // _lobbyView.ShowCharacter(choiceCharacter);
         
         // Model
+        _lobbyPopupModel.ChoiceCharacterTypeObservable()
+            .Subscribe(characterType => _lobbyView.ShowCharacter(characterType));
+        
         _lobbyModel.NicknameObservable
             .Subscribe(nickName => _lobbyView.SetNickName(nickName));
         
@@ -33,9 +42,11 @@ public class LobbyPresenter : MonoBehaviour
 
         // View
         _lobbyView.MatchButtonAsObservable()
+            .Where(_=> !_lobbyPopupModel.IsActive)
             .Subscribe(OnClickMatchButton);
 
         _lobbyView.RankButtonAsObservable()
+            .Where(_=> !_lobbyPopupModel.IsActive)
             .Subscribe(OnClickRankButton);
 
         _lobbyView.MailButtonAsObservable()
@@ -45,7 +56,7 @@ public class LobbyPresenter : MonoBehaviour
             .Subscribe(_ => _lobbyView.ShowErrorMessage());
         
         _lobbyView.CharacterButtonAsObservable()
-            .Subscribe(_ => _lobbyView.ShowErrorMessage());
+            .Subscribe(_ => _lobbyPopupView.SetActivePopupView(true));
         
         _lobbyView.FriendButtonAsObservable()
             .Subscribe(_ => _lobbyView.ShowErrorMessage());

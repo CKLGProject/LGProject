@@ -100,7 +100,7 @@ RectTransform:
   m_GameObject: {fileID: 414632636298206793}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5566387468454571907}
@@ -109,7 +109,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 200.69775, y: 185}
+  m_AnchoredPosition: {x: 200, y: 185}
   m_SizeDelta: {x: 250, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &573779985394534905
@@ -250,7 +250,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -285, y: 280.72107}
+  m_AnchoredPosition: {x: -200, y: 280.72107}
   m_SizeDelta: {x: 318, y: 432.5577}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &4507109480925110152
@@ -689,12 +689,12 @@ PrefabInstance:
     - target: {fileID: 224771122883764374, guid: 05f32eddd3e41fd4597ada617b785928,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 93
+      value: 46
       objectReference: {fileID: 0}
     - target: {fileID: 224771122883764374, guid: 05f32eddd3e41fd4597ada617b785928,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 141.27885
+      value: 146
       objectReference: {fileID: 0}
     - target: {fileID: 224771122883764374, guid: 05f32eddd3e41fd4597ada617b785928,
         type: 3}
@@ -849,12 +849,12 @@ PrefabInstance:
     - target: {fileID: 224771122883764374, guid: 05f32eddd3e41fd4597ada617b785928,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -93
+      value: -247
       objectReference: {fileID: 0}
     - target: {fileID: 224771122883764374, guid: 05f32eddd3e41fd4597ada617b785928,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 141.27885
+      value: -141
       objectReference: {fileID: 0}
     - target: {fileID: 224771122883764374, guid: 05f32eddd3e41fd4597ada617b785928,
         type: 3}

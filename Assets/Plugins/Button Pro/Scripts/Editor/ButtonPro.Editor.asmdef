@@ -1,0 +1,18 @@
+{
+    "name": "ButtonPro.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:7612c3cdc7c89458683d6040e0a36c02"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

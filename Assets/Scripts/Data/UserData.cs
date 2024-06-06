@@ -7,7 +7,7 @@ namespace Data
         None,
         Hit,
         Frost,
-        C,
+        Cane,
         Storm,
         E
     }
