@@ -17,7 +17,8 @@ namespace LGProject.PlayerState
 
         //Thread callback; 
         private static readonly int Landing = Animator.StringToHash("Landing");
-        
+        private float dontInputKeyTimer = 0.0f;
+        private float currentTimer = 0;
         public JumpState(PlayerStateMachine stateMachine, ref float jumpScale, int maximumCount, AnimationCurve animationCurve) : base(stateMachine)
         {
             //_jumpScale = jumpScale;
@@ -47,12 +48,12 @@ namespace LGProject.PlayerState
         public override void Exit()
         {
             base.Exit();
+            currentTimer = 0;
         }
 
         public override void LogicUpdate()
         {
             base.LogicUpdate();
-
             // 점프 후 이동과 추가 점프를 체크해야함.
             if (StateMachine.JumpInCount < 2 && StateMachine.jumpAction.triggered)
             {
@@ -60,24 +61,29 @@ namespace LGProject.PlayerState
                 StateMachine.ChangeState(StateMachine.jumpState);
             }
 
-            // 가드 게이지가 1이상일 경우 발동
-            if (StateMachine.guardAction.triggered && StateMachine.GuardGage > 0 && !StateMachine.IsJumpGuard)
+            currentTimer += Time.deltaTime;
+            if(currentTimer > dontInputKeyTimer)
             {
-                //stateMachine.GuardEffect.SetActive(true);
-                StateMachine.IsJumpGuard = true;
-                StateMachine.ChangeState(StateMachine.guardState);
-                return;
-            }
+                // 가드 게이지가 1이상일 경우 발동
+                if (StateMachine.guardAction.triggered && StateMachine.GuardGage > 0 && !StateMachine.IsJumpGuard)
+                {
+                    //stateMachine.GuardEffect.SetActive(true);
+                    StateMachine.IsJumpGuard = true;
+                    StateMachine.ChangeState(StateMachine.guardState);
+                    return;
+                }
 
-            if(StateMachine.attackAction.triggered )
-            {
-                StateMachine.ChangeState(StateMachine.jumpAttackState);
+                if (StateMachine.attackAction.triggered)
+                {
+                    StateMachine.ChangeState(StateMachine.jumpAttackState);
+                }
             }
-            if(StateMachine.IsGrounded)
+            if (StateMachine.IsGrounded)
             {
                 StateMachine.ChangeState(StateMachine.landingState);
             }
             Movement(3f);
+
             //if (StateMachine.)
         }
 

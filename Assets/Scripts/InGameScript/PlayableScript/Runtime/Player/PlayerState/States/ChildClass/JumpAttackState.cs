@@ -20,6 +20,9 @@ namespace LGProject.PlayerState
             base.Enter();
             // Velocity는 초기화시키지 않도록 하자.
             //Debug.Log($"Enter = {StateMachine.JumpInCount}");
+            StateMachine.animator.ResetTrigger("Jump1");
+            StateMachine.animator.ResetTrigger("Jump2");
+            StateMachine.playable.effectManager.Play(EffectManager.EFFECT.JumpAttack, 0.1f).Forget();
             StateMachine.animator.SetTrigger(JumpAttack);
         }
 
@@ -30,6 +33,7 @@ namespace LGProject.PlayerState
             //Debug.Log($"Exit = {StateMachine.JumpInCount}");
             StateMachine.animator.SetTrigger(Landing);
 
+            StateMachine.playable.effectManager.Stop(EffectManager.EFFECT.JumpAttack);
 
         }
 

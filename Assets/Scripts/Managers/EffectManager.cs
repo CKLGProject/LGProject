@@ -26,6 +26,12 @@ public sealed class EffectManagerEditor : Editor
     private SerializedProperty ThirdAttackEffect;
     private SerializedProperty ThirdAttackOffset;
 
+    private SerializedProperty DashAttackEffect;
+    private SerializedProperty DashAttackOffset;
+
+    private SerializedProperty JumpAttackEffect;
+    private SerializedProperty JumpAttackOffset;
+
     private SerializedProperty GuardEffect;
     private SerializedProperty GuardOffset;
 
@@ -129,6 +135,24 @@ public sealed class EffectManagerEditor : Editor
         if (ThirdAttackOffset == null)
         {
             ThirdAttackOffset = serializedObject.FindProperty("_AttackOffset3");
+        }
+
+        if(DashAttackEffect == null)
+        {
+            DashAttackEffect = serializedObject.FindProperty("_DashAttackEffect");
+        }
+        if(DashAttackOffset == null)
+        {
+            DashAttackOffset = serializedObject.FindProperty("_DashAttackOffset");
+        }
+
+        if(JumpAttackEffect == null)
+        {
+            JumpAttackEffect = serializedObject.FindProperty("_JumpAttackEffect");
+        }
+        if(JumpAttackOffset == null)
+        {
+            JumpAttackOffset = serializedObject.FindProperty("_JumpAttackOffset");
         }
         #endregion
 
@@ -335,6 +359,52 @@ public sealed class EffectManagerEditor : Editor
             if (changeScope.changed)
             {
                 ThirdAttackOffset.vector3Value = value;
+            }
+        }
+
+        EditorGUILayout.Space(10f);
+
+
+        using (var changeScope = new EditorGUI.ChangeCheckScope())
+        {
+            GameObject value = (GameObject)EditorGUILayout.ObjectField("Dash Attack Effect Prefab", DashAttackEffect.objectReferenceValue, typeof(GameObject), true);
+            if (changeScope.changed)
+            {
+                DashAttackEffect.objectReferenceValue = value;
+            }
+        }
+
+        EditorGUILayout.Space(10f);
+
+        using (var changeScope = new EditorGUI.ChangeCheckScope())
+        {
+            Vector3 value = EditorGUILayout.Vector3Field("Dash Attack Effect Offset", DashAttackOffset.vector3Value);
+            if (changeScope.changed)
+            {
+                DashAttackOffset.vector3Value = value;
+            }
+        }
+
+        EditorGUILayout.Space(10f);
+
+
+        using (var changeScope = new EditorGUI.ChangeCheckScope())
+        {
+            GameObject value = (GameObject)EditorGUILayout.ObjectField("Jump Attack Effect Prefab", JumpAttackEffect.objectReferenceValue, typeof(GameObject), true);
+            if (changeScope.changed)
+            {
+                JumpAttackEffect.objectReferenceValue = value;
+            }
+        }
+
+        EditorGUILayout.Space(10f);
+
+        using (var changeScope = new EditorGUI.ChangeCheckScope())
+        {
+            Vector3 value = EditorGUILayout.Vector3Field("Jump Attack Effect Offset", JumpAttackOffset.vector3Value);
+            if (changeScope.changed)
+            {
+                JumpAttackOffset.vector3Value = value;
             }
         }
 
@@ -615,6 +685,19 @@ public class EffectManager : MonoBehaviour
     public Vector3 _AttackOffset3;
 
     [HideInInspector]
+    public GameObject _DashAttackEffect;
+
+    [HideInInspector]
+    public Vector3 _DashAttackOffset;
+
+    [HideInInspector]
+    public GameObject _JumpAttackEffect;
+
+    [HideInInspector]
+    public Vector3 _JumpAttackOffset;
+
+
+    [HideInInspector]
     public GameObject _GuardEffect;
 
     [HideInInspector]
@@ -681,20 +764,22 @@ public class EffectManager : MonoBehaviour
     public enum EFFECT
     {
         Attack1 = 0,
-        Attack2 = 1,
-        Attack3 = 2,
-        Guard = 3,
-        Hit = 4,
-        Airborne = 5,
-        Knockback = 6,
-        Run = 7,
-        Landing = 8,
-        Ultimate = 9,
-        UltimateHit = 10,
-        UltimateDash = 11,
-        UltimateAirborn = 12,
-        UltimatePreCenter = 13,
-        UltimatePreRHand = 14,
+        Attack2,
+        Attack3 ,
+        DashAttack,
+        JumpAttack,
+        Guard,
+        Hit,
+        Airborne ,
+        Knockback ,
+        Run ,
+        Landing ,
+        Ultimate,
+        UltimateHit ,
+        UltimateDash ,
+        UltimateAirborn ,
+        UltimatePreCenter ,
+        UltimatePreRHand ,
     }
 
 
@@ -709,6 +794,7 @@ public class EffectManager : MonoBehaviour
         GameObject tempEffect = null;
         Vector3 posOffset = Vector3.zero;
         Vector3 rotOffset = Vector3.zero;
+        #region AttackEffect
         if (_AttackEffect1 != null)
         {
             rotOffset = new Vector3(0, 180, 0);
@@ -738,6 +824,30 @@ public class EffectManager : MonoBehaviour
             _EffectContainer.Add(EFFECT.Attack3, tempEffect.GetComponent<ParticleSystem>());
             tempEffect.SetActive(false);
         }
+
+        if (_JumpAttackEffect != null)
+        {
+            rotOffset = new Vector3(0, 180, 0);
+            posOffset = _JumpAttackOffset;
+            tempEffect = Instantiate(_JumpAttackEffect, transform.position + posOffset, Quaternion.Euler(rotOffset));
+            tempEffect.transform.parent = transform;
+            _EffectContainer.Add(EFFECT.JumpAttack, tempEffect.GetComponent<ParticleSystem>());
+            tempEffect.SetActive(false);
+        }
+
+        if (_DashAttackEffect != null)
+        {
+            rotOffset = new Vector3(0, 180, 0);
+            posOffset = _DashAttackOffset;
+            tempEffect = Instantiate(_DashAttackEffect, transform.position + posOffset, Quaternion.Euler(rotOffset));
+            tempEffect.transform.parent = transform;
+            _EffectContainer.Add(EFFECT.DashAttack, tempEffect.GetComponent<ParticleSystem>());
+            tempEffect.SetActive(false);
+        }
+        #endregion 
+
+        #region GuardEffect
+
         if (_GuardEffect != null)
         {
             tempEffect = Instantiate(_GuardEffect, transform.position, Quaternion.identity);
@@ -746,13 +856,7 @@ public class EffectManager : MonoBehaviour
             tempEffect.SetActive(false);
         }
 
-        if (_DamageEffect != null)
-        {
-            tempEffect = Instantiate(_DamageEffect, transform.position, Quaternion.identity);
-            tempEffect.transform.parent = transform;
-            _EffectContainer.Add(EFFECT.Hit, tempEffect.GetComponent<ParticleSystem>());
-            tempEffect.SetActive(false);
-        }
+        #endregion
 
         if (_RunEffect != null)
         {
@@ -761,6 +865,15 @@ public class EffectManager : MonoBehaviour
             _EffectContainer.Add(EFFECT.Run, tempEffect.GetComponent<ParticleSystem>());
             tempEffect.GetComponent<ParticleSystem>().Play();
             //tempEffect.SetActive(false);
+        }
+        #region Damaged
+
+        if (_DamageEffect != null)
+        {
+            tempEffect = Instantiate(_DamageEffect, transform.position, Quaternion.identity);
+            tempEffect.transform.parent = transform;
+            _EffectContainer.Add(EFFECT.Hit, tempEffect.GetComponent<ParticleSystem>());
+            tempEffect.SetActive(false);
         }
 
         if (_AirborneEffect != null)
@@ -778,6 +891,9 @@ public class EffectManager : MonoBehaviour
             _EffectContainer.Add(EFFECT.Knockback, tempEffect.GetComponent<ParticleSystem>());
             tempEffect.SetActive(false);
         }
+        #endregion
+
+        #region LandingEffect
 
         if (_LandingEffect != null)
         {
@@ -786,7 +902,9 @@ public class EffectManager : MonoBehaviour
             _EffectContainer.Add(EFFECT.Landing, tempEffect.GetComponent<ParticleSystem>());
             tempEffect.SetActive(false);
         }
+        #endregion
 
+        #region UltimateEffect
         if (_UltimateEffect != null)
         {
             tempEffect = Instantiate(_UltimateEffect, transform.position, Quaternion.identity);
@@ -831,6 +949,7 @@ public class EffectManager : MonoBehaviour
             _EffectContainer.Add(EFFECT.UltimatePreRHand, _UltimatePre_RHand_FX.GetComponent<ParticleSystem>());
             _UltimatePre_RHand_FX.SetActive(false);
         }
+        #endregion
     }
 
     private void Update()
