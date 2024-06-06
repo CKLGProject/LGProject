@@ -38,6 +38,7 @@ namespace LGProject
         {
             IsStart = true;
             Timer = 180;
+            FileManager.Instance.LoadData();
         }
 
         /// <summary>

@@ -17,6 +17,7 @@ namespace LGProject.PlayerState
         public override void Enter()
         {
             base.Enter();
+            Debug.Log("LandingState");
             StateMachine.StandingVelocity();
             StateMachine.animator.SetTrigger(Landing);
             _currentTimer = 0;

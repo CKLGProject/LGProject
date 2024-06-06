@@ -160,6 +160,32 @@ namespace LGProject.PlayerState //
             return psm;
         }
 
+        public void AnimSpeed(Data.CharacterType characterType, float speed)
+        {
+            switch (characterType)
+            {
+                case Data.CharacterType.None:
+                    break;
+                case Data.CharacterType.Hit:
+                    animator.speed = speed;
+                    break;
+                case Data.CharacterType.Frost:
+                    animator.speed = speed;
+                    break;
+                case Data.CharacterType.Cain:
+                    animator.speed = speed;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public async UniTaskVoid ResetAnimSpeed(float time = 0f)
+        {
+            await UniTask.Delay(TimeSpan.FromSeconds(time));
+            animator.speed = 1f;
+        }
+
         // 캐릭터 별로 State맞추기
         public void SetUltimateState(Data.CharacterType charcterType)
         {
@@ -261,7 +287,7 @@ namespace LGProject.PlayerState //
             UpdateData(damageType);
         }
 
-        private void UpdateData(DATA_TYPE damageType)
+        public void UpdateData(DATA_TYPE damageType)
         {
             try
             {

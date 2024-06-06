@@ -128,7 +128,7 @@ namespace BehaviourTree
                     temp.
                     Item1.GetComponent<Playable>().
                     GetStateMachine.
-                    HitDamaged(v, 0, _stateMachine, LGProject.DATA_TYPE.DashAttackHit);
+                    HitDamaged(v, 0, _stateMachine, LGProject.DATA_TYPE.DashAttack);
 
                     //temp.Item1.GetComponent<Playable>().GetStateMachine.hitPlayer = AIAgent.Instance.transform;
 
@@ -158,6 +158,7 @@ namespace BehaviourTree
             //else
                 _stateMachine.animator.SetTrigger("DashAttack");
             _stateMachine.animator.SetFloat("Run", 0);
+            //_stateMachine.UpdateData(LGProject.DATA_TYPE.DashAttack);
         }
 
         private void ExitExceptionHandling()
