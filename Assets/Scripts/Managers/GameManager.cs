@@ -63,6 +63,28 @@ public class GameManager : MonoBehaviour
 
         return ECharacterType.None;
     }
+
+    /// <summary>
+    /// 현재 캐릭터 상태를 변경합니다.
+    /// </summary>
+    /// <param name="characterType">캐릭터 타입</param>
+    /// <exception cref="ArgumentOutOfRangeException"></exception>
+    public void SetCurrentCharacter(ActorType actorType, ECharacterType characterType)
+    {
+        switch (actorType)
+        {
+            case ActorType.User:
+                PlayerPrefs.SetInt("Character", (int)characterType);
+                
+                // 캐릭터 설정
+                _userData.CharacterType = characterType;
+                break;
+            case ActorType.AI:
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(actorType), actorType, null);
+        }
+    }
     
     /// <summary>
     /// 해당 액터의 현재 정령을 반환합니다.
@@ -117,7 +139,7 @@ public class GameManager : MonoBehaviour
 
         // 기본으로 히트 캐릭터 수록
         string hasCharacterMapJson = PlayerPrefs.GetString("HasCharacterMap", "{}");
-        _userData. HasCharacterMap = JsonConvert.DeserializeObject<Dictionary<ECharacterType, bool>>(hasCharacterMapJson);
+        _userData.HasCharacterMap = JsonConvert.DeserializeObject<Dictionary<ECharacterType, bool>>(hasCharacterMapJson);
 
         if (_userData.HasCharacterMap.Count == 0) 
             _userData.HasCharacterMap.Add(ECharacterType.Hit, true);

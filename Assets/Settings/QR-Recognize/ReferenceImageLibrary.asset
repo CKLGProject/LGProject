@@ -21,9 +21,49 @@ MonoBehaviour:
       m_GuidLow: 4687317572604012629
       m_GuidHigh: 2696290125327320507
     m_SerializedTextureGuid:
-      m_GuidLow: 3806265024192527671
-      m_GuidHigh: 11416804611985999209
+      m_GuidLow: 9521036844305960111
+      m_GuidHigh: 2235902601108230377
+    m_Size: {x: 0.1, y: 0.1}
+    m_SpecifySize: 1
+    m_Name: Air Conditioner
+    m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 5615983273244241528
+      m_GuidHigh: 16934088899384933762
+    m_SerializedTextureGuid:
+      m_GuidLow: 12978835972217320652
+      m_GuidHigh: 4561801172856603371
+    m_Size: {x: 0.1, y: 0.1}
+    m_SpecifySize: 1
+    m_Name: Cinebeam Cube
+    m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 5377954022220474167
+      m_GuidHigh: 9675602635083578539
+    m_SerializedTextureGuid:
+      m_GuidLow: 16442979535201111702
+      m_GuidHigh: 15461835055710467179
     m_Size: {x: 0.1, y: 0.1}
     m_SpecifySize: 1
     m_Name: Oven
+    m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 4794916417440446481
+      m_GuidHigh: 12514886932517583278
+    m_SerializedTextureGuid:
+      m_GuidLow: 293350455293301044
+      m_GuidHigh: 17066405268951589323
+    m_Size: {x: 0.1, y: 0.1}
+    m_SpecifySize: 1
+    m_Name: Refrigerator
+    m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 5610342944072243637
+      m_GuidHigh: 13499740676656669883
+    m_SerializedTextureGuid:
+      m_GuidLow: 1467717965743840742
+      m_GuidHigh: 9616068803542002395
+    m_Size: {x: 0.1, y: 0.09965987}
+    m_SpecifySize: 1
+    m_Name: vacuum
     m_Texture: {fileID: 0}
