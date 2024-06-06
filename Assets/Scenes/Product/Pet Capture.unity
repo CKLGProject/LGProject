@@ -1259,19 +1259,19 @@ MonoBehaviour:
     GuideMessage: "\uB0C9\uC7A5\uACE0\uB97C \uC5F4\uC5B4 \uC8FC\uC138\uC694."
     GestureUI: {fileID: 868444530}
     GestureType: 3
-  - ObjectName: Vacuum
+  - ObjectName: vacuum
     MachineObject: {fileID: 618497643}
     CharacterObject: {fileID: 408449889}
     GuideMessage: "\uCCAD\uC18C\uAE30\uC758 \uC804\uC6D0\uC744 \uCF1C\uC8FC\uC138\uC694."
     GestureUI: {fileID: 1013301368}
     GestureType: 1
-  - ObjectName: Air Conditional
+  - ObjectName: Air Conditioner
     MachineObject: {fileID: 2136168070}
     CharacterObject: {fileID: 408449889}
     GuideMessage: "\uC5D0\uC5B4\uCEE8\uC758 \uC804\uC6D0\uC744 \uCF1C\uC8FC\uC138\uC694."
     GestureUI: {fileID: 1013301368}
     GestureType: 1
-  - ObjectName: Beam Cube
+  - ObjectName: Cinebeam Cube
     MachineObject: {fileID: 535801158}
     CharacterObject: {fileID: 1214068827}
     GuideMessage: "\uC2DC\uB124\uBE54 \uD050\uBE0C\uC758 \uC804\uC6D0\uC744 \uCF1C\uC8FC\uC138\uC694."
