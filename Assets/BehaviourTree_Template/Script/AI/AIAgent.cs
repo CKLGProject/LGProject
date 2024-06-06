@@ -56,15 +56,13 @@ namespace BehaviourTree
 
         private void Update()
         {
+            // 바라보는 방향 -> 일단 무조건 플레이어를 바라보게 설정
             // 일단 여기에 넣어보자
             PlayableGravity();
             GetStateMachine.Update();
-            //PlatformCheck();
             NewPlatformCheck();
-            //DeadLineCheck();
             DeadSpaceCheck();
             CameraCheck();
-            // 바라보는 방향 -> 일단 무조건 플레이어를 바라보게 설정
         }
 
         private void OnDrawGizmos()

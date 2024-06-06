@@ -160,11 +160,7 @@ namespace LGProject
                 while (!endOfFile)
                 {
                     DATA structData = new DATA();
-                    //if (count1 == 0)
-                    //{
-                    //    count1++;
-                    //    continue;
-                    //}
+
                     var data_value = data_values[count1].Split(',');
                     if (data_value == null)
                     {
@@ -186,6 +182,7 @@ namespace LGProject
             {
                 Debug.LogWarning("CSV파일이 존재하지 않거나 받아온 데이터가 null 값입니다.");
             }
+
             #endregion
         }
 
