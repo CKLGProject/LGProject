@@ -45,7 +45,7 @@ namespace LGProject.PlayerState
             if (StateMachine.IsDamaged)
                 StateMachine.IsDamaged = false;
 
-            if(!StateMachine.guardAction.IsPressed() )
+            if(!StateMachine.guardAction.IsPressed())
             {
                 StateMachine.ChangeState(StateMachine.idleState);
                 return;

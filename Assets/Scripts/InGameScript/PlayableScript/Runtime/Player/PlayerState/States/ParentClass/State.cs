@@ -34,7 +34,8 @@ namespace LGProject.PlayerState
             }
             if (StateMachine.IsDamaged && !StateMachine.IsGuard)
             {
-                // 공격을 받았을 때, hitState로 변경해 줌.
+                StateMachine.AttackCount = 0;
+                StateMachine.animator.SetInteger("Attack", 0);
                 StateMachine.ChangeState(StateMachine.hitState);
                 return;
             }
