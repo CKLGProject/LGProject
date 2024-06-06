@@ -498,6 +498,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetLogoGroup: {fileID: 81369881}
   FadeInDuration: 1
+  FadeOutDelay: 1
   FadeOutDuration: 1
   OnFadeComplete:
     m_PersistentCalls:
@@ -558,7 +559,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1193089843}
   - component: {fileID: 1193089842}
-  - component: {fileID: 1193089841}
   - component: {fileID: 1193089840}
   m_Layer: 0
   m_Name: Main Camera
@@ -611,14 +611,6 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
---- !u!81 &1193089841
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1193089839}
-  m_Enabled: 1
 --- !u!20 &1193089842
 Camera:
   m_ObjectHideFlags: 0

@@ -10,9 +10,15 @@ namespace NKStudio
         {
             // LeftToolbarGUI는 왼쪽부터 렌더링됩니다.
             ToolbarExtender.LeftToolbarGUI.Add(EnterPlayModeOptionToolbars.OnToolbarGUI);
+            
 #if XRSimulation
             ToolbarExtender.LeftToolbarGUI.Add(XRSimulationToolbars.OnToolbarGUI);    
 #endif
+            
+#if USE_FMOD
+            ToolbarExtender.LeftToolbarGUI.Add(FMODDebugToolbars.OnToolbarGUI);
+#endif
+            
             ToolbarExtender.LeftToolbarGUI.Add(SceneSwitchLeftButton.OnToolbarGUI);
             
             // RightToolbarGUI는 오른쪽부터 렌더링됩니다.
