@@ -78,7 +78,6 @@ namespace LGProject.PlayerState
         {
             if(Physics.Raycast(StateMachine.transform.position + Vector3.up * .5f, StateMachine.playable.directionX ?  Vector3.right : Vector3.left, out hit, 4f))
             {
-                //Debug.Log(hit.transform.name);
                 return true;
             }
             Debug.Log("null");
@@ -115,8 +114,6 @@ namespace LGProject.PlayerState
             KnockbackValue = StateMachine.playable.CalculateVelocity(
                targetStateMachine.transform.position + direction,
                   targetStateMachine.transform.position, 0.5f, 3f);
-
-            //targetStateMachine.playable.effectManager.PlayOneShot(EffectManager.EFFECT.UltimateHit);
 
             targetStateMachine.HitDamaged(KnockbackValue, 0.2f, StateMachine, DATA_TYPE.JumpAttackHit);
 

@@ -26,6 +26,7 @@ namespace LGProject.PlayerState
         private bool _damageInCount;
         private static readonly int Attack = Animator.StringToHash("Attack");
         private static readonly int Idle = Animator.StringToHash("Idle");
+        private static readonly int GuardEnd = Animator.StringToHash("GuardEnd");
 
         public AttackState(PlayerStateMachine stateMachine, ref float firstJudgeAttack, ref float firstAttackDelay,ref float secondJudgeAttack,ref float secondAttackDelay, ref float thirdJudgeAttack, ref float thirdAttackDelay) : base(stateMachine)
         {
@@ -70,6 +71,7 @@ namespace LGProject.PlayerState
             #endregion
 
             #region 애니메이션 출력
+            StateMachine.animator.SetTrigger(GuardEnd);
             StateMachine.animator.SetInteger(Attack, StateMachine.AttackCount);
             #endregion
 

@@ -72,12 +72,25 @@ namespace LGProject
             }
             #endregion
         }
+
+        public void Add(DATA Adder)
+        {
+            NormalAttackCount += Adder.NormalAttackCount;
+            DashAttackCount += Adder.DashAttackCount;
+            NormalAttackHitCount += Adder.NormalAttackHitCount;
+            DashAttackHitCount += Adder.DashAttackHitCount;
+            JumpCount += Adder.JumpCount;
+            ChasingCount += Adder.ChasingCount;
+            NormalMoveCount += Adder.NormalMoveCount; ;
+            GuardCount += Adder.GuardCount;
+        }
     }
 
     public class FileManager : MonoBehaviour
     {
         public static FileManager Instance { get; private set; }
         public Dictionary<int, DATA> AllData = new Dictionary<int, DATA>();
+        public DATA TotalData = new DATA();
 
         public DATA Data;
 
@@ -147,11 +160,11 @@ namespace LGProject
                 while (!endOfFile)
                 {
                     DATA structData = new DATA();
-                    if (count1 == 0)
-                    {
-                        count1++;
-                        continue;
-                    }
+                    //if (count1 == 0)
+                    //{
+                    //    count1++;
+                    //    continue;
+                    //}
                     var data_value = data_values[count1].Split(',');
                     if (data_value == null)
                     {
@@ -164,7 +177,8 @@ namespace LGProject
                         break;
                     }
                     structData.Init(data_value);
-                    AllData.Add(int.Parse(data_value[0]), structData);
+                    AllData.Add(AllData.Count, structData);
+                    TotalData.Add(structData);
                     count1++;
                 }
             }
@@ -181,20 +195,24 @@ namespace LGProject
 
         public void SaveData()
         {
+            AllData.Add(AllData.Count, Data);
 
-            string[] tempData = new string[9];
-            tempData[0] = Data.Round.ToString();
-            tempData[1] = Data.NormalAttackCount.ToString();
-            tempData[2] = Data.DashAttackCount.ToString();
-            tempData[3] = Data.NormalAttackHitCount.ToString();
-            tempData[4] = Data.DashAttackHitCount.ToString();
-            tempData[5] = Data.JumpCount.ToString();
-            tempData[6] = Data.ChasingCount.ToString();
-            tempData[7] = Data.NormalMoveCount.ToString();
-            tempData[8] = Data.GuardCount.ToString();
+            foreach(var InGameData in AllData)
+            {
+                string[] tempData = new string[9];
+                tempData[0] = InGameData.Value.Round.ToString();
+                tempData[1] = InGameData.Value.NormalAttackCount.ToString();
+                tempData[2] = InGameData.Value.DashAttackCount.ToString();
+                tempData[3] = InGameData.Value.NormalAttackHitCount.ToString();
+                tempData[4] = InGameData.Value.DashAttackHitCount.ToString();
+                tempData[5] = InGameData.Value.JumpCount.ToString();
+                tempData[6] = InGameData.Value.ChasingCount.ToString();
+                tempData[7] = InGameData.Value.NormalMoveCount.ToString();
+                tempData[8] = InGameData.Value.GuardCount.ToString();
 
-            data.Add(tempData);
+                data.Add(tempData);
 
+            }
             string[][] output = new string[data.Count][];
 
             for (int i = 0; i < output.Length; i++)
@@ -212,7 +230,7 @@ namespace LGProject
                 sb.AppendLine(string.Join(delimiter, output[i]));
             }
 
-            string filepath = FileManager.GetPath();
+            string filepath = GetPath();
 
             if (!Directory.Exists(filepath))
             {

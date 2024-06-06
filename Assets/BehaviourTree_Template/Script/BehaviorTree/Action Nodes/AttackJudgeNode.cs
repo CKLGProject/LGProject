@@ -19,7 +19,6 @@ namespace BehaviourTree
         protected override void OnStart()
         {
             StartExceptionHandling();
-            //Debug.Log("AttackJudgeNodeStart");
         }
 
         protected override void OnStop()
@@ -108,14 +107,17 @@ namespace BehaviourTree
                 case 1:
                     _stateMachine.playable.effectManager.Play(EffectManager.EFFECT.Attack1).Forget();
                     moveValue = _stateMachine.playable.FirstAttackMovingValue;
+                    //_stateMachine.UpdateData(LGProject.DATA_TYPE.NormalAttack);
                     break;
                 case 2:
                     _stateMachine.playable.effectManager.Play(EffectManager.EFFECT.Attack2).Forget();
                     moveValue = _stateMachine.playable.SecondAttackMovingValue;
+                    //_stateMachine.UpdateData(LGProject.DATA_TYPE.NormalAttack);
                     break;
                 case 3:
                     moveValue = _stateMachine.playable.ThirdAttackMovingValue;
                     _stateMachine.playable.effectManager.Play(EffectManager.EFFECT.Attack3, 0.25f).Forget();
+                    //_stateMachine.UpdateData(LGProject.DATA_TYPE.NormalAttack);
                     break;
                 default:
                     break;
@@ -165,7 +167,7 @@ namespace BehaviourTree
                 {
                     temp.
                     Item1.GetStateMachine.
-                    HitDamaged(_stateMachine.AttackCount < 3 ? Vector3.zero : v, 0, _stateMachine, LGProject.DATA_TYPE.NormalAttackHit);
+                    HitDamaged(_stateMachine.AttackCount < 3 ? Vector3.zero : v, 0, _stateMachine, LGProject.DATA_TYPE.NormalAttack);
                     temp.Item1.GetStateMachine.hitPlayer = _stateMachine.transform;
 
                     _stateMachine.animator.SetInteger("Attack", 0);
