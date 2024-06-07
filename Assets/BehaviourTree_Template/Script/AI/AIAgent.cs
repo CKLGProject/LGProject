@@ -1,4 +1,5 @@
 using System.Collections;
+using LGProject;
 using UnityEngine;
 using UnityEditor;
 
@@ -23,6 +24,12 @@ namespace BehaviourTree
 
         public Transform player;
         public bool isGround;
+
+
+        public int GuardPercent;
+        public int AttackPercent;
+        public int ChasingPercent;
+        public int NormalMovePercent;
     
 
         #region magicMathods
@@ -39,6 +46,15 @@ namespace BehaviourTree
             StateMachine = LGProject.PlayerState.PlayerStateMachine.CreateStateMachine(this.gameObject);
         }
 
+        public void SetData()
+        {
+            GuardPercent = (((FileManager.Instance.TotalData.DashAttackHitCount + FileManager.Instance.TotalData.NormalAttackHitCount) + (FileManager.Instance.TotalData.NormalAttackCount + FileManager.Instance.TotalData.DashAttackCount)) / (FileManager.Instance.TotalData.DashAttackHitCount + FileManager.Instance.TotalData.NormalAttackHitCount)) * 10;
+            AttackPercent = (((FileManager.Instance.TotalData.NormalAttackCount + FileManager.Instance.TotalData.DashAttackCount) + (FileManager.Instance.TotalData.DashAttackHitCount + FileManager.Instance.TotalData.NormalAttackHitCount)) / (FileManager.Instance.TotalData.NormalAttackCount + FileManager.Instance.TotalData.DashAttackCount)) * 10;
+            // 상대방으로부터 피해를 많이 입으면 추격이 아닌 NormalMove의 빈도 수가 높아짐.
+            ChasingPercent = (FileManager.Instance.TotalData.ChasingCount - FileManager.Instance.TotalData.DashAttackHitCount) < 0 ? 3 : 7;
+            NormalMovePercent = (FileManager.Instance.TotalData.ChasingCount - FileManager.Instance.TotalData.DashAttackHitCount) < 0 ? 7 : 3;
+        }
+
         private void Start()
         {
             InitEffectManager();
@@ -52,6 +68,8 @@ namespace BehaviourTree
                 float time = StateMachine.animator.runtimeAnimatorController.animationClips[i].length;
                 StateMachine.SetAnimPlayTime(name, time);
             }
+            FileManager.Instance.LoadData();
+
         }
 
         private void Update()

@@ -48,7 +48,7 @@ namespace BehaviourTree
             currentNode = GetStartingNode();
             if ( currentNode == null)
             {
-                return State.Success;
+                 return State.Success;
             }
 
 

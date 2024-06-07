@@ -29,6 +29,12 @@ namespace LGProject
                 Instance = this;
             else
                 Destroy(gameObject);
+            //FileManager.Instance.LoadData();
+
+        }
+
+        private void Start()
+        {
         }
 
         /// <summary>
@@ -38,7 +44,6 @@ namespace LGProject
         {
             IsStart = true;
             Timer = 180;
-            FileManager.Instance.LoadData();
         }
 
         /// <summary>
