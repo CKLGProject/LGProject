@@ -100,11 +100,11 @@ namespace LGProject
                 Instance = this;
             else
                 Destroy(gameObject);
+            Data = new DATA();
         }
 
         private void Start()
         {
-            Data = new DATA();
         }
 
         #region getPath
