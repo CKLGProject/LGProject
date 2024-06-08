@@ -24,10 +24,16 @@ public class LobbyView : MonoBehaviour
     [Header("Buttons")] [SerializeField] private GameObject matchButton;
 
     /// <summary>
+    /// 캡처 버튼
+    /// </summary>
+    [SerializeField] private GameObject captureButton;
+    
+    /// <summary>
     /// 랭킹 버튼
     /// </summary>
     [SerializeField] private GameObject rankButton;
 
+    [Space]
     /// <summary>
     /// 우편 버튼
     /// </summary>
@@ -72,6 +78,16 @@ public class LobbyView : MonoBehaviour
         return matchButton.TouchDownAsObservable();
     }
 
+    
+    /// <summary>
+    /// 캡쳐 버튼 옵저버입니다.
+    /// </summary>
+    /// <returns>RankButton Observer</returns>
+    public Observable<Unit> CaptureButtonAsObservable()
+    {
+        return captureButton.TouchDownAsObservable();
+    }
+    
     /// <summary>
     /// 랭킹 버튼 옵저버입니다.
     /// </summary>

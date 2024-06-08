@@ -47,7 +47,11 @@ public class LobbyPresenter : MonoBehaviour
 
         _lobbyView.RankButtonAsObservable()
             .Where(_=> !_lobbyPopupModel.IsActive)
-            .Subscribe(OnClickRankButton);
+            .Subscribe(_ => _lobbyView.ShowErrorMessage());
+        
+        _lobbyView.CaptureButtonAsObservable()
+            .Where(_=> !_lobbyPopupModel.IsActive)
+            .Subscribe(OnClickCaptureButton);
 
         _lobbyView.MailButtonAsObservable()
             .Subscribe(_ => _lobbyView.ShowErrorMessage());
@@ -70,7 +74,7 @@ public class LobbyPresenter : MonoBehaviour
         _lobbyModel.Plug = (uint)PlayerPrefs.GetInt("Plug", 0);
     }
 
-    private void OnClickRankButton(Unit obj)
+    private void OnClickCaptureButton(Unit obj)
     {
        _lobbyView.OnClickCapture?.Invoke();
     }
