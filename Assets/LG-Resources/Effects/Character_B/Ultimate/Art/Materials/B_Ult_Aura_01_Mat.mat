@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Ultimate_Aura_Mat
+  m_Name: B_Ult_Aura_01_Mat
   m_Shader: {fileID: -6465566751694194690, guid: 5332a4fd30c146741a7a7e7fb5d72080,
     type: 3}
   m_Parent: {fileID: 0}
@@ -115,6 +115,7 @@ Material:
     - _AlphaToMask: 0
     - _Alpha_Power: 3.5
     - _Alpha_Reverse: 0
+    - _Alpha_Tex_Power: 5
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _BumpScale: 1
@@ -125,6 +126,7 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
+    - _Dissolve_Mask_G_Power: 1
     - _Dissolve_Stength: 0.5
     - _DstBlend: 10
     - _DstBlendAlpha: 0
@@ -148,6 +150,7 @@ Material:
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _Saturation: 1
+    - _SmoothStep_Edge: 0
     - _SmoothStep_Range: 1
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
