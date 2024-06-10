@@ -31,7 +31,8 @@ namespace LGProject.PlayerState
             StateMachine.IsUseUltimate = true;
             StateMachine.animator.updateMode = AnimatorUpdateMode.UnscaledTime;
             StateMachine.playable.effectManager.Play(EffectManager.EFFECT.Ultimate).Forget();
-
+            StateMachine.playable.effectManager.Play(EffectManager.EFFECT.UltimatePreCenter).Forget();
+            StateMachine.playable.effectManager.Play(EffectManager.EFFECT.UltimatePreRHand).Forget();
             _isMove = false;
             WaitStart().Forget();
             Time.timeScale = 0.1f;
@@ -61,10 +62,16 @@ namespace LGProject.PlayerState
 
         protected async UniTaskVoid WaitStart()
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(0.175f));
+            await UniTask.Delay(TimeSpan.FromSeconds(0.1f));
+            StateMachine.playable.SwitchingWeapon(true);
+            //await UniTask.Delay(TimeSpan.FromSeconds(0.075f));
             _isMove = true;
             Time.timeScale = 1f;
-            //StateMachine.playable.effectManager.Stop(EffectManager.EFFECT.Ultimate);
+            StateMachine.playable.effectManager.Play(EffectManager.EFFECT.UltimateHit).Forget();
+            StateMachine.playable.effectManager.Play(EffectManager.EFFECT.UltimateDash).Forget();
+            StateMachine.playable.effectManager.Stop(EffectManager.EFFECT.Ultimate);
+            StateMachine.playable.effectManager.Stop(EffectManager.EFFECT.UltimatePreRHand);
+            StateMachine.playable.effectManager.Stop(EffectManager.EFFECT.UltimatePreCenter);
             //StateMachine.animator.updateMode = AnimatorUpdateMode.Normal;
             //StateMachine.playable.effectManager.Play(EffectManager.EFFECT.UltimateDash).Forget();
             //StateMachine.playable.effectManager.Stop(EffectManager.EFFECT.UltimatePreCenter);
