@@ -115,6 +115,7 @@ Material:
     - _AlphaToMask: 0
     - _Alpha_Power: 3.5
     - _Alpha_Reverse: 0
+    - _Alpha_Tex_Power: 4
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _BumpScale: 1
@@ -125,6 +126,7 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
+    - _Dissolve_Mask_G_Power: 1
     - _Dissolve_Stength: 0.5
     - _DstBlend: 10
     - _DstBlendAlpha: 0
@@ -148,6 +150,7 @@ Material:
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _Saturation: 1
+    - _SmoothStep_Edge: 0
     - _SmoothStep_Range: 1
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
@@ -168,7 +171,6 @@ Material:
     - _Panner_Speed: {r: 0.5, g: -1, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
-  m_AllowLocking: 1
 --- !u!114 &1716681716542825482
 MonoBehaviour:
   m_ObjectHideFlags: 11
