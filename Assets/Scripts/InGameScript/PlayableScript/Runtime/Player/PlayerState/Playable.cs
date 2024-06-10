@@ -72,10 +72,16 @@ namespace LGProject.PlayerState
 
         [HideInInspector] public int LifePoint = 3;
 
+        [Space(10)]
+        public Vector3 NoramlAttackKNockbackDirection = new Vector3();
+        public Vector3 DashAttackKNockbackDirection = new Vector3();
+
+
         public bool movingAttack = true;
 
         public Vector3 AliveOffset;
         public float respawnTime;
+
 
         public float DamageGage { get; private set; }
         public void SetDamageGage(float value) => DamageGage = value;

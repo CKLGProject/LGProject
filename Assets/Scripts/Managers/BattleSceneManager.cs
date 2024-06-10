@@ -54,7 +54,7 @@ namespace LGProject
             IsStart = false;
             IsEnd = true;
             // 여기서 호출하고 싶은데..
-            FileManager.Instance.SaveData();
+            //FileManager.Instance.SaveData();
             
         }
     }

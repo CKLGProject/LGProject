@@ -497,11 +497,11 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 5ce81d5475426ed47a283942f544e4a1
-  position: {x: 611, y: 1415}
+  position: {x: 601, y: 1415}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
-  description: "\uCD08\uAE30 \uAC12 4"
+  description: "\uB300\uC26C \uC5B4\uD0DD \uC2DC\uD038\uC2A4"
   child: {fileID: -892536741043771492}
   weight: 20
   aiWeight: 3
@@ -817,9 +817,9 @@ MonoBehaviour:
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
-  description: "\uCD08\uAE30 \uAC12 : 1"
+  description: "\uAC00\uB4DC \uC2DC\uD038\uC2A4"
   child: {fileID: -7742227205409017021}
-  weight: 10
+  weight: 5
   aiWeight: 1
 --- !u!114 &2612944177186896387
 MonoBehaviour:
@@ -858,7 +858,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 00ae37c11edfbdb448b7fc1d721813e9
-  position: {x: -394.60687, y: 898.99994}
+  position: {x: -395, y: 899}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}

@@ -261,7 +261,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &16371188
 RectTransform:
   m_ObjectHideFlags: 0
@@ -704,8 +704,8 @@ MonoBehaviour:
   profileSync: 1
   useCustomBounds: 0
   bounds:
-    m_Center: {x: -8.549971, y: 11.686108, z: 0.2617874}
-    m_Extent: {x: 5.2376456, y: 10.641834, z: 5.682477}
+    m_Center: {x: -8.549285, y: 11.683589, z: 0.26100588}
+    m_Extent: {x: 3.88919, y: 10.066277, z: 4.291668}
   boundsInLocalSpace: 0
   profile: {fileID: 11400000, guid: 65cecfa64e9f4414796874d62562f6e5, type: 2}
   customRange: 20.583605
@@ -1217,7 +1217,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &179457852
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2471,8 +2471,8 @@ MonoBehaviour:
   profileSync: 1
   useCustomBounds: 0
   bounds:
-    m_Center: {x: 5.934, y: 12.452828, z: -7.728547}
-    m_Extent: {x: 2.234186, y: 10.478035, z: 3.3550313}
+    m_Center: {x: 5.934, y: 12.45012, z: -7.7288475}
+    m_Extent: {x: 1.0968981, y: 10.3499975, z: 2.2243695}
   boundsInLocalSpace: 0
   profile: {fileID: 11400000, guid: 65cecfa64e9f4414796874d62562f6e5, type: 2}
   customRange: 20.583605
@@ -3654,7 +3654,7 @@ PrefabInstance:
     - target: {fileID: 6142601296869339651, guid: 2733f80f426950d4598e4e6317bd7935,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8219133890818253592, guid: 2733f80f426950d4598e4e6317bd7935,
         type: 3}
@@ -3715,7 +3715,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 2040097837}
+      objectReference: {fileID: 1896813931}
     - target: {fileID: 8866563565161335285, guid: 2733f80f426950d4598e4e6317bd7935,
         type: 3}
       propertyPath: battleModel
@@ -6146,8 +6146,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 996713019}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.10251728, y: 0.00000000427893, z: -4.409877e-10, w: 0.99473125}
-  m_LocalPosition: {x: -2, y: 4, z: -21.5}
+  m_LocalRotation: {x: 0.10251728, y: -0.0000000042789328, z: 4.4098794e-10, w: 0.99473125}
+  m_LocalPosition: {x: -0.25, y: 4, z: -21.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8317,8 +8317,8 @@ MonoBehaviour:
   profileSync: 1
   useCustomBounds: 0
   bounds:
-    m_Center: {x: -3.2305365, y: 11.410816, z: 0.43957615}
-    m_Extent: {x: 4.169597, y: 10.662968, z: 6.282717}
+    m_Center: {x: -3.230936, y: 11.408324, z: 0.44060636}
+    m_Extent: {x: 2.8150854, y: 10.023082, z: 5.063916}
   boundsInLocalSpace: 0
   profile: {fileID: 11400000, guid: 65cecfa64e9f4414796874d62562f6e5, type: 2}
   customRange: 20.583605
@@ -8861,7 +8861,7 @@ Transform:
   m_GameObject: {fileID: 1316624601}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2, y: 1, z: -9.5}
+  m_LocalPosition: {x: -0.25, y: 1, z: -9.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9066,8 +9066,8 @@ MonoBehaviour:
   profileSync: 1
   useCustomBounds: 0
   bounds:
-    m_Center: {x: 5.92889, y: 11.374675, z: 1.9304929}
-    m_Extent: {x: 3.0585237, y: 10.545781, z: 7.3434973}
+    m_Center: {x: 5.9288797, y: 11.372243, z: 1.9292622}
+    m_Extent: {x: 1.5214021, y: 9.851002, z: 5.969895}
   boundsInLocalSpace: 0
   profile: {fileID: 11400000, guid: 65cecfa64e9f4414796874d62562f6e5, type: 2}
   customRange: 20.583605
@@ -9303,8 +9303,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1353022552}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.10251728, y: 0.00000000427893, z: -4.409877e-10, w: 0.99473125}
-  m_LocalPosition: {x: -2, y: 4, z: -21.5}
+  m_LocalRotation: {x: 0.10251728, y: -0.0000000042789328, z: 4.4098794e-10, w: 0.99473125}
+  m_LocalPosition: {x: -0.25, y: 4, z: -21.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9747,6 +9747,8 @@ MonoBehaviour:
   DownWaitDelay: 0
   WakeUpDelay: 0
   LifePoint: 3
+  NoramlAttackKNockbackDirection: {x: 0, y: 0, z: 0}
+  DashAttackKNockbackDirection: {x: 0, y: 0, z: 0}
   movingAttack: 1
   AliveOffset: {x: 0, y: 0, z: 0}
   respawnTime: 0
@@ -12381,8 +12383,8 @@ MonoBehaviour:
   profileSync: 1
   useCustomBounds: 0
   bounds:
-    m_Center: {x: 4.8314795, y: 11.988585, z: 1.6089063}
-    m_Extent: {x: 2.6365938, y: 10.561075, z: 5.1841702}
+    m_Center: {x: 4.8315163, y: 11.985961, z: 1.6096399}
+    m_Extent: {x: 1.3649403, y: 10.228853, z: 3.9550867}
   boundsInLocalSpace: 0
   profile: {fileID: 11400000, guid: 65cecfa64e9f4414796874d62562f6e5, type: 2}
   customRange: 20.589056
@@ -14567,6 +14569,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6559117602054936325, guid: e748e159dd59aae4188ea3f4a8ac1c84,
+        type: 3}
+      propertyPath: DashAttackKNockbackDirection.x
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6559117602054936325, guid: e748e159dd59aae4188ea3f4a8ac1c84,
+        type: 3}
+      propertyPath: DashAttackKNockbackDirection.y
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6559117602054936325, guid: e748e159dd59aae4188ea3f4a8ac1c84,
+        type: 3}
+      propertyPath: NoramlAttackKNockbackDirection.x
+      value: -0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 6559117602054936325, guid: e748e159dd59aae4188ea3f4a8ac1c84,
+        type: 3}
+      propertyPath: NoramlAttackKNockbackDirection.y
+      value: 0.45
+      objectReference: {fileID: 0}
     - target: {fileID: 6969282849394247417, guid: e748e159dd59aae4188ea3f4a8ac1c84,
         type: 3}
       propertyPath: m_Name
@@ -14575,7 +14597,7 @@ PrefabInstance:
     - target: {fileID: 6969282849394247417, guid: e748e159dd59aae4188ea3f4a8ac1c84,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14712,8 +14734,8 @@ MonoBehaviour:
   profileSync: 1
   useCustomBounds: 0
   bounds:
-    m_Center: {x: -2.8957922, y: 12.109256, z: -9.652092}
-    m_Extent: {x: 5.752884, y: 10.674998, z: 3.870028}
+    m_Center: {x: -2.8965218, y: 12.106638, z: -9.651886}
+    m_Extent: {x: 4.22622, y: 10.271898, z: 2.2969236}
   boundsInLocalSpace: 0
   profile: {fileID: 11400000, guid: 65cecfa64e9f4414796874d62562f6e5, type: 2}
   customRange: 20.583605
@@ -15997,7 +16019,7 @@ PrefabInstance:
     - target: {fileID: 4349796721831851310, guid: e36772ac1b2dcda4da45ce3d28228fd0,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8577382153869532568, guid: e36772ac1b2dcda4da45ce3d28228fd0,
         type: 3}
