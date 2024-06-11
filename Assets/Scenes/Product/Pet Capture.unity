@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18018535, g: 0.22559482, b: 0.30677685, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -397,7 +397,7 @@ PrefabInstance:
     - target: {fileID: 31571618735311738, guid: 4b0b717ae88aed240a74d985a457eafd,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 831782714200187609, guid: 4b0b717ae88aed240a74d985a457eafd,
         type: 3}
@@ -1108,6 +1108,7 @@ MonoBehaviour:
   guideMessageGroup: {fileID: 88436892}
   guideMessageText: {fileID: 1329741521}
   informationMessageGroup: {fileID: 103857892}
+  informationMessageFadeTime: 1
   resetButton: {fileID: 1834318052}
   fxDirector: {fileID: 2143194893}
   lightController: {fileID: 1201955953}
@@ -1127,19 +1128,19 @@ MonoBehaviour:
   - ObjectName: vacuum
     MachineObject: {fileID: 618497643}
     CharacterObject: {fileID: 408449889}
-    GuideMessage: "\uCCAD\uC18C\uAE30\uC758 \uC804\uC6D0\uC744 \uCF1C\uC8FC\uC138\uC694."
+    GuideMessage: "\uCCAD\uC18C\uAE30\uB97C \uB20C\uB7EC \uC8FC\uC138\uC694."
     GestureUI: {fileID: 1013301368}
     GestureType: 1
   - ObjectName: Air Conditioner
     MachineObject: {fileID: 2136168070}
     CharacterObject: {fileID: 408449889}
-    GuideMessage: "\uC5D0\uC5B4\uCEE8\uC758 \uC804\uC6D0\uC744 \uCF1C\uC8FC\uC138\uC694."
+    GuideMessage: "\uC5D0\uC5B4\uCEE8\uC744 \uB20C\uB7EC \uC8FC\uC138\uC694."
     GestureUI: {fileID: 1013301368}
     GestureType: 1
   - ObjectName: Cinebeam Cube
     MachineObject: {fileID: 535801158}
     CharacterObject: {fileID: 1214068827}
-    GuideMessage: "\uC2DC\uB124\uBE54 \uD050\uBE0C\uC758 \uC804\uC6D0\uC744 \uCF1C\uC8FC\uC138\uC694."
+    GuideMessage: "\uC2DC\uB124\uBE54 \uD050\uBE0C\uB97C \uB20C\uB7EC\uC8FC\uC138\uC694."
     GestureUI: {fileID: 1013301368}
     GestureType: 1
   objectContent: {fileID: 2041036352}
@@ -4235,8 +4236,8 @@ RectTransform:
   - {fileID: 1141293788}
   - {fileID: 327239493}
   - {fileID: 1541774301}
-  - {fileID: 88436891}
   - {fileID: 103857891}
+  - {fileID: 88436891}
   m_Father: {fileID: 1835307966}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}

@@ -57,6 +57,10 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
+    - _N_F_DCS: 0
+    - _N_F_HDLS: 0
+    - _N_F_HPSS: 0
+    - _N_F_NLASOBF: 0
     - _OutlineWidth: 0.5
     m_Colors: []
   m_BuildTextureStacks: []

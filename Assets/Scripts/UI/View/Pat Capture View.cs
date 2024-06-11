@@ -30,6 +30,7 @@ public class PatCaptureView : MonoBehaviour
     [SerializeField] private CanvasGroup guideMessageGroup;
     [SerializeField] private TextMeshProUGUI guideMessageText;
     [SerializeField] private CanvasGroup informationMessageGroup;
+    [SerializeField] private float informationMessageFadeTime = 3f;
     [SerializeField] private Button resetButton;
 
     [Header("Timeline")] [SerializeField] private PlayableDirector fxDirector;
@@ -148,7 +149,7 @@ public class PatCaptureView : MonoBehaviour
         sequence.Append(DOTween.To(() => informationMessageGroup.alpha, x => informationMessageGroup.alpha = x, 1, 1f)
             .SetEase(Ease.InSine));
         sequence.Append(DOTween.To(() => informationMessageGroup.alpha, x => informationMessageGroup.alpha = x, 0, 1f)
-            .SetEase(Ease.OutSine).SetDelay(3f));
+            .SetEase(Ease.OutSine).SetDelay(informationMessageFadeTime));
         sequence.Play();
 
         // 리셋 버튼 활성화

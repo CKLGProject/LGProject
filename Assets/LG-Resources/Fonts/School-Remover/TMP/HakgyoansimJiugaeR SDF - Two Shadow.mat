@@ -90,8 +90,8 @@ Material:
     - _StencilOp: 0
     - _StencilReadMask: 255
     - _StencilWriteMask: 255
-    - _TextureHeight: 512
-    - _TextureWidth: 512
+    - _TextureHeight: 1024
+    - _TextureWidth: 1024
     - _Underlay2Dilate: 0.13
     - _Underlay2OffsetX: 0.25
     - _Underlay2OffsetY: -0.08
