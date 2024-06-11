@@ -2,8 +2,8 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneSystem;
+using UnityEngine.Singleton;
 using UnityEngine.UI;
-using USingleton;
 using Utility;
 
 public class LoginView : MonoBehaviour

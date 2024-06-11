@@ -5,6 +5,7 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class LobbyPopupView : MonoBehaviour
@@ -21,19 +22,21 @@ public class LobbyPopupView : MonoBehaviour
     [SerializeField] private GameObject FrostName;
     [SerializeField] private GameObject CaneName;
 
+    [FormerlySerializedAs("attackText")]
     [Header("Text")]
-    [SerializeField] private TextMeshProUGUI attackText;
+    [SerializeField] private TextMeshProUGUI attackPowerText;
     [SerializeField] private TextMeshProUGUI defenseText;
     [SerializeField] private TextMeshProUGUI moveSpeedText;
     [SerializeField] private TextMeshProUGUI attackSpeedText;
     
     [Header("캐릭터 프로필")] [SerializeField] private CharacterProfile[] characterProfiles;
 
-    [Header("캐릭터 프로필 버튼")] [SerializeField]
-    private Button hitProfileButton;
-
+    [Header("캐릭터 프로필 버튼")]
+    [SerializeField] private Button hitProfileButton;
     [SerializeField] private Button frostProfileButton;
-    [SerializeField] private Button caneProfileButton;
+    [SerializeField] private Button kaneProfileButton;
+    [SerializeField] private Button stomeProfileButton;
+    [SerializeField] private Button brightProfileButton;
 
     [Header("버튼")] [SerializeField] private Button characterSelectionButton;
     [SerializeField] private Button exitButton;
@@ -95,12 +98,26 @@ public class LobbyPopupView : MonoBehaviour
         return frostProfileButton.OnClickAsObservable();
     }
 
-    public Observable<Unit> CaneProfileButtonClicked()
+    public Observable<Unit> KaneProfileButtonClicked()
     {
-        Assert.IsNotNull(caneProfileButton, "caneProfileButton != null");
+        Assert.IsNotNull(kaneProfileButton, "kaneProfileButton != null");
 
-        return caneProfileButton.OnClickAsObservable();
+        return kaneProfileButton.OnClickAsObservable();
     }
+    
+    public Observable<Unit> StomeProfileButtonClicked()
+    {
+        Assert.IsNotNull(stomeProfileButton, "stomeProfileButton != null");
+
+        return stomeProfileButton.OnClickAsObservable();
+    }
+    public Observable<Unit> brightProfileButtonClicked()
+    {
+        Assert.IsNotNull(brightProfileButton, "brightProfileButton != null");
+
+        return brightProfileButton.OnClickAsObservable();
+    }
+    
 
     /// <summary>
     /// 캐릭터 선택 버튼의 상호작용을 설정합니다.
@@ -179,7 +196,7 @@ public class LobbyPopupView : MonoBehaviour
     /// <param name="data"></param>
     public void SetCharacterData(CharacterData data)
     {
-        attackText.text = data.AttackSpeed.ToString();
+        attackPowerText.text = data.AttackPower.ToString();
         defenseText.text = data.DefensePower.ToString();
         moveSpeedText.text = data.MoveSpeed.ToString();
         attackSpeedText.text = data.AttackSpeed.ToString();

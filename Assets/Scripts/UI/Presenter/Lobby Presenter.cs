@@ -1,7 +1,7 @@
 using Data;
 using R3;
 using UnityEngine;
-using USingleton;
+using UnityEngine.Singleton;
 
 [RequireComponent(typeof(LobbyView))]
 [RequireComponent(typeof(LobbyModel))]
@@ -20,10 +20,6 @@ public class LobbyPresenter : MonoBehaviour
         
         _lobbyModel = GetComponent<LobbyModel>();
         _lobbyPopupModel = FindAnyObjectByType<LobbyPopupModel>();
-
-        // 임시 값
-        _lobbyModel.Coin = 1958;
-        _lobbyModel.Plug = 3270;
 
         // ECharacterType choiceCharacter = Singleton.Instance<GameManager>().GetCharacter(ActorType.User);
         // _lobbyView.ShowCharacter(choiceCharacter);
@@ -76,6 +72,10 @@ public class LobbyPresenter : MonoBehaviour
         _lobbyModel.Level = PlayerPrefs.GetInt("Level", 0);
         _lobbyModel.Coin = (uint)PlayerPrefs.GetInt("Coin", 0);
         _lobbyModel.Plug = (uint)PlayerPrefs.GetInt("Plug", 0);
+        
+        // 임시 값
+        _lobbyModel.Coin = 1958;
+        _lobbyModel.Plug = 3270;
     }
 
     private void OnClickCaptureButton(Unit obj)

@@ -3,7 +3,6 @@ using LGProject.PlayerState;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using USingleton;
 
 namespace BehaviourTree
 {

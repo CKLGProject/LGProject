@@ -4274,6 +4274,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 644638734}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &644638736 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7703397435568807800, guid: 746de1e3c36656e47aa0121d9bbab822,
+    type: 3}
+  m_PrefabInstance: {fileID: 644638734}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29760b58c6c4e44cba6239ab92490340, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &657302358
 GameObject:
   m_ObjectHideFlags: 0
@@ -6659,6 +6671,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 991353053}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &991353055 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7703397435568807800, guid: 746de1e3c36656e47aa0121d9bbab822,
+    type: 3}
+  m_PrefabInstance: {fileID: 991353053}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29760b58c6c4e44cba6239ab92490340, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &993228476
 GameObject:
   m_ObjectHideFlags: 0
@@ -8056,7 +8080,7 @@ PrefabInstance:
     - target: {fileID: 5679546777228738948, guid: 746de1e3c36656e47aa0121d9bbab822,
         type: 3}
       propertyPath: m_Name
-      value: Cane
+      value: Kane
       objectReference: {fileID: 0}
     - target: {fileID: 5937838484086531846, guid: 746de1e3c36656e47aa0121d9bbab822,
         type: 3}
@@ -12595,7 +12619,7 @@ MonoBehaviour:
   HitName: {fileID: 740635409}
   FrostName: {fileID: 299472302}
   CaneName: {fileID: 1170892850}
-  attackText: {fileID: 1691526610}
+  attackPowerText: {fileID: 1691526610}
   defenseText: {fileID: 95256008}
   moveSpeedText: {fileID: 581708676}
   attackSpeedText: {fileID: 1939075416}
@@ -12605,7 +12629,9 @@ MonoBehaviour:
   - {fileID: 1381916149}
   hitProfileButton: {fileID: 4396377990715545351}
   frostProfileButton: {fileID: 973375820}
-  caneProfileButton: {fileID: 1381916148}
+  kaneProfileButton: {fileID: 1381916148}
+  stomeProfileButton: {fileID: 644638736}
+  brightProfileButton: {fileID: 991353055}
   characterSelectionButton: {fileID: 754102311}
   exitButton: {fileID: 387501636}
 --- !u!114 &1507049091

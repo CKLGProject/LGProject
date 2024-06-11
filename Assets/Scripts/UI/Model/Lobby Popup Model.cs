@@ -1,7 +1,7 @@
 using Data;
 using R3;
 using UnityEngine;
-using USingleton;
+using UnityEngine.Singleton;
 
 public class LobbyPopupModel : MonoBehaviour
 {

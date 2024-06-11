@@ -2,12 +2,13 @@ using Data;
 using R3;
 using System;
 using UnityEngine;
-using USingleton;
+using UnityEngine.Singleton;
 
 [RequireComponent(typeof(LobbyPopupModel))]
 [RequireComponent(typeof(LobbyPopupView))]
 public class LobbyPopupPresenter : MonoBehaviour
 {
+    private LobbyView _lobbyView;
     private LobbyPopupModel _model;
     private LobbyPopupView _view;
 
@@ -15,6 +16,7 @@ public class LobbyPopupPresenter : MonoBehaviour
     {
         _model = GetComponent<LobbyPopupModel>();
         _view = GetComponent<LobbyPopupView>();
+        _lobbyView = FindAnyObjectByType<LobbyView>();
 
         // 전부 비활성화
         _view.AllNoneSelected();
@@ -36,7 +38,7 @@ public class LobbyPopupPresenter : MonoBehaviour
                 _view.ActiveCurrentCharacterProfile(selectionCharacter);
                 _view.SetActiveCharacterImage(selectionCharacter);
 
-                switch (currentCharacterProfile)
+                switch (selectionCharacter)
                 {
                     case ECharacterType.Hit:
                         _view.SetCharacterData(_model.HitData);
@@ -47,15 +49,7 @@ public class LobbyPopupPresenter : MonoBehaviour
                     case ECharacterType.Cane:
                         _view.SetCharacterData(_model.KaneData);
                         break;
-                    case ECharacterType.Storm:
-                        break;
-                    case ECharacterType.E:
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
                 }
-                
-                
             })
             .AddTo(this);
 
@@ -68,8 +62,16 @@ public class LobbyPopupPresenter : MonoBehaviour
             .Subscribe(_ => _model.SetSelectedCharacterType(ECharacterType.Frost))
             .AddTo(this);
 
-        _view.CaneProfileButtonClicked()
+        _view.KaneProfileButtonClicked()
             .Subscribe(_ => _model.SetSelectedCharacterType(ECharacterType.Cane))
+            .AddTo(this);
+        
+        _view.StomeProfileButtonClicked()
+            .Subscribe(_ => _lobbyView.ShowErrorMessage())
+            .AddTo(this);
+        
+        _view.brightProfileButtonClicked()
+            .Subscribe(_ => _lobbyView.ShowErrorMessage())
             .AddTo(this);
 
         _view.OnCharacterSelectionButtonClicked()

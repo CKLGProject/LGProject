@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
-using USingleton;
+using UnityEngine.Singleton;
 
 [RequireComponent(typeof(BattleView))]
 [RequireComponent(typeof(BattleModel))]

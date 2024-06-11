@@ -5,10 +5,10 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Serialization;
-using USingleton.AutoSingleton;
+using UnityEngine.Singleton;
 using Random = UnityEngine.Random;
 
-[Singleton(nameof(GameManager))]
+[Singleton]
 public class GameManager : MonoBehaviour
 {
     // 유저 데이터

@@ -1,5 +1,5 @@
 using UnityEngine;
-using USingleton;
+using UnityEngine.Singleton;
 
 namespace LGProject
 {
