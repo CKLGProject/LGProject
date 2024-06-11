@@ -13,7 +13,7 @@ namespace BehaviourTree
             if (_stateMachine == null)
                 _stateMachine = AIAgent.Instance.GetStateMachine;
             _stateMachine.playable.effectManager.Play(EffectManager.EFFECT.Airborne).Forget();
-            //AIAgent.Instance.GetStateMachine.
+            Debug.Log("KockBackNode");
         }
 
         protected override void OnStop()

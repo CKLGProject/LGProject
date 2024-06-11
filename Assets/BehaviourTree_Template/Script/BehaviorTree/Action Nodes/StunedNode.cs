@@ -19,6 +19,7 @@ namespace BehaviourTree
             if (_stateMachine == null)
                 _stateMachine = Agent.GetStateMachine;
             _stateMachine.IsGuard = false;
+            //Debug.Log("Stun Node");
             _stateMachine.animator.ResetTrigger("Landing");
             _stateMachine.animator.ResetTrigger("Knockback");
             _stateMachine.animator.ResetTrigger("WakeUp");

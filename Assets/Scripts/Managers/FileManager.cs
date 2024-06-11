@@ -234,7 +234,7 @@ namespace LGProject
                 Directory.CreateDirectory(filepath);
             }
 
-            StreamWriter outStream = System.IO.File.CreateText(filepath + fileName);
+            StreamWriter outStream = File.CreateText(filepath + fileName);
             outStream.Write(sb);
             outStream.Close();
         }

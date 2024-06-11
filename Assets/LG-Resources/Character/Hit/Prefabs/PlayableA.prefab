@@ -20,7 +20,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4910213552037458275
 Transform:
   m_ObjectHideFlags: 0
@@ -52,8 +52,6 @@ MonoBehaviour:
   Animator: {fileID: 4197115238591175659}
   <ActorType>k__BackingField: 1
   <CharacterType>k__BackingField: 1
-  battleModel: {fileID: 0}
-  CollisionObserver: {fileID: 0}
   velocity: {x: 0, y: 0, z: 0}
   MaximumJumpCount: 2
   MaximumSpeed: 4.2
@@ -73,9 +71,13 @@ MonoBehaviour:
   DownWaitDelay: 0.5
   WakeUpDelay: 0.5
   LifePoint: 3
+  NoramlAttackKNockbackDirection: {x: -0.45, y: 0.45, z: 0}
+  DashAttackKNockbackDirection: {x: 0.4, y: 0.6, z: 0}
   movingAttack: 1
   AliveOffset: {x: 0, y: 0, z: 0}
   respawnTime: 1
+  DefaultWeapon: {fileID: 0}
+  UltimateWeapon: {fileID: 0}
   directionX: 1
   jumpCurve:
     serializedVersion: 2
@@ -197,6 +199,10 @@ MonoBehaviour:
   _AttackOffset1: {x: 0, y: 0, z: 0}
   _AttackOffset2: {x: 0, y: 0, z: -1}
   _AttackOffset3: {x: 0, y: 0, z: 0}
+  _DashAttackEffect: {fileID: 0}
+  _DashAttackOffset: {x: 0, y: 0, z: 0}
+  _JumpAttackEffect: {fileID: 0}
+  _JumpAttackOffset: {x: 0, y: 0, z: 0}
   _GuardEffect: {fileID: 6828380774985832577, guid: d62653505d5e72f44b9b3e68d377f861,
     type: 3}
   _GuardOffset: {x: 0, y: 0, z: 0}

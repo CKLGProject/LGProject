@@ -20,6 +20,8 @@ namespace BehaviourTree
                 _stateMachine = AIAgent.Instance.GetStateMachine;
             _stateMachine.IsKnockback = false;
             _stateMachine.IsDamaged = false;
+
+            Debug.Log("WakeUpNode");
         }
 
         protected override void OnStop()

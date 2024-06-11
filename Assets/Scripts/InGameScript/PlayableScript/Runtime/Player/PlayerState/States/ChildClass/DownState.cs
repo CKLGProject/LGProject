@@ -24,6 +24,7 @@ namespace LGProject.PlayerState
             _currentTimer = 0;
             StateMachine.IsDown = true;
             StateMachine.IsKnockback = false;
+            StateMachine.IsDamaged = false;
             StateMachine.animator.SetInteger("Attack", 0);
             StateMachine.animator.SetTrigger(Landing);
             StateMachine.ResetVelocity();

@@ -211,17 +211,17 @@ namespace LGProject.PlayerState
                     try
                     {
                         Vector3 direction = (temp.Item1.GetStateMachine.transform.position - StateMachine.transform.position).normalized;
-                        Vector3 v = StateMachine.playable.CalculateVelocity(
-                           temp.Item1.GetStateMachine.transform.position + direction ,
-                              temp.Item1.GetStateMachine.transform.position, 0.5f, 1f);
+                        Vector3 velocity = (StateMachine.transform.forward * 1.5f + StateMachine.transform.up * 3) * 1.5f;
+
                         // 가드를 올리지 않았을 경우
                         if (temp.Item1 != StateMachine.transform)
                         {
                             temp.
                             Item1.GetStateMachine.
-                            HitDamaged(StateMachine.AttackCount - 1 < 2 ? Vector3.zero : v, 0.1f, StateMachine, DATA_TYPE.NormalAttackHit);
+                            HitDamaged(StateMachine.AttackCount - 1 < 2 ? Vector3.zero : velocity, 0.1f, StateMachine, DATA_TYPE.NormalAttackHit);
                             _damageInCount = true;
-
+                            //if (StateMachine.AttackCount > 2)
+                            //    Debug.Log("");
                             if (!temp.Item1.GetStateMachine.IsGuard && !temp.Item1.GetStateMachine.IsDown && !temp.Item1.GetStateMachine.IsSuperArmor && !StateMachine.IsUseUltimate)
                             {
                                 // 100 % gage로 일단 계산

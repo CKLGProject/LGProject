@@ -10,6 +10,7 @@ public class UIFollow : MonoBehaviour
     {
         // UI 요소의 RectTransform을 가져옵니다.
         uiElement = GetComponent<RectTransform>();
+        target = GameObject.Find("Player").transform;
     }
 
     void Update()

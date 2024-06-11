@@ -3173,8 +3173,8 @@ MonoBehaviour:
   UseAsync: 0
   editorAutoLoad: 0
   loadScene:
-    sceneAsset: {fileID: 102900000, guid: 88dd0b09ca7d94e4d9fc46e84783e817, type: 3}
-    path: Assets/Scenes/Stage_Sunset.unity
+    sceneAsset: {fileID: 102900000, guid: d4a070b194734bc40b94c87ef8841330, type: 3}
+    path: Assets/Scenes/InGameScene/TestScene/Frost-Anim.unity
   additiveScenes: []
   SkipMode: 3
   SkipAction:

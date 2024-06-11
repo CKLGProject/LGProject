@@ -15,8 +15,8 @@ namespace LGProject.PlayerState
         public Animator Animator;
         [field: SerializeField] public ActorType ActorType { get; private set; }
         [field : SerializeField] public CharacterType CharacterType { get; private set; }
-        [SerializeField] private BattleModel battleModel;
-        [SerializeField] private CollisionObserver CollisionObserver;
+        private BattleModel battleModel;
+        private CollisionObserver CollisionObserver;
 
         [SerializeField] protected Vector3 velocity = Vector3.zero;
 
@@ -72,10 +72,16 @@ namespace LGProject.PlayerState
 
         [HideInInspector] public int LifePoint = 3;
 
+        [Space(10)]
+        public Vector3 NoramlAttackKNockbackDirection = new Vector3();
+        public Vector3 DashAttackKNockbackDirection = new Vector3();
+
+
         public bool movingAttack = true;
 
         public Vector3 AliveOffset;
         public float respawnTime;
+
 
         public float DamageGage { get; private set; }
         public void SetDamageGage(float value) => DamageGage = value;
@@ -93,26 +99,27 @@ namespace LGProject.PlayerState
             UltimateGage = 100;
         }
 
+        public GameObject DefaultWeapon;
+        public GameObject UltimateWeapon;
+
         // 공격 방향
         [HideInInspector] public bool directionX = false;
         [HideInInspector] public AnimationCurve jumpCurve;
 
-        public Platform UnderPlatform;
-        //public DeadZone DeadZone;
+        [HideInInspector] public Platform UnderPlatform;
 
-        public EffectManager effectManager;
+        [HideInInspector] public EffectManager effectManager;
 
-        public bool IsGrounded;
-        public bool IsGuard;
-        public bool IsJumpGuard;
-        public bool IsDamaged;
-        public bool IsDown;
-        public bool IsKnockback;
-        public bool IsJumpping;
-        public bool IsDead;
-        public bool IsNormalAttack;
-        public bool IsUltimate;
-        //public Vector3 velocity;
+        /*[HideInInspector]*/ public bool IsGrounded;
+        /*[HideInInspector]*/ public bool IsGuard;
+        /*[HideInInspector]*/ public bool IsJumpGuard;
+        /*[HideInInspector]*/ public bool IsDamaged;
+        /*[HideInInspector]*/ public bool IsDown;
+        /*[HideInInspector]*/ public bool IsKnockback;
+        /*[HideInInspector]*/ public bool IsJumpping;
+        /*[HideInInspector]*/ public bool IsDead;
+        /*[HideInInspector]*/ public bool IsNormalAttack;
+        /*[HideInInspector]*/ public bool IsUltimate;
 
         float _gravity = -9.8f;
         float _groundedGravity = -0.05f;
@@ -121,6 +128,7 @@ namespace LGProject.PlayerState
 
         //float maxJumpHeight = 1.5f;
         float maxJumpTime = 0.5f;
+
 
         protected virtual void Awake()
         {
@@ -405,9 +413,30 @@ namespace LGProject.PlayerState
                     StateMachine.IsUltimate = false;
                     ultimateTime = 0;
                     effectManager.Stop(EffectManager.EFFECT.Ultimate);
+                    OffEffectCharacterType();
+                    SwitchingWeapon(IsUltimate);
                 }
             }
         }
+
+        private void OffEffectCharacterType()
+        {
+            switch (CharacterType)
+            {
+                case CharacterType.None:
+                    break;
+                case CharacterType.Hit:
+                    break;
+                case CharacterType.Frost:
+                    StateMachine.playable.effectManager.Stop(EffectManager.EFFECT.UltimateDash);
+                    break;
+                case CharacterType.Cain:
+                    break;
+                default:
+                    break;
+            }
+        }
+
         public void SetupJumpVariables()
         {
             float timeToApex = maxJumpTime / 2;
@@ -461,6 +490,20 @@ namespace LGProject.PlayerState
         public void SetUnderPlatform()
         {
             UnderPlatform = GameObject.Find("Main_Floor (1)").GetComponent<Platform>();
+        }
+
+        public void SwitchingWeapon(bool Ultimate)
+        {
+            if(Ultimate)
+            {
+                DefaultWeapon.SetActive(false);
+                UltimateWeapon.SetActive(true);
+            }
+            else
+            {
+                DefaultWeapon.SetActive(true);
+                UltimateWeapon.SetActive(false);
+            }
         }
 
         public void ShowUltimateEffect()
