@@ -342,7 +342,7 @@ namespace LGProject.PlayerState //
             if (!IsGuard || (EnemyStateMachine != null && EnemyStateMachine.IsUseUltimate))
             {
                 physics.velocity = Vector3.zero;
-                playable.SetDamageGage(playable.DamageGage + 8.5f);
+                playable.SetDamageGage(playable.DamageGage + (IsUltimate == true ? 8.5f : 4.25f));
                 battleModel.SyncDamageGage(playable.ActorType, playable.DamageGage);
                 IsNormalAttack = false;
                 // 충격에 의한 물리 공식

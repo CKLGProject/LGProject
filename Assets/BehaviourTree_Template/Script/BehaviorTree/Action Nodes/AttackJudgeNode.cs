@@ -155,19 +155,19 @@ namespace BehaviourTree
             }
             else
             {
-                Vector3 v = Vector3.zero;
+                Vector3 velocity = (_stateMachine.transform.forward * 1.5f + _stateMachine.transform.up * 3) * 1.5f;
+
+                //Vector3 v = Vector3.zero;
                 if (_stateMachine.AttackCount >= 3)
                 {
-                    Vector3 direction = (temp.Item1.GetStateMachine.transform.position - AIAgent.Instance.transform.position).normalized;
-                    v = AIAgent.Instance.CalculateVelocity(
-                       temp.Item1.GetStateMachine.transform.position + direction,
-                          temp.Item1.GetStateMachine.transform.position, 0.5f, 1f);
+                    //Vector3 direction = (temp.Item1.GetStateMachine.transform.position - AIAgent.Instance.transform.position).normalized;
+
                 }
                 if (temp.Item1 != _stateMachine.transform)
                 {
                     temp.
                     Item1.GetStateMachine.
-                    HitDamaged(_stateMachine.AttackCount < 3 ? Vector3.zero : v, 0, _stateMachine, LGProject.DATA_TYPE.NormalAttack);
+                    HitDamaged(_stateMachine.AttackCount < 3 ? Vector3.zero : velocity, 0, _stateMachine, LGProject.DATA_TYPE.NormalAttack);
                     temp.Item1.GetStateMachine.hitPlayer = _stateMachine.transform;
 
                     _stateMachine.animator.SetInteger("Attack", 0);

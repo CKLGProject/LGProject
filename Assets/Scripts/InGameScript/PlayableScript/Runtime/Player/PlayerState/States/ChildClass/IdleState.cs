@@ -33,7 +33,7 @@ namespace LGProject.PlayerState
             // 키 입력을 대기 받으면 상태가 변경됨.
             if (Mathf.Abs(StateMachine.moveAction.ReadValue<float>()) > 0.2f )
             {
-                StateMachine.ChangeState(StateMachine.moveState);
+                    StateMachine.ChangeState(StateMachine.moveState);
                 return;
             }
 

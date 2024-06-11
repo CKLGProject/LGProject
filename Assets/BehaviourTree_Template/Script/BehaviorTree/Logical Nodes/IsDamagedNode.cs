@@ -18,6 +18,11 @@ namespace BehaviourTree
         protected override void OnStop()
         {
             //agent.isHit = false;
+            if(AIAgent.Instance.GetStateMachine.IsDamaged)
+            {
+                //Debug.Log("IsDamaged true");
+            }
+
         }
 
         protected override State OnUpdate()

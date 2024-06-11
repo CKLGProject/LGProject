@@ -2,6 +2,7 @@ using System.Collections;
 using LGProject;
 using UnityEngine;
 using UnityEditor;
+using Cysharp.Threading.Tasks;
 
 namespace BehaviourTree
 {
@@ -22,7 +23,6 @@ namespace BehaviourTree
         public float speed = 10;
         public int targetIndex;
 
-        public Transform player;
         public bool isGround;
 
 
@@ -30,7 +30,9 @@ namespace BehaviourTree
         public int AttackPercent;
         public int ChasingPercent;
         public int NormalMovePercent;
-    
+
+        // 상대방
+        public Transform player;
 
         #region magicMathods
         [System.Obsolete]
@@ -57,6 +59,7 @@ namespace BehaviourTree
 
         private void Start()
         {
+            player = BattleSceneManager.Instance.GetPlayers();
             InitEffectManager();
             effectManager.InitParticles();
             SetUnderPlatform();
@@ -72,15 +75,33 @@ namespace BehaviourTree
 
         }
 
+        float curTimer = 0;
+        float minTimer = 0.1f;
+
         private void Update()
         {
             // 바라보는 방향 -> 일단 무조건 플레이어를 바라보게 설정
             // 일단 여기에 넣어보자
+            if(StateMachine.IsKnockback)
+            {
+                curTimer += Time.deltaTime;
+                if (curTimer < minTimer)
+                    return;
+            }
+            else
+            {
+                curTimer = 0;
+            }
             PlayableGravity();
             GetStateMachine.Update();
             NewPlatformCheck();
             DeadSpaceCheck();
             CameraCheck();
+        }
+        async UniTaskVoid Counter ()
+        {
+            await UniTask.Delay(System.TimeSpan.FromSeconds(0.1f));
+
         }
 
         private void OnDrawGizmos()

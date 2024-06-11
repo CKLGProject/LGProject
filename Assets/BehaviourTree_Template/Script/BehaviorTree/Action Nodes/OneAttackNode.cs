@@ -115,20 +115,18 @@ namespace BehaviourTree
             else
             {
                 Vector3 direction = (temp.Item1.GetStateMachine.transform.position - _stateMachine.transform.position).normalized;
-                Vector3 v = Vector3.zero;
                 direction.x *= 2;
                 direction.y *= 1.5f;
-                v = AIAgent.Instance.CalculateVelocity(
-                   temp.Item1.GetStateMachine.transform.position + direction,
-                   temp.Item1.GetStateMachine.transform.position, 0.5f, 1f);
+                Vector3 velocity = (_stateMachine.transform.forward * 3f + _stateMachine.transform.up * 1.5f) * 1.5f;
+
 
                 if (temp.Item1 != AIAgent.Instance.transform/* && !temp.Item1.GetStateMachine.isGuard*/)
                 {
-                    Debug.Log($"v = {v}, direct = {direction}");
+                    //Debug.Log($"v = {v}, direct = {direction}");
                     temp.
                     Item1.GetComponent<Playable>().
                     GetStateMachine.
-                    HitDamaged(v, 0, _stateMachine, LGProject.DATA_TYPE.DashAttack);
+                    HitDamaged(velocity, 0, _stateMachine, LGProject.DATA_TYPE.DashAttack);
 
                     //temp.Item1.GetComponent<Playable>().GetStateMachine.hitPlayer = AIAgent.Instance.transform;
 

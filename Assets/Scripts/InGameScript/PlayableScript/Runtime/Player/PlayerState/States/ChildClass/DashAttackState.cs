@@ -98,15 +98,14 @@ namespace LGProject.PlayerState
                         Vector3 direction = (temp.Item1.GetStateMachine.transform.position - StateMachine.transform.position).normalized;
                         direction.x *= 2;
                         direction.y *= 1.5f;
-                        Vector3 v = StateMachine.playable.CalculateVelocity(
-                           temp.Item1.GetStateMachine.transform.position + direction,
-                              temp.Item1.GetStateMachine.transform.position, 0.5f, 1f);
+                        Vector3 velocity = (StateMachine.transform.forward * 3f + StateMachine.transform.up * 1.5f) * 1.5f;
+
                         // 가드를 올리지 않았을 경우
                         if (temp.Item1 != StateMachine.transform)
                         {
                             temp.
                             Item1.GetStateMachine.
-                            HitDamaged(v, 0, StateMachine, DATA_TYPE.DashAttackHit);
+                            HitDamaged(velocity, 0, StateMachine, DATA_TYPE.DashAttackHit);
                             _damageInCount = true;
 
                             if (!temp.Item1.GetStateMachine.IsGuard && !temp.Item1.GetStateMachine.IsDown && !temp.Item1.GetStateMachine.IsSuperArmor && !StateMachine.IsUseUltimate)

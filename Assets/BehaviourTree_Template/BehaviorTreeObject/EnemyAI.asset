@@ -266,7 +266,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 117ab0154c9e23b4a92e6e42038ee647
-  position: {x: -581.1965, y: 900.99994}
+  position: {x: -581, y: 901}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
@@ -477,7 +477,6 @@ MonoBehaviour:
     moveToObject: {fileID: 0}
   description: 
   children:
-  - {fileID: -6895995334728390926}
   - {fileID: -237580460281809946}
   - {fileID: -7252241123171764499}
   - {fileID: -5132085179448640655}
@@ -858,7 +857,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 00ae37c11edfbdb448b7fc1d721813e9
-  position: {x: -395, y: 899}
+  position: {x: -395.00006, y: 899.0001}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}

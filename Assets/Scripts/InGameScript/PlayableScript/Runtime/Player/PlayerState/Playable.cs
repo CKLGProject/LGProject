@@ -110,16 +110,16 @@ namespace LGProject.PlayerState
 
         [HideInInspector] public EffectManager effectManager;
 
-        [HideInInspector] public bool IsGrounded;
-        [HideInInspector] public bool IsGuard;
-        [HideInInspector] public bool IsJumpGuard;
-        [HideInInspector] public bool IsDamaged;
-        [HideInInspector] public bool IsDown;
-        [HideInInspector] public bool IsKnockback;
-        [HideInInspector] public bool IsJumpping;
-        [HideInInspector] public bool IsDead;
-        [HideInInspector] public bool IsNormalAttack;
-        [HideInInspector] public bool IsUltimate;
+        /*[HideInInspector]*/ public bool IsGrounded;
+        /*[HideInInspector]*/ public bool IsGuard;
+        /*[HideInInspector]*/ public bool IsJumpGuard;
+        /*[HideInInspector]*/ public bool IsDamaged;
+        /*[HideInInspector]*/ public bool IsDown;
+        /*[HideInInspector]*/ public bool IsKnockback;
+        /*[HideInInspector]*/ public bool IsJumpping;
+        /*[HideInInspector]*/ public bool IsDead;
+        /*[HideInInspector]*/ public bool IsNormalAttack;
+        /*[HideInInspector]*/ public bool IsUltimate;
 
         float _gravity = -9.8f;
         float _groundedGravity = -0.05f;
@@ -128,6 +128,7 @@ namespace LGProject.PlayerState
 
         //float maxJumpHeight = 1.5f;
         float maxJumpTime = 0.5f;
+
 
         protected virtual void Awake()
         {

@@ -6,6 +6,7 @@ namespace LGProject.PlayerState
     [RequireComponent(typeof(PlayerInput))]
     public class Player : Playable
     {
+
         private void InitStates()
         {
             // ref을 쓰는 이유
@@ -37,11 +38,24 @@ namespace LGProject.PlayerState
                 StateMachine.SetAnimPlayTime(name, time);
             }
         }
+        float curTimer = 0;
+        float minTimer = 0.1f;
+
 
         private void Update()
         {
             if (BattleSceneManager.Instance.IsStart)
             {
+                if (StateMachine.IsKnockback)
+                {
+                    curTimer += Time.deltaTime;
+                    if (curTimer < minTimer)
+                        return;
+                }
+                else
+                {
+                    curTimer = 0;
+                }
                 StateMachine.CurrentState.LogicUpdate();
                 StateMachine.Update();
                 PlayableGravity();
