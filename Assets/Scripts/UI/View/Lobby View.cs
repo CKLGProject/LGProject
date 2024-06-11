@@ -10,8 +10,10 @@ using Utility;
 
 public class LobbyView : MonoBehaviour
 {
-    [Header("Character")] [SerializeField] private GameObject hit;
+    [Header("Character")]
+    [SerializeField] private GameObject hit;
     [SerializeField] private GameObject frost;
+    [SerializeField] private GameObject kane;
 
     [Header("Text")] [SerializeField] private TextMeshProUGUI nickNameText;
     [SerializeField] private TextMeshProUGUI levelText;
@@ -204,6 +206,7 @@ public class LobbyView : MonoBehaviour
     {
         hit.SetActive(false);
         frost.SetActive(false);
+        kane.SetActive(false);
         
         switch (characterType)
         {
@@ -214,6 +217,7 @@ public class LobbyView : MonoBehaviour
                 frost.SetActive(true);
                 break;
             case ECharacterType.Cane:
+                kane.SetActive(true);
                 break;
             case ECharacterType.Storm:
                 break;
