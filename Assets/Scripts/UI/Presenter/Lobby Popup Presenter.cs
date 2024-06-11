@@ -1,5 +1,6 @@
 using Data;
 using R3;
+using System;
 using UnityEngine;
 using USingleton;
 
@@ -34,6 +35,27 @@ public class LobbyPopupPresenter : MonoBehaviour
                 _view.AllNoneSelected();
                 _view.ActiveCurrentCharacterProfile(selectionCharacter);
                 _view.SetActiveCharacterImage(selectionCharacter);
+
+                switch (currentCharacterProfile)
+                {
+                    case ECharacterType.Hit:
+                        _view.SetCharacterData(_model.HitData);
+                        break;
+                    case ECharacterType.Frost:
+                        _view.SetCharacterData(_model.FrostData);
+                        break;
+                    case ECharacterType.Cane:
+                        _view.SetCharacterData(_model.KaneData);
+                        break;
+                    case ECharacterType.Storm:
+                        break;
+                    case ECharacterType.E:
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+                
+                
             })
             .AddTo(this);
 

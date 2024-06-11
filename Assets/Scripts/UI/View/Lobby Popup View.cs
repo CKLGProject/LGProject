@@ -2,6 +2,7 @@ using Data;
 using R3;
 using R3.Triggers;
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.UI;
@@ -19,6 +20,12 @@ public class LobbyPopupView : MonoBehaviour
     [SerializeField] private GameObject HitName;
     [SerializeField] private GameObject FrostName;
     [SerializeField] private GameObject CaneName;
+
+    [Header("Text")]
+    [SerializeField] private TextMeshProUGUI attackText;
+    [SerializeField] private TextMeshProUGUI defenseText;
+    [SerializeField] private TextMeshProUGUI moveSpeedText;
+    [SerializeField] private TextMeshProUGUI attackSpeedText;
     
     [Header("캐릭터 프로필")] [SerializeField] private CharacterProfile[] characterProfiles;
 
@@ -164,6 +171,18 @@ public class LobbyPopupView : MonoBehaviour
     public void SetActivePopupView(bool active)
     {
         popupView.SetActive(active);
+    }
+    
+    /// <summary>
+    /// 캐릭터 데이터를 설정합니다.
+    /// </summary>
+    /// <param name="data"></param>
+    public void SetCharacterData(CharacterData data)
+    {
+        attackText.text = data.AttackSpeed.ToString();
+        defenseText.text = data.DefensePower.ToString();
+        moveSpeedText.text = data.MoveSpeed.ToString();
+        attackSpeedText.text = data.AttackSpeed.ToString();
     }
 
     /// <summary>

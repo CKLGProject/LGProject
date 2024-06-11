@@ -70,7 +70,7 @@ public class LobbyView : MonoBehaviour
 
     [Header("Event")] public UnityEvent OnClickCapture;
     public UnityEvent OnClickMatch;
-
+    
     /// <summary>
     /// 매치 버튼 옵저버입니다.
     /// </summary>
