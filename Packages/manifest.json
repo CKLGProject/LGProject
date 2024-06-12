@@ -4,7 +4,7 @@
     "com.cysharp.r3": "https://github.com/Cysharp/R3.git?path=src/R3.Unity/Assets/R3.Unity",
     "com.nkstudio.scenereference": "https://github.com/NK-Studio/SceneReference.git#UPM",
     "com.nkstudio.ufolder": "https://github.com/NK-Studio/UFolder.git#UPM",
-    "com.nkstudio.usinglton": "https://github.com/NK-Studio/USingleton.git#Test",
+    "com.nkstudio.usinglton": "https://github.com/NK-Studio/USingleton.git#SimpleUPM",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.animation.rigging": "1.2.1",
     "com.unity.cinemachine": "2.9.7",

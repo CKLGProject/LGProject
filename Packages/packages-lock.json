@@ -41,11 +41,11 @@
       "hash": "18ffc1b77594a324fb94e2b8614e2e3a524fbfb8"
     },
     "com.nkstudio.usinglton": {
-      "version": "https://github.com/NK-Studio/USingleton.git#Test",
+      "version": "https://github.com/NK-Studio/USingleton.git#SimpleUPM",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "58bd07b964867f71d4948d3890a00be7aec4a1af"
+      "hash": "2ef7f3d2adc5edb9b67ac7efb94d7a5274d6ee56"
     },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
