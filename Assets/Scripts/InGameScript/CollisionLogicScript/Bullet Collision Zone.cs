@@ -10,8 +10,8 @@ namespace LGProject.CollisionZone
     public class BulletCollisionZone : CollisionZone
     {
         private float _speed;
-        private Vector3 _direction;
-        private Vector3 _originPos;
+        [SerializeField] private Vector3 _direction;
+        [SerializeField] private Vector3 _originPos;
         [SerializeField] private GameObject _hitEffect;
 
         public override bool TriggerSpace(Transform plableTransform)
@@ -34,6 +34,7 @@ namespace LGProject.CollisionZone
 
         private void Update()
         {
+            Debug.Log(Vector3.Distance(transform.position, _originPos));
             if(Vector3.Distance(transform.position, _originPos) > 3.5f)
             {
                 gameObject.SetActive(false);

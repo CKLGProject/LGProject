@@ -30,21 +30,42 @@ namespace LGProject.PlayerState
         {
             //base.ShootProjectile();
             Debug.Log("발사");
-
+            Vector3 V = Vector3.zero;
             switch (AtkCount)
             {
                 case 1:
                     // 일당 생성으로 해보자
-                    BulletPrefab1.GetComponent<ParticleSystem>().Play();
                     BulletPrefab1.gameObject.SetActive(true);
-                    Vector3 V = effectManager._AttackOffset1;
-                    V.x -= 1.25f;
-                    BulletPrefab1.transform.position = V + transform.position;
+                    BulletPrefab1.GetComponent<ParticleSystem>().Play();
+                    V = effectManager._AttackOffset1;
+                    BulletPrefab1.transform.position = V + transform.position + (velocity);
+
+                    velocity *= velocity.x;
                     BulletPrefab1.MoveSet(10f, velocity, transform.position);
                     break;
                 case 2:
+                    // 일당 생성으로 해보자
+                    BulletPrefab2.gameObject.SetActive(true);
+                    BulletPrefab2.GetComponent<ParticleSystem>().Play();
+                    V = effectManager._AttackOffset1;
+                    BulletPrefab2.transform.position = V + transform.position + (velocity);
+
+                    velocity *= velocity.x;
+                    BulletPrefab2.MoveSet(10f, velocity, transform.position);
                     break;
                 case 3:
+                    // 일당 생성으로 해보자
+                    BulletPrefab3.gameObject.SetActive(true);
+                    BulletPrefab3.GetComponent<ParticleSystem>().Play();
+                    V = effectManager._AttackOffset1;
+                    //V.x -= 1.25f;
+                    //if (velocity.x > 0)
+                    BulletPrefab3.transform.position = V + transform.position + (velocity);
+                    //else
+                    //    BulletPrefab1.transform.position = V + transform.position + (velocity * -1.25f);
+
+                    velocity *= velocity.x;
+                    BulletPrefab3.MoveSet(10f, velocity, transform.position);
                     break;
                 default:
                     break;
