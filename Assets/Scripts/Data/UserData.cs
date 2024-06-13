@@ -17,6 +17,6 @@ namespace Data
         public ECharacterType CharacterType;
         public string Nickname;
         public Dictionary<ECharacterType, bool> HasCharacterMap;
-        public Pet Pet;
+        public Dictionary<ECharacterType, Pet> Pets;
     }
 }

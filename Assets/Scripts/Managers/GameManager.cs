@@ -55,8 +55,8 @@ public class GameManager : MonoBehaviour
     {
         switch (actorType)
         {
-            case ActorType.User:
-                return _userData.CharacterType;
+            // case ActorType.User:
+            //     return _userData.CharacterType;
             case ActorType.AI:
                 return _aiData.CharacterType;
         }
@@ -94,8 +94,8 @@ public class GameManager : MonoBehaviour
     {
         switch (actorType)
         {
-            case ActorType.User:
-                return _userData.Pet;
+            // case ActorType.User:
+            //     return _userData.Pet;
             case ActorType.AI:
                 return _aiData.Pet;
         }
@@ -145,11 +145,11 @@ public class GameManager : MonoBehaviour
             _userData.HasCharacterMap.Add(ECharacterType.Hit, true);
         
         // 펫 설정
-        _userData.Pet = new();
-        _userData.Pet.PetType = (EPetType)PlayerPrefs.GetInt("Pat", (int)EPetType.None);
-        _userData.Pet.PetData = FindPatDataByPatType(_userData.Pet.PetType);
-        _userData.Pet.Level = PlayerPrefs.GetInt("Pat Level", 0);
-    }
+        // _userData.Pet = new();
+        // _userData.Pet.PetType = (EPetType)PlayerPrefs.GetInt("Pat", (int)EPetType.None);
+        // _userData.Pet.PetData = FindPatDataByPatType(_userData.Pet.PetType);
+        // _userData.Pet.Level = PlayerPrefs.GetInt("Pat Level", 0);
+     }
     
     /// <summary>
     /// AI 모델 중 랜덤하게 1개를 반환합니다.

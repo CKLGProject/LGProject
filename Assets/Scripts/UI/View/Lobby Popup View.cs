@@ -38,8 +38,11 @@ public class LobbyPopupView : MonoBehaviour
     [SerializeField] private Button stomeProfileButton;
     [SerializeField] private Button brightProfileButton;
 
-    [Header("버튼")] [SerializeField] private Button characterSelectionButton;
+    [Header("버튼")]
+    [SerializeField] private Button characterSelectionButton;
     [SerializeField] private Button exitButton;
+    [SerializeField] private Button petChoiceButton;
+    [SerializeField] private Button itemChoiceButton;
 
     private Subject<bool> _popupViewActiveSubject = new Subject<bool>();
 
@@ -179,6 +182,20 @@ public class LobbyPopupView : MonoBehaviour
         Assert.IsNotNull(characterSelectionButton, "characterSelectionButton != null");
 
         return characterSelectionButton.OnClickAsObservable();
+    }
+    
+    public Observable<Unit> OnPetChoiceButtonClicked()
+    {
+        Assert.IsNotNull(petChoiceButton, "petChoiceButton != null");
+
+        return petChoiceButton.OnClickAsObservable();
+    }
+    
+    public Observable<Unit> OnItemChoiceButtonClicked()
+    {
+        Assert.IsNotNull(itemChoiceButton, "itemChoiceButton != null");
+
+        return itemChoiceButton.OnClickAsObservable();
     }
 
     /// <summary>

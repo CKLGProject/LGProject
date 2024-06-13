@@ -47,26 +47,26 @@ public class LobbyPresenter : MonoBehaviour
 
         _lobbyView.RankButtonAsObservable()
             .Where(_=> !_lobbyPopupModel.IsActive)
-            .Subscribe(_ => _lobbyView.ShowErrorMessage());
+            .Subscribe(_ => _lobbyView.ShowErrorMessage(0));
         
         _lobbyView.CaptureButtonAsObservable()
             .Where(_=> !_lobbyPopupModel.IsActive)
             .Subscribe(OnClickCaptureButton);
 
         _lobbyView.MailButtonAsObservable()
-            .Subscribe(_ => _lobbyView.ShowErrorMessage());
+            .Subscribe(_ => _lobbyView.ShowErrorMessage(0));
         
         _lobbyView.QuestButtonAsObservable()
-            .Subscribe(_ => _lobbyView.ShowErrorMessage());
+            .Subscribe(_ => _lobbyView.ShowErrorMessage(0));
         
         _lobbyView.CharacterButtonAsObservable()
             .Subscribe(_ => _lobbyPopupView.SetActivePopupView(true));
         
         _lobbyView.FriendButtonAsObservable()
-            .Subscribe(_ => _lobbyView.ShowErrorMessage());
+            .Subscribe(_ => _lobbyView.ShowErrorMessage(0));
         
         _lobbyView.SettingButtonAsObservable()
-            .Subscribe(_ => _lobbyView.ShowErrorMessage());
+            .Subscribe(_ => _lobbyView.ShowErrorMessage(0));
         
         _lobbyModel.Nickname = PlayerPrefs.GetString("Nickname", "Guest");
         _lobbyModel.Level = PlayerPrefs.GetInt("Level", 0);

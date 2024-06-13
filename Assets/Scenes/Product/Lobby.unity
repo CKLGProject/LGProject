@@ -313,7 +313,11 @@ MonoBehaviour:
   friendButton: {fileID: 1370404069}
   inventoryButton: {fileID: 1886922067}
   settingButton: {fileID: 623699442}
-  errorMessage: "\uD574\uB2F9 \uAE30\uB2A5\uC740 \uAD6C\uD604\uB418\uC9C0 \uC54A\uC558\uC2B5\uB2C8\uB2E4."
+  errorMessage:
+  - "\uD574\uB2F9 \uAE30\uB2A5\uC774 \uAC1C\uBC29\uB418\uC9C0 \uC54A\uC558\uC2B5\uB2C8\uB2E4."
+  - "\uD574\uB2F9 \uCE90\uB9AD\uD130\uAC00 \uAC1C\uBC29\uB418\uC9C0 \uC54A\uC558\uC2B5\uB2C8\uB2E4."
+  - "\uC7A5\uCC29 \uD560 \uC218 \uC788\uB294 \uC815\uB839\uC774 \uC5C6\uC2B5\uB2C8\uB2E4."
+  - "\uC7A5\uCC29 \uD560 \uC218 \uC788\uB294 \uC544\uC774\uD15C\uC774 \uC5C6\uC2B5\uB2C8\uB2E4."
   OnClickCapture:
     m_PersistentCalls:
       m_Calls:
@@ -12634,6 +12638,8 @@ MonoBehaviour:
   brightProfileButton: {fileID: 991353055}
   characterSelectionButton: {fileID: 754102311}
   exitButton: {fileID: 387501636}
+  petChoiceButton: {fileID: 453669982}
+  itemChoiceButton: {fileID: 1290908598}
 --- !u!114 &1507049091
 MonoBehaviour:
   m_ObjectHideFlags: 0

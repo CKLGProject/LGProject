@@ -66,7 +66,7 @@ public class LobbyView : MonoBehaviour
     /// </summary>
     [SerializeField] private Button settingButton;
 
-    [Tooltip("미구현 메세지")] [SerializeField] private string errorMessage;
+    [Tooltip("미구현 메세지")] [SerializeField] private string[] errorMessage;
 
     [Header("Event")] public UnityEvent OnClickCapture;
     public UnityEvent OnClickMatch;
@@ -156,9 +156,9 @@ public class LobbyView : MonoBehaviour
     /// <summary>
     /// 미구현 메세지를 띄웁니다.
     /// </summary>
-    public void ShowErrorMessage()
+    public void ShowErrorMessage(int index)
     {
-        LGUtility.Toast(errorMessage);
+        LGUtility.Toast(errorMessage[index]);
     }
 
     /// <summary>

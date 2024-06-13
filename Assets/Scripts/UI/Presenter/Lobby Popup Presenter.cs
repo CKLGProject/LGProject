@@ -67,11 +67,19 @@ public class LobbyPopupPresenter : MonoBehaviour
             .AddTo(this);
         
         _view.StomeProfileButtonClicked()
-            .Subscribe(_ => _lobbyView.ShowErrorMessage())
+            .Subscribe(_ => _lobbyView.ShowErrorMessage(2))
             .AddTo(this);
         
         _view.brightProfileButtonClicked()
-            .Subscribe(_ => _lobbyView.ShowErrorMessage())
+            .Subscribe(_ => _lobbyView.ShowErrorMessage(2))
+            .AddTo(this);
+        
+        _view.OnItemChoiceButtonClicked()
+            .Subscribe(_ => _lobbyView.ShowErrorMessage(3))
+            .AddTo(this);
+        
+        _view.OnItemChoiceButtonClicked()
+            .Subscribe(_ => _lobbyView.ShowErrorMessage(3))
             .AddTo(this);
 
         _view.OnCharacterSelectionButtonClicked()
