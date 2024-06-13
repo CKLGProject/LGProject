@@ -15,18 +15,18 @@ namespace LGProject.PlayerState
 
         //private float AttackCont = 0;
         //private int maximumCount = 0;
-        private float _firstJudgeDelay;
-        private float _firstAttackDelay;
-        private float _secondJudgeDelay;
-        private float _secondAttackDelay;
-        private float _thirdJudgeDelay;
-        private float _thirdAttackDelay;
+        protected float _firstJudgeDelay;
+        protected float _firstAttackDelay;
+        protected float _secondJudgeDelay;
+        protected float _secondAttackDelay;
+        protected float _thirdJudgeDelay;
+        protected float _thirdAttackDelay;
 
-        private float _currentTimer;
-        private bool _damageInCount;
-        private static readonly int Attack = Animator.StringToHash("Attack");
-        private static readonly int Idle = Animator.StringToHash("Idle");
-        private static readonly int GuardEnd = Animator.StringToHash("GuardEnd");
+        protected float _currentTimer;
+        protected bool _damageInCount;
+        protected static readonly int Attack = Animator.StringToHash("Attack");
+        protected static readonly int Idle = Animator.StringToHash("Idle");
+        protected static readonly int GuardEnd = Animator.StringToHash("GuardEnd");
 
         public AttackState(PlayerStateMachine stateMachine, ref float firstJudgeAttack, ref float firstAttackDelay,ref float secondJudgeAttack,ref float secondAttackDelay, ref float thirdJudgeAttack, ref float thirdAttackDelay) : base(stateMachine)
         {

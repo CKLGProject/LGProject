@@ -26,21 +26,26 @@ namespace LGProject.PlayerState
 
         public virtual void LogicUpdate()
         {
-            if(StateMachine.IsKnockback)
+            Damaged();
+        }
+
+        public bool Damaged()
+        {
+            if (StateMachine.IsKnockback)
             {
                 Debug.Log("Next State?");
                 StateMachine.ChangeState(StateMachine.knockbackState);
-                return;
+                return true;
             }
             if (StateMachine.IsDamaged && !StateMachine.IsGuard)
             {
                 StateMachine.AttackCount = 0;
                 StateMachine.animator.SetInteger("Attack", 0);
                 StateMachine.ChangeState(StateMachine.hitState);
-                return;
+                return true;
             }
+            return false;
         }
-
         public virtual void Exit()
         {
 

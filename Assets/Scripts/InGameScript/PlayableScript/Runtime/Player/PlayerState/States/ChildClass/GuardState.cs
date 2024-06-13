@@ -20,7 +20,7 @@ namespace LGProject.PlayerState
 
             StateMachine.StandingVelocity();
             StateMachine.animator.ResetTrigger(GuardEnd);
-            StateMachine.AnimSpeed(Data.CharacterType.Frost, 3f);
+            //StateMachine.AnimSpeed(Data.ECharacterType.Frost, 3f);
             StateMachine.animator.SetTrigger(GuardStart);
             StateMachine.playable.effectManager.Play(EffectManager.EFFECT.Guard).Forget();
             StateMachine.IsGuard = true;
@@ -33,7 +33,7 @@ namespace LGProject.PlayerState
             StateMachine.playable.effectManager.Stop(EffectManager.EFFECT.Guard);
 
             StateMachine.animator.SetTrigger(GuardEnd);
-            StateMachine.ResetAnimSpeed(0).Forget();
+            //StateMachine.ResetAnimSpeed(0).Forget();
 
             StateMachine.IsGuard = false;
         }

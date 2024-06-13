@@ -41,7 +41,10 @@ namespace LGProject.PlayerState
 
         public override void LogicUpdate()
         {
-            base.LogicUpdate();
+            //base.LogicUpdate();
+
+            if (Damaged())
+                return;
             // 점프 공격을 한 상태에서 움직이게 할 것인가?
             // 점프 공격을 한 상태에서 체공 시간을 늘릴 것인가?
             // 1단 점프를 한 후 공격을 한 상태라면 2단 점프가 가능하게 할 것인가?
