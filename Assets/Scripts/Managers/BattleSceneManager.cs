@@ -27,34 +27,41 @@ namespace LGProject
 
         public void SetPlayers()
         {
-            switch (characterType)
+            try
             {
-                case Data.ECharacterType.None:
-                    Debug.Log("캐릭터 없음. Hit가 소환됩니다.");
-                    OnlinePlayer = playable[0];
-                    break;
-                case Data.ECharacterType.Hit:
-                    OnlinePlayer = playable[0];
-                    break;
-                case Data.ECharacterType.Frost:
-                    OnlinePlayer = playable[1];
-                    break;
-                case Data.ECharacterType.Cane:
-                    OnlinePlayer = playable[2];
-                    break;
-                case Data.ECharacterType.Storm:
-                    Debug.Log("캐릭터 없음. Hit가 소환됩니다.");
-                    OnlinePlayer = playable[0];
-                    break;
-                case Data.ECharacterType.E:
-                    Debug.Log("캐릭터 없음. Hit가 소환됩니다.");
-                    OnlinePlayer = playable[0];
-                    break;
-                default:
-                    break;
+                switch (characterType)
+                {
+                    case Data.ECharacterType.None:
+                        Debug.Log("캐릭터 없음. Hit가 소환됩니다.");
+                        OnlinePlayer = playable[0];
+                        break;
+                    case Data.ECharacterType.Hit:
+                        OnlinePlayer = playable[0];
+                        break;
+                    case Data.ECharacterType.Frost:
+                        OnlinePlayer = playable[1];
+                        break;
+                    case Data.ECharacterType.Cane:
+                        OnlinePlayer = playable[2];
+                        break;
+                    case Data.ECharacterType.Storm:
+                        Debug.Log("캐릭터 없음. Hit가 소환됩니다.");
+                        OnlinePlayer = playable[0];
+                        break;
+                    case Data.ECharacterType.E:
+                        Debug.Log("캐릭터 없음. Hit가 소환됩니다.");
+                        OnlinePlayer = playable[0];
+                        break;
+                    default:
+                        break;
+                }
+                OnlinePlayer.transform.name = "Player";
+                OnlinePlayer.gameObject.SetActive(true);
             }
-            OnlinePlayer.transform.name = "Player";
-            OnlinePlayer.gameObject.SetActive(true);
+            catch
+            {
+                Debug.Log("설정된 픒레이어가 없음");
+            }
         }
 
         /*****************************************************
