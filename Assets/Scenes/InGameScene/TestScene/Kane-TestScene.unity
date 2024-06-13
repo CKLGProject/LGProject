@@ -6908,8 +6908,9 @@ MonoBehaviour:
   IsNormalAttack: 0
   IsUltimate: 0
   BulletPrefab1: {fileID: 815997347}
-  BulletPrefab2: {fileID: 1680155173}
-  BulletPrefab3: {fileID: 1575110133}
+  BulletPrefab2: {fileID: 1680155174}
+  BulletPrefab3: {fileID: 1575110134}
+  Speed: 7
 --- !u!1001 &921508069
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7213,7 +7214,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 996713019}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.10251728, y: -0.0000000042789328, z: 4.4098794e-10, w: 0.99473125}
+  m_LocalRotation: {x: 0.10251728, y: 0.00000000427893, z: -4.409877e-10, w: 0.99473125}
   m_LocalPosition: {x: -2, y: 4, z: -21.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -10484,7 +10485,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1353022552}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.10251728, y: -0.0000000042789328, z: 4.4098794e-10, w: 0.99473125}
+  m_LocalRotation: {x: 0.10251728, y: 0.00000000427893, z: -4.409877e-10, w: 0.99473125}
   m_LocalPosition: {x: -2, y: 4, z: -21.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -12814,6 +12815,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 907411641}
     m_Modifications:
+    - target: {fileID: 2609273605048047173, guid: b5a45e896bacb5841b890e69dd8dcf13,
+        type: 3}
+      propertyPath: _range
+      value: 3.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5341753054696920823, guid: b5a45e896bacb5841b890e69dd8dcf13,
         type: 3}
       propertyPath: m_Name
@@ -12877,11 +12883,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5341753054696920823, guid: b5a45e896bacb5841b890e69dd8dcf13,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1575110133}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5a45e896bacb5841b890e69dd8dcf13, type: 3}
 --- !u!4 &1575110131 stripped
 Transform:
@@ -12889,36 +12891,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1575110130}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1575110132 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5341753054696920823, guid: b5a45e896bacb5841b890e69dd8dcf13,
+--- !u!114 &1575110134 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2609273605048047173, guid: b5a45e896bacb5841b890e69dd8dcf13,
     type: 3}
   m_PrefabInstance: {fileID: 1575110130}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1575110133
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1575110132}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f49444dc6e884124bb9b5dcfb46a4a6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RectSpace:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 0
-    height: 0
-  CollisionLineBoxScale: {x: 0, y: 0, z: 0}
-  Offset: {x: 0, y: 0, z: 0}
-  CollisionColor: {r: 0, g: 0, b: 0, a: 1}
-  _direction: {x: 0, y: 0, z: 0}
-  _originPos: {x: 0, y: 0, z: 0}
-  _hitEffect: {fileID: 0}
 --- !u!1 &1576742905
 GameObject:
   m_ObjectHideFlags: 0
@@ -14308,6 +14292,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6988260793795350495, guid: 959911086c7c50c448d3b56dbed91f28,
+        type: 3}
+      propertyPath: _range
+      value: 3.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8122219003115480000, guid: 959911086c7c50c448d3b56dbed91f28,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14361,11 +14350,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1228148216620425289, guid: 959911086c7c50c448d3b56dbed91f28,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1680155173}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 959911086c7c50c448d3b56dbed91f28, type: 3}
 --- !u!4 &1680155171 stripped
 Transform:
@@ -14373,36 +14358,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1680155170}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1680155172 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1228148216620425289, guid: 959911086c7c50c448d3b56dbed91f28,
+--- !u!114 &1680155174 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6988260793795350495, guid: 959911086c7c50c448d3b56dbed91f28,
     type: 3}
   m_PrefabInstance: {fileID: 1680155170}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1680155173
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1680155172}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f49444dc6e884124bb9b5dcfb46a4a6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RectSpace:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 0
-    height: 0
-  CollisionLineBoxScale: {x: 0, y: 0, z: 0}
-  Offset: {x: 0, y: 0, z: 0}
-  CollisionColor: {r: 0, g: 0, b: 0, a: 1}
-  _direction: {x: 0, y: 0, z: 0}
-  _originPos: {x: 0, y: 0, z: 0}
-  _hitEffect: {fileID: 0}
 --- !u!4 &1688100273 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3745288571159066430, guid: 5363515592658884fb93cff794b19ef5,
@@ -17072,65 +17039,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 907411641}
     m_Modifications:
-    - target: {fileID: 145354029620633523, guid: 1491e80891464e44ea6773a82d6200c6,
-        type: 3}
-      propertyPath: moveWithTransform
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 145354029620633523, guid: 1491e80891464e44ea6773a82d6200c6,
-        type: 3}
-      propertyPath: TrailModule.worldSpace
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1848727054504774880, guid: 1491e80891464e44ea6773a82d6200c6,
         type: 3}
-      propertyPath: Offset.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1848727054504774880, guid: 1491e80891464e44ea6773a82d6200c6,
-        type: 3}
-      propertyPath: Offset.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1848727054504774880, guid: 1491e80891464e44ea6773a82d6200c6,
-        type: 3}
-      propertyPath: Offset.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1848727054504774880, guid: 1491e80891464e44ea6773a82d6200c6,
-        type: 3}
-      propertyPath: _hitEffect
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1848727054504774880, guid: 1491e80891464e44ea6773a82d6200c6,
-        type: 3}
-      propertyPath: CollisionLineBoxScale.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1848727054504774880, guid: 1491e80891464e44ea6773a82d6200c6,
-        type: 3}
-      propertyPath: CollisionLineBoxScale.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1848727054504774880, guid: 1491e80891464e44ea6773a82d6200c6,
-        type: 3}
-      propertyPath: CollisionLineBoxScale.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3003533791217472685, guid: 1491e80891464e44ea6773a82d6200c6,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3003533791217472685, guid: 1491e80891464e44ea6773a82d6200c6,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3003533791217472685, guid: 1491e80891464e44ea6773a82d6200c6,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
+      propertyPath: _range
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 3003533791217472685, guid: 1491e80891464e44ea6773a82d6200c6,
         type: 3}
@@ -17182,75 +17094,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4722314843681680275, guid: 1491e80891464e44ea6773a82d6200c6,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4722314843681680275, guid: 1491e80891464e44ea6773a82d6200c6,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4722314843681680275, guid: 1491e80891464e44ea6773a82d6200c6,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4722314843681680275, guid: 1491e80891464e44ea6773a82d6200c6,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4722314843681680275, guid: 1491e80891464e44ea6773a82d6200c6,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4722314843681680275, guid: 1491e80891464e44ea6773a82d6200c6,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5749144139264127035, guid: 1491e80891464e44ea6773a82d6200c6,
-        type: 3}
-      propertyPath: moveWithTransform
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5749144139264127035, guid: 1491e80891464e44ea6773a82d6200c6,
-        type: 3}
-      propertyPath: ColorModule.gradient.maxGradient.atime1
-      value: 65535
-      objectReference: {fileID: 0}
-    - target: {fileID: 5749144139264127035, guid: 1491e80891464e44ea6773a82d6200c6,
-        type: 3}
-      propertyPath: ColorModule.gradient.maxGradient.atime2
-      value: 65535
-      objectReference: {fileID: 0}
-    - target: {fileID: 5749144139264127035, guid: 1491e80891464e44ea6773a82d6200c6,
-        type: 3}
-      propertyPath: ColorModule.gradient.maxGradient.key1.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5749144139264127035, guid: 1491e80891464e44ea6773a82d6200c6,
-        type: 3}
-      propertyPath: ColorModule.gradient.maxGradient.m_NumAlphaKeys
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 6033413309677323425, guid: 1491e80891464e44ea6773a82d6200c6,
         type: 3}
       propertyPath: m_Name
       value: C_AttackBullet_01_FX
-      objectReference: {fileID: 0}
-    - target: {fileID: 6033413309677323425, guid: 1491e80891464e44ea6773a82d6200c6,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6643763469920796615, guid: 1491e80891464e44ea6773a82d6200c6,
-        type: 3}
-      propertyPath: moveWithTransform
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
