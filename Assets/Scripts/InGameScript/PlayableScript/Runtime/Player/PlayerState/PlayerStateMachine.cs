@@ -80,6 +80,8 @@ namespace LGProject.PlayerState //
         public State CurrentState;
         public Transform hitPlayer;
 
+        public Data.ECharacterType charType;
+
         private Dictionary<string, float> animClipsInfo = new Dictionary<string, float>();
         
         // Constant
@@ -115,7 +117,7 @@ namespace LGProject.PlayerState //
             psm.playerInput = obj.GetComponent<PlayerInput>();
             psm.collider = obj.GetComponent<Collider>();
             psm.battleModel = Object.FindAnyObjectByType<BattleModel>();
-
+            psm.charType = psm.playable.CharacterType;
             psm.IsGrounded = true;
             psm.IsGuard = false;
             try
@@ -130,11 +132,8 @@ namespace LGProject.PlayerState //
                 psm.moveState = new MoveState(psm, ref psm.playable.DashSpeed, psm.playable.MaximumSpeed);
                 psm.jumpState = new JumpState(psm, ref psm.playable.JumpScale, psm.playable.MaximumJumpCount,
                     psm.playable.jumpCurve);
+                ApplyAttackState(psm.charType, psm);
 
-                psm.attackState = new AttackState(psm, ref psm.playable.FirstAttackJudgeDelay,
-                    ref psm.playable.FirstAttackDelay, ref psm.playable.SecondAttackJudgeDelay,
-                    ref psm.playable.SecondAttackDelay, ref psm.playable.ThirdAttackJudgeDelay,
-                    ref psm.playable.ThirdAttackDelay);
                 psm.ultimateState = new UltimateState(psm);
 
                 psm.jumpAttackState = new JumpAttackState(psm, psm.playable.MaximumSpeed);
@@ -147,6 +146,7 @@ namespace LGProject.PlayerState //
                 psm.downState = new DownState(psm, ref psm.playable.DownWaitDelay);
                 psm.wakeUpState = new WakeUpState(psm, ref psm.playable.WakeUpDelay);
                 psm.landingState = new LandingState(psm);
+                
 
                 psm.Initalize(psm.idleState); 
                 //SetUltimateState();
@@ -160,19 +160,56 @@ namespace LGProject.PlayerState //
             return psm;
         }
 
-        public void AnimSpeed(Data.CharacterType characterType, float speed)
+        private static void ApplyAttackState(Data.ECharacterType charcterType, PlayerStateMachine psm)
+        {
+            switch (charcterType)
+            {
+                case Data.ECharacterType.None:
+                    psm.attackState = new AttackState(psm, ref psm.playable.FirstAttackJudgeDelay,
+    ref psm.playable.FirstAttackDelay, ref psm.playable.SecondAttackJudgeDelay,
+    ref psm.playable.SecondAttackDelay, ref psm.playable.ThirdAttackJudgeDelay,
+    ref psm.playable.ThirdAttackDelay);
+                    break;
+                case Data.ECharacterType.Hit:
+                    psm.attackState = new AttackState(psm, ref psm.playable.FirstAttackJudgeDelay,
+    ref psm.playable.FirstAttackDelay, ref psm.playable.SecondAttackJudgeDelay,
+    ref psm.playable.SecondAttackDelay, ref psm.playable.ThirdAttackJudgeDelay,
+    ref psm.playable.ThirdAttackDelay);
+                    break;
+                case Data.ECharacterType.Frost:
+                    psm.attackState = new AttackState(psm, ref psm.playable.FirstAttackJudgeDelay,
+    ref psm.playable.FirstAttackDelay, ref psm.playable.SecondAttackJudgeDelay,
+    ref psm.playable.SecondAttackDelay, ref psm.playable.ThirdAttackJudgeDelay,
+    ref psm.playable.ThirdAttackDelay);
+                    break;
+                case Data.ECharacterType.Cane:
+                    psm.attackState = new KaneAttackState(psm, ref psm.playable.FirstAttackJudgeDelay,
+    ref psm.playable.FirstAttackDelay, ref psm.playable.SecondAttackJudgeDelay,
+    ref psm.playable.SecondAttackDelay, ref psm.playable.ThirdAttackJudgeDelay,
+    ref psm.playable.ThirdAttackDelay);
+                    break;
+                case Data.ECharacterType.Storm:
+                    break;
+                case Data.ECharacterType.E:
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public void AnimSpeed(Data.ECharacterType characterType, float speed)
         {
             switch (characterType)
             {
-                case Data.CharacterType.None:
+                case Data.ECharacterType.None:
                     break;
-                case Data.CharacterType.Hit:
+                case Data.ECharacterType.Hit:
                     animator.speed = speed;
                     break;
-                case Data.CharacterType.Frost:
+                case Data.ECharacterType.Frost:
                     animator.speed = speed;
                     break;
-                case Data.CharacterType.Cain:
+                case Data.ECharacterType.Cane:
                     animator.speed = speed;
                     break;
                 default:
@@ -187,20 +224,20 @@ namespace LGProject.PlayerState //
         }
 
         // 캐릭터 별로 State맞추기
-        public void SetUltimateState(Data.CharacterType charcterType)
+        public void SetUltimateState(Data.ECharacterType charcterType)
         {
             switch (charcterType)
             {
-                case Data.CharacterType.None:
+                case Data.ECharacterType.None:
 
                     break;
-                case Data.CharacterType.Hit:
+                case Data.ECharacterType.Hit:
                     ultimateState = new HitUltimateState(this);
                     break;
-                case Data.CharacterType.Frost:
+                case Data.ECharacterType.Frost:
                     ultimateState = new FrostUltimateState(this);
                     break;
-                case Data.CharacterType.Cain:
+                case Data.ECharacterType.Cane:
 
                     break;
                 default:
@@ -371,6 +408,7 @@ namespace LGProject.PlayerState //
             IsDamaged = true;
         }
 
+
         private async UniTaskVoid SetVelocity(Vector3 velocity, float nockbackDelay = 0.2f )
         {
             await UniTask.Delay(TimeSpan.FromSeconds(nockbackDelay));
@@ -378,6 +416,10 @@ namespace LGProject.PlayerState //
             IsKnockback = true;
         }
 
+        public void ShootProjectile()
+        {
+            playable.ShootProjectile(AttackCount, transform.forward);
+        }
         public void ResetAnimParameters()
         {
             animator.ResetTrigger(Idle);

@@ -14,7 +14,7 @@ namespace LGProject.PlayerState
     {
         public Animator Animator;
         [field: SerializeField] public ActorType ActorType { get; private set; }
-        [field : SerializeField] public CharacterType CharacterType { get; private set; }
+        [field : SerializeField] public ECharacterType CharacterType { get; private set; }
         private BattleModel battleModel;
         private CollisionObserver CollisionObserver;
 
@@ -71,6 +71,8 @@ namespace LGProject.PlayerState
         public float WakeUpDelay = 0;
 
         [HideInInspector] public int LifePoint = 3;
+
+        [HideInInspector] public GameObject projectile;
 
         [Space(10)]
         public Vector3 NoramlAttackKNockbackDirection = new Vector3();
@@ -212,6 +214,14 @@ namespace LGProject.PlayerState
         private void OnCollisionEnter(Collision collision)
         {
             //Debug.Log("Bye");
+
+        }
+
+        // 공격 시작 
+        public virtual void ShootProjectile(int AtkCount, Vector3 velocity)
+        {
+            //Debug.Log("Hello World");
+
         }
 
         #region CheckFields
@@ -423,14 +433,14 @@ namespace LGProject.PlayerState
         {
             switch (CharacterType)
             {
-                case CharacterType.None:
+                case ECharacterType.None:
                     break;
-                case CharacterType.Hit:
+                case ECharacterType.Hit:
                     break;
-                case CharacterType.Frost:
+                case ECharacterType.Frost:
                     StateMachine.playable.effectManager.Stop(EffectManager.EFFECT.UltimateDash);
                     break;
-                case CharacterType.Cain:
+                case ECharacterType.Cane:
                     break;
                 default:
                     break;

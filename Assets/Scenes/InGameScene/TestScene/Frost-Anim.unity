@@ -9529,6 +9529,7 @@ MonoBehaviour:
   DownWaitDelay: 0
   WakeUpDelay: 0
   LifePoint: 3
+  projectile: {fileID: 0}
   NoramlAttackKNockbackDirection: {x: 0, y: 0, z: 0}
   DashAttackKNockbackDirection: {x: 0, y: 0, z: 0}
   movingAttack: 1
@@ -12409,7 +12410,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 148.565, y: -32.601997}
+  m_AnchoredPosition: {x: 148.575, y: -32.601997}
   m_SizeDelta: {x: 61.57, y: 34.796}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1656021335
@@ -14246,7 +14247,7 @@ PrefabInstance:
     - target: {fileID: 4910213552037458275, guid: e748e159dd59aae4188ea3f4a8ac1c84,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 4910213552037458275, guid: e748e159dd59aae4188ea3f4a8ac1c84,
         type: 3}
@@ -15387,8 +15388,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 58.89, y: -25}
-  m_SizeDelta: {x: 117.78, y: 50}
+  m_AnchoredPosition: {x: 58.895, y: -25}
+  m_SizeDelta: {x: 117.79, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2137134651
 MonoBehaviour:

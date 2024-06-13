@@ -837,7 +837,7 @@ public class EffectManager : MonoBehaviour
 
         if (_DashAttackEffect != null)
         {
-            rotOffset = new Vector3(0, 180, 0);
+            //rotOffset = new Vector3(0, 180, 0);
             posOffset = _DashAttackOffset;
             tempEffect = Instantiate(_DashAttackEffect, transform.position + posOffset, Quaternion.Euler(rotOffset));
             tempEffect.transform.parent = transform;

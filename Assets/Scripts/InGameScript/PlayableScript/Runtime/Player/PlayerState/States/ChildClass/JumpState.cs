@@ -53,7 +53,10 @@ namespace LGProject.PlayerState
 
         public override void LogicUpdate()
         {
-            base.LogicUpdate();
+            //base.LogicUpdate();
+
+            if (Damaged())
+                return;
             // 점프 후 이동과 추가 점프를 체크해야함.
             if (StateMachine.JumpInCount < 2 && StateMachine.jumpAction.triggered)
             {

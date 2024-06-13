@@ -29,7 +29,9 @@ namespace LGProject.PlayerState
 
         public override void LogicUpdate()
         {
-            base.LogicUpdate();
+            //base.LogicUpdate();
+            if (Damaged())
+                return;
             // 키 입력을 대기 받으면 상태가 변경됨.
             if (Mathf.Abs(StateMachine.moveAction.ReadValue<float>()) > 0.2f )
             {

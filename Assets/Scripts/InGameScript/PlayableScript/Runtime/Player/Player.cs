@@ -21,11 +21,11 @@ namespace LGProject.PlayerState
         }
 
 
-        private void Start()
+        protected virtual void Start()
         {
             InitStates();
             InitEffectManager();
-            SetUltimateGage(100);
+            SetUltimateGage(0);
             // 소환될 때 게임에 있는 매니저들을 불러옴
             StateMachine.SetUltimateState(CharacterType);
 
@@ -42,7 +42,7 @@ namespace LGProject.PlayerState
         float minTimer = 0.1f;
 
 
-        private void Update()
+        protected virtual void Update()
         {
             if (BattleSceneManager.Instance.IsStart)
             {
