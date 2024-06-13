@@ -13,6 +13,7 @@ namespace LGProject.CollisionZone
         [SerializeField] private Vector3 _direction;
         [SerializeField] private Vector3 _originPos;
         [SerializeField] private GameObject _hitEffect;
+        [SerializeField] private float _range;
 
         public override bool TriggerSpace(Transform plableTransform)
         {
@@ -35,7 +36,7 @@ namespace LGProject.CollisionZone
         private void Update()
         {
             Debug.Log(Vector3.Distance(transform.position, _originPos));
-            if(Vector3.Distance(transform.position, _originPos) > 3.5f)
+            if(Vector3.Distance(transform.position, _originPos) > _range)
             {
                 gameObject.SetActive(false);
                 return;
