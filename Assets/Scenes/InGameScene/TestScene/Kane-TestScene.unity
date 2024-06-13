@@ -390,8 +390,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab96f9a40825b1f4a825269dd2ddff9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 1896813931}
-  offset: {x: 0, y: 1.5, z: 0}
+  Target: {fileID: 1896813931}
+  Offset: {x: 0, y: 1.5, z: 0}
 --- !u!1 &26457170
 GameObject:
   m_ObjectHideFlags: 3
@@ -17095,7 +17095,7 @@ PrefabInstance:
     - target: {fileID: 3003533791217472685, guid: 1491e80891464e44ea6773a82d6200c6,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3003533791217472685, guid: 1491e80891464e44ea6773a82d6200c6,
         type: 3}
@@ -17105,7 +17105,7 @@ PrefabInstance:
     - target: {fileID: 3003533791217472685, guid: 1491e80891464e44ea6773a82d6200c6,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3003533791217472685, guid: 1491e80891464e44ea6773a82d6200c6,
         type: 3}
@@ -17120,7 +17120,7 @@ PrefabInstance:
     - target: {fileID: 3003533791217472685, guid: 1491e80891464e44ea6773a82d6200c6,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3003533791217472685, guid: 1491e80891464e44ea6773a82d6200c6,
         type: 3}
@@ -17190,7 +17190,7 @@ PrefabInstance:
     - target: {fileID: 6033413309677323425, guid: 1491e80891464e44ea6773a82d6200c6,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6643763469920796615, guid: 1491e80891464e44ea6773a82d6200c6,
         type: 3}
