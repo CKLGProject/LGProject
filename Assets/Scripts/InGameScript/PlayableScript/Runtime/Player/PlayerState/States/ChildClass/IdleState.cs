@@ -21,7 +21,7 @@ namespace LGProject.PlayerState
             // 입장 시 내부 정보를 초기화.
             base.Enter();
             StateMachine.StandingVelocity();
-            StateMachine.animator.SetTrigger(Idle);
+            //StateMachine.animator.SetTrigger(Idle);
             StateMachine.animator.SetFloat(Run, 0);
             StateMachine.animator.SetInteger(Attack, 0);
             //StateMachine.animator.ResetTrigger(Landing);

@@ -235,9 +235,23 @@ namespace LGProject.PlayerState
             }
         }
 
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.layer == 9)
+            {
+                BulletCollisionZone bullet = other.GetComponent<BulletCollisionZone>();
+                bullet.gameObject.SetActive(false);
+                StateMachine.ApplyHitDamaged(bullet.KnockbackVelocity, 0, StateMachine, DATA_TYPE.NormalAttack);
+            }
+
+        }
+
         private void OnCollisionEnter(Collision collision)
         {
-            //Debug.Log("Bye");
+            if (collision.gameObject.layer == 9)
+            {
+                Debug.Log("HelloWorld2");
+            }
 
         }
 
