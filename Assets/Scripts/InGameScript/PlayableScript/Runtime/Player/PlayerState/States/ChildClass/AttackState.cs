@@ -180,7 +180,7 @@ namespace LGProject.PlayerState
                 else if (_currentTimer >= time)
                 {
                     // 모션이 끝났으니 기본 상태로 되돌아감.
-                    StateMachine.animator.SetTrigger(Idle);
+                    //StateMachine.animator.SetTrigger(Idle);
                     StateMachine.AttackCount = 0;
                     StateMachine.animator.SetInteger(Attack, 0);
                     StateMachine.ChangeState(StateMachine.idleState);

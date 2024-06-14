@@ -22,7 +22,14 @@ namespace LGProject
 
         public Transform GetPlayers()
         {
-            return OnlinePlayer.transform;
+            try
+            {
+                return OnlinePlayer.transform;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         public void SetPlayers()
