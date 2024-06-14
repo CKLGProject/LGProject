@@ -1,10 +1,9 @@
 using UnityEngine;
 using System;
-using UnityEngine.UI;
-using TMPro;
 using Cysharp.Threading.Tasks;
 using Data;
 using LGProject.CollisionZone;
+using FMODPlus;
 
 namespace LGProject.PlayerState
 {
@@ -74,11 +73,6 @@ namespace LGProject.PlayerState
 
         [HideInInspector] public GameObject projectile;
 
-        [Space(10)]
-        public Vector3 NoramlAttackKNockbackDirection = new Vector3();
-        public Vector3 DashAttackKNockbackDirection = new Vector3();
-
-
         public bool movingAttack = true;
 
         public Vector3 AliveOffset;
@@ -101,8 +95,10 @@ namespace LGProject.PlayerState
             UltimateGage = 100;
         }
 
-        public GameObject DefaultWeapon;
-        public GameObject UltimateWeapon;
+        [HideInInspector] public GameObject DefaultWeapon;
+        /*[HideInInspector]*/ public GameObject UltimateWeapon;
+
+        public FMODAudioSource AudioSource;
 
         // 공격 방향
         [HideInInspector] public bool directionX = false;
@@ -112,16 +108,16 @@ namespace LGProject.PlayerState
 
         [HideInInspector] public EffectManager effectManager;
 
-        /*[HideInInspector]*/ public bool IsGrounded;
-        /*[HideInInspector]*/ public bool IsGuard;
-        /*[HideInInspector]*/ public bool IsJumpGuard;
-        /*[HideInInspector]*/ public bool IsDamaged;
-        /*[HideInInspector]*/ public bool IsDown;
-        /*[HideInInspector]*/ public bool IsKnockback;
-        /*[HideInInspector]*/ public bool IsJumpping;
-        /*[HideInInspector]*/ public bool IsDead;
-        /*[HideInInspector]*/ public bool IsNormalAttack;
-        /*[HideInInspector]*/ public bool IsUltimate;
+        [HideInInspector] public bool IsGrounded;
+        [HideInInspector] public bool IsGuard;
+        [HideInInspector] public bool IsJumpGuard;
+        [HideInInspector] public bool IsDamaged;
+        [HideInInspector] public bool IsDown;
+        [HideInInspector] public bool IsKnockback;
+        [HideInInspector] public bool IsJumpping;
+        [HideInInspector] public bool IsDead;
+        [HideInInspector] public bool IsNormalAttack;
+        [HideInInspector] public bool IsUltimate;
 
         float _gravity = -9.8f;
         float _groundedGravity = -0.05f;
