@@ -1,46 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Threading;
+
 
 namespace LGProject.PlayerState
 {
-
-
-    public class JumpState : State
+    public class FlightState : State
     {
-        //private float _jumpScale = 0;
-        //private int _maximumCount = 0;
-        //private float _jumpDelay = 0.2f;
-        
-        //Thread callback; 
         private static readonly int Landing = Animator.StringToHash("Landing");
         private float dontInputKeyTimer = 0.0f;
         private float currentTimer = 0;
-        public JumpState(PlayerStateMachine stateMachine, ref float jumpScale, int maximumCount, AnimationCurve animationCurve) : base(stateMachine)
+        public FlightState(PlayerStateMachine stateMachine) : base(stateMachine)
         {
-            //_jumpScale = jumpScale;
-            //_maximumCount = maximumCount;
-            //_jumpDelay = 0.2f;
-            //_animationCurve = animationCurve;
         }
 
         public override void Enter()
         {
             base.Enter();
-             
-            StateMachine.JumpVelocity();
+            //StateMachine.IsGrounded = false;
+            //StateMachine.JumpVelocity();
             StateMachine.animator.ResetTrigger(Landing);
             StateMachine.IsJumpping = true;
             StateMachine.JumpInCount++;
-            StateMachine.playable.HandleJumpping();
+            //StateMachine.playable.HandleJumpping();
             //stateMachine.physics.velocity += Vector3.up * _jumpScale;
             StateMachine.animator.SetTrigger("Jump" + StateMachine.JumpInCount);
             FileManager.Instance.SetInGameData(DATA_TYPE.Jump);
 
-
-            // 이걸 n초 뒤에 켜고 싶은데...
-            // -> 머리에 닿으면 꺼주고 싶은데...
         }
 
         public override void Exit()
@@ -51,8 +37,6 @@ namespace LGProject.PlayerState
 
         public override void LogicUpdate()
         {
-            //base.LogicUpdate();
-
             if (Damaged())
                 return;
             // 점프 후 이동과 추가 점프를 체크해야함.
@@ -63,7 +47,7 @@ namespace LGProject.PlayerState
             }
 
             currentTimer += Time.deltaTime;
-            if(currentTimer > dontInputKeyTimer)
+            if (currentTimer > dontInputKeyTimer)
             {
                 // 가드 게이지가 1이상일 경우 발동
                 if (StateMachine.guardAction.triggered && StateMachine.GuardGage > 0 && !StateMachine.IsJumpGuard)
@@ -84,19 +68,12 @@ namespace LGProject.PlayerState
                 StateMachine.ChangeState(StateMachine.landingState);
             }
             Movement(3f);
-
-            //if (StateMachine.)
         }
 
         public override void PhysicsUpdate()
         {
-            // State
-
-            // 공중에 떠있는 코드.
-
+            base.PhysicsUpdate();
         }
-
-
     }
 
 }

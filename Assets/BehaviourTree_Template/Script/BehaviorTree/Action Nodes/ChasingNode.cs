@@ -102,7 +102,7 @@ namespace BehaviourTree
                 return false;
             }
             currentWaypoint.z = _stateMachine.transform.position.z;
-
+            currentWaypoint.y = _stateMachine.transform.position.y; 
             _stateMachine.transform.position = Vector3.MoveTowards(_stateMachine.transform.position, currentWaypoint, _agent.MaximumSpeed * Time.deltaTime);
 
             Vector3 direction = currentWaypoint - _stateMachine.transform.position;
@@ -211,12 +211,15 @@ namespace BehaviourTree
         {
             if (_curTimer >= jumpDelay)
             {
+                Debug.Log($"HH{_count}");
                 _count++;
-                _stateMachine.JumpInCount++;
-                _stateMachine.JumpVelocity();
-                _stateMachine.physics.velocity += Vector3.up * _agent.JumpScale;
+                _agent.GetStateMachine.JumpInCount++;
+                _agent.HandleJumpping();
+                _agent.GetStateMachine.collider.isTrigger = true;
                 _curTimer = 0;
+                _agent.GetStateMachine.animator.SetTrigger("Jump" + _agent.GetStateMachine.JumpInCount.ToString());
             }
+
         }
 
         private void StateMachineLogic()

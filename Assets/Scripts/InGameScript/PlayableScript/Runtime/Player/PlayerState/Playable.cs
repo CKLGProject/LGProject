@@ -108,7 +108,7 @@ namespace LGProject.PlayerState
 
         [HideInInspector] public EffectManager effectManager;
 
-        [HideInInspector] public bool IsGrounded;
+        /*[HideInInspector]*/ public bool IsGrounded;
         [HideInInspector] public bool IsGuard;
         [HideInInspector] public bool IsJumpGuard;
         [HideInInspector] public bool IsDamaged;
@@ -207,6 +207,33 @@ namespace LGProject.PlayerState
             }
         }
 
+        public void UnderPlatformCheck()
+        {
+            switch (ActorType)
+            {
+                case ActorType.None:
+                    break;
+                case ActorType.User:
+                    if (!StateMachine.CheckFlight() && !CollisionObserver.CallUnderPlatformZone(ZoneType.Platform, transform.position + Vector3.down * 0.25f))
+                    {
+                        //Debug.Log("HeloWorld");
+                        StateMachine.ChangeState(StateMachine.flightState);
+                        StateMachine.IsGrounded = false;
+                        StateMachine.collider.isTrigger = true;
+                    }
+                    break;
+                case ActorType.AI:
+                    if(!CollisionObserver.CallUnderPlatformZone(ZoneType.Platform, transform.position + Vector3.down * 0.25f))
+                    {
+                        StateMachine.IsGrounded = false;
+                        StateMachine.collider.isTrigger = true;
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
         private void OnCollisionEnter(Collision collision)
         {
             //Debug.Log("Bye");
@@ -224,27 +251,14 @@ namespace LGProject.PlayerState
 
         private RaycastHit hit;
 
-        float curTimer = 0;
-        float downTimer = 0.5f;
+        //public float curTimer = 0;
+        //float downTimer = 0.5f;
         private static readonly int Landing = Animator.StringToHash("Landing");
         private static readonly int Flying = Animator.StringToHash("Flying");
         private static readonly int Hit = Animator.StringToHash("Hit");
         private static readonly int Knockback = Animator.StringToHash("Knockback");
         private static readonly int WakeUp = Animator.StringToHash("WakeUp");   
         //private static readonly int 
-
-        public void IsPushDownKey()
-        {
-            if (StateMachine.IsDown)
-            {
-                curTimer += Time.deltaTime;
-                if (downTimer < curTimer)
-                {
-                    StateMachine.IsDown = false;
-                    curTimer = 0;
-                }
-            }
-        }
 
         #region Initialize
         public void InitializeInfo()
@@ -335,7 +349,8 @@ namespace LGProject.PlayerState
                 // rect와 비교하여 해당 위치보다 아래 있으면 체크하지 않기.
                 // 그럼 경우의 수는 2가지
                 // 바닥을 뚫었는가? 에 대한 체크
-                if (AABBPlatformCheck())
+                UnderPlatform = PlatformZoneCheck();
+                if ( UnderPlatform != null)
                 {
                     StateMachine.animator.SetTrigger(Landing);
                     if (StateMachine.IsKnockback)
@@ -364,15 +379,20 @@ namespace LGProject.PlayerState
             }
         }
 
-        private bool AABBPlatformCheck()
-        {
-            if (transform.position.x < UnderPlatform.rect.x && transform.position.x > UnderPlatform.rect.width &&
-                transform.position.y < UnderPlatform.rect.y && transform.position.y > UnderPlatform.rect.height)
-            {
-                return true;
-            }
+        //private bool AABBPlatformCheck()
+        //{
+        //    if (transform.position.x < UnderPlatform.rect.x && transform.position.x > UnderPlatform.rect.width &&
+        //        transform.position.y < UnderPlatform.rect.y && transform.position.y > UnderPlatform.rect.height)
+        //    {
+        //        return true;
+        //    }
 
-            return false;
+        //    return false;
+        //}
+
+        public Platform PlatformZoneCheck()
+        {
+            return CollisionObserver.CallZoneFunction(ZoneType.Platform, transform) as Platform;
         }
 
         public void CameraCheck()
@@ -495,7 +515,7 @@ namespace LGProject.PlayerState
 
         public void SetUnderPlatform()
         {
-            UnderPlatform = GameObject.Find("Main_Floor (1)").GetComponent<Platform>();
+            UnderPlatform = GameObject.Find("Main_Floor").GetComponent<Platform>();
         }
 
         public void SwitchingWeapon(bool Ultimate)

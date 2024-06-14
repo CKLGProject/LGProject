@@ -11,6 +11,10 @@ namespace LGProject.CollisionZone
         {
             InitSize();
         }
+        public override bool TriggerSpace(Vector3 playableVector)
+        {
+            throw new System.NotImplementedException();
+        }
 
         public override bool TriggerSpace(Transform pTransform)
         {
@@ -21,5 +25,6 @@ namespace LGProject.CollisionZone
             }
             return true;
         }
+
     }
 }

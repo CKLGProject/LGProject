@@ -46,5 +46,7 @@ namespace LGProject.CollisionZone
 
         public abstract bool TriggerSpace(Transform plableTransform);
 
+        public abstract bool TriggerSpace(Vector3 playableVector);
+
     }
 }

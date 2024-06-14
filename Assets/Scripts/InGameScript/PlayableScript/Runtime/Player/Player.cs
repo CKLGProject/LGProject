@@ -64,6 +64,7 @@ namespace LGProject.PlayerState
                 DeadSpaceCheck();
                 CameraCheck();
                 UpdateUltimateTimer();
+                UnderPlatformCheck();
             }
         }
 

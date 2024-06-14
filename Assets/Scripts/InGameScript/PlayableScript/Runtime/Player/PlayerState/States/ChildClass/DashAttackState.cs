@@ -26,7 +26,7 @@ namespace LGProject.PlayerState
             StateMachine.physics.velocity = Vector3.zero;
             _damageInCount = false;
             StateMachine.physics.velocity += Vector3.right * (StateMachine.moveAction.ReadValue<float>()) * 10f;
-            StateMachine.playable.effectManager.Play(EffectManager.EFFECT.DashAttack).Forget();
+            StateMachine.playable.effectManager.Play(EffectManager.EFFECT.DashAttack, 0.1f).Forget();
             // velocity 초기화 X
             // 그런데 브레이크는 걸면 좋을 듯? 대충 Drag값 조절해서 끼이익 하는 느낌을 줘보자.
             //Debug.Log("Sert");

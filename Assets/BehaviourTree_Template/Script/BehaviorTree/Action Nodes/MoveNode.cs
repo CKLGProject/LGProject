@@ -23,7 +23,7 @@ namespace BehaviourTree
 
         // 현재 이동을 A*로 진행하려 생각 중.
         // Platform을 기준으로 이동할 수 있는 노드이며 대각선 이동 또는 y축 이동일 경우 점프를 하게 대체.
-        public float jumpDelay = 0;
+        private float jumpDelay = 0.5f;
         private float _curTimer = 0;
         private int _count = 0;
         
@@ -117,7 +117,9 @@ namespace BehaviourTree
                     return false;
                 }
                 currentWaypoint.z = _agent.transform.position.z;
+                currentWaypoint.y = _stateMachine.transform.position.y;
 
+                //if (_agent.GetStateMachine.IsGrounded) 
                 _agent.transform.position = Vector3.MoveTowards(_agent.transform.position, currentWaypoint, _stateMachine.playable.MaximumSpeed * Time.deltaTime);
 
                 Vector3 direction = currentWaypoint - _agent.transform.position;
@@ -244,12 +246,13 @@ namespace BehaviourTree
 
         private void SetJumpVelocity()
         {
-            if (_curTimer >= jumpDelay)
+            if (_curTimer >= jumpDelay && _agent.GetStateMachine.JumpInCount < 2)
             {
+                Debug.Log($"HH{_count}");
                 _count++;
                 _agent.GetStateMachine.JumpInCount++;
-                _agent.GetStateMachine.JumpVelocity();
                 _agent.HandleJumpping();
+                _agent.GetStateMachine.collider.isTrigger = true;
                 _curTimer = 0;
                 _agent.GetStateMachine.animator.SetTrigger("Jump" + _agent.GetStateMachine.JumpInCount.ToString());
             }

@@ -28,6 +28,10 @@ namespace LGProject.CollisionZone
             SubTarget(plableTransform);
             return false;
         }
+        public override bool TriggerSpace(Vector3 playableVector)
+        {
+            throw new System.NotImplementedException();
+        }
 
         public void SubTarget(Transform pTransform)
         {
