@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3a3bf1bf71981d8439d6f9b11ad491fa
+guid: aae26fd82bb0d7a4b8aad5c6344f0a5f
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -33,11 +33,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Run
+      name: KnockStay
       takeName: Take 001
       internalID: 1827226128182048838
-      firstFrame: 0
-      lastFrame: 18
+      firstFrame: 8
+      lastFrame: 20
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
