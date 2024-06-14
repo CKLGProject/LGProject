@@ -217,7 +217,6 @@ namespace LGProject.PlayerState
                 case ActorType.User:
                     if (!StateMachine.CheckFlight() && !CollisionObserver.CallUnderPlatformZone(ZoneType.Platform, transform.position + Vector3.down * 0.25f))
                     {
-                        //Debug.Log("HeloWorld");
                         StateMachine.ChangeState(StateMachine.flightState);
                         StateMachine.IsGrounded = false;
                         StateMachine.collider.isTrigger = true;
@@ -365,7 +364,7 @@ namespace LGProject.PlayerState
                 // 그럼 경우의 수는 2가지
                 // 바닥을 뚫었는가? 에 대한 체크
                 UnderPlatform = PlatformZoneCheck();
-                if ( UnderPlatform != null)
+                if (UnderPlatform != null)
                 {
                     StateMachine.animator.SetTrigger(Landing);
                     if (StateMachine.IsKnockback)
