@@ -19,6 +19,10 @@ namespace LGProject.CollisionZone
         {
             throw new System.NotImplementedException();
         }
+        public override bool TriggerSpace(Vector3 playableVector)
+        {
+            throw new NotImplementedException();
+        }
 
         public void MoveSet(float speed, Vector3 direction, float timer)
         {
@@ -49,5 +53,6 @@ namespace LGProject.CollisionZone
         {
             await UniTask.Delay(TimeSpan.FromSeconds(time));
         }
+
     }
 }

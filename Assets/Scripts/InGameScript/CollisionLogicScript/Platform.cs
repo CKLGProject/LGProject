@@ -4,13 +4,36 @@ using UnityEngine;
 
 namespace LGProject.CollisionZone
 {
-    public class Platform : MonoBehaviour
+    public class Platform : CollisionZone
     {
         public Vector3 center;
         public Vector3 offset;
         public List<GameObject> objList;
         public GameObject prefab;
         public Rect rect = new Rect();
+
+        public override bool TriggerSpace(Transform plableTransform)
+        {
+            if (plableTransform.position.x < rect.x && plableTransform.position.x > rect.width &&
+                plableTransform.position.y < rect.y && plableTransform.position.y > rect.height)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public override bool TriggerSpace(Vector3 playableVector)
+        {
+            if (playableVector.x < rect.x && playableVector.x > rect.width &&
+                playableVector.y < rect.y && playableVector.y > rect.height)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.white;

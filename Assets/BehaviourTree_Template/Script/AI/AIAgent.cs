@@ -61,6 +61,7 @@ namespace BehaviourTree
         {
             player = BattleSceneManager.Instance.GetPlayers();
             InitEffectManager();
+            SetupJumpVariables();
             effectManager.InitParticles();
             SetUnderPlatform();
             SetUltimateGage(0);
@@ -97,6 +98,7 @@ namespace BehaviourTree
             NewPlatformCheck();
             DeadSpaceCheck();
             CameraCheck();
+            UnderPlatformCheck();
         }
         async UniTaskVoid Counter ()
         {

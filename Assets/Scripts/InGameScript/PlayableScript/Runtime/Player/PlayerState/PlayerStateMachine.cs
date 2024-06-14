@@ -37,6 +37,7 @@ namespace LGProject.PlayerState //
         public IdleState idleState;
         public MoveState moveState;
         public JumpState jumpState;
+        public FlightState flightState;
         public AttackState attackState;
         public JumpAttackState jumpAttackState;
         public DashAttackState dashAttackState;
@@ -132,6 +133,7 @@ namespace LGProject.PlayerState //
                 psm.moveState = new MoveState(psm, ref psm.playable.DashSpeed, psm.playable.MaximumSpeed);
                 psm.jumpState = new JumpState(psm, ref psm.playable.JumpScale, psm.playable.MaximumJumpCount,
                     psm.playable.jumpCurve);
+                psm.flightState = new FlightState(psm);
                 ApplyAttackState(psm.charType, psm);
 
                 psm.ultimateState = new UltimateState(psm);
@@ -215,6 +217,20 @@ namespace LGProject.PlayerState //
                 default:
                     break;
             }
+        }
+
+        public bool CheckFlight()
+        {
+            //if (CurrentState.GetType() == typeof(IdleState) &&
+            //    CurrentState.GetType() == typeof(MoveState) &&
+            //    CurrentState.GetType() == typeof(AttackState) &&
+            //    CurrentState.GetType() == typeof(DashAttackState) )
+            if(CurrentState.GetType() == typeof(JumpState) || 
+                CurrentState.GetType() == typeof(FlightState) || 
+                CurrentState.GetType() == typeof(JumpAttackState) || 
+                CurrentState.GetType() == typeof(KnockbackState))
+                return true;
+            return false;
         }
 
         public async UniTaskVoid ResetAnimSpeed(float time = 0f)
