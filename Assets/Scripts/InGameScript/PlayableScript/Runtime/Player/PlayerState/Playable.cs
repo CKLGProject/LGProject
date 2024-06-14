@@ -514,10 +514,6 @@ namespace LGProject.PlayerState
         }
         #endregion
 
-        public void SetUnderPlatform()
-        {
-            UnderPlatform = GameObject.Find("Main_Floor").GetComponent<Platform>();
-        }
 
         public void SwitchingWeapon(bool Ultimate)
         {
