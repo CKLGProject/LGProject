@@ -1,4 +1,8 @@
 # Changelog
+## [1.6.4]-Beta - 2024-06-14
+### Change
+- Assembly Definition 이름 수정
+
 ## [1.6.3]-Beta - 2023-10-24
 ### Fixed
 - KeyList 라벨 글자가 밀려서 Show Info 안보이던 이슈 수정
