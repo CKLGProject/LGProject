@@ -7,6 +7,7 @@ namespace Data
         public EPetType PetType;
         public PetData PetData;
         public int Level;
+        public bool HasPet;
 
         /// <summary>
         /// 해당 레벨의 프로필 이미지를 제공합니다.

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18018535, g: 0.22559482, b: 0.30677685, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -778,7 +778,7 @@ GameObject:
   m_Component:
   - component: {fileID: 263828256}
   m_Layer: 0
-  m_Name: Pat Group
+  m_Name: Pet Group
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1039,7 +1039,7 @@ GameObject:
   - component: {fileID: 438279085}
   - component: {fileID: 438279087}
   m_Layer: 0
-  m_Name: Pat Capture System
+  m_Name: Pet Capture System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1119,30 +1119,35 @@ MonoBehaviour:
     GuideMessage: "\uC624\uBE10\uC744 \uC5F4\uC5B4 \uC8FC\uC138\uC694."
     GestureUI: {fileID: 846676794}
     GestureType: 2
+    RewardPet: 0
   - ObjectName: Refrigerator
     MachineObject: {fileID: 95087986}
     CharacterObject: {fileID: 1222049142}
     GuideMessage: "\uB0C9\uC7A5\uACE0\uB97C \uC5F4\uC5B4 \uC8FC\uC138\uC694."
     GestureUI: {fileID: 868444530}
     GestureType: 3
+    RewardPet: 0
   - ObjectName: vacuum
     MachineObject: {fileID: 618497643}
     CharacterObject: {fileID: 408449889}
     GuideMessage: "\uCCAD\uC18C\uAE30\uB97C \uB20C\uB7EC \uC8FC\uC138\uC694."
     GestureUI: {fileID: 1013301368}
     GestureType: 1
+    RewardPet: 0
   - ObjectName: Air Conditioner
     MachineObject: {fileID: 2136168070}
     CharacterObject: {fileID: 408449889}
     GuideMessage: "\uC5D0\uC5B4\uCEE8\uC744 \uB20C\uB7EC \uC8FC\uC138\uC694."
     GestureUI: {fileID: 1013301368}
     GestureType: 1
+    RewardPet: 0
   - ObjectName: Cinebeam Cube
     MachineObject: {fileID: 535801158}
     CharacterObject: {fileID: 1214068827}
     GuideMessage: "\uC2DC\uB124\uBE54 \uD050\uBE0C\uB97C \uB20C\uB7EC\uC8FC\uC138\uC694."
     GestureUI: {fileID: 1013301368}
     GestureType: 1
+    RewardPet: 0
   objectContent: {fileID: 2041036352}
   objectRotation: {fileID: 208130402}
 --- !u!114 &438279087

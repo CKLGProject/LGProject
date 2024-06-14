@@ -9,6 +9,7 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.Singleton;
 using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
 using TrackingState = UnityEngine.XR.ARSubsystems.TrackingState;
@@ -158,6 +159,9 @@ public class PatCaptureView : MonoBehaviour
         // 오브젝트 회전 활성화
         objectRotation.Active = true;
 
+        // 펫을 추가합니다.
+        Singleton.Instance<GameManager>().AddPet(_targetObject.Value.RewardPet);
+        
         // 타겟팅된 가전제품 활성화
         _targetObject.Value.MachineObject.SetActive(true);
     }

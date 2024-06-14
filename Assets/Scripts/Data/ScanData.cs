@@ -20,5 +20,6 @@ namespace Data
         public string GuideMessage;
         public GameObject GestureUI;
         public GestureType GestureType;
+        public EPetType RewardPet;
     }
 }

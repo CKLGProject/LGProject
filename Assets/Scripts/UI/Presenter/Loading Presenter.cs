@@ -25,7 +25,7 @@ public class LoadingPresenter : MonoBehaviour
         _loadingView.SetCharacterImage(ActorType.User, userCharacter);
 
         // 유저 정령 UI를 설정한다.
-        Sprite userPatImage = CurrentGameManager.GetPat(ActorType.User).GetProfileImage();
+        Sprite userPatImage = CurrentGameManager.GetPet(ActorType.User).GetProfileImage();
         _loadingView.SetPatUI(ActorType.User, userPatImage);
 
         #endregion
@@ -37,7 +37,7 @@ public class LoadingPresenter : MonoBehaviour
         _loadingView.SetCharacterImage(ActorType.AI, aiCharacter);
         
         // AI 정령 UI를 설정한다.
-        Sprite aiPatImage = CurrentGameManager.GetPat(ActorType.AI).GetProfileImage();
+        Sprite aiPatImage = CurrentGameManager.GetPet(ActorType.AI).GetProfileImage();
         _loadingView.SetPatUI(ActorType.AI, aiPatImage);
 
         #endregion
