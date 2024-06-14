@@ -39,7 +39,7 @@ namespace BehaviourTree
                 return State.Failure;
             }
 
-            if (_agent.path.Length > 0 && TargetPointToPlayerPositionDistance() > 2f)
+            if (_agent.path.Length > 0 && TargetPointToPlayerPositionDistance() > 3f)
             {
                 pathFinding.PathRequestManager.RequestPath(new pathFinding.PathRequest(_stateMachine.transform.position, _agent.player.position, _agent.GetPath));
                 return State.Running;

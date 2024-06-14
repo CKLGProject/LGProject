@@ -154,7 +154,10 @@ namespace BehaviourTree
             if (!_stateMachine.IsGrounded)
                 _stateMachine.animator.SetTrigger("JumpAttack");
             else
+            {
+                _stateMachine.physics.velocity += _stateMachine.transform.forward * 5f;
                 _stateMachine.animator.SetTrigger("DashAttack");
+            }
             _stateMachine.animator.SetFloat("Run", 0);
         }
 
