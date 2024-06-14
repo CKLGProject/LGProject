@@ -1011,7 +1011,7 @@ public class EffectManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("Not thing");
+                //Debug.Log("Not thing");
             }
         }
         catch

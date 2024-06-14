@@ -513,7 +513,14 @@ namespace LGProject.PlayerState
         /// </summary>
         public void ShootProjectile()
         {
-            playable.ShootProjectile(AttackCount, transform.forward);
+            try
+            {
+                playable.ShootProjectile(AttackCount, transform.forward);
+            }
+            catch
+            {
+                Debug.Log($"{transform.name}");
+            }
         }
 
         /// <summary>

@@ -99,11 +99,6 @@ namespace BehaviourTree
             CameraCheck();
             UnderPlatformCheck();
         }
-        async UniTaskVoid Counter ()
-        {
-            await UniTask.Delay(System.TimeSpan.FromSeconds(0.1f));
-
-        }
 
         private void OnDrawGizmos()
         {
