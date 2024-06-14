@@ -101,7 +101,7 @@ namespace BehaviourTree
             _stateMachine.AttackCount++;
             _stateMachine.animator.SetInteger("Attack", _stateMachine.AttackCount);
             _curTimer = 0;
-            _time = _stateMachine.GetAnimPlayTime("Attack" + (_stateMachine.AttackCount).ToString());
+            _time = _stateMachine.GetAnimationPlayTime("Attack" + (_stateMachine.AttackCount).ToString());
             switch (_stateMachine.AttackCount)
             {
                 case 1:
@@ -167,8 +167,8 @@ namespace BehaviourTree
                 {
                     temp.
                     Item1.GetStateMachine.
-                    HitDamaged(_stateMachine.AttackCount < 3 ? Vector3.zero : velocity, 0, _stateMachine, LGProject.DATA_TYPE.NormalAttack);
-                    temp.Item1.GetStateMachine.hitPlayer = _stateMachine.transform;
+                    ApplyHitDamaged(_stateMachine.AttackCount < 3 ? Vector3.zero : velocity, 0, _stateMachine, LGProject.DATA_TYPE.NormalAttack);
+                    temp.Item1.GetStateMachine.HitPlayer = _stateMachine.transform;
 
                     _stateMachine.animator.SetInteger("Attack", 0);
                     if (_stateMachine.playable.movingAttack)

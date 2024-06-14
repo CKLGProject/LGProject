@@ -1,3 +1,4 @@
+using FMODUnity;
 using UnityEngine;
 
 namespace LGProject.PlayerState
@@ -91,6 +92,13 @@ namespace LGProject.PlayerState
                     break;  
             }
             #endregion
+
+            #region 오디오 출력
+
+            if (StateMachine.AudioList.TryFindClip("Punch", out EventReference clip)) 
+                StateMachine.AudioSource.PlayOneShot(clip);
+            
+            #endregion
         }
 
         public override void Exit()
@@ -124,7 +132,7 @@ namespace LGProject.PlayerState
 
         private void AttackLogic()
         {
-            float time = StateMachine.GetAnimPlayTime("Attack" + StateMachine.AttackCount);
+            float time = StateMachine.GetAnimationPlayTime("Attack" + StateMachine.AttackCount);
             float animDelay = 1 ;
             switch (StateMachine.AttackCount)
             {
@@ -218,7 +226,7 @@ namespace LGProject.PlayerState
                         {
                             temp.
                             Item1.GetStateMachine.
-                            HitDamaged(StateMachine.AttackCount - 1 < 2 ? Vector3.zero : velocity, 0.1f, StateMachine, DATA_TYPE.NormalAttackHit);
+                            ApplyHitDamaged(StateMachine.AttackCount - 1 < 2 ? Vector3.zero : velocity, 0.1f, StateMachine, DATA_TYPE.NormalAttackHit);
                             _damageInCount = true;
                             //if (StateMachine.AttackCount > 2)
                             //    Debug.Log("");
@@ -226,7 +234,7 @@ namespace LGProject.PlayerState
                             {
                                 // 100 % gage로 일단 계산
                                 StateMachine.playable.SetUltimateGage(StateMachine.playable.UltimateGage + 10);
-                                StateMachine.UltimateGageisFull();
+                                StateMachine.UltimateGageIsFull();
                             }
                         }
                     }

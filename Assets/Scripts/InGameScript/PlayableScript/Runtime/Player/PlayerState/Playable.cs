@@ -99,6 +99,7 @@ namespace LGProject.PlayerState
         /*[HideInInspector]*/ public GameObject UltimateWeapon;
 
         [SerializeField] private FMODAudioSource audioSource;
+        private LocalKeyList _localKeyList;
 
         // 공격 방향
         [HideInInspector] public bool directionX = false;

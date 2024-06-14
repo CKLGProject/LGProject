@@ -70,7 +70,7 @@ namespace BehaviourTree
             {
                 string name = StateMachine.animator.runtimeAnimatorController.animationClips[i].name;
                 float time = StateMachine.animator.runtimeAnimatorController.animationClips[i].length;
-                StateMachine.SetAnimPlayTime(name, time);
+                StateMachine.SetAnimationPlayTime(name, time);
             }
             FileManager.Instance.LoadData();
 

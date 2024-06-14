@@ -22,7 +22,7 @@ namespace LGProject.PlayerState
             base.Enter();
             _currentTimer = 0;
 
-            StateMachine.ResetAnimParameters();
+            StateMachine.ResetAnimationParameters();
             StateMachine.animator.SetTrigger(WakeUp);
             StateMachine.animator.SetFloat(Run, 0);
         }

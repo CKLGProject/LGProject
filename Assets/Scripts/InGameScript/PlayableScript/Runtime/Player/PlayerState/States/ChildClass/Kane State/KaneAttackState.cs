@@ -48,7 +48,7 @@ namespace LGProject.PlayerState
 
         private void AttackLogic()
         {
-            float time = StateMachine.GetAnimPlayTime("Attack" + StateMachine.AttackCount);
+            float time = StateMachine.GetAnimationPlayTime("Attack" + StateMachine.AttackCount);
             float animDelay = 1;
             switch (StateMachine.AttackCount)
             {

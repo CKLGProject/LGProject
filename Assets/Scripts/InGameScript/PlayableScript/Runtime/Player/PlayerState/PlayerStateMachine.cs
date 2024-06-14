@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Cysharp.Threading.Tasks;
+using FMODPlus;
 using Object = UnityEngine.Object;
 
-namespace LGProject.PlayerState // 
+namespace LGProject.PlayerState
 {
     public enum DAMAGE_TYPE
     {
@@ -23,6 +24,8 @@ namespace LGProject.PlayerState //
         public Transform transform;
         public Playable playable;
         public Animator animator;
+        public FMODAudioSource AudioSource;
+        public LocalKeyList AudioList;
         public Rigidbody physics;
         public PlayerInput playerInput;
         public Collider collider;
@@ -74,17 +77,17 @@ namespace LGProject.PlayerState //
 
         public int JumpInCount = 0;
         public int AttackCount = 0;
-        
+
         // 이건 어떻게 깎이게 할 것인가?
         public float GuardGage = 100;
 
         public State CurrentState;
-        public Transform hitPlayer;
+        public Transform HitPlayer;
 
-        public Data.ECharacterType charType;
+        public Data.ECharacterType CharacterType;
 
-        private Dictionary<string, float> animClipsInfo = new Dictionary<string, float>();
-        
+        private Dictionary<string, float> _animationClipsInfo = new Dictionary<string, float>();
+
         // Constant
         private static readonly int Hit = Animator.StringToHash("Hit");
         private static readonly int Knockback = Animator.StringToHash("Knockback");
@@ -96,29 +99,46 @@ namespace LGProject.PlayerState //
         private static readonly int WakeUp = Animator.StringToHash("WakeUp");
         private static readonly int GuardEnd = Animator.StringToHash("GuardEnd");
 
-        public void SetAnimPlayTime(string clipName, float time)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="clipName"></param>
+        /// <param name="time"></param>
+        public void SetAnimationPlayTime(string clipName, float time)
         {
-            //animClipsInfo.Add(clipName, time);
+            //_animationClipsInfo.Add(clipName, time);
         }
 
-        public float GetAnimPlayTime(string clipName)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="clipName"></param>
+        /// <returns></returns>
+        public float GetAnimationPlayTime(string clipName)
         {
-            animClipsInfo.TryGetValue(clipName, out float value);
+            _animationClipsInfo.TryGetValue(clipName, out float value);
             return value;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public static PlayerStateMachine CreateStateMachine(GameObject obj)
         {
             PlayerStateMachine psm = new PlayerStateMachine();
             psm.transform = obj.transform;
             psm.playable = obj.GetComponent<Playable>();
             //psm.animator = obj.GetComponent<Animator>();
+            psm.AudioSource = obj.GetComponent<FMODAudioSource>();
+            psm.AudioList = Object.FindAnyObjectByType<LocalKeyList>();
             psm.animator = psm.playable.Animator;
             psm.physics = obj.GetComponent<Rigidbody>();
             psm.playerInput = obj.GetComponent<PlayerInput>();
             psm.collider = obj.GetComponent<Collider>();
             psm.battleModel = Object.FindAnyObjectByType<BattleModel>();
-            psm.charType = psm.playable.CharacterType;
+            psm.CharacterType = psm.playable.CharacterType;
             psm.IsGrounded = true;
             psm.IsGuard = false;
             try
@@ -134,7 +154,7 @@ namespace LGProject.PlayerState //
                 psm.jumpState = new JumpState(psm, ref psm.playable.JumpScale, psm.playable.MaximumJumpCount,
                     psm.playable.jumpCurve);
                 psm.flightState = new FlightState(psm);
-                ApplyAttackState(psm.charType, psm);
+                ApplyAttackState(psm.CharacterType, psm);
 
                 psm.ultimateState = new UltimateState(psm);
 
@@ -148,9 +168,9 @@ namespace LGProject.PlayerState //
                 psm.downState = new DownState(psm, ref psm.playable.DownWaitDelay);
                 psm.wakeUpState = new WakeUpState(psm, ref psm.playable.WakeUpDelay);
                 psm.landingState = new LandingState(psm);
-                
 
-                psm.Initalize(psm.idleState); 
+
+                psm.Initalize(psm.idleState);
                 //SetUltimateState();
             }
             catch
@@ -162,33 +182,38 @@ namespace LGProject.PlayerState //
             return psm;
         }
 
-        private static void ApplyAttackState(Data.ECharacterType charcterType, PlayerStateMachine psm)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="characterType"></param>
+        /// <param name="psm"></param>
+        private static void ApplyAttackState(Data.ECharacterType characterType, PlayerStateMachine psm)
         {
-            switch (charcterType)
+            switch (characterType)
             {
                 case Data.ECharacterType.None:
                     psm.attackState = new AttackState(psm, ref psm.playable.FirstAttackJudgeDelay,
-    ref psm.playable.FirstAttackDelay, ref psm.playable.SecondAttackJudgeDelay,
-    ref psm.playable.SecondAttackDelay, ref psm.playable.ThirdAttackJudgeDelay,
-    ref psm.playable.ThirdAttackDelay);
+                        ref psm.playable.FirstAttackDelay, ref psm.playable.SecondAttackJudgeDelay,
+                        ref psm.playable.SecondAttackDelay, ref psm.playable.ThirdAttackJudgeDelay,
+                        ref psm.playable.ThirdAttackDelay);
                     break;
                 case Data.ECharacterType.Hit:
                     psm.attackState = new AttackState(psm, ref psm.playable.FirstAttackJudgeDelay,
-    ref psm.playable.FirstAttackDelay, ref psm.playable.SecondAttackJudgeDelay,
-    ref psm.playable.SecondAttackDelay, ref psm.playable.ThirdAttackJudgeDelay,
-    ref psm.playable.ThirdAttackDelay);
+                        ref psm.playable.FirstAttackDelay, ref psm.playable.SecondAttackJudgeDelay,
+                        ref psm.playable.SecondAttackDelay, ref psm.playable.ThirdAttackJudgeDelay,
+                        ref psm.playable.ThirdAttackDelay);
                     break;
                 case Data.ECharacterType.Frost:
                     psm.attackState = new AttackState(psm, ref psm.playable.FirstAttackJudgeDelay,
-    ref psm.playable.FirstAttackDelay, ref psm.playable.SecondAttackJudgeDelay,
-    ref psm.playable.SecondAttackDelay, ref psm.playable.ThirdAttackJudgeDelay,
-    ref psm.playable.ThirdAttackDelay);
+                        ref psm.playable.FirstAttackDelay, ref psm.playable.SecondAttackJudgeDelay,
+                        ref psm.playable.SecondAttackDelay, ref psm.playable.ThirdAttackJudgeDelay,
+                        ref psm.playable.ThirdAttackDelay);
                     break;
                 case Data.ECharacterType.Kane:
                     psm.attackState = new KaneAttackState(psm, ref psm.playable.FirstAttackJudgeDelay,
-    ref psm.playable.FirstAttackDelay, ref psm.playable.SecondAttackJudgeDelay,
-    ref psm.playable.SecondAttackDelay, ref psm.playable.ThirdAttackJudgeDelay,
-    ref psm.playable.ThirdAttackDelay);
+                        ref psm.playable.FirstAttackDelay, ref psm.playable.SecondAttackJudgeDelay,
+                        ref psm.playable.SecondAttackDelay, ref psm.playable.ThirdAttackJudgeDelay,
+                        ref psm.playable.ThirdAttackDelay);
                     break;
                 case Data.ECharacterType.Storm:
                     break;
@@ -199,7 +224,12 @@ namespace LGProject.PlayerState //
             }
         }
 
-        public void AnimSpeed(Data.ECharacterType characterType, float speed)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="characterType"></param>
+        /// <param name="speed"></param>
+        public void AnimationSpeed(Data.ECharacterType characterType, float speed)
         {
             switch (characterType)
             {
@@ -219,20 +249,28 @@ namespace LGProject.PlayerState //
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public bool CheckFlight()
         {
             //if (CurrentState.GetType() == typeof(IdleState) &&
             //    CurrentState.GetType() == typeof(MoveState) &&
             //    CurrentState.GetType() == typeof(AttackState) &&
             //    CurrentState.GetType() == typeof(DashAttackState) )
-            if(CurrentState.GetType() == typeof(JumpState) || 
-                CurrentState.GetType() == typeof(FlightState) || 
-                CurrentState.GetType() == typeof(JumpAttackState) || 
+            if (CurrentState.GetType() == typeof(JumpState) ||
+                CurrentState.GetType() == typeof(FlightState) ||
+                CurrentState.GetType() == typeof(JumpAttackState) ||
                 CurrentState.GetType() == typeof(KnockbackState))
                 return true;
             return false;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="time"></param>
         public async UniTaskVoid ResetAnimSpeed(float time = 0f)
         {
             await UniTask.Delay(TimeSpan.FromSeconds(time));
@@ -261,12 +299,20 @@ namespace LGProject.PlayerState //
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="startingState"></param>
         public void Initalize(State startingState)
         {
             CurrentState = startingState;
             startingState.Enter();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="nextState"></param>
         public void ChangeState(State nextState)
         {
             CurrentState.Exit();
@@ -274,6 +320,10 @@ namespace LGProject.PlayerState //
             CurrentState.Enter();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public Transform CheckEnemy()
         {
             Vector3 downPos = transform.position;
@@ -331,15 +381,27 @@ namespace LGProject.PlayerState //
             playable.IsNormalAttack = IsNormalAttack;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void ResetVelocity()
         {
             physics.velocity = Vector3.zero;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="damageType"></param>
         public void DataSet(DATA_TYPE damageType)
         {
             UpdateData(damageType);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="damageType"></param>
         public void UpdateData(DATA_TYPE damageType)
         {
             try
@@ -378,20 +440,29 @@ namespace LGProject.PlayerState //
             {
                 Debug.Log("Don't have File Manager");
             }
-
         }
 
-        public void HitDamaged(Vector3 velocity, float nockbackDelay ,PlayerStateMachine EnemyStateMachine , DATA_TYPE dataType)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="velocity"></param>
+        /// <param name="nockbackDelay"></param>
+        /// <param name="EnemyStateMachine"></param>
+        /// <param name="dataType"></param>
+        public void ApplyHitDamaged(Vector3 velocity, float nockbackDelay, PlayerStateMachine EnemyStateMachine,
+            DATA_TYPE dataType)
         {
             UpdateData(dataType);
             // 누어 있는 상태에선 데미지를 입지 않는다.
-            if (IsDown || IsUseUltimate || IsSuperArmor ||(EnemyStateMachine != null && IsUseUltimate))
+            if (IsDown || IsUseUltimate || IsSuperArmor || (EnemyStateMachine != null && IsUseUltimate))
                 return;
-            if(IsGuard)
+            if (IsGuard)
             {
                 //GuardGage -= 25;
-                physics.velocity = new Vector3((EnemyStateMachine.transform.position - transform.position).normalized.x * -2.5f, 0, 0);
+                physics.velocity =
+                    new Vector3((EnemyStateMachine.transform.position - transform.position).normalized.x * -2.5f, 0, 0);
             }
+
             if (!IsGuard || (EnemyStateMachine != null && EnemyStateMachine.IsUseUltimate))
             {
                 physics.velocity = Vector3.zero;
@@ -410,7 +481,7 @@ namespace LGProject.PlayerState //
                     animator.SetTrigger(Hit);
                 }
 
-                if(EnemyStateMachine != null && EnemyStateMachine.IsUseUltimate)
+                if (EnemyStateMachine != null && EnemyStateMachine.IsUseUltimate)
                 {
                     playable.effectManager.PlayOneShot(EffectManager.EFFECT.UltimateHit, Vector3.left);
                 }
@@ -418,25 +489,37 @@ namespace LGProject.PlayerState //
                 {
                     playable.effectManager.Play(EffectManager.EFFECT.Hit).Forget();
                 }
+
                 playable.effectManager.Stop(EffectManager.EFFECT.Guard);
             }
 
             IsDamaged = true;
         }
 
-
-        private async UniTaskVoid SetVelocity(Vector3 velocity, float nockbackDelay = 0.2f )
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="velocity"></param>
+        /// <param name="nockbackDelay"></param>
+        private async UniTaskVoid SetVelocity(Vector3 velocity, float nockbackDelay = 0.2f)
         {
             await UniTask.Delay(TimeSpan.FromSeconds(nockbackDelay));
             physics.velocity = velocity;
             IsKnockback = true;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void ShootProjectile()
         {
             playable.ShootProjectile(AttackCount, transform.forward);
         }
-        public void ResetAnimParameters()
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void ResetAnimationParameters()
         {
             animator.ResetTrigger(Idle);
             animator.ResetTrigger(DashAttack);
@@ -449,12 +532,10 @@ namespace LGProject.PlayerState //
             animator.ResetTrigger(GuardEnd);
         }
 
-        public void UltimateGageisFull()
+        public void UltimateGageIsFull()
         {
             if (playable.UltimateGage >= 100)
-            {
                 playable.ShowUltimateEffect();
-            }
         }
     }
 }

@@ -24,7 +24,7 @@ namespace LGProject.PlayerState
             //stateMachine.physics.velocity = stateMachine;
 
             StateMachine.AttackCount = 0;
-            //Debug.Log($"{stateMachine.transform.ToString()}who's hit? : {stateMachine.hitPlayer}");
+            //Debug.Log($"{stateMachine.transform.ToString()}who's hit? : {stateMachine.HitPlayer}");
             _currentTimer = 0;
 
         }

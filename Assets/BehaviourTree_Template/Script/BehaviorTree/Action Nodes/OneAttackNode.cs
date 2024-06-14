@@ -126,9 +126,9 @@ namespace BehaviourTree
                     temp.
                     Item1.GetComponent<Playable>().
                     GetStateMachine.
-                    HitDamaged(velocity, 0, _stateMachine, LGProject.DATA_TYPE.DashAttack);
+                    ApplyHitDamaged(velocity, 0, _stateMachine, LGProject.DATA_TYPE.DashAttack);
 
-                    //temp.Item1.GetComponent<Playable>().GetStateMachine.hitPlayer = AIAgent.Instance.transform;
+                    //temp.Item1.GetComponent<Playable>().GetStateMachine.HitPlayer = AIAgent.Instance.transform;
 
                     if (!temp.Item1.GetStateMachine.IsGuard && !temp.Item1.GetStateMachine.IsDown )
                     {

@@ -89,7 +89,7 @@ namespace LGProject.PlayerState
                 if (player.transform != StateMachine.transform)
                 {
                     //Debug.Log($"{player.transform.name}");
-                    player.GetComponent<Playable>().GetStateMachine.HitDamaged(velocity, 0, StateMachine, DATA_TYPE.JumpAttackHit);
+                    player.GetComponent<Playable>().GetStateMachine.ApplyHitDamaged(velocity, 0, StateMachine, DATA_TYPE.JumpAttackHit);
                 }
             }
         }

@@ -107,7 +107,7 @@ namespace LGProject.PlayerState
                         {
                             temp.
                             Item1.GetStateMachine.
-                            HitDamaged(velocity, 0, StateMachine, DATA_TYPE.DashAttackHit);
+                            ApplyHitDamaged(velocity, 0, StateMachine, DATA_TYPE.DashAttackHit);
                             _damageInCount = true;
 
                             if (!temp.Item1.GetStateMachine.IsGuard && !temp.Item1.GetStateMachine.IsDown && !temp.Item1.GetStateMachine.IsSuperArmor && !StateMachine.IsUseUltimate)

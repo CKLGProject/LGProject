@@ -5,7 +5,9 @@ namespace LGProject.PlayerState
 {
     [RequireComponent(typeof(PlayerInput))]
     public class Player : Playable
-    {
+    {      
+        private float _currentTimer;
+        private float _minTimer = 0.1f;
 
         private void InitStates()
         {
@@ -35,11 +37,10 @@ namespace LGProject.PlayerState
             {
                 string name = StateMachine.animator.runtimeAnimatorController.animationClips[i].name;
                 float time = StateMachine.animator.runtimeAnimatorController.animationClips[i].length;
-                StateMachine.SetAnimPlayTime(name, time);
+                StateMachine.SetAnimationPlayTime(name, time);
             }
         }
-        float curTimer = 0;
-        float minTimer = 0.1f;
+
 
 
         protected virtual void Update()
@@ -48,13 +49,13 @@ namespace LGProject.PlayerState
             {
                 if (StateMachine.IsKnockback)
                 {
-                    curTimer += Time.deltaTime;
-                    if (curTimer < minTimer)
+                    _currentTimer += Time.deltaTime;
+                    if (_currentTimer < _minTimer)
                         return;
                 }
                 else
                 {
-                    curTimer = 0;
+                    _currentTimer = 0;
                 }
                 StateMachine.CurrentState.LogicUpdate();
                 StateMachine.Update();
