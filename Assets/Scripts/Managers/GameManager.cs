@@ -20,6 +20,36 @@ public class GameManager : MonoBehaviour
     [FormerlySerializedAs("patDataList")] [SerializeField] private PetData[] petDataList;
     [SerializeField] private AIModel[] aiModelList;
 
+    /// <summary>
+    /// User Data를 초기화합니다.
+    /// </summary>
+    private void InitUserData()
+    {
+        // 캐릭터 설정
+        _userData.CharacterType = (ECharacterType)PlayerPrefs.GetInt("Character", (int)ECharacterType.Hit);
+
+        // 닉네임 설정
+        string nickName = PlayerPrefs.GetString("Nickname", "Guest");
+        _userData.Nickname = nickName;
+
+        // 기본으로 히트 캐릭터 수록
+        string hasCharacterMapJson = PlayerPrefs.GetString("HasCharacterMap", "{}");
+        _userData.HasCharacterMap = JsonConvert.DeserializeObject<Dictionary<ECharacterType, bool>>(hasCharacterMapJson);
+
+        // 기본으로 Hit 캐릭터 바인딩
+        if (_userData.HasCharacterMap.Count == 0) 
+            _userData.HasCharacterMap.Add(ECharacterType.Hit, true);
+        
+        string hasPetMapJson = PlayerPrefs.GetString("HasPetMap", "{}");
+        _userData.HasPetMap = JsonConvert.DeserializeObject<Dictionary<EPetType, bool>>(hasPetMapJson);
+        
+        // 펫 설정
+        _userData.Pet = new();
+        _userData.Pet.PetType = (EPetType)PlayerPrefs.GetInt("Pet", (int)EPetType.None);
+        _userData.Pet.PetData = FindPatDataByPatType(_userData.Pet.PetType);
+        _userData.Pet.Level = PlayerPrefs.GetInt("Pet Level", 0);
+    }
+    
     private void Start()
     {
         // 초기화
@@ -55,8 +85,8 @@ public class GameManager : MonoBehaviour
     {
         switch (actorType)
         {
-            // case ActorType.User:
-            //     return _userData.CharacterType;
+            case ActorType.User:
+                return _userData.CharacterType;
             case ActorType.AI:
                 return _aiData.CharacterType;
         }
@@ -67,6 +97,7 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// 현재 캐릭터 상태를 변경합니다.
     /// </summary>
+    /// <param name="actorType">캐릭터 타입</param>
     /// <param name="characterType">캐릭터 타입</param>
     /// <exception cref="ArgumentOutOfRangeException"></exception>
     public void SetCurrentCharacter(ActorType actorType, ECharacterType characterType)
@@ -90,12 +121,12 @@ public class GameManager : MonoBehaviour
     /// 해당 액터의 현재 정령을 반환합니다.
     /// </summary>
     /// <returns>정령 타입</returns>
-    public Pet GetPat(ActorType actorType)
+    public Pet GetPet(ActorType actorType)
     {
         switch (actorType)
         {
-            // case ActorType.User:
-            //     return _userData.Pet;
+            case ActorType.User:
+                return _userData.Pet;
             case ActorType.AI:
                 return _aiData.Pet;
         }
@@ -124,32 +155,18 @@ public class GameManager : MonoBehaviour
         else
             _aiData.Pet.Level = -1;
     }
-
+    
     /// <summary>
-    /// User Data를 초기화합니다.
+    /// 해당 타입의 펫을 추가합니다.
     /// </summary>
-    private void InitUserData()
+    /// <param name="petType"></param>
+    public void AddPet(EPetType petType)
     {
-        // 캐릭터 설정
-        _userData.CharacterType = (ECharacterType)PlayerPrefs.GetInt("Character", (int)ECharacterType.Hit);
-
-        // 닉네임 설정
-        string nickName = PlayerPrefs.GetString("Nickname", "Guest");
-        _userData.Nickname = nickName;
-
-        // 기본으로 히트 캐릭터 수록
-        string hasCharacterMapJson = PlayerPrefs.GetString("HasCharacterMap", "{}");
-        _userData.HasCharacterMap = JsonConvert.DeserializeObject<Dictionary<ECharacterType, bool>>(hasCharacterMapJson);
-
-        if (_userData.HasCharacterMap.Count == 0) 
-            _userData.HasCharacterMap.Add(ECharacterType.Hit, true);
+        _userData.HasPetMap[petType] = true;
         
-        // 펫 설정
-        // _userData.Pet = new();
-        // _userData.Pet.PetType = (EPetType)PlayerPrefs.GetInt("Pat", (int)EPetType.None);
-        // _userData.Pet.PetData = FindPatDataByPatType(_userData.Pet.PetType);
-        // _userData.Pet.Level = PlayerPrefs.GetInt("Pat Level", 0);
-     }
+        string json = JsonConvert.SerializeObject(_userData.HasPetMap);
+        PlayerPrefs.SetString("HasPetMap", json);
+    }
     
     /// <summary>
     /// AI 모델 중 랜덤하게 1개를 반환합니다.
