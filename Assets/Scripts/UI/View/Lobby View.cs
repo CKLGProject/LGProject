@@ -216,7 +216,7 @@ public class LobbyView : MonoBehaviour
             case ECharacterType.Frost:
                 frost.SetActive(true);
                 break;
-            case ECharacterType.Cane:
+            case ECharacterType.Kane:
                 kane.SetActive(true);
                 break;
             case ECharacterType.Storm:

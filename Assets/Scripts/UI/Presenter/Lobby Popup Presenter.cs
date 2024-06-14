@@ -46,7 +46,7 @@ public class LobbyPopupPresenter : MonoBehaviour
                     case ECharacterType.Frost:
                         _view.SetCharacterData(_model.FrostData);
                         break;
-                    case ECharacterType.Cane:
+                    case ECharacterType.Kane:
                         _view.SetCharacterData(_model.KaneData);
                         break;
                 }
@@ -63,7 +63,7 @@ public class LobbyPopupPresenter : MonoBehaviour
             .AddTo(this);
 
         _view.KaneProfileButtonClicked()
-            .Subscribe(_ => _model.SetSelectedCharacterType(ECharacterType.Cane))
+            .Subscribe(_ => _model.SetSelectedCharacterType(ECharacterType.Kane))
             .AddTo(this);
         
         _view.StomeProfileButtonClicked()

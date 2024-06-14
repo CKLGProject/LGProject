@@ -157,7 +157,7 @@ public class LobbyPopupView : MonoBehaviour
                 FrostImage.SetActive(true);
                 FrostName.SetActive(true);
                 break;
-            case ECharacterType.Cane:
+            case ECharacterType.Kane:
                 CaneImage.SetActive(true);
                 CaneName.SetActive(true);
                 break;

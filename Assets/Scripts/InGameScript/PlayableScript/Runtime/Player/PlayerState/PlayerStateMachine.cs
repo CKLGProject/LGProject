@@ -182,7 +182,7 @@ namespace LGProject.PlayerState //
     ref psm.playable.SecondAttackDelay, ref psm.playable.ThirdAttackJudgeDelay,
     ref psm.playable.ThirdAttackDelay);
                     break;
-                case Data.ECharacterType.Cane:
+                case Data.ECharacterType.Kane:
                     psm.attackState = new KaneAttackState(psm, ref psm.playable.FirstAttackJudgeDelay,
     ref psm.playable.FirstAttackDelay, ref psm.playable.SecondAttackJudgeDelay,
     ref psm.playable.SecondAttackDelay, ref psm.playable.ThirdAttackJudgeDelay,
@@ -209,7 +209,7 @@ namespace LGProject.PlayerState //
                 case Data.ECharacterType.Frost:
                     animator.speed = speed;
                     break;
-                case Data.ECharacterType.Cane:
+                case Data.ECharacterType.Kane:
                     animator.speed = speed;
                     break;
                 default:
@@ -237,7 +237,7 @@ namespace LGProject.PlayerState //
                 case Data.ECharacterType.Frost:
                     ultimateState = new FrostUltimateState(this);
                     break;
-                case Data.ECharacterType.Cane:
+                case Data.ECharacterType.Kane:
 
                     break;
                 default:

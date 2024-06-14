@@ -98,7 +98,7 @@ namespace LGProject.PlayerState
         [HideInInspector] public GameObject DefaultWeapon;
         /*[HideInInspector]*/ public GameObject UltimateWeapon;
 
-        public FMODAudioSource AudioSource;
+        [SerializeField] private FMODAudioSource audioSource;
 
         // 공격 방향
         [HideInInspector] public bool directionX = false;
@@ -436,7 +436,7 @@ namespace LGProject.PlayerState
                 case ECharacterType.Frost:
                     StateMachine.playable.effectManager.Stop(EffectManager.EFFECT.UltimateDash);
                     break;
-                case ECharacterType.Cane:
+                case ECharacterType.Kane:
                     break;
                 default:
                     break;

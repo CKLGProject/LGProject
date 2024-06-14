@@ -41,7 +41,7 @@ namespace LGProject
                     case Data.ECharacterType.Frost:
                         OnlinePlayer = playable[1];
                         break;
-                    case Data.ECharacterType.Cane:
+                    case Data.ECharacterType.Kane:
                         OnlinePlayer = playable[2];
                         break;
                     case Data.ECharacterType.Storm:
