@@ -10,10 +10,13 @@ using Utility;
 
 public class LobbyView : MonoBehaviour
 {
-    [Header("Character")]
-    [SerializeField] private GameObject hit;
+    [Header("Character")] [SerializeField] private GameObject hit;
     [SerializeField] private GameObject frost;
     [SerializeField] private GameObject kane;
+
+    [Header("Pet")] [SerializeField] private GameObject scorchwing;
+    [SerializeField] private GameObject icebound;
+    [SerializeField] private GameObject aerion;
 
     [Header("Text")] [SerializeField] private TextMeshProUGUI nickNameText;
     [SerializeField] private TextMeshProUGUI levelText;
@@ -29,17 +32,13 @@ public class LobbyView : MonoBehaviour
     /// 캡처 버튼
     /// </summary>
     [SerializeField] private GameObject captureButton;
-    
+
     /// <summary>
     /// 랭킹 버튼
     /// </summary>
     [SerializeField] private GameObject rankButton;
 
-    [Space]
-    /// <summary>
-    /// 우편 버튼
-    /// </summary>
-    [SerializeField] private Button mailButton;
+    [Space] [SerializeField] private Button mailButton;
 
     /// <summary>
     /// 퀘스트 버튼
@@ -70,7 +69,7 @@ public class LobbyView : MonoBehaviour
 
     [Header("Event")] public UnityEvent OnClickCapture;
     public UnityEvent OnClickMatch;
-    
+
     /// <summary>
     /// 매치 버튼 옵저버입니다.
     /// </summary>
@@ -80,7 +79,7 @@ public class LobbyView : MonoBehaviour
         return matchButton.TouchDownAsObservable();
     }
 
-    
+
     /// <summary>
     /// 캡쳐 버튼 옵저버입니다.
     /// </summary>
@@ -89,7 +88,7 @@ public class LobbyView : MonoBehaviour
     {
         return captureButton.TouchDownAsObservable();
     }
-    
+
     /// <summary>
     /// 랭킹 버튼 옵저버입니다.
     /// </summary>
@@ -207,7 +206,7 @@ public class LobbyView : MonoBehaviour
         hit.SetActive(false);
         frost.SetActive(false);
         kane.SetActive(false);
-        
+
         switch (characterType)
         {
             case ECharacterType.Hit:
@@ -225,6 +224,38 @@ public class LobbyView : MonoBehaviour
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(characterType), characterType, null);
+        }
+    }
+
+    /// <summary>
+    /// 펫를 보이게 합니다.
+    /// </summary>
+    /// <param name="petType">보이게할 펫 타입</param>
+    /// <exception cref="ArgumentOutOfRangeException"></exception>
+    public void ShowPet(EPetType petType)
+    {
+        scorchwing.SetActive(false);
+        icebound.SetActive(false);
+        aerion.SetActive(false);
+
+        switch (petType)
+        {
+            case EPetType.Scorchwing:
+                scorchwing.SetActive(true);
+                break;
+            case EPetType.Icebound:
+                icebound.SetActive(true);
+                break;
+            case EPetType.Aerion:
+                aerion.SetActive(true);
+                break;
+            case EPetType.Electra:
+#if UNITY_EDITOR
+                Debug.LogError("아직 미구현 입니다.");
+#endif
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(petType), petType, null);
         }
     }
 }
