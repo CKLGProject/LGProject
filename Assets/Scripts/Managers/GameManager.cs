@@ -40,12 +40,17 @@ public class GameManager : MonoBehaviour
         if (_userData.HasCharacterMap.Count == 0) 
             _userData.HasCharacterMap.Add(ECharacterType.Hit, true);
         
+        // 펫을 가지고 있는지 체크
         string hasPetMapJson = PlayerPrefs.GetString("HasPetMap", "{}");
         _userData.HasPetMap = JsonConvert.DeserializeObject<Dictionary<EPetType, bool>>(hasPetMapJson);
         
+        // 펫을 활성화 했는지 체크
+        string isEnablePetMapJson = PlayerPrefs.GetString("IsEnablePetMap", "{}");
+        _userData.IsEnablePetMap = JsonConvert.DeserializeObject<Dictionary<EPetType, bool>>(isEnablePetMapJson);
+        
         // 펫 설정
         _userData.Pet = new();
-        _userData.Pet.PetType = (EPetType)PlayerPrefs.GetInt("Pet", (int)EPetType.None);
+        _userData.Pet.PetType = (EPetType)PlayerPrefs.GetInt("Pet", (int)EPetType.None); 
         _userData.Pet.PetData = FindPatDataByPatType(_userData.Pet.PetType);
         _userData.Pet.Level = PlayerPrefs.GetInt("Pet Level", 0);
     }
@@ -167,6 +172,42 @@ public class GameManager : MonoBehaviour
         string json = JsonConvert.SerializeObject(_userData.HasPetMap);
         PlayerPrefs.SetString("HasPetMap", json);
     }
+
+    /// <summary>
+    /// 캐릭터 타입에 따라 펫을 가지고 있는지 반환합니다.
+    /// </summary>
+    /// <param name="characterType">캐릭터 타입</param>
+    /// <returns>가지고 있으면 true, 아니면 false</returns>
+    /// <exception cref="ArgumentOutOfRangeException">미구현된 캐릭터 입니다.</exception>
+    public bool HasPet(ECharacterType characterType)
+    {
+        switch (characterType)
+        {
+            case ECharacterType.Hit:
+                return _userData.HasPetMap[EPetType.Scorchwing];
+            case ECharacterType.Frost:
+                return _userData.HasPetMap[EPetType.Icebound];
+            case ECharacterType.Kane:
+                return _userData.HasPetMap[EPetType.Aerion];
+            default:
+                throw new ArgumentOutOfRangeException(nameof(characterType), characterType, null);
+        }
+    }
+    
+    public bool IsEnablePet(ECharacterType characterType)
+    {
+        switch (characterType)
+        {
+            case ECharacterType.Hit:
+                return _userData.IsEnablePetMap[EPetType.Scorchwing];
+            case ECharacterType.Frost:
+                return _userData.IsEnablePetMap[EPetType.Icebound];
+            case ECharacterType.Kane:
+                return _userData.IsEnablePetMap[EPetType.Aerion];
+            default:
+                throw new ArgumentOutOfRangeException(nameof(characterType), characterType, null);
+        }
+    }
     
     /// <summary>
     /// AI 모델 중 랜덤하게 1개를 반환합니다.
@@ -191,4 +232,5 @@ public class GameManager : MonoBehaviour
     {
         return petDataList.FirstOrDefault(patData => patData.petType == petType);
     }
+    
 }

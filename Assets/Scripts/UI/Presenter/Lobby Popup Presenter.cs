@@ -12,6 +12,8 @@ public class LobbyPopupPresenter : MonoBehaviour
     private LobbyPopupModel _model;
     private LobbyPopupView _view;
 
+    private GameManager GameManager => Singleton.Instance<GameManager>();
+
     private void Start()
     {
         _model = GetComponent<LobbyPopupModel>();
@@ -24,13 +26,15 @@ public class LobbyPopupPresenter : MonoBehaviour
         // 현재 캐릭터 활성화
         ECharacterType currentCharacter = _model.SelectedCharacterType;
         _view.ActiveCurrentCharacterProfile(currentCharacter);
+        
+        GameManager.HasPet(currentCharacter)
 
         // 현재 클릭한 캐릭터 타입을 변경
         _model.SelectedCharacterTypeObservable()
             .Subscribe(selectionCharacter =>
             {
                 // 버튼 활성화 상태
-                ECharacterType currentCharacterProfile = Singleton.Instance<GameManager>().GetCharacter(ActorType.User);
+                ECharacterType currentCharacterProfile = GameManager.GetCharacter(ActorType.User);
                 bool buttonActive = currentCharacterProfile != selectionCharacter;
                 _view.SetInteractionByCharacterSelectionButton(buttonActive);
 

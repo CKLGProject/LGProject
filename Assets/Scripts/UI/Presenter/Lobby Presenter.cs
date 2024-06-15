@@ -20,9 +20,6 @@ public class LobbyPresenter : MonoBehaviour
         
         _lobbyModel = GetComponent<LobbyModel>();
         _lobbyPopupModel = FindAnyObjectByType<LobbyPopupModel>();
-
-        // ECharacterType choiceCharacter = Singleton.Instance<GameManager>().GetCharacter(ActorType.User);
-        // _lobbyView.ShowCharacter(choiceCharacter);
         
         // Model
         _lobbyPopupModel.ChoiceCharacterTypeObservable()

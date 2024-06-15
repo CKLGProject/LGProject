@@ -45,6 +45,9 @@ public class LobbyPopupView : MonoBehaviour
 
     [Header("캐릭터 프로필")] [SerializeField] private CharacterProfile[] characterProfiles;
 
+    [Header("펫 프로필")]
+    [SerializeField] private PetData[] petDataList;
+    
     [Header("캐릭터 프로필 버튼")] [SerializeField]
     private Button hitProfileButton;
 

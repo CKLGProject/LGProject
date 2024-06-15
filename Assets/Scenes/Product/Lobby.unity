@@ -13344,6 +13344,11 @@ MonoBehaviour:
   - {fileID: 4396377990715545352}
   - {fileID: 973375821}
   - {fileID: 1381916149}
+  petDataList:
+  - {fileID: 11400000, guid: 62179994741ec4bf283630928d5b3631, type: 2}
+  - {fileID: 11400000, guid: 415e3f6f7f76640f2b757b7e9ef9e136, type: 2}
+  - {fileID: 11400000, guid: 29091777240d940099adb929c0fdb6af, type: 2}
+  - {fileID: 11400000, guid: 570b5cc60e386423ea93eed3a9eaa8e9, type: 2}
   hitProfileButton: {fileID: 4396377990715545351}
   frostProfileButton: {fileID: 973375820}
   kaneProfileButton: {fileID: 1381916148}
