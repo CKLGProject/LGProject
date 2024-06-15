@@ -2,16 +2,6 @@ using System.Collections.Generic;
 
 namespace Data
 {
-    public enum ECharacterType
-    {
-        None,
-        Hit,
-        Frost,
-        Kane,
-        Storm,
-        E
-    }
-
     public class UserData
     {
         public ECharacterType CharacterType;
