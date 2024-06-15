@@ -37,6 +37,14 @@ namespace LGProject.CollisionZone
         {
             InitSize();
         }
+        public void PlayHitParticle()
+        {
+            Vector3 OffsetPreset = new Vector3(Offset.x * transform.right.x, Offset.y, Offset.z);
+            _hitEffect.transform.position = transform.position + OffsetPreset;
+            _hitEffect.SetActive(true);
+            _hitEffect.GetComponent<ParticleSystem>().Play();
+        }
+
 
         public void MoveSet(float speed, Vector3 direction, float timer, Vector3 velocity)
         {
@@ -87,7 +95,6 @@ namespace LGProject.CollisionZone
             if (collision.gameObject.layer == 1 << 3)
             {
                 gameObject.SetActive(false);
-
             }
 
         }

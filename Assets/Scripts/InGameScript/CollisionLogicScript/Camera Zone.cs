@@ -8,11 +8,13 @@ namespace LGProject.CollisionZone
     public class CameraZone : CollisionZone
     {
         public GameObject TargetGroup;
+        private CinemachineTargetGroup _targetGroup;
 
 
         private void Awake()
         {
             TargetGroup = GameObject.Find("Target Group (1)");
+            _targetGroup = TargetGroup.GetComponent<CinemachineTargetGroup>();
             InitSize();
         }
 
@@ -36,27 +38,39 @@ namespace LGProject.CollisionZone
         public void SubTarget(Transform pTransform)
         {
             //Debug.Log(TargetGroup.GetComponent<CinemachineTargetGroup>().FindMember(pTransform));
-            int num = TargetGroup.GetComponent<CinemachineTargetGroup>().FindMember(pTransform);
+            int num = _targetGroup.FindMember(pTransform);
             if(num >= 0)
-                TargetGroup.GetComponent<CinemachineTargetGroup>().m_Targets[num].target = null;
+                _targetGroup.m_Targets[num].target = null;
         }
 
         public void AddTarget(Transform pTransform)
         {
             //Debug.Log(TargetGroup.GetComponent<CinemachineTargetGroup>().FindMember(pTransform));
-            if (TargetGroup.GetComponent<CinemachineTargetGroup>().FindMember(pTransform) == -1)
+            if (_targetGroup.FindMember(pTransform) == -1)
             {
-                for (int i = 0; i < TargetGroup.GetComponent<CinemachineTargetGroup>().m_Targets.Length; i++)
+                for (int i = 0; i < _targetGroup.m_Targets.Length; i++)
                 {
-                    if (TargetGroup.GetComponent<CinemachineTargetGroup>().m_Targets[i].target == null)
+                    if (_targetGroup.m_Targets[i].target == null)
                     {
-                        TargetGroup.GetComponent<CinemachineTargetGroup>().m_Targets[i].target = pTransform;
+                        _targetGroup.m_Targets[i].target = pTransform;
+                        //_targetGroup.m_Targets[i].weight = 3;
                         return;
                     }
                 }
             }
         }
 
+        public void ForcusPlayer(Transform player)
+        {
+            for (int i = 0; i < _targetGroup.m_Targets.Length; i++)
+                {
+                if (_targetGroup.m_Targets[i].target == player)
+                {
+                    _targetGroup.m_Targets[i].weight = 3;
+                    return;
+                }
+            }
+        }
     }
 
 }

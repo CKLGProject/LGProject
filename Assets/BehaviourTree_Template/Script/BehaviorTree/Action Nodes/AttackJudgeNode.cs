@@ -1,3 +1,4 @@
+using FMODUnity;
 using LGProject.PlayerState;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,6 +16,8 @@ namespace BehaviourTree
         private float _curTimer = 0;
         private bool _isAttack = false;
         private float _time = 0;
+
+        private readonly string _punchClip = $"Punch";
 
         protected override void OnStart()
         {
@@ -106,17 +109,26 @@ namespace BehaviourTree
             {
                 case 1:
                     _stateMachine.playable.effectManager.Play(EffectManager.EFFECT.Attack1).Forget();
+                    #region 오디오 출력
+
+                    _stateMachine.PlayAudioClip(_punchClip);
+
+                    #endregion
                     moveValue = _stateMachine.playable.FirstAttackMovingValue;
                     //_stateMachine.UpdateData(LGProject.DATA_TYPE.NormalAttack);
                     break;
                 case 2:
                     _stateMachine.playable.effectManager.Play(EffectManager.EFFECT.Attack2).Forget();
                     moveValue = _stateMachine.playable.SecondAttackMovingValue;
+
+                    _stateMachine.PlayAudioClip(_punchClip);
                     //_stateMachine.UpdateData(LGProject.DATA_TYPE.NormalAttack);
                     break;
                 case 3:
                     moveValue = _stateMachine.playable.ThirdAttackMovingValue;
                     _stateMachine.playable.effectManager.Play(EffectManager.EFFECT.Attack3, 0.25f).Forget();
+
+                    _stateMachine.PlayAudioClip(_punchClip);
                     //_stateMachine.UpdateData(LGProject.DATA_TYPE.NormalAttack);
                     break;
                 default:

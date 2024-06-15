@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Singleton;
+using LGProject.CollisionZone;
 
 namespace LGProject
 {
@@ -10,6 +11,7 @@ namespace LGProject
         public GameObject[] playable;
 
         public GameObject OnlinePlayer;
+        public CameraZone CameraZone;
 
 
         public bool IsStart { get; private set; }
@@ -97,6 +99,9 @@ namespace LGProject
         {
             IsStart = true;
             Timer = 180;
+            // 시작하면 카메라를 옮겨줌
+            CameraZone.ForcusPlayer(OnlinePlayer.transform);
+            
         }
 
         /// <summary>

@@ -240,6 +240,7 @@ namespace LGProject.PlayerState
             {
                 BulletCollisionZone bullet = other.GetComponent<BulletCollisionZone>();
                 bullet.gameObject.SetActive(false);
+                bullet.PlayHitParticle();
                 StateMachine.ApplyHitDamaged(bullet.KnockbackVelocity, 0, StateMachine, DATA_TYPE.NormalAttack);
             }
 
@@ -354,8 +355,6 @@ namespace LGProject.PlayerState
         {
             // 0 이상일 때는 체크하지 않.기.
             // 왜냐면 올라가고 있기 때문이지
-            //if (!StateMachine.IsGrounded && Mathf.Abs(StateMachine.physics.velocity.y) == 0)
-            //    StateMachine.IsGrounded = true;
 
             if (StateMachine.physics.velocity.y < -0.1f &&
                 (!StateMachine.IsGrounded || StateMachine.IsKnockback))
@@ -545,6 +544,7 @@ namespace LGProject.PlayerState
         public void ShowUltimateEffect()
         {
             effectManager.Play(EffectManager.EFFECT.Ultimate).Forget();
+            Debug.Log("UltimateFull");
         }
 
         #endregion

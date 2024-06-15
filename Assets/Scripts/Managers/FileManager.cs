@@ -141,9 +141,9 @@ namespace LGProject
         }
         #endregion
 
-        static string SPLIT_RE = @",(?=(?:[^""]*""[^""]*"")*(?![^""]*""))";
-        static string LINE_SPLIT_RE = @"\r\n|\n\r|\n|\r";
-        static char[] TRIM_CHARS = { '\"' };
+        //static string SPLIT_RE = @",(?=(?:[^""]*""[^""]*"")*(?![^""]*""))";
+        //static string LINE_SPLIT_RE = @"\r\n|\n\r|\n|\r";
+        //static char[] TRIM_CHARS = { '\"' };
 
         // 데이터를 반환함.
         //public static DATA 

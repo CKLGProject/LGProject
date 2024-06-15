@@ -248,7 +248,6 @@ namespace BehaviourTree
         {
             if (_curTimer >= jumpDelay && _agent.GetStateMachine.JumpInCount < 2)
             {
-                Debug.Log($"HH{_count}");
                 _count++;
                 _agent.GetStateMachine.JumpInCount++;
                 _agent.HandleJumpping();

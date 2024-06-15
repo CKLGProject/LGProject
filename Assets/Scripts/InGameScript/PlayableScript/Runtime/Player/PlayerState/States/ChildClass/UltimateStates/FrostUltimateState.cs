@@ -85,7 +85,7 @@ namespace LGProject.PlayerState
             foreach (var player in checkPlayer)
             {
                 Vector3 velocity = (player.transform.position - StateMachine.transform.position + Vector3.up).normalized;
-                velocity *= 3f;
+                velocity *= 10f;
                 if (player.transform != StateMachine.transform)
                 {
                     //Debug.Log($"{player.transform.name}");
