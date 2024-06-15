@@ -12,34 +12,48 @@ public class LobbyPopupView : MonoBehaviour
 {
     [Header("팝업")] [SerializeField] private GameObject popupView;
 
-    [Header("캐릭터 이미지 그룹")] 
-    [SerializeField] private GameObject HitImage;
-    [SerializeField] private GameObject FrostImage;
-    [SerializeField] private GameObject CaneImage;
+    [Header("캐릭터 이미지 그룹")]
+    [FormerlySerializedAs("HitImage"), SerializeField]
+    private GameObject hitImage;
 
+    [FormerlySerializedAs("FrostImage"),SerializeField]
+    private GameObject frostImage;
+
+    [FormerlySerializedAs("CaneImage"), SerializeField]
+    private GameObject kaneImage;
+    
     [Header("캐릭터 이름 그룹")] 
-    [SerializeField] private GameObject HitName;
-    [SerializeField] private GameObject FrostName;
-    [SerializeField] private GameObject CaneName;
+    [FormerlySerializedAs("HitName"), SerializeField] 
+    private GameObject hitName;
+    
+    [FormerlySerializedAs("FrostName") ,SerializeField]
+    private GameObject frostName;
+    
+    [FormerlySerializedAs("CaneName") ,SerializeField]
+    private GameObject kaneName;
 
-    [FormerlySerializedAs("attackText")]
-    [Header("Text")]
-    [SerializeField] private TextMeshProUGUI attackPowerText;
+    [Header("펫 이미지")]
+    [SerializeField] private Image petImage;
+
+    [Header("Text")] 
+    [FormerlySerializedAs("attackText"), SerializeField]
+    private TextMeshProUGUI attackPowerText;
+
     [SerializeField] private TextMeshProUGUI defenseText;
     [SerializeField] private TextMeshProUGUI moveSpeedText;
     [SerializeField] private TextMeshProUGUI attackSpeedText;
-    
+
     [Header("캐릭터 프로필")] [SerializeField] private CharacterProfile[] characterProfiles;
 
-    [Header("캐릭터 프로필 버튼")]
-    [SerializeField] private Button hitProfileButton;
+    [Header("캐릭터 프로필 버튼")] [SerializeField]
+    private Button hitProfileButton;
+
     [SerializeField] private Button frostProfileButton;
     [SerializeField] private Button kaneProfileButton;
     [SerializeField] private Button stomeProfileButton;
     [SerializeField] private Button brightProfileButton;
 
-    [Header("버튼")]
-    [SerializeField] private Button characterSelectionButton;
+    [Header("버튼")] [SerializeField] private Button characterSelectionButton;
     [SerializeField] private Button exitButton;
     [SerializeField] private Button petChoiceButton;
     [SerializeField] private Button itemChoiceButton;
@@ -107,20 +121,21 @@ public class LobbyPopupView : MonoBehaviour
 
         return kaneProfileButton.OnClickAsObservable();
     }
-    
+
     public Observable<Unit> StomeProfileButtonClicked()
     {
         Assert.IsNotNull(stomeProfileButton, "stomeProfileButton != null");
 
         return stomeProfileButton.OnClickAsObservable();
     }
+
     public Observable<Unit> brightProfileButtonClicked()
     {
         Assert.IsNotNull(brightProfileButton, "brightProfileButton != null");
 
         return brightProfileButton.OnClickAsObservable();
     }
-    
+
 
     /// <summary>
     /// 캐릭터 선택 버튼의 상호작용을 설정합니다.
@@ -139,27 +154,27 @@ public class LobbyPopupView : MonoBehaviour
     public void SetActiveCharacterImage(ECharacterType characterType)
     {
         // 모두 비활성화
-        HitImage.SetActive(false);
-        FrostImage.SetActive(false);
-        CaneImage.SetActive(false);
-        
-        HitName.SetActive(false);
-        FrostName.SetActive(false);
-        CaneName.SetActive(false);
+        hitImage.SetActive(false);
+        frostImage.SetActive(false);
+        kaneImage.SetActive(false);
+
+        hitName.SetActive(false);
+        frostName.SetActive(false);
+        kaneName.SetActive(false);
 
         switch (characterType)
         {
             case ECharacterType.Hit:
-                HitImage.SetActive(true);
-                HitName.SetActive(true);
+                hitImage.SetActive(true);
+                hitName.SetActive(true);
                 break;
             case ECharacterType.Frost:
-                FrostImage.SetActive(true);
-                FrostName.SetActive(true);
+                frostImage.SetActive(true);
+                frostName.SetActive(true);
                 break;
             case ECharacterType.Kane:
-                CaneImage.SetActive(true);
-                CaneName.SetActive(true);
+                kaneImage.SetActive(true);
+                kaneName.SetActive(true);
                 break;
             case ECharacterType.Storm:
                 break;
@@ -183,14 +198,14 @@ public class LobbyPopupView : MonoBehaviour
 
         return characterSelectionButton.OnClickAsObservable();
     }
-    
+
     public Observable<Unit> OnPetChoiceButtonClicked()
     {
         Assert.IsNotNull(petChoiceButton, "petChoiceButton != null");
 
         return petChoiceButton.OnClickAsObservable();
     }
-    
+
     public Observable<Unit> OnItemChoiceButtonClicked()
     {
         Assert.IsNotNull(itemChoiceButton, "itemChoiceButton != null");
@@ -206,7 +221,7 @@ public class LobbyPopupView : MonoBehaviour
     {
         popupView.SetActive(active);
     }
-    
+
     /// <summary>
     /// 캐릭터 데이터를 설정합니다.
     /// </summary>
