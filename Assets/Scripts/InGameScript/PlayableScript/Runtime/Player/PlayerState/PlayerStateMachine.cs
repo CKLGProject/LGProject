@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 using Cysharp.Threading.Tasks;
 using FMODPlus;
 using Object = UnityEngine.Object;
+using FMODUnity;
 
 namespace LGProject.PlayerState
 {
@@ -198,13 +199,13 @@ namespace LGProject.PlayerState
                         ref psm.playable.ThirdAttackDelay);
                     break;
                 case Data.ECharacterType.Hit:
-                    psm.attackState = new AttackState(psm, ref psm.playable.FirstAttackJudgeDelay,
+                    psm.attackState = new HitAttackState(psm, ref psm.playable.FirstAttackJudgeDelay,
                         ref psm.playable.FirstAttackDelay, ref psm.playable.SecondAttackJudgeDelay,
                         ref psm.playable.SecondAttackDelay, ref psm.playable.ThirdAttackJudgeDelay,
                         ref psm.playable.ThirdAttackDelay);
                     break;
                 case Data.ECharacterType.Frost:
-                    psm.attackState = new AttackState(psm, ref psm.playable.FirstAttackJudgeDelay,
+                    psm.attackState = new FrostAttackState(psm, ref psm.playable.FirstAttackJudgeDelay,
                         ref psm.playable.FirstAttackDelay, ref psm.playable.SecondAttackJudgeDelay,
                         ref psm.playable.SecondAttackDelay, ref psm.playable.ThirdAttackJudgeDelay,
                         ref psm.playable.ThirdAttackDelay);
@@ -255,10 +256,6 @@ namespace LGProject.PlayerState
         /// <returns></returns>
         public bool CheckFlight()
         {
-            //if (CurrentState.GetType() == typeof(IdleState) &&
-            //    CurrentState.GetType() == typeof(MoveState) &&
-            //    CurrentState.GetType() == typeof(AttackState) &&
-            //    CurrentState.GetType() == typeof(DashAttackState) )
             if (CurrentState.GetType() == typeof(JumpState) ||
                 CurrentState.GetType() == typeof(FlightState) ||
                 CurrentState.GetType() == typeof(JumpAttackState) ||
@@ -458,7 +455,6 @@ namespace LGProject.PlayerState
                 return;
             if (IsGuard)
             {
-                //GuardGage -= 25;
                 physics.velocity =
                     new Vector3((EnemyStateMachine.transform.position - transform.position).normalized.x * -2.5f, 0, 0);
             }
@@ -466,7 +462,7 @@ namespace LGProject.PlayerState
             if (!IsGuard || (EnemyStateMachine != null && EnemyStateMachine.IsUseUltimate))
             {
                 physics.velocity = Vector3.zero;
-                playable.SetDamageGage(playable.DamageGage + (IsUltimate == true ? 8.5f : 4.25f));
+                playable.SetDamageGage(playable.DamageGage + (IsUltimate == true ? 4.25f : 8.5f));
                 battleModel.SyncDamageGage(playable.ActorType, playable.DamageGage);
                 IsNormalAttack = false;
                 // 충격에 의한 물리 공식
@@ -505,6 +501,7 @@ namespace LGProject.PlayerState
         {
             await UniTask.Delay(TimeSpan.FromSeconds(nockbackDelay));
             physics.velocity = velocity;
+            collider.isTrigger = true;
             IsKnockback = true;
         }
 
@@ -543,6 +540,23 @@ namespace LGProject.PlayerState
         {
             if (playable.UltimateGage >= 100)
                 playable.ShowUltimateEffect();
+        }
+
+        /// <summary>
+        /// 오디오 클립을 이름으로 찾아 재생하는 매서드
+        /// </summary>
+        /// <param name="clipName"></param>
+        public void PlayAudioClip(string clipName)
+        {
+            try
+            {
+                if (AudioList.TryFindClip(clipName, out EventReference clip))
+                    AudioSource.PlayOneShot(clip);
+            }
+            catch
+            {
+                Debug.Log("사용할 수 있는 오디오 클립이 존재하지 않습니다.");
+            }
         }
     }
 }

@@ -1,3 +1,4 @@
+using FMODUnity;
 using LGProject.PlayerState;
 using System.Collections;
 using System.Collections.Generic;
@@ -19,6 +20,7 @@ namespace BehaviourTree
         [Space(10f)]
         //[SerializeField] private float _judgeTimer = 0;
         //[SerializeField] private float _aniDelay = 0;
+        private readonly string _punchClip = $"Punch";
 
         private float _curTimer;
 
@@ -90,7 +92,7 @@ namespace BehaviourTree
             Vector3 right = Vector3.right * (_agent.directionX == true ? 1 : -1);
             Vector3 center = _agent.transform.position + right + Vector3.up * 0.5f;
             Vector3 hitboxSize = Vector3.one * 0.5f;
-            hitboxSize.x *= (_stateMachine.IsGrounded ? 1.3f : 1.3f);
+            hitboxSize.x *= (_stateMachine.IsGrounded ? 1.0f : 1.0f);
             Collider[] targets = Physics.OverlapBox(center,
                 hitboxSize,
                 Quaternion.identity, 1 << 3);
@@ -143,6 +145,7 @@ namespace BehaviourTree
 
         private void StartExceptionHandling()
         {
+            EventReference clip;
             if (_agent == null)
                 _agent = AIAgent.Instance;
             if (_stateMachine == null)
@@ -154,13 +157,17 @@ namespace BehaviourTree
             if (!_stateMachine.IsGrounded)
             {
                 _stateMachine.animator.SetTrigger("JumpAttack");
-                Debug.Log("Jump Attack");
+
+                _stateMachine.PlayAudioClip(_punchClip);
+                //Debug.Log("Jump Attack");
             }
             else
             {
                 _stateMachine.physics.velocity += _stateMachine.transform.forward * 5f;
                 _stateMachine.animator.SetTrigger("DashAttack");
-                Debug.Log("DashAttack");
+
+                _stateMachine.PlayAudioClip(_punchClip);
+                //Debug.Log("DashAttack");
             }
             _stateMachine.animator.SetFloat("Run", 0);
         }

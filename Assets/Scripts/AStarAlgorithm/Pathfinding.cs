@@ -17,7 +17,6 @@ namespace pathFinding
 
         private void Awake()
         {
-            //requestManager = GetComponent<PathRequestManager>();
             _grid = GetComponent<Grid>();
         }
         

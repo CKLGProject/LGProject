@@ -1,10 +1,9 @@
 using FMODUnity;
 using UnityEngine;
 
-
 namespace LGProject.PlayerState
 {
-    public class HitAttackState : AttackState
+    public class FrostAttackState : AttackState
     {
         // 체크 해야할 것
         // 공격을 연속으로 하는가?
@@ -13,22 +12,7 @@ namespace LGProject.PlayerState
         // 달리고 있는가?
         // 
 
-        //private float AttackCont = 0;
-        //private int maximumCount = 0;
-        //protected float _firstJudgeDelay;
-        //protected float _firstAttackDelay;
-        //protected float _secondJudgeDelay;
-        //protected float _secondAttackDelay;
-        //protected float _thirdJudgeDelay;
-        //protected float _thirdAttackDelay;
-
-        //protected float _currentTimer;
-        //protected bool _damageInCount;
-        //protected static readonly int Attack = Animator.StringToHash("Attack");
-        //protected static readonly int Idle = Animator.StringToHash("Idle");
-        //protected static readonly int GuardEnd = Animator.StringToHash("GuardEnd");
-
-        public HitAttackState(PlayerStateMachine stateMachine, ref float firstJudgeAttack, ref float firstAttackDelay, ref float secondJudgeAttack, ref float secondAttackDelay, ref float thirdJudgeAttack, ref float thirdAttackDelay) : base(stateMachine, ref firstJudgeAttack, ref firstAttackDelay, ref secondJudgeAttack, ref secondAttackDelay, ref thirdJudgeAttack, ref thirdAttackDelay)
+        public FrostAttackState(PlayerStateMachine stateMachine, ref float firstJudgeAttack, ref float firstAttackDelay, ref float secondJudgeAttack, ref float secondAttackDelay, ref float thirdJudgeAttack, ref float thirdAttackDelay) : base(stateMachine, ref firstJudgeAttack, ref firstAttackDelay, ref secondJudgeAttack, ref secondAttackDelay, ref thirdJudgeAttack, ref thirdAttackDelay)
         {
             _currentTimer = 0;
 
@@ -42,7 +26,7 @@ namespace LGProject.PlayerState
 
         public override void Enter()
         {
-            base.Enter();
+            //base.Enter();
             // 어디서 왔는지 체크가 필요할까?
             _currentTimer = 0;
 
@@ -106,11 +90,15 @@ namespace LGProject.PlayerState
         }
         public override void LogicUpdate()
         {
-            base.LogicUpdate();
+            //base.LogicUpdate();
             // 코루틴이나 쓰레드 등으로 카운팅 또는 불리안 값을 사용하여 상태를 변경해 줄 예정
             // 공격 시엔 콤보 입력도 필요할 것이라 생각하기 때문에 히트 스테이트나 다운 스테이트 등이 필요할 것으로 예상됨.
             // 그럼 공격은 어떻게 할 것인가? 
-
+            if (Damaged())
+            {
+                return;
+            }
+            
             _currentTimer += Time.deltaTime;
 
             #region ComboSystem
@@ -193,7 +181,7 @@ namespace LGProject.PlayerState
 
             if (!_damageInCount)
             {
-                Vector3 right = Vector3.right * (StateMachine.playable.directionX == true ? 0.7f : -0.7f);
+                Vector3 right = Vector3.right * (StateMachine.playable.directionX == true ? 1.2f : -1.2f);
                 Vector3 center = StateMachine.transform.position + right + Vector3.up * 0.5f;
 
                 // 생각보다 판정이 후하진 않게 하기

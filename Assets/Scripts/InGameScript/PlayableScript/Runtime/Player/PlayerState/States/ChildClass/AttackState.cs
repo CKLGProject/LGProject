@@ -94,9 +94,9 @@ namespace LGProject.PlayerState
             #endregion
 
             #region 오디오 출력
-
-            if (StateMachine.AudioList.TryFindClip("Punch", out EventReference clip)) 
-                StateMachine.AudioSource.PlayOneShot(clip);
+            StateMachine.PlayAudioClip("Punch");
+            //if (StateMachine.AudioList.TryFindClip("Punch", out EventReference clip)) 
+            //    StateMachine.AudioSource.PlayOneShot(clip);
             
             #endregion
         }
@@ -194,8 +194,9 @@ namespace LGProject.PlayerState
 
             if (!_damageInCount)
             {
-                Vector3 right = Vector3.right * (StateMachine.playable.directionX == true ? 0.7f : -0.7f);
+                Vector3 right = Vector3.right * (StateMachine.playable.directionX == true ? 1.2f : -1.2f);
                 Vector3 center = StateMachine.transform.position + right + Vector3.up * 0.5f;
+                
                 // 생각보다 판정이 후하진 않게 하기
                 // hit box의 크기를 따라감.
                 Collider[] targets = Physics.OverlapBox(center, Vector3.one * 0.5f, Quaternion.identity, 1 << 3);
@@ -249,8 +250,6 @@ namespace LGProject.PlayerState
         public override void PhysicsUpdate()
         {
             base.PhysicsUpdate();
-
-        }
+        }  
     }
-
 }
