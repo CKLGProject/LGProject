@@ -226,7 +226,7 @@ namespace LGProject.PlayerState
                         {
                             temp.
                             Item1.GetStateMachine.
-                            ApplyHitDamaged(StateMachine.AttackCount - 1 < 2 ? Vector3.zero : velocity, 0.1f, StateMachine, DATA_TYPE.NormalAttackHit);
+                            ApplyHitDamaged(StateMachine.AttackCount - 1 < 2 ? Vector3.zero : velocity, 0.1f, StateMachine);
                             _damageInCount = true;
                             //if (StateMachine.AttackCount > 2)
                             //    Debug.Log("");

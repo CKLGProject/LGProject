@@ -31,7 +31,6 @@ namespace LGProject.PlayerState
         public override void ShootProjectile(int AtkCount, Vector3 velocity)
         {
             //base.ShootProjectile();
-            Debug.Log("발사");
             Vector3 Velocity = Vector3.zero;
             switch (AtkCount)
             {

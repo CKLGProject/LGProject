@@ -32,12 +32,12 @@ namespace LGProject.PlayerState
 
             effectManager.InitParticles();
 
-            for (int i = 0; i < StateMachine.animator.runtimeAnimatorController.animationClips.Length; i++)
-            {
-                string name = StateMachine.animator.runtimeAnimatorController.animationClips[i].name;
-                float time = StateMachine.animator.runtimeAnimatorController.animationClips[i].length;
-                StateMachine.SetAnimationPlayTime(name, time);
-            }
+            //for (int i = 0; i < StateMachine.animator.runtimeAnimatorController.animationClips.Length; i++)
+            //{
+            //    string name = StateMachine.animator.runtimeAnimatorController.animationClips[i].name;
+            //    float time = StateMachine.animator.runtimeAnimatorController.animationClips[i].length;
+            //    StateMachine.SetAnimationPlayTime(name, time);
+            //}
         }
 
 

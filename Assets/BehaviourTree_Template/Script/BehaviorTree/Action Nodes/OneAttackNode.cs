@@ -128,7 +128,7 @@ namespace BehaviourTree
                     temp.
                     Item1.GetComponent<Playable>().
                     GetStateMachine.
-                    ApplyHitDamaged(velocity, 0, _stateMachine, LGProject.DATA_TYPE.DashAttack);
+                    ApplyHitDamaged(velocity, 0, _stateMachine);
 
                     //temp.Item1.GetComponent<Playable>().GetStateMachine.HitPlayer = AIAgent.Instance.transform;
 

@@ -179,7 +179,7 @@ namespace BehaviourTree
                 {
                     temp.
                     Item1.GetStateMachine.
-                    ApplyHitDamaged(_stateMachine.AttackCount < 3 ? Vector3.zero : velocity, 0, _stateMachine, LGProject.DATA_TYPE.NormalAttack);
+                    ApplyHitDamaged(_stateMachine.AttackCount < 3 ? Vector3.zero : velocity, 0, _stateMachine);
                     temp.Item1.GetStateMachine.HitPlayer = _stateMachine.transform;
 
                     _stateMachine.animator.SetInteger("Attack", 0);

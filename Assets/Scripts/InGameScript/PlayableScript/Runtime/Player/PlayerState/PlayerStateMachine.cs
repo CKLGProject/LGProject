@@ -452,10 +452,9 @@ namespace LGProject.PlayerState
         /// <param name="EnemyStateMachine"></param>
         /// <param name="DamageGage"></param>
         /// <param name="dataType"></param>
-        public void ApplyHitDamaged(Vector3 velocity, float nockbackDelay, float DamageGage, PlayerStateMachine EnemyStateMachine,
-            DATA_TYPE dataType)
+        public void ApplyHitDamaged(Vector3 velocity, float nockbackDelay, PlayerStateMachine EnemyStateMachine, float DamageGage = 8.5f)
         {
-            UpdateData(dataType);
+            //UpdateData(dataType);
             // 누어 있는 상태에선 데미지를 입지 않는다.
             if (IsDown || IsUseUltimate || IsSuperArmor || (EnemyStateMachine != null && IsUseUltimate))
                 return;
@@ -468,7 +467,7 @@ namespace LGProject.PlayerState
             if (!IsGuard || (EnemyStateMachine != null && EnemyStateMachine.IsUseUltimate))
             {
                 physics.velocity = Vector3.zero;
-                playable.SetDamageGage(playable.DamageGage + (IsUltimate == true ? 4.25f : 8.5f));
+                playable.SetDamageGage(playable.DamageGage + (IsUltimate == true ? DamageGage * 0.5f : DamageGage));
                 battleModel.SyncDamageGage(playable.ActorType, playable.DamageGage);
                 IsNormalAttack = false;
                 // 충격에 의한 물리 공식

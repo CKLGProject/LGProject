@@ -241,7 +241,7 @@ namespace LGProject.PlayerState
                 BulletCollisionZone bullet = other.GetComponent<BulletCollisionZone>();
                 bullet.gameObject.SetActive(false);
                 bullet.PlayHitParticle();
-                StateMachine.ApplyHitDamaged(bullet.KnockbackVelocity, 0, StateMachine, DATA_TYPE.NormalAttack);
+                StateMachine.ApplyHitDamaged(bullet.KnockbackVelocity, 0, StateMachine, bullet.KnockbackGage);
             }
 
         }
