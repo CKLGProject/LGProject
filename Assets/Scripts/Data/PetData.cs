@@ -3,14 +3,7 @@ using UnityEngine.Serialization;
 
 namespace Data
 {
-    public enum EPetType
-    {
-        None,
-        Scorchwing, // 스코치윙
-        Icebound, // 아이스바운드
-        Aerion, // 에리온
-        Electra // 일렉트라
-    }
+
     
     [CreateAssetMenu(fileName = "Pet Data", menuName = "LG Data/Pet Data")]
     public class PetData : ScriptableObject
