@@ -40,7 +40,14 @@ namespace BehaviourTree
 
         protected override void OnStop()
         {
-            _stateMachine.animator.SetFloat("Run", 0f);
+            try
+            {
+                _stateMachine.animator.SetFloat("Run", 0f);
+            }
+            catch
+            {
+
+            }
         }
 
         protected override State OnUpdate()
