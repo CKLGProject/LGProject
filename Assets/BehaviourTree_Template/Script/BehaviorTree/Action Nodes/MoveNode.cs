@@ -91,7 +91,7 @@ namespace BehaviourTree
             }
             catch
             {
-
+                return State.Failure;
             }
 
         }
