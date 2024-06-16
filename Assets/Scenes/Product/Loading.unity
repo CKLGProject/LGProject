@@ -1326,11 +1326,6 @@ PrefabInstance:
       propertyPath: m_text
       value: AI
       objectReference: {fileID: 0}
-    - target: {fileID: 7553053177719512325, guid: 40a1a056e0c5e4b39bb9586b34b349b6,
-        type: 3}
-      propertyPath: m_HorizontalAlignment
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 7590996179125094764, guid: 40a1a056e0c5e4b39bb9586b34b349b6,
         type: 3}
       propertyPath: m_Pivot.x
