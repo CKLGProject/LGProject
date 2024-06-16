@@ -44,7 +44,6 @@ namespace BehaviourTree
 
             if (_stateMachine.IsDamaged || _stateMachine.IsKnockback)
             {
-                Debug.Log("AA");
                 return State.Failure;
             }
             if (_stateMachine.playable.DashAttackDelay > _curTimer)
@@ -89,12 +88,13 @@ namespace BehaviourTree
         private bool ActionJudge()
         {
             // 판정 범위 계산.
-            Vector3 right = Vector3.right * (_agent.directionX == true ? 1 : -1);
-            Vector3 center = _agent.transform.position + right + Vector3.up * 0.5f;
-            Vector3 hitboxSize = Vector3.one * 0.5f;
-            hitboxSize.x *= (_stateMachine.IsGrounded ? 1.0f : 1.0f);
+            Vector3 pDirct = AIAgent.Instance.player.position - _stateMachine.transform.position;
+            Vector3 right = Vector3.right * (pDirct.x > 0 ? 1f : -1f);
+            Vector3 center = AIAgent.Instance.transform.position + right + Vector3.up * 0.5f;
+
+
             Collider[] targets = Physics.OverlapBox(center,
-                hitboxSize,
+                 Vector3.one * 0.5f,
                 Quaternion.identity, 1 << 3);
 
             System.Tuple<Playable, float> temp = null;

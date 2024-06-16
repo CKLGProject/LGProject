@@ -241,6 +241,7 @@ namespace LGProject.PlayerState
                 BulletCollisionZone bullet = other.GetComponent<BulletCollisionZone>();
                 bullet.gameObject.SetActive(false);
                 bullet.PlayHitParticle();
+                Debug.Log($"{bullet.DamageCount}");
                 StateMachine.ApplyHitDamaged(bullet.KnockbackVelocity, 0, StateMachine, bullet.KnockbackGage);
             }
 
@@ -508,6 +509,10 @@ namespace LGProject.PlayerState
             StateMachine.animator.SetTrigger("Jump1");
 
             StateMachine.animator.SetTrigger("Landing");
+            StateMachine.animator.SetFloat("Run", 0);
+            StateMachine.animator.SetInteger("Attack", 0);
+            StateMachine.AttackCount = 0;
+
             StateMachine.IsDamaged = false;
             StateMachine.IsKnockback = false;
             StateMachine.IsGrounded = false;
@@ -517,7 +522,7 @@ namespace LGProject.PlayerState
                 StateMachine.ChangeState(StateMachine.landingState);
 
             // 무적 2초
-            await UniTask.Delay(TimeSpan.FromSeconds(2f));
+            await UniTask.Delay(TimeSpan.FromSeconds(1f));
             StateMachine.IsSuperArmor = false;
         }
         #endregion

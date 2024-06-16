@@ -13,7 +13,6 @@ namespace BehaviourTree
             if (_stateMachine == null)
                 _stateMachine = AIAgent.Instance.GetStateMachine;
             _stateMachine.playable.effectManager.Play(EffectManager.EFFECT.Airborne).Forget();
-            Debug.Log("KockBackNode");
         }
 
         protected override void OnStop()
@@ -28,7 +27,6 @@ namespace BehaviourTree
             {
                 _stateMachine.IsKnockback = false;
                 _stateMachine.IsDamaged = false;
-                //_stateMachine.animator.SetTrigger("Landing");
                 return State.Failure;
             }
             // 일단 판정을 받아야함.

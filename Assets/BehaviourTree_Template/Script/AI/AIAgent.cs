@@ -47,7 +47,7 @@ namespace BehaviourTree
             Random.seed = System.DateTime.Now.Millisecond;
             StateMachine = new LGProject.PlayerState.PlayerStateMachine();
             StateMachine = LGProject.PlayerState.PlayerStateMachine.CreateStateMachine(this.gameObject);
-            SetAIModel();
+            //SetAIModel();
         }
 
         private void SetAIModel()

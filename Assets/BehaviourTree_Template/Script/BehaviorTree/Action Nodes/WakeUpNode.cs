@@ -27,20 +27,34 @@ namespace BehaviourTree
         protected override void OnStop()
         {
             //Debug.Log("WakeUpStateStop");
-            _stateMachine.IsDown = false;
+            try
+            {
+                _stateMachine.IsDown = false;
+            }
+            catch
+            {
+
+            }
         }
 
         protected override State OnUpdate()
         {
-            curTimer += Time.deltaTime;
-            // 일어나는 중이면 무적 판정
-            if (_stateMachine.playable.WakeUpDelay < curTimer )
+            try
             {
-                return State.Success;
+                curTimer += Time.deltaTime;
+                // 일어나는 중이면 무적 판정
+                if (_stateMachine.playable.WakeUpDelay < curTimer)
+                {
+                    return State.Success;
+                }
+                if (_stateMachine.IsDamaged)
+                    return State.Failure;
+                return State.Running;
             }
-            if (_stateMachine.IsDamaged)
+            catch
+            {
                 return State.Failure;
-            return State.Running;
+            }
         }
     }
 
