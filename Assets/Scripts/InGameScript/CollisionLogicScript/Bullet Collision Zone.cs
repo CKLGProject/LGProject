@@ -65,6 +65,9 @@ namespace LGProject.CollisionZone
         {
             if(Vector3.Distance(transform.position, _originPos) > _range)
             {
+                _hitEffect.SetActive(true);
+                PlayHitParticle();
+                _hitEffect.GetComponent<ParticleSystem>().Play();
                 gameObject.SetActive(false);
                 return;
             }
