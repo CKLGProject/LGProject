@@ -1,33 +1,21 @@
 using R3;
+using ReactiveInputSystem;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(LoginView))]
-public class LoginPresenter : MonoBehaviour
+[RequireComponent(typeof(InitStartView))]
+public class InitStartPresenter : MonoBehaviour
 {
-    private LoginView _view;
-
+    private InitStartView _view;
+    private InputAction _inputAction;
+    
     private void Start()
     {
-        _view = GetComponent<LoginView>();
-
-        if (IsFirstLogin())
-            _view.ShowLoginView();
-        else
-            _view.Connect();
-
-        _view.LoginButton.onClick
-            .AsObservable()
-            .Where(_ => _view.IsNicknameNotEmpty())
-            .Subscribe(_ => _view.Connect(true))
-            .AddTo(this);
-    }
-
-    /// <summary>
-    /// 처음 로그인한다면 true를 반환합니다.
-    /// </summary>
-    /// <returns></returns>
-    private bool IsFirstLogin()
-    {
-        return PlayerPrefs.GetInt("IsFirstLogin", 0) == 0;
+        _view = GetComponent<InitStartView>();
+        _inputAction = InputSystem.actions.FindActionMap("System").FindAction("Tap");
+        
+        // View
+        _inputAction.PerformedAsObservable()
+            .Subscribe(_ => _view.Connect());
     }
 }
