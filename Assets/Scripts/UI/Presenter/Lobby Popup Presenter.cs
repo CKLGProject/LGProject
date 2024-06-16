@@ -153,7 +153,12 @@ public class LobbyPopupPresenter : MonoBehaviour
                 }
                 
                 _view.ActivePet(selectionCharacter);
-                _lobbyView.ActivePet(selectionCharacter);
+                
+                if (GameManager.GetCharacter(ActorType.User) == selectionCharacter)
+                {
+                    GameManager.UpdateUserPetData();
+                    _lobbyView.ActivePet(selectionCharacter);
+                }
             })
             .AddTo(this);
     }
