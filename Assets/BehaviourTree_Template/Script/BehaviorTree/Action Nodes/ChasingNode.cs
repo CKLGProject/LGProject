@@ -85,16 +85,6 @@ namespace BehaviourTree
                 _agent = AIAgent.Instance;
             _curTimer += Time.deltaTime;
             Vector3 currentWaypoint = new Vector3(_agent.path[_agent.targetIndex].x, _agent.path[_agent.targetIndex].y - 0.45f, _agent.path[_agent.targetIndex].z);
-            //if (_agent.transform.position == currentWaypoint)
-            if (Mathf.Abs(Vector3.Distance(_agent.transform.position, currentWaypoint)) < 0.25f)
-            {
-                _agent.targetIndex++;
-                if (_agent.targetIndex >= _agent.path.Length)
-                {
-                    return false;
-                }
-                currentWaypoint = new Vector3(_agent.path[_agent.targetIndex].x, _agent.path[_agent.targetIndex].y - 0.45f, _agent.path[_agent.targetIndex].z);
-            }
 
             // 대각선 위인지 체크
             if (AcrossTargetNode(currentWaypoint))
@@ -109,7 +99,21 @@ namespace BehaviourTree
                 return false;
             }
             currentWaypoint.z = _stateMachine.transform.position.z;
-            currentWaypoint.y = _stateMachine.transform.position.y; 
+            currentWaypoint.y = _stateMachine.transform.position.y;
+            //if (_agent.transform.position == currentWaypoint)
+            if (Mathf.Abs(Vector3.Distance(_agent.transform.position, currentWaypoint)) < 0.25f)
+            {
+                _agent.targetIndex++;
+                if (_agent.targetIndex >= _agent.path.Length)
+                {
+                    return false;
+                }
+                currentWaypoint = new Vector3(_agent.path[_agent.targetIndex].x, _agent.path[_agent.targetIndex].y - 0.45f, _agent.path[_agent.targetIndex].z);
+
+                currentWaypoint.z = _stateMachine.transform.position.z;
+                currentWaypoint.y = _stateMachine.transform.position.y;
+            }
+
             _stateMachine.transform.position = Vector3.MoveTowards(_stateMachine.transform.position, currentWaypoint, _agent.MaximumSpeed * Time.deltaTime);
 
             Vector3 direction = currentWaypoint - _stateMachine.transform.position;
