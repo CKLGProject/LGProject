@@ -26,11 +26,10 @@ public class InitStartView : MonoBehaviour
     /// </summary>
     public void Connect()
     {
-        string nickName = PlayerPrefs.GetString("Nickname", "Guest");
+        const string nickName = "Guest";
+        PlayerPrefs.SetString("Nickname", nickName);
         Singleton.Instance<GameManager>().SetNickname(nickName);
 
         lobbySceneLoader.AllowCompletion();
     }
-
-
 }
