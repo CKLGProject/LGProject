@@ -13,6 +13,8 @@ namespace LGProject
         public GameObject OnlinePlayer;
         public CameraZone CameraZone;
 
+        public int PlayCount { get; private set; }
+
 
         public bool IsStart { get; private set; }
         public bool IsEnd { get; private set; }
@@ -84,6 +86,18 @@ namespace LGProject
             else
                 Destroy(gameObject);
             characterType = Singleton.Instance<GameManager>().GetCharacter(Data.ActorType.User);
+
+            if (PlayerPrefs.HasKey("PlayCount"))
+            {
+                PlayerPrefs.GetInt("PlayCount", PlayCount);
+            }
+            else
+            {
+                Debug.Log("Not Have Data");
+                PlayCount = 1;
+            }
+
+
             SetPlayers();
         }
 
@@ -101,6 +115,7 @@ namespace LGProject
             Timer = 180;
             // 시작하면 카메라를 옮겨줌
             CameraZone.ForcusPlayer(OnlinePlayer.transform);
+            PlayCount = 2;
             
         }
 
@@ -111,9 +126,9 @@ namespace LGProject
         {
             IsStart = false;
             IsEnd = true;
-            // 여기서 호출하고 싶은데..
-            //FileManager.Instance.SaveData();
-            
+            // 게임이 종료되면 게임 횟수를 체크하여 난이도별 AI를 삽입한다.
+            // 패턴은 약 - 약 - 강 현재는 이렇게 설정 예정.
+            PlayerPrefs.SetInt("PlayCount", PlayCount);
         }
     }
 }

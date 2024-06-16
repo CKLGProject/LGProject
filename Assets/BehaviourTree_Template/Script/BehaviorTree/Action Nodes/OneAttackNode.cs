@@ -145,7 +145,6 @@ namespace BehaviourTree
 
         private void StartExceptionHandling()
         {
-            EventReference clip;
             if (_agent == null)
                 _agent = AIAgent.Instance;
             if (_stateMachine == null)

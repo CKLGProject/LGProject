@@ -248,17 +248,13 @@ namespace LGProject.PlayerState
 
         private void OnCollisionEnter(Collision collision)
         {
-            if (collision.gameObject.layer == 9)
-            {
-                Debug.Log("HelloWorld2");
-            }
 
         }
 
         // 공격 시작 
         public virtual void ShootProjectile(int AtkCount, Vector3 velocity)
         {
-            //Debug.Log("Hello World");
+
 
         }
 
