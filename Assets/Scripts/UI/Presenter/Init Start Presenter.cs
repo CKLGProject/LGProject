@@ -20,6 +20,9 @@ public class InitStartPresenter : MonoBehaviour
         // 텍스트 변경
         _view.ChangeTextByOS();
         
+        // 페이드 아웃을 적용합니다.
+        _view.PlayFadeOut();
+        
         // View
         _inputAction.PerformedAsObservable()
             .Subscribe(_ => _view.Connect());
