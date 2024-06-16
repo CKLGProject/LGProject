@@ -48,15 +48,22 @@ namespace BehaviourTree
         {
             // 타이머를 재생해서 0이 되면 실행되게 하기
 
-            if (Agent.GetStateMachine.IsDamaged)
-                return State.Failure;
-            if (Agent.path == null)
-                return State.Running;
-            else
+            try
             {
-                //_curTimer = 0;
-                PathRequestManager.RequestPath(new PathRequest(Agent.transform.position, Grid.Instance.GetRandPoint(Agent.player.position), Agent.GetPath));
-                return State.Success;
+                if (Agent.GetStateMachine.IsDamaged)
+                    return State.Failure;
+                if (Agent.path == null)
+                    return State.Running;
+                else
+                {
+                    //_curTimer = 0;
+                    PathRequestManager.RequestPath(new PathRequest(Agent.transform.position, Grid.Instance.GetRandPoint(Agent.player.position), Agent.GetPath));
+                    return State.Success;
+                }
+            }
+            catch
+            {
+                return State.Failure;
             }
             #region Legarcy
 

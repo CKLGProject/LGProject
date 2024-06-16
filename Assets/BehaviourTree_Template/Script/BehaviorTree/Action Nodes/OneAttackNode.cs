@@ -89,12 +89,12 @@ namespace BehaviourTree
         {
             // 판정 범위 계산.
             Vector3 pDirct = AIAgent.Instance.player.position - _stateMachine.transform.position;
-            Vector3 right = Vector3.right * (pDirct.x > 0 ? 1f : -1f);
+            Vector3 right = _stateMachine.transform.forward;
             Vector3 center = AIAgent.Instance.transform.position + right + Vector3.up * 0.5f;
 
 
             Collider[] targets = Physics.OverlapBox(center,
-                 Vector3.one * 0.5f,
+                 new Vector3(0.2f, 1f, 1f),
                 Quaternion.identity, 1 << 3);
 
             System.Tuple<Playable, float> temp = null;

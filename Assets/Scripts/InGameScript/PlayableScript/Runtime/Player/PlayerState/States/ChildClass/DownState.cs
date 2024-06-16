@@ -10,7 +10,7 @@ namespace LGProject.PlayerState
         private float _currentTimer;
         private float _delay;
         private bool _flight;
-        private static readonly int Landing = Animator.StringToHash("Landing");
+        private static readonly int Landing = Animator.StringToHash("Down");
 
         public DownState(PlayerStateMachine stateMachine, ref float delay) : base(stateMachine)
         {

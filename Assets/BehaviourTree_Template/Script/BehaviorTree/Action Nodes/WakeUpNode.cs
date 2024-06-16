@@ -12,6 +12,8 @@ namespace BehaviourTree
         [Space(10f)]
         public float wakeUpTime;
         private float curTimer;
+
+        private readonly int Landing = Animator.StringToHash("Landing");
         protected override void OnStart()
         {
             //Debug.Log("WakeUpStateStart");
@@ -20,8 +22,7 @@ namespace BehaviourTree
                 _stateMachine = AIAgent.Instance.GetStateMachine;
             _stateMachine.IsKnockback = false;
             _stateMachine.IsDamaged = false;
-
-            Debug.Log("WakeUpNode");
+            _stateMachine.animator.ResetTrigger(Landing);
         }
 
         protected override void OnStop()
