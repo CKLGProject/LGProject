@@ -110,15 +110,15 @@ namespace LGProject.PlayerState
         [HideInInspector] public EffectManager effectManager;
 
         /*[HideInInspector]*/ public bool IsGrounded;
-        [HideInInspector] public bool IsGuard;
-        [HideInInspector] public bool IsJumpGuard;
-        [HideInInspector] public bool IsDamaged;
-        [HideInInspector] public bool IsDown;
-        [HideInInspector] public bool IsKnockback;
-        [HideInInspector] public bool IsJumpping;
-        [HideInInspector] public bool IsDead;
-        [HideInInspector] public bool IsNormalAttack;
-        [HideInInspector] public bool IsUltimate;
+        /*[HideInInspector]*/ public bool IsGuard;
+        /*[HideInInspector]*/ public bool IsJumpGuard;
+        /*[HideInInspector]*/ public bool IsDamaged;
+        /*[HideInInspector]*/ public bool IsDown;
+        /*[HideInInspector]*/ public bool IsKnockback;
+        /*[HideInInspector]*/ public bool IsJumpping;
+        /*[HideInInspector]*/ public bool IsDead;
+        /*[HideInInspector]*/ public bool IsNormalAttack;
+        /*[HideInInspector]*/ public bool IsUltimate;
 
         float _gravity = -9.8f;
         float _groundedGravity = -0.05f;
@@ -269,7 +269,8 @@ namespace LGProject.PlayerState
         private static readonly int Flying = Animator.StringToHash("Flying");
         private static readonly int Hit = Animator.StringToHash("Hit");
         private static readonly int Knockback = Animator.StringToHash("Knockback");
-        private static readonly int WakeUp = Animator.StringToHash("WakeUp");   
+        private static readonly int WakeUp = Animator.StringToHash("WakeUp");
+        private static readonly int Down = Animator.StringToHash("Down");
         //private static readonly int 
 
         #region Initialize
@@ -336,6 +337,7 @@ namespace LGProject.PlayerState
         private void KncokbackLandingCheck()
         {
             effectManager.Play(EffectManager.EFFECT.Knockback).Forget();
+            StateMachine.animator.SetTrigger(Down);
             Vector3 velocity = StateMachine.physics.velocity;
             velocity.y = 0;
             transform.position = new Vector3(transform.position.x, UnderPlatform.rect.y, transform.position.z);
@@ -343,7 +345,7 @@ namespace LGProject.PlayerState
             StateMachine.physics.velocity = Vector3.zero;
             StateMachine.collider.isTrigger = false;
             StateMachine.IsGrounded = true;
-            StateMachine.IsKnockback = false;
+            //StateMachine.IsKnockback = false;
             StateMachine.JumpInCount = 0;
             StateMachine.StandingVelocity();
         }

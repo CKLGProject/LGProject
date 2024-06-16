@@ -72,6 +72,9 @@ namespace LGProject
             catch
             {
                 Debug.Log("설정된 픒레이어가 없음");
+                OnlinePlayer = playable[0];
+                OnlinePlayer.transform.name = "Player";
+                OnlinePlayer.gameObject.SetActive(true);
             }
         }
 
@@ -96,6 +99,12 @@ namespace LGProject
                 Debug.Log("Not Have Data");
                 PlayCount = 1;
             }
+
+            foreach (var item in playable)
+            {
+                item.SetActive(false);
+            }
+
 
 
             SetPlayers();

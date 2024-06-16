@@ -40,7 +40,14 @@ namespace BehaviourTree
 
         protected override void OnStop()
         {
-            _stateMachine.animator.SetFloat("Run", 0f);
+            try
+            {
+                _stateMachine.animator.SetFloat("Run", 0f);
+            }
+            catch
+            {
+
+            }
         }
 
         protected override State OnUpdate()
@@ -59,33 +66,40 @@ namespace BehaviourTree
             //return State.Running;
 
             #endregion
-            if (_agent == null)
-                _agent = AIAgent.Instance;
+            try
+            {
+                if (_agent == null)
+                    _agent = AIAgent.Instance;
 
-            if (_stateMachine.IsDamaged || _stateMachine.IsDead)
-                return State.Failure;
+                if (_stateMachine.IsDamaged || _stateMachine.IsDead)
+                    return State.Failure;
 
-            if (_agent.GetStateMachine.IsGrounded)
-                _agent.GetStateMachine.playable.effectManager.Play(EffectManager.EFFECT.Run).Forget();
-            else
-                _agent.GetStateMachine.playable.effectManager.Stop(EffectManager.EFFECT.Run);
+                if (_agent.GetStateMachine.IsGrounded)
+                    _agent.GetStateMachine.playable.effectManager.Play(EffectManager.EFFECT.Run).Forget();
+                else
+                    _agent.GetStateMachine.playable.effectManager.Stop(EffectManager.EFFECT.Run);
 
-            float distance = Vector3.Distance(_stateMachine.transform.position, _agent.player.position);
+                float distance = Vector3.Distance(_stateMachine.transform.position, _agent.player.position);
 
-            // path가 있는지 확인. || 내 앞에 적이 있는 지 확인
-            if ((_agent.path == null || distance <= 1.5f) && _agent.GetStateMachine.IsGrounded)
+                // path가 있는지 확인. || 내 앞에 적이 있는 지 확인
+                if ((_agent.path == null || distance <= 1.5f) && _agent.GetStateMachine.IsGrounded)
+                {
+                    return State.Failure;
+                }
+                // path가 있다면 움직이게 하기.
+                // Running 상태가 필요함.
+                // 마지막 경로에 도착했는가를 체크해야함.
+                if (FollowPath())
+                {
+                    // 이동을 해야함.
+                    return State.Running;
+                }
+                return State.Success;
+            }
+            catch
             {
                 return State.Failure;
             }
-            // path가 있다면 움직이게 하기.
-            // Running 상태가 필요함.
-            // 마지막 경로에 도착했는가를 체크해야함.
-            if (FollowPath())
-            {
-                // 이동을 해야함.
-                return State.Running;
-            }
-            return State.Success;   
 
         }
 
@@ -97,14 +111,6 @@ namespace BehaviourTree
             {
                 _curTimer += Time.deltaTime;
                 Vector3 currentWaypoint = new Vector3(_agent.path[_agent.targetIndex].x, _agent.path[_agent.targetIndex].y - 0.45f, _agent.path[_agent.targetIndex].z);
-                if (Mathf.Abs(Vector3.Distance(_agent.transform.position, currentWaypoint)) < 0.5f)
-                {
-                    _agent.targetIndex++;
-                    if (_agent.targetIndex >= _agent.path.Length)
-                        return false;
-
-                    currentWaypoint = new Vector3(_agent.path[_agent.targetIndex].x, _agent.path[_agent.targetIndex].y - 0.45f, _agent.path[_agent.targetIndex].z);
-                }
 
                 // 대각선 위인지 체크
                 if (AcrossTargetNode(currentWaypoint))
@@ -118,6 +124,19 @@ namespace BehaviourTree
                 }
                 currentWaypoint.z = _agent.transform.position.z;
                 currentWaypoint.y = _stateMachine.transform.position.y;
+
+                if (Mathf.Abs(Vector3.Distance(_agent.transform.position, currentWaypoint)) < 0.5f)
+                {
+                    _agent.targetIndex++;
+                    if (_agent.targetIndex >= _agent.path.Length)
+                        return false;
+
+                    currentWaypoint = new Vector3(_agent.path[_agent.targetIndex].x, _agent.path[_agent.targetIndex].y - 0.45f, _agent.path[_agent.targetIndex].z);
+
+                    currentWaypoint.z = _agent.transform.position.z;
+                    currentWaypoint.y = _stateMachine.transform.position.y;
+                }
+
 
                 //if (_agent.GetStateMachine.IsGrounded) 
                 _agent.transform.position = Vector3.MoveTowards(_agent.transform.position, currentWaypoint, _stateMachine.playable.MaximumSpeed * Time.deltaTime);

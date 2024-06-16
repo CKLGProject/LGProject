@@ -93,7 +93,7 @@ namespace LGProject.PlayerState
             pointY = node.GridY;
             // 맥스치는 0 ~ 19 1/3만큼 이동할 것이다 그럼?;
             int point = 19 / 3; // 6;
-            pointX = StateMachine.playable.directionX ? pointX + point : pointX - point;
+            pointX = StateMachine.transform.forward.x > 0 ? pointX + point : pointX - point;
             pointX = pointX < 1 ? 1 : pointX;
             pointX = pointX > 19 ? 18 : pointX;
 

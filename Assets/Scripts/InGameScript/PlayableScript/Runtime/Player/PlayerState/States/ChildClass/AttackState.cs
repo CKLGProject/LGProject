@@ -194,12 +194,14 @@ namespace LGProject.PlayerState
 
             if (!_damageInCount)
             {
-                Vector3 right = Vector3.right * (StateMachine.playable.directionX == true ? 1.2f : -1.2f);
+                Vector3 right = (StateMachine.transform.forward);
                 Vector3 center = StateMachine.transform.position + right + Vector3.up * 0.5f;
-                
+
                 // 생각보다 판정이 후하진 않게 하기
                 // hit box의 크기를 따라감.
-                Collider[] targets = Physics.OverlapBox(center, Vector3.one * 0.5f, Quaternion.identity, 1 << 3);
+                Vector3 hitBox =
+                 new Vector3(0.5f, 1f, 1f);
+                Collider[] targets = Physics.OverlapBox(center, hitBox, Quaternion.identity, 1 << 3);
                 // 박스 내부에 들어온 적을 생각했을 때, Playable Character와 가까운 적을 타겟으로 삼는다.
                 System.Tuple<Playable, float> temp = null;
 

@@ -18,7 +18,7 @@ namespace BehaviourTree
             //tree.Bind(GetComponent<AIAgent>());
 #endif
 
-            //SpawnTheAIModelNPattern();
+            SpawnTheAIModelNPattern();
         }
 
         // 처음 생성되었을 때, 확률에 따라 출력될 모델의 종류를 결정하고 그에 맞는 세팅을 해준다.

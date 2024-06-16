@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1ee089778469a6499c863647c673aaa, type: 3}
   m_Name: WeightDecoratorNode
   m_EditorClassIdentifier: 
-  state: 1
+  state: 2
   started: 0
   guid: 2a35be6a1506b9d4a90ef8fae3359fb2
   position: {x: 765, y: 505.00003}
@@ -83,7 +83,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1ee089778469a6499c863647c673aaa, type: 3}
   m_Name: WeightDecoratorNode
   m_EditorClassIdentifier: 
-  state: 2
+  state: 1
   started: 0
   guid: 540c49761559b5e42917a9b766f81849
   position: {x: 462.45004, y: 505.00006}
@@ -106,7 +106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cb92853804b27d41ac471ecaeaa74e7, type: 3}
   m_Name: ChasingNode
   m_EditorClassIdentifier: 
-  state: 1
+  state: 2
   started: 0
   guid: db5bb0bbfa88ac941a05004522e17ed5
   position: {x: 630.99994, y: 955}
@@ -128,8 +128,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b03b19d40d81754894d6bd701897994, type: 3}
   m_Name: DownNode
   m_EditorClassIdentifier: 
-  state: 2
-  started: 0
+  state: 0
+  started: 1
   guid: 52aa76a76aaf432429f80607369448b1
   position: {x: -362, y: 644}
   blackboard:
@@ -233,7 +233,7 @@ MonoBehaviour:
   - {fileID: 8561578144344339604}
   - {fileID: 979470226565153095}
   - {fileID: -1847989979969271714}
-  current: 0
+  current: 2
 --- !u!114 &-4288313280875520722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -317,7 +317,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6babec2a44aec92419c275b704eb9284, type: 3}
   m_Name: SequencerNode
   m_EditorClassIdentifier: 
-  state: 1
+  state: 2
   started: 0
   guid: 9f9c52804eea2e14da7c847718889032
   position: {x: 711.00006, y: 809.065}
@@ -328,7 +328,7 @@ MonoBehaviour:
   children:
   - {fileID: -8219645718292566422}
   - {fileID: -2826794560748770681}
-  current: 0
+  current: 2
 --- !u!114 &-4056544319149206852
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -497,7 +497,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 918635b42d91aa84fb42901c6781c520, type: 3}
   m_Name: SetPathNode
   m_EditorClassIdentifier: 
-  state: 2
+  state: 1
   started: 0
   guid: 7be37b5e813774549844668f2551baa5
   position: {x: 357.44998, y: 796.0001}
@@ -518,7 +518,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6babec2a44aec92419c275b704eb9284, type: 3}
   m_Name: SequencerNode
   m_EditorClassIdentifier: 
-  state: 2
+  state: 1
   started: 0
   guid: 1519ef2a3f5aa93458e9a5edc4eac577
   position: {x: 462.00012, y: 645}
@@ -529,7 +529,7 @@ MonoBehaviour:
   children:
   - {fileID: -2080985506334161861}
   - {fileID: 650769149217407391}
-  current: 2
+  current: 0
 --- !u!114 &-1878908651922025553
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -554,7 +554,7 @@ MonoBehaviour:
   - {fileID: -1314574971530753747}
   - {fileID: -7252241123171764499}
   - {fileID: 6263507584445490026}
-  current: 2
+  current: 1
 --- !u!114 &-1847989979969271714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -809,7 +809,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1300e3106659d4544b91bb649664acca, type: 3}
   m_Name: MoveNode
   m_EditorClassIdentifier: 
-  state: 2
+  state: 1
   started: 0
   guid: f860bf3544287224f818f494607f8fc5
   position: {x: 517, y: 796}
@@ -917,7 +917,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68047313e2fb8cf439c7453b6915160a, type: 3}
   m_Name: SelectorNode
   m_EditorClassIdentifier: 
-  state: 1
+  state: 2
   started: 0
   guid: 7788440f0cc4d664c9c87f170b4ca0ae
   position: {x: 810, y: 655}
@@ -961,8 +961,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba188e7c4d935a447ae30ffa5c8d1ba4, type: 3}
   m_Name: WakeUpNode
   m_EditorClassIdentifier: 
-  state: 0
-  started: 1
+  state: 2
+  started: 0
   guid: 7556b628ad359e4418ccc721c1064b93
   position: {x: -202, y: 644}
   blackboard:
@@ -1096,7 +1096,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41ba01fb4f8cf244694fcdefbe1221d6, type: 3}
   m_Name: RangeNode
   m_EditorClassIdentifier: 
-  state: 1
+  state: 2
   started: 0
   guid: e226da028ba38534994cecaa59e72f08
   position: {x: -243.00002, y: 495.00003}

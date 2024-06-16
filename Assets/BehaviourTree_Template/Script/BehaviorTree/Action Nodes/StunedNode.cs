@@ -24,7 +24,7 @@ namespace BehaviourTree
              _stateMachine.animator.ResetTrigger("Knockback");
             _stateMachine.animator.ResetTrigger("WakeUp");
             _stateMachine.animator.SetFloat("Run", 0f);
-
+            Debug.Log("Stun");
         }
 
         protected override void OnStop()
@@ -34,21 +34,30 @@ namespace BehaviourTree
 
         protected override State OnUpdate()
         {
-            // 경직 중 공격을 당하면 초기화
-            if(Agent.GetStateMachine.IsDamaged && !Agent.GetStateMachine.IsKnockback)
+            try
             {
-                // 피격 모션 출력
-                Agent.GetStateMachine.IsDamaged = false;
-                curTiemr = 0;
+                // 경직 중 공격을 당하면 초기화
+                if (Agent.GetStateMachine.IsDamaged && !Agent.GetStateMachine.IsKnockback)
+                {
+                    // 피격 모션 출력
+                    Agent.GetStateMachine.IsDamaged = false;
+                    curTiemr = 0;
+                }
+
+                curTiemr += Time.deltaTime;
+
+                if (_stateMachine.playable.HitDelay < curTiemr || (Agent.GetStateMachine.IsKnockback))
+                {
+                    return State.Success;
+                }
+
+                return State.Running;
             }
-            curTiemr += Time.deltaTime;
-   
-            if(_stateMachine.playable.HitDelay < curTiemr || (Agent.GetStateMachine.IsKnockback ))
+            catch
             {
-                
-                return State.Success;
+                return State.Failure;
             }
-            return State.Running;
+
         }
     }
 

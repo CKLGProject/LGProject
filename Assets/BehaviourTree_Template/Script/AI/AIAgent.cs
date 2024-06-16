@@ -86,7 +86,7 @@ namespace BehaviourTree
         }
 
         float curTimer = 0;
-        float minTimer = 0.1f;
+        float minTimer = 0.2f;
 
         private void Update()
         {

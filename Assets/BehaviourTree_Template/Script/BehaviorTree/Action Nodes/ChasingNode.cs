@@ -33,33 +33,40 @@ namespace BehaviourTree
 
         protected override State OnUpdate()
         {
-            // path가 있는지 확인. || 내가 피해를 입은 경우 |}| 최종 경로에 도착한 경우 || 플레이어가 공중에 떠있을때 || 플레이어가 누워있을 때 || 플레이어가 떨어졌을 때,
-            if (EscapeConditions())
+            try
+            {
+                // path가 있는지 확인. || 내가 피해를 입은 경우 |}| 최종 경로에 도착한 경우 || 플레이어가 공중에 떠있을때 || 플레이어가 누워있을 때 || 플레이어가 떨어졌을 때,
+                if (EscapeConditions())
+                {
+                    return State.Failure;
+                }
+
+                if (_agent.path.Length > 0 && TargetPointToPlayerPositionDistance() > 3f)
+                {
+                    pathFinding.PathRequestManager.RequestPath(new pathFinding.PathRequest(_stateMachine.transform.position, _agent.player.position, _agent.GetPath));
+                    return State.Running;
+                }
+
+                float distance = Vector3.Distance(_agent.transform.position, _agent.player.position);
+                if (distance < stopRange)
+                {
+                    return State.Success;
+                }
+
+                // Running 상태가 필요함.
+                // path가 있다면 움직이게 하기.
+                // 마지막 경로에 도착했는가를 체크해야함.
+                if (_agent.targetIndex < _agent.path.Length && FollowPath())
+                {
+                    // 이동을 해야함.
+                    return State.Running;
+                }
+                return State.Success;
+            }
+            catch
             {
                 return State.Failure;
             }
-
-            if (_agent.path.Length > 0 && TargetPointToPlayerPositionDistance() > 3f)
-            {
-                pathFinding.PathRequestManager.RequestPath(new pathFinding.PathRequest(_stateMachine.transform.position, _agent.player.position, _agent.GetPath));
-                return State.Running;
-            }
-
-            float distance = Vector3.Distance(_agent.transform.position, _agent.player.position);
-            if (distance < stopRange)
-            {
-                return State.Success;
-            }
-
-            // Running 상태가 필요함.
-            // path가 있다면 움직이게 하기.
-            // 마지막 경로에 도착했는가를 체크해야함.
-            if (_agent.targetIndex < _agent.path.Length && FollowPath())
-            {
-                // 이동을 해야함.
-                return State.Running;
-            }
-            return State.Success;
             
         }
 
@@ -78,16 +85,6 @@ namespace BehaviourTree
                 _agent = AIAgent.Instance;
             _curTimer += Time.deltaTime;
             Vector3 currentWaypoint = new Vector3(_agent.path[_agent.targetIndex].x, _agent.path[_agent.targetIndex].y - 0.45f, _agent.path[_agent.targetIndex].z);
-            //if (_agent.transform.position == currentWaypoint)
-            if (Mathf.Abs(Vector3.Distance(_agent.transform.position, currentWaypoint)) < 0.25f)
-            {
-                _agent.targetIndex++;
-                if (_agent.targetIndex >= _agent.path.Length)
-                {
-                    return false;
-                }
-                currentWaypoint = new Vector3(_agent.path[_agent.targetIndex].x, _agent.path[_agent.targetIndex].y - 0.45f, _agent.path[_agent.targetIndex].z);
-            }
 
             // 대각선 위인지 체크
             if (AcrossTargetNode(currentWaypoint))
@@ -102,7 +99,21 @@ namespace BehaviourTree
                 return false;
             }
             currentWaypoint.z = _stateMachine.transform.position.z;
-            currentWaypoint.y = _stateMachine.transform.position.y; 
+            currentWaypoint.y = _stateMachine.transform.position.y;
+            //if (_agent.transform.position == currentWaypoint)
+            if (Mathf.Abs(Vector3.Distance(_agent.transform.position, currentWaypoint)) < 0.25f)
+            {
+                _agent.targetIndex++;
+                if (_agent.targetIndex >= _agent.path.Length)
+                {
+                    return false;
+                }
+                currentWaypoint = new Vector3(_agent.path[_agent.targetIndex].x, _agent.path[_agent.targetIndex].y - 0.45f, _agent.path[_agent.targetIndex].z);
+
+                currentWaypoint.z = _stateMachine.transform.position.z;
+                currentWaypoint.y = _stateMachine.transform.position.y;
+            }
+
             _stateMachine.transform.position = Vector3.MoveTowards(_stateMachine.transform.position, currentWaypoint, _agent.MaximumSpeed * Time.deltaTime);
 
             Vector3 direction = currentWaypoint - _stateMachine.transform.position;
@@ -211,7 +222,6 @@ namespace BehaviourTree
         {
             if (_curTimer >= jumpDelay)
             {
-                Debug.Log($"HH{_count}");
                 _count++;
                 _agent.GetStateMachine.JumpInCount++;
                 _agent.HandleJumpping();
