@@ -345,7 +345,7 @@ namespace LGProject.PlayerState
             StateMachine.physics.velocity = Vector3.zero;
             StateMachine.collider.isTrigger = false;
             StateMachine.IsGrounded = true;
-            StateMachine.IsKnockback = false;
+            //StateMachine.IsKnockback = false;
             StateMachine.JumpInCount = 0;
             StateMachine.StandingVelocity();
         }

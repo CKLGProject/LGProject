@@ -23,6 +23,7 @@ namespace BehaviourTree
             _stateMachine.IsKnockback = false;
             _stateMachine.IsDamaged = false;
             _stateMachine.animator.ResetTrigger(Landing);
+            Debug.Log("WakeUp");
         }
 
         protected override void OnStop()
