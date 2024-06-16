@@ -26,6 +26,30 @@
       },
       "hash": "e86fc4f7a1d49c49944bae8adb92c0ae24f25cae"
     },
+    "com.esotericsoftware.spine.spine-csharp": {
+      "version": "https://github.com/EsotericSoftware/spine-runtimes.git?path=spine-csharp/src#4.2",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "ccac475c818777ac109107ae29dad087683f5da0"
+    },
+    "com.esotericsoftware.spine.spine-unity": {
+      "version": "https://github.com/EsotericSoftware/spine-runtimes.git?path=spine-unity/Assets/Spine#4.2",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.esotericsoftware.spine.spine-csharp": "4.2.0"
+      },
+      "hash": "ccac475c818777ac109107ae29dad087683f5da0"
+    },
+    "com.esotericsoftware.spine.urp-shaders": {
+      "version": "file:com.esotericsoftware.spine.urp-shaders-4.2-2019.1",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {
+        "com.unity.render-pipelines.universal": "7.1.5"
+      }
+    },
     "com.nkstudio.scenereference": {
       "version": "https://github.com/NK-Studio/SceneReference.git#UPM",
       "depth": 0,
