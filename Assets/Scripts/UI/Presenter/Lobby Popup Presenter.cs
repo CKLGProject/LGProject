@@ -91,7 +91,9 @@ public class LobbyPopupPresenter : MonoBehaviour
         _view.OnCharacterSelectionButtonClicked()
             .Subscribe(_ =>
             {
-                Singleton.Instance<GameManager>().SetCurrentCharacter(ActorType.User, _model.SelectedCharacterType);
+                GameManager.SetCurrentCharacter(ActorType.User, _model.SelectedCharacterType);
+                GameManager.UpdateUserPetData();
+                
                 _model.SetChoiceCharacterType(_model.SelectedCharacterType);
                 _view.SetInteractionByCharacterSelectionButton(false);
             })

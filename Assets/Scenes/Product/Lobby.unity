@@ -240,7 +240,7 @@ GameObject:
   - component: {fileID: 34941801}
   - component: {fileID: 34941800}
   m_Layer: 0
-  m_Name: Loby System
+  m_Name: Lobby System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3830,8 +3830,8 @@ MonoBehaviour:
   UseAsync: 0
   editorAutoLoad: 0
   loadScene:
-    sceneAsset: {fileID: 102900000, guid: 27a695b0634ca574f8f3b9df487e1070, type: 3}
-    path: Assets/Scenes/InGameScene/TestScene/InGameAIChangerTestScene.unity
+    sceneAsset: {fileID: 102900000, guid: 7e448d90f162c4ed6a0a581223fd5466, type: 3}
+    path: Assets/Scenes/Product/Loading.unity
   additiveScenes: []
   SkipMode: 3
   SkipAction:

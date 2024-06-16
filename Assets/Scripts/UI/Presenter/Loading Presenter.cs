@@ -8,7 +8,7 @@ public class LoadingPresenter : MonoBehaviour
 {
     private LoadingView _loadingView;
 
-    private GameManager CurrentGameManager => Singleton.Instance<GameManager>();
+    private GameManager GameManager => Singleton.Instance<GameManager>();
 
     private void Start()
     {
@@ -17,28 +17,34 @@ public class LoadingPresenter : MonoBehaviour
         #region User
 
         // 유저 이름을 설정합니다.
-        string userName = CurrentGameManager.GetNickname();
+        string userName = GameManager.GetNickname();
         _loadingView.SetUserNameText(ActorType.User, userName);
 
         // 유저 프로필 이미지를 설정합니다.
-        ECharacterType userCharacter = CurrentGameManager.GetCharacter(ActorType.User);
-        _loadingView.SetCharacterImage(ActorType.User, userCharacter);
-
+        ECharacterType userCharacter = GameManager.GetCharacter(ActorType.User);
+        _loadingView.ShowCharacterProfile(ActorType.User, userCharacter);
+        
         // 유저 정령 UI를 설정한다.
-        Sprite userPatImage = CurrentGameManager.GetPet(ActorType.User).GetProfileImage();
-        _loadingView.SetPatUI(ActorType.User, userPatImage);
+        EPetType userPetType = GameManager.GetPetType(ActorType.User);
+
+        bool canUseUserPetUIActive = userPetType != EPetType.None;
+        _loadingView.SetActivePetGroup(ActorType.User, canUseUserPetUIActive);
+        _loadingView.ShowPetProfile(ActorType.User, userPetType);
 
         #endregion
 
         #region AI
 
         // AI 프로필 이미지를 설정합니다.
-        ECharacterType aiCharacter = CurrentGameManager.GetCharacter(ActorType.AI);
-        _loadingView.SetCharacterImage(ActorType.AI, aiCharacter);
+        ECharacterType aiCharacter = GameManager.GetCharacter(ActorType.AI);
+        _loadingView.ShowCharacterProfile(ActorType.AI, aiCharacter);
         
         // AI 정령 UI를 설정한다.
-        Sprite aiPatImage = CurrentGameManager.GetPet(ActorType.AI).GetProfileImage();
-        _loadingView.SetPatUI(ActorType.AI, aiPatImage);
+        EPetType aiPetType = GameManager.GetPetType(ActorType.AI);
+
+        bool canUseAIPetUIActive = aiPetType != EPetType.None;
+        _loadingView.SetActivePetGroup(ActorType.AI, canUseAIPetUIActive);
+        _loadingView.ShowPetProfile(ActorType.AI, aiPetType);
 
         #endregion
 

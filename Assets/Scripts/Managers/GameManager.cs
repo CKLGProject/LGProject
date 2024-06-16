@@ -53,7 +53,9 @@ public class GameManager : MonoBehaviour
 
         // 펫 설정
         _userData.Pet = new();
-        _userData.Pet.PetType = (EPetType)PlayerPrefs.GetInt("Pet", (int)EPetType.None);
+        //NOTE:원래는 펫을 장착하거나 해제하는 기능이 있어야 하지만, 현재는 펫을 고정으로 설정하고 있습니다.
+        // _userData.Pet.PetType = (EPetType)PlayerPrefs.GetInt("Pet", (int)EPetType.None);
+        _userData.Pet.PetType = GetUserPetType(_userData.CharacterType);
         _userData.Pet.PetData = FindPatDataByPatType(_userData.Pet.PetType);
         _userData.Pet.Level = PlayerPrefs.GetInt("Pet Level", 0);
     }
@@ -126,23 +128,6 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 해당 액터의 현재 정령을 반환합니다.
-    /// </summary>
-    /// <returns>정령 타입</returns>
-    public Pet GetPet(ActorType actorType)
-    {
-        switch (actorType)
-        {
-            case ActorType.User:
-                return _userData.Pet;
-            case ActorType.AI:
-                return _aiData.Pet;
-        }
-
-        return null;
-    }
-
-    /// <summary>
     /// AI 모델을 랜덤하게 선택합니다.
     /// </summary>
     public void RandomChoiceAI()
@@ -154,6 +139,8 @@ public class GameManager : MonoBehaviour
         _aiData.CharacterType = model.CharacterType;
 
         // 정령 데이터 바인딩
+        _aiData.Pet.PetType = model.petType;
+        
         PetData petData = FindPatDataByPatType(model.petType);
         _aiData.Pet.PetData = petData;
 
@@ -242,5 +229,104 @@ public class GameManager : MonoBehaviour
 
         string json = JsonConvert.SerializeObject(_userData.IsEnablePetMap);
         PlayerPrefs.SetString("IsEnablePetMap", json);
+    }
+
+    /// <summary>
+    /// 해당 액터의 펫 타입을 반환합니다.
+    /// </summary>
+    /// <param name="actorType">액터 타겟</param>
+    /// <returns>펫 타입</returns>
+    public EPetType GetPetType(ActorType actorType)
+    {
+        switch (actorType)
+        {
+            case ActorType.User:
+                return _userData.Pet.PetType;
+            case ActorType.AI:
+                return _aiData.Pet.PetType;
+        }
+
+        return EPetType.None;
+    }
+
+    /// <summary>
+    /// 해당 캐릭터가 펫을 가지고 있는지 파악하고 있다면 펫 타입을 반환합니다.
+    /// </summary>
+    /// <param name="characterType">검사할 캐릭터 타입</param>
+    /// <returns>펫 타입</returns>
+    /// <exception cref="ArgumentOutOfRangeException"></exception>
+    private EPetType GetUserPetType(ECharacterType characterType)
+    {
+        bool hasPet;
+        switch (characterType)
+        {
+            case ECharacterType.Hit:
+
+                hasPet = HasPet(EPetType.Scorchwing);
+
+                if (hasPet)
+                {
+                    bool isEnablePet = IsEnablePet(EPetType.Scorchwing);
+
+                    if (isEnablePet)
+                        return EPetType.Scorchwing;
+                }
+
+                break;
+            case ECharacterType.Frost:
+
+                hasPet = HasPet(EPetType.Icebound);
+
+                if (hasPet)
+                {
+                    bool isEnablePet = IsEnablePet(EPetType.Icebound);
+
+                    if (isEnablePet)
+                        return EPetType.Icebound;
+                }
+
+                break;
+            case ECharacterType.Kane:
+
+                hasPet = HasPet(EPetType.Aerion);
+                
+                if (hasPet)
+                {
+                    bool isEnablePet = IsEnablePet(EPetType.Aerion);
+
+                    if (isEnablePet)
+                        return EPetType.Aerion;
+                }
+                
+                break;
+            case ECharacterType.Storm:
+
+                hasPet = HasPet(EPetType.Aerion);   
+                
+                if (hasPet)
+                {
+                    bool isEnablePet = IsEnablePet(EPetType.Aerion);
+
+                    if (isEnablePet)
+                        return EPetType.Aerion;
+                }
+
+                break;
+            case ECharacterType.E:
+            default:
+                throw new ArgumentOutOfRangeException(nameof(characterType), characterType, null);
+        }
+
+        return EPetType.None;
+    }
+
+    /// <summary>
+    /// User Pet Data를 업데이트 합니다.
+    /// </summary>
+    public void UpdateUserPetData()
+    {
+        _userData.Pet.PetType = GetUserPetType(_userData.CharacterType);
+        _userData.Pet.PetData = FindPatDataByPatType(_userData.Pet.PetType);
+        _userData.Pet.Level = PlayerPrefs.GetInt("Pet Level", 0);
     }
 }

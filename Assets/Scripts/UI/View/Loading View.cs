@@ -1,12 +1,9 @@
 using Data;
 using R3;
 using System;
-using System.Linq;
 using System.Text;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
 
 public class LoadingView : MonoBehaviour
 {
@@ -14,15 +11,14 @@ public class LoadingView : MonoBehaviour
     public class CardUI
     {
         public TextMeshProUGUI NameText;
-        public TextMeshProUGUI PatNameText;
-        public Image CharacterImage;
-        public Image PatImage;
+        public GameObject[] CharacterList;
+        public GameObject[] PetList;
+        public GameObject PetGroup;
     }
 
     [SerializeField] private TextMeshProUGUI loadingText;
 
     [Header("User")] [SerializeField] private CardUI userCardUI;
-
 
     [Header("AI")] [SerializeField] private CardUI aiCardUI;
 
@@ -34,45 +30,23 @@ public class LoadingView : MonoBehaviour
     /// <summary>
     /// 유저 정령 프로필 이미지를 value로 변경합니다.
     /// </summary>
-    /// <param name="target"></param>
-    /// <param name="value"></param>
-    public void SetCharacterProfileImage(ActorType target, Sprite value)
-    {
-        switch (target)
-        {
-            case ActorType.User:
-                if (!userCardUI.CharacterImage)
-                    return;
-                userCardUI.CharacterImage.sprite = value;
-                break;
-            case ActorType.AI:
-                if (!aiCardUI.CharacterImage)
-                    return;
-                aiCardUI.CharacterImage.sprite = value;
-                break;
-            default:
-                throw new ArgumentOutOfRangeException(nameof(target), target, null);
-        }
-    }
-
-    /// <summary>
-    /// 캐릭터 이미지를 value로 변경합니다.
-    /// </summary>
     /// <param name="target">타겟 액터</param>
-    /// <param name="value">캐릭터 타입</param>
-    public void SetCharacterImage(ActorType target, ECharacterType value)
+    /// <param name="characterType">캐릭터 타입</param>
+    public void ShowCharacterProfile(ActorType target, ECharacterType characterType)
     {
         switch (target)
         {
             case ActorType.User:
-                if (!userCardUI.CharacterImage)
-                    return;
-                userCardUI.CharacterImage.sprite = CalculateCharacterImage(value);
+                foreach (GameObject characterObject in userCardUI.CharacterList)
+                    characterObject.SetActive(false);
+
+                userCardUI.CharacterList[(int)characterType].SetActive(true);
                 break;
             case ActorType.AI:
-                if (!aiCardUI.CharacterImage)
-                    return;
-                aiCardUI.CharacterImage.sprite = CalculateCharacterImage(value);
+                foreach (GameObject characterObject in aiCardUI.CharacterList)
+                    characterObject.SetActive(false);
+
+                aiCardUI.CharacterList[(int)characterType].SetActive(true);
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(target), target, null);
@@ -125,21 +99,44 @@ public class LoadingView : MonoBehaviour
     /// <summary>
     /// 펫 이름 텍스트를 value로 설정합니다.
     /// </summary>
-    public void SetPatUI(ActorType target, Sprite value)
+    /// <param name="target">타겟 액터</param>
+    /// <param name="petType">펫 타입</param>
+    public void ShowPetProfile(ActorType target, EPetType petType)
     {
         switch (target)
         {
             case ActorType.User:
-                if (!userCardUI.PatImage)
-                    return;
-                //TODO:여기에 정령 이름 부분이 필요시 들어간다.
-                userCardUI.PatImage.sprite = value;
+                foreach (GameObject petObject in userCardUI.PetList)
+                    petObject.SetActive(false);
+
+                userCardUI.PetList[(int)petType].SetActive(true);
                 break;
             case ActorType.AI:
-                if (!aiCardUI.PatImage)
-                    return;
-                //TODO:여기에 정령 이름 부분이 필요시 들어간다.
-                aiCardUI.PatImage.sprite = value;
+                foreach (GameObject petObject in aiCardUI.PetList)
+                    petObject.SetActive(false);
+
+                aiCardUI.PetList[(int)petType].SetActive(true);
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(target), target, null);
+        }
+    }
+
+    /// <summary>
+    /// 해당 액터 타겟의 펫 그룹 활성화 상태를 설정합니다.
+    /// </summary>
+    /// <param name="target">액터 타겟</param>
+    /// <param name="active">활성화 여부</param>
+    /// <exception cref="ArgumentOutOfRangeException"></exception>
+    public void SetActivePetGroup(ActorType target, bool active)
+    {
+        switch (target)
+        {
+            case ActorType.User:
+                userCardUI.PetGroup.SetActive(active);
+                break;
+            case ActorType.AI:
+                aiCardUI.PetGroup.SetActive(active);
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(target), target, null);
@@ -153,17 +150,5 @@ public class LoadingView : MonoBehaviour
     public Observable<Unit> UpdateLoadingTextObservable()
     {
         return Observable.Interval(TimeSpan.FromSeconds(0.25f));
-    }
-
-    /// <summary>
-    /// characterType에 알맞는 캐릭터 이미지를 반환합니다.
-    /// </summary>
-    /// <param name="characterType">캐릭터 타입</param>
-    /// <returns>캐릭터 이미지</returns>
-    private Sprite CalculateCharacterImage(ECharacterType characterType)
-    {
-        return (from characterImageData in characterImageDataList
-            where characterType == characterImageData.CharacterType
-            select characterImageData.CharacterProfileImage).FirstOrDefault();
     }
 }
