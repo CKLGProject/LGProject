@@ -199,7 +199,7 @@ namespace LGProject.PlayerState
                         ref psm.playable.ThirdAttackDelay);
                     break;
                 case Data.ECharacterType.Hit:
-                    psm.attackState = new HitAttackState(psm, ref psm.playable.FirstAttackJudgeDelay,
+                    psm.attackState = new AttackState(psm, ref psm.playable.FirstAttackJudgeDelay,
                         ref psm.playable.FirstAttackDelay, ref psm.playable.SecondAttackJudgeDelay,
                         ref psm.playable.SecondAttackDelay, ref psm.playable.ThirdAttackJudgeDelay,
                         ref psm.playable.ThirdAttackDelay);
@@ -456,7 +456,7 @@ namespace LGProject.PlayerState
         {
             //UpdateData(dataType);
             // 누어 있는 상태에선 데미지를 입지 않는다.
-            if (IsDown || IsUseUltimate || IsSuperArmor || (EnemyStateMachine != null && IsUseUltimate))
+            if (IsDown || IsKnockback || IsUseUltimate || IsSuperArmor || (EnemyStateMachine != null && IsUseUltimate))
                 return;
             if (IsGuard)
             {

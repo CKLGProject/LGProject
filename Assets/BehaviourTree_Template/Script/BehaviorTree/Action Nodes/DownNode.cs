@@ -11,7 +11,7 @@ namespace BehaviourTree
         [Space(10f)]
         public float downTimer;
         private float curTimer;
-        private static readonly int Landing = Animator.StringToHash("Landing");
+        private static readonly int Landing = Animator.StringToHash("Down");
         private static readonly int WakeUp = Animator.StringToHash("WakeUp");
         protected override void OnStart()
         {
