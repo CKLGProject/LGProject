@@ -26,8 +26,8 @@ public class LobbyPopupPresenter : MonoBehaviour
         // 현재 캐릭터 활성화
         ECharacterType currentCharacter = _model.SelectedCharacterType;
         _view.ActiveCurrentCharacterProfile(currentCharacter);
-        
-        GameManager.HasPet(currentCharacter)
+
+        _view.ActivePet(currentCharacter);
 
         // 현재 클릭한 캐릭터 타입을 변경
         _model.SelectedCharacterTypeObservable()
@@ -41,6 +41,7 @@ public class LobbyPopupPresenter : MonoBehaviour
                 _view.AllNoneSelected();
                 _view.ActiveCurrentCharacterProfile(selectionCharacter);
                 _view.SetActiveCharacterImage(selectionCharacter);
+                _view.ActivePet(selectionCharacter);
 
                 switch (selectionCharacter)
                 {
@@ -69,23 +70,24 @@ public class LobbyPopupPresenter : MonoBehaviour
         _view.KaneProfileButtonClicked()
             .Subscribe(_ => _model.SetSelectedCharacterType(ECharacterType.Kane))
             .AddTo(this);
-        
+
         _view.StomeProfileButtonClicked()
             .Subscribe(_ => _lobbyView.ShowErrorMessage(2))
             .AddTo(this);
-        
+
         _view.brightProfileButtonClicked()
             .Subscribe(_ => _lobbyView.ShowErrorMessage(2))
             .AddTo(this);
-        
-        _view.OnItemChoiceButtonClicked()
-            .Subscribe(_ => _lobbyView.ShowErrorMessage(3))
-            .AddTo(this);
-        
+
         _view.OnItemChoiceButtonClicked()
             .Subscribe(_ => _lobbyView.ShowErrorMessage(3))
             .AddTo(this);
 
+        _view.OnItemChoiceButtonClicked()
+            .Subscribe(_ => _lobbyView.ShowErrorMessage(3))
+            .AddTo(this);
+
+        // 캐릭터 선택 버튼 클릭
         _view.OnCharacterSelectionButtonClicked()
             .Subscribe(_ =>
             {
@@ -101,6 +103,56 @@ public class LobbyPopupPresenter : MonoBehaviour
 
         _view.OnPopupViewActiveObservable()
             .Subscribe(active => _model.SetActive(active))
+            .AddTo(this);
+
+        _view.OnPetChoiceButtonClicked()
+            .Subscribe(_ =>
+            {
+                ECharacterType selectionCharacter = _model.SelectedCharacterType;
+
+                switch (selectionCharacter)
+                {
+                    case ECharacterType.Hit:
+
+                        if (GameManager.HasPet(EPetType.Scorchwing))
+                            GameManager.ActivePet(EPetType.Scorchwing);
+                        else
+                            _lobbyView.ShowErrorMessage(4);
+                        
+                        break;
+                    case ECharacterType.Frost:
+
+                        if (GameManager.HasPet(EPetType.Icebound))
+                            GameManager.ActivePet(EPetType.Icebound);
+                        else
+                            _lobbyView.ShowErrorMessage(4);
+                        
+                        break;
+                    case ECharacterType.Kane:
+
+                        if (GameManager.HasPet(EPetType.Aerion))
+                            GameManager.ActivePet(EPetType.Aerion);
+                        else
+                            _lobbyView.ShowErrorMessage(4);
+                        
+                        break;
+                    case ECharacterType.Storm:
+
+                        if (GameManager.HasPet(EPetType.Aerion))
+                            GameManager.ActivePet(EPetType.Aerion);
+                        else
+                            _lobbyView.ShowErrorMessage(4);
+                        
+                        break;
+                    case ECharacterType.E:
+                    case ECharacterType.None:
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+                
+                _view.ActivePet(selectionCharacter);
+                _lobbyView.ActivePet(selectionCharacter);
+            })
             .AddTo(this);
     }
 }

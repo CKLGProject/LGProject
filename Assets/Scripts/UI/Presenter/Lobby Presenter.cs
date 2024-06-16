@@ -23,7 +23,15 @@ public class LobbyPresenter : MonoBehaviour
         
         // Model
         _lobbyPopupModel.ChoiceCharacterTypeObservable()
-            .Subscribe(characterType => _lobbyView.ShowCharacter(characterType));
+            .Subscribe(characterType =>
+            {
+                // 캐릭터를 보이게 합니다.
+                _lobbyView.ShowCharacter(characterType);
+                
+                // 펫을 보이게 합니다.
+                ECharacterType selectedCharacter = _lobbyPopupModel.SelectedCharacterType;
+                _lobbyView.ActivePet(selectedCharacter);
+            });
         
         _lobbyModel.NicknameObservable
             .Subscribe(nickName => _lobbyView.SetNickName(nickName));
@@ -38,6 +46,9 @@ public class LobbyPresenter : MonoBehaviour
             .Subscribe(plug => _lobbyView.SetPlug(plug));
 
         // View
+        ECharacterType selectedCharacter = _lobbyPopupModel.SelectedCharacterType;
+        _lobbyView.ActivePet(selectedCharacter);
+        
         _lobbyView.MatchButtonAsObservable()
             .Where(_=> !_lobbyPopupModel.IsActive)
             .Subscribe(OnClickMatchButton);
