@@ -27,8 +27,6 @@ public class LobbyPopupPresenter : MonoBehaviour
         ECharacterType currentCharacter = _model.SelectedCharacterType;
         _view.ActiveCurrentCharacterProfile(currentCharacter);
         
-        GameManager.HasPet(currentCharacter)
-
         // 현재 클릭한 캐릭터 타입을 변경
         _model.SelectedCharacterTypeObservable()
             .Subscribe(selectionCharacter =>
