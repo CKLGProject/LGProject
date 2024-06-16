@@ -1,0 +1,23 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Assets/Plugins/Pet%20Enable%20Debug/Scripts/Editor/PetDebug.uss?fileID=7433441132597879392&amp;guid=3de32955bf0c60a4197bc7fcfe056ab4&amp;type=3#PetDebug" />
+    <Style src="project://database/Assets/LG-Resources/USS/LGStyle%20Sheet.uss?fileID=7433441132597879392&amp;guid=70b963dcfd4ab486cb8c59f4fc73c9ac&amp;type=3#LGStyle Sheet" />
+    <ui:Label tabindex="-1" text="Pet Debug" parse-escape-sequences="true" display-tooltip-when-elided="true" class="TitleStyle" />
+    <ui:VisualElement style="padding-right: 6px; padding-left: 6px;">
+        <ui:Label tabindex="-1" text="펫 세팅" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Label" style="-unity-font-style: bold;" />
+        <ui:VisualElement style="flex-direction: row; margin-top: 3px;">
+            <ui:EnumField label="Pet" type="Data.EPetType, LGData" value="Scorchwing" name="pet-selection-field" style="flex-grow: 1;" />
+            <ui:Button text="Have" parse-escape-sequences="true" display-tooltip-when-elided="true" name="have-button" />
+            <ui:Button text="Enable" parse-escape-sequences="true" display-tooltip-when-elided="true" name="enable-button" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="space" style="height: 12px;" />
+    <ui:VisualElement style="padding-right: 6px; padding-left: 6px;">
+        <ui:Label tabindex="-1" text="가지고 있는 펫 목록 체크" parse-escape-sequences="true" display-tooltip-when-elided="true" style="-unity-font-style: bold;" />
+        <ui:Button text="확인" parse-escape-sequences="true" display-tooltip-when-elided="true" name="has-pet-list-button" class="Test-Button ButtonStyle" />
+    </ui:VisualElement>
+    <ui:VisualElement name="space" style="height: 12px;" />
+    <ui:VisualElement style="padding-right: 6px; padding-left: 6px;">
+        <ui:Label tabindex="-1" text="가지고 있는 펫 전부 리셋" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Label" style="-unity-font-style: bold;" />
+        <ui:Button text="리셋" parse-escape-sequences="true" display-tooltip-when-elided="true" name="pet-reset-button" class="Test-Button ButtonStyle" />
+    </ui:VisualElement>
+</ui:UXML>

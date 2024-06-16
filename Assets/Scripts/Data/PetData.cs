@@ -12,7 +12,7 @@ namespace Data
         Electra // 일렉트라
     }
     
-    [CreateAssetMenu(fileName = "Pat Data", menuName = "LG Data/Pat Data")]
+    [CreateAssetMenu(fileName = "Pet Data", menuName = "LG Data/Pet Data")]
     public class PetData : ScriptableObject
     {
         [FormerlySerializedAs("PatName")] public string PetName;

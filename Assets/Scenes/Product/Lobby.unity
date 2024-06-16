@@ -300,9 +300,9 @@ MonoBehaviour:
   hit: {fileID: 1585642796}
   frost: {fileID: 860558259}
   kane: {fileID: 458351656}
-  scorchwing: {fileID: 988097650}
-  icebound: {fileID: 666191703}
-  aerion: {fileID: 1279142435}
+  scorchwing: {fileID: 1928066560}
+  icebound: {fileID: 1373655625}
+  aerion: {fileID: 734238851}
   nickNameText: {fileID: 1883799342}
   levelText: {fileID: 1890859280}
   coinText: {fileID: 1968248191}
@@ -321,6 +321,7 @@ MonoBehaviour:
   - "\uD574\uB2F9 \uCE90\uB9AD\uD130\uAC00 \uAC1C\uBC29\uB418\uC9C0 \uC54A\uC558\uC2B5\uB2C8\uB2E4."
   - "\uC7A5\uCC29 \uD560 \uC218 \uC788\uB294 \uC815\uB839\uC774 \uC5C6\uC2B5\uB2C8\uB2E4."
   - "\uC7A5\uCC29 \uD560 \uC218 \uC788\uB294 \uC544\uC774\uD15C\uC774 \uC5C6\uC2B5\uB2C8\uB2E4."
+  - "\uC815\uB839\uC744 \uAC00\uC9C0\uACE0 \uC788\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4."
   OnClickCapture:
     m_PersistentCalls:
       m_Calls:
@@ -2623,7 +2624,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 453669983}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1054153201}
+        m_TargetAssemblyTypeName: FMODPlus.FMODAudioSource, NKStudio.FMODPlus.Runtime
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &453669983
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4547,12 +4560,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 660697843}
   m_CullTransparentMesh: 1
---- !u!1 &666191703 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5406961283693985149, guid: 8e6e995eeca40d8449e1ebb05331da3e,
-    type: 3}
-  m_PrefabInstance: {fileID: 1373655623}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &694198887
 GameObject:
   m_ObjectHideFlags: 0
@@ -4761,7 +4768,7 @@ PrefabInstance:
     - target: {fileID: 31571618735311738, guid: 50b29a17f73431848a5652b888693996,
         type: 3}
       propertyPath: m_Name
-      value: Pet
+      value: Pet (Aerion)
       objectReference: {fileID: 0}
     - target: {fileID: 31571618735311738, guid: 50b29a17f73431848a5652b888693996,
         type: 3}
@@ -4991,6 +4998,12 @@ PrefabInstance:
 --- !u!4 &734238850 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8630710509245374758, guid: 50b29a17f73431848a5652b888693996,
+    type: 3}
+  m_PrefabInstance: {fileID: 734238849}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &734238851 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 31571618735311738, guid: 50b29a17f73431848a5652b888693996,
     type: 3}
   m_PrefabInstance: {fileID: 734238849}
   m_PrefabAsset: {fileID: 0}
@@ -6821,12 +6834,6 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!1 &988097650 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 31571618735311738, guid: 4b0b717ae88aed240a74d985a457eafd,
-    type: 3}
-  m_PrefabInstance: {fileID: 1928066558}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &991353053
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7913,7 +7920,7 @@ GameObject:
   - component: {fileID: 1170892853}
   - component: {fileID: 1170892852}
   m_Layer: 0
-  m_Name: Cane-Name
+  m_Name: Kane-Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8064,12 +8071,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3925383527711208864, guid: 254c322587d731e40bd510f9e234a503,
     type: 3}
   m_PrefabInstance: {fileID: 4465324023855634640}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1279142435 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 31571618735311738, guid: 50b29a17f73431848a5652b888693996,
-    type: 3}
-  m_PrefabInstance: {fileID: 734238849}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1283531100
 GameObject:
@@ -8286,7 +8287,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1290908599}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1054153201}
+        m_TargetAssemblyTypeName: FMODPlus.FMODAudioSource, NKStudio.FMODPlus.Runtime
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1290908599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8628,7 +8641,7 @@ PrefabInstance:
     - target: {fileID: 5406961283693985149, guid: 8e6e995eeca40d8449e1ebb05331da3e,
         type: 3}
       propertyPath: m_Name
-      value: Pet
+      value: Pet (Icebound)
       objectReference: {fileID: 0}
     - target: {fileID: 5406961283693985149, guid: 8e6e995eeca40d8449e1ebb05331da3e,
         type: 3}
@@ -8658,6 +8671,12 @@ PrefabInstance:
 --- !u!4 &1373655624 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 425462005902069971, guid: 8e6e995eeca40d8449e1ebb05331da3e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1373655623}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1373655625 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5406961283693985149, guid: 8e6e995eeca40d8449e1ebb05331da3e,
     type: 3}
   m_PrefabInstance: {fileID: 1373655623}
   m_PrefabAsset: {fileID: 0}
@@ -13344,6 +13363,12 @@ MonoBehaviour:
   - {fileID: 4396377990715545352}
   - {fileID: 973375821}
   - {fileID: 1381916149}
+  petDataList:
+  - {fileID: 11400000, guid: 62179994741ec4bf283630928d5b3631, type: 2}
+  - {fileID: 11400000, guid: 415e3f6f7f76640f2b757b7e9ef9e136, type: 2}
+  - {fileID: 11400000, guid: 29091777240d940099adb929c0fdb6af, type: 2}
+  - {fileID: 11400000, guid: 570b5cc60e386423ea93eed3a9eaa8e9, type: 2}
+  - {fileID: 11400000, guid: 49e7dab4f7aa24aada45e94c8e1628c1, type: 2}
   hitProfileButton: {fileID: 4396377990715545351}
   frostProfileButton: {fileID: 973375820}
   kaneProfileButton: {fileID: 1381916148}
@@ -14728,7 +14753,7 @@ GameObject:
   - component: {fileID: 1742793944}
   - component: {fileID: 1742793943}
   m_Layer: 0
-  m_Name: Cane
+  m_Name: Kane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15756,7 +15781,7 @@ PrefabInstance:
     - target: {fileID: 31571618735311738, guid: 4b0b717ae88aed240a74d985a457eafd,
         type: 3}
       propertyPath: m_Name
-      value: Pet
+      value: Pet (Scorchwing)
       objectReference: {fileID: 0}
     - target: {fileID: 31571618735311738, guid: 4b0b717ae88aed240a74d985a457eafd,
         type: 3}
@@ -15851,6 +15876,12 @@ PrefabInstance:
 --- !u!4 &1928066559 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8630710509245374758, guid: 4b0b717ae88aed240a74d985a457eafd,
+    type: 3}
+  m_PrefabInstance: {fileID: 1928066558}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1928066560 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 31571618735311738, guid: 4b0b717ae88aed240a74d985a457eafd,
     type: 3}
   m_PrefabInstance: {fileID: 1928066558}
   m_PrefabAsset: {fileID: 0}

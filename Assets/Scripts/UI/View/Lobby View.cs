@@ -5,6 +5,7 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Singleton;
 using UnityEngine.UI;
 using Utility;
 
@@ -228,34 +229,71 @@ public class LobbyView : MonoBehaviour
     }
 
     /// <summary>
-    /// 펫를 보이게 합니다.
+    /// 캐릭터 타입에 알맞는 펫을 활성화 시키는 함수
     /// </summary>
-    /// <param name="petType">보이게할 펫 타입</param>
-    /// <exception cref="ArgumentOutOfRangeException"></exception>
-    public void ShowPet(EPetType petType)
+    /// <param name="characterType">펫을 활성화해야 하는 캐릭터의 유형</param>
+    public void ActivePet(ECharacterType characterType)
+    {
+        switch (characterType)
+        {
+            case ECharacterType.Hit:
+                TryPetActive(EPetType.Scorchwing);
+                break;
+            case ECharacterType.Frost:
+                TryPetActive(EPetType.Icebound);
+                break;
+            case ECharacterType.Kane:
+                TryPetActive(EPetType.Aerion);
+                break;
+            case ECharacterType.Storm:
+                TryPetActive(EPetType.Aerion);
+                break;
+            case ECharacterType.None:
+            case ECharacterType.E:
+            default:
+                throw new ArgumentOutOfRangeException(nameof(characterType), characterType, null);
+        }
+    }
+
+    /// <summary>
+    /// 해당 펫을 활성화 시킬 수 있다면 활성화를 시키고 그에 대한 결과를 반환합니다.
+    /// </summary>
+    /// <param name="petType">활성화 시킬 펫</param>
+    /// <returns>성공 여부</returns>
+    private void TryPetActive(EPetType petType)
     {
         scorchwing.SetActive(false);
         icebound.SetActive(false);
         aerion.SetActive(false);
 
-        switch (petType)
+        bool hasPet = Singleton.Instance<GameManager>().HasPet(petType);
+        if (hasPet)
         {
-            case EPetType.Scorchwing:
-                scorchwing.SetActive(true);
-                break;
-            case EPetType.Icebound:
-                icebound.SetActive(true);
-                break;
-            case EPetType.Aerion:
-                aerion.SetActive(true);
-                break;
-            case EPetType.Electra:
+            bool isEnablePet = Singleton.Instance<GameManager>().IsEnablePet(petType);
+            if (isEnablePet)
+            {
+                switch (petType)
+                {
+                    case EPetType.Scorchwing:
+                        scorchwing.SetActive(true);
+                        break;
+                    case EPetType.Icebound:
+                        icebound.SetActive(true);
+                        break;
+                    case EPetType.Aerion:
+                        aerion.SetActive(true);
+                        break;
+                    case EPetType.Electra:
 #if UNITY_EDITOR
-                Debug.LogError("아직 미구현 입니다.");
+                        Debug.LogError("아직 미구현 입니다.");
 #endif
-                break;
-            default:
-                throw new ArgumentOutOfRangeException(nameof(petType), petType, null);
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException(nameof(petType), petType, null);
+                }
+
+                return;
+            }
         }
     }
 }

@@ -6,37 +6,34 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Serialization;
+using UnityEngine.Singleton;
 using UnityEngine.UI;
 
 public class LobbyPopupView : MonoBehaviour
 {
     [Header("팝업")] [SerializeField] private GameObject popupView;
 
-    [Header("캐릭터 이미지 그룹")]
-    [FormerlySerializedAs("HitImage"), SerializeField]
+    [Header("캐릭터 이미지 그룹")] [FormerlySerializedAs("HitImage"), SerializeField]
     private GameObject hitImage;
 
-    [FormerlySerializedAs("FrostImage"),SerializeField]
+    [FormerlySerializedAs("FrostImage"), SerializeField]
     private GameObject frostImage;
 
     [FormerlySerializedAs("CaneImage"), SerializeField]
     private GameObject kaneImage;
-    
-    [Header("캐릭터 이름 그룹")] 
-    [FormerlySerializedAs("HitName"), SerializeField] 
+
+    [Header("캐릭터 이름 그룹")] [FormerlySerializedAs("HitName"), SerializeField]
     private GameObject hitName;
-    
-    [FormerlySerializedAs("FrostName") ,SerializeField]
+
+    [FormerlySerializedAs("FrostName"), SerializeField]
     private GameObject frostName;
-    
-    [FormerlySerializedAs("CaneName") ,SerializeField]
+
+    [FormerlySerializedAs("CaneName"), SerializeField]
     private GameObject kaneName;
 
-    [Header("펫 이미지")]
-    [SerializeField] private Image petImage;
+    [Header("펫 이미지")] [SerializeField] private Image petImage;
 
-    [Header("Text")] 
-    [FormerlySerializedAs("attackText"), SerializeField]
+    [Header("Text")] [FormerlySerializedAs("attackText"), SerializeField]
     private TextMeshProUGUI attackPowerText;
 
     [SerializeField] private TextMeshProUGUI defenseText;
@@ -44,6 +41,8 @@ public class LobbyPopupView : MonoBehaviour
     [SerializeField] private TextMeshProUGUI attackSpeedText;
 
     [Header("캐릭터 프로필")] [SerializeField] private CharacterProfile[] characterProfiles;
+
+    [Header("펫 프로필")] [SerializeField] private PetData[] petDataList;
 
     [Header("캐릭터 프로필 버튼")] [SerializeField]
     private Button hitProfileButton;
@@ -241,5 +240,77 @@ public class LobbyPopupView : MonoBehaviour
     public Observable<bool> OnPopupViewActiveObservable()
     {
         return _popupViewActiveSubject;
+    }
+
+    /// <summary>
+    /// 캐릭터 타입에 알맞는 펫을 활성화 시키는 함수
+    /// </summary>
+    /// <param name="characterType">펫을 활성화해야 하는 캐릭터의 유형</param>
+    public void ActivePet(ECharacterType characterType)
+    {
+        // 일단 끔
+        petChoiceButton.gameObject.SetActive(false);
+        
+        switch (characterType)
+        {
+            case ECharacterType.Hit:
+                
+                if (TryPetActive(EPetType.Scorchwing))
+                    return;
+                
+                break;
+            case ECharacterType.Frost:
+                
+                if (TryPetActive(EPetType.Icebound))
+                    return;
+                
+                break;
+            case ECharacterType.Kane:
+                
+                if (TryPetActive(EPetType.Aerion))
+                    return;
+                break;
+            case ECharacterType.Storm:
+                
+                if (TryPetActive(EPetType.Aerion))
+                    return;
+                
+                break;
+            case ECharacterType.None:
+            case ECharacterType.E:
+            default:
+                throw new ArgumentOutOfRangeException(nameof(characterType), characterType, null);
+            
+        }
+        
+        // 펫이 없거나 활성화 할 수 없는 경우
+        petChoiceButton.gameObject.SetActive(true);
+        petImage.gameObject.SetActive(false);
+        petImage.sprite = null;
+    }
+    
+    /// <summary>
+    /// 해당 펫을 활성화 시킬 수 있다면 활성화를 시키고 그에 대한 결과를 반환합니다.
+    /// </summary>
+    /// <param name="petType">활성화 시킬 펫</param>
+    /// <returns>성공 여부</returns>
+    private bool TryPetActive(EPetType petType)
+    {
+        bool hasPet = Singleton.Instance<GameManager>().HasPet(petType);
+        if (hasPet)
+        {
+            bool isEnablePet = Singleton.Instance<GameManager>().IsEnablePet(petType);
+            if (isEnablePet)
+            {
+                // 개발 기간상 0단계 펫만 존재
+                const int petLevel = 0;
+
+                petImage.gameObject.SetActive(true);
+                petImage.sprite = petDataList[(int)petType].PetProfileImage[petLevel];
+                return true;
+            }
+        }
+
+        return false;
     }
 }

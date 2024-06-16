@@ -13,11 +13,13 @@ public class GameManager : MonoBehaviour
 {
     // 유저 데이터
     private readonly UserData _userData = new();
-    
+
     // AI 데이터
     private readonly AIData _aiData = new();
 
-    [FormerlySerializedAs("patDataList")] [SerializeField] private PetData[] petDataList;
+    [FormerlySerializedAs("patDataList")] [SerializeField]
+    private PetData[] petDataList;
+
     [SerializeField] private AIModel[] aiModelList;
 
     /// <summary>
@@ -34,22 +36,28 @@ public class GameManager : MonoBehaviour
 
         // 기본으로 히트 캐릭터 수록
         string hasCharacterMapJson = PlayerPrefs.GetString("HasCharacterMap", "{}");
-        _userData.HasCharacterMap = JsonConvert.DeserializeObject<Dictionary<ECharacterType, bool>>(hasCharacterMapJson);
+        _userData.HasCharacterMap =
+            JsonConvert.DeserializeObject<Dictionary<ECharacterType, bool>>(hasCharacterMapJson);
 
         // 기본으로 Hit 캐릭터 바인딩
-        if (_userData.HasCharacterMap.Count == 0) 
+        if (_userData.HasCharacterMap.Count == 0)
             _userData.HasCharacterMap.Add(ECharacterType.Hit, true);
-        
+
+        // 펫을 가지고 있는지 체크
         string hasPetMapJson = PlayerPrefs.GetString("HasPetMap", "{}");
         _userData.HasPetMap = JsonConvert.DeserializeObject<Dictionary<EPetType, bool>>(hasPetMapJson);
-        
+
+        // 펫을 활성화 했는지 체크
+        string isEnablePetMapJson = PlayerPrefs.GetString("IsEnablePetMap", "{}");
+        _userData.IsEnablePetMap = JsonConvert.DeserializeObject<Dictionary<EPetType, bool>>(isEnablePetMapJson);
+
         // 펫 설정
         _userData.Pet = new();
         _userData.Pet.PetType = (EPetType)PlayerPrefs.GetInt("Pet", (int)EPetType.None);
         _userData.Pet.PetData = FindPatDataByPatType(_userData.Pet.PetType);
         _userData.Pet.Level = PlayerPrefs.GetInt("Pet Level", 0);
     }
-    
+
     private void Start()
     {
         // 초기화
@@ -58,7 +66,7 @@ public class GameManager : MonoBehaviour
         // 화면이 꺼지지 않도록 처리
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
     }
-    
+
     /// <summary>
     /// 닉네임을 설정합니다.
     /// </summary>
@@ -106,7 +114,7 @@ public class GameManager : MonoBehaviour
         {
             case ActorType.User:
                 PlayerPrefs.SetInt("Character", (int)characterType);
-                
+
                 // 캐릭터 설정
                 _userData.CharacterType = characterType;
                 break;
@@ -116,7 +124,7 @@ public class GameManager : MonoBehaviour
                 throw new ArgumentOutOfRangeException(nameof(actorType), actorType, null);
         }
     }
-    
+
     /// <summary>
     /// 해당 액터의 현재 정령을 반환합니다.
     /// </summary>
@@ -155,7 +163,7 @@ public class GameManager : MonoBehaviour
         else
             _aiData.Pet.Level = -1;
     }
-    
+
     /// <summary>
     /// 해당 타입의 펫을 추가합니다.
     /// </summary>
@@ -163,11 +171,43 @@ public class GameManager : MonoBehaviour
     public void AddPet(EPetType petType)
     {
         _userData.HasPetMap[petType] = true;
-        
+
         string json = JsonConvert.SerializeObject(_userData.HasPetMap);
         PlayerPrefs.SetString("HasPetMap", json);
     }
-    
+
+    /// <summary>
+    /// 펫을 가지고 있는지 반환합니다.
+    /// </summary>
+    /// <param name="petType">펫 타입</param>
+    /// <returns>가지고 있으면 true, 아니면 false</returns>
+    /// <exception cref="ArgumentOutOfRangeException">미구현된 캐릭터 입니다.</exception>
+    public bool HasPet(EPetType petType)
+    {
+        bool hasNotPet = !_userData.HasPetMap.ContainsKey(petType);
+
+        if (hasNotPet)
+            return false;
+
+        return _userData.HasPetMap[petType];
+    }
+
+    /// <summary>
+    /// 해당 타입의 펫이 활성화 되어있는지 반환합니다.
+    /// </summary>
+    /// <param name="petType">펫 타입</param>
+    /// <returns>펫이 활성화 되어있으면 true, 아니면 false</returns>
+    /// <exception cref="ArgumentOutOfRangeException">해당 타입의 펫이 없을 경우</exception>
+    public bool IsEnablePet(EPetType petType)
+    {
+        bool enableNotPet = !_userData.IsEnablePetMap.ContainsKey(petType);
+
+        if (enableNotPet)
+            return false;
+
+        return _userData.IsEnablePetMap[petType];
+    }
+
     /// <summary>
     /// AI 모델 중 랜덤하게 1개를 반환합니다.
     /// </summary>
@@ -190,5 +230,17 @@ public class GameManager : MonoBehaviour
     private PetData FindPatDataByPatType(EPetType petType)
     {
         return petDataList.FirstOrDefault(patData => patData.petType == petType);
+    }
+
+    /// <summary>
+    /// 해당 펫을 활성화 합니다.
+    /// </summary>
+    /// <param name="petType">활성화 시킬 펫</param>
+    public void ActivePet(EPetType petType)
+    {
+        _userData.IsEnablePetMap[petType] = true;
+
+        string json = JsonConvert.SerializeObject(_userData.IsEnablePetMap);
+        PlayerPrefs.SetString("IsEnablePetMap", json);
     }
 }
