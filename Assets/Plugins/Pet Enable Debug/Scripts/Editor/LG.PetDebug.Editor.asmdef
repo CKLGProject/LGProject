@@ -1,0 +1,16 @@
+{
+    "name": "LG.PetDebug.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:2871a61c47e924d2082279aa2a435953"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
