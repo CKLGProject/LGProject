@@ -259,7 +259,8 @@ namespace LGProject.PlayerState
             if (CurrentState.GetType() == typeof(JumpState) ||
                 CurrentState.GetType() == typeof(FlightState) ||
                 CurrentState.GetType() == typeof(JumpAttackState) ||
-                CurrentState.GetType() == typeof(KnockbackState))
+                CurrentState.GetType() == typeof(KnockbackState) || 
+                CurrentState.GetType() == typeof(GuardState))
                 return true;
             return false;
         }
@@ -440,16 +441,20 @@ namespace LGProject.PlayerState
         }
 
         /// <summary>
-        /// 
+        /// velocity     = 넉백 방향 및 날아가는 힘.
+        /// nockbackDelay = 힘을 적용 받기까지의 시간.
+        /// Damaged = 넉백 증가 수치.
+        /// EnemyStateMachine = 피해를 준 플레이어의 정보.
+        /// dataType = 피해를 받은 타입.
         /// </summary>
         /// <param name="velocity"></param>
         /// <param name="nockbackDelay"></param>
         /// <param name="EnemyStateMachine"></param>
+        /// <param name="DamageGage"></param>
         /// <param name="dataType"></param>
-        public void ApplyHitDamaged(Vector3 velocity, float nockbackDelay, PlayerStateMachine EnemyStateMachine,
-            DATA_TYPE dataType)
+        public void ApplyHitDamaged(Vector3 velocity, float nockbackDelay, PlayerStateMachine EnemyStateMachine, float DamageGage = 8.5f)
         {
-            UpdateData(dataType);
+            //UpdateData(dataType);
             // 누어 있는 상태에선 데미지를 입지 않는다.
             if (IsDown || IsUseUltimate || IsSuperArmor || (EnemyStateMachine != null && IsUseUltimate))
                 return;
@@ -462,7 +467,7 @@ namespace LGProject.PlayerState
             if (!IsGuard || (EnemyStateMachine != null && EnemyStateMachine.IsUseUltimate))
             {
                 physics.velocity = Vector3.zero;
-                playable.SetDamageGage(playable.DamageGage + (IsUltimate == true ? 4.25f : 8.5f));
+                playable.SetDamageGage(playable.DamageGage + (IsUltimate == true ? DamageGage * 0.5f : DamageGage));
                 battleModel.SyncDamageGage(playable.ActorType, playable.DamageGage);
                 IsNormalAttack = false;
                 // 충격에 의한 물리 공식

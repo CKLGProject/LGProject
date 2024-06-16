@@ -3830,8 +3830,8 @@ MonoBehaviour:
   UseAsync: 0
   editorAutoLoad: 0
   loadScene:
-    sceneAsset: {fileID: 102900000, guid: d4a070b194734bc40b94c87ef8841330, type: 3}
-    path: Assets/Scenes/InGameScene/TestScene/Frost-Anim.unity
+    sceneAsset: {fileID: 102900000, guid: 27a695b0634ca574f8f3b9df487e1070, type: 3}
+    path: Assets/Scenes/InGameScene/TestScene/InGameAIChangerTestScene.unity
   additiveScenes: []
   SkipMode: 3
   SkipAction:

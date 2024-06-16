@@ -11,7 +11,6 @@ namespace BehaviourTree
     {
         public AIAgent Agent;
         private LGProject.PlayerState.PlayerStateMachine _stateMachine;
-        private bool _isCheckGround = true;
 
         protected override void OnStart()
         {
@@ -19,10 +18,7 @@ namespace BehaviourTree
                 Agent = AIAgent.Instance;
             if (_stateMachine == null)
                 _stateMachine = AIAgent.Instance.GetStateMachine;
-            //Debug.Log("IsFlying");
-            _isCheckGround = false;
             // 플라잉 상태가 될 경우 0.15초간 체크 안해야할듯.
-            //Unitask().Forget();
         }
 
         protected override void OnStop()
@@ -37,12 +33,6 @@ namespace BehaviourTree
             if(!_stateMachine.IsGrounded)
                 return State.Success;
             return State.Running;
-        }
-
-        private async UniTaskVoid Unitask()
-        {
-            await UniTask.Delay(TimeSpan.FromSeconds(0.1f));
-            _isCheckGround = true;
         }
     }
 

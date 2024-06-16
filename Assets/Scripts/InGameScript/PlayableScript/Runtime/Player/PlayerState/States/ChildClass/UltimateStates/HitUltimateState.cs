@@ -115,7 +115,7 @@ namespace LGProject.PlayerState
                targetStateMachine.transform.position + direction,
                   targetStateMachine.transform.position, 0.5f, 3f);
 
-            targetStateMachine.ApplyHitDamaged(KnockbackValue, 0.2f, StateMachine, DATA_TYPE.JumpAttackHit);
+            targetStateMachine.ApplyHitDamaged(KnockbackValue, 0.2f, StateMachine);
 
 
         }

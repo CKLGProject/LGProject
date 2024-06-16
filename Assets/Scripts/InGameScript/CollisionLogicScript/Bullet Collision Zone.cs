@@ -16,8 +16,8 @@ namespace LGProject.CollisionZone
         [SerializeField] private float _range;
         [SerializeField] private BoxCollider _boxCollider;
         [SerializeField] private int _damageCount;
-        [SerializeField] public Vector3 KnockbackVelocity;
-
+        public Vector3 KnockbackVelocity;
+        public float KnockbackGage = 4.25f;
         // 충돌 판정을 넣고 싶은데... 상대방을 체크할 수 있는 방법이 없을까?
 
         public override bool TriggerSpace(Transform plableTransform)
@@ -65,6 +65,9 @@ namespace LGProject.CollisionZone
         {
             if(Vector3.Distance(transform.position, _originPos) > _range)
             {
+                _hitEffect.SetActive(true);
+                PlayHitParticle();
+                _hitEffect.GetComponent<ParticleSystem>().Play();
                 gameObject.SetActive(false);
                 return;
             }

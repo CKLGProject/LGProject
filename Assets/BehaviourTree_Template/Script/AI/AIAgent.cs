@@ -2,7 +2,7 @@ using System.Collections;
 using LGProject;
 using UnityEngine;
 using UnityEditor;
-using Cysharp.Threading.Tasks;
+using UnityEngine.Singleton;
 
 namespace BehaviourTree
 {
@@ -14,25 +14,27 @@ namespace BehaviourTree
 
         private float _attackRange;
 
-        public Transform target;
+        [HideInInspector] public Transform target;
         public pathFinding.Grid grid;
-        public Vector3[] path;
-        public bool chasing;
-        public bool finding;
+        [HideInInspector] public Vector3[] path;
+        [HideInInspector] public bool chasing;
+        [HideInInspector] public bool finding;
 
-        public float speed = 10;
-        public int targetIndex;
+        [HideInInspector] public float speed = 10;
+        [HideInInspector] public int targetIndex;
 
-        public bool isGround;
+        [HideInInspector] public bool isGround;
 
+        [SerializeField] private GameObject[] ChildModels;
 
-        public int GuardPercent;
-        public int AttackPercent;
-        public int ChasingPercent;
-        public int NormalMovePercent;
+       
+        [HideInInspector] public int GuardPercent;
+        [HideInInspector] public int AttackPercent;
+        [HideInInspector] public int ChasingPercent;
+        [HideInInspector] public int NormalMovePercent;
 
         // 상대방
-        public Transform player;
+        [HideInInspector] public Transform player;
 
         #region magicMathods
         [System.Obsolete]
@@ -42,11 +44,19 @@ namespace BehaviourTree
             
             if (instance == null) 
                 instance = this;
-            
             Random.seed = System.DateTime.Now.Millisecond;
             StateMachine = new LGProject.PlayerState.PlayerStateMachine();
             StateMachine = LGProject.PlayerState.PlayerStateMachine.CreateStateMachine(this.gameObject);
+            SetAIModel();
         }
+
+        private void SetAIModel()
+        {
+            int rand = Random.Range(0, ChildModels.Length);
+            ChildModels[rand].SetActive(true);
+            Animator = ChildModels[rand].GetComponent<Animator>();
+        }
+
 
         public void SetData()
         {

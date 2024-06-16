@@ -21,7 +21,7 @@ namespace BehaviourTree
             _stateMachine.IsGuard = false;
             //Debug.Log("Stun Node");
             _stateMachine.animator.ResetTrigger("Landing");
-            _stateMachine.animator.ResetTrigger("Knockback");
+             _stateMachine.animator.ResetTrigger("Knockback");
             _stateMachine.animator.ResetTrigger("WakeUp");
             _stateMachine.animator.SetFloat("Run", 0f);
 

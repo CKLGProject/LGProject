@@ -112,7 +112,7 @@ public class BehaviorTreeEditor : EditorWindow
                 var runner = Selection.activeGameObject.GetComponent<BehaviorTreeRunner>();
                 if (runner)
                 {
-                    tree = runner.tree;
+                    tree = runner.Tree;
                 }
             }
         }

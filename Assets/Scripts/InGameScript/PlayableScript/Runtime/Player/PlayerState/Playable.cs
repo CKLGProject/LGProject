@@ -241,24 +241,20 @@ namespace LGProject.PlayerState
                 BulletCollisionZone bullet = other.GetComponent<BulletCollisionZone>();
                 bullet.gameObject.SetActive(false);
                 bullet.PlayHitParticle();
-                StateMachine.ApplyHitDamaged(bullet.KnockbackVelocity, 0, StateMachine, DATA_TYPE.NormalAttack);
+                StateMachine.ApplyHitDamaged(bullet.KnockbackVelocity, 0, StateMachine, bullet.KnockbackGage);
             }
 
         }
 
         private void OnCollisionEnter(Collision collision)
         {
-            if (collision.gameObject.layer == 9)
-            {
-                Debug.Log("HelloWorld2");
-            }
 
         }
 
         // 공격 시작 
         public virtual void ShootProjectile(int AtkCount, Vector3 velocity)
         {
-            //Debug.Log("Hello World");
+
 
         }
 

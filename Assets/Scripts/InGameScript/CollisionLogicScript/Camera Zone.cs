@@ -66,7 +66,7 @@ namespace LGProject.CollisionZone
                 {
                 if (_targetGroup.m_Targets[i].target == player)
                 {
-                    _targetGroup.m_Targets[i].weight = 3;
+                    _targetGroup.m_Targets[i].weight = 1.5f;
                     return;
                 }
             }
