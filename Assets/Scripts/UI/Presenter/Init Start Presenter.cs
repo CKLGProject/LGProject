@@ -2,6 +2,7 @@ using R3;
 using ReactiveInputSystem;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Utility;
 
 [RequireComponent(typeof(InitStartView))]
 public class InitStartPresenter : MonoBehaviour
@@ -12,7 +13,12 @@ public class InitStartPresenter : MonoBehaviour
     private void Start()
     {
         _view = GetComponent<InitStartView>();
-        _inputAction = InputSystem.actions.FindActionMap("System").FindAction("Tap");
+
+        bool isMobile = LGUtility.IsMobile();
+        _inputAction = InputSystem.actions.FindActionMap("System").FindAction(isMobile ? "Tap" : "AnyKey");
+        
+        // 텍스트 변경
+        _view.ChangeTextByOS();
         
         // View
         _inputAction.PerformedAsObservable()

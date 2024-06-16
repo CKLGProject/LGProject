@@ -83,5 +83,14 @@ namespace Utility
             AndroidJavaObject.Call("Toast", message, (int)length);
 #endif
         }
+        
+        /// <summary>
+        /// 모바일인지 체크합니다.
+        /// </summary>
+        /// <returns></returns>
+        public static bool IsMobile()
+        {
+            return Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer;
+        }
     }
 }

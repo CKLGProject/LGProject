@@ -425,6 +425,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lobbySceneLoader: {fileID: 1886463926}
+  touchText: {fileID: 1959681567}
 --- !u!1 &1844800388
 GameObject:
   m_ObjectHideFlags: 0
