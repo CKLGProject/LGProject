@@ -96,7 +96,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5147967505005749542
 Transform:
   m_ObjectHideFlags: 0
@@ -284,7 +284,8 @@ MonoBehaviour:
   _AttackOffset1: {x: 0, y: 0, z: 0}
   _AttackOffset2: {x: 0, y: 0, z: 0}
   _AttackOffset3: {x: 0, y: 0, z: 0}
-  _DashAttackEffect: {fileID: 0}
+  _DashAttackEffect: {fileID: 8925157853000351857, guid: fd18a39ee09dea44a919acfa25505b43,
+    type: 3}
   _DashAttackOffset: {x: 0, y: 0, z: 0}
   _JumpAttackEffect: {fileID: 0}
   _JumpAttackOffset: {x: 0, y: 0, z: 0}

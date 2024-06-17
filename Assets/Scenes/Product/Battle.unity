@@ -7411,11 +7411,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kane
       objectReference: {fileID: 0}
-    - target: {fileID: 7066266423145889497, guid: 1183023d0846f204895b8367dd073489,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13103,7 +13098,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 996713019}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.018716557, y: 0.00013839747, z: -0.0000025907775, w: 0.9998248}
+  m_LocalRotation: {x: 0.018716557, y: 0.00013836312, z: -0.0000025901347, w: 0.9998248}
   m_LocalPosition: {x: 0, y: 3.5065002, z: -21.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -16889,7 +16884,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1353022552}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.018716557, y: 0.00013839747, z: -0.0000025907775, w: 0.9998248}
+  m_LocalRotation: {x: 0.018716557, y: 0.00013836312, z: -0.0000025901347, w: 0.9998248}
   m_LocalPosition: {x: 0, y: 3.5065002, z: -21.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

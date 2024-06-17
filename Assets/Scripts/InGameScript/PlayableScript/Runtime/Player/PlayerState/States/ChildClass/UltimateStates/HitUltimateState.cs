@@ -86,34 +86,29 @@ namespace LGProject.PlayerState
 
         private void MovementPointSet()
         {
-            int pointX = 0;
-            int pointY = 0;
-            pathFinding.Node node = pathFinding.Grid.Instance.NodeFromWorldPoint(StateMachine.transform.position);
-            pointX = node.GridX;
-            pointY = node.GridY;
-            // 맥스치는 0 ~ 19 1/3만큼 이동할 것이다 그럼?;
-            int point = 19 / 3; // 6;
-            pointX = StateMachine.transform.forward.x > 0 ? pointX + point : pointX - point;
-            pointX = pointX < 1 ? 1 : pointX;
-            pointX = pointX > 19 ? 18 : pointX;
+            //int pointX = 0;
+            //int pointY = 0;
+            //pathFinding.Node node = pathFinding.Grid.Instance.NodeFromWorldPoint(StateMachine.transform.position);
+            //pointX = node.GridX;
+            //pointY = node.GridY;
+            //// 맥스치는 0 ~ 19 1/3만큼 이동할 것이다 그럼?;
+            //int point = 19 / 3; // 6;
+            //pointX = StateMachine.transform.forward.x > 0 ? pointX + point : pointX - point;
+            //pointX = pointX < 1 ? 1 : pointX;
+            //pointX = pointX > 19 ? 18 : pointX;
 
-            _movingNode = _nodeList[pointX];
-            _movingPoint = new Vector3(_movingNode.WorldPosition.x, StateMachine.transform.position.y, StateMachine.transform.position.z);
+            //_movingNode = _nodeList[pointX];
+            //_movingPoint = new Vector3(_movingNode.WorldPosition.x, StateMachine.transform.position.y, StateMachine.transform.position.z);
+
+            // 앞으로 5거리만큼 이동.
+            _movingPoint = StateMachine.transform.position + StateMachine.transform.forward * 6f;
         }
 
         private void MovementTargetPointSet()
         {
             PlayerStateMachine targetStateMachine = hit.transform.GetComponent<Playable>().GetStateMachine;
-            pathFinding.Node node = pathFinding.Grid.Instance.NodeFromWorldPoint(hit.transform.position);
-            _movingPoint = node.WorldPosition;
+
             // 그리고 타겟에게 피해를 입힘.
-            //Vector3 KnockbackValue = Vector3.zero;
-            //Vector3 direction = (targetStateMachine.transform.position - StateMachine.transform.position).normalized;
-            //direction.x *= 2;
-            //direction.y *= 1.5f;
-            //KnockbackValue = StateMachine.playable.CalculateVelocity(
-            //   targetStateMachine.transform.position + direction,
-            //targetStateMachine.transform.position, 0.5f, 3f);
             Vector3 KnockbackValue = (StateMachine.transform.forward * 4.5f + StateMachine.transform.up * 4.5f) ;
 
             targetStateMachine.ApplyHitDamaged(KnockbackValue, 0, StateMachine);

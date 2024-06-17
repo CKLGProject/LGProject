@@ -15,6 +15,7 @@ namespace LGProject.CollisionZone
         [SerializeField] private GameObject _hitEffect;
         [SerializeField] private float _range;
         [SerializeField] private BoxCollider _boxCollider;
+        public Action Methods;
         public int DamageCount;
         public Vector3 KnockbackVelocity;
         public float KnockbackGage = 4.25f;
@@ -52,13 +53,14 @@ namespace LGProject.CollisionZone
             _direction = direction;
             Play(timer).Forget();
         }
-        public void MoveSet(float speed, Vector3 direction, Vector3 originPos, Vector3 velocity)
+        public void MoveSet(float speed, Vector3 direction, Vector3 originPos, Vector3 velocity, Action callBack )
         {
             _speed = speed;
             _direction = direction;
             _originPos = originPos;
             _boxCollider.center = new Vector3(_boxCollider.center.x * transform.right.x, _boxCollider.center.y, _boxCollider.center.z);
             KnockbackVelocity = velocity;
+            Methods = callBack;
         }
 
         private void Update()

@@ -223,10 +223,11 @@ namespace LGProject.PlayerState
                     }
                     break;
                 case ActorType.AI:
-                    if(!StateMachine.CheckFlightAI() && !CollisionObserver.CallUnderPlatformZone(ZoneType.Platform, transform.position + Vector3.down * 0.25f))
+                    if(/*!StateMachine.CheckFlightAI() &&*/ !CollisionObserver.CallUnderPlatformZone(ZoneType.Platform, transform.position + Vector3.down * 0.25f))
                     {
                         //StateMachine.animator.SetTrigger("Jump1");
                         StateMachine.IsGrounded = false;
+                        StateMachine.IsJumpping = true;
                         StateMachine.collider.isTrigger = true;
                     }
                     break;
@@ -242,6 +243,7 @@ namespace LGProject.PlayerState
                 BulletCollisionZone bullet = other.GetComponent<BulletCollisionZone>();
                 bullet.gameObject.SetActive(false);
                 bullet.PlayHitParticle();
+                bullet.Methods();
                 Debug.Log($"{bullet.DamageCount}");
                 StateMachine.ApplyHitDamaged(bullet.KnockbackVelocity, 0, StateMachine, bullet.KnockbackGage);
             }
