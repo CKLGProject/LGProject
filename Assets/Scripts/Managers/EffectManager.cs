@@ -63,6 +63,8 @@ public sealed class EffectManagerEditor : Editor
 
     public SerializedProperty UltimatePre_RHand_FX;
 
+    public SerializedProperty UltimatePre_Point006;
+
     private static GUIStyle BoldLabelStyle;
     private static GUIStyle BoldFoldStyle;
 
@@ -261,7 +263,10 @@ public sealed class EffectManagerEditor : Editor
         {
             UltimatePre_RHand_FX = serializedObject.FindProperty("_UltimatePre_RHand_FX");
         }
-
+        if(UltimatePre_Point006 == null)
+        {
+            UltimatePre_Point006 = serializedObject.FindProperty("_UltimatePre_Point006");
+        }
         #endregion
 
         /******************************************
@@ -623,7 +628,18 @@ public sealed class EffectManagerEditor : Editor
                 UltimatePre_RHand_FX.objectReferenceValue = value;
             }
         }
-        #endregion
+
+        EditorGUILayout.Space(10f);
+
+        using (var changeScope = new EditorGUI.ChangeCheckScope())
+        {
+            GameObject value = (GameObject)EditorGUILayout.ObjectField("UltimatePre_Point006 Effect Prefab", UltimatePre_Point006.objectReferenceValue, typeof(GameObject), true);
+            if (changeScope.changed)
+            {
+                UltimatePre_Point006.objectReferenceValue = value;
+            }
+        }
+        #endregion  
 
         EditorGUI.indentLevel--;
         GUI_DrawLine(5f, 20f);
@@ -754,6 +770,9 @@ public class EffectManager : MonoBehaviour
     [HideInInspector]
     public GameObject _UltimatePre_RHand_FX;
 
+    [HideInInspector]
+    public GameObject _UltimatePre_Point006;
+
     Dictionary<EFFECT, ParticleSystem> _EffectContainer = new Dictionary<EFFECT, ParticleSystem>();
 
     [SerializeField] private List<ParticleSystem> playList;
@@ -780,6 +799,7 @@ public class EffectManager : MonoBehaviour
         UltimateAirborn ,
         UltimatePreCenter ,
         UltimatePreRHand ,
+        UltimatePrePoint006,
     }
 
 
@@ -948,6 +968,12 @@ public class EffectManager : MonoBehaviour
         {
             _EffectContainer.Add(EFFECT.UltimatePreRHand, _UltimatePre_RHand_FX.GetComponent<ParticleSystem>());
             _UltimatePre_RHand_FX.SetActive(false);
+        }
+
+        if(_UltimatePre_Point006 != null)
+        {
+            _EffectContainer.Add(EFFECT.UltimatePrePoint006, _UltimatePre_Point006.GetComponent<ParticleSystem>());
+            _UltimatePre_Point006.SetActive(false);
         }
         #endregion
     }

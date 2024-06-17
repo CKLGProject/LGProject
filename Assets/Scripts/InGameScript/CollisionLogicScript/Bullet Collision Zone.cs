@@ -15,6 +15,7 @@ namespace LGProject.CollisionZone
         [SerializeField] private GameObject _hitEffect;
         [SerializeField] private float _range;
         [SerializeField] private BoxCollider _boxCollider;
+        public Transform Player;
         public Action Methods;
         public int DamageCount;
         public Vector3 KnockbackVelocity;
@@ -53,6 +54,11 @@ namespace LGProject.CollisionZone
             _direction = direction;
             Play(timer).Forget();
         }
+        public void ParentPlayerSet(Transform player)
+        {
+            Player = player;
+        }
+
         public void MoveSet(float speed, Vector3 direction, Vector3 originPos, Vector3 velocity, Action callBack )
         {
             _speed = speed;
@@ -84,6 +90,11 @@ namespace LGProject.CollisionZone
 
         private void OnTriggerEnter(Collider other)
         {
+            if(other.gameObject.layer == 6)
+            {
+                PlayHitParticle();
+                gameObject.SetActive(false);
+            }
             //Debug.Log($"other {other.gameObject.layer} / {other.transform.name}");
             //if (other.gameObject.layer == 3)
             //{
@@ -101,7 +112,12 @@ namespace LGProject.CollisionZone
             {
                 gameObject.SetActive(false);
             }
-
+            if(collision.gameObject.layer == 1 << 6)
+            {
+                Debug.Log("hello");
+                PlayHitParticle();
+                gameObject.SetActive(false);
+            }
         }
 
     }

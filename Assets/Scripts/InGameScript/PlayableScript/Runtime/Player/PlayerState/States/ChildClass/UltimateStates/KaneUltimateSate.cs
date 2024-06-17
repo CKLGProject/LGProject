@@ -82,7 +82,7 @@ namespace LGProject.PlayerState
         {
             // 전방을 향해 힘찬 함성 5초간 발싸!
             // 으앙ㅇ아아ㅏㅇ아ㅏ아ㅏㅏ아아아아아ㅏ아ㅏㅏㅇㅇㅇ아ㅏ아아아ㅏ아ㅏㅏ아ㅏㅏ아ㅏ아앙아아ㅏㅏ
-            Collider[] checkPlayer = Physics.OverlapBox(StateMachine.transform.position + StateMachine.transform.forward * 3f, new Vector3(6, 1, 1), Quaternion.identity, 1 << 3);
+            Collider[] checkPlayer = Physics.OverlapBox(StateMachine.transform.position + StateMachine.transform.forward * 2f, new Vector3(4, 1, 1), Quaternion.identity, 1 << 3);
             foreach(var player in checkPlayer)
             {
                 Vector3 velocity = StateMachine.transform.forward * 4.5f + StateMachine.transform.up * 4.5f;
