@@ -64,6 +64,9 @@ public class LobbyPresenter : MonoBehaviour
         _lobbyView.MailButtonAsObservable()
             .Subscribe(_ => _lobbyView.ShowErrorMessage(0));
         
+        _lobbyView.InventoryButtonAsObservable()
+            .Subscribe(_ => _lobbyView.ShowErrorMessage(0));
+        
         _lobbyView.QuestButtonAsObservable()
             .Subscribe(_ => _lobbyView.ShowErrorMessage(0));
         
