@@ -72,19 +72,47 @@ public class LobbyPopupPresenter : MonoBehaviour
             .AddTo(this);
 
         _view.StomeProfileButtonClicked()
-            .Subscribe(_ => _lobbyView.ShowErrorMessage(2))
+            .Subscribe(_ =>
+            {
+#if UNITY_STANDALONE
+                _lobbyView.ShowToastMessage(1);
+#else
+                _lobbyView.ShowErrorMessage(2);
+#endif
+            })
             .AddTo(this);
 
         _view.brightProfileButtonClicked()
-            .Subscribe(_ => _lobbyView.ShowErrorMessage(2))
+            .Subscribe(_ =>
+            {
+#if UNITY_STANDALONE
+                _lobbyView.ShowToastMessage(2);
+#else
+                 _lobbyView.ShowErrorMessage(2);
+#endif
+            })
             .AddTo(this);
 
         _view.OnItemChoiceButtonClicked()
-            .Subscribe(_ => _lobbyView.ShowErrorMessage(3))
+            .Subscribe(_ =>
+            {
+#if UNITY_STANDALONE
+                _lobbyView.ShowToastMessage(3);
+#else
+                 _lobbyView.ShowErrorMessage(3);
+#endif
+            })
             .AddTo(this);
 
         _view.OnItemChoiceButtonClicked()
-            .Subscribe(_ => _lobbyView.ShowErrorMessage(3))
+            .Subscribe(_ =>
+            {
+#if UNITY_STANDALONE
+                _lobbyView.ShowToastMessage(3);
+#else
+                _lobbyView.ShowErrorMessage(3);
+#endif
+            })
             .AddTo(this);
 
         // 캐릭터 선택 버튼 클릭
@@ -93,7 +121,7 @@ public class LobbyPopupPresenter : MonoBehaviour
             {
                 GameManager.SetCurrentCharacter(ActorType.User, _model.SelectedCharacterType);
                 GameManager.UpdateUserPetData();
-                
+
                 _model.SetChoiceCharacterType(_model.SelectedCharacterType);
                 _view.SetInteractionByCharacterSelectionButton(false);
                 _lobbyView.UpdateProfileImage();
@@ -120,41 +148,65 @@ public class LobbyPopupPresenter : MonoBehaviour
                         if (GameManager.HasPet(EPetType.Scorchwing))
                             GameManager.ActivePet(EPetType.Scorchwing);
                         else
+                        {
+#if UNITY_STANDALONE
+                            _lobbyView.ShowToastMessage(4);
+#else
                             _lobbyView.ShowErrorMessage(4);
-                        
+#endif
+                        }
+
                         break;
                     case ECharacterType.Frost:
 
                         if (GameManager.HasPet(EPetType.Icebound))
                             GameManager.ActivePet(EPetType.Icebound);
                         else
+                        {
+#if UNITY_STANDALONE
+                            _lobbyView.ShowToastMessage(4);
+#else
                             _lobbyView.ShowErrorMessage(4);
-                        
+#endif
+                        }
+
                         break;
                     case ECharacterType.Kane:
 
                         if (GameManager.HasPet(EPetType.Aerion))
                             GameManager.ActivePet(EPetType.Aerion);
                         else
+                        {
+#if UNITY_STANDALONE
+                            _lobbyView.ShowToastMessage(4);
+#else
                             _lobbyView.ShowErrorMessage(4);
-                        
+#endif
+                        }
+
                         break;
                     case ECharacterType.Storm:
 
                         if (GameManager.HasPet(EPetType.Aerion))
                             GameManager.ActivePet(EPetType.Aerion);
                         else
+                        {
+#if UNITY_STANDALONE
+                            _lobbyView.ShowToastMessage(4);
+#else
                             _lobbyView.ShowErrorMessage(4);
-                        
+#endif
+                        }
+
                         break;
                     case ECharacterType.E:
                     case ECharacterType.None:
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
-                
+
                 _view.ActivePet(selectionCharacter);
-                
+
                 if (GameManager.GetCharacter(ActorType.User) == selectionCharacter)
                 {
                     GameManager.UpdateUserPetData();

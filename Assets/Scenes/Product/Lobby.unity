@@ -6142,7 +6142,7 @@ GameObject:
   - component: {fileID: 884911750}
   - component: {fileID: 884911749}
   m_Layer: 0
-  m_Name: Canvas-Popup (Toast)
+  m_Name: Canvas-Toast
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6228,7 +6228,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!43 &891207370
 Mesh:
