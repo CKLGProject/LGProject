@@ -37,6 +37,15 @@ public class ChangeImage : MonoBehaviour
             }
         }
     }
+    
+    /// <summary>
+    /// 캐릭터 타입을 설정합니다.
+    /// </summary>
+    /// <param name="characterType">캐릭터 타입</param>
+    public void SetCharacterType(ECharacterType characterType)
+    {
+        CharacterType = characterType;
+    }
 }
 
 [Serializable]

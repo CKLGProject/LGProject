@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneSystem;
 using UnityEngine.Serialization;
+using UnityEngine.Singleton;
 using UnityEngine.UI;
 
 
@@ -36,13 +37,32 @@ public class BattleView : MonoBehaviour
     [Header("Home Scene")]
     [SerializeField] private SceneLoader lobbySceneLoader;
 
-
     [Header("Timer")]
     [SerializeField] private TextMeshProUGUI timerText;
     [Header("StartLogo")]
     [SerializeField] private Image StartImage;
 
+    [SerializeField] private ChangeImage[] userChangeImages;
+    [SerializeField] private ChangeImage[] aiChangeImages;
 
+    /// <summary>
+    /// 초기 체인지 이미지를 바인딩합니다.
+    /// </summary>
+    public void InitBindChangeImage()
+    {
+        foreach (ChangeImage userChangeImage in userChangeImages)
+        {
+            ECharacterType userCharacter = Singleton.Instance<GameManager>().GetCharacter(ActorType.User);
+            userChangeImage.SetCharacterType(userCharacter);
+        }
+        
+        foreach (ChangeImage aiChangeImage in aiChangeImages)
+        {
+            ECharacterType aiCharacter = Singleton.Instance<GameManager>().GetCharacter(ActorType.AI);
+            aiChangeImage.SetCharacterType(aiCharacter);
+        }
+    }
+    
     /// <summary>
     /// 뷰를 전부 안보이도록 처리합니다.
     /// </summary>

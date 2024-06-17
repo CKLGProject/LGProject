@@ -26,6 +26,9 @@ public class BattlePresenter : MonoBehaviour
         _battleView = GetComponent<BattleView>();
         _battleModel = GetComponent<BattleModel>();
 
+        // 체인지 이미지 바인딩
+        _battleView.InitBindChangeImage();
+        
         // 이름 설정
         string nickName = CurrentGameManager.GetNickname();
         _battleView.SetNameText(ActorType.User, nickName);
