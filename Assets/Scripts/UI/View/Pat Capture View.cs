@@ -37,6 +37,7 @@ public class PatCaptureView : MonoBehaviour
     [SerializeField] private float informationMessageFadeTime = 3f;
     [SerializeField] private Button resetButton;
     [SerializeField] private SkeletonGraphic gestureUI;
+    [SerializeField] private GameObject scanUI;
 
     [Header("Timeline")] [SerializeField] private PlayableDirector fxDirector;
     [SerializeField] private LightController lightController;
@@ -143,6 +144,9 @@ public class PatCaptureView : MonoBehaviour
         // 캡처 버튼을 더 이상 누를 수 없겠금 방지
         UIGroup.blocksRaycasts = false;
 
+        // 스캔 UI 비활성화
+        scanUI.SetActive(false);
+        
         // AR 이미지 타겟팅 기능 비활성화
         _arTrackedImageManager.trackedImagesChanged -= OnTrackedImage;
 

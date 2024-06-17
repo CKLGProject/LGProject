@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18018535, g: 0.22559482, b: 0.30677685, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -572,7 +572,7 @@ GameObject:
   - component: {fileID: 158274787}
   - component: {fileID: 158274786}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Scan UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1261,6 +1261,7 @@ MonoBehaviour:
   informationMessageFadeTime: 1
   resetButton: {fileID: 1834318052}
   gestureUI: {fileID: 1591428708}
+  scanUI: {fileID: 158274784}
   fxDirector: {fileID: 2143194893}
   lightController: {fileID: 1201955953}
   scanDataList:
