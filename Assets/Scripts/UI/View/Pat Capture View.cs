@@ -1,8 +1,10 @@
 // #define LG_DEBUG
+
 using Cysharp.Threading.Tasks;
 using Data;
 using DG.Tweening;
 using R3;
+using Spine.Unity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,11 +22,12 @@ public class PatCaptureView : MonoBehaviour
     [SerializeField] private ARSession arSession;
     [SerializeField] private ARTrackedImageManager _arTrackedImageManager;
 
-    [Header("Gesture Controller")]
-    [SerializeField] private PinchController pinchController;
+    [Header("Gesture Controller")] [SerializeField]
+    private PinchController pinchController;
+
     [SerializeField] private SwipeController swipeController;
     [SerializeField] private DoubleTapController doubleTapController;
-    
+
     [Header("UI")] [SerializeField] private CanvasGroup UIGroup;
     [SerializeField] private Button captureButton;
     [SerializeField] private GameObject informationMessageText;
@@ -33,6 +36,7 @@ public class PatCaptureView : MonoBehaviour
     [SerializeField] private CanvasGroup informationMessageGroup;
     [SerializeField] private float informationMessageFadeTime = 3f;
     [SerializeField] private Button resetButton;
+    [SerializeField] private SkeletonGraphic gestureUI;
 
     [Header("Timeline")] [SerializeField] private PlayableDirector fxDirector;
     [SerializeField] private LightController lightController;
@@ -66,19 +70,19 @@ public class PatCaptureView : MonoBehaviour
         SetActiveResetButton(false);
 
         swipeController.OnSwipeObservable
-            .Where(_=> objectRotation.Active == false)
+            .Where(_ => objectRotation.Active == false)
             .Where(_ => CompareTargetGesture(GestureType.ScrollDown))
             .Subscribe(_ => _onCharacterize.OnNext(Unit.Default))
             .AddTo(this);
 
         doubleTapController.OnDoubleTouchObservable()
-            .Where(_=> objectRotation.Active == false)
+            .Where(_ => objectRotation.Active == false)
             .Where(_ => CompareTargetGesture(GestureType.DoubleTap))
             .Subscribe(_ => _onCharacterize.OnNext(Unit.Default))
             .AddTo(this);
 
         pinchController.OnPinchOutObservable
-            .Where(_=> objectRotation.Active == false)
+            .Where(_ => objectRotation.Active == false)
             .Where(_ => CompareTargetGesture(GestureType.Pinch))
             .Subscribe(_ => _onCharacterize.OnNext(Unit.Default))
             .AddTo(this);
@@ -161,11 +165,11 @@ public class PatCaptureView : MonoBehaviour
 
         // 펫을 추가합니다.
         Singleton.Instance<GameManager>().AddPet(_targetObject.Value.RewardPet);
-        
+
         // 타겟팅된 가전제품 활성화
         _targetObject.Value.MachineObject.SetActive(true);
     }
-    
+
     /// <summary>
     /// 오브젝트 회전을 비활성화 합니다.
     /// </summary>
@@ -188,14 +192,14 @@ public class PatCaptureView : MonoBehaviour
     /// </summary>
     public async UniTaskVoid PlayCharacterizeSequence()
     {
-        if(_targetObject.Value.MachineObject.TryGetComponent(out Animator targetAnimator)) 
+        if (_targetObject.Value.MachineObject.TryGetComponent(out Animator targetAnimator))
             targetAnimator.SetTrigger(Open);
-        
+
         const float delayTime = 0.7f;
-        
+
         // 일단 delayTime 정도.. 대기
         await UniTask.Delay(TimeSpan.FromSeconds(delayTime));
-        
+
         fxDirector.Play();
     }
 
@@ -205,7 +209,7 @@ public class PatCaptureView : MonoBehaviour
     public void ShowTouchGuideText()
     {
         SetActiveGuideMessageText(true);
-        
+
         string message = _targetObject.Value.GuideMessage;
         guideMessageText.text = message;
         guideMessageText.gameObject.SetActive(true);
@@ -296,9 +300,28 @@ public class PatCaptureView : MonoBehaviour
     /// </summary>
     public void SetActiveGestureUI(bool isActive)
     {
-        _targetObject.Value.GestureUI.SetActive(isActive);
+        gestureUI.gameObject.SetActive(isActive);
+
+        GestureType gestureType = _targetObject.Value.GestureType;
+        switch (gestureType)
+        {
+            case GestureType.DoubleTap:
+                const string doubleTap = "Double_Click";
+                gestureUI.AnimationState.SetAnimation(0, doubleTap, true);
+                break;
+            case GestureType.ScrollDown:
+                const string scrollDown = "Scroll_Down";
+                gestureUI.AnimationState.SetAnimation(0, scrollDown, true);
+                break;
+            case GestureType.Pinch:
+                const string pinch = "Pinch";
+                gestureUI.AnimationState.SetAnimation(0, pinch, true);
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
     }
-    
+
     /// <summary>
     /// 리셋 버튼의 활성화 여부를 설정합니다.
     /// </summary>
@@ -306,7 +329,7 @@ public class PatCaptureView : MonoBehaviour
     {
         resetButton.gameObject.SetActive(isActive);
     }
-    
+
     /// <summary>
     /// 해당 가전제품을 활성화 하는 방법의 텍스트의 활성화 여부를 설정합니다.
     /// </summary>

@@ -10,7 +10,6 @@ namespace Data
         public GameObject MachineObject;
         public GameObject CharacterObject;
         public string GuideMessage;
-        public GameObject GestureUI;
         public GestureType GestureType;
         public EPetType RewardPet;
     }
