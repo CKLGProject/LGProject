@@ -7,10 +7,10 @@ namespace LGProject.PlayerState
 {
     public class JumpAttackState : State
     {
-        private float _maximumSpeed;
-        private bool _damageInCount;
-        private static readonly int JumpAttack = Animator.StringToHash("JumpAttack");
-        private static readonly int Landing = Animator.StringToHash("Landing");
+        protected float _maximumSpeed;
+        protected bool _damageInCount;
+        protected static readonly int JumpAttack = Animator.StringToHash("JumpAttack");
+        protected static readonly int Landing = Animator.StringToHash("Landing");
         public JumpAttackState(PlayerStateMachine stateMachine, float maximumSpeed) : base(stateMachine)
         {
             _maximumSpeed = maximumSpeed;
@@ -78,7 +78,7 @@ namespace LGProject.PlayerState
 
         }
 
-        public void AttackJudge()
+        private void AttackJudge()
         {
             if (!_damageInCount)
             {

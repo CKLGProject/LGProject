@@ -159,7 +159,7 @@ namespace LGProject.PlayerState
 
                 psm.ultimateState = new UltimateState(psm);
 
-                psm.jumpAttackState = new JumpAttackState(psm, psm.playable.MaximumSpeed);
+                ApplyJumpAttackState(psm.CharacterType, psm);
                 psm.dashAttackState = new DashAttackState(psm, ref psm.playable.DashAttackDelay);
 
                 psm.hitState = new HitState(psm, ref psm.playable.HitDelay);
@@ -225,6 +225,30 @@ namespace LGProject.PlayerState
             }
         }
 
+        public static void ApplyJumpAttackState(Data.ECharacterType characterType, PlayerStateMachine psm)
+        {
+            switch (characterType)
+            {
+                case Data.ECharacterType.None:
+                    break;
+                case Data.ECharacterType.Hit:
+                    psm.jumpAttackState = new JumpAttackState(psm, psm.playable.MaximumSpeed);
+                    break;
+                case Data.ECharacterType.Frost:
+                    psm.jumpAttackState = new JumpAttackState(psm, psm.playable.MaximumSpeed);
+                    break;
+                case Data.ECharacterType.Kane:
+                    psm.jumpAttackState = new KaneJumpAttackState(psm, psm.playable.MaximumSpeed);
+                    break;
+                case Data.ECharacterType.Storm:
+                    break;
+                case Data.ECharacterType.E:
+                    break;
+                default:
+                    break;
+            }
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -259,6 +283,7 @@ namespace LGProject.PlayerState
             if (CurrentState.GetType() == typeof(JumpState) ||
                 CurrentState.GetType() == typeof(FlightState) ||
                 CurrentState.GetType() == typeof(JumpAttackState) ||
+                CurrentState.GetType() == typeof(KaneJumpAttackState) ||
                 CurrentState.GetType() == typeof(KnockbackState) || 
                 CurrentState.GetType() == typeof(GuardState))
                 return true;
@@ -394,6 +419,12 @@ namespace LGProject.PlayerState
             physics.velocity = Vector3.zero;
         }
 
+        public void JumpAttackVelocity()
+        {
+            physics.velocity = transform.up * 1.5f;
+        }
+
+
         /// <summary>
         /// 
         /// </summary>
@@ -524,7 +555,7 @@ namespace LGProject.PlayerState
         {
             try
             {
-                playable.ShootProjectile(AttackCount, transform.forward);
+                playable.ShootProjectile(IsGrounded ? AttackCount : 4, transform.forward);
             }
             catch
             {

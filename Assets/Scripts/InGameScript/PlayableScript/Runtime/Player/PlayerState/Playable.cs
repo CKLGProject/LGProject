@@ -238,9 +238,11 @@ namespace LGProject.PlayerState
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.layer == 9)
+            if (other.gameObject.layer == 9 )
             {
                 BulletCollisionZone bullet = other.GetComponent<BulletCollisionZone>();
+                if (bullet.Player == transform)
+                    return;
                 bullet.gameObject.SetActive(false);
                 bullet.PlayHitParticle();
                 bullet.Methods();
