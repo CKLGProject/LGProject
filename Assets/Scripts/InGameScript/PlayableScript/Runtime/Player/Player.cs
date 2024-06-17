@@ -26,7 +26,7 @@ namespace LGProject.PlayerState
         {
             InitStates();
             InitEffectManager();
-            SetUltimateGage(100);
+            SetUltimateGage(0);
             // 소환될 때 게임에 있는 매니저들을 불러옴
             StateMachine.SetUltimateState(CharacterType);
 

@@ -208,6 +208,11 @@ namespace LGProject.PlayerState
             }
         }
 
+        public bool CheckPointCollision(Vector3 checkPoint)
+        {
+            return CollisionObserver.CallUnderPlatformZone(ZoneType.Platform, checkPoint);
+        }
+
         public void UnderPlatformCheck()
         {
             switch (ActorType)

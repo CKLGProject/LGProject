@@ -28,7 +28,8 @@ public class BattlePresenter : MonoBehaviour
 
         // 체인지 이미지 바인딩
         _battleView.InitBindChangeImage();
-        
+        _battleView.InitBindChangeCutScene();
+
         // 이름 설정
         string nickName = CurrentGameManager.GetNickname();
         _battleView.SetNameText(ActorType.User, nickName);
@@ -36,6 +37,13 @@ public class BattlePresenter : MonoBehaviour
 
         // 뷰를 전부 안보이도록 처리
         _battleView.AllHideView();
+
+        //컷씬의 애니메이션을 제어하는 옵저버
+        _battleModel.CutSceneAnimatorObservable.Subscribe(trigger => _battleView.PlayTriggerCutSceneAnimator(trigger)).AddTo(this);
+
+
+        // 컷씬을 보여주는 옵저버
+        _battleModel.CutSceneObservable.Subscribe(show => _battleView.ShowCutScenePanel(show)).AddTo(this);
 
         // 유저의 생명 포인트에 따라 UI를 업데이트하는 옵저버
         _battleModel.UserHealthObservable

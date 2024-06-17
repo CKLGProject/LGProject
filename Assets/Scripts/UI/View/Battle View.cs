@@ -45,6 +45,9 @@ public class BattleView : MonoBehaviour
     [SerializeField] private ChangeImage[] userChangeImages;
     [SerializeField] private ChangeImage[] aiChangeImages;
 
+    [SerializeField] private ChangeImage[] userChangeCutScenes;
+    [SerializeField] private ChangeImage[] userChangeCutScenesBack;
+ 
     /// <summary>
     /// 초기 체인지 이미지를 바인딩합니다.
     /// </summary>
@@ -63,6 +66,48 @@ public class BattleView : MonoBehaviour
         }
     }
     
+    /// <summary>
+    /// 초기 컷씬씬을 바인딩 합니다.
+    /// </summary>
+    public void InitBindChangeCutScene()
+    {
+        foreach (ChangeImage changeImageCutScene in userChangeCutScenes)
+        {
+            try
+            {
+                ECharacterType userCharacter = Singleton.Instance<GameManager>().GetCharacter(ActorType.User);
+                changeImageCutScene.SetCharacterType(userCharacter);
+            }
+            catch
+            {
+
+            }
+            changeImageCutScene.gameObject.SetActive(false);
+        }
+
+        foreach (ChangeImage changeImageCutSceneBack in userChangeCutScenesBack)
+        {
+            ECharacterType userCharacter = Singleton.Instance<GameManager>().GetCharacter(ActorType.User);
+            changeImageCutSceneBack.SetCharacterType(userCharacter);
+            changeImageCutSceneBack.gameObject.SetActive(false);
+        }
+    }
+    
+    public void PlayTriggerCutSceneAnimator(string trigger)
+    {
+        userChangeCutScenes[0].targetImages[0].GetComponent<Animator>().SetTrigger(trigger);
+        userChangeCutScenesBack[0].targetImages[0].GetComponent<Animator>().SetTrigger(trigger);
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public void ShowCutScenePanel(bool active)
+    {
+        userChangeCutScenes[0].targetImages[0].gameObject.SetActive(active);
+        userChangeCutScenesBack[0].targetImages[0].gameObject.SetActive(active);
+    }
+
     /// <summary>
     /// 뷰를 전부 안보이도록 처리합니다.
     /// </summary>
@@ -104,6 +149,11 @@ public class BattleView : MonoBehaviour
                 aiEnergyIcon.sprite = ready ? ultimateReadySprite : ultimateReadyYetSprite;
                 break;
         }
+    }
+
+    public void ShowUltimateCutScene(ActorType actorType)
+    {
+
     }
 
     /// <summary>

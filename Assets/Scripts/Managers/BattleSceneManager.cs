@@ -9,6 +9,7 @@ namespace LGProject
         public static BattleSceneManager Instance { get; private set; }
         Data.ECharacterType characterType;
         public GameObject[] playable;
+        public GameObject[] AI;
 
         public GameObject OnlinePlayer;
         public CameraZone CameraZone;
@@ -78,6 +79,15 @@ namespace LGProject
             }
         }
 
+        /// <summary>
+        /// AI의 정보를 불러와 생성해주는 코드
+        /// 예시는 위처럼 작업해주길 바람.
+        /// </summary>
+        public void SetAi()
+        {
+
+        }
+
         /*****************************************************
          * Private Methods
          * **/
@@ -104,10 +114,15 @@ namespace LGProject
             {
                 item.SetActive(false);
             }
+            foreach(var item in AI)
+            {
+                item.SetActive(false);
+            }
 
 
 
             SetPlayers();
+            SetAi();
         }
 
         private void Start()
