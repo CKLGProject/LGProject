@@ -637,7 +637,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1018.1897, y: -968.8768}
+  m_AnchoredPosition: {x: -968.1897, y: -903.94525}
   m_SizeDelta: {x: 804.80005, y: 840.80005}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &9930167
@@ -7889,7 +7889,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -549, y: -10.931519}
+  m_AnchoredPosition: {x: -499, y: 54}
   m_SizeDelta: {x: 593.6001, y: 704.80005}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &599413578
@@ -13747,8 +13747,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0000061989, y: 19.5}
-  m_SizeDelta: {x: 149, y: 181}
+  m_AnchoredPosition: {x: 0, y: 25.2}
+  m_SizeDelta: {x: 153, y: 193}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1130718044
 MonoBehaviour:
@@ -13808,7 +13808,7 @@ MonoBehaviour:
   - CharacterType: 2
     CharacterProfileImage: {fileID: 21300000, guid: f3779c9fcdec0574ba357cbc718a08e9,
       type: 3}
-    isFlip: 0
+    isFlip: 1
   targetImages:
   - {fileID: 1130718044}
 --- !u!1 &1159805001
@@ -20048,8 +20048,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0, y: 19}
-  m_SizeDelta: {x: 149, y: 181}
+  m_AnchoredPosition: {x: -1.2, y: 25.8}
+  m_SizeDelta: {x: 153, y: 193}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1730397531
 MonoBehaviour:
@@ -20109,11 +20109,11 @@ MonoBehaviour:
   - CharacterType: 2
     CharacterProfileImage: {fileID: 21300000, guid: f3779c9fcdec0574ba357cbc718a08e9,
       type: 3}
-    isFlip: 1
+    isFlip: 0
   - CharacterType: 3
     CharacterProfileImage: {fileID: 21300000, guid: 7afddb41a2aaeeb4f868f696c1e9798f,
       type: 3}
-    isFlip: 1
+    isFlip: 0
   targetImages:
   - {fileID: 1730397531}
 --- !u!1001 &1732338317
