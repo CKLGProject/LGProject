@@ -11,20 +11,26 @@ public class ChangeImage : MonoBehaviour
 {
     public ECharacterType CharacterType { get; private set; }
 
-    [ArrayElementTitle("CharacterType")]
-    public CharacterByImage[] characterByImages;
-    
+    [ArrayElementTitle("CharacterType")] public CharacterByImage[] characterByImages;
+
     public Image[] targetImages;
-    
+
     private void Start()
     {
         ChangeImageAsync().Forget();
     }
-    
+
     private async UniTaskVoid ChangeImageAsync()
     {
         await UniTask.Yield();
-      
+        UpdateChangeImage();
+    }
+
+    /// <summary>
+    /// 체인지 이미지를 업데이트 합니다.
+    /// </summary>
+    public void UpdateChangeImage()
+    {
         foreach (CharacterByImage characterByImage in characterByImages)
         {
             if (characterByImage.CharacterType == CharacterType)
@@ -37,7 +43,7 @@ public class ChangeImage : MonoBehaviour
             }
         }
     }
-    
+
     /// <summary>
     /// 캐릭터 타입을 설정합니다.
     /// </summary>

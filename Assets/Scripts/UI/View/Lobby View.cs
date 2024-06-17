@@ -74,12 +74,27 @@ public class LobbyView : MonoBehaviour
     [Header("Event")] public UnityEvent OnClickCapture;
     public UnityEvent OnClickMatch;
 
+    [Header("Toast PC")]
+    [SerializeField] private PCToastGenerate toastGenerate;
+
+    
     /// <summary>
     /// 프로필 이미지를 바인딩 합니다.
     /// </summary>
     public void BindProfileImage(ECharacterType characterType)
     {
         profileImage.SetCharacterType(characterType);
+    }
+
+    /// <summary>
+    /// 토스트 메세지를 생성합니다.
+    /// </summary>
+    /// <param name="index">에러 메세지 인덱스</param>
+    /// <param name="toastType">시간</param>
+    public void ShowToastMessage(int index, LGUtility.EToast toastType = LGUtility.EToast.LENGTH_SHORT)
+    {
+        string message = errorMessage[index];
+        toastGenerate.ShowToastMessage(message, toastType);
     }
     
     /// <summary>
@@ -231,7 +246,6 @@ public class LobbyView : MonoBehaviour
                 kane.SetActive(true);
                 break;
             case ECharacterType.Storm:
-                break;
             case ECharacterType.E:
                 break;
             default:
@@ -306,5 +320,15 @@ public class LobbyView : MonoBehaviour
                 return;
             }
         }
+    }
+
+    /// <summary>
+    /// 프로필 이미지를 업데이트 합니다.
+    /// </summary>
+    public void UpdateProfileImage()
+    {
+        ECharacterType characterType = Singleton.Instance<GameManager>().GetCharacter(ActorType.User);
+        profileImage.SetCharacterType(characterType);
+        profileImage.UpdateChangeImage();
     }
 }

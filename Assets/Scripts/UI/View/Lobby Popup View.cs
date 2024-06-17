@@ -8,6 +8,7 @@ using UnityEngine.Assertions;
 using UnityEngine.Serialization;
 using UnityEngine.Singleton;
 using UnityEngine.UI;
+using Utility;
 
 public class LobbyPopupView : MonoBehaviour
 {
@@ -56,7 +57,7 @@ public class LobbyPopupView : MonoBehaviour
     [SerializeField] private Button exitButton;
     [SerializeField] private Button petChoiceButton;
     [SerializeField] private Button itemChoiceButton;
-
+    
     private Subject<bool> _popupViewActiveSubject = new Subject<bool>();
 
     private void Start()

@@ -96,6 +96,7 @@ public class LobbyPopupPresenter : MonoBehaviour
                 
                 _model.SetChoiceCharacterType(_model.SelectedCharacterType);
                 _view.SetInteractionByCharacterSelectionButton(false);
+                _lobbyView.UpdateProfileImage();
             })
             .AddTo(this);
 
