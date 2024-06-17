@@ -24,6 +24,9 @@ public class LobbyView : MonoBehaviour
     [SerializeField] private TextMeshProUGUI coinText;
     [SerializeField] private TextMeshProUGUI plugText;
 
+    [Header("Profile Image")]
+    [SerializeField] private ChangeImage profileImage;
+    
     /// <summary>
     /// 매치 버튼
     /// </summary>
@@ -71,6 +74,14 @@ public class LobbyView : MonoBehaviour
     [Header("Event")] public UnityEvent OnClickCapture;
     public UnityEvent OnClickMatch;
 
+    /// <summary>
+    /// 프로필 이미지를 바인딩 합니다.
+    /// </summary>
+    public void BindProfileImage(ECharacterType characterType)
+    {
+        profileImage.SetCharacterType(characterType);
+    }
+    
     /// <summary>
     /// 매치 버튼 옵저버입니다.
     /// </summary>

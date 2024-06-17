@@ -48,6 +48,7 @@ public class LobbyPresenter : MonoBehaviour
         // View
         ECharacterType selectedCharacter = _lobbyPopupModel.SelectedCharacterType;
         _lobbyView.ActivePet(selectedCharacter);
+        _lobbyView.BindProfileImage(selectedCharacter);
         
         _lobbyView.MatchButtonAsObservable()
             .Where(_=> !_lobbyPopupModel.IsActive)
