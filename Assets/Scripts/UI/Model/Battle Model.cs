@@ -19,10 +19,45 @@ public class BattleModel : MonoBehaviour
     private readonly SerializableReactiveProperty<float> _aiUltimateEnergyProperty = new ();
     private readonly SerializableReactiveProperty<bool>  _aiUltimateEnergyIconProperty = new ();
     private readonly SerializableReactiveProperty<float> _gameCountDownTimerProperty = new ();
-
+    private readonly SerializableReactiveProperty<bool> _cutSceneProperty = new();
+    private readonly SerializableReactiveProperty<string> _cutSceneAnimatorProperty = new();
     private void Awake()
     {
         _countDownProperty = new SerializableReactiveProperty<int>(CountMax);
+    }
+    
+
+    /// <summary>
+    /// 컷씬의 애니메이션 트리거를 제어함
+    /// </summary>
+    /// <param name="actorType"></param>
+    /// <param name="trigger"></param>
+    public void PlayAnimatorControllerTrigger(string trigger)
+    {
+        _cutSceneAnimatorProperty.Value = trigger;
+    }
+    
+
+    /// <summary>
+    /// 컷씬을 호출하는 매서드
+    /// </summary>
+    /// <param name="actorType"></param>
+    /// <param name="active"></param>
+    public void ShowCutScene(ActorType actorType, bool active)
+    {
+        switch (actorType)
+        {
+            case ActorType.None:
+                break;
+            case ActorType.User:
+                _cutSceneProperty.Value = active;
+                break;
+            case ActorType.AI:
+                _cutSceneProperty.Value = active;
+                break;
+            default:
+                break;
+        }
     }
 
     /// <summary>
@@ -123,4 +158,6 @@ public class BattleModel : MonoBehaviour
     public Observable<bool> AIUltimateEnergyIconObservable => _aiUltimateEnergyIconProperty.AsObservable();
     public Observable<float> AIUltimateEnergyObservable => _aiUltimateEnergyProperty.AsObservable();
     public Observable<float> GameCountDownTimerObservable => _gameCountDownTimerProperty.AsObservable();
+    public Observable<bool> CutSceneObservable => _cutSceneProperty.AsObservable();
+    public Observable<string> CutSceneAnimatorObservable => _cutSceneAnimatorProperty.AsObservable();
 }

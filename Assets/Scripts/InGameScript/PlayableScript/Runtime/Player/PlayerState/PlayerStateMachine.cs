@@ -157,7 +157,7 @@ namespace LGProject.PlayerState
                 psm.flightState = new FlightState(psm);
                 ApplyAttackState(psm.CharacterType, psm);
 
-                psm.ultimateState = new UltimateState(psm);
+                //psm.ultimateState = new UltimateState(psm);
 
                 ApplyJumpAttackState(psm.CharacterType, psm);
                 psm.dashAttackState = new DashAttackState(psm, ref psm.playable.DashAttackDelay);
@@ -327,6 +327,11 @@ namespace LGProject.PlayerState
                 default:
                     break;
             }
+        }
+
+        public bool CheckPlatform(Vector3 checkPos)
+        {
+            return playable.CheckPointCollision(checkPos);
         }
 
         /// <summary>

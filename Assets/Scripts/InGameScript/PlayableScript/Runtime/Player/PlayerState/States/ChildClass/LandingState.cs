@@ -18,6 +18,7 @@ namespace LGProject.PlayerState
         {
             base.Enter();
             Debug.Log("LandingState");
+            StateMachine.physics.isKinematic = false;
             StateMachine.StandingVelocity();
             StateMachine.animator.SetTrigger(Landing);
             _currentTimer = 0;

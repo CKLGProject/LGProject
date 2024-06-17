@@ -40,6 +40,8 @@ namespace LGProject.PlayerState
             StateMachine.IsUseUltimate = true;
             StateMachine.animator.updateMode = AnimatorUpdateMode.UnscaledTime;
             _isMove = false;
+            StateMachine.battleModel.ShowCutScene(Data.ActorType.User, true);
+
             WaitStart().Forget();
             Time.timeScale = 0.1f;
         }
@@ -49,7 +51,7 @@ namespace LGProject.PlayerState
             base.Exit();
             StateMachine.IsUseUltimate = false;
         }
-
+        //RaycastHit hit;
         public override void LogicUpdate()
         {
             base.LogicUpdate();
@@ -57,11 +59,12 @@ namespace LGProject.PlayerState
             // 바라보고 있는 방향으로 돌진
             // velociy 돌진이 아니라 해당 위치까지 이동을 시켜주는 것이 좋음
             float distance = Vector3.Distance(StateMachine.transform.position, _movingPoint);
-            if (distance >= 1f && _isMove)
+            // 거리가 다 되지 않았으면서 움직일 수 있고, 진행 중 플랫폼이 존재하지 않을 때 까지 이동하기.
+            if (distance >= 1f && _isMove && StateMachine.CheckPlatform(StateMachine.transform.position + StateMachine.transform.forward * 1.5f + StateMachine.transform.up * -0.5f))
             {
 
                 // 현재 6칸 / 6m 이동 중 6m사이에 적이 있으면 해당 적 앞에서 멈추고 애니메이션 실행 
-                StateMachine.transform.position = Vector3.MoveTowards(StateMachine.transform.position, _movingPoint, 1000f * Time.deltaTime);
+                StateMachine.transform.position = Vector3.MoveTowards(StateMachine.transform.position, _movingPoint, 100f * Time.deltaTime);
             }
             else if (_isMove)
                 StateMachine.ChangeState(StateMachine.idleState);
@@ -101,24 +104,25 @@ namespace LGProject.PlayerState
             //_movingPoint = new Vector3(_movingNode.WorldPosition.x, StateMachine.transform.position.y, StateMachine.transform.position.z);
 
             // 앞으로 5거리만큼 이동.
-            _movingPoint = StateMachine.transform.position + StateMachine.transform.forward * 6f;
+            _movingPoint = StateMachine.transform.position + StateMachine.transform.forward * 4f;
         }
 
         private void MovementTargetPointSet()
         {
             PlayerStateMachine targetStateMachine = hit.transform.GetComponent<Playable>().GetStateMachine;
 
+            pathFinding.Node node = pathFinding.Grid.Instance.NodeFromWorldPoint(hit.transform.position);
+            _movingPoint = node.WorldPosition;
             // 그리고 타겟에게 피해를 입힘.
-            Vector3 KnockbackValue = (StateMachine.transform.forward * 4.5f + StateMachine.transform.up * 4.5f) ;
+            Vector3 KnockbackValue = (StateMachine.transform.forward * 9f + StateMachine.transform.up * 9f) ;
 
             targetStateMachine.ApplyHitDamaged(KnockbackValue, 0, StateMachine);
-
-
         }
 
         protected async UniTaskVoid WaitStart()
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(0.175f));
+            await UniTask.Delay(TimeSpan.FromSeconds(1.75f), DelayType.Realtime);
+            StateMachine.battleModel.PlayAnimatorControllerTrigger("Hide");
             _isMove = true;
             Time.timeScale = 1f;
             StateMachine.playable.effectManager.Stop(EffectManager.EFFECT.Ultimate);
@@ -137,6 +141,8 @@ namespace LGProject.PlayerState
             {
                 MovementPointSet();
             }
+            await UniTask.Delay(TimeSpan.FromSeconds(2f), DelayType.Realtime);
+            StateMachine.battleModel.ShowCutScene(Data.ActorType.User, false);
         }
     }
 }

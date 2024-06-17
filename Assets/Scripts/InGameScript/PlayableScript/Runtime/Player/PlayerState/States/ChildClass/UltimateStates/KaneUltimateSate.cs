@@ -14,7 +14,7 @@ namespace LGProject.PlayerState
         private bool _isMove;
 
         private static readonly int Ultimate = Animator.StringToHash("Ultimate");
-
+       
 
         public KaneUltimateState(PlayerStateMachine stateMachine) : base(stateMachine)
         {
@@ -32,7 +32,7 @@ namespace LGProject.PlayerState
             StateMachine.playable.effectManager.Play(EffectManager.EFFECT.Ultimate).Forget();
             StateMachine.playable.effectManager.Play(EffectManager.EFFECT.UltimatePreCenter).Forget();
             StateMachine.playable.effectManager.Play(EffectManager.EFFECT.UltimatePreRHand).Forget();
-            //StateMachine.playable.effectManager.Play(EffectManager.EFFECT.UltimatePrePoint006).Forget();
+            StateMachine.battleModel.ShowCutScene(Data.ActorType.User, true);
             _isMove = false;
             WaitStart().Forget();
             Time.timeScale = 0.1f;
@@ -62,32 +62,43 @@ namespace LGProject.PlayerState
             base.PhysicsUpdate();
 
         }
+
+        //IEnumerator CutScenePlay()
+        //{
+
+        //}
+
+        protected async UniTaskVoid CutSceneAnimation()
+        {
+            await UniTask.Delay(TimeSpan.FromSeconds(2f), DelayType.Realtime);
+        }
+
         protected async UniTaskVoid WaitStart()
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(0.2f));
+            await UniTask.Delay(TimeSpan.FromSeconds(2f), DelayType.Realtime);
             //StateMachine.playable.SwitchingWeapon(true);
             //await UniTask.Delay(TimeSpan.FromSeconds(0.075f));
+            StateMachine.battleModel.PlayAnimatorControllerTrigger("Hide");
             _isMove = true;
             Time.timeScale = 1f;
-            //StateMachine.playable.effectManager.Play(EffectManager.EFFECT.UltimateHit).Forget();
-            //StateMachine.playable.effectManager.Play(EffectManager.EFFECT.UltimateDash).Forget();
             StateMachine.playable.effectManager.Stop(EffectManager.EFFECT.Ultimate);
             StateMachine.playable.effectManager.Stop(EffectManager.EFFECT.UltimatePreRHand);
             StateMachine.playable.effectManager.Stop(EffectManager.EFFECT.UltimatePreCenter);
             StateMachine.playable.effectManager.Play(EffectManager.EFFECT.UltimatePrePoint006).Forget();
             StateMachine.IsUseUltimate = false;
-            // 내리찍을 때 주변 적에게 피해를 입히고 넉백시킴.
+            //StateMachine.battleModel.ShowCutScene(Data.ActorType.User, false);
+
             UltimateAttack();
+            await UniTask.Delay(TimeSpan.FromSeconds(2f), DelayType.Realtime);
+            StateMachine.battleModel.ShowCutScene(Data.ActorType.User, false);
         }
 
         private void UltimateAttack()
         {
-            // 전방을 향해 힘찬 함성 5초간 발싸!
-            // 으앙ㅇ아아ㅏㅇ아ㅏ아ㅏㅏ아아아아아ㅏ아ㅏㅏㅇㅇㅇ아ㅏ아아아ㅏ아ㅏㅏ아ㅏㅏ아ㅏ아앙아아ㅏㅏ
             Collider[] checkPlayer = Physics.OverlapBox(StateMachine.transform.position + StateMachine.transform.forward * 2f, new Vector3(4, 1, 1), Quaternion.identity, 1 << 3);
             foreach(var player in checkPlayer)
             {
-                Vector3 velocity = StateMachine.transform.forward * 4.5f + StateMachine.transform.up * 4.5f;
+                Vector3 velocity = StateMachine.transform.forward * 9f + StateMachine.transform.up * 9f;
 
                 if(player.transform != StateMachine.transform)
                 {
