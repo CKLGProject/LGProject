@@ -315,9 +315,9 @@ MonoBehaviour:
   _UltimateHit: {fileID: 0}
   _UltimateDash: {fileID: 0}
   _UltimateAirborn: {fileID: 0}
-  _UltimatePreCenter: {fileID: 6851090200280715105}
+  _UltimatePreCenter: {fileID: 1364768776903080780}
   _UltimatePre_RHand_FX: {fileID: 8391687958315682612}
-  _UltimatePre_Point006: {fileID: 1364768776903080780}
+  _UltimatePre_Point006: {fileID: 6851090200280715105}
   playList: []
 --- !u!1001 &628093781449063800
 PrefabInstance:

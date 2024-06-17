@@ -32,6 +32,7 @@ namespace LGProject.PlayerState
             StateMachine.playable.effectManager.Play(EffectManager.EFFECT.Ultimate).Forget();
             StateMachine.playable.effectManager.Play(EffectManager.EFFECT.UltimatePreCenter).Forget();
             StateMachine.playable.effectManager.Play(EffectManager.EFFECT.UltimatePreRHand).Forget();
+            //StateMachine.playable.effectManager.Play(EffectManager.EFFECT.UltimatePrePoint006).Forget();
             _isMove = false;
             WaitStart().Forget();
             Time.timeScale = 0.1f;
@@ -68,11 +69,12 @@ namespace LGProject.PlayerState
             //await UniTask.Delay(TimeSpan.FromSeconds(0.075f));
             _isMove = true;
             Time.timeScale = 1f;
-            StateMachine.playable.effectManager.Play(EffectManager.EFFECT.UltimateHit).Forget();
-            StateMachine.playable.effectManager.Play(EffectManager.EFFECT.UltimateDash).Forget();
+            //StateMachine.playable.effectManager.Play(EffectManager.EFFECT.UltimateHit).Forget();
+            //StateMachine.playable.effectManager.Play(EffectManager.EFFECT.UltimateDash).Forget();
             StateMachine.playable.effectManager.Stop(EffectManager.EFFECT.Ultimate);
             StateMachine.playable.effectManager.Stop(EffectManager.EFFECT.UltimatePreRHand);
             StateMachine.playable.effectManager.Stop(EffectManager.EFFECT.UltimatePreCenter);
+            StateMachine.playable.effectManager.Play(EffectManager.EFFECT.UltimatePrePoint006).Forget();
             StateMachine.IsUseUltimate = false;
             // 내리찍을 때 주변 적에게 피해를 입히고 넉백시킴.
             UltimateAttack();
