@@ -297,7 +297,7 @@ namespace LGProject.PlayerState
                     ultimateState = new FrostUltimateState(this);
                     break;
                 case Data.ECharacterType.Kane:
-
+                    ultimateState = new KaneUltimateState(this);
                     break;
                 default:
                     break;

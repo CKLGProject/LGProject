@@ -27,6 +27,11 @@ namespace LGProject.PlayerState
             base.Update();
 
         }
+        
+        public void UpGage()
+        {
+            SetUltimateGage(UltimateGage + 10);
+        }
 
         public override void ShootProjectile(int AtkCount, Vector3 velocity)
         {
@@ -42,7 +47,7 @@ namespace LGProject.PlayerState
                     BulletPrefab1.transform.position = Velocity + transform.position + (velocity);
 
                     velocity *= velocity.x;
-                    BulletPrefab1.MoveSet(Speed, velocity, transform.position, Vector3.zero);
+                    BulletPrefab1.MoveSet(Speed, velocity, transform.position, Vector3.zero, UpGage);
                     
                     break;
                 case 2:
@@ -53,7 +58,7 @@ namespace LGProject.PlayerState
                     BulletPrefab2.transform.position = Velocity + transform.position + (velocity );
 
                     velocity *= velocity.x;
-                    BulletPrefab2.MoveSet(Speed, velocity, transform.position, Vector3.zero);
+                    BulletPrefab2.MoveSet(Speed, velocity, transform.position, Vector3.zero, UpGage);
                     break;
                 case 3:
                     // 일당 생성으로 해보자
@@ -68,7 +73,7 @@ namespace LGProject.PlayerState
 
                     velocity *= velocity.x;
                     Vector3 KnockbackVelocity = (transform.forward * 1.5f + transform.up * 3) * 1.5f; 
-                    BulletPrefab3.MoveSet(Speed, velocity, transform.position , KnockbackVelocity);
+                    BulletPrefab3.MoveSet(Speed, velocity, transform.position , KnockbackVelocity, UpGage);
                     break;
                 default:
                     break;
