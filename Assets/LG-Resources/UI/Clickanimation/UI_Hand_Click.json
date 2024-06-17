@@ -1,6 +1,6 @@
 {
 "skeleton": {
-	"hash": "DQClz0YJzBA",
+	"hash": "aif5o14t5zY",
 	"spine": "4.2.29",
 	"x": -187.29,
 	"y": -20.51,
@@ -62,6 +62,7 @@
 	{ "name": "line10", "parent": "line9", "length": 34.71, "x": 34.71 }
 ],
 "slots": [
+	{ "name": "back", "bone": "root" },
 	{ "name": "hand_01", "bone": "hand_03", "attachment": "hand_01" },
 	{ "name": "hand_02", "bone": "hand_04", "attachment": "hand_02" },
 	{ "name": "hand_03", "bone": "hand_06", "attachment": "hand_03" },
