@@ -265,6 +265,13 @@ namespace LGProject.PlayerState
             return false;
         }
 
+        public bool CheckFlightAI()
+        {
+            if (IsKnockback || JumpInCount > 0 || IsGuard)
+                return true;
+            return false;
+        }
+
         /// <summary>
         /// 
         /// </summary>

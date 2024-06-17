@@ -107,15 +107,16 @@ namespace LGProject.PlayerState
             pathFinding.Node node = pathFinding.Grid.Instance.NodeFromWorldPoint(hit.transform.position);
             _movingPoint = node.WorldPosition;
             // 그리고 타겟에게 피해를 입힘.
-            Vector3 KnockbackValue = Vector3.zero;
-            Vector3 direction = (targetStateMachine.transform.position - StateMachine.transform.position).normalized;
-            direction.x *= 2;
-            direction.y *= 1.5f;
-            KnockbackValue = StateMachine.playable.CalculateVelocity(
-               targetStateMachine.transform.position + direction,
-                  targetStateMachine.transform.position, 0.5f, 3f);
+            //Vector3 KnockbackValue = Vector3.zero;
+            //Vector3 direction = (targetStateMachine.transform.position - StateMachine.transform.position).normalized;
+            //direction.x *= 2;
+            //direction.y *= 1.5f;
+            //KnockbackValue = StateMachine.playable.CalculateVelocity(
+            //   targetStateMachine.transform.position + direction,
+            //targetStateMachine.transform.position, 0.5f, 3f);
+            Vector3 KnockbackValue = (StateMachine.transform.forward * 4.5f + StateMachine.transform.up * 4.5f) ;
 
-            targetStateMachine.ApplyHitDamaged(KnockbackValue, 0.2f, StateMachine);
+            targetStateMachine.ApplyHitDamaged(KnockbackValue, 0, StateMachine);
 
 
         }
