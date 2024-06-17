@@ -223,8 +223,9 @@ namespace LGProject.PlayerState
                     }
                     break;
                 case ActorType.AI:
-                    if(!CollisionObserver.CallUnderPlatformZone(ZoneType.Platform, transform.position + Vector3.down * 0.25f))
+                    if(!StateMachine.CheckFlightAI() && !CollisionObserver.CallUnderPlatformZone(ZoneType.Platform, transform.position + Vector3.down * 0.25f))
                     {
+                        //StateMachine.animator.SetTrigger("Jump1");
                         StateMachine.IsGrounded = false;
                         StateMachine.collider.isTrigger = true;
                     }

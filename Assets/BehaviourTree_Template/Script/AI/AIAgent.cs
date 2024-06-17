@@ -34,7 +34,7 @@ namespace BehaviourTree
         [HideInInspector] public int NormalMovePercent;
 
         // 상대방
-        [HideInInspector] public Transform player;
+        public Transform player;
 
         #region magicMathods
         [System.Obsolete]
