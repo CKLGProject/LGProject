@@ -61,7 +61,7 @@ Material:
     - _CastShadows: 0
     - _Cull: 2
     - _DstBlend: 10
-    - _Edge_Blur_Stength: 3
+    - _Edge_Blur_Stength: 2.5
     - _Edge_Fresnel_Power: 5
     - _Edge_Intensity: 20
     - _Fresnel_Power: 5

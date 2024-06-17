@@ -61,7 +61,7 @@ Material:
     - _CastShadows: 0
     - _Cull: 2
     - _DstBlend: 10
-    - _Edge_Blur_Stength: 3
+    - _Edge_Blur_Stength: 1.5
     - _Edge_Fresnel_Power: 5
     - _Edge_Intensity: 20
     - _Fresnel_Power: 5
@@ -71,18 +71,17 @@ Material:
     - _SrcBlend: 5
     - _Surface: 1
     - _Wave_Intensity: 2
-    - _Wave_Lerp: 0.2
+    - _Wave_Lerp: 0.15
     - _ZTest: 4
     - _ZWrite: 0
     - _ZWriteControl: 0
     m_Colors:
-    - _Base_Color: {r: 0.48235294, g: 0.15671264, b: 0.13725491, a: 1}
-    - _Edge_Color: {r: 34.404903, g: 1.361041, b: 0, a: 0}
+    - _Base_Color: {r: 0.46226418, g: 0.114698805, b: 0.09376113, a: 1}
+    - _Edge_Color: {r: 9.3166485, g: 0.8722849, b: 0, a: 0}
     - _Main_Color: {r: 55.61987, g: 2.6402063, b: 0, a: 0}
     - _Panner_Speed: {r: 0.1, g: -0.3, b: 0, a: 0}
     - _Wave_Tiling: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
-  m_AllowLocking: 1
 --- !u!114 &7791796058952899131
 MonoBehaviour:
   m_ObjectHideFlags: 11
