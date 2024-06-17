@@ -29,8 +29,11 @@ public class ChangeImage : MonoBehaviour
         {
             if (characterByImage.CharacterType == CharacterType)
             {
-                foreach (Image targetImage in targetImages) 
+                foreach (Image targetImage in targetImages)
+                {
                     targetImage.sprite = characterByImage.CharacterProfileImage;
+                    targetImage.transform.localScale = characterByImage.isFlip ? new Vector3(-1, 1, 1) : Vector3.one;
+                }
             }
         }
     }
@@ -41,4 +44,5 @@ public class CharacterByImage
 {
     public ECharacterType CharacterType;
     public Sprite CharacterProfileImage;
+    public bool isFlip;
 }
