@@ -4,17 +4,17 @@ using R3;
 using System;
 using UnityEngine;
 
-[RequireComponent(typeof(PatCaptureView))]
-[RequireComponent(typeof(PatCaptureModel))]
-public class PatCapturePresenter : MonoBehaviour
+[RequireComponent(typeof(PetCaptureView))]
+[RequireComponent(typeof(PetCaptureModel))]
+public class PetCapturePresenter : MonoBehaviour
 {
-    private PatCaptureView _view;
-    private PatCaptureModel _model;
+    private PetCaptureView _view;
+    private PetCaptureModel _model;
 
     private void Start()
     {
-        _view = GetComponent<PatCaptureView>();
-        _model = GetComponent<PatCaptureModel>();
+        _view = GetComponent<PetCaptureView>();
+        _model = GetComponent<PetCaptureModel>();
 
         Observable.Timer(TimeSpan.FromSeconds(3))
             .Subscribe(_ => _view.SetActiveInformationMessageText(false)).AddTo(this);

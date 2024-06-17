@@ -11,12 +11,13 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.SceneSystem;
 using UnityEngine.Singleton;
 using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
 using TrackingState = UnityEngine.XR.ARSubsystems.TrackingState;
 
-public class PatCaptureView : MonoBehaviour
+public class PetCaptureView : MonoBehaviour
 {
     [Header("AR")] [SerializeField] private Camera arCamera;
     [SerializeField] private ARSession arSession;
@@ -42,6 +43,10 @@ public class PatCaptureView : MonoBehaviour
     [Header("Timeline")] [SerializeField] private PlayableDirector fxDirector;
     [SerializeField] private LightController lightController;
 
+    [Header("자동 로비 이동 시간")]
+    [SerializeField] private SceneLoader lobbySceneLoader;
+    [SerializeField] private float backLobbyTime = 2.5f; 
+    
     [SerializeField] private List<ScanData> scanDataList;
     [SerializeField] private Transform objectContent;
     [SerializeField] private ObjectRotation objectRotation;
@@ -342,5 +347,22 @@ public class PatCaptureView : MonoBehaviour
     {
         guideMessageGroup.alpha = isActive ? 1 : 0;
         guideMessageText.gameObject.SetActive(isActive);
+    }
+
+    /// <summary>
+    /// 로비로 자동 이동하는 메서드 입니다.
+    /// </summary>
+    public void AutoBackMoveLobby()
+    {
+        BackLobbyTask().Forget();
+    }
+    
+    /// <summary>
+    /// 로비로 이동하는 Task 입니다.
+    /// </summary>
+    private async UniTaskVoid BackLobbyTask()
+    {
+        await UniTask.Delay(TimeSpan.FromSeconds(backLobbyTime));
+        lobbySceneLoader.AllowCompletion();
     }
 }

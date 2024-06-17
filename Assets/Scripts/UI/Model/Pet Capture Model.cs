@@ -2,7 +2,7 @@ using R3;
 using UnityEngine;
 
 
-public class PatCaptureModel : MonoBehaviour
+public class PetCaptureModel : MonoBehaviour
 {
     private ReactiveProperty<bool> _canQRCodeCapture = new(false);
     public Observable<bool> CanQRCodeCaptureAsObservable => _canQRCodeCapture.AsObservable();

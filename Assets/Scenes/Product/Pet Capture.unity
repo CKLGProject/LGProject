@@ -617,7 +617,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 83dfa7d82ba8cba4e879c685ad137355, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2d1887b1538a84dfeb88ba1e6d635366, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1264,6 +1264,8 @@ MonoBehaviour:
   scanUI: {fileID: 158274784}
   fxDirector: {fileID: 2143194893}
   lightController: {fileID: 1201955953}
+  lobbySceneLoader: {fileID: 681562202}
+  backLobbyTime: 2.5
   scanDataList:
   - ObjectName: Oven
     MachineObject: {fileID: 2090208312}
@@ -1314,6 +1316,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 96422983901965d4bba138685ba45200, type: 2}
     - {fileID: 11400000, guid: 27381219349e2d74ba56f4cd3ffc60b2, type: 2}
     - {fileID: 11400000, guid: a9378c76cb8054c98bb6cab31aa13b68, type: 2}
+    - {fileID: 11400000, guid: 28f1ed6bd64c340af9154a6ed26d694f, type: 2}
     m_Events:
     - m_PersistentCalls:
         m_Calls:
@@ -1352,6 +1355,20 @@ MonoBehaviour:
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 438279082}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: 
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: 
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -5222,7 +5239,7 @@ PlayableDirector:
   m_GameObject: {fileID: 2143194891}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: 17237d779c0564867b9349ddac8d65e0, type: 2}
+  m_PlayableAsset: {fileID: 0}
   m_InitialState: 0
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
