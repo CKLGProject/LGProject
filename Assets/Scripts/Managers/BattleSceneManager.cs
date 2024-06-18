@@ -114,10 +114,12 @@ namespace LGProject
             {
                 item.SetActive(false);
             }
-            foreach(var item in AI)
-            {
-                item.SetActive(false);
-            }
+            
+            // 아래 코드 활성화 시켜줘야함.
+            //foreach(var item in AI)
+            //{
+            //    item.SetActive(false);
+            //}
 
 
 
