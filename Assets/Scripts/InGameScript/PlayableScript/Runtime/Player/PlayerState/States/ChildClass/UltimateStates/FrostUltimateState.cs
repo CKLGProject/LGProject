@@ -34,6 +34,7 @@ namespace LGProject.PlayerState
             StateMachine.playable.effectManager.Play(EffectManager.EFFECT.UltimatePreCenter).Forget();
             StateMachine.playable.effectManager.Play(EffectManager.EFFECT.UltimatePreRHand).Forget();
             _isMove = false;
+            StateMachine.battleModel.ShowCutScene(Data.ActorType.User, true);
             WaitStart().Forget();
             Time.timeScale = 0.1f;
         }
@@ -74,7 +75,10 @@ namespace LGProject.PlayerState
             StateMachine.playable.effectManager.Stop(EffectManager.EFFECT.UltimatePreCenter);
             StateMachine.IsUseUltimate = false;
             // 내리찍을 때 주변 적에게 피해를 입히고 넉백시킴.
+            StateMachine.playable.ForcusUltimateUser(1.5f);
             ShockWake();
+            await UniTask.Delay(TimeSpan.FromSeconds(2f), DelayType.Realtime);
+            StateMachine.battleModel.ShowCutScene(Data.ActorType.User, false);
         }
 
         // 프로스트가 내리찍을 때 작동하는 기능 

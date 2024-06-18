@@ -208,11 +208,25 @@ namespace LGProject.PlayerState
             }
         }
 
+
+        public void ForcusUltimateUser(float forcus)
+        {
+            CollisionObserver.GetCameraZone().UltimateForcus(transform ,forcus);
+        }
+
+        /// <summary>
+        /// 해당 위치에 플랫폼이 존재하는지 체크하는 매서드
+        /// </summary>
+        /// <param name="checkPoint"></param>
+        /// <returns></returns>
         public bool CheckPointCollision(Vector3 checkPoint)
         {
             return CollisionObserver.CallUnderPlatformZone(ZoneType.Platform, checkPoint);
         }
 
+        /// <summary>
+        /// 플랫폼을 체크하여 바닥과 맞닿아있는지 체크하는 매서드
+        /// </summary>
         public void UnderPlatformCheck()
         {
             switch (ActorType)

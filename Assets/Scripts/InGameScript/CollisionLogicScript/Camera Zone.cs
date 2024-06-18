@@ -37,7 +37,6 @@ namespace LGProject.CollisionZone
 
         public void SubTarget(Transform pTransform)
         {
-            //Debug.Log(TargetGroup.GetComponent<CinemachineTargetGroup>().FindMember(pTransform));
             int num = _targetGroup.FindMember(pTransform);
             if(num >= 0)
                 _targetGroup.m_Targets[num].target = null;
@@ -45,7 +44,6 @@ namespace LGProject.CollisionZone
 
         public void AddTarget(Transform pTransform)
         {
-            //Debug.Log(TargetGroup.GetComponent<CinemachineTargetGroup>().FindMember(pTransform));
             if (_targetGroup.FindMember(pTransform) == -1)
             {
                 for (int i = 0; i < _targetGroup.m_Targets.Length; i++)
@@ -71,6 +69,19 @@ namespace LGProject.CollisionZone
                 }
             }
         }
+
+        public void UltimateForcus(Transform player, float weight)
+        {
+            for (int i = 0; i < _targetGroup.m_Targets.Length; i++)
+            {
+                if (_targetGroup.m_Targets[i].target == player)
+                {
+                    _targetGroup.m_Targets[i].weight = weight;
+                    return;
+                }
+            }
+        }
+
     }
 
 }

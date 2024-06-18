@@ -16,6 +16,8 @@ namespace LGProject.PlayerState
             
             // 얼티밋을 사용하면 게이지가 닮.
             StateMachine.playable.SetUltimateGage(0);
+            // 카메라 확대 
+            StateMachine.playable.ForcusUltimateUser(5f);
         }
 
         public override void Exit()
