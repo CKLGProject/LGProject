@@ -69,7 +69,7 @@ namespace BehaviourTree
 
         private void Start()
         {
-            player = BattleSceneManager.Instance.GetPlayers();
+            player = BattleSceneManager.Instance.GetUserPlayer();
             InitEffectManager();
             SetupJumpVariables();
             effectManager.InitParticles();
