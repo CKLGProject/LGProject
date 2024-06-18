@@ -2,6 +2,7 @@ using Data;
 using UnityEngine;
 using UnityEngine.Singleton;
 using LGProject.CollisionZone;
+using UnityEngine.Serialization;
 
 namespace LGProject
 {
@@ -9,14 +10,13 @@ namespace LGProject
     {
         public static BattleSceneManager Instance { get; private set; }
 
-        public GameObject[] playable;
-        public GameObject[] AI;
+        [FormerlySerializedAs("playable")] public GameObject[] playableList;
+        [FormerlySerializedAs("AI")] public GameObject[] AIList;
 
-        public GameObject OnlinePlayer;
+        public GameObject OnlinePlayer { get; private set; }
         public CameraZone CameraZone;
 
         public int PlayCount { get; private set; }
-
 
         public bool IsStart { get; private set; }
         public bool IsEnd { get; private set; }
@@ -38,108 +38,37 @@ namespace LGProject
             }
         }
 
-        /// <summary>
-        /// 유저 캐릭터에 알맞게 유저 캐릭터를 생성합니다.
-        /// </summary>
-        /// <param name="characterType"></param>
-        public void InitUserCharacter(ECharacterType characterType)
-        {
-                switch (characterType)
-                {
-                    case ECharacterType.Hit:
-                        OnlinePlayer = playable[0];
-                        break;
-                    case ECharacterType.Frost:
-                        OnlinePlayer = playable[1];
-                        break;
-                    case ECharacterType.Kane:
-                        OnlinePlayer = playable[2];
-                        break;
-                    case ECharacterType.None:
-                    case ECharacterType.Storm:
-                    case ECharacterType.E:
-                    default:
-#if UNITY_EDITOR
-                        Debug.LogError("유저 캐릭터 설정에 이슈가 발생하였습니다.");        
-#endif
-                        OnlinePlayer = playable[0];
-                        break;
-                }
-                
-                OnlinePlayer.transform.name = "Player";
-                OnlinePlayer.gameObject.SetActive(true);
-        }
-
-        /// <summary>
-        /// AI의 정보를 불러와 생성해주는 코드
-        /// 예시는 위처럼 작업해주길 바람.
-        /// </summary>
-        public void InitAICharacter(ECharacterType characterType)
-        {
-            // 어...떻게 적으라는 거죠?? 😫
-            
-//             switch (characterType)
-//             {
-//                 case ECharacterType.Hit:
-//                     OnlinePlayer = playable[0];
-//                     break;
-//                 case ECharacterType.Frost:
-//                     OnlinePlayer = playable[1];
-//                     break;
-//                 case ECharacterType.Kane:
-//                     OnlinePlayer = playable[2];
-//                     break;
-//                 case ECharacterType.None:
-//                 case ECharacterType.Storm:
-//                 case ECharacterType.E:
-//                 default:
-// #if UNITY_EDITOR
-//                     Debug.LogError("유저 캐릭터 설정에 이슈가 발생하였습니다.");        
-// #endif
-//                     OnlinePlayer = playable[0];
-//                     break;
-//             }
-//                 
-//             OnlinePlayer.transform.name = "Player";
-//             OnlinePlayer.gameObject.SetActive(true);
-        }
-
         /*****************************************************
          * Private Methods
          * **/
 
         private void Awake()
         {
-            if (Instance == null) 
+            if (Instance == null)
                 Instance = this;
             else
                 Destroy(gameObject);
             
-
             if (PlayerPrefs.HasKey("PlayCount"))
-            {
                 PlayerPrefs.GetInt("PlayCount", PlayCount);
-            }
             else
             {
-                Debug.Log("Not Have Data");
+                Debug.LogWarning("Not Have Data");
                 PlayCount = 1;
             }
 
-            foreach (var item in playable)
-            {
-                item.SetActive(false);
-            }
+            // 유저 캐릭터 전부 비활성화
+            foreach (GameObject playable in playableList) 
+                playable.SetActive(false);
             
-            // 아래 코드 활성화 시켜줘야함.
-            //foreach(var item in AI)
-            //{
-            //    item.SetActive(false);
-            //}
-            
+            // AI 캐릭터 전부 비활성화
+            foreach(GameObject ai in AIList) 
+                ai.SetActive(false);
+
+            // 유저와 AI 캐릭터 활성화 진행
             ECharacterType userCharacterType = Singleton.Instance<GameManager>().GetCharacter(ActorType.User);
             ECharacterType aiCharacterType = Singleton.Instance<GameManager>().GetCharacter(ActorType.AI);
-            
+
             InitUserCharacter(userCharacterType);
             InitAICharacter(aiCharacterType);
         }
@@ -154,7 +83,6 @@ namespace LGProject
             // 시작하면 카메라를 옮겨줌
             CameraZone.ForcusPlayer(OnlinePlayer.transform);
             PlayCount = 2;
-            
         }
 
         /// <summary>
@@ -167,6 +95,70 @@ namespace LGProject
             // 게임이 종료되면 게임 횟수를 체크하여 난이도별 AI를 삽입한다.
             // 패턴은 약 - 약 - 강 현재는 이렇게 설정 예정.
             PlayerPrefs.SetInt("PlayCount", PlayCount);
+        }
+
+        /// <summary>
+        /// 유저 캐릭터에 알맞게 캐릭터를 생성합니다.
+        /// </summary>
+        /// <param name="characterType">활성화 시킬 캐릭터 타입</param>
+        private void InitUserCharacter(ECharacterType characterType)
+        {
+            switch (characterType)
+            {
+                case ECharacterType.Hit:
+                    OnlinePlayer = playableList[0];
+                    break;
+                case ECharacterType.Frost:
+                    OnlinePlayer = playableList[1];
+                    break;
+                case ECharacterType.Kane:
+                    OnlinePlayer = playableList[2];
+                    break;
+                case ECharacterType.None:
+                case ECharacterType.Storm:
+                case ECharacterType.E:
+                default:
+#if UNITY_EDITOR
+                    Debug.LogError("유저 캐릭터 설정에 이슈가 발생하였습니다.");
+#endif
+                    OnlinePlayer = playableList[0];
+                    break;
+            }
+
+            OnlinePlayer.name = "Player";
+            OnlinePlayer.gameObject.SetActive(true);
+        }
+
+        /// <summary>
+        /// AI에 알맞게 캐릭터를 생성합니다.
+        /// </summary>
+        /// <param name="characterType">활성화 시킬 캐릭터 타입</param>
+        private void InitAICharacter(ECharacterType characterType)
+        {
+            // AI 캐릭터 생성
+            GameObject targetAI;
+            switch (characterType)
+            {
+                case ECharacterType.Hit:
+                    targetAI = AIList[0];
+                    break;
+                case ECharacterType.Frost:
+                    targetAI = AIList[1];
+                    break;
+                case ECharacterType.Kane:
+                case ECharacterType.None:
+                case ECharacterType.Storm:
+                case ECharacterType.E:
+                default:
+#if UNITY_EDITOR
+                    Debug.LogError("유저 캐릭터 설정에 이슈가 발생하였습니다.");
+#endif
+                    targetAI = AIList[0];
+                    break;
+            }
+
+            targetAI.name = "AI";
+            targetAI.SetActive(true);
         }
     }
 }
