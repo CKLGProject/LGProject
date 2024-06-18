@@ -54,7 +54,6 @@ namespace LGProject.PlayerState
                 StateMachine.IsUltimate = true;
                 StateMachine.ChangeState(StateMachine.idleState);
             }
-
         }
 
         public override void PhysicsUpdate()
@@ -62,11 +61,6 @@ namespace LGProject.PlayerState
             base.PhysicsUpdate();
 
         }
-
-        //IEnumerator CutScenePlay()
-        //{
-
-        //}
 
         protected async UniTaskVoid CutSceneAnimation()
         {
@@ -89,6 +83,7 @@ namespace LGProject.PlayerState
             //StateMachine.battleModel.ShowCutScene(Data.ActorType.User, false);
 
             UltimateAttack();
+            StateMachine.playable.ForcusUltimateUser(1.5f);
             await UniTask.Delay(TimeSpan.FromSeconds(2f), DelayType.Realtime);
             StateMachine.battleModel.ShowCutScene(Data.ActorType.User, false);
         }
