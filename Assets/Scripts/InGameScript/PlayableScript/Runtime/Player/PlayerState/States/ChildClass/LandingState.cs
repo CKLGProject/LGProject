@@ -38,7 +38,7 @@ namespace LGProject.PlayerState
             _currentTimer += Time.deltaTime;
             if (_currentTimer > 0.25f)
             {
-                if (Mathf.Abs(StateMachine.moveAction.ReadValue<float>()) > 0.2f)
+                if (Mathf.Abs(StateMachine.moveAction.ReadValue<Vector2>().x) > 0.2f)
                     StateMachine.ChangeState(StateMachine.moveState);
                 else
                     StateMachine.ChangeState(StateMachine.idleState);

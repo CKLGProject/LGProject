@@ -57,21 +57,21 @@ namespace LGProject.PlayerState
             {
                 // 바로 앞에 적이 있으면 더이상 이동하지 않음(애니메이션은 재생)
                 // 머리와 다리쪽에서 Ray를 쏠 예정
-                StateMachine.physics.velocity += Vector3.right * (StateMachine.moveAction.ReadValue<float>());
+                StateMachine.physics.velocity += Vector3.right * StateMachine.moveAction.ReadValue<Vector2>().x;
                 
                 Vector3 left = new Vector3((StateMachine.transform.position + Vector3.right).x + 2f,
                     StateMachine.transform.position.y, StateMachine.transform.position.z);
                 Vector3 right = new Vector3((StateMachine.transform.position + Vector3.left).x - 2f,
                     StateMachine.transform.position.y, StateMachine.transform.position.z);
-                if(StateMachine.moveAction.ReadValue<float>() < 0)
+                if(StateMachine.moveAction.ReadValue<Vector2>().x < 0)
                     StateMachine.transform.LookAt(right);
-                if (StateMachine.moveAction.ReadValue<float>() > 0)
+                if (StateMachine.moveAction.ReadValue<Vector2>().x > 0)
                     StateMachine.transform.LookAt(left);
                 //Vector3 euler = StateMachine.transform.GetChild(1).GetComponent<RectTransform>().localRotation.eulerAngles;
                 //Debug.Log($"{euler} / {StateMachine.transform.GetChild(1).GetComponent<RectTransform>().transform.name}");
                 //StateMachine.transform.GetChild(1).GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, StateMachine.moveAction.ReadValue<float>() < 0 ? 90 : -90, 0);
             }
-            if (StateMachine.moveAction.ReadValue<float>() == 0)
+            if (StateMachine.moveAction.ReadValue<Vector2>().x == 0)
                 StateMachine.StandingVelocity();
         }
     }

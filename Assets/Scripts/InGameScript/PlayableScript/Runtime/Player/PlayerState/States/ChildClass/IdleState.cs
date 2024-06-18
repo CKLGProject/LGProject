@@ -11,9 +11,8 @@ namespace LGProject.PlayerState
         private static readonly int Attack = Animator.StringToHash("Attack");
         private static readonly int Landing = Animator.StringToHash("Landing");
 
-        public IdleState(PlayerStateMachine stateMachine) : base (stateMachine)
+        public IdleState(PlayerStateMachine stateMachine) : base(stateMachine)
         {
-
         }
 
         public override void Enter()
@@ -32,20 +31,21 @@ namespace LGProject.PlayerState
             //base.LogicUpdate();
             if (Damaged())
                 return;
+
             // 키 입력을 대기 받으면 상태가 변경됨.
-            if (Mathf.Abs(StateMachine.moveAction.ReadValue<float>()) > 0.2f )
+            if (Mathf.Abs(StateMachine.moveAction.ReadValue<Vector2>().x) > 0.2f)
             {
-                    StateMachine.ChangeState(StateMachine.moveState);
+                StateMachine.ChangeState(StateMachine.moveState);
                 return;
             }
 
-            if (StateMachine.attackAction.triggered)
+            if (StateMachine.attackAction.WasPressedThisFrame())
             {
                 AttackLogic();
                 return;
             }
 
-            if (StateMachine.jumpAction.triggered && StateMachine.JumpInCount < 2)
+            if (StateMachine.jumpAction.WasPressedThisFrame() && StateMachine.JumpInCount < 2)
             {
                 //Debug.Log("idleJump");
                 StateMachine.ChangeState(StateMachine.jumpState);
@@ -53,7 +53,7 @@ namespace LGProject.PlayerState
             }
 
             // 점프 중에는 한 번만 가능하게 한다.
-            if (StateMachine.guardAction.triggered && StateMachine.GuardGage > 0)
+            if (StateMachine.guardAction.WasPressedThisFrame() && StateMachine.GuardGage > 0)
             {
                 StateMachine.ChangeState(StateMachine.guardState);
                 return;
@@ -61,7 +61,7 @@ namespace LGProject.PlayerState
 
             //bool Down = guardAction.ReadValue<bool>();
 
-            if (StateMachine.downAction.triggered)
+            if (StateMachine.downAction.WasPressedThisFrame())
             {
                 Debug.Log($"Down = {true}");
             }
@@ -70,7 +70,7 @@ namespace LGProject.PlayerState
         private void AttackLogic()
         {
             // 땅에 붙어있으면서 공격을 진행하면?
-            if(StateMachine.playable.UltimateGage >= 100)
+            if (StateMachine.playable.UltimateGage >= 100)
             {
                 StateMachine.ChangeState(StateMachine.ultimateState);
                 return;
@@ -81,29 +81,24 @@ namespace LGProject.PlayerState
                 StateMachine.ChangeState(StateMachine.attackState);
                 return;
             }
-            
+
             // 공중에서 공격하면?
-            if(!StateMachine.IsGrounded)
+            if (!StateMachine.IsGrounded)
             {
                 StateMachine.ChangeState(StateMachine.jumpAttackState);
                 return;
             }
-            
         }
 
         public override void PhysicsUpdate()
         {
             // 땅에 닿은지 체크하여 jump Count를 0으로 변경.
             base.PhysicsUpdate();
-
         }
 
         public override void Exit()
         {
             // 나갈 떄 불필요한 정보들을 정리.
-
         }
-
     }
-
 }

@@ -28,7 +28,6 @@ namespace LGProject.PlayerState
         public FMODAudioSource AudioSource;
         public LocalKeyList AudioList;
         public Rigidbody physics;
-        public PlayerInput playerInput;
         public Collider collider;
         public BattleModel battleModel;
 
@@ -136,7 +135,6 @@ namespace LGProject.PlayerState
             psm.AudioList = Object.FindAnyObjectByType<LocalKeyList>();
             psm.animator = psm.playable.Animator;
             psm.physics = obj.GetComponent<Rigidbody>();
-            psm.playerInput = obj.GetComponent<PlayerInput>();
             psm.collider = obj.GetComponent<Collider>();
             psm.battleModel = Object.FindAnyObjectByType<BattleModel>();
             psm.CharacterType = psm.playable.CharacterType;
@@ -144,11 +142,11 @@ namespace LGProject.PlayerState
             psm.IsGuard = false;
             try
             {
-                psm.moveAction = psm.playerInput.actions["Move"];
-                psm.attackAction = psm.playerInput.actions["Attack"];
-                psm.jumpAction = psm.playerInput.actions["Jump"];
-                psm.downAction = psm.playerInput.actions["Down"];
-                psm.guardAction = psm.playerInput.actions["Guard"];
+                psm.moveAction = InputSystem.actions["Move"];
+                psm.attackAction = InputSystem.actions["Attack"];
+                psm.jumpAction = InputSystem.actions["Jump"];
+                psm.downAction = InputSystem.actions["Down"];
+                psm.guardAction = InputSystem.actions["Guard"];
 
                 psm.idleState = new IdleState(psm);
                 psm.moveState = new MoveState(psm, ref psm.playable.DashSpeed, psm.playable.MaximumSpeed);

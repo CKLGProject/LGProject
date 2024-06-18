@@ -9,7 +9,7 @@
                     "name": "Move",
                     "type": "Value",
                     "id": "fe0f9b1b-4ae4-47c1-bbfb-af905fa26fce",
-                    "expectedControlType": "Axis",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -18,7 +18,7 @@
                     "name": "Down",
                     "type": "Button",
                     "id": "7b83c9f3-7b3a-42f1-982a-f02f030cb8b5",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -27,7 +27,7 @@
                     "name": "Jump",
                     "type": "Button",
                     "id": "e79b6a8b-0471-4239-a776-866da8d10878",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -53,9 +53,9 @@
             ],
             "bindings": [
                 {
-                    "name": "AD",
+                    "name": "WASD",
                     "id": "81fb4027-646b-4a44-acb6-178a24751c25",
-                    "path": "1DAxis",
+                    "path": "2DVector",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -64,59 +64,59 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "Negative",
+                    "name": "Up",
                     "id": "6aa5dd10-f363-4b35-bb16-80d53dd5a2c0",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Down",
+                    "id": "39ef6f9b-0ef1-43d1-9dc2-ffd6f4728878",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Left",
+                    "id": "94b8c008-88a8-4e28-8fed-ed8c860bd170",
                     "path": "<Keyboard>/leftArrow",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard",
+                    "groups": "",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "Positive",
-                    "id": "39ef6f9b-0ef1-43d1-9dc2-ffd6f4728878",
+                    "name": "Right",
+                    "id": "97afb29c-eb23-49d4-8667-b0023254f51a",
                     "path": "<Keyboard>/rightArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "LStick",
-                    "id": "5b61ea48-e9d1-4f38-95f7-700fe52fc70e",
-                    "path": "1DAxis",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Move",
-                    "isComposite": true,
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "8f23f691-5681-48de-90bb-7fadb42946ee",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "StickDeadzone(min=0.125,max=0.125)",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
                     "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "16d24c4e-a35d-44d4-920a-93dd93ad3eba",
-                    "path": "<Gamepad>/leftStick/left",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "04cd91ee-4d49-496f-85fd-1228ca526bf2",
-                    "path": "<Gamepad>/leftStick/right",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
                 },
                 {
                     "name": "",
@@ -132,7 +132,7 @@
                 {
                     "name": "",
                     "id": "bef96786-06b7-4ff8-92d4-15e0ff9d482f",
-                    "path": "<Gamepad>/buttonEast",
+                    "path": "<Gamepad>/leftTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
@@ -143,7 +143,7 @@
                 {
                     "name": "",
                     "id": "28d21aef-fe3b-41ee-b725-1d923cc86499",
-                    "path": "<Gamepad>/buttonSouth",
+                    "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
@@ -187,7 +187,7 @@
                 {
                     "name": "",
                     "id": "55ce1a97-2757-42d3-9dd5-ebd5d92c380c",
-                    "path": "<Gamepad>/leftStick/up",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",

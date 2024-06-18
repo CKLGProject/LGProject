@@ -22,7 +22,7 @@ namespace LGProject.PlayerState
             base.Enter();
 
             // 방향 판정
-            StateMachine.playable.directionX = StateMachine.moveAction.ReadValue<float>() >= 0.1f ? true : false;
+            StateMachine.playable.directionX = StateMachine.moveAction.ReadValue<Vector2>().x >= 0.1f ? true : false;
         }
 
         public override void Exit()
@@ -41,7 +41,7 @@ namespace LGProject.PlayerState
             //if (StateMachine.IsKnockback || StateMachine.IsDamaged)
             //    return;
 
-            float moveThreshold = Mathf.Abs(StateMachine.moveAction.ReadValue<float>());
+            float moveThreshold = Mathf.Abs(StateMachine.moveAction.ReadValue<Vector2>().x);
             StateMachine.animator.SetFloat(Run, moveThreshold);
             if (StateMachine.IsGrounded && !_isPlayingMoveEffect)
             {

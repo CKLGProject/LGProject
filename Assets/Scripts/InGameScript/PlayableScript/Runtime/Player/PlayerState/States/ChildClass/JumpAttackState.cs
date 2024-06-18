@@ -52,11 +52,11 @@ namespace LGProject.PlayerState
             if (_damageInCount == false)
                 AttackJudge();
 
-            if (Mathf.Abs(StateMachine.moveAction.ReadValue<float>()) >= 0.2f)
+            if (Mathf.Abs(StateMachine.moveAction.ReadValue<Vector2>().x) >= 0.2f)
             {
                 // 진행 방향에 적이 있어? 없으면 이동
                 if (StateMachine.CheckEnemy() == null && StateMachine.physics.velocity.x <= _maximumSpeed && StateMachine.physics.velocity.x >= -_maximumSpeed)
-                    StateMachine.physics.velocity += Vector3.right * (StateMachine.moveAction.ReadValue<float>());
+                    StateMachine.physics.velocity += Vector3.right * StateMachine.moveAction.ReadValue<Vector2>().x;
             }
             else
             {

@@ -59,7 +59,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 0.5019608}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -173,7 +173,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &2053305439726512198
 MonoBehaviour:
@@ -268,7 +268,7 @@ PrefabInstance:
     - target: {fileID: 114344768413473294, guid: 05f32eddd3e41fd4597ada617b785928,
         type: 3}
       propertyPath: m_ControlPath
-      value: <Gamepad>/buttonSouth
+      value: <Gamepad>/rightTrigger
       objectReference: {fileID: 0}
     - target: {fileID: 114826362001716654, guid: 05f32eddd3e41fd4597ada617b785928,
         type: 3}
@@ -578,7 +578,7 @@ PrefabInstance:
     - target: {fileID: 114344768413473294, guid: 05f32eddd3e41fd4597ada617b785928,
         type: 3}
       propertyPath: m_ControlPath
-      value: <Gamepad>/buttonEast
+      value: <Gamepad>/buttonSouth
       objectReference: {fileID: 0}
     - target: {fileID: 114826362001716654, guid: 05f32eddd3e41fd4597ada617b785928,
         type: 3}
@@ -738,7 +738,7 @@ PrefabInstance:
     - target: {fileID: 114344768413473294, guid: 05f32eddd3e41fd4597ada617b785928,
         type: 3}
       propertyPath: m_ControlPath
-      value: <Gamepad>/buttonEast
+      value: <Gamepad>/leftTrigger
       objectReference: {fileID: 0}
     - target: {fileID: 114826362001716654, guid: 05f32eddd3e41fd4597ada617b785928,
         type: 3}

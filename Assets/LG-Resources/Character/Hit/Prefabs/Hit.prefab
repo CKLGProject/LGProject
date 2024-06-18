@@ -88,7 +88,6 @@ GameObject:
   - component: {fileID: 6559117602054936325}
   - component: {fileID: 1335163795397542594}
   - component: {fileID: 4417936120026488029}
-  - component: {fileID: 6249669094861835219}
   - component: {fileID: 1461212728011964297}
   m_Layer: 3
   m_Name: Hit
@@ -224,37 +223,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 88
   m_CollisionDetection: 0
---- !u!114 &6249669094861835219
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6969282849394247417}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 3f532f69df74e964fab3d76fec7561f0,
-    type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: Gamepad
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!114 &1461212728011964297
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -309,6 +277,7 @@ MonoBehaviour:
     type: 3}
   _UltimatePreCenter: {fileID: 563741907048959462}
   _UltimatePre_RHand_FX: {fileID: 3953709074532442758}
+  _UltimatePre_Point006: {fileID: 0}
   playList: []
 --- !u!1001 &6198966323794279417
 PrefabInstance:
