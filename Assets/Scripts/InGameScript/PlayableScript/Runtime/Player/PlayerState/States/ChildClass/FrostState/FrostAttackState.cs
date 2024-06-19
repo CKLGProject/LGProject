@@ -78,8 +78,8 @@ namespace LGProject.PlayerState
 
             #region 오디오 출력
 
-            if (StateMachine.AudioList.TryFindClip("Punch", out EventReference clip))
-                StateMachine.AudioSource.PlayOneShot(clip);
+            // if (StateMachine.AudioList.TryFindClip("Punch", out EventReference clip))
+            //     StateMachine.AudioSource.PlayOneShot(clip);
 
             #endregion
         }

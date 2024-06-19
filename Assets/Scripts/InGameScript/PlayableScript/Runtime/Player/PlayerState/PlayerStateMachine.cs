@@ -139,7 +139,7 @@ namespace LGProject.PlayerState
             psm.CharacterType = psm.playable.CharacterType;
             psm.IsGrounded = true;
             psm.IsGuard = false;
-            
+
             try
             {
                 psm.moveAction = InputSystem.actions["Move"];
@@ -180,69 +180,68 @@ namespace LGProject.PlayerState
 
             return psm;
         }
-        
-        
+
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="characterType"></param>
         /// <param name="psm"></param>
-        private static void ApplyAttackState(Data.ECharacterType characterType, PlayerStateMachine psm)
+        private static void ApplyAttackState(ECharacterType characterType, PlayerStateMachine psm)
         {
             switch (characterType)
             {
-                case Data.ECharacterType.None:
+                case ECharacterType.None:
                     psm.attackState = new AttackState(psm, ref psm.playable.FirstAttackJudgeDelay,
                         ref psm.playable.FirstAttackDelay, ref psm.playable.SecondAttackJudgeDelay,
                         ref psm.playable.SecondAttackDelay, ref psm.playable.ThirdAttackJudgeDelay,
                         ref psm.playable.ThirdAttackDelay);
                     break;
-                case Data.ECharacterType.Hit:
+                case ECharacterType.Hit:
                     psm.attackState = new AttackState(psm, ref psm.playable.FirstAttackJudgeDelay,
                         ref psm.playable.FirstAttackDelay, ref psm.playable.SecondAttackJudgeDelay,
                         ref psm.playable.SecondAttackDelay, ref psm.playable.ThirdAttackJudgeDelay,
                         ref psm.playable.ThirdAttackDelay);
                     break;
-                case Data.ECharacterType.Frost:
+                case ECharacterType.Frost:
                     psm.attackState = new FrostAttackState(psm, ref psm.playable.FirstAttackJudgeDelay,
                         ref psm.playable.FirstAttackDelay, ref psm.playable.SecondAttackJudgeDelay,
                         ref psm.playable.SecondAttackDelay, ref psm.playable.ThirdAttackJudgeDelay,
                         ref psm.playable.ThirdAttackDelay);
                     break;
-                case Data.ECharacterType.Kane:
+                case ECharacterType.Kane:
                     psm.attackState = new KaneAttackState(psm, ref psm.playable.FirstAttackJudgeDelay,
                         ref psm.playable.FirstAttackDelay, ref psm.playable.SecondAttackJudgeDelay,
                         ref psm.playable.SecondAttackDelay, ref psm.playable.ThirdAttackJudgeDelay,
                         ref psm.playable.ThirdAttackDelay);
                     break;
-                case Data.ECharacterType.Storm:
+                case ECharacterType.Storm:
                     break;
-                case Data.ECharacterType.E:
+                case ECharacterType.E:
                     break;
                 default:
                     break;
             }
         }
 
-        public static void ApplyJumpAttackState(Data.ECharacterType characterType, PlayerStateMachine psm)
+        public static void ApplyJumpAttackState(ECharacterType characterType, PlayerStateMachine psm)
         {
             switch (characterType)
             {
-                case Data.ECharacterType.None:
+                case ECharacterType.None:
                     break;
-                case Data.ECharacterType.Hit:
+                case ECharacterType.Hit:
                     psm.jumpAttackState = new JumpAttackState(psm, psm.playable.MaximumSpeed);
                     break;
-                case Data.ECharacterType.Frost:
+                case ECharacterType.Frost:
                     psm.jumpAttackState = new JumpAttackState(psm, psm.playable.MaximumSpeed);
                     break;
-                case Data.ECharacterType.Kane:
+                case ECharacterType.Kane:
                     psm.jumpAttackState = new KaneJumpAttackState(psm, psm.playable.MaximumSpeed);
                     break;
-                case Data.ECharacterType.Storm:
+                case ECharacterType.Storm:
                     break;
-                case Data.ECharacterType.E:
+                case ECharacterType.E:
                     break;
                 default:
                     break;
@@ -254,19 +253,19 @@ namespace LGProject.PlayerState
         /// </summary>
         /// <param name="characterType"></param>
         /// <param name="speed"></param>
-        public void AnimationSpeed(Data.ECharacterType characterType, float speed)
+        public void AnimationSpeed(ECharacterType characterType, float speed)
         {
             switch (characterType)
             {
-                case Data.ECharacterType.None:
+                case ECharacterType.None:
                     break;
-                case Data.ECharacterType.Hit:
+                case ECharacterType.Hit:
                     animator.speed = speed;
                     break;
-                case Data.ECharacterType.Frost:
+                case ECharacterType.Frost:
                     animator.speed = speed;
                     break;
-                case Data.ECharacterType.Kane:
+                case ECharacterType.Kane:
                     animator.speed = speed;
                     break;
                 default:
@@ -284,7 +283,7 @@ namespace LGProject.PlayerState
                 CurrentState.GetType() == typeof(FlightState) ||
                 CurrentState.GetType() == typeof(JumpAttackState) ||
                 CurrentState.GetType() == typeof(KaneJumpAttackState) ||
-                CurrentState.GetType() == typeof(KnockbackState) || 
+                CurrentState.GetType() == typeof(KnockbackState) ||
                 CurrentState.GetType() == typeof(GuardState))
                 return true;
             return false;
@@ -308,20 +307,20 @@ namespace LGProject.PlayerState
         }
 
         // 캐릭터 별로 State맞추기
-        public void SetUltimateState(Data.ECharacterType charcterType)
+        public void SetUltimateState(ECharacterType charcterType)
         {
             switch (charcterType)
             {
-                case Data.ECharacterType.None:
+                case ECharacterType.None:
 
                     break;
-                case Data.ECharacterType.Hit:
+                case ECharacterType.Hit:
                     ultimateState = new HitUltimateState(this);
                     break;
-                case Data.ECharacterType.Frost:
+                case ECharacterType.Frost:
                     ultimateState = new FrostUltimateState(this);
                     break;
-                case Data.ECharacterType.Kane:
+                case ECharacterType.Kane:
                     ultimateState = new KaneUltimateState(this);
                     break;
                 default:
@@ -495,9 +494,9 @@ namespace LGProject.PlayerState
         /// <param name="EnemyStateMachine"></param>
         /// <param name="DamageGage"></param>
         /// <param name="dataType"></param>
-        public void ApplyHitDamaged(Vector3 velocity, float nockbackDelay, PlayerStateMachine EnemyStateMachine, float DamageGage = 8.5f)
+        public void ApplyHitDamaged(Vector3 velocity, float nockbackDelay, PlayerStateMachine EnemyStateMachine,
+            float DamageGage = 8.5f)
         {
-            
             //UpdateData(dataType);
             // 누어 있는 상태에선 데미지를 입지 않는다.
             if (IsDown || IsKnockback || IsUseUltimate || IsSuperArmor || (EnemyStateMachine != null && IsUseUltimate))
@@ -532,6 +531,7 @@ namespace LGProject.PlayerState
                 }
                 else
                 {
+                    VocaFX.PlayVoca(EVocaType.Fuck);
                     playable.effectManager.Play(EffectManager.EFFECT.Hit).Forget();
                 }
 
@@ -613,7 +613,10 @@ namespace LGProject.PlayerState
         /// </summary>
         public void BindComponents()
         {
-            VocaFX = BattleSceneSystem.Instance.UserVocaFX;
+            VocaFX = playable.ActorType == ActorType.User
+                ? BattleSceneSystem.Instance.UserVocaFX
+                : BattleSceneSystem.Instance.AIVocaFX;
+
             AudioList = Object.FindAnyObjectByType<LocalKeyList>();
             battleModel = Object.FindAnyObjectByType<BattleModel>();
         }

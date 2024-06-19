@@ -92,7 +92,6 @@ namespace LGProject.PlayerState
         public GameObject UltimateWeapon;
 
         [SerializeField] private FMODAudioSource audioSource;
-        [SerializeField] private VocaFX vocaFX;
 
         private LocalKeyList _localKeyList;
 
@@ -376,6 +375,7 @@ namespace LGProject.PlayerState
 
         private void KncokbackLandingCheck()
         {
+            StateMachine.VocaFX.PlayVoca(EVocaType.Kung);
             effectManager.Play(EffectManager.EFFECT.Knockback).Forget();
             StateMachine.animator.SetTrigger(Down);
             Vector3 velocity = StateMachine.physics.velocity;
