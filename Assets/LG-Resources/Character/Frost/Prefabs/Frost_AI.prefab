@@ -80,7 +80,6 @@ MonoBehaviour:
   DefaultWeapon: {fileID: 0}
   UltimateWeapon: {fileID: 0}
   audioSource: {fileID: 4251279420827891145}
-  vocaFX: {fileID: 0}
   directionX: 0
   jumpCurve:
     serializedVersion: 2
@@ -810,7 +809,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 35745ab693c463e45b34ec93b1a52956,
         type: 3}
       propertyPath: m_Name
-      value: CharacterB
+      value: Frost
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 35745ab693c463e45b34ec93b1a52956,
         type: 3}
