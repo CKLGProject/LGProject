@@ -1,20 +1,24 @@
 using Data;
 using UnityEngine;
-using UnityEngine.Singleton;
 using LGProject.CollisionZone;
 using UnityEngine.Serialization;
+using UnityEngine.Singleton;
 
 namespace LGProject
 {
-    public class BattleSceneManager : MonoBehaviour
+    public class BattleSceneSystem : MonoBehaviour
     {
-        public static BattleSceneManager Instance { get; private set; }
+        public static BattleSceneSystem Instance { get; private set; }
 
         [FormerlySerializedAs("playable")] public GameObject[] playableList;
         [FormerlySerializedAs("AI")] public GameObject[] AIList;
 
         public GameObject OnlinePlayer { get; private set; }
         public CameraZone CameraZone;
+
+        [Header("VocaFX")]
+        [SerializeField] private VocaFX userVocaFX;
+        [SerializeField] private VocaFX aiVocaFX;
 
         public int PlayCount { get; private set; }
 
@@ -48,7 +52,7 @@ namespace LGProject
                 Instance = this;
             else
                 Destroy(gameObject);
-            
+
             if (PlayerPrefs.HasKey("PlayCount"))
                 PlayerPrefs.GetInt("PlayCount", PlayCount);
             else
@@ -58,11 +62,11 @@ namespace LGProject
             }
 
             // 유저 캐릭터 전부 비활성화
-            foreach (GameObject playable in playableList) 
+            foreach (GameObject playable in playableList)
                 playable.SetActive(false);
-            
+
             // AI 캐릭터 전부 비활성화
-            foreach(GameObject ai in AIList) 
+            foreach (GameObject ai in AIList)
                 ai.SetActive(false);
 
             // 유저와 AI 캐릭터 활성화 진행
@@ -127,6 +131,9 @@ namespace LGProject
 
             OnlinePlayer.name = "Player";
             OnlinePlayer.gameObject.SetActive(true);
+            
+            // FX 할당
+            userVocaFX.FollowTarget = OnlinePlayer.transform;
         }
 
         /// <summary>
@@ -159,6 +166,9 @@ namespace LGProject
 
             targetAI.name = "AI";
             targetAI.SetActive(true);
+            
+            // FX 할당
+            aiVocaFX.FollowTarget = targetAI.transform;
         }
     }
 }

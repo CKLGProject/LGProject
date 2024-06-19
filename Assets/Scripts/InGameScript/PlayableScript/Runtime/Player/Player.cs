@@ -42,7 +42,7 @@ namespace LGProject.PlayerState
 
         protected virtual void Update()
         {
-            if (BattleSceneManager.Instance.IsStart)
+            if (BattleSceneSystem.Instance.IsStart)
             {
                 if (StateMachine.IsKnockback)
                 {

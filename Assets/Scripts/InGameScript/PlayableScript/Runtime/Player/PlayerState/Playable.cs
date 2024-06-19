@@ -7,13 +7,14 @@ using FMODPlus;
 
 namespace LGProject.PlayerState
 {
-
-    [RequireComponent(typeof(Rigidbody), typeof(CapsuleCollider), typeof(EffectManager)) ]
+    [RequireComponent(typeof(Rigidbody))]
+    [RequireComponent(typeof(CapsuleCollider))]
+    [RequireComponent(typeof(EffectManager))]
     public class Playable : MonoBehaviour
     {
         public Animator Animator;
         [field: SerializeField] public ActorType ActorType { get; private set; }
-        [field : SerializeField] public ECharacterType CharacterType { get; private set; }
+        [field: SerializeField] public ECharacterType CharacterType { get; private set; }
         private BattleModel battleModel;
         private CollisionObserver CollisionObserver;
 
@@ -33,41 +34,31 @@ namespace LGProject.PlayerState
 
 
         // 공격 관련 인스펙터 
-        [HideInInspector]
-        public float FirstAttackDelay = 1f;
+        [HideInInspector] public float FirstAttackDelay = 1f;
 
-        [HideInInspector]
-        public float FirstAttackJudgeDelay = 1f;
+        [HideInInspector] public float FirstAttackJudgeDelay = 1f;
 
         [HideInInspector] public float FirstAttackMovingValue = 1f;
 
-        [HideInInspector]
-        public float SecondAttackDelay = 1f;
+        [HideInInspector] public float SecondAttackDelay = 1f;
 
-        [HideInInspector]
-        public float SecondAttackJudgeDelay = 1f;
+        [HideInInspector] public float SecondAttackJudgeDelay = 1f;
 
         [HideInInspector] public float SecondAttackMovingValue = 1f;
 
-        [HideInInspector]
-        public float ThirdAttackDelay = 1f;
+        [HideInInspector] public float ThirdAttackDelay = 1f;
 
-        [HideInInspector]
-        public float ThirdAttackJudgeDelay = 1f;
+        [HideInInspector] public float ThirdAttackJudgeDelay = 1f;
 
         [HideInInspector] public float ThirdAttackMovingValue = 1f;
 
-        [HideInInspector]
-        public float DashAttackDelay = 0;
+        [HideInInspector] public float DashAttackDelay = 0;
 
-        [HideInInspector]
-        public float HitDelay = 0;
+        [HideInInspector] public float HitDelay = 0;
 
-        [HideInInspector]
-        public float DownWaitDelay = 0;
+        [HideInInspector] public float DownWaitDelay = 0;
 
-        [HideInInspector]
-        public float WakeUpDelay = 0;
+        [HideInInspector] public float WakeUpDelay = 0;
 
         [HideInInspector] public int LifePoint = 3;
 
@@ -96,9 +87,13 @@ namespace LGProject.PlayerState
         }
 
         [HideInInspector] public GameObject DefaultWeapon;
-        /*[HideInInspector]*/ public GameObject UltimateWeapon;
+
+        /*[HideInInspector]*/
+        public GameObject UltimateWeapon;
 
         [SerializeField] private FMODAudioSource audioSource;
+        [SerializeField] private VocaFX vocaFX;
+
         private LocalKeyList _localKeyList;
 
         // 공격 방향
@@ -109,16 +104,35 @@ namespace LGProject.PlayerState
 
         [HideInInspector] public EffectManager effectManager;
 
-        /*[HideInInspector]*/ public bool IsGrounded;
-        /*[HideInInspector]*/ public bool IsGuard;
-        /*[HideInInspector]*/ public bool IsJumpGuard;
-        /*[HideInInspector]*/ public bool IsDamaged;
-        /*[HideInInspector]*/ public bool IsDown;
-        /*[HideInInspector]*/ public bool IsKnockback;
-        /*[HideInInspector]*/ public bool IsJumpping;
-        /*[HideInInspector]*/ public bool IsDead;
-        /*[HideInInspector]*/ public bool IsNormalAttack;
-        /*[HideInInspector]*/ public bool IsUltimate;
+        /*[HideInInspector]*/
+        public bool IsGrounded;
+
+        /*[HideInInspector]*/
+        public bool IsGuard;
+
+        /*[HideInInspector]*/
+        public bool IsJumpGuard;
+
+        /*[HideInInspector]*/
+        public bool IsDamaged;
+
+        /*[HideInInspector]*/
+        public bool IsDown;
+
+        /*[HideInInspector]*/
+        public bool IsKnockback;
+
+        /*[HideInInspector]*/
+        public bool IsJumpping;
+
+        /*[HideInInspector]*/
+        public bool IsDead;
+
+        /*[HideInInspector]*/
+        public bool IsNormalAttack;
+
+        /*[HideInInspector]*/
+        public bool IsUltimate;
 
         float _gravity = -9.8f;
         float _groundedGravity = -0.05f;
@@ -173,17 +187,17 @@ namespace LGProject.PlayerState
                 Debug.LogError("EffectManager 없음");
             }
         }
+
         private void OnTriggerStay(Collider other)
         {
-            if(other.CompareTag("Player") && !StateMachine.IsGrounded)
+            if (other.CompareTag("Player") && !StateMachine.IsGrounded)
             {
                 // 부딧힌 대상으로부터 n만큼의 거리를 벌려야함.
                 float directionX = transform.position.x - other.transform.position.x;
                 //float radius = StateMachine.collider.GetComponent<CapsuleCollider>().radius;
                 directionX = directionX > 0 ? 4.5f : -4.5f;
-                if(Mathf.Abs(StateMachine.physics.velocity.x) == 0)
+                if (Mathf.Abs(StateMachine.physics.velocity.x) == 0)
                 {
-                    
                     // 목표지점 세팅
                     Vector3 targetPoint = other.transform.position + Vector3.right * directionX;
                     StateMachine.transform.Translate(targetPoint * Time.deltaTime);
@@ -193,6 +207,7 @@ namespace LGProject.PlayerState
                 {
                     StateMachine.physics.velocity += Vector3.right * directionX;
                 }
+
                 Vector3 zResetPos = StateMachine.transform.position;
                 zResetPos.z = -9.5f;
                 StateMachine.transform.position = zResetPos;
@@ -202,16 +217,14 @@ namespace LGProject.PlayerState
 
         private void OnTriggerExit(Collider other)
         {
-            if(other.CompareTag("Player") && !StateMachine.IsGrounded)
-            {
+            if (other.CompareTag("Player") && !StateMachine.IsGrounded)
                 StateMachine.StandingVelocity();
-            }
         }
 
 
-        public void ForcusUltimateUser(float forcus)
+        public void FocusUltimateUser(float focus)
         {
-            CollisionObserver.GetCameraZone().UltimateForcus(transform ,forcus);
+            CollisionObserver.GetCameraZone().UltimateForcus(transform, focus);
         }
 
         /// <summary>
@@ -234,21 +247,27 @@ namespace LGProject.PlayerState
                 case ActorType.None:
                     break;
                 case ActorType.User:
-                    if (!StateMachine.CheckFlight() && !CollisionObserver.CallUnderPlatformZone(ZoneType.Platform, transform.position + Vector3.down * 0.25f))
+                    if (!StateMachine.CheckFlight() &&
+                        !CollisionObserver.CallUnderPlatformZone(ZoneType.Platform,
+                            transform.position + Vector3.down * 0.25f))
                     {
                         StateMachine.ChangeState(StateMachine.flightState);
                         StateMachine.IsGrounded = false;
                         StateMachine.collider.isTrigger = true;
                     }
+
                     break;
                 case ActorType.AI:
-                    if(/*!StateMachine.CheckFlightAI() &&*/ !CollisionObserver.CallUnderPlatformZone(ZoneType.Platform, transform.position + Vector3.down * 0.25f))
+                    if ( /*!StateMachine.CheckFlightAI() &&*/
+                        !CollisionObserver.CallUnderPlatformZone(ZoneType.Platform,
+                            transform.position + Vector3.down * 0.25f))
                     {
                         //StateMachine.animator.SetTrigger("Jump1");
                         StateMachine.IsGrounded = false;
                         StateMachine.IsJumpping = true;
                         StateMachine.collider.isTrigger = true;
                     }
+
                     break;
                 default:
                     break;
@@ -257,7 +276,7 @@ namespace LGProject.PlayerState
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.layer == 9 )
+            if (other.gameObject.layer == 9)
             {
                 BulletCollisionZone bullet = other.GetComponent<BulletCollisionZone>();
                 if (bullet.Player == transform)
@@ -268,19 +287,15 @@ namespace LGProject.PlayerState
                 Debug.Log($"{bullet.DamageCount}");
                 StateMachine.ApplyHitDamaged(bullet.KnockbackVelocity, 0, StateMachine, bullet.KnockbackGage);
             }
-
         }
 
         private void OnCollisionEnter(Collision collision)
         {
-
         }
 
         // 공격 시작 
         public virtual void ShootProjectile(int AtkCount, Vector3 velocity)
         {
-
-
         }
 
         #region CheckFields
@@ -298,15 +313,17 @@ namespace LGProject.PlayerState
         //private static readonly int 
 
         #region Initialize
+
         public void InitializeInfo()
         {
-            battleModel = GameObject.Find("Battle UI System").GetComponent<BattleModel>();
-            CollisionObserver = GameObject.Find("Collision Zone System").GetComponent<CollisionObserver>();
-
+            battleModel = FindAnyObjectByType<BattleModel>();
+            CollisionObserver = FindAnyObjectByType<CollisionObserver>();
         }
+
         #endregion
 
         #region CollisionCheckMethods
+
         public void PlatformCheck()
         {
             // 일단 여기에 넣어보자
@@ -355,7 +372,6 @@ namespace LGProject.PlayerState
             StateMachine.IsJumpGuard = false;
             StateMachine.JumpInCount = 0;
             StateMachine.StandingVelocity();
-
         }
 
         private void KncokbackLandingCheck()
@@ -463,6 +479,7 @@ namespace LGProject.PlayerState
 
         private float ultimateTime = 0;
         private float ultimateFailTime = 5;
+
         protected void UpdateUltimateTimer()
         {
             if (StateMachine.IsUltimate)
@@ -470,7 +487,7 @@ namespace LGProject.PlayerState
                 ultimateTime += Time.deltaTime;
                 // 얼티밋을 사용할 때는 공격을 받을 순 있으나 다수의 기능이 추가됨.
                 // 이 상태에서는 타이머가 흘러가며 타이머가 완료되면 다수의 기능이 종료됨.
-                if(ultimateTime > ultimateFailTime)
+                if (ultimateTime > ultimateFailTime)
                 {
                     StateMachine.IsUltimate = false;
                     ultimateTime = 0;
@@ -551,12 +568,13 @@ namespace LGProject.PlayerState
             await UniTask.Delay(TimeSpan.FromSeconds(1f));
             StateMachine.IsSuperArmor = false;
         }
+
         #endregion
 
 
         public void SwitchingWeapon(bool Ultimate)
         {
-            if(Ultimate)
+            if (Ultimate)
             {
                 DefaultWeapon.SetActive(false);
                 UltimateWeapon.SetActive(true);

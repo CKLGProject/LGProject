@@ -60,7 +60,7 @@ public class BattlePresenter : MonoBehaviour
             .Where(lifePoint => lifePoint == 0)
             .Subscribe(_ =>
             {
-                BattleSceneManager.Instance.GameEnd();
+                BattleSceneSystem.Instance.GameEnd();
                 _battleView.ShowLosePopup();
             })
             .AddTo(this);
@@ -70,7 +70,7 @@ public class BattlePresenter : MonoBehaviour
             .Where(lifePoint => lifePoint == 0)
             .Subscribe(_ =>
             {
-                BattleSceneManager.Instance.GameEnd();
+                BattleSceneSystem.Instance.GameEnd();
                 _battleView.ShowWinPopup();
             })
             .AddTo(this);
@@ -113,13 +113,13 @@ public class BattlePresenter : MonoBehaviour
         this.CountdownAsObservable(BattleModel.CountMax)
             .Subscribe(
                 count => _battleModel.SetCountdown(count),
-                _ => BattleSceneManager.Instance.GameStart())
+                _ => BattleSceneSystem.Instance.GameStart())
             .AddTo(this);
 
         this.GameCountDownTimerObservable(BattleModel.TimerMax)
             .Subscribe(
                 count => _battleModel.SetTimerCountdown(count),
-                _ => BattleSceneManager.Instance.GameEnd()).AddTo(this);
+                _ => BattleSceneSystem.Instance.GameEnd()).AddTo(this);
 
         _battleModel.GameCountDownTimerObservable
             .Subscribe(count => _battleView.SetTimerText(count))
@@ -130,7 +130,7 @@ public class BattlePresenter : MonoBehaviour
 
     private async ValueTask GameEndObservable(CancellationToken token)
     {
-        await UniTask.WaitUntil(() => BattleSceneManager.Instance.IsEnd, cancellationToken: token);
+        await UniTask.WaitUntil(() => BattleSceneSystem.Instance.IsEnd, cancellationToken: token);
         await UniTask.Delay(TimeSpan.FromSeconds(3), cancellationToken: token);
     }
 }

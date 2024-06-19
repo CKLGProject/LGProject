@@ -28,13 +28,13 @@ namespace BehaviourTree
             // AI Type 및 현재 몇 번째 플레이인지 체크하기
             //if (Singleton.Instance<GameManager>())
             // 3번마다 다른 AI를 장착
-            bool HardMode = BattleSceneManager.Instance.PlayCount % 3 == 0;
+            bool HardMode = BattleSceneSystem.Instance.PlayCount % 3 == 0;
             Tree = HardMode ? Trees[0] : Trees[1];
         }
 
         private void Update()
         {
-            if(BattleSceneManager.Instance.IsStart)
+            if(BattleSceneSystem.Instance.IsStart)
                 Tree.Update();
         }
     }

@@ -773,7 +773,7 @@ public class EffectManager : MonoBehaviour
     [HideInInspector]
     public GameObject _UltimatePre_Point006;
 
-    Dictionary<EFFECT, ParticleSystem> _EffectContainer = new Dictionary<EFFECT, ParticleSystem>();
+    private Dictionary<EFFECT, ParticleSystem> _EffectContainer = new Dictionary<EFFECT, ParticleSystem>();
 
     [SerializeField] private List<ParticleSystem> playList;
 
@@ -802,24 +802,19 @@ public class EffectManager : MonoBehaviour
         UltimatePrePoint006,
     }
 
-
-    private void Start()
-    {
-
-    }
-
     public void InitParticles()
     {
         // 일단 여기에 이펙트들을 세팅
-        GameObject tempEffect = null;
-        Vector3 posOffset = Vector3.zero;
-        Vector3 rotOffset = Vector3.zero;
+        GameObject tempEffect;
+        Vector3 positionOffset;
+        Vector3 rotationOffset = Vector3.zero;
+        
         #region AttackEffect
         if (_AttackEffect1 != null)
         {
-            rotOffset = new Vector3(0, 180, 0);
-            posOffset = _AttackOffset1;
-            tempEffect = Instantiate(_AttackEffect1, transform.position + posOffset, Quaternion.Euler(rotOffset));
+            rotationOffset = new Vector3(0, 180, 0);
+            positionOffset = _AttackOffset1;
+            tempEffect = Instantiate(_AttackEffect1, transform.position + positionOffset, Quaternion.Euler(rotationOffset));
             tempEffect.transform.parent = transform;
             _EffectContainer.Add(EFFECT.Attack1, tempEffect.GetComponent<ParticleSystem>());
             tempEffect.SetActive(false);
@@ -827,9 +822,9 @@ public class EffectManager : MonoBehaviour
         
         if (_AttackEffect2 != null)
         {
-            rotOffset = new Vector3(0, 180, 0);
-            posOffset = _AttackOffset2;
-            tempEffect = Instantiate(_AttackEffect2, transform.position + posOffset, Quaternion.Euler(rotOffset));
+            rotationOffset = new Vector3(0, 180, 0);
+            positionOffset = _AttackOffset2;
+            tempEffect = Instantiate(_AttackEffect2, transform.position + positionOffset, Quaternion.Euler(rotationOffset));
             tempEffect.transform.parent = transform;
             _EffectContainer.Add(EFFECT.Attack2, tempEffect.GetComponent<ParticleSystem>());
             tempEffect.SetActive(false);
@@ -837,9 +832,9 @@ public class EffectManager : MonoBehaviour
         
         if (_AttackEffect3 != null)
         {
-            rotOffset = new Vector3(0, 180, 0);
-            posOffset = _AttackOffset3;
-            tempEffect = Instantiate(_AttackEffect3, transform.position + posOffset, Quaternion.Euler(rotOffset));
+            rotationOffset = new Vector3(0, 180, 0);
+            positionOffset = _AttackOffset3;
+            tempEffect = Instantiate(_AttackEffect3, transform.position + positionOffset, Quaternion.Euler(rotationOffset));
             tempEffect.transform.parent = transform;
             _EffectContainer.Add(EFFECT.Attack3, tempEffect.GetComponent<ParticleSystem>());
             tempEffect.SetActive(false);
@@ -847,9 +842,9 @@ public class EffectManager : MonoBehaviour
 
         if (_JumpAttackEffect != null)
         {
-            rotOffset = new Vector3(0, 180, 0);
-            posOffset = _JumpAttackOffset;
-            tempEffect = Instantiate(_JumpAttackEffect, transform.position + posOffset, Quaternion.Euler(rotOffset));
+            rotationOffset = new Vector3(0, 180, 0);
+            positionOffset = _JumpAttackOffset;
+            tempEffect = Instantiate(_JumpAttackEffect, transform.position + positionOffset, Quaternion.Euler(rotationOffset));
             tempEffect.transform.parent = transform;
             _EffectContainer.Add(EFFECT.JumpAttack, tempEffect.GetComponent<ParticleSystem>());
             tempEffect.SetActive(false);
@@ -857,9 +852,9 @@ public class EffectManager : MonoBehaviour
 
         if (_DashAttackEffect != null)
         {
-            //rotOffset = new Vector3(0, 90, 0);
-            posOffset = _DashAttackOffset;
-            tempEffect = Instantiate(_DashAttackEffect, transform.position + posOffset, Quaternion.Euler(rotOffset));
+            // rotationOffset = new Vector3(0, 90, 0);
+            positionOffset = _DashAttackOffset;
+            tempEffect = Instantiate(_DashAttackEffect, transform.position + positionOffset, Quaternion.Euler(rotationOffset));
             tempEffect.transform.parent = transform;
             _EffectContainer.Add(EFFECT.DashAttack, tempEffect.GetComponent<ParticleSystem>());
             tempEffect.SetActive(false);
@@ -998,8 +993,7 @@ public class EffectManager : MonoBehaviour
     {
         try
         {
-            ParticleSystem effect;
-            _EffectContainer.TryGetValue(effectType, out effect);
+            _EffectContainer.TryGetValue(effectType, out ParticleSystem effect);
 
             if (effect != null)
             {
@@ -1025,8 +1019,7 @@ public class EffectManager : MonoBehaviour
     {
         try
         {
-            ParticleSystem effect;
-            _EffectContainer.TryGetValue(effectType, out effect);
+            _EffectContainer.TryGetValue(effectType, out ParticleSystem effect);
 
             if (effect != null)
             {
@@ -1051,8 +1044,7 @@ public class EffectManager : MonoBehaviour
     {
         try
         {
-            ParticleSystem effect;
-            _EffectContainer.TryGetValue(effectType, out effect);
+            _EffectContainer.TryGetValue(effectType, out ParticleSystem effect);
 
             if (effect != null)
             {

@@ -130,7 +130,6 @@ namespace LGProject.PlayerState
             PlayerStateMachine psm = new PlayerStateMachine();
             psm.transform = obj.transform;
             psm.playable = obj.GetComponent<Playable>();
-            //psm.animator = obj.GetComponent<Animator>();
             psm.AudioSource = obj.GetComponent<FMODAudioSource>();
             psm.AudioList = Object.FindAnyObjectByType<LocalKeyList>();
             psm.animator = psm.playable.Animator;
@@ -140,6 +139,7 @@ namespace LGProject.PlayerState
             psm.CharacterType = psm.playable.CharacterType;
             psm.IsGrounded = true;
             psm.IsGuard = false;
+            
             try
             {
                 psm.moveAction = InputSystem.actions["Move"];
