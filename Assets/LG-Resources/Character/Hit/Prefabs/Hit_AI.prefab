@@ -156,7 +156,6 @@ MonoBehaviour:
   DefaultWeapon: {fileID: 0}
   UltimateWeapon: {fileID: 0}
   audioSource: {fileID: 5907203365814558733}
-  vocaFX: {fileID: 0}
   directionX: 0
   jumpCurve:
     serializedVersion: 2
@@ -390,6 +389,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8014300752184872275, guid: 677a68bf96020ca41b3dfffd46622418,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8b6d37d1a36d0044fb6b8252ec1ff325, type: 2}
+    - target: {fileID: -5760671784021858582, guid: 677a68bf96020ca41b3dfffd46622418,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8b6d37d1a36d0044fb6b8252ec1ff325, type: 2}
+    - target: {fileID: -483292093021651503, guid: 677a68bf96020ca41b3dfffd46622418,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
