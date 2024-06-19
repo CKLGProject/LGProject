@@ -1,3 +1,4 @@
+using Data;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,24 +7,23 @@ namespace BehaviourTree
 {
     public class DownNode : ActionNode
     {
-        public AIAgent Agent;
-        private LGProject.PlayerState.PlayerStateMachine _stateMachine;
+        public AIAgent Agent => AIAgent.Instance;
+        private LGProject.PlayerState.PlayerStateMachine StateMachine => Agent.GetStateMachine;
+       
         [Space(10f)]
         public float downTimer;
-        private float _curTimer;
+        private float _currentTimer;
+        
         private static readonly int WakeUp = Animator.StringToHash("WakeUp");
         private static readonly int Run = Animator.StringToHash("Run");
+      
         protected override void OnStart()
         {
-            if (Agent == null)
-                Agent = AIAgent.Instance;
-            if (_stateMachine == null)
-                _stateMachine = Agent.GetStateMachine;
-            _curTimer = 0;
-            _stateMachine.IsDamaged = false;
-            _stateMachine.IsDown = true;
-            _stateMachine.IsGrounded = true;
-            _stateMachine.animator.SetInteger(Run, 0);
+            _currentTimer = 0;
+            StateMachine.IsDamaged = false;
+            StateMachine.IsDown = true;
+            StateMachine.IsGrounded = true;
+            StateMachine.animator.SetInteger(Run, 0);
         }
 
         protected override void OnStop()
@@ -35,14 +35,14 @@ namespace BehaviourTree
         {
             try
             {
-                if (_stateMachine.IsGrounded)
+                if (StateMachine.IsGrounded)
                 {
-                    _curTimer += Time.deltaTime;
+                    _currentTimer += Time.deltaTime;
                     // 고정된 누어있는 시간이 존재함.
-                    if (_stateMachine.playable.DownWaitDelay < _curTimer)
+                    if (StateMachine.playable.DownWaitDelay < _currentTimer)
                     {
                         // 누어있는 시간이 끝나면 Idle 상태가 되면서 일어남.
-                        _stateMachine.animator.SetTrigger(WakeUp);
+                        StateMachine.animator.SetTrigger(WakeUp);
                         return State.Success;
                     }
                 }

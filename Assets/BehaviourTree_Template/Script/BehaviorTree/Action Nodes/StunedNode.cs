@@ -1,3 +1,4 @@
+using Data;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,25 +7,22 @@ namespace BehaviourTree
 {
     public class StunedNode : ActionNode
     {
-        public AIAgent Agent;
-        public LGProject.PlayerState.PlayerStateMachine _stateMachine;
+        public AIAgent Agent => AIAgent.Instance;
+
         [Space(10f)]
         public float stunedTimer;
-        private float curTiemr;
+
+        private float _currentTimer;
+
+        private LGProject.PlayerState.PlayerStateMachine StateMachine => Agent.GetStateMachine;
 
         protected override void OnStart()
         {
-            if (Agent == null)
-                Agent = AIAgent.Instance;
-            if (_stateMachine == null)
-                _stateMachine = Agent.GetStateMachine;
-            _stateMachine.IsGuard = false;
-            //Debug.Log("Stun Node");
-            _stateMachine.animator.ResetTrigger("Landing");
-             _stateMachine.animator.ResetTrigger("Knockback");
-            _stateMachine.animator.ResetTrigger("WakeUp");
-            _stateMachine.animator.SetFloat("Run", 0f);
-            Debug.Log("Stun");
+            StateMachine.IsGuard = false;
+            StateMachine.animator.ResetTrigger("Landing");
+            StateMachine.animator.ResetTrigger("Knockback");
+            StateMachine.animator.ResetTrigger("WakeUp");
+            StateMachine.animator.SetFloat("Run", 0f);
         }
 
         protected override void OnStop()
@@ -41,12 +39,12 @@ namespace BehaviourTree
                 {
                     // 피격 모션 출력
                     Agent.GetStateMachine.IsDamaged = false;
-                    curTiemr = 0;
+                    _currentTimer = 0;
                 }
 
-                curTiemr += Time.deltaTime;
+                _currentTimer += Time.deltaTime;
 
-                if (_stateMachine.playable.HitDelay < curTiemr || (Agent.GetStateMachine.IsKnockback))
+                if (StateMachine.playable.HitDelay < _currentTimer || (Agent.GetStateMachine.IsKnockback))
                 {
                     return State.Success;
                 }

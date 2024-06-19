@@ -9,8 +9,7 @@ namespace BehaviourTree
 
     public class AIAgent : LGProject.PlayerState.Playable
     {
-        private static AIAgent instance;
-        public static AIAgent Instance => instance;
+        public static AIAgent Instance { get; private set; }
 
         private float _attackRange;
 
@@ -42,11 +41,12 @@ namespace BehaviourTree
         {
             base.Awake();
             
-            if (instance == null) 
-                instance = this;
+            if (Instance == null) 
+                Instance = this;
+            
             Random.seed = System.DateTime.Now.Millisecond;
             StateMachine = new LGProject.PlayerState.PlayerStateMachine();
-            StateMachine = LGProject.PlayerState.PlayerStateMachine.CreateStateMachine(this.gameObject);
+            StateMachine = LGProject.PlayerState.PlayerStateMachine.CreateStateMachine(gameObject);
             //SetAIModel();
         }
 
@@ -74,6 +74,8 @@ namespace BehaviourTree
             SetupJumpVariables();
             effectManager.InitParticles();
             SetUltimateGage(0);
+            StateMachine.BindComponents();
+            
             transform.rotation = Quaternion.Euler(new Vector3(0, -90, 0));
             for (int i = 0; i < StateMachine.animator.runtimeAnimatorController.animationClips.Length; i++)
             {
