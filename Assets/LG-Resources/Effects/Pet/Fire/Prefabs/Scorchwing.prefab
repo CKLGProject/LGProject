@@ -1,17 +1,64 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &3069078224362313008
+--- !u!1 &8702448105647568422
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2324786339672502179}
+  - component: {fileID: 15838806079391400}
+  m_Layer: 0
+  m_Name: Scorchwing
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2324786339672502179
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8702448105647568422}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5181803038897689042}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &15838806079391400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8702448105647568422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fc86e3efe735441f93919f5b9007abf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Follow: {fileID: 0}
+  followSpeed: 0.15
+--- !u!1001 &3472001619590410484
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 2324786339672502179}
     m_Modifications:
     - target: {fileID: 31571618735311738, guid: 4b0b717ae88aed240a74d985a457eafd,
         type: 3}
       propertyPath: m_Name
-      value: Scorchwing
+      value: GFX
       objectReference: {fileID: 0}
     - target: {fileID: 31571618735311738, guid: 4b0b717ae88aed240a74d985a457eafd,
         type: 3}
@@ -56,17 +103,17 @@ PrefabInstance:
     - target: {fileID: 8630710509245374758, guid: 4b0b717ae88aed240a74d985a457eafd,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8630710509245374758, guid: 4b0b717ae88aed240a74d985a457eafd,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8630710509245374758, guid: 4b0b717ae88aed240a74d985a457eafd,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8630710509245374758, guid: 4b0b717ae88aed240a74d985a457eafd,
         type: 3}
@@ -86,29 +133,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 31571618735311738, guid: 4b0b717ae88aed240a74d985a457eafd,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8359765401687002718}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b0b717ae88aed240a74d985a457eafd, type: 3}
---- !u!1 &3091620376349990474 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 31571618735311738, guid: 4b0b717ae88aed240a74d985a457eafd,
+--- !u!4 &5181803038897689042 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8630710509245374758, guid: 4b0b717ae88aed240a74d985a457eafd,
     type: 3}
-  m_PrefabInstance: {fileID: 3069078224362313008}
+  m_PrefabInstance: {fileID: 3472001619590410484}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8359765401687002718
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3091620376349990474}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fc86e3efe735441f93919f5b9007abf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Follow: {fileID: 0}
-  followSpeed: 0.15
