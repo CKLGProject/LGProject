@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Cysharp.Threading.Tasks;
+using Data;
 using FMODPlus;
 using Object = UnityEngine.Object;
 using FMODUnity;
@@ -30,6 +31,7 @@ namespace LGProject.PlayerState
         public Rigidbody physics;
         public Collider collider;
         public BattleModel battleModel;
+        public VocaFX VocaFX;
 
         public InputAction moveAction;
         public InputAction attackAction;
@@ -84,7 +86,7 @@ namespace LGProject.PlayerState
         public State CurrentState;
         public Transform HitPlayer;
 
-        public Data.ECharacterType CharacterType;
+        public ECharacterType CharacterType;
 
         private Dictionary<string, float> _animationClipsInfo = new Dictionary<string, float>();
 
@@ -131,11 +133,9 @@ namespace LGProject.PlayerState
             psm.transform = obj.transform;
             psm.playable = obj.GetComponent<Playable>();
             psm.AudioSource = obj.GetComponent<FMODAudioSource>();
-            psm.AudioList = Object.FindAnyObjectByType<LocalKeyList>();
             psm.animator = psm.playable.Animator;
             psm.physics = obj.GetComponent<Rigidbody>();
             psm.collider = obj.GetComponent<Collider>();
-            psm.battleModel = Object.FindAnyObjectByType<BattleModel>();
             psm.CharacterType = psm.playable.CharacterType;
             psm.IsGrounded = true;
             psm.IsGuard = false;
@@ -180,6 +180,8 @@ namespace LGProject.PlayerState
 
             return psm;
         }
+        
+        
 
         /// <summary>
         /// 
@@ -495,6 +497,7 @@ namespace LGProject.PlayerState
         /// <param name="dataType"></param>
         public void ApplyHitDamaged(Vector3 velocity, float nockbackDelay, PlayerStateMachine EnemyStateMachine, float DamageGage = 8.5f)
         {
+            
             //UpdateData(dataType);
             // 누어 있는 상태에선 데미지를 입지 않는다.
             if (IsDown || IsKnockback || IsUseUltimate || IsSuperArmor || (EnemyStateMachine != null && IsUseUltimate))
@@ -603,6 +606,16 @@ namespace LGProject.PlayerState
             {
                 Debug.Log("사용할 수 있는 오디오 클립이 존재하지 않습니다.");
             }
+        }
+
+        /// <summary>
+        /// 컴포넌트를 바인딩합니다.
+        /// </summary>
+        public void BindComponents()
+        {
+            VocaFX = BattleSceneSystem.Instance.UserVocaFX;
+            AudioList = Object.FindAnyObjectByType<LocalKeyList>();
+            battleModel = Object.FindAnyObjectByType<BattleModel>();
         }
     }
 }

@@ -206,7 +206,7 @@ namespace BehaviourTree
             }
         }
 
-        public void SetAttacRange(float range)
+        public void SetAttackRange(float range)
         {
             _attackRange = range;
         }

@@ -129,7 +129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Animator: {fileID: 4246712564485102162}
   <ActorType>k__BackingField: 2
-  <CharacterType>k__BackingField: 0
+  <CharacterType>k__BackingField: 1
   velocity: {x: 0, y: 0, z: 0}
   MaximumJumpCount: 2
   MaximumSpeed: 4
@@ -156,6 +156,7 @@ MonoBehaviour:
   DefaultWeapon: {fileID: 0}
   UltimateWeapon: {fileID: 0}
   audioSource: {fileID: 5907203365814558733}
+  vocaFX: {fileID: 0}
   directionX: 0
   jumpCurve:
     serializedVersion: 2
@@ -183,6 +184,7 @@ MonoBehaviour:
   speed: 2.5
   targetIndex: 0
   isGround: 0
+  ChildModels: []
   GuardPercent: 0
   AttackPercent: 0
   ChasingPercent: 0
@@ -250,7 +252,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0c007b2e03c15d42bece2f59cb3dd62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tree: {fileID: 11400000, guid: b31e46ff439065d428172745f3cfeb51, type: 2}
+  Tree: {fileID: 0}
+  Trees: []
 --- !u!114 &2876321095919618213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -305,6 +308,7 @@ MonoBehaviour:
     type: 3}
   _UltimatePreCenter: {fileID: 0}
   _UltimatePre_RHand_FX: {fileID: 0}
+  _UltimatePre_Point006: {fileID: 0}
   playList: []
 --- !u!114 &2735284328782316872
 MonoBehaviour:

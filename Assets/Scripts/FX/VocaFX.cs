@@ -26,10 +26,7 @@ public class VocaFX : MonoBehaviour
     [SerializeField] private float fadeDelay = 0.25f;
 
     private Transform _cameraTransform;
-    
-    private List<int> playingListCach;
-
-    private MaterialPropertyBlock _materialPropertyBlock;
+    private List<int> _playingListCash;
 
     private static readonly int MainTex = Shader.PropertyToID("_MainTex");
     private static readonly int Color = Shader.PropertyToID("_Color");
@@ -50,8 +47,7 @@ public class VocaFX : MonoBehaviour
         // 메모리 공간 바인딩
         int textRendererCount = textTargetList.Length;
         _textRenderers = new MeshRenderer[textRendererCount];
-        _materialPropertyBlock = new MaterialPropertyBlock();
-        playingListCach = new List<int>();
+        _playingListCash = new List<int>();
 
         // 할당
         for (int i = 0; i < textRendererCount; i++)
@@ -109,27 +105,29 @@ public class VocaFX : MonoBehaviour
             {
                 _textRenderers[playIndex].material.SetColor(Color, UnityEngine.Color.white);
                 textTargetList[playIndex].gameObject.SetActive(false);
-                playingListCach.Remove(playIndex);
+                _playingListCash.Remove(playIndex);
             })
             .Play();
-
-        // 클리어
-        _materialPropertyBlock.Clear();
     }
 
+    /// <summary>
+    /// 효과를 재생할 위치를 계산합니다.
+    /// </summary>
+    /// <param name="index"></param>
+    /// <returns></returns>
     private int CalculatePlayIndex(int index)
     {
         // 표시할 Text가 없다면 -1 표시
-        if (playingListCach.Count == textTargetList.Length)
+        if (_playingListCash.Count == textTargetList.Length)
             return -1;
         
-        if (playingListCach.Contains(index))
+        if (_playingListCash.Contains(index))
         {
             int randomTextIndex = Random.Range(0, textTargetList.Length);
             return CalculatePlayIndex(randomTextIndex); // 재귀 호출의 결과를 반환
         }
 
-        playingListCach.Add(index); // 새로운 인덱스를 캐시에 추가
+        _playingListCash.Add(index); // 새로운 인덱스를 캐시에 추가
         return index;  
     }
 

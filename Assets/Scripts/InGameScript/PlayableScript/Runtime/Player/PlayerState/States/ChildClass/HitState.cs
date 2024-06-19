@@ -1,3 +1,4 @@
+using Data;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,6 +28,8 @@ namespace LGProject.PlayerState
             //Debug.Log($"{stateMachine.transform.ToString()}who's hit? : {stateMachine.HitPlayer}");
             _currentTimer = 0;
 
+            // 피격 당했을 때 퍽 FX 출력
+            StateMachine.VocaFX.PlayVoca(EVocaType.Fuck);
         }
 
         public override void Exit()

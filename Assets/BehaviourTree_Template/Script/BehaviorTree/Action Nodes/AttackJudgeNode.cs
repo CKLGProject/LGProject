@@ -100,7 +100,7 @@ namespace BehaviourTree
             }
             _isAttack = false;
             _stateMachine.IsNormalAttack = true;
-            //AIAgent.Instance.SetAttacRange(attackRange);
+            //AIAgent.Instance.SetAttackRange(attackRange);
             _stateMachine.AttackCount++;
             _stateMachine.animator.SetInteger("Attack", _stateMachine.AttackCount);
             _curTimer = 0;

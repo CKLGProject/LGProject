@@ -1,3 +1,4 @@
+using Data;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,6 +29,9 @@ namespace LGProject.PlayerState
             StateMachine.animator.SetInteger("Attack", 0);
             StateMachine.animator.SetTrigger(Landing);
             StateMachine.ResetVelocity();
+            
+            // 피격 당해서 땅에 쿵 되었을 때 쿵 FX 출력
+            StateMachine.VocaFX.PlayVoca(EVocaType.Kung);
         }
 
         public override void Exit()

@@ -53,7 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Animator: {fileID: 9022331674210818811}
   <ActorType>k__BackingField: 2
-  <CharacterType>k__BackingField: 0
+  <CharacterType>k__BackingField: 2
   velocity: {x: 0, y: 0, z: 0}
   MaximumJumpCount: 2
   MaximumSpeed: 4
@@ -80,6 +80,7 @@ MonoBehaviour:
   DefaultWeapon: {fileID: 0}
   UltimateWeapon: {fileID: 0}
   audioSource: {fileID: 4251279420827891145}
+  vocaFX: {fileID: 0}
   directionX: 0
   jumpCurve:
     serializedVersion: 2

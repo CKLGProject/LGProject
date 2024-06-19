@@ -16,9 +16,11 @@ namespace LGProject
         public GameObject OnlinePlayer { get; private set; }
         public CameraZone CameraZone;
 
-        [Header("VocaFX")]
-        [SerializeField] private VocaFX userVocaFX;
-        [SerializeField] private VocaFX aiVocaFX;
+        [field: Header("VocaFX")]
+        [field: SerializeField]
+        public VocaFX UserVocaFX { get; private set; }
+
+        [field: SerializeField] public VocaFX AIVocaFX { get; private set; }
 
         public int PlayCount { get; private set; }
 
@@ -131,9 +133,9 @@ namespace LGProject
 
             OnlinePlayer.name = "Player";
             OnlinePlayer.gameObject.SetActive(true);
-            
+
             // FX 할당
-            userVocaFX.FollowTarget = OnlinePlayer.transform;
+            UserVocaFX.FollowTarget = OnlinePlayer.transform;
         }
 
         /// <summary>
@@ -166,9 +168,9 @@ namespace LGProject
 
             targetAI.name = "AI";
             targetAI.SetActive(true);
-            
+
             // FX 할당
-            aiVocaFX.FollowTarget = targetAI.transform;
+            AIVocaFX.FollowTarget = targetAI.transform;
         }
     }
 }

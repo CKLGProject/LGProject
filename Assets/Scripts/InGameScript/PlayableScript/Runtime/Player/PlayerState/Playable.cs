@@ -294,7 +294,7 @@ namespace LGProject.PlayerState
         }
 
         // 공격 시작 
-        public virtual void ShootProjectile(int AtkCount, Vector3 velocity)
+        public virtual void ShootProjectile(int attackCount, Vector3 velocity)
         {
         }
 
@@ -527,7 +527,7 @@ namespace LGProject.PlayerState
         public void PlayableGravity()
         {
             if (!StateMachine.IsGrounded)
-                StateMachine.physics.velocity += Vector3.up * _gravity * Time.deltaTime;
+                StateMachine.physics.velocity += Vector3.up * (_gravity * Time.deltaTime);
             else
                 StateMachine.physics.velocity += Vector3.up * _groundedGravity * Time.deltaTime;
         }
