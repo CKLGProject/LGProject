@@ -111,6 +111,7 @@ Transform:
   m_Children:
   - {fileID: 7845000925598368145}
   - {fileID: 225151390789457756}
+  - {fileID: 8526075527331512861}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6559117602054936325
@@ -279,6 +280,37 @@ MonoBehaviour:
   _UltimatePre_RHand_FX: {fileID: 3953709074532442758}
   _UltimatePre_Point006: {fileID: 0}
   playList: []
+--- !u!1 &8460850136829063542
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8526075527331512861}
+  m_Layer: 3
+  m_Name: Pet Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8526075527331512861
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8460850136829063542}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: 1.072, z: -0.609}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4910213552037458275}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &6198966323794279417
 PrefabInstance:
   m_ObjectHideFlags: 0

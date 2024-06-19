@@ -10,8 +10,11 @@ namespace LGProject
     {
         public static BattleSceneSystem Instance { get; private set; }
 
-        [FormerlySerializedAs("playable")] public GameObject[] playableList;
-        [FormerlySerializedAs("AI")] public GameObject[] AIList;
+        [SerializeField] private GameObject[] playableList;
+
+        [SerializeField] private GameObject[] aiList;
+
+        [SerializeField] private GameObject[] petList;
 
         public GameObject OnlinePlayer { get; private set; }
         public CameraZone CameraZone;
@@ -68,7 +71,7 @@ namespace LGProject
                 playable.SetActive(false);
 
             // AI 캐릭터 전부 비활성화
-            foreach (GameObject ai in AIList)
+            foreach (GameObject ai in aiList)
                 ai.SetActive(false);
 
             // 유저와 AI 캐릭터 활성화 진행
@@ -136,6 +139,23 @@ namespace LGProject
 
             // FX 할당
             UserVocaFX.FollowTarget = OnlinePlayer.transform;
+
+            // 펫 생성
+            EPetType petType = Singleton.Instance<GameManager>().GetPetType(ActorType.User);
+
+            if (petType != EPetType.None)
+            {
+                int petIndex = (int)petType - 1;
+                GameObject petObject =
+                    Instantiate(petList[petIndex], OnlinePlayer.transform.position, Quaternion.identity);
+                petObject.SetActive(true);
+                petObject.name = "User Pet";
+                if (petObject.TryGetComponent(out PetFollow petFollow))
+                {
+                    Transform petPoint = OnlinePlayer.transform.Find("Pet Point");
+                    petFollow.Follow = petPoint;
+                }
+            }
         }
 
         /// <summary>
@@ -149,10 +169,10 @@ namespace LGProject
             switch (characterType)
             {
                 case ECharacterType.Hit:
-                    targetAI = AIList[0];
+                    targetAI = aiList[0];
                     break;
                 case ECharacterType.Frost:
-                    targetAI = AIList[1];
+                    targetAI = aiList[1];
                     break;
                 case ECharacterType.Kane:
                 case ECharacterType.None:
@@ -162,7 +182,7 @@ namespace LGProject
 #if UNITY_EDITOR
                     Debug.LogError("유저 캐릭터 설정에 이슈가 발생하였습니다.");
 #endif
-                    targetAI = AIList[0];
+                    targetAI = aiList[0];
                     break;
             }
 
@@ -171,6 +191,21 @@ namespace LGProject
 
             // FX 할당
             AIVocaFX.FollowTarget = targetAI.transform;
+
+            // 펫 생성
+            EPetType petType = Singleton.Instance<GameManager>().GetPetType(ActorType.AI);
+            if (petType != EPetType.None)
+            {
+                int petIndex = (int)petType - 1;
+                GameObject petObject = Instantiate(petList[petIndex], targetAI.transform.position, Quaternion.identity);
+                petObject.SetActive(true);
+                petObject.name = "AI Pet";
+                if (petObject.TryGetComponent(out PetFollow petFollow))
+                {
+                    Transform petPoint = targetAI.transform.Find("Pet Point");
+                    petFollow.Follow = petPoint;
+                }
+            }
         }
     }
 }
