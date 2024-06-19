@@ -10,6 +10,21 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 425462005902069971, guid: 8e6e995eeca40d8449e1ebb05331da3e,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 425462005902069971, guid: 8e6e995eeca40d8449e1ebb05331da3e,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 425462005902069971, guid: 8e6e995eeca40d8449e1ebb05331da3e,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 425462005902069971, guid: 8e6e995eeca40d8449e1ebb05331da3e,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -76,12 +91,12 @@ PrefabInstance:
     - target: {fileID: 5406961283693985149, guid: 8e6e995eeca40d8449e1ebb05331da3e,
         type: 3}
       propertyPath: m_Name
-      value: Pet_Ice_FX Variant
+      value: Icebound
       objectReference: {fileID: 0}
     - target: {fileID: 5406961283693985149, guid: 8e6e995eeca40d8449e1ebb05331da3e,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5650692987813336618, guid: 8e6e995eeca40d8449e1ebb05331da3e,
         type: 3}
