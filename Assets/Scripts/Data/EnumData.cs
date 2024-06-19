@@ -33,4 +33,11 @@ namespace Data
         ScrollDown,
         Pinch
     }
+
+    public enum EVocaType
+    {
+        Kung,
+        Tang,
+        Fuck
+    }
 }
