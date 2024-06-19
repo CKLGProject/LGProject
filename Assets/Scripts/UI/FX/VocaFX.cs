@@ -4,6 +4,7 @@ using DG.Tweening;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 using Random = UnityEngine.Random;
 
 public class VocaFX : MonoBehaviour
@@ -15,8 +16,18 @@ public class VocaFX : MonoBehaviour
     [SerializeField] private Transform[] textTargetList;
     private MeshRenderer[] _textRenderers;
 
-    [SerializeField] private float fadeDelay = 1f;
+    [Header("Target")]
+    public Transform FollowTarget;
+    
+    [Header("Setting")]
+    [Tooltip("페이드 지속 시간")]
+    [SerializeField] private float fadeDuration = 0.5f;
+    
+    [Tooltip("페이드를 시전하는 딜레이")]
+    [SerializeField] private float fadeDelay = 0.25f;
 
+    private Transform _cameraTransform;
+    
     private List<int> playingListCach;
 
     private MaterialPropertyBlock _materialPropertyBlock;
@@ -35,6 +46,8 @@ public class VocaFX : MonoBehaviour
     /// </summary>
     private void Init()
     {
+        _cameraTransform = Camera.main.transform;
+        
         // 메모리 공간 바인딩
         int textRendererCount = textTargetList.Length;
         _textRenderers = new MeshRenderer[textRendererCount];
@@ -90,8 +103,8 @@ public class VocaFX : MonoBehaviour
 
         // FX
         _textRenderers[playIndex].material
-            .DOFade(0, 0.5f)
-            .SetDelay(0.25f)
+            .DOFade(0, fadeDuration)
+            .SetDelay(fadeDelay)
             .SetEase(Ease.OutSine)
             .OnComplete(() =>
             {
@@ -119,5 +132,33 @@ public class VocaFX : MonoBehaviour
 
         playingListCach.Add(index); // 새로운 인덱스를 캐시에 추가
         return index;  
+    }
+
+    private void Update()
+    {
+        // 빌보드 처리
+        UpdateBillboardEffect();
+        
+        if (!FollowTarget)
+            return;
+        
+        transform.position = FollowTarget.position;
+    }
+    
+    /// <summary>
+    /// 글자가 카메라를 향해 빌보드를 합니다.
+    /// </summary>
+    private void UpdateBillboardEffect()
+    {
+        Assert.IsNotNull(_cameraTransform, "_cameraTransform != null");
+
+        foreach (Transform textTarget in textTargetList)
+        {
+            textTarget.LookAt(_cameraTransform);
+            
+            Vector3 rotation = textTarget.rotation.eulerAngles;
+            rotation.y += 180;
+            textTarget.rotation = Quaternion.Euler(rotation);
+        }
     }
 }

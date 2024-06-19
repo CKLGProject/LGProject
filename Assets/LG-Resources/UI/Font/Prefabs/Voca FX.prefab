@@ -315,7 +315,9 @@ MonoBehaviour:
   - {fileID: 7937677565373366222}
   - {fileID: 7777653614864762880}
   - {fileID: 943356086494120256}
-  fadeDelay: 1
+  FollowTarget: {fileID: 0}
+  fadeDuration: 0.5
+  fadeDelay: 0.25
 --- !u!1 &5921166835180506515
 GameObject:
   m_ObjectHideFlags: 0
