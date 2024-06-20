@@ -84,7 +84,7 @@ namespace LGProject.PlayerState
             //StateMachine.battleModel.ShowCutScene(Data.ActorType.User, false);
 
             UltimateAttack();
-            StateMachine.playable.FocusUltimateUser(1.5f);
+            StateMachine.playable.FocusUltimateUser(OroginWeight);
             await UniTask.Delay(TimeSpan.FromSeconds(2f), DelayType.Realtime);
             StateMachine.battleModel.ShowCutScene(Data.ActorType.User, false);
         }

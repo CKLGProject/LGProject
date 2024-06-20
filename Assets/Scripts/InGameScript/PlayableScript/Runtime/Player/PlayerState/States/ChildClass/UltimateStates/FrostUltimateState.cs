@@ -75,7 +75,7 @@ namespace LGProject.PlayerState
             StateMachine.playable.effectManager.Stop(EffectManager.EFFECT.UltimatePreCenter);
             StateMachine.IsUseUltimate = false;
             // 내리찍을 때 주변 적에게 피해를 입히고 넉백시킴.
-            StateMachine.playable.FocusUltimateUser(1.5f);
+            StateMachine.playable.FocusUltimateUser(OroginWeight);
             ShockWake();
             await UniTask.Delay(TimeSpan.FromSeconds(2f), DelayType.Realtime);
             StateMachine.battleModel.ShowCutScene(Data.ActorType.User, false);
