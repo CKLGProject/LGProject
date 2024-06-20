@@ -4,6 +4,7 @@ using System;
 using System.Text;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class LoadingView : MonoBehaviour
 {
@@ -24,8 +25,41 @@ public class LoadingView : MonoBehaviour
 
     [SerializeField] private CharacterImageData[] characterImageDataList;
 
+    [Header("Scenes")] [SerializeField] private GameObject[] sceneLoadingList;
+
+    [Header("Test")] [SerializeField, Tooltip("테스트를 위한 용도이며 릴리즈 버전은 무조건 Every로 동작합니다.")]
+    private EBattleMapKind battleMapKind = EBattleMapKind.Day | EBattleMapKind.Night;
 
     private int _dotCount;
+
+    private void Awake()
+    {
+        // 기본적으로 비활성화 (보안)
+        foreach (GameObject sceneLoading in sceneLoadingList)
+            sceneLoading.SetActive(false);
+    }
+
+    private void Start()
+    {
+#if UNITY_EDITOR
+        Assert.IsTrue(battleMapKind.HasFlag(EBattleMapKind.None), "battleMapKind가 None입니다.");
+
+        if (battleMapKind.HasFlag(EBattleMapKind.Day) && battleMapKind.HasFlag(EBattleMapKind.Night))
+        {
+            int randomIndex = UnityEngine.Random.Range(0, 2);
+            sceneLoadingList[randomIndex].SetActive(true);
+            return;
+        }
+
+        if (battleMapKind.HasFlag(EBattleMapKind.Day))
+            sceneLoadingList[0].SetActive(true);
+        else if (battleMapKind.HasFlag(EBattleMapKind.Night))
+            sceneLoadingList[1].SetActive(true);
+#else
+        int randomIndex = UnityEngine.Random.Range(0, 2);
+        sceneLoadingList[randomIndex].SetActive(true);
+#endif
+    }
 
     /// <summary>
     /// 유저 정령 프로필 이미지를 value로 변경합니다.

@@ -1,3 +1,5 @@
+using System;
+
 namespace Data
 {
     public enum ECharacterType
@@ -39,5 +41,13 @@ namespace Data
         Kung,
         Tang,
         Fuck
+    }
+
+    [Flags]
+    public enum EBattleMapKind
+    {
+        None,
+        Day,
+        Night
     }
 }
