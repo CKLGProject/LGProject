@@ -15,17 +15,17 @@ EditorBuildSettings:
     path: Assets/Scenes/Product/Lobby.unity
     guid: 91caf55ad9aa496419e1bbe442ae9c59
   - enabled: 1
-    path: Assets/Scenes/Product/Choose Character.unity
-    guid: 927209608c87843c2aa8b71005ae3d00
-  - enabled: 1
     path: Assets/Scenes/Product/Loading.unity
     guid: 7e448d90f162c4ed6a0a581223fd5466
   - enabled: 1
     path: Assets/Scenes/Product/Pet Capture.unity
     guid: 22e2aabea0d5c4210a5de2c00589fe2d
   - enabled: 1
-    path: Assets/Scenes/Product/Battle.unity
+    path: Assets/Scenes/Product/Battle-Day.unity
     guid: 27a695b0634ca574f8f3b9df487e1070
+  - enabled: 1
+    path: Assets/Scenes/Product/Battle-Night.unity
+    guid: 5d687b47c41b3254fa27ce4fe3aa4688
   m_configObjects:
     AR Foundation RemoteARFoundationRemoteLoaderSettings: {fileID: 11400000, guid: b62574607372f429585897789a5049fd,
       type: 2}

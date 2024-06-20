@@ -258,6 +258,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1055772023}
+  - {fileID: 1677384518}
   - {fileID: 1671780979}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -747,7 +748,7 @@ GameObject:
   - component: {fileID: 1055772023}
   - component: {fileID: 1055772022}
   m_Layer: 0
-  m_Name: Battle Scene Loader
+  m_Name: Battle Scene Loader (Day)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -770,7 +771,7 @@ MonoBehaviour:
   editorAutoLoad: 0
   loadScene:
     sceneAsset: {fileID: 102900000, guid: 27a695b0634ca574f8f3b9df487e1070, type: 3}
-    path: Assets/Scenes/Product/Battle.unity
+    path: Assets/Scenes/Product/Battle-Day.unity
   additiveScenes: []
   SkipMode: 0
   SkipAction:
@@ -1171,6 +1172,79 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5a0079c30aef289489ee433b440a56ab, type: 2}
   - {fileID: 11400000, guid: 7c4eebc04054b234abbaa5e2cb789a77, type: 2}
   - {fileID: 11400000, guid: faebbfb46b7e8014eb73c737cc9bfdac, type: 2}
+--- !u!1 &1677384517
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1677384518}
+  - component: {fileID: 1677384519}
+  m_Layer: 0
+  m_Name: Battle Scene Loader (Night)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1677384518
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1677384517}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 641126907}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1677384519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1677384517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89fc4b73d3bdf43aeac288614f778a97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LoadStyle: 0
+  UseAsync: 0
+  editorAutoLoad: 0
+  loadScene:
+    sceneAsset: {fileID: 102900000, guid: 5d687b47c41b3254fa27ce4fe3aa4688, type: 3}
+    path: Assets/Scenes/Product/Battle-Night.unity
+  additiveScenes: []
+  SkipMode: 0
+  SkipAction:
+    m_Name: Skip
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 661fd17a-49ab-4cde-90d4-914019952ff7
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  MinimumLoadingTime: 3
+  DontUseAsync: 0
+  DestroyOnCompleted: 0
+  onLoading:
+    m_PersistentCalls:
+      m_Calls: []
+  onLoadCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  onCompleted:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1791980064 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5787071878600088236, guid: 40a1a056e0c5e4b39bb9586b34b349b6,
