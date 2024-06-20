@@ -62,7 +62,9 @@ namespace LGProject
                 PlayerPrefs.GetInt("PlayCount", PlayCount);
             else
             {
+#if UNITY_EDITOR
                 Debug.LogWarning("Not Have Data");
+#endif
                 PlayCount = 1;
             }
 

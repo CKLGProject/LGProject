@@ -29,11 +29,9 @@ namespace LGProject.PlayerState
             StateMachine.playable.effectManager.Play(EffectManager.EFFECT.DashAttack, 0.1f).Forget();
             // velocity 초기화 X
             // 그런데 브레이크는 걸면 좋을 듯? 대충 Drag값 조절해서 끼이익 하는 느낌을 줘보자.
-            //Debug.Log("Sert");
         }
         public override void LogicUpdate()
         {
-            //base.LogicUpdate();
             if (Damaged())
                 return;
             _currentTimer += Time.deltaTime;
@@ -120,7 +118,9 @@ namespace LGProject.PlayerState
                     }
                     catch
                     {
+#if UNITY_EDITOR
                         Debug.Log("AA");
+#endif
                     }
                 }
             }

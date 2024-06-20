@@ -4456,6 +4456,11 @@ PrefabInstance:
       propertyPath: _hitEffect
       value: 
       objectReference: {fileID: 548951483}
+    - target: {fileID: 6932045493422461996, guid: af5c522be8efb4b76b7f647f18ccff3c,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d794d0b2e0c3827449b955a5a896febb, type: 2}
     - target: {fileID: 7066266423145889497, guid: af5c522be8efb4b76b7f647f18ccff3c,
         type: 3}
       propertyPath: m_Name
@@ -24301,6 +24306,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Frost_AI
       objectReference: {fileID: 0}
+    - target: {fileID: 4885444769505129726, guid: 551b652ef833b4348a77fd7332d7b83c,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5134505680086110306, guid: 551b652ef833b4348a77fd7332d7b83c,
         type: 3}
       propertyPath: grid
@@ -25235,10 +25245,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3655528678612276171, guid: e36772ac1b2dcda4da45ce3d28228fd0,
+        type: 3}
+      propertyPath: FirstAttackJudgeDelay
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 4349796721831851310, guid: e36772ac1b2dcda4da45ce3d28228fd0,
         type: 3}
       propertyPath: m_Name
       value: Frost_Playable
+      objectReference: {fileID: 0}
+    - target: {fileID: 8725541552807560513, guid: e36772ac1b2dcda4da45ce3d28228fd0,
+        type: 3}
+      propertyPath: _DashAttackOffset.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8725541552807560513, guid: e36772ac1b2dcda4da45ce3d28228fd0,
+        type: 3}
+      propertyPath: _DashAttackOffset.z
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8938391724231686051, guid: e36772ac1b2dcda4da45ce3d28228fd0,
         type: 3}

@@ -8,7 +8,7 @@ namespace LGProject.PlayerState
     public class UltimateState : State
     {
         protected const float FocusWeight = 5f;
-        protected const float OroginWeight = 1.5f;
+        protected const float OriginWeight = 1.5f;
         protected float UltimateDelay = 0f;
         protected bool _isMove;
         public UltimateState(PlayerStateMachine stateMachine, float delay) : base(stateMachine)

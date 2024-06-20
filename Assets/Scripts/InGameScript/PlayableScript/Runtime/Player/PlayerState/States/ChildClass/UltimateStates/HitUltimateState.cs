@@ -84,7 +84,6 @@ namespace LGProject.PlayerState
             {
                 return true;
             }
-            Debug.Log("null");
             return false;
         }
 
@@ -110,7 +109,8 @@ namespace LGProject.PlayerState
         protected async UniTaskVoid WaitStart()
         {
             await UniTask.Delay(TimeSpan.FromSeconds(1.75f), DelayType.Realtime);
-            StateMachine.battleModel.PlayAnimatorControllerTrigger("Hide");
+            //StateMachine.battleModel.PlayAnimatorControllerTrigger("Hide");
+            StateMachine.battleModel.ShowCutScene(Data.ActorType.User, false);
             _isAttack = true;
             Time.timeScale = 1f;
             StateMachine.playable.effectManager.Stop(EffectManager.EFFECT.Ultimate);
@@ -129,9 +129,9 @@ namespace LGProject.PlayerState
             {
                 MovementPointSet();
             }
-            StateMachine.playable.FocusUltimateUser(OroginWeight);
+            StateMachine.playable.FocusUltimateUser(OriginWeight);
             await UniTask.Delay(TimeSpan.FromSeconds(2f), DelayType.Realtime);
-            StateMachine.battleModel.ShowCutScene(Data.ActorType.User, false);
+            //StateMachine.battleModel.ShowCutScene(Data.ActorType.User, false);
         }
     }
 }

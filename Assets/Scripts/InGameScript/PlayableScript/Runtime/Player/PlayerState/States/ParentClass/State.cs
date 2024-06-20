@@ -33,7 +33,6 @@ namespace LGProject.PlayerState
         {
             if (StateMachine.IsKnockback)
             {
-                Debug.Log("Next State?");
                 StateMachine.ChangeState(StateMachine.knockbackState);
                 return true;
             }
@@ -67,9 +66,6 @@ namespace LGProject.PlayerState
                     StateMachine.transform.LookAt(right);
                 if (StateMachine.moveAction.ReadValue<Vector2>().x > 0)
                     StateMachine.transform.LookAt(left);
-                //Vector3 euler = StateMachine.transform.GetChild(1).GetComponent<RectTransform>().localRotation.eulerAngles;
-                //Debug.Log($"{euler} / {StateMachine.transform.GetChild(1).GetComponent<RectTransform>().transform.name}");
-                //StateMachine.transform.GetChild(1).GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, StateMachine.moveAction.ReadValue<float>() < 0 ? 90 : -90, 0);
             }
             if (StateMachine.moveAction.ReadValue<Vector2>().x == 0)
                 StateMachine.StandingVelocity();

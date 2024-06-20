@@ -20,16 +20,12 @@ namespace LGProject.PlayerState
         {
             base.Enter();
             // x,z Velocity를 초기화
-            //Vector3 v = stateMachine.physics.velocity;
-            //Vector3.zero;
-            //stateMachine.physics.velocity = stateMachine;
 
             StateMachine.AttackCount = 0;
-            //Debug.Log($"{stateMachine.transform.ToString()}who's hit? : {stateMachine.HitPlayer}");
             _currentTimer = 0;
+            StateMachine.physics.isKinematic = false;
 
             // 피격 당했을 때 퍽 FX 출력
-            StateMachine.VocaFX.PlayVoca(EVocaType.Fuck);
         }
 
         public override void Exit()
@@ -45,13 +41,8 @@ namespace LGProject.PlayerState
             StateMachine.IsDamaged = false;
             if (!StateMachine.IsGrounded)
             {
-                Debug.Log("점프 공격을 맞음");
                 StateMachine.ChangeState(StateMachine.knockbackState);
                 return;
-                //curTimer += Time.deltaTime;
-                //if (curTimer >= stunedTimer)
-                //{
-                //}
             }
             else
             {
