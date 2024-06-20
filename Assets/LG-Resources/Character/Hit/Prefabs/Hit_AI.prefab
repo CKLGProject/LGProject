@@ -128,7 +128,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8219133890818253592
 Transform:
   m_ObjectHideFlags: 0
@@ -166,7 +166,7 @@ MonoBehaviour:
   MaximumJumpCount: 2
   MaximumSpeed: 4
   DashSpeed: 0
-  JumpScale: 1.1
+  JumpScale: 5
   FirstAttackDelay: 0.5
   FirstAttackJudgeDelay: 0.2
   FirstAttackMovingValue: 1
@@ -283,10 +283,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0c007b2e03c15d42bece2f59cb3dd62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Tree: {fileID: 11400000, guid: b31e46ff439065d428172745f3cfeb51, type: 2}
-  Trees:
-  - {fileID: 11400000, guid: bf676e1904caabe4bb3b3daca0322aaf, type: 2}
-  - {fileID: 11400000, guid: b31e46ff439065d428172745f3cfeb51, type: 2}
+  Tree: {fileID: 0}
+  Trees: []
 --- !u!114 &2876321095919618213
 MonoBehaviour:
   m_ObjectHideFlags: 0

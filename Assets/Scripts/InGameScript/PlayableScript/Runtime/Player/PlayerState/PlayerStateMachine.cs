@@ -315,13 +315,13 @@ namespace LGProject.PlayerState
 
                     break;
                 case ECharacterType.Hit:
-                    ultimateState = new HitUltimateState(this, playable.UltimateDelay);
+                    ultimateState = new HitUltimateState(this);
                     break;
                 case ECharacterType.Frost:
-                    ultimateState = new FrostUltimateState(this, playable.UltimateDelay);
+                    ultimateState = new FrostUltimateState(this);
                     break;
                 case ECharacterType.Kane:
-                    ultimateState = new KaneUltimateState(this, playable.UltimateDelay);
+                    ultimateState = new KaneUltimateState(this);
                     break;
                 default:
                     break;
