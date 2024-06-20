@@ -58,7 +58,7 @@ namespace LGProject.CollisionZone
             }
         }
 
-        public void ForcusPlayer(Transform player)
+        public void FocusPlayer(Transform player)
         {
             for (int i = 0; i < _targetGroup.m_Targets.Length; i++)
                 {

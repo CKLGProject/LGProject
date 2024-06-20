@@ -36,7 +36,6 @@ namespace BehaviourTree
         public Transform player;
 
         #region magicMathods
-        [System.Obsolete]
         protected override void Awake()
         {
             base.Awake();
@@ -44,7 +43,7 @@ namespace BehaviourTree
             if (Instance == null) 
                 Instance = this;
             
-            Random.seed = System.DateTime.Now.Millisecond;
+
             StateMachine = new LGProject.PlayerState.PlayerStateMachine();
             StateMachine = LGProject.PlayerState.PlayerStateMachine.CreateStateMachine(gameObject);
             //SetAIModel();
