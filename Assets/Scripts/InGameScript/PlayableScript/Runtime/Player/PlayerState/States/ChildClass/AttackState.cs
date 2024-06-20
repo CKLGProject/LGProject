@@ -137,25 +137,21 @@ namespace LGProject.PlayerState
             switch (StateMachine.AttackCount)
             {
                 case 1:
-                    //animDelay = 0.2f;
+
                     animDelay = _firstJudgeDelay;
                     time = _firstAttackDelay;
-                    //time = 0.35f;
                     break;
                 case 2:
-                    //animDelay = 0.4f;
+
                     animDelay = _secondJudgeDelay;
                     time = _secondAttackDelay;
-                    //time = 0.6f;
                     break;
                 case 3:
-                    //animDelay = 0.2f;
+
                     animDelay = _thirdJudgeDelay;
                     time = _thirdAttackDelay;
-                    //time = 0.6f;
                     break;
             }
-            //Debug.Log($"sm = {stateMachine.AttackCount} / attackDelay = {animDelay} / time {time }");
             // 딜레이가 끝난 이후 추가 키 입력이 들어가면? 
             if (_currentTimer > animDelay)
             {
@@ -180,7 +176,7 @@ namespace LGProject.PlayerState
                 else if (_currentTimer >= time)
                 {
                     // 모션이 끝났으니 기본 상태로 되돌아감.
-                    //StateMachine.animator.SetTrigger(Idle);
+
                     StateMachine.AttackCount = 0;
                     StateMachine.animator.SetInteger(Attack, 0);
                     StateMachine.ChangeState(StateMachine.idleState);
@@ -231,8 +227,7 @@ namespace LGProject.PlayerState
                             Item1.GetStateMachine.
                             ApplyHitDamaged(StateMachine.AttackCount - 1 < 2 ? Vector3.zero : velocity, 0.1f, StateMachine);
                             _damageInCount = true;
-                            //if (StateMachine.AttackCount > 2)
-                            //    Debug.Log("");
+
                             if (!temp.Item1.GetStateMachine.IsGuard && !temp.Item1.GetStateMachine.IsDown && !temp.Item1.GetStateMachine.IsSuperArmor && !StateMachine.IsUseUltimate)
                             {
                                 // 100 % gage로 일단 계산
@@ -243,7 +238,9 @@ namespace LGProject.PlayerState
                     }
                     catch
                     {
+#if UNITY_EDITOR
                         Debug.Log("AA");
+#endif
                     }
                 }
             }

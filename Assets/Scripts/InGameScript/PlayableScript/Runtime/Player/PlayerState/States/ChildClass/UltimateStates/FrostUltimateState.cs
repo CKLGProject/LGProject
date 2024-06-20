@@ -92,7 +92,6 @@ namespace LGProject.PlayerState
                 velocity *= 10f;
                 if (player.transform != StateMachine.transform)
                 {
-                    //Debug.Log($"{player.transform.name}");
                     player.GetComponent<Playable>().GetStateMachine.ApplyHitDamaged(velocity, 0, StateMachine);
                 }
             }

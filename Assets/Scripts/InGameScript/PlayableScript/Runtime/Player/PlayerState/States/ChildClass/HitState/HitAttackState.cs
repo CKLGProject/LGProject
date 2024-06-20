@@ -154,7 +154,6 @@ namespace LGProject.PlayerState
                     //time = 0.6f;
                     break;
             }
-            //Debug.Log($"sm = {stateMachine.AttackCount} / attackDelay = {animDelay} / time {time }");
             // 딜레이가 끝난 이후 추가 키 입력이 들어가면? 
             if (_currentTimer > animDelay)
             {
@@ -228,8 +227,7 @@ namespace LGProject.PlayerState
                             Item1.GetStateMachine.
                             ApplyHitDamaged(StateMachine.AttackCount - 1 < 2 ? Vector3.zero : velocity, 0.1f, StateMachine);
                             _damageInCount = true;
-                            //if (StateMachine.AttackCount > 2)
-                            //    Debug.Log("");
+
                             if (!temp.Item1.GetStateMachine.IsGuard && !temp.Item1.GetStateMachine.IsDown && !temp.Item1.GetStateMachine.IsSuperArmor && !StateMachine.IsUseUltimate)
                             {
                                 // 100 % gage로 일단 계산
@@ -240,7 +238,9 @@ namespace LGProject.PlayerState
                     }
                     catch
                     {
+#if UNITY_EDITOR
                         Debug.Log("AA");
+#endif
                     }
                 }
             }

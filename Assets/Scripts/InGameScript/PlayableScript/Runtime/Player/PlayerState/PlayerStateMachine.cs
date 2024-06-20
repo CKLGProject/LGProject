@@ -174,8 +174,10 @@ namespace LGProject.PlayerState
             }
             catch
             {
+#if UNITY_EDITOR
                 Debug.LogWarning(
                     "Player Component에 Input System과 관련된 Component가 존재하지 않습니다.\n때문에 Playerable Character가 움직이지 않을 수도 있습니다.");
+#endif
             }
 
             return psm;
@@ -478,7 +480,9 @@ namespace LGProject.PlayerState
             }
             catch
             {
+#if UNITY_EDITOR
                 Debug.Log("Don't have File Manager");
+#endif
             }
         }
 
@@ -565,7 +569,9 @@ namespace LGProject.PlayerState
             }
             catch
             {
+#if UNITY_EDITOR
                 Debug.Log($"{transform.name}");
+#endif
             }
         }
 
@@ -604,7 +610,9 @@ namespace LGProject.PlayerState
             }
             catch
             {
+#if UNITY_EDITOR
                 Debug.Log("사용할 수 있는 오디오 클립이 존재하지 않습니다.");
+#endif
             }
         }
 

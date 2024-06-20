@@ -135,7 +135,7 @@ MonoBehaviour:
   DashSpeed: 2
   JumpScale: 1.1
   FirstAttackDelay: 0.35
-  FirstAttackJudgeDelay: 0.2
+  FirstAttackJudgeDelay: 0.1
   FirstAttackMovingValue: 1
   SecondAttackDelay: 0.6
   SecondAttackJudgeDelay: 0.2
@@ -248,7 +248,7 @@ MonoBehaviour:
   _AttackOffset3: {x: 1.2, y: 0, z: 0}
   _DashAttackEffect: {fileID: 4400223982341537954, guid: db6f1b13fcb30aa42a3fde574ff584be,
     type: 3}
-  _DashAttackOffset: {x: 0, y: 0, z: 0}
+  _DashAttackOffset: {x: 0.5, y: 0, z: 0.5}
   _JumpAttackEffect: {fileID: 587711298246763827, guid: cd2e7c10daf6e8245817d7d48c3f4cee,
     type: 3}
   _JumpAttackOffset: {x: 1.2, y: 0, z: 0}

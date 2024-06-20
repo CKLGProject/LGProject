@@ -84,7 +84,6 @@ namespace LGProject.PlayerState
             {
                 return true;
             }
-            Debug.Log("null");
             return false;
         }
 

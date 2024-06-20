@@ -852,7 +852,6 @@ public class EffectManager : MonoBehaviour
 
         if (_DashAttackEffect != null)
         {
-            // rotationOffset = new Vector3(0, 90, 0);
             positionOffset = _DashAttackOffset;
             tempEffect = Instantiate(_DashAttackEffect, transform.position + positionOffset, Quaternion.Euler(rotationOffset));
             tempEffect.transform.parent = transform;
@@ -1006,12 +1005,16 @@ public class EffectManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("Notting");
+#if UNITY_EDITOR
+                Debug.LogError("Notting");
+#endif
             }
         }
         catch
         {
+#if UNITY_EDITOR
             Debug.LogError("EffectManager Error");
+#endif
         }
     }
 

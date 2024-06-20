@@ -61,10 +61,10 @@ namespace LGProject.PlayerState
 
             //bool Down = guardAction.ReadValue<bool>();
 
-            if (StateMachine.downAction.WasPressedThisFrame())
-            {
-                Debug.Log($"Down = {true}");
-            }
+            //if (StateMachine.downAction.WasPressedThisFrame())
+            //{
+            //    Debug.Log($"Down = {true}");
+            //}
         }
 
         private void AttackLogic()

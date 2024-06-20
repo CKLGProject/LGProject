@@ -186,7 +186,9 @@ namespace LGProject.PlayerState
             battleModel.SyncDamageGage(ActorType, DamageGage);
             if (effectManager == null)
             {
+#if UNITY_EDITOR
                 Debug.LogError("EffectManager 없음");
+#endif
             }
         }
 
@@ -203,7 +205,6 @@ namespace LGProject.PlayerState
                     // 목표지점 세팅
                     Vector3 targetPoint = other.transform.position + Vector3.right * directionX;
                     StateMachine.transform.Translate(targetPoint * Time.deltaTime);
-                    Debug.Log(targetPoint);
                 }
                 else
                 {
@@ -213,7 +214,6 @@ namespace LGProject.PlayerState
                 Vector3 zResetPos = StateMachine.transform.position;
                 zResetPos.z = -9.5f;
                 StateMachine.transform.position = zResetPos;
-                Debug.Log(StateMachine.physics.velocity);
             }
         }
 
@@ -286,7 +286,6 @@ namespace LGProject.PlayerState
                 bullet.gameObject.SetActive(false);
                 bullet.PlayHitParticle();
                 bullet.Methods();
-                Debug.Log($"{bullet.DamageCount}");
                 StateMachine.ApplyHitDamaged(bullet.KnockbackVelocity, 0, StateMachine, bullet.KnockbackGage);
             }
         }
@@ -592,7 +591,6 @@ namespace LGProject.PlayerState
         public void ShowUltimateEffect()
         {
             effectManager.Play(EffectManager.EFFECT.Ultimate).Forget();
-            Debug.Log("UltimateFull");
         }
 
         #endregion

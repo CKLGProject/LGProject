@@ -17,7 +17,7 @@ namespace LGProject.PlayerState
         public override void Enter()
         {
             base.Enter();
-            Debug.Log("LandingState");
+
             StateMachine.physics.isKinematic = false;
             StateMachine.StandingVelocity();
             StateMachine.animator.SetTrigger(Landing);
