@@ -1,19 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Cysharp.Threading.Tasks;
-using System;
 namespace LGProject.PlayerState
 {
     public class UltimateState : State
     {
         protected const float FocusWeight = 5f;
         protected const float OroginWeight = 1.5f;
-        protected float UltimateDelay = 0f;
-        protected bool _isMove;
-        public UltimateState(PlayerStateMachine stateMachine, float delay) : base(stateMachine)
+        public UltimateState(PlayerStateMachine stateMachine) : base(stateMachine)
         {
-            UltimateDelay = delay;
+
         }
 
         public override void Enter()
@@ -23,7 +19,6 @@ namespace LGProject.PlayerState
             // 얼티밋을 사용하면 게이지가 닮.
             StateMachine.playable.SetUltimateGage(0);
             // 카메라 확대 
-            _isMove = false;
             StateMachine.playable.FocusUltimateUser(FocusWeight);
         }
 
@@ -41,13 +36,6 @@ namespace LGProject.PlayerState
         {
             base.PhysicsUpdate();
         }
-
-        protected async UniTaskVoid UsingUltimateSkill()
-        {
-            await UniTask.Delay(TimeSpan.FromSeconds(UltimateDelay), DelayType.Realtime);
-            _isMove = true;
-        }
-
 
     }
 

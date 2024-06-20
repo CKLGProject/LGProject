@@ -11,11 +11,12 @@ namespace LGProject.PlayerState
         // 슈우우우우웅 탁! 느낌이라
         // 흠 어케하면 좋을까...
 
+        private bool _isMove;
 
         private static readonly int Ultimate = Animator.StringToHash("Ultimate");
        
 
-        public KaneUltimateState(PlayerStateMachine stateMachine, float delay) : base(stateMachine, delay)
+        public KaneUltimateState(PlayerStateMachine stateMachine) : base(stateMachine)
         {
 
         }
@@ -34,7 +35,6 @@ namespace LGProject.PlayerState
             StateMachine.playable.effectManager.Play(EffectManager.EFFECT.UltimatePreRHand).Forget();
             StateMachine.battleModel.ShowCutScene(Data.ActorType.User, true);
             _isMove = false;
-            UsingUltimateSkill().Forget();
             WaitStart().Forget();
             Time.timeScale = 0.1f;
 
@@ -63,16 +63,25 @@ namespace LGProject.PlayerState
 
         }
 
+        protected async UniTaskVoid CutSceneAnimation()
+        {
+            await UniTask.Delay(TimeSpan.FromSeconds(2f), DelayType.Realtime);
+        }
+
         protected async UniTaskVoid WaitStart()
         {
             await UniTask.Delay(TimeSpan.FromSeconds(2f), DelayType.Realtime);
+            //StateMachine.playable.SwitchingWeapon(true);
+            //await UniTask.Delay(TimeSpan.FromSeconds(0.075f));
             StateMachine.battleModel.PlayAnimatorControllerTrigger("Hide");
+            _isMove = true;
             Time.timeScale = 1f;
             StateMachine.playable.effectManager.Stop(EffectManager.EFFECT.Ultimate);
             StateMachine.playable.effectManager.Stop(EffectManager.EFFECT.UltimatePreRHand);
             StateMachine.playable.effectManager.Stop(EffectManager.EFFECT.UltimatePreCenter);
             StateMachine.playable.effectManager.Play(EffectManager.EFFECT.UltimatePrePoint006).Forget();
             StateMachine.IsUseUltimate = false;
+            //StateMachine.battleModel.ShowCutScene(Data.ActorType.User, false);
 
             UltimateAttack();
             StateMachine.playable.FocusUltimateUser(OroginWeight);

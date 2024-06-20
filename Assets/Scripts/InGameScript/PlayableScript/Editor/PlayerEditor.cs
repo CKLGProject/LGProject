@@ -31,8 +31,6 @@ public class PlayerEditor : Editor
     private SerializedProperty _thirdAttackJudgeDelayProperty;
     private SerializedProperty _thirdAttackMovingValueProperty;
 
-    private SerializedProperty _ultimateDelay;
-
     private SerializedProperty _dashAttackDelayProperty;
 
     private SerializedProperty _hitDelayProperty;
@@ -125,9 +123,6 @@ public class PlayerEditor : Editor
 
         if (_thirdAttackMovingValueProperty == null)
             _thirdAttackMovingValueProperty = serializedObject.FindProperty("ThirdAttackMovingValue");
-
-        if (_ultimateDelay == null)
-            _ultimateDelay = serializedObject.FindProperty("UltimateDelay");
 
         if (_dashAttackDelayProperty == null)
             _dashAttackDelayProperty = serializedObject.FindProperty("DashAttackDelay");
@@ -339,16 +334,6 @@ public class PlayerEditor : Editor
             if (changeScope.changed)
             {
                 _dashAttackDelayProperty.floatValue = value;
-            }
-        }
-
-        EditorGUILayout.Space(10f);
-        using (var changeScop = new EditorGUI.ChangeCheckScope())
-        {
-            float value = EditorGUILayout.FloatField("필살기 사용 후 딜레이", _ultimateDelay.floatValue);
-            if (changeScop.changed)
-            {
-                _ultimateDelay.floatValue = value;
             }
         }
 
