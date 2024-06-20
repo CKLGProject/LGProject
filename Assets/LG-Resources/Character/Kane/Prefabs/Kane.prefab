@@ -126,7 +126,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5147967505005749542
 Transform:
   m_ObjectHideFlags: 0
@@ -178,6 +178,7 @@ MonoBehaviour:
   ThirdAttackJudgeDelay: 0.5
   ThirdAttackMovingValue: 3
   DashAttackDelay: 0.5
+  UltimateDelay: 2.5
   HitDelay: 1
   DownWaitDelay: 0.5
   WakeUpDelay: 0.5
@@ -564,6 +565,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: C_Ultmate_pre_BCenter_FX
       objectReference: {fileID: 0}
+    - target: {fileID: 8854604261172847914, guid: c23b7a9f6f275db4eb8da088143f22e1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -895,6 +901,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: C_Ultmate_pre_Point006_FX
+      objectReference: {fileID: 0}
+    - target: {fileID: 6057619051478344338, guid: d7c06250be584e44a992d626a7532299,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8397427733956846536, guid: d7c06250be584e44a992d626a7532299,
         type: 3}

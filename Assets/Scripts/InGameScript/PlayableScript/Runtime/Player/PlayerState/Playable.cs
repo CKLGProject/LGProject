@@ -54,6 +54,8 @@ namespace LGProject.PlayerState
 
         [HideInInspector] public float DashAttackDelay = 0;
 
+        [HideInInspector] public float UltimateDelay = 0f;
+
         [HideInInspector] public float HitDelay = 0;
 
         [HideInInspector] public float DownWaitDelay = 0;
@@ -61,6 +63,7 @@ namespace LGProject.PlayerState
         [HideInInspector] public float WakeUpDelay = 0;
 
         [HideInInspector] public int LifePoint = 3;
+
 
         [HideInInspector] public GameObject projectile;
 
