@@ -31,7 +31,7 @@ namespace LGProject.PlayerState
             StateMachine.ResetVelocity();
             
             // 피격 당해서 땅에 쿵 되었을 때 쿵 FX 출력
-            StateMachine.VocaFX.PlayVoca(EVocaType.Kung);
+            //StateMachine.VocaFX.PlayVoca(EVocaType.Kung);
         }
 
         public override void Exit()

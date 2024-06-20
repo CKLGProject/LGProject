@@ -65,6 +65,8 @@ namespace LGProject.PlayerState
         {
             await UniTask.Delay(TimeSpan.FromSeconds(1f), DelayType.Realtime);
             StateMachine.playable.SwitchingWeapon(true);
+            StateMachine.battleModel.ShowCutScene(Data.ActorType.User, false);
+            //StateMachine.battleModel.PlayAnimatorControllerTrigger("Hide");
             Time.timeScale = 1f;
             StateMachine.playable.effectManager.Play(EffectManager.EFFECT.UltimateHit).Forget();
             StateMachine.playable.effectManager.Play(EffectManager.EFFECT.UltimateDash).Forget();
@@ -73,7 +75,7 @@ namespace LGProject.PlayerState
             StateMachine.playable.effectManager.Stop(EffectManager.EFFECT.UltimatePreCenter);
             StateMachine.IsUseUltimate = false;
             // 내리찍을 때 주변 적에게 피해를 입히고 넉백시킴.
-            StateMachine.playable.FocusUltimateUser(OroginWeight);
+            StateMachine.playable.FocusUltimateUser(OriginWeight);
             ShockWake();
             await UniTask.Delay(TimeSpan.FromSeconds(2f), DelayType.Realtime);
             StateMachine.battleModel.ShowCutScene(Data.ActorType.User, false);

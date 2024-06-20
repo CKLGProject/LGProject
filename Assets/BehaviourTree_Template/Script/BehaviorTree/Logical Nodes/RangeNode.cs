@@ -51,7 +51,7 @@ namespace BehaviourTree
             }
             catch
             {
-                Debug.Log("Fuc");
+                Debug.LogError("Fuc");
             }
             return State.Failure;
         }

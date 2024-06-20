@@ -66,16 +66,18 @@ namespace LGProject.PlayerState
         protected async UniTaskVoid WaitStart()
         {
             await UniTask.Delay(TimeSpan.FromSeconds(2f), DelayType.Realtime);
-            StateMachine.battleModel.PlayAnimatorControllerTrigger("Hide");
+            StateMachine.battleModel.ShowCutScene(Data.ActorType.User, false);
+            //StateMachine.battleModel.PlayAnimatorControllerTrigger("Hide");
             Time.timeScale = 1f;
             StateMachine.playable.effectManager.Stop(EffectManager.EFFECT.Ultimate);
             StateMachine.playable.effectManager.Stop(EffectManager.EFFECT.UltimatePreRHand);
             StateMachine.playable.effectManager.Stop(EffectManager.EFFECT.UltimatePreCenter);
+            //StateMachine.playable.effectManager.Stop(EffectManager.EFFECT.UltimatePrePoint006);
             StateMachine.playable.effectManager.Play(EffectManager.EFFECT.UltimatePrePoint006).Forget();
             StateMachine.IsUseUltimate = false;
 
             UltimateAttack();
-            StateMachine.playable.FocusUltimateUser(OroginWeight);
+            StateMachine.playable.FocusUltimateUser(OriginWeight);
             await UniTask.Delay(TimeSpan.FromSeconds(2f), DelayType.Realtime);
             StateMachine.battleModel.ShowCutScene(Data.ActorType.User, false);
         }

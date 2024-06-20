@@ -27,9 +27,10 @@ namespace LGProject.PlayerState
             StateMachine.AttackCount = 0;
             //Debug.Log($"{stateMachine.transform.ToString()}who's hit? : {stateMachine.HitPlayer}");
             _currentTimer = 0;
+            StateMachine.physics.isKinematic = false;
 
             // 피격 당했을 때 퍽 FX 출력
-            StateMachine.VocaFX.PlayVoca(EVocaType.Fuck);
+            //StateMachine.VocaFX.PlayVoca(EVocaType.Fuck);
         }
 
         public override void Exit()

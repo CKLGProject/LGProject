@@ -437,7 +437,7 @@ Transform:
   m_GameObject: {fileID: 30018346}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.2125001, z: -9.5}
+  m_LocalPosition: {x: -2, y: 1.212, z: -9.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12670,8 +12670,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1208162867}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.017557181, y: 0.00000075416864, z: -0.000000013243116, w: 0.99984586}
-  m_LocalPosition: {x: 0, y: 3.6125002, z: -21.5}
+  m_LocalRotation: {x: 0.0342849, y: 0.000000019800527, z: -6.792584e-10, w: 0.9994121}
+  m_LocalPosition: {x: -2, y: 3.612, z: -21.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -13950,8 +13950,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1328400254}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.017557181, y: 0.00000075416864, z: -0.000000013243116, w: 0.99984586}
-  m_LocalPosition: {x: 0, y: 3.6125002, z: -21.5}
+  m_LocalRotation: {x: 0.0342849, y: 0.000000019800527, z: -6.792584e-10, w: 0.9994121}
+  m_LocalPosition: {x: -2, y: 3.612, z: -21.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14081,7 +14081,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 34.05996
+  field of view: 25
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
@@ -17441,6 +17441,7 @@ MonoBehaviour:
   ThirdAttackJudgeDelay: 1
   ThirdAttackMovingValue: 1
   DashAttackDelay: 0
+  UltimateDelay: 0
   HitDelay: 0
   DownWaitDelay: 0
   WakeUpDelay: 0
@@ -20550,7 +20551,7 @@ PrefabInstance:
     - target: {fileID: 1683840886605889499, guid: 551b652ef833b4348a77fd7332d7b83c,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5134505680086110306, guid: 551b652ef833b4348a77fd7332d7b83c,
         type: 3}
