@@ -90,7 +90,7 @@ namespace LGProject
             IsStart = true;
             Timer = 180;
             // 시작하면 카메라를 옮겨줌
-            CameraZone.ForcusPlayer(OnlinePlayer.transform);
+            CameraZone.FocusPlayer(OnlinePlayer.transform);
             PlayCount = 2;
         }
 

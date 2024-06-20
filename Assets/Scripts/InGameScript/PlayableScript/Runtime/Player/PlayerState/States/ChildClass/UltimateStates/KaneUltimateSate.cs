@@ -30,6 +30,7 @@ namespace LGProject.PlayerState
             StateMachine.IsUseUltimate = true;
             StateMachine.animator.updateMode = AnimatorUpdateMode.UnscaledTime;
             StateMachine.playable.effectManager.Play(EffectManager.EFFECT.Ultimate).Forget();
+            //StateMachine.playable.effectManager.Play(EffectManager.EFFECT.UltimatePrePoint006).Forget();
             StateMachine.playable.effectManager.Play(EffectManager.EFFECT.UltimatePreCenter).Forget();
             StateMachine.playable.effectManager.Play(EffectManager.EFFECT.UltimatePreRHand).Forget();
             StateMachine.battleModel.ShowCutScene(Data.ActorType.User, true);
