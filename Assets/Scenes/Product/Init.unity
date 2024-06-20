@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
+  m_IndirectSpecularColor: {r: 0.12729266, g: 0.13414232, b: 0.12114291, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -249,7 +249,7 @@ MonoBehaviour:
   editorAutoLoad: 0
   loadScene:
     sceneAsset: {fileID: 102900000, guid: c9a195874f2f64366a3c85e78c9e92c2, type: 3}
-    path: Assets/Scenes/Product/Login.unity
+    path: Assets/Scenes/Product/Init Start.unity
   additiveScenes: []
   SkipMode: 3
   SkipAction:
