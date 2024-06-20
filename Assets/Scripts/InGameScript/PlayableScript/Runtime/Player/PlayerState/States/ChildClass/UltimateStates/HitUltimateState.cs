@@ -15,14 +15,14 @@ namespace LGProject.PlayerState
         private pathFinding.Node _movingNode;
         private Vector3 _movingPoint;
         private List<pathFinding.Node> _nodeList;
-        private bool _isMove;
+        private bool _isAttack;
 
         private RaycastHit hit;
 
         private static readonly int Ultimate = Animator.StringToHash("Ultimate");
 
 
-        public HitUltimateState(PlayerStateMachine _stateMachine) : base(_stateMachine)
+        public HitUltimateState(PlayerStateMachine stateMachine, float delay ) : base(stateMachine, delay)
         {
             _nodeList = pathFinding.Grid.Instance.WalkableNodeList;
             _nodeList.Reverse();
@@ -39,9 +39,9 @@ namespace LGProject.PlayerState
 
             StateMachine.IsUseUltimate = true;
             StateMachine.animator.updateMode = AnimatorUpdateMode.UnscaledTime;
-            _isMove = false;
+            _isAttack = false;
             StateMachine.battleModel.ShowCutScene(Data.ActorType.User, true);
-
+            UsingUltimateSkill().Forget();
             WaitStart().Forget();
             Time.timeScale = 0.1f;
         }
@@ -60,15 +60,16 @@ namespace LGProject.PlayerState
             // velociy 돌진이 아니라 해당 위치까지 이동을 시켜주는 것이 좋음
             float distance = Vector3.Distance(StateMachine.transform.position, _movingPoint);
             // 거리가 다 되지 않았으면서 움직일 수 있고, 진행 중 플랫폼이 존재하지 않을 때 까지 이동하기.
-            if (distance >= 1f && _isMove && StateMachine.CheckPlatform(StateMachine.transform.position + StateMachine.transform.forward * 1.5f + StateMachine.transform.up * -0.5f))
+            if (distance >= 1f && _isAttack && StateMachine.CheckPlatform(StateMachine.transform.position + StateMachine.transform.forward * 1.5f + StateMachine.transform.up * -0.5f))
             {
 
                 // 현재 6칸 / 6m 이동 중 6m사이에 적이 있으면 해당 적 앞에서 멈추고 애니메이션 실행 
                 StateMachine.transform.position = Vector3.MoveTowards(StateMachine.transform.position, _movingPoint, 100f * Time.deltaTime);
             }
             else if (_isMove)
+            {
                 StateMachine.ChangeState(StateMachine.idleState);
-
+            }
         }
 
         public override void PhysicsUpdate()
@@ -89,19 +90,6 @@ namespace LGProject.PlayerState
 
         private void MovementPointSet()
         {
-            //int pointX = 0;
-            //int pointY = 0;
-            //pathFinding.Node node = pathFinding.Grid.Instance.NodeFromWorldPoint(StateMachine.transform.position);
-            //pointX = node.GridX;
-            //pointY = node.GridY;
-            //// 맥스치는 0 ~ 19 1/3만큼 이동할 것이다 그럼?;
-            //int point = 19 / 3; // 6;
-            //pointX = StateMachine.transform.forward.x > 0 ? pointX + point : pointX - point;
-            //pointX = pointX < 1 ? 1 : pointX;
-            //pointX = pointX > 19 ? 18 : pointX;
-
-            //_movingNode = _nodeList[pointX];
-            //_movingPoint = new Vector3(_movingNode.WorldPosition.x, StateMachine.transform.position.y, StateMachine.transform.position.z);
 
             // 앞으로 5거리만큼 이동.
             _movingPoint = StateMachine.transform.position + StateMachine.transform.forward * 4f;
@@ -123,7 +111,7 @@ namespace LGProject.PlayerState
         {
             await UniTask.Delay(TimeSpan.FromSeconds(1.75f), DelayType.Realtime);
             StateMachine.battleModel.PlayAnimatorControllerTrigger("Hide");
-            _isMove = true;
+            _isAttack = true;
             Time.timeScale = 1f;
             StateMachine.playable.effectManager.Stop(EffectManager.EFFECT.Ultimate);
             StateMachine.animator.updateMode = AnimatorUpdateMode.Normal;

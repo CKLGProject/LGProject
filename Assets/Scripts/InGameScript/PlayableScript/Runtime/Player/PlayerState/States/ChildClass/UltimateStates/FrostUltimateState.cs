@@ -11,12 +11,11 @@ namespace LGProject.PlayerState
         // 자기 강화 궁극기
         // 지속시간 5초
 
-        private bool _isMove;
 
         private static readonly int Ultimate = Animator.StringToHash("Ultimate");
         
 
-        public FrostUltimateState(PlayerStateMachine _stateMachine) : base(_stateMachine)
+        public FrostUltimateState(PlayerStateMachine stateMachine, float delay) : base(stateMachine, delay)
         {
 
         }
@@ -35,6 +34,7 @@ namespace LGProject.PlayerState
             StateMachine.playable.effectManager.Play(EffectManager.EFFECT.UltimatePreRHand).Forget();
             _isMove = false;
             StateMachine.battleModel.ShowCutScene(Data.ActorType.User, true);
+            UsingUltimateSkill().Forget();
             WaitStart().Forget();
             Time.timeScale = 0.1f;
         }
@@ -63,10 +63,8 @@ namespace LGProject.PlayerState
 
         protected async UniTaskVoid WaitStart()
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(0.1f));
+            await UniTask.Delay(TimeSpan.FromSeconds(1f), DelayType.Realtime);
             StateMachine.playable.SwitchingWeapon(true);
-            //await UniTask.Delay(TimeSpan.FromSeconds(0.075f));
-            _isMove = true;
             Time.timeScale = 1f;
             StateMachine.playable.effectManager.Play(EffectManager.EFFECT.UltimateHit).Forget();
             StateMachine.playable.effectManager.Play(EffectManager.EFFECT.UltimateDash).Forget();

@@ -144,6 +144,7 @@ MonoBehaviour:
   ThirdAttackJudgeDelay: 0.2
   ThirdAttackMovingValue: 3
   DashAttackDelay: 0.5
+  UltimateDelay: 1
   HitDelay: 1
   DownWaitDelay: 0.5
   WakeUpDelay: 0.5
