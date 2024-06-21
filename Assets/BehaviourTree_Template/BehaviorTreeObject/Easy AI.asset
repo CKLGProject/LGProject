@@ -138,7 +138,6 @@ MonoBehaviour:
   description: "\uD53C\uD574\uB97C \uC785\uC5B4 \uB204\uC6CC\uC788\uB294 \uC560\uB2C8\uBA54\uC774\uC158\uC774
     \uCD9C\uB825\uB428.\n\uACF5\uC911\uC5D0 \uB4E0 \uC0C1\uD0DC\uBA74 \uD0C0\uC774\uBA38\uAC00
     \uB3CC\uC9C0 \uC54A\uC74C."
-  Agent: {fileID: 0}
   downTimer: 1
 --- !u!114 &-7104301402895992465
 MonoBehaviour:
@@ -164,7 +163,7 @@ MonoBehaviour:
   - {fileID: 429546570504228725}
   - {fileID: -4056544319149206852}
   - {fileID: -3990081122036225864}
-  current: 1
+  current: 0
 --- !u!114 &-6895995334728390926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -233,7 +232,7 @@ MonoBehaviour:
   - {fileID: 8561578144344339604}
   - {fileID: 979470226565153095}
   - {fileID: -1847989979969271714}
-  current: 2
+  current: 0
 --- !u!114 &-4288313280875520722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -320,7 +319,7 @@ MonoBehaviour:
   state: 2
   started: 0
   guid: 9f9c52804eea2e14da7c847718889032
-  position: {x: 711.00006, y: 809.065}
+  position: {x: 710.99994, y: 809}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
@@ -328,7 +327,7 @@ MonoBehaviour:
   children:
   - {fileID: -8219645718292566422}
   - {fileID: -2826794560748770681}
-  current: 2
+  current: 0
 --- !u!114 &-4056544319149206852
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -385,7 +384,7 @@ MonoBehaviour:
   state: 2
   started: 0
   guid: a0824f2786eaaa84e8d8044a0254cc62
-  position: {x: 951.00006, y: 1251}
+  position: {x: 951, y: 1250.9999}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
@@ -393,7 +392,7 @@ MonoBehaviour:
   children:
   - {fileID: -9094113144568606400}
   - {fileID: 3354794614377933772}
-  current: 2
+  current: 0
 --- !u!114 &-3455377277169705623
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -521,7 +520,7 @@ MonoBehaviour:
   state: 1
   started: 0
   guid: 1519ef2a3f5aa93458e9a5edc4eac577
-  position: {x: 462.00012, y: 645}
+  position: {x: 462, y: 644}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
@@ -554,7 +553,7 @@ MonoBehaviour:
   - {fileID: -1314574971530753747}
   - {fileID: -7252241123171764499}
   - {fileID: 6263507584445490026}
-  current: 1
+  current: 0
 --- !u!114 &-1847989979969271714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -570,7 +569,7 @@ MonoBehaviour:
   state: 1
   started: 0
   guid: e8f5a5b3cbda8f04ab15bbe104c10fad
-  position: {x: 38.00008, y: 495}
+  position: {x: 37.999992, y: 494.99997}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
@@ -578,7 +577,7 @@ MonoBehaviour:
   children:
   - {fileID: 6457612046067698217}
   - {fileID: -7104301402895992465}
-  current: 1
+  current: 0
 --- !u!114 &-1743591964760258194
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -775,7 +774,7 @@ MonoBehaviour:
   - {fileID: 6577803585413208398}
   - {fileID: 4814404046932979626}
   - {fileID: -1878908651922025553}
-  current: 2
+  current: 0
 --- !u!114 &429546570504228725
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -947,7 +946,6 @@ MonoBehaviour:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
   description: "\uACBD\uC9C1"
-  Agent: {fileID: 0}
   stunedTimer: 1.5
 --- !u!114 &6263507584445490026
 MonoBehaviour:
@@ -1083,7 +1081,7 @@ MonoBehaviour:
   children:
   - {fileID: -9214143172723323414}
   - {fileID: 8725824852736064917}
-  current: 2
+  current: 0
 --- !u!114 &8561578144344339604
 MonoBehaviour:
   m_ObjectHideFlags: 0

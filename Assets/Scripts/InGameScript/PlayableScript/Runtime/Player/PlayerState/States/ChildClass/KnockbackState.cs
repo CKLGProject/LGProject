@@ -16,6 +16,7 @@ namespace LGProject.PlayerState
             // 날아가는 중임을 체크
             //StateMachine.IsKnockback = true;
             //StateMachine.animator.SetTrigger("Knockback");
+            StateMachine.physics.isKinematic = false;
         }
 
         public override void Exit()

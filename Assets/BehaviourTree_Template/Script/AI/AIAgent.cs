@@ -42,10 +42,16 @@ namespace BehaviourTree
             
             if (Instance == null) 
                 Instance = this;
+            else
+            {
+                Destroy(Instance.gameObject);
+                Instance = this;
+            }
             
-
+            
             StateMachine = new LGProject.PlayerState.PlayerStateMachine();
             StateMachine = LGProject.PlayerState.PlayerStateMachine.CreateStateMachine(gameObject);
+            StateMachine.IsGrounded = true;
             //SetAIModel();
         }
 
@@ -91,24 +97,27 @@ namespace BehaviourTree
 
         private void Update()
         {
-            // 바라보는 방향 -> 일단 무조건 플레이어를 바라보게 설정
-            // 일단 여기에 넣어보자
-            if(StateMachine.IsKnockback || !StateMachine.IsGrounded)
+            if (BattleSceneSystem.Instance.IsStart)
             {
-                curTimer += Time.deltaTime;
-                if (curTimer < minTimer)
-                    return;
+                // 바라보는 방향 -> 일단 무조건 플레이어를 바라보게 설정
+                // 일단 여기에 넣어보자
+                if (StateMachine.IsKnockback || !StateMachine.IsGrounded)
+                {
+                    curTimer += Time.deltaTime;
+                    if (curTimer < minTimer)
+                        return;
+                }
+                else
+                {
+                    curTimer = 0;
+                }
+                GetStateMachine.Update();
+                PlayableGravity();
+                NewPlatformCheck();
+                DeadSpaceCheck();
+                CameraCheck();
+                UnderPlatformCheck();
             }
-            else
-            {
-                curTimer = 0;
-            }
-            PlayableGravity();
-            GetStateMachine.Update();
-            NewPlatformCheck();
-            DeadSpaceCheck();
-            CameraCheck();
-            UnderPlatformCheck();
         }
 
         private void OnDrawGizmos()

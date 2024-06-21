@@ -16,7 +16,6 @@ namespace BehaviourTree
         private readonly int Landing = Animator.StringToHash("Landing");
         protected override void OnStart()
         {
-            //Debug.Log("WakeUpStateStart");
             curTimer = 0;
             if (_stateMachine == null)
                 _stateMachine = AIAgent.Instance.GetStateMachine;
