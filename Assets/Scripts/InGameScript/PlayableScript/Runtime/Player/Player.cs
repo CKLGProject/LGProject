@@ -58,6 +58,7 @@ namespace LGProject.PlayerState
                 {
                     _currentTimer = 0;
                 }
+                SuperAmmorTimer();
                 StateMachine.CurrentState.LogicUpdate();
                 StateMachine.Update();
                 PlayableGravity();

@@ -73,6 +73,13 @@ namespace LGProject.PlayerState
         public float respawnTime;
 
 
+        [Header("무적 블링크 정보")]
+        public SkinnedMeshRenderer[] SkinnedMeshRenderer;
+        [SerializeField] private float BlinkTimer = 2.5f;
+        [Min(0.1f), Range(0.1f, 1f)]
+        [SerializeField] private float BlinkInterval = 0.1f;
+
+
         public float DamageGage { get; private set; }
         public void SetDamageGage(float value) => DamageGage = value;
 
@@ -82,6 +89,7 @@ namespace LGProject.PlayerState
         {
             UltimateGage = Mathf.Clamp(value, 0, 100);
             battleModel.SyncUltimateEnergy(ActorType, UltimateGage);
+            StateMachine.UltimateGageIsFull();
         }
 
         public void Cheat()
@@ -223,7 +231,6 @@ namespace LGProject.PlayerState
                 StateMachine.StandingVelocity();
         }
 
-
         public void FocusUltimateUser(float focus)
         {
             CollisionObserver.GetCameraZone().UltimateForcus(transform, focus);
@@ -269,10 +276,60 @@ namespace LGProject.PlayerState
                         StateMachine.IsJumpping = true;
                         StateMachine.collider.isTrigger = true;
                     }
-
                     break;
                 default:
                     break;
+            }
+        }
+
+        /// <summary>
+        /// 플레이어 메시 껐다 켰다 해주기
+        /// </summary>
+        /// <returns></returns>
+        public async UniTaskVoid PlayerMashBlink()
+        {
+            while(StateMachine.IsSuperArmor)
+            {
+                EnAblePlayerMesh();
+                await UniTask.Delay(TimeSpan.FromSeconds(BlinkInterval * 0.5f), DelayType.Realtime);
+                AblePlayerMesh();
+                await UniTask.Delay(TimeSpan.FromSeconds(BlinkInterval * 0.5f), DelayType.Realtime);
+            }
+        }
+
+        /// <summary>
+        /// 플레이어 메시 꺼주기
+        /// </summary>
+        private void EnAblePlayerMesh()
+        {
+            foreach(var skin in SkinnedMeshRenderer)
+            {
+                skin.enabled = false;
+            }
+        }
+
+        float currentSuperAmmorTimer = 0;
+        protected void SuperAmmorTimer()
+        {
+            if(StateMachine.IsSuperArmor)
+            {
+                currentSuperAmmorTimer += Time.deltaTime;
+                if(currentSuperAmmorTimer > BlinkTimer)
+                {
+                    StateMachine.IsSuperArmor = false;
+                    currentSuperAmmorTimer = 0;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 플레이어 메시 켜주기
+        /// </summary>
+        private void AblePlayerMesh()
+        {
+            foreach (var skin in SkinnedMeshRenderer)
+            {
+                skin.enabled = true;
             }
         }
 
@@ -432,17 +489,6 @@ namespace LGProject.PlayerState
                 }
             }
         }
-
-        //private bool AABBPlatformCheck()
-        //{
-        //    if (transform.position.x < UnderPlatform.rect.x && transform.position.x > UnderPlatform.rect.width &&
-        //        transform.position.y < UnderPlatform.rect.y && transform.position.y > UnderPlatform.rect.height)
-        //    {
-        //        return true;
-        //    }
-
-        //    return false;
-        //}
 
         public Platform PlatformZoneCheck()
         {
