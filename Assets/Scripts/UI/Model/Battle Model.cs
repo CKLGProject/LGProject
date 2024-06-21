@@ -34,7 +34,6 @@ public class BattleModel : MonoBehaviour
     /// <param name="trigger"></param>
     public void PlayAnimatorControllerTrigger(string trigger)
     {
-        Debug.Log("Call Hide Animator");
         _cutSceneAnimatorProperty.Value = trigger;
     }
     

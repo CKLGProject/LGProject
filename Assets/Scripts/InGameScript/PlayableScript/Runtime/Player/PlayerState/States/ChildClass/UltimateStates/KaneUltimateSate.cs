@@ -85,7 +85,7 @@ namespace LGProject.PlayerState
 
         private void UltimateAttack()
         {
-            Collider[] checkPlayer = Physics.OverlapBox(StateMachine.transform.position + StateMachine.transform.forward * 2f, new Vector3(3f, 1, 1), Quaternion.identity, 1 << 3);
+            Collider[] checkPlayer = Physics.OverlapBox(StateMachine.transform.position + StateMachine.transform.forward * 2.5f, new Vector3(3f, 1, 1), Quaternion.identity, 1 << 3);
             GameObject obj = GameObject.Instantiate(new GameObject());
             obj.transform.position = StateMachine.transform.position + StateMachine.transform.forward * 2f;
             obj.transform.localScale = new Vector3(3f, 1, 1);
