@@ -32,8 +32,6 @@ namespace BehaviourTree
         {
             try
             {
-
-                // 여기서 야랄나는 것임.
                 if ((!_stateMachine.IsKnockback) && _stateMachine.IsGrounded)
                 {
                     Debug.Log("Flight Fail");

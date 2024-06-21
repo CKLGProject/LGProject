@@ -67,7 +67,8 @@ namespace LGProject.PlayerState
         {
             await UniTask.Delay(TimeSpan.FromSeconds(2f), DelayType.Realtime);
             StateMachine.battleModel.ShowCutScene(Data.ActorType.User, false);
-            //StateMachine.battleModel.PlayAnimatorControllerTrigger("Hide");
+            StateMachine.battleModel.PlayAnimatorControllerTrigger("Hide");
+
             Time.timeScale = 1f;
             StateMachine.playable.effectManager.Stop(EffectManager.EFFECT.Ultimate);
             StateMachine.playable.effectManager.Stop(EffectManager.EFFECT.UltimatePreRHand);
@@ -84,8 +85,12 @@ namespace LGProject.PlayerState
 
         private void UltimateAttack()
         {
-            Collider[] checkPlayer = Physics.OverlapBox(StateMachine.transform.position + StateMachine.transform.forward * 2f, new Vector3(4, 1, 1), Quaternion.identity, 1 << 3);
-            foreach(var player in checkPlayer)
+            Collider[] checkPlayer = Physics.OverlapBox(StateMachine.transform.position + StateMachine.transform.forward * 2.5f, new Vector3(3f, 1, 1), Quaternion.identity, 1 << 3);
+            GameObject obj = GameObject.Instantiate(new GameObject());
+            obj.transform.position = StateMachine.transform.position + StateMachine.transform.forward * 2f;
+            obj.transform.localScale = new Vector3(3f, 1, 1);
+
+            foreach (var player in checkPlayer)
             {
                 Vector3 velocity = StateMachine.transform.forward * 9f + StateMachine.transform.up * 9f;
 

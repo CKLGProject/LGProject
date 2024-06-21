@@ -129,13 +129,16 @@ namespace LGProject.PlayerState
         /// <returns></returns>
         public static PlayerStateMachine CreateStateMachine(GameObject obj)
         {
+            Debug.Log("AA");
             PlayerStateMachine psm = new PlayerStateMachine();
             psm.transform = obj.transform;
             psm.playable = obj.GetComponent<Playable>();
             psm.AudioSource = obj.GetComponent<FMODAudioSource>();
             psm.animator = psm.playable.Animator;
             psm.physics = obj.GetComponent<Rigidbody>();
+            psm.physics.isKinematic = false;
             psm.collider = obj.GetComponent<Collider>();
+            psm.collider.isTrigger = false;
             psm.CharacterType = psm.playable.CharacterType;
             psm.IsGrounded = true;
             psm.IsGuard = false;

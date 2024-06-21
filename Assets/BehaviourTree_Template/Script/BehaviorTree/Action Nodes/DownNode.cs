@@ -24,6 +24,7 @@ namespace BehaviourTree
             StateMachine.IsDown = true;
             StateMachine.IsGrounded = true;
             StateMachine.animator.SetInteger(Run, 0);
+            Debug.Log("Down");
         }
 
         protected override void OnStop()

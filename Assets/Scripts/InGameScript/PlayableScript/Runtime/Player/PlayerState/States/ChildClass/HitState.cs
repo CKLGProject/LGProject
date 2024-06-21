@@ -23,7 +23,6 @@ namespace LGProject.PlayerState
 
             StateMachine.AttackCount = 0;
             _currentTimer = 0;
-            StateMachine.physics.isKinematic = false;
 
             // 피격 당했을 때 퍽 FX 출력
         }
