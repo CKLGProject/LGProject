@@ -99,6 +99,7 @@ namespace BehaviourTree
         {
             if (BattleSceneSystem.Instance.IsStart)
             {
+                SuperAmmorTimer();
                 // 바라보는 방향 -> 일단 무조건 플레이어를 바라보게 설정
                 // 일단 여기에 넣어보자
                 if (StateMachine.IsKnockback || !StateMachine.IsGrounded)

@@ -22,7 +22,9 @@ namespace BehaviourTree
             _stateMachine.IsKnockback = false;
             _stateMachine.IsDamaged = false;
             _stateMachine.animator.ResetTrigger(Landing);
-            Debug.Log("WakeUp");
+            _stateMachine.BlinkPlayerMesh();
+            //_stateMachine.BlinkPlayerMaterial();
+            //Debug.Log("WakeUp");
         }
 
         protected override void OnStop()
@@ -31,6 +33,7 @@ namespace BehaviourTree
             try
             {
                 _stateMachine.IsDown = false;
+                //Debug.Log("WakeUpEnd");
             }
             catch
             {

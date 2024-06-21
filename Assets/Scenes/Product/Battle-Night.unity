@@ -3457,6 +3457,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6559117602054936325, guid: e748e159dd59aae4188ea3f4a8ac1c84,
         type: 3}
+      propertyPath: SkinnedMeshRenderer
+      value: 
+      objectReference: {fileID: 1236644441}
+    - target: {fileID: 6559117602054936325, guid: e748e159dd59aae4188ea3f4a8ac1c84,
+        type: 3}
       propertyPath: FirstAttackJudgeDelay
       value: 0.1
       objectReference: {fileID: 0}
@@ -4378,6 +4383,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1377608663600074391, guid: af5c522be8efb4b76b7f647f18ccff3c,
         type: 3}
+      propertyPath: UltimateDelay
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1377608663600074391, guid: af5c522be8efb4b76b7f647f18ccff3c,
+        type: 3}
       propertyPath: JumpAttackBulletPrefab
       value: 
       objectReference: {fileID: 568890504}
@@ -5220,7 +5230,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 58.89, y: -25}
-  m_SizeDelta: {x: 117.78, y: 50}
+  m_SizeDelta: {x: 0, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &577642006
 MonoBehaviour:
@@ -5788,7 +5798,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 148.56, y: -32.601997}
-  m_SizeDelta: {x: 61.56, y: 34.796}
+  m_SizeDelta: {x: 0, y: 34.796}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &643237068
 MonoBehaviour:
@@ -7645,7 +7655,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 57.725, y: -25}
-  m_SizeDelta: {x: 115.45, y: 50}
+  m_SizeDelta: {x: 0, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &821826900
 MonoBehaviour:
@@ -12772,7 +12782,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1208162867}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.03422829, y: -0.00008961909, z: 0.0000030693068, w: 0.999414}
+  m_LocalRotation: {x: 0.03422829, y: -0.00008962277, z: 0.000003069433, w: 0.999414}
   m_LocalPosition: {x: -1.3333335, y: 3.1846669, z: -21.544926}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -12894,6 +12904,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1225981787}
   m_CullTransparentMesh: 1
+--- !u!137 &1236644441 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8904399688858621143, guid: e748e159dd59aae4188ea3f4a8ac1c84,
+    type: 3}
+  m_PrefabInstance: {fileID: 440253768}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1237422779
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14052,7 +14068,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1328400254}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.03422829, y: -0.00008961909, z: 0.0000030693068, w: 0.999414}
+  m_LocalRotation: {x: 0.03422829, y: -0.00008962277, z: 0.000003069433, w: 0.999414}
   m_LocalPosition: {x: -1.3333335, y: 3.1846669, z: -21.544926}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -17558,6 +17574,7 @@ MonoBehaviour:
   movingAttack: 1
   AliveOffset: {x: 0, y: 0, z: 0}
   respawnTime: 0
+  SkinnedMeshRenderer: {fileID: 0}
   DefaultWeapon: {fileID: 0}
   UltimateWeapon: {fileID: 0}
   audioSource: {fileID: 0}

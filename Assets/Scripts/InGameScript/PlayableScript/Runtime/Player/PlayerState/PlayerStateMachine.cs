@@ -433,6 +433,11 @@ namespace LGProject.PlayerState
             physics.velocity = transform.up * 1.5f;
         }
 
+        public void SuperAmmor()
+        {
+            IsSuperArmor = true;
+        }
+
 
         /// <summary>
         /// 
@@ -617,6 +622,12 @@ namespace LGProject.PlayerState
                 Debug.Log("사용할 수 있는 오디오 클립이 존재하지 않습니다.");
 #endif
             }
+        }
+
+        public void BlinkPlayerMesh()
+        {
+            IsSuperArmor = true;
+            playable.PlayerMashBlink().Forget();
         }
 
         /// <summary>
