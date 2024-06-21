@@ -77,7 +77,7 @@ public class LobbyPopupPresenter : MonoBehaviour
 #if UNITY_STANDALONE
                 _lobbyView.ShowToastMessage(1);
 #else
-                _lobbyView.ShowErrorMessage(2);
+                _lobbyView.ShowErrorMessage(1);
 #endif
             })
             .AddTo(this);
@@ -86,9 +86,9 @@ public class LobbyPopupPresenter : MonoBehaviour
             .Subscribe(_ =>
             {
 #if UNITY_STANDALONE
-                _lobbyView.ShowToastMessage(2);
+                _lobbyView.ShowToastMessage(1);
 #else
-                 _lobbyView.ShowErrorMessage(2);
+                 _lobbyView.ShowErrorMessage(1);
 #endif
             })
             .AddTo(this);
