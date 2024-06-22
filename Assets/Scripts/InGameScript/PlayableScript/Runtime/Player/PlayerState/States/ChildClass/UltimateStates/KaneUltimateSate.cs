@@ -17,7 +17,7 @@ namespace LGProject.PlayerState
 
         public KaneUltimateState(PlayerStateMachine stateMachine, float delay) : base(stateMachine, delay)
         {
-
+            UltimateSFXName = "Kane_Ultimate";
         }
 
         public override void Enter()
@@ -43,6 +43,7 @@ namespace LGProject.PlayerState
         public override void Exit()
         {
             base.Exit();
+            StateMachine.playable.PlayingUltimateReadySFX(false);
 
         }
 
@@ -85,6 +86,7 @@ namespace LGProject.PlayerState
 
         private void UltimateAttack()
         {
+            StateMachine.PlayAudioClip(UltimateSFXName);
             Collider[] checkPlayer = Physics.OverlapBox(StateMachine.transform.position + StateMachine.transform.forward * 2.5f, new Vector3(3f, 1, 1), Quaternion.identity, 1 << 3);
             GameObject obj = GameObject.Instantiate(new GameObject());
             obj.transform.position = StateMachine.transform.position + StateMachine.transform.forward * 2f;

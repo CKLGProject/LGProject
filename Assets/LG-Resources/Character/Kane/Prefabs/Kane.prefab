@@ -105,8 +105,8 @@ MonoBehaviour:
   Preload: 0
   AllowNonRigidbodyDoppler: 0
   OverrideAttenuation: 0
-  OverrideMinDistance: -1
-  OverrideMaxDistance: -1
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &7066266423145889497
 GameObject:
   m_ObjectHideFlags: 0
@@ -187,6 +187,9 @@ MonoBehaviour:
   movingAttack: 1
   AliveOffset: {x: 0, y: 0, z: 0}
   respawnTime: 0
+  SkinnedMeshRenderer: []
+  BlinkTimer: 0
+  BlinkInterval: 0.1
   DefaultWeapon: {fileID: 0}
   UltimateWeapon: {fileID: 0}
   audioSource: {fileID: 7076176742742437425}

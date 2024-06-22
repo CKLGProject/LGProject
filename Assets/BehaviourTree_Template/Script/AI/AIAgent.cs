@@ -26,7 +26,8 @@ namespace BehaviourTree
 
         [SerializeField] private GameObject[] ChildModels;
 
-       
+        [Header("Sounds Great")]
+        public string[] CallingSoundNames;       
         [HideInInspector] public int GuardPercent;
         [HideInInspector] public int AttackPercent;
         [HideInInspector] public int ChasingPercent;

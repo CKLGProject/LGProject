@@ -17,6 +17,7 @@ namespace LGProject.PlayerState
 
         public FrostUltimateState(PlayerStateMachine stateMachine, float delay) : base(stateMachine, delay)
         {
+            UltimateSFXName = "Frost_Ultimate";
 
         }
         public override void Enter()
@@ -42,6 +43,7 @@ namespace LGProject.PlayerState
         public override void Exit()
         {
             base.Exit();
+            StateMachine.playable.PlayingUltimateReadySFX(false);
         }
 
         public override void LogicUpdate()
@@ -84,6 +86,7 @@ namespace LGProject.PlayerState
         // 프로스트가 내리찍을 때 작동하는 기능 
         private void ShockWake()
         {
+            StateMachine.PlayAudioClip(UltimateSFXName);
             Collider[] checkPlayer = Physics.OverlapSphere(StateMachine.transform.position, 3, 1 << 3);
 
             foreach (var player in checkPlayer)

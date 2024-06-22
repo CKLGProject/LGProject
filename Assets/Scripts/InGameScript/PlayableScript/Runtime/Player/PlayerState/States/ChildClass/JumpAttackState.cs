@@ -11,9 +11,11 @@ namespace LGProject.PlayerState
         protected bool _damageInCount;
         protected static readonly int JumpAttack = Animator.StringToHash("JumpAttack");
         protected static readonly int Landing = Animator.StringToHash("Landing");
-        public JumpAttackState(PlayerStateMachine stateMachine, float maximumSpeed) : base(stateMachine)
+        protected static string _sfxName = string.Empty;
+        public JumpAttackState(PlayerStateMachine stateMachine, float maximumSpeed, string sfxName) : base(stateMachine)
         {
             _maximumSpeed = maximumSpeed;
+            _sfxName = sfxName;
         }
 
         public override void Enter()
@@ -26,6 +28,7 @@ namespace LGProject.PlayerState
             StateMachine.playable.effectManager.Play(EffectManager.EFFECT.JumpAttack, 0.1f).Forget();
             StateMachine.animator.SetTrigger(JumpAttack);
             _damageInCount = false;
+            StateMachine.PlayAudioClip(_sfxName);
         }
 
         public override void Exit()

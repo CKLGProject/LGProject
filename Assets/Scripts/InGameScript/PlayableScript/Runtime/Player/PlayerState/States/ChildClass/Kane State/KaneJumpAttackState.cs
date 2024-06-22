@@ -8,7 +8,7 @@ namespace  LGProject.PlayerState
     {
         float currentTimer = 0f;
         float stopTimer = 0.2f;
-        public KaneJumpAttackState(PlayerStateMachine stateMachine, float maximumSpeed) : base(stateMachine, maximumSpeed)
+        public KaneJumpAttackState(PlayerStateMachine stateMachine, float maximumSpeed, string sfxName) : base(stateMachine, maximumSpeed, sfxName)
         {
             //_maximumSpeed = maximumSpeed;
         }
