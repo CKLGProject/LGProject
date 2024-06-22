@@ -272,7 +272,7 @@ namespace BehaviourTree
                 _agent.HandleJumpping();
                 _agent.GetStateMachine.collider.isTrigger = true;
                 _curTimer = 0;
-                Debug.Log($"JumpCount / {_agent.GetStateMachine.JumpInCount}");
+                //Debug.Log($"JumpCount / {_agent.GetStateMachine.JumpInCount}");
                 _agent.GetStateMachine.animator.SetTrigger("Jump" + _agent.GetStateMachine.JumpInCount.ToString());
             }
         }

@@ -17,7 +17,6 @@ namespace LGProject.PlayerState
             _secondAttackDelay = secondAttackDelay;
             _thirdJudgeDelay = thirdJudgeAttack;
             _thirdAttackDelay = thirdAttackDelay;
-            Debug.Log("Kane Attack State");
         }
 
         public override void Enter()
