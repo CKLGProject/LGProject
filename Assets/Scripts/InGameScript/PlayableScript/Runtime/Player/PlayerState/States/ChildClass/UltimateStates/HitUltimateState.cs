@@ -26,7 +26,7 @@ namespace LGProject.PlayerState
         {
             _nodeList = pathFinding.Grid.Instance.WalkableNodeList;
             _nodeList.Reverse();
-            //_delay = _delayTime;
+            UltimateSFXName = "Hit_Ultimate";
         }
 
         public override void Enter()
@@ -49,6 +49,7 @@ namespace LGProject.PlayerState
         public override void Exit()
         {
             base.Exit();
+            StateMachine.playable.PlayingUltimateReadySFX(false);
             StateMachine.IsUseUltimate = false;
         }
         //RaycastHit hit;
@@ -103,6 +104,7 @@ namespace LGProject.PlayerState
             // 그리고 타겟에게 피해를 입힘.
             Vector3 KnockbackValue = (StateMachine.transform.forward * 9f + StateMachine.transform.up * 9f) ;
 
+            StateMachine.PlayAudioClip(UltimateSFXName);
             targetStateMachine.ApplyHitDamaged(KnockbackValue, 0, StateMachine);
         }
 

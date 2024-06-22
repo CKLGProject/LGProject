@@ -30,6 +30,7 @@ namespace BehaviourTree
         protected override void OnStart()
         {
             StartExceptionHandling();
+            _stateMachine.PlayAudioClip(AIAgent.Instance.CallingSoundNames[0]);
         }
 
         protected override void OnStop()

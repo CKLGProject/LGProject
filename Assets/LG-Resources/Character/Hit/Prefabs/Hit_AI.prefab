@@ -167,8 +167,8 @@ MonoBehaviour:
   MaximumSpeed: 4
   DashSpeed: 0
   JumpScale: 1.1
-  FirstAttackDelay: 0.5
-  FirstAttackJudgeDelay: 0.2
+  FirstAttackDelay: 0.6
+  FirstAttackJudgeDelay: 0.5
   FirstAttackMovingValue: 1
   SecondAttackDelay: 0.6
   SecondAttackJudgeDelay: 0.2
@@ -191,7 +191,7 @@ MonoBehaviour:
   - {fileID: 1355248535655832082}
   - {fileID: 8881860252120503662}
   BlinkTimer: 2
-  BlinkInterval: 1
+  BlinkInterval: 0.5
   DefaultWeapon: {fileID: 0}
   UltimateWeapon: {fileID: 0}
   audioSource: {fileID: 5907203365814558733}
@@ -223,6 +223,8 @@ MonoBehaviour:
   targetIndex: 0
   isGround: 0
   ChildModels: []
+  CallingSoundNames:
+  - Hit_Attack
   GuardPercent: 0
   AttackPercent: 0
   ChasingPercent: 0

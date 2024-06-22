@@ -129,11 +129,10 @@ namespace LGProject.PlayerState
         /// <returns></returns>
         public static PlayerStateMachine CreateStateMachine(GameObject obj)
         {
-            Debug.Log("AA");
             PlayerStateMachine psm = new PlayerStateMachine();
             psm.transform = obj.transform;
             psm.playable = obj.GetComponent<Playable>();
-            psm.AudioSource = obj.GetComponent<FMODAudioSource>();
+            psm.AudioSource = psm.playable.AudioSourceProperty;
             psm.animator = psm.playable.Animator;
             psm.physics = obj.GetComponent<Rigidbody>();
             psm.physics.isKinematic = false;
@@ -161,7 +160,6 @@ namespace LGProject.PlayerState
                 //psm.ultimateState = new UltimateState(psm);
 
                 ApplyJumpAttackState(psm.CharacterType, psm);
-                psm.dashAttackState = new DashAttackState(psm, ref psm.playable.DashAttackDelay);
 
                 psm.hitState = new HitState(psm, ref psm.playable.HitDelay);
                 psm.guardState = new GuardState(psm);
@@ -203,7 +201,7 @@ namespace LGProject.PlayerState
                         ref psm.playable.ThirdAttackDelay);
                     break;
                 case ECharacterType.Hit:
-                    psm.attackState = new AttackState(psm, ref psm.playable.FirstAttackJudgeDelay,
+                    psm.attackState = new HitAttackState(psm, ref psm.playable.FirstAttackJudgeDelay,
                         ref psm.playable.FirstAttackDelay, ref psm.playable.SecondAttackJudgeDelay,
                         ref psm.playable.SecondAttackDelay, ref psm.playable.ThirdAttackJudgeDelay,
                         ref psm.playable.ThirdAttackDelay);
@@ -236,13 +234,16 @@ namespace LGProject.PlayerState
                 case ECharacterType.None:
                     break;
                 case ECharacterType.Hit:
-                    psm.jumpAttackState = new JumpAttackState(psm, psm.playable.MaximumSpeed);
+                    psm.jumpAttackState = new JumpAttackState(psm, psm.playable.MaximumSpeed, "Hit_Attack");
+                    psm.dashAttackState = new DashAttackState(psm, ref psm.playable.DashAttackDelay, "Hit_Attack");
                     break;
                 case ECharacterType.Frost:
-                    psm.jumpAttackState = new JumpAttackState(psm, psm.playable.MaximumSpeed);
+                    psm.jumpAttackState = new JumpAttackState(psm, psm.playable.MaximumSpeed, "Frost_Attack");
+                    psm.dashAttackState = new DashAttackState(psm, ref psm.playable.DashAttackDelay, "Frost_Attack");
                     break;
                 case ECharacterType.Kane:
-                    psm.jumpAttackState = new KaneJumpAttackState(psm, psm.playable.MaximumSpeed);
+                    psm.jumpAttackState = new KaneJumpAttackState(psm, psm.playable.MaximumSpeed, "Kane_Attack");
+                    psm.dashAttackState = new DashAttackState(psm, ref psm.playable.DashAttackDelay, "Hit_Attack");
                     break;
                 case ECharacterType.Storm:
                     break;
@@ -494,6 +495,8 @@ namespace LGProject.PlayerState
             }
         }
 
+        private readonly string DamagedSFXName = "Damaged";
+
         /// <summary>
         /// velocity     = 넉백 방향 및 날아가는 힘.
         /// nockbackDelay = 힘을 적용 받기까지의 시간.
@@ -521,6 +524,7 @@ namespace LGProject.PlayerState
 
             if (!IsGuard || (EnemyStateMachine != null && EnemyStateMachine.IsUseUltimate))
             {
+                PlayAudioClip(DamagedSFXName);
                 physics.velocity = Vector3.zero;
                 playable.SetDamageGage(playable.DamageGage + (IsUltimate == true ? DamageGage * 0.5f : DamageGage));
                 battleModel.SyncDamageGage(playable.ActorType, playable.DamageGage);
@@ -615,6 +619,7 @@ namespace LGProject.PlayerState
             {
                 if (AudioList.TryFindClip(clipName, out EventReference clip))
                     AudioSource.PlayOneShot(clip);
+                AudioSource.Play();
             }
             catch
             {

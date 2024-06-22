@@ -104,6 +104,8 @@ namespace LGProject.PlayerState
 
         [SerializeField] private FMODAudioSource audioSource;
 
+        public FMODAudioSource AudioSourceProperty { get { return audioSource; } }
+
         private LocalKeyList _localKeyList;
 
         // 공격 방향
@@ -368,6 +370,8 @@ namespace LGProject.PlayerState
         private static readonly int Knockback = Animator.StringToHash("Knockback");
         private static readonly int WakeUp = Animator.StringToHash("WakeUp");
         private static readonly int Down = Animator.StringToHash("Down");
+        private static readonly string KnockbackSFXName = "Knockback";
+        private static readonly string UltimateReadySFXName = "UltimateReady";
         //private static readonly int 
 
         #region Initialize
@@ -434,6 +438,7 @@ namespace LGProject.PlayerState
 
         private void KncokbackLandingCheck()
         {
+            StateMachine.PlayAudioClip(KnockbackSFXName);
             StateMachine.VocaFX.PlayVoca(EVocaType.Kung);
             effectManager.Play(EffectManager.EFFECT.Knockback).Forget();
             StateMachine.animator.SetTrigger(Down);
@@ -637,6 +642,16 @@ namespace LGProject.PlayerState
         public void ShowUltimateEffect()
         {
             effectManager.Play(EffectManager.EFFECT.Ultimate).Forget();
+            PlayingUltimateReadySFX(true);
+
+        }
+
+        public void PlayingUltimateReadySFX(bool use)
+        {
+            if(use)
+                audioSource.Play();
+            else
+                audioSource.Stop();
         }
 
         #endregion

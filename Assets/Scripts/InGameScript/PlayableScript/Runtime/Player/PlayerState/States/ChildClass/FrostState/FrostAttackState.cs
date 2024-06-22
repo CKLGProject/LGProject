@@ -14,21 +14,21 @@ namespace LGProject.PlayerState
 
         public FrostAttackState(PlayerStateMachine stateMachine, ref float firstJudgeAttack, ref float firstAttackDelay, ref float secondJudgeAttack, ref float secondAttackDelay, ref float thirdJudgeAttack, ref float thirdAttackDelay) : base(stateMachine, ref firstJudgeAttack, ref firstAttackDelay, ref secondJudgeAttack, ref secondAttackDelay, ref thirdJudgeAttack, ref thirdAttackDelay)
         {
-            _currentTimer = 0;
+            CurrentTimer = 0;
 
-            _firstJudgeDelay = firstJudgeAttack;
-            _firstAttackDelay = firstAttackDelay;
-            _secondJudgeDelay = secondJudgeAttack;
-            _secondAttackDelay = secondAttackDelay;
-            _thirdJudgeDelay = thirdJudgeAttack;
-            _thirdAttackDelay = thirdAttackDelay;
+            FirstJudgeDelay = firstJudgeAttack;
+            FirstAttackDelay = firstAttackDelay;
+            SecondJudgeDelay = secondJudgeAttack;
+            SecondAttackDelay = secondAttackDelay;
+            ThirdJudgeDelay = thirdJudgeAttack;
+            ThirdAttackDelay = thirdAttackDelay;
+            AttackSoundName = "Frost_Attack";
         }
 
         public override void Enter()
         {
-            //base.Enter();
-            // 어디서 왔는지 체크가 필요할까?
-            _currentTimer = 0;
+
+            CurrentTimer = 0;
 
             #region 공격 로직 
             StateMachine.AttackCount++;
@@ -51,7 +51,7 @@ namespace LGProject.PlayerState
             // 공격하면서 전진.
             if (StateMachine.playable.movingAttack)
                 StateMachine.physics.velocity += StateMachine.transform.forward * moveValue;
-            _damageInCount = false;
+            DamageInCount = false;
             #endregion
 
             #region 애니메이션 출력
@@ -78,8 +78,7 @@ namespace LGProject.PlayerState
 
             #region 오디오 출력
 
-            // if (StateMachine.AudioList.TryFindClip("Punch", out EventReference clip))
-            //     StateMachine.AudioSource.PlayOneShot(clip);
+            StateMachine.PlayAudioClip(AttackSoundName);
 
             #endregion
         }
@@ -90,16 +89,13 @@ namespace LGProject.PlayerState
         }
         public override void LogicUpdate()
         {
-            //base.LogicUpdate();
-            // 코루틴이나 쓰레드 등으로 카운팅 또는 불리안 값을 사용하여 상태를 변경해 줄 예정
-            // 공격 시엔 콤보 입력도 필요할 것이라 생각하기 때문에 히트 스테이트나 다운 스테이트 등이 필요할 것으로 예상됨.
-            // 그럼 공격은 어떻게 할 것인가? 
+
             if (Damaged())
             {
                 return;
             }
             
-            _currentTimer += Time.deltaTime;
+            CurrentTimer += Time.deltaTime;
 
             #region ComboSystem
             AttackLogic();
@@ -124,28 +120,25 @@ namespace LGProject.PlayerState
             switch (StateMachine.AttackCount)
             {
                 case 1:
-                    animDelay = _firstJudgeDelay;
-                    time = _firstAttackDelay;
+                    animDelay = FirstJudgeDelay;
+                    time = FirstAttackDelay;
                     break;
                 case 2:
-                    animDelay = _secondJudgeDelay;
-                    time = _secondAttackDelay;
+                    animDelay = SecondJudgeDelay;
+                    time = SecondAttackDelay;
                     break;
                 case 3:
-                    animDelay = _thirdJudgeDelay;
-                    time = _thirdAttackDelay;
+                    animDelay = ThirdJudgeDelay;
+                    time = ThirdAttackDelay;
                     break;
             }
 
-            // 딜레이가 끝난 이후 추가 키 입력이 들어가면? 
-            if (_currentTimer > animDelay)
+            if (CurrentTimer > animDelay)
             {
                 StateMachine.animator.SetInteger(Attack, 0);
-                // 공격 진행
-                if (_damageInCount == false) AttackJudge();
+                if (DamageInCount == false) AttackJudge();
                 if (StateMachine.attackAction.triggered && StateMachine.AttackCount < 3)
                 {
-                    // 다음 공격의 게이지가 100일 경우 Ultimate공격을 진행 아닐 경우 attackState
                     if (StateMachine.playable.UltimateGage >= 100)
                     {
                         StateMachine.AttackCount = 0;
@@ -157,11 +150,9 @@ namespace LGProject.PlayerState
                         StateMachine.ChangeState(StateMachine.attackState);
                     }
                 }
-                // 모션이 끝나면?
-                else if (_currentTimer >= time)
+
+                else if (CurrentTimer >= time)
                 {
-                    // 모션이 끝났으니 기본 상태로 되돌아감.
-                    //StateMachine.animator.SetTrigger(Idle);
                     StateMachine.AttackCount = 0;
                     StateMachine.animator.SetInteger(Attack, 0);
                     StateMachine.ChangeState(StateMachine.idleState);
@@ -170,10 +161,13 @@ namespace LGProject.PlayerState
             }
         }
 
+        /// <summary>
+        /// 공격 판정 체크
+        /// </summary>
         private void AttackJudge()
         {
 
-            if (!_damageInCount)
+            if (!DamageInCount)
             {
                 Vector3 right = Vector3.right * (StateMachine.playable.directionX == true ? 1.2f : -1.2f);
                 Vector3 center = StateMachine.transform.position + right + Vector3.up * 0.5f;
@@ -194,7 +188,7 @@ namespace LGProject.PlayerState
                 }
                 if (temp == null)
                 {
-                    _damageInCount = false;
+                    DamageInCount = false;
                 }
                 else
                 {
@@ -209,7 +203,7 @@ namespace LGProject.PlayerState
                             temp.
                             Item1.GetStateMachine.
                             ApplyHitDamaged(StateMachine.AttackCount - 1 < 2 ? Vector3.zero : velocity, 0.1f, StateMachine);
-                            _damageInCount = true;
+                            DamageInCount = true;
                             if (!temp.Item1.GetStateMachine.IsGuard && !temp.Item1.GetStateMachine.IsDown && !temp.Item1.GetStateMachine.IsSuperArmor && !StateMachine.IsUseUltimate)
                             {
                                 // 100 % gage로 일단 계산

@@ -24,8 +24,9 @@ namespace LGProject.PlayerState
         {
             InitStates();
             InitEffectManager();
-            SetUltimateGage(100);
-            
+            SetUltimateGage(0);
+            PlayingUltimateReadySFX(false);
+
             // 다른 컴포넌트를 참조는 Start에서 해야함
             StateMachine.BindComponents();
             

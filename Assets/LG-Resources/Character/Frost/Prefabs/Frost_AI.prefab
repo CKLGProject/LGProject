@@ -116,6 +116,8 @@ MonoBehaviour:
   targetIndex: 0
   isGround: 0
   ChildModels: []
+  CallingSoundNames:
+  - Frost_Attack
   GuardPercent: 0
   AttackPercent: 0
   ChasingPercent: 0

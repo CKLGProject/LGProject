@@ -9,14 +9,15 @@ namespace LGProject.PlayerState
         
         public KaneAttackState(PlayerStateMachine stateMachine, ref float firstJudgeAttack, ref float firstAttackDelay, ref float secondJudgeAttack, ref float secondAttackDelay, ref float thirdJudgeAttack, ref float thirdAttackDelay) : base(stateMachine, ref firstJudgeAttack, ref firstAttackDelay, ref secondJudgeAttack, ref secondAttackDelay, ref thirdJudgeAttack, ref thirdAttackDelay)
         {
-            _currentTimer = 0;
+            CurrentTimer = 0;
 
-            _firstJudgeDelay = firstJudgeAttack;
-            _firstAttackDelay = firstAttackDelay;
-            _secondJudgeDelay = secondJudgeAttack;
-            _secondAttackDelay = secondAttackDelay;
-            _thirdJudgeDelay = thirdJudgeAttack;
-            _thirdAttackDelay = thirdAttackDelay;
+            FirstJudgeDelay = firstJudgeAttack;
+            FirstAttackDelay = firstAttackDelay;
+            SecondJudgeDelay = secondJudgeAttack;
+            SecondAttackDelay = secondAttackDelay;
+            ThirdJudgeDelay = thirdJudgeAttack;
+            ThirdAttackDelay = thirdAttackDelay;
+            AttackSoundName = "Kane_Attack";
         }
 
         public override void Enter()
@@ -36,7 +37,7 @@ namespace LGProject.PlayerState
             //base.LogicUpdate();
             if (Damaged())
                 return;
-            _currentTimer += Time.deltaTime;
+            CurrentTimer += Time.deltaTime;
             AttackLogic();
         }
 
@@ -53,33 +54,32 @@ namespace LGProject.PlayerState
             {
                 case 1:
                     //animDelay = 0.2f;
-                    animDelay = _firstJudgeDelay;
-                    time = _firstAttackDelay;
+                    animDelay = FirstJudgeDelay;
+                    time = FirstAttackDelay;
                     //time = 0.35f;
                     break;
                 case 2:
                     //animDelay = 0.4f;
-                    animDelay = _secondJudgeDelay;
-                    time = _secondAttackDelay;
+                    animDelay = SecondJudgeDelay;
+                    time = SecondAttackDelay;
                     //time = 0.6f;
                     break;
                 case 3:
                     //animDelay = 0.2f;
-                    animDelay = _thirdJudgeDelay;
-                    time = _thirdAttackDelay;
+                    animDelay = ThirdJudgeDelay;
+                    time = ThirdAttackDelay;
                     //time = 0.6f;
                     break;
             }
             //Debug.Log($"sm = {stateMachine.AttackCount} / attackDelay = {animDelay} / time {time }");
             // 딜레이가 끝난 이후 추가 키 입력이 들어가면? 
-            if (_currentTimer > animDelay)
+            if (CurrentTimer > animDelay)
             {
                 StateMachine.animator.SetInteger(Attack, 0);
-                // 공격 진행
-                if (_damageInCount == false) Shoot();
+
+                if (DamageInCount == false) Shoot();
                 if (StateMachine.attackAction.triggered && StateMachine.AttackCount < 3)
                 {
-                    // 다음 공격의 게이지가 100일 경우 Ultimate공격을 진행 아닐 경우 attackState
                     if (StateMachine.playable.UltimateGage >= 100)
                     {
                         StateMachine.AttackCount = 0;
@@ -91,11 +91,8 @@ namespace LGProject.PlayerState
                         StateMachine.ChangeState(StateMachine.attackState);
                     }
                 }
-                // 모션이 끝나면?
-                else if (_currentTimer >= time)
+                else if (CurrentTimer >= time)
                 {
-                    // 모션이 끝났으니 기본 상태로 되돌아감.
-                    StateMachine.animator.SetTrigger(Idle);
                     StateMachine.AttackCount = 0;
                     StateMachine.animator.SetInteger(Attack, 0);
                     StateMachine.ChangeState(StateMachine.idleState);
@@ -106,7 +103,10 @@ namespace LGProject.PlayerState
 
         private void Shoot()
         {
-            _damageInCount = true;
+            #region 오디오 출력
+            StateMachine.PlayAudioClip(AttackSoundName);
+            #endregion
+            DamageInCount = true;
             StateMachine.ShootProjectile();
         }
     }

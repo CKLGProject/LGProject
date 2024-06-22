@@ -2364,7 +2364,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 873426142}
+  - {fileID: 842728223}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &246775619
@@ -5230,7 +5230,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 58.89, y: -25}
-  m_SizeDelta: {x: 0, y: 50}
+  m_SizeDelta: {x: 117.78, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &577642006
 MonoBehaviour:
@@ -5798,7 +5798,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 148.56, y: -32.601997}
-  m_SizeDelta: {x: 0, y: 34.796}
+  m_SizeDelta: {x: 61.56, y: 34.796}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &643237068
 MonoBehaviour:
@@ -7655,7 +7655,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 57.725, y: -25}
-  m_SizeDelta: {x: 0, y: 50}
+  m_SizeDelta: {x: 115.45, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &821826900
 MonoBehaviour:
@@ -7768,6 +7768,86 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 821826898}
   m_CullTransparentMesh: 1
+--- !u!1 &842728222
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 842728223}
+  - component: {fileID: 842728224}
+  m_Layer: 0
+  m_Name: Audio Libraries
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &842728223
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 842728222}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 205604121}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &842728224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 842728222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7da6d1fde29614e3e84019cd9e052acd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ClipList:
+    EventRefList:
+    - Key: Hit_Attack
+      Value:
+        Guid:
+          Data1: -823153480
+          Data2: 1093665455
+          Data3: -1281875267
+          Data4: -1829963997
+        Path: event:/SFX/Punch_Hit
+      Params: []
+      ShowInfo: 1
+      GUID: abce6f13-31b6-43da-926d-1838671046d0
+    - Key: Frost_Attack
+      Value:
+        Guid:
+          Data1: -2086447310
+          Data2: 1180856656
+          Data3: -2095823947
+          Data4: -267378837
+        Path: event:/SFX/Punch_Frost
+      Params: []
+      ShowInfo: 1
+      GUID: 0cc5e804-3928-432b-9fca-cc4cb55347e0
+    - Key: Kane_Attack
+      Value:
+        Guid:
+          Data1: 1893833322
+          Data2: 1094450346
+          Data3: 585355422
+          Data4: -1761105227
+        Path: event:/SFX/Shoot_Kane
+      Params: []
+      ShowInfo: 1
+      GUID: 6eeb8b00-76b3-436a-a6ad-892c9f6fff57
+  EventRefList: []
 --- !u!1 &851698014
 GameObject:
   m_ObjectHideFlags: 0
@@ -8083,64 +8163,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!1 &873426141
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 873426142}
-  - component: {fileID: 873426143}
-  m_Layer: 0
-  m_Name: Audio Libraries
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &873426142
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 873426141}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 205604121}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &873426143
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 873426141}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7da6d1fde29614e3e84019cd9e052acd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ClipList:
-    EventRefList:
-    - Key: Punch
-      Value:
-        Guid:
-          Data1: 1413075282
-          Data2: 1125976483
-          Data3: 229705134
-          Data4: 890410156
-        Path: event:/SFX/Punch
-      Params: []
-      ShowInfo: 1
-      GUID: abce6f13-31b6-43da-926d-1838671046d0
-  EventRefList: []
 --- !u!1 &874508552
 GameObject:
   m_ObjectHideFlags: 0
@@ -16614,6 +16636,16 @@ PrefabInstance:
       propertyPath: JumpScale
       value: 1.1
       objectReference: {fileID: 0}
+    - target: {fileID: 8866563565161335285, guid: 2733f80f426950d4598e4e6317bd7935,
+        type: 3}
+      propertyPath: FirstAttackDelay
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8866563565161335285, guid: 2733f80f426950d4598e4e6317bd7935,
+        type: 3}
+      propertyPath: FirstAttackJudgeDelay
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -17574,7 +17606,10 @@ MonoBehaviour:
   movingAttack: 1
   AliveOffset: {x: 0, y: 0, z: 0}
   respawnTime: 0
-  SkinnedMeshRenderer: {fileID: 0}
+  SkinnedMeshRenderer:
+  - {fileID: 0}
+  BlinkTimer: 2.5
+  BlinkInterval: 0.1
   DefaultWeapon: {fileID: 0}
   UltimateWeapon: {fileID: 0}
   audioSource: {fileID: 0}
@@ -17606,6 +17641,7 @@ MonoBehaviour:
   targetIndex: 0
   isGround: 0
   ChildModels: []
+  CallingSoundNames: []
   GuardPercent: 0
   AttackPercent: 0
   ChasingPercent: 0

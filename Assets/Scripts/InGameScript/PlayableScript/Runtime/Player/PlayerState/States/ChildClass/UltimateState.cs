@@ -11,6 +11,7 @@ namespace LGProject.PlayerState
         protected const float OriginWeight = 1.5f;
         protected float UltimateDelay = 0f;
         protected bool _isMove;
+        protected string UltimateSFXName = string.Empty;
         public UltimateState(PlayerStateMachine stateMachine, float delay) : base(stateMachine)
         {
             UltimateDelay = delay;

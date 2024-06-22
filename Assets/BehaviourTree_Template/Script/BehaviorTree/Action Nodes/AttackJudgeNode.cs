@@ -17,11 +17,12 @@ namespace BehaviourTree
         private bool _isAttack = false;
         private float _time = 0;
 
-        private readonly string _punchClip = $"Punch";
+        private string _punchClip = $"Punch";
 
         protected override void OnStart()
         {
             StartExceptionHandling();
+            _stateMachine.PlayAudioClip(AIAgent.Instance.CallingSoundNames[0]);
         }
 
         protected override void OnStop()
@@ -42,21 +43,6 @@ namespace BehaviourTree
 
             _curTimer += Time.deltaTime;
             
-            switch (_stateMachine.AttackCount)
-            {
-                case 1:
-                    animTimer = _stateMachine.playable.FirstAttackJudgeDelay;
-                    _time = _stateMachine.playable.FirstAttackDelay;
-                    break;
-                case 2:
-                    animTimer = _stateMachine.playable.SecondAttackJudgeDelay;
-                    _time = _stateMachine.playable.SecondAttackDelay;
-                    break;
-                case 3:
-                    animTimer = _stateMachine.playable.ThirdAttackJudgeDelay;
-                    _time = _stateMachine.playable.ThirdAttackDelay;
-                    break;
-            }
             #region legarcy
             if (_curTimer > animTimer)
             {
@@ -93,6 +79,7 @@ namespace BehaviourTree
             if (_stateMachine == null)
             {
                 _stateMachine = AIAgent.Instance.GetStateMachine;
+                _punchClip = AIAgent.Instance.name;
             }
             if (_stateMachine.AttackCount > 2)
             {
@@ -109,11 +96,6 @@ namespace BehaviourTree
             {
                 case 1:
                     _stateMachine.playable.effectManager.Play(EffectManager.EFFECT.Attack1).Forget();
-                    #region 오디오 출력
-
-                    _stateMachine.PlayAudioClip(_punchClip);
-
-                    #endregion
                     moveValue = _stateMachine.playable.FirstAttackMovingValue;
                     //_stateMachine.UpdateData(LGProject.DATA_TYPE.NormalAttack);
                     break;
@@ -121,21 +103,39 @@ namespace BehaviourTree
                     _stateMachine.playable.effectManager.Play(EffectManager.EFFECT.Attack2).Forget();
                     moveValue = _stateMachine.playable.SecondAttackMovingValue;
 
-                    _stateMachine.PlayAudioClip(_punchClip);
                     //_stateMachine.UpdateData(LGProject.DATA_TYPE.NormalAttack);
                     break;
                 case 3:
                     moveValue = _stateMachine.playable.ThirdAttackMovingValue;
                     _stateMachine.playable.effectManager.Play(EffectManager.EFFECT.Attack3, 0.25f).Forget();
 
-                    _stateMachine.PlayAudioClip(_punchClip);
                     //_stateMachine.UpdateData(LGProject.DATA_TYPE.NormalAttack);
                     break;
                 default:
                     break;
             }
             // 공격하면서 전진.
+            switch (_stateMachine.AttackCount)
+            {
+                case 1:
+                    animTimer = _stateMachine.playable.FirstAttackJudgeDelay;
+                    _time = _stateMachine.playable.FirstAttackDelay;
+                    break;
+                case 2:
+                    animTimer = _stateMachine.playable.SecondAttackJudgeDelay;
+                    _time = _stateMachine.playable.SecondAttackDelay;
+                    break;
+                case 3:
+                    animTimer = _stateMachine.playable.ThirdAttackJudgeDelay;
+                    _time = _stateMachine.playable.ThirdAttackDelay;
+                    break;
+            }
 
+            #region 오디오 출력
+
+            _stateMachine.PlayAudioClip(_punchClip);
+
+            #endregion
             #endregion
         }
 

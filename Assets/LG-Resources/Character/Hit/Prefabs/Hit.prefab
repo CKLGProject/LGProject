@@ -74,8 +74,8 @@ MonoBehaviour:
   Preload: 0
   AllowNonRigidbodyDoppler: 0
   OverrideAttenuation: 0
-  OverrideMinDistance: -1
-  OverrideMaxDistance: -1
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &6969282849394247417
 GameObject:
   m_ObjectHideFlags: 0
@@ -135,13 +135,13 @@ MonoBehaviour:
   DashSpeed: 2
   JumpScale: 1.1
   FirstAttackDelay: 0.35
-  FirstAttackJudgeDelay: 0.1
+  FirstAttackJudgeDelay: 0.2
   FirstAttackMovingValue: 1
   SecondAttackDelay: 0.6
   SecondAttackJudgeDelay: 0.2
   SecondAttackMovingValue: 1
   ThirdAttackDelay: 0.5
-  ThirdAttackJudgeDelay: 0.2
+  ThirdAttackJudgeDelay: 1
   ThirdAttackMovingValue: 3
   DashAttackDelay: 0.5
   UltimateDelay: 2.5
@@ -153,6 +153,9 @@ MonoBehaviour:
   movingAttack: 1
   AliveOffset: {x: 0, y: 0, z: 0}
   respawnTime: 1
+  SkinnedMeshRenderer: []
+  BlinkTimer: 0
+  BlinkInterval: 0.1
   DefaultWeapon: {fileID: 0}
   UltimateWeapon: {fileID: 0}
   audioSource: {fileID: 7470831804913447965}

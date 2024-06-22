@@ -12,9 +12,11 @@ namespace LGProject.PlayerState
         
         private static readonly int DashAttack = Animator.StringToHash("DashAttack");
 
-        public DashAttackState(PlayerStateMachine stateMachine, ref float animationDelay) : base(stateMachine)
+        private static string _sfxName = string.Empty;
+        public DashAttackState(PlayerStateMachine stateMachine, ref float animationDelay, string SFXName) : base(stateMachine)
         {
             _animationDelay = animationDelay;
+            _sfxName = SFXName;
             //aniDelay = 
         }
 
@@ -27,6 +29,7 @@ namespace LGProject.PlayerState
             _damageInCount = false;
             StateMachine.physics.velocity += Vector3.right * (StateMachine.moveAction.ReadValue<Vector2>().x * 7f);
             StateMachine.playable.effectManager.Play(EffectManager.EFFECT.DashAttack, 0.1f).Forget();
+            StateMachine.PlayAudioClip(_sfxName);
             // velocity 초기화 X
             // 그런데 브레이크는 걸면 좋을 듯? 대충 Drag값 조절해서 끼이익 하는 느낌을 줘보자.
         }
