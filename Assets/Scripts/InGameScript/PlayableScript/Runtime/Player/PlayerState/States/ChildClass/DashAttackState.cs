@@ -96,10 +96,10 @@ namespace LGProject.PlayerState
                 {
                     try
                     {
-                        Vector3 direction = (temp.Item1.GetStateMachine.transform.position - StateMachine.transform.position).normalized;
-                        direction.x *= 2;
-                        direction.y *= 1.5f;
-                        Vector3 velocity = (StateMachine.transform.forward * 3f + StateMachine.transform.up * 1.5f) * 1.5f;
+                        //Vector3 direction = (temp.Item1.GetStateMachine.transform.position - StateMachine.transform.position).normalized;
+                        //direction.x *= 2;
+                        //direction.y *= 1.5f;
+                        Vector3 velocity = (StateMachine.transform.forward * 2f + StateMachine.transform.up * 2f) * 2f;
 
                         // 가드를 올리지 않았을 경우
                         if (temp.Item1 != StateMachine.transform)
