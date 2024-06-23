@@ -1,4 +1,5 @@
 using Data;
+using FMODPlus;
 using R3;
 using ReactiveTouchDown;
 using System;
@@ -83,6 +84,8 @@ public class LobbyView : MonoBehaviour
     [Header("Toast PC")]
     [SerializeField] private PCToastGenerate toastGenerate;
 
+    [Header("Audio")]
+    [SerializeField] private FMODAudioSource clickAudioSource;
     
     /// <summary>
     /// 프로필 이미지를 바인딩 합니다.
@@ -342,5 +345,13 @@ public class LobbyView : MonoBehaviour
         ECharacterType characterType = Singleton.Instance<GameManager>().GetCharacter(ActorType.User);
         profileImage.SetCharacterType(characterType);
         profileImage.UpdateChangeImage();
+    }
+    
+    /// <summary>
+    /// 클릭 사운드를 재생합니다.
+    /// </summary>
+    public void PlayClickSound()
+    {
+        clickAudioSource.Play();
     }
 }

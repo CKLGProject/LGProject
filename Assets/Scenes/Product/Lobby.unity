@@ -431,6 +431,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   toastGenerate: {fileID: 1190537181}
+  clickAudioSource: {fileID: 1054153201}
 --- !u!1 &39780554
 GameObject:
   m_ObjectHideFlags: 0
@@ -14434,7 +14435,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -0.000061035156, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 159.732, y: 159.732}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1627223715

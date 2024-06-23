@@ -56,14 +56,7 @@ public class LobbyPresenter : MonoBehaviour
 
         _lobbyView.RankButtonAsObservable()
             .Where(_ => !_lobbyPopupModel.IsActive)
-            .Subscribe(_ =>
-            {
-#if UNITY_STANDALONE
-                _lobbyView.ShowToastMessage(0);
-#else
-                _lobbyView.ShowErrorMessage(0);
-#endif
-            });
+            .Subscribe(OnClickRankButton);
 
         _lobbyView.CaptureButtonAsObservable()
             .Where(_ => !_lobbyPopupModel.IsActive)
@@ -146,8 +139,21 @@ public class LobbyPresenter : MonoBehaviour
         _lobbyModel.Plug = 3270;
     }
 
+    private void OnClickRankButton(Unit obj)
+    {
+        _lobbyView.PlayClickSound();
+        
+#if UNITY_STANDALONE
+        _lobbyView.ShowToastMessage(0);
+#else
+        _lobbyView.ShowErrorMessage(0);
+#endif
+    }
+
     private void OnClickCaptureButton(Unit obj)
     {
+        _lobbyView.PlayClickSound();
+        
 #if UNITY_STANDALONE || UNITY_EDITOR
         _lobbyView.ShowToastMessage(5);
 #else
@@ -157,6 +163,8 @@ public class LobbyPresenter : MonoBehaviour
 
     private void OnClickMatchButton(Unit obj)
     {
+        _lobbyView.PlayClickSound();
+        
         Singleton.Instance<GameManager>().RandomChoiceAI();
         _lobbyView.OnClickMatch?.Invoke();
     }
