@@ -134,11 +134,11 @@ MonoBehaviour:
   MaximumSpeed: 4.2
   DashSpeed: 2
   JumpScale: 1.1
-  FirstAttackDelay: 0.35
-  FirstAttackJudgeDelay: 0.2
+  FirstAttackDelay: 0.6
+  FirstAttackJudgeDelay: 0.4
   FirstAttackMovingValue: 1
   SecondAttackDelay: 0.6
-  SecondAttackJudgeDelay: 0.2
+  SecondAttackJudgeDelay: 0.4
   SecondAttackMovingValue: 1
   ThirdAttackDelay: 0.5
   ThirdAttackJudgeDelay: 1
@@ -159,7 +159,6 @@ MonoBehaviour:
   DefaultWeapon: {fileID: 0}
   UltimateWeapon: {fileID: 0}
   audioSource: {fileID: 7470831804913447965}
-  ultimateSource: {fileID: 0}
   directionX: 1
   jumpCurve:
     serializedVersion: 2

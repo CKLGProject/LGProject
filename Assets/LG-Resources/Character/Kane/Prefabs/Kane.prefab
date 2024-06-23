@@ -193,7 +193,6 @@ MonoBehaviour:
   DefaultWeapon: {fileID: 0}
   UltimateWeapon: {fileID: 0}
   audioSource: {fileID: 7076176742742437425}
-  ultimateSource: {fileID: 0}
   directionX: 0
   jumpCurve:
     serializedVersion: 2
