@@ -1,4 +1,5 @@
 using Data;
+using FMODPlus;
 using UnityEngine;
 using LGProject.CollisionZone;
 using UnityEngine.Serialization;
@@ -24,6 +25,8 @@ namespace LGProject
         public VocaFX UserVocaFX { get; private set; }
 
         [field: SerializeField] public VocaFX AIVocaFX { get; private set; }
+
+        [Header("Audio")] [SerializeField] private FMODAudioSource bgmAudioSource;
 
         public int PlayCount { get; private set; }
 
@@ -106,6 +109,9 @@ namespace LGProject
             // 게임이 종료되면 게임 횟수를 체크하여 난이도별 AI를 삽입한다.
             // 패턴은 약 - 약 - 강 현재는 이렇게 설정 예정.
             PlayerPrefs.SetInt("PlayCount", PlayCount);
+
+            // 게임 끝 소리 출력
+            bgmAudioSource.SetParameter("Game End", 1);
         }
 
         /// <summary>
