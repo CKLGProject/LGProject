@@ -33,6 +33,7 @@ namespace LGProject.PlayerState
             StateMachine.playable.effectManager.Play(EffectManager.EFFECT.UltimatePreCenter).Forget();
             StateMachine.playable.effectManager.Play(EffectManager.EFFECT.UltimatePreRHand).Forget();
             StateMachine.battleModel.ShowCutScene(Data.ActorType.User, true);
+            StateMachine.PlayAudioClip(UltimateReady);
             _isMove = false;
             UsingUltimateSkill().Forget();
             WaitStart().Forget();
@@ -43,8 +44,6 @@ namespace LGProject.PlayerState
         public override void Exit()
         {
             base.Exit();
-            StateMachine.playable.PlayingUltimateReadySFX(false);
-
         }
 
         public override void LogicUpdate()

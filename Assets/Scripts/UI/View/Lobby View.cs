@@ -68,6 +68,12 @@ public class LobbyView : MonoBehaviour
     /// 설정 버튼
     /// </summary>
     [SerializeField] private Button settingButton;
+    
+    /// <summary>
+    /// 존재하는 모든 펫을 얻을 수 있는 치트 버튼
+    /// </summary>
+    [SerializeField] private Button petCheatButton;
+
 
     [Tooltip("미구현 메세지")] [SerializeField] private string[] errorMessage;
 
@@ -177,6 +183,12 @@ public class LobbyView : MonoBehaviour
     public Observable<Unit> SettingButtonAsObservable()
     {
         return settingButton.OnClickAsObservable();
+    }
+
+
+    public Observable<Unit> CheatButtonAsObservable()
+    {
+        return petCheatButton.OnClickAsObservable();
     }
 
     /// <summary>

@@ -122,6 +122,20 @@ public class LobbyPresenter : MonoBehaviour
 #endif
             });
 
+        _lobbyView.CheatButtonAsObservable()
+            .Subscribe(_ =>
+            {
+                Singleton.Instance<GameManager>().AddPet(EPetType.Aerion);
+                Singleton.Instance<GameManager>().AddPet(EPetType.Electra);
+                Singleton.Instance<GameManager>().AddPet(EPetType.Icebound);
+                Singleton.Instance<GameManager>().AddPet(EPetType.Scorchwing);
+#if UNITY_STANDALONE
+                _lobbyView.ShowToastMessage(0);
+#else
+                _lobbyView.ShowErrorMessage(0);
+#endif
+            });
+
         _lobbyModel.Nickname = PlayerPrefs.GetString("Nickname", "Guest");
         _lobbyModel.Level = PlayerPrefs.GetInt("Level", 0);
         _lobbyModel.Coin = (uint)PlayerPrefs.GetInt("Coin", 0);

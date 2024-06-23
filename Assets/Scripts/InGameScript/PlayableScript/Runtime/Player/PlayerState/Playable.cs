@@ -642,17 +642,17 @@ namespace LGProject.PlayerState
         public void ShowUltimateEffect()
         {
             effectManager.Play(EffectManager.EFFECT.Ultimate).Forget();
-            PlayingUltimateReadySFX(true);
+            //PlayingUltimateReadySFX(true);
 
         }
 
-        public void PlayingUltimateReadySFX(bool use)
-        {
-            if(use)
-                audioSource.Play();
-            else
-                audioSource.Stop();
-        }
+        //public void PlayingUltimateReadySFX(bool use)
+        //{
+        //    if(use)
+        //        ultimateSource.Play();
+        //    else
+        //        audioSource.Stop();
+        //}
 
         #endregion
     }

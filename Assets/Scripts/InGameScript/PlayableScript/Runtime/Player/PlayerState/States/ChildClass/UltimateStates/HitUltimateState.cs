@@ -41,6 +41,7 @@ namespace LGProject.PlayerState
             StateMachine.animator.updateMode = AnimatorUpdateMode.UnscaledTime;
             _isAttack = false;
             StateMachine.battleModel.ShowCutScene(Data.ActorType.User, true);
+            StateMachine.PlayAudioClip(UltimateReady);
             UsingUltimateSkill().Forget();
             WaitStart().Forget();
             Time.timeScale = 0.1f;
@@ -49,7 +50,6 @@ namespace LGProject.PlayerState
         public override void Exit()
         {
             base.Exit();
-            StateMachine.playable.PlayingUltimateReadySFX(false);
             StateMachine.IsUseUltimate = false;
         }
         //RaycastHit hit;

@@ -2364,7 +2364,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 842728223}
+  - {fileID: 1399839054}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &246775619
@@ -7768,86 +7768,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 821826898}
   m_CullTransparentMesh: 1
---- !u!1 &842728222
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 842728223}
-  - component: {fileID: 842728224}
-  m_Layer: 0
-  m_Name: Audio Libraries
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &842728223
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 842728222}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 205604121}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &842728224
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 842728222}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7da6d1fde29614e3e84019cd9e052acd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ClipList:
-    EventRefList:
-    - Key: Hit_Attack
-      Value:
-        Guid:
-          Data1: -823153480
-          Data2: 1093665455
-          Data3: -1281875267
-          Data4: -1829963997
-        Path: event:/SFX/Punch_Hit
-      Params: []
-      ShowInfo: 1
-      GUID: abce6f13-31b6-43da-926d-1838671046d0
-    - Key: Frost_Attack
-      Value:
-        Guid:
-          Data1: -2086447310
-          Data2: 1180856656
-          Data3: -2095823947
-          Data4: -267378837
-        Path: event:/SFX/Punch_Frost
-      Params: []
-      ShowInfo: 1
-      GUID: 0cc5e804-3928-432b-9fca-cc4cb55347e0
-    - Key: Kane_Attack
-      Value:
-        Guid:
-          Data1: 1893833322
-          Data2: 1094450346
-          Data3: 585355422
-          Data4: -1761105227
-        Path: event:/SFX/Shoot_Kane
-      Params: []
-      ShowInfo: 1
-      GUID: 6eeb8b00-76b3-436a-a6ad-892c9f6fff57
-  EventRefList: []
 --- !u!1 &851698014
 GameObject:
   m_ObjectHideFlags: 0
@@ -12804,7 +12724,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1208162867}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.03422829, y: -0.00008962277, z: 0.000003069433, w: 0.999414}
+  m_LocalRotation: {x: 0.03422829, y: -0.00008961847, z: 0.0000030692856, w: 0.999414}
   m_LocalPosition: {x: -1.3333335, y: 3.1846669, z: -21.544926}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -14090,7 +14010,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1328400254}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.03422829, y: -0.00008962277, z: 0.000003069433, w: 0.999414}
+  m_LocalRotation: {x: 0.03422829, y: -0.00008961847, z: 0.0000030692856, w: 0.999414}
   m_LocalPosition: {x: -1.3333335, y: 3.1846669, z: -21.544926}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -14519,6 +14439,152 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1830361418}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1399839053
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1399839054}
+  - component: {fileID: 1399839055}
+  m_Layer: 0
+  m_Name: Audio Libraries
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1399839054
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1399839053}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 205604121}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1399839055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1399839053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7da6d1fde29614e3e84019cd9e052acd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ClipList:
+    EventRefList:
+    - Key: Hit_Attack
+      Value:
+        Guid:
+          Data1: -823153480
+          Data2: 1093665455
+          Data3: -1281875267
+          Data4: -1829963997
+        Path: event:/SFX/Attack_Hit
+      Params: []
+      ShowInfo: 1
+      GUID: abce6f13-31b6-43da-926d-1838671046d0
+    - Key: Frost_Attack
+      Value:
+        Guid:
+          Data1: -2086447310
+          Data2: 1180856656
+          Data3: -2095823947
+          Data4: -267378837
+        Path: event:/SFX/Attack_Frost
+      Params: []
+      ShowInfo: 1
+      GUID: 0cc5e804-3928-432b-9fca-cc4cb55347e0
+    - Key: Kane_Attack
+      Value:
+        Guid:
+          Data1: 1893833322
+          Data2: 1094450346
+          Data3: 585355422
+          Data4: -1761105227
+        Path: event:/SFX/Attack_Kane
+      Params: []
+      ShowInfo: 1
+      GUID: 6eeb8b00-76b3-436a-a6ad-892c9f6fff57
+    - Key: Damaged
+      Value:
+        Guid:
+          Data1: 1739680795
+          Data2: 1249152389
+          Data3: 282353281
+          Data4: 781242015
+        Path: event:/SFX/Damaged
+      Params: []
+      ShowInfo: 1
+      GUID: c68f2e6f-6817-43ee-be97-3423ef175b84
+    - Key: Kane_Ultimate
+      Value:
+        Guid:
+          Data1: 15556034
+          Data2: 1179009957
+          Data3: 1790233005
+          Data4: -1482670138
+        Path: event:/SFX/Ultimate_Kane
+      Params: []
+      ShowInfo: 1
+      GUID: bd2cf50b-de4f-4224-8b85-088fd427864d
+    - Key: Hit_Ultimate
+      Value:
+        Guid:
+          Data1: 444366392
+          Data2: 1076272651
+          Data3: 1372412317
+          Data4: -1340022187
+        Path: event:/SFX/Ultimate_Hit
+      Params: []
+      ShowInfo: 1
+      GUID: ed94bac1-d7d8-4037-bfc0-d2badc456ce1
+    - Key: Frost_Ultimate
+      Value:
+        Guid:
+          Data1: -2140244471
+          Data2: 1258383403
+          Data3: 953416367
+          Data4: -367352151
+        Path: event:/SFX/Ultimate_Frost
+      Params: []
+      ShowInfo: 1
+      GUID: 46f4fdea-8b4c-4149-b311-f3ca8465849f
+    - Key: Knockback
+      Value:
+        Guid:
+          Data1: 1574964142
+          Data2: 1207173914
+          Data3: -1134913395
+          Data4: -1852041898
+        Path: event:/SFX/Knockback
+      Params: []
+      ShowInfo: 1
+      GUID: 7e06767c-605a-4afe-8dac-86648545d3a1
+    - Key: UltimateReady
+      Value:
+        Guid:
+          Data1: 1220983245
+          Data2: 1136864828
+          Data3: 978292926
+          Data4: 1295155694
+        Path: event:/SFX/Ultimate_Ready
+      Params: []
+      ShowInfo: 1
+      GUID: fdbcebbb-35c1-4685-99d4-28c286766310
+  EventRefList: []
 --- !u!43 &1401740160
 Mesh:
   m_ObjectHideFlags: 0
