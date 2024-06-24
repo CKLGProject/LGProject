@@ -134,11 +134,11 @@ MonoBehaviour:
   MaximumSpeed: 4.2
   DashSpeed: 2
   JumpScale: 1.1
-  FirstAttackDelay: 0.6
-  FirstAttackJudgeDelay: 0.4
+  FirstAttackDelay: 0.8
+  FirstAttackJudgeDelay: 0.6
   FirstAttackMovingValue: 1
-  SecondAttackDelay: 0.6
-  SecondAttackJudgeDelay: 0.4
+  SecondAttackDelay: 0.8
+  SecondAttackJudgeDelay: 0.5
   SecondAttackMovingValue: 1
   ThirdAttackDelay: 0.5
   ThirdAttackJudgeDelay: 1
