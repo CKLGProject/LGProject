@@ -125,6 +125,7 @@ public class LobbyPopupPresenter : MonoBehaviour
                 _model.SetChoiceCharacterType(_model.SelectedCharacterType);
                 _view.SetInteractionByCharacterSelectionButton(false);
                 _lobbyView.UpdateProfileImage();
+                _view.SetActivePopupView(false);
             })
             .AddTo(this);
 
