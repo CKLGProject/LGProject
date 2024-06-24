@@ -10,6 +10,7 @@ public class InitStartView : MonoBehaviour
     [SerializeField] private SceneLoader lobbySceneLoader;
     [SerializeField] private TextMeshProUGUI touchText;
     [SerializeField] private CanvasGroup screenFX;
+    [SerializeField] private TextMeshProUGUI versionText;
 
     private const string MobileText = "화면을 터치해주세요!";
     private const string PCText = "아무 키나 누르세요!";
@@ -43,5 +44,13 @@ public class InitStartView : MonoBehaviour
         Singleton.Instance<GameManager>().SetNickname(nickName);
 
         lobbySceneLoader.AllowCompletion();
+    }
+    
+    /// <summary>
+    /// 앱의 버전을 표시합니다.
+    /// </summary>
+    public void InitVersionText()
+    {
+        versionText.text = $"Ver.{Application.version}";
     }
 }

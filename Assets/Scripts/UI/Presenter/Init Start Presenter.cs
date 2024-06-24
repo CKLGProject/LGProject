@@ -23,6 +23,9 @@ public class InitStartPresenter : MonoBehaviour
         // 페이드 아웃을 적용합니다.
         _view.PlayFadeOut();
         
+        // 버전 표시
+        _view.InitVersionText();
+        
         // View
         _inputAction.PerformedAsObservable()
             .Subscribe(_ => _view.Connect());
