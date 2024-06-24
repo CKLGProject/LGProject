@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,6 +24,17 @@ namespace UIExtension
         {
             _button = GetComponent<Button>();
             _image = GetComponent<Image>();
+        }
+
+        private void Start()
+        {
+            StartCoroutine(Init());
+        }
+
+        private IEnumerator Init()
+        {
+            yield return null;
+            UpdateButtonSprite(_button.interactable);
         }
 
         private void Update()
