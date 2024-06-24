@@ -1,4 +1,7 @@
 using Data;
+using DG.Tweening;
+using DG.Tweening.Core;
+using DG.Tweening.Plugins.Options;
 using FMODPlus;
 using R3;
 using ReactiveTouchDown;
@@ -6,6 +9,7 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 using UnityEngine.Singleton;
 using UnityEngine.UI;
 using Utility;
@@ -25,23 +29,23 @@ public class LobbyView : MonoBehaviour
     [SerializeField] private TextMeshProUGUI coinText;
     [SerializeField] private TextMeshProUGUI plugText;
 
-    [Header("Profile Image")]
-    [SerializeField] private ChangeImage profileImage;
-    
+    [Header("Profile Image")] [SerializeField]
+    private ChangeImage profileImage;
+
     /// <summary>
     /// 매치 버튼
     /// </summary>
-    [Header("Buttons")] [SerializeField] private GameObject matchButton;
+    [Header("Buttons")] [SerializeField] private MeshRenderer matchButton;
 
     /// <summary>
     /// 캡처 버튼
     /// </summary>
-    [SerializeField] private GameObject captureButton;
+    [SerializeField] private MeshRenderer captureButton;
 
     /// <summary>
     /// 랭킹 버튼
     /// </summary>
-    [SerializeField] private GameObject rankButton;
+    [SerializeField] private MeshRenderer rankButton;
 
     [Space] [SerializeField] private Button mailButton;
 
@@ -69,7 +73,7 @@ public class LobbyView : MonoBehaviour
     /// 설정 버튼
     /// </summary>
     [SerializeField] private Button settingButton;
-    
+
     /// <summary>
     /// 존재하는 모든 펫을 얻을 수 있는 치트 버튼
     /// </summary>
@@ -81,12 +85,17 @@ public class LobbyView : MonoBehaviour
     [Header("Event")] public UnityEvent OnClickCapture;
     public UnityEvent OnClickMatch;
 
-    [Header("Toast PC")]
-    [SerializeField] private PCToastGenerate toastGenerate;
+    [Header("Toast PC")] [SerializeField] private PCToastGenerate toastGenerate;
 
-    [Header("Audio")]
-    [SerializeField] private FMODAudioSource clickAudioSource;
-    
+    [Header("Audio")] [SerializeField] private FMODAudioSource clickAudioSource;
+
+    [Header("Screen FX")] [SerializeField] private MeshRenderer screenRenderer;
+    private readonly Color ClickColor = new Color(0f, 0f, 0f, 0.4f);
+
+    // Constants
+    private static readonly int DistortionStrength = Shader.PropertyToID("_DistortionStrength");
+    private static readonly int ImageBrightness = Shader.PropertyToID("_ImageBrightness");
+
     /// <summary>
     /// 프로필 이미지를 바인딩 합니다.
     /// </summary>
@@ -105,33 +114,59 @@ public class LobbyView : MonoBehaviour
         string message = errorMessage[index];
         toastGenerate.ShowToastMessage(message, toastType);
     }
-    
+
     /// <summary>
-    /// 매치 버튼 옵저버입니다.
+    /// 매치 버튼을 클릭했을 때 옵저버입니다.
     /// </summary>
     /// <returns>MatchButton Observer</returns>
-    public Observable<Unit> MatchButtonAsObservable()
+    public Observable<Unit> MatchButtonDownAsObservable()
     {
-        return matchButton.TouchDownAsObservable();
-    }
-
-
-    /// <summary>
-    /// 캡쳐 버튼 옵저버입니다.
-    /// </summary>
-    /// <returns>RankButton Observer</returns>
-    public Observable<Unit> CaptureButtonAsObservable()
-    {
-        return captureButton.TouchDownAsObservable();
+        return matchButton.gameObject.TouchDownAsObservable();
     }
 
     /// <summary>
-    /// 랭킹 버튼 옵저버입니다.
+    /// 매치 버튼을 땟을 때 옵저버입니다.
+    /// </summary>
+    /// <returns>MatchButton Observer</returns>
+    public Observable<Unit> MatchButtonUpAsObservable()
+    {
+        return matchButton.gameObject.TouchUpAsObservable();
+    }
+
+    /// <summary>
+    /// 캡쳐 버튼 클릭 옵저버입니다.
     /// </summary>
     /// <returns>RankButton Observer</returns>
-    public Observable<Unit> RankButtonAsObservable()
+    public Observable<Unit> CaptureButtonDownAsObservable()
     {
-        return rankButton.TouchDownAsObservable();
+        return captureButton.gameObject.TouchDownAsObservable();
+    }
+
+    /// <summary>
+    /// 캡쳐 버튼 땟을 때 옵저버입니다.
+    /// </summary>
+    /// <returns>RankButton Observer</returns>
+    public Observable<Unit> CaptureButtonUpAsObservable()
+    {
+        return captureButton.gameObject.TouchUpAsObservable();
+    }
+
+    /// <summary>
+    /// 랭킹 버튼 클릭 옵저버입니다.
+    /// </summary>
+    /// <returns>RankButton Observer</returns>
+    public Observable<Unit> RankButtonDownAsObservable()
+    {
+        return rankButton.gameObject.TouchDownAsObservable();
+    }
+
+    /// <summary>
+    /// 랭킹 버튼 땟을 때 옵저버입니다.
+    /// </summary>
+    /// <returns>RankButton Observer</returns>
+    public Observable<Unit> RankButtonUpAsObservable()
+    {
+        return rankButton.gameObject.TouchUpAsObservable();
     }
 
     /// <summary>
@@ -331,8 +366,6 @@ public class LobbyView : MonoBehaviour
                     default:
                         throw new ArgumentOutOfRangeException(nameof(petType), petType, null);
                 }
-
-                return;
             }
         }
     }
@@ -346,12 +379,154 @@ public class LobbyView : MonoBehaviour
         profileImage.SetCharacterType(characterType);
         profileImage.UpdateChangeImage();
     }
-    
+
     /// <summary>
     /// 클릭 사운드를 재생합니다.
     /// </summary>
     public void PlayClickSound()
     {
         clickAudioSource.Play();
+    }
+
+    /// <summary>
+    /// 처음에 시작할 때 모니터 연출을 처리합니다.
+    /// </summary>
+    public void InitScreenFX()
+    {
+        const float destDistortion = 0.03f;
+
+        screenRenderer.material.SetFloat(DistortionStrength, 1.35f);
+        screenRenderer.material.SetFloat(ImageBrightness, 0f);
+
+        Sequence sequence = DOTween.Sequence();
+
+        var distortionAnimation = DOTween.To(() => screenRenderer.material.GetFloat(DistortionStrength),
+                x => screenRenderer.material.SetFloat(DistortionStrength, x),
+                destDistortion, 1f)
+            .SetEase(Ease.OutBounce);
+
+        var imageBrightnessAnimation = DOTween.To(() => screenRenderer.material.GetFloat(ImageBrightness),
+                x => screenRenderer.material.SetFloat(ImageBrightness, x),
+                1f, 1f)
+            .SetEase(Ease.OutBounce);
+
+        sequence.Append(distortionAnimation);
+        sequence.Join(imageBrightnessAnimation);
+        sequence.SetAutoKill();
+    }
+
+    /// <summary>
+    /// 클릭 효과를 재생합니다.
+    /// </summary>
+    /// <param name="touchTarget"></param>
+    /// <exception cref="ArgumentOutOfRangeException"></exception>
+    public void PlayClickFX(ETouchTarget touchTarget)
+    {
+        switch (touchTarget)
+        {
+            case ETouchTarget.Match:
+                matchButton.material.color = Color.clear;
+                break;
+            case ETouchTarget.Capture:
+                captureButton.material.color = Color.clear;
+                break;
+            case ETouchTarget.Rank:
+                rankButton.material.color = Color.clear;
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(touchTarget), touchTarget, null);
+        }
+
+
+        DOTween.Kill("TouchFX");
+
+        Tween fade = null;
+
+        switch (touchTarget)
+        {
+            case ETouchTarget.Match:
+                fade = DOTween
+                    .To(() => matchButton.material.color, x => matchButton.material.color = x,
+                        ClickColor, 0.25f).SetEase(Ease.OutSine);
+                break;
+            case ETouchTarget.Capture:
+                fade = DOTween
+                    .To(() => captureButton.material.color, x => captureButton.material.color = x,
+                        ClickColor, 0.25f).SetEase(Ease.OutSine);
+                break;
+            case ETouchTarget.Rank:
+                fade = DOTween
+                    .To(() => rankButton.material.color, x => rankButton.material.color = x,
+                        ClickColor, 0.25f).SetEase(Ease.OutSine);
+                break;
+        }
+
+        if (fade == null)
+            return;
+
+        Sequence fadeSequence = DOTween.Sequence();
+        fadeSequence.SetId("TouchFX");
+        fadeSequence.Append(fade);
+    }
+
+
+    public void OnResetClickFX(ETouchTarget touchTarget)
+    {
+        DOTween.Kill("TouchFX");
+
+        TweenerCore<Color, Color, ColorOptions> fade = null;
+
+        switch (touchTarget)
+        {
+            case ETouchTarget.Match:
+                fade = DOTween
+                    .To(() => matchButton.material.color, x => matchButton.material.color = x,
+                        Color.clear, 0.25f).SetEase(Ease.OutSine);
+                break;
+            case ETouchTarget.Capture:
+                fade = DOTween
+                    .To(() => captureButton.material.color, x => captureButton.material.color = x,
+                        Color.clear, 0.25f).SetEase(Ease.OutSine);
+                break;
+            case ETouchTarget.Rank:
+                fade = DOTween
+                    .To(() => rankButton.material.color, x => rankButton.material.color = x,
+                        Color.clear, 0.25f).SetEase(Ease.OutSine);
+                break;
+        }
+
+        if (fade == null)
+            return;
+
+        Sequence fadeSequence = DOTween.Sequence();
+        fadeSequence.SetId("TouchFX");
+        fadeSequence.Append(fade);
+    }
+
+    public void OnClickButton(ETouchTarget touchTarget)
+    {
+        PlayClickSound();
+        switch (touchTarget)
+        {
+            case ETouchTarget.Match:
+                Singleton.Instance<GameManager>().RandomChoiceAI();
+                OnClickMatch?.Invoke();
+                break;
+            case ETouchTarget.Capture:
+                
+#if UNITY_STANDALONE || UNITY_EDITOR
+                ShowToastMessage(5);
+#else
+                OnClickCapture?.Invoke();
+#endif
+                break;
+            case ETouchTarget.Rank:
+#if UNITY_STANDALONE || UNITY_EDITOR
+                ShowToastMessage(0);
+#else
+                ShowErrorMessage(0);
+#endif
+                break;
+        }
     }
 }

@@ -50,4 +50,12 @@ namespace Data
         Day,
         Night
     }
+    
+    public enum ETouchTarget
+    {
+        None,
+        Match,
+        Capture,
+        Rank
+    }
 }

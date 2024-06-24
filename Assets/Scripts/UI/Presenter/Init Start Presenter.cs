@@ -15,7 +15,7 @@ public class InitStartPresenter : MonoBehaviour
         _view = GetComponent<InitStartView>();
 
         bool isMobile = LGUtility.IsMobile();
-        _inputAction = InputSystem.actions.FindActionMap("System").FindAction(isMobile ? "Tap" : "AnyKey");
+        _inputAction = InputSystem.actions.FindActionMap("System").FindAction(isMobile ? "Touch" : "AnyKey");
         
         // 텍스트 변경
         _view.ChangeTextByOS();

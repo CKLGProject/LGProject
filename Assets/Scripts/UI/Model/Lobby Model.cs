@@ -1,3 +1,4 @@
+using Data;
 using R3;
 using UnityEngine;
 
@@ -32,10 +33,14 @@ public class LobbyModel : MonoBehaviour
 
     private ReactiveProperty<uint> _plug = new ReactiveProperty<uint>();
     public Observable<uint> PlugObservable => _plug;
-
+    
     public uint Plug
     {
         get => _plug.Value;
         set => _plug.Value = value;
     }
+
+    public ETouchTarget TouchTarget = ETouchTarget.None;
+
+
 }

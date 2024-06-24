@@ -1,6 +1,7 @@
 using Data;
 using R3;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Singleton;
 
 [RequireComponent(typeof(LobbyView))]
@@ -13,6 +14,7 @@ public class LobbyPresenter : MonoBehaviour
     private LobbyView _lobbyView;
     private LobbyModel _lobbyModel;
 
+
     private void Start()
     {
         _lobbyView = GetComponent<LobbyView>();
@@ -20,6 +22,8 @@ public class LobbyPresenter : MonoBehaviour
 
         _lobbyModel = GetComponent<LobbyModel>();
         _lobbyPopupModel = FindAnyObjectByType<LobbyPopupModel>();
+
+        _lobbyView.InitScreenFX();
 
         // Model
         _lobbyPopupModel.ChoiceCharacterTypeObservable()
@@ -50,17 +54,52 @@ public class LobbyPresenter : MonoBehaviour
         _lobbyView.ActivePet(selectedCharacter);
         _lobbyView.BindProfileImage(selectedCharacter);
 
-        _lobbyView.MatchButtonAsObservable()
+        _lobbyView.MatchButtonDownAsObservable()
             .Where(_ => !_lobbyPopupModel.IsActive)
-            .Subscribe(OnClickMatchButton);
+            .Subscribe(_ =>
+            {
+                ETouchTarget touchTarget = ETouchTarget.Match;
+                _lobbyModel.TouchTarget = touchTarget;
 
-        _lobbyView.RankButtonAsObservable()
-            .Where(_ => !_lobbyPopupModel.IsActive)
-            .Subscribe(OnClickRankButton);
+                _lobbyView.PlayClickFX(touchTarget);
+            });
 
-        _lobbyView.CaptureButtonAsObservable()
+        _lobbyView.MatchButtonUpAsObservable()
             .Where(_ => !_lobbyPopupModel.IsActive)
-            .Subscribe(OnClickCaptureButton);
+            .Where(_ => _lobbyModel.TouchTarget == ETouchTarget.Match)
+            .Subscribe(_ => _lobbyView.OnClickButton(ETouchTarget.Match));
+
+        _lobbyView.RankButtonDownAsObservable()
+            .Where(_ => !_lobbyPopupModel.IsActive)
+            .Subscribe(_ =>
+            {
+                ETouchTarget touchTarget = ETouchTarget.Rank;
+                _lobbyModel.TouchTarget = touchTarget;
+
+                _lobbyView.PlayClickFX(touchTarget);
+            });
+
+        _lobbyView.RankButtonUpAsObservable()
+            .Where(_ => !_lobbyPopupModel.IsActive)
+            .Where(_ => _lobbyModel.TouchTarget == ETouchTarget.Rank)
+            .Subscribe(_ => _lobbyView.OnClickButton(ETouchTarget.Rank));
+
+        _lobbyView.CaptureButtonDownAsObservable()
+            .Where(_ => !_lobbyPopupModel.IsActive)
+            .Subscribe(_ =>
+            {
+                ETouchTarget touchTarget = ETouchTarget.Capture;
+                _lobbyModel.TouchTarget = touchTarget;
+
+                _lobbyView.PlayClickFX(touchTarget);
+            });
+
+        _lobbyView.CaptureButtonUpAsObservable()
+            .Where(_ => !_lobbyPopupModel.IsActive)
+            .Where(_ => _lobbyModel.TouchTarget == ETouchTarget.Capture)
+            .Subscribe(_ => _lobbyView.OnClickButton(ETouchTarget.Capture));
+
+        InputSystem.actions.FindActionMap("System").FindAction("Touch").canceled += OnResetClickFX;
 
         _lobbyView.MailButtonAsObservable()
             .Subscribe(_ =>
@@ -139,33 +178,11 @@ public class LobbyPresenter : MonoBehaviour
         _lobbyModel.Plug = 3270;
     }
 
-    private void OnClickRankButton(Unit obj)
+    private void OnResetClickFX(InputAction.CallbackContext obj)
     {
-        _lobbyView.PlayClickSound();
-        
-#if UNITY_STANDALONE
-        _lobbyView.ShowToastMessage(0);
-#else
-        _lobbyView.ShowErrorMessage(0);
-#endif
-    }
+        ETouchTarget touchTarget = _lobbyModel.TouchTarget;
+        _lobbyView.OnResetClickFX(touchTarget);
 
-    private void OnClickCaptureButton(Unit obj)
-    {
-        _lobbyView.PlayClickSound();
-        
-#if UNITY_STANDALONE || UNITY_EDITOR
-        _lobbyView.ShowToastMessage(5);
-#else
-        _lobbyView.OnClickCapture?.Invoke();
-#endif
-    }
-
-    private void OnClickMatchButton(Unit obj)
-    {
-        _lobbyView.PlayClickSound();
-        
-        Singleton.Instance<GameManager>().RandomChoiceAI();
-        _lobbyView.OnClickMatch?.Invoke();
+        _lobbyModel.TouchTarget = ETouchTarget.None;
     }
 }

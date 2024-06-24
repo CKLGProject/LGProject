@@ -9,6 +9,13 @@ namespace ReactiveTouchDown
 {
     public static class ObservableTriggerExtensions
     {
+        public static Observable<Unit> TouchUpAsObservable(this GameObject component)
+        {
+            if (component == null || component.gameObject == null) return Observable.Empty<Unit>();
+            return GetOrAddComponent<ObservableTouchUpTrigger>(component.gameObject)
+                .OnTouchUpAsObservable(component);
+        }
+        
         public static Observable<Unit> TouchDownAsObservable(this GameObject component)
         {
             if (component == null || component.gameObject == null) return Observable.Empty<Unit>();
@@ -55,7 +62,7 @@ namespace ReactiveTouchDown
         private void Awake()
         {
             _camera = Camera.main;
-            _inputAction = InputSystem.actions.FindActionMap("System").FindAction("Tap");
+            _inputAction = InputSystem.actions.FindActionMap("System").FindAction("Touch");
             _inputAction.performed += OnTouch;
         }
 
@@ -86,6 +93,57 @@ namespace ReactiveTouchDown
         }
     }
 
+    public class ObservableTouchUpTrigger : ObservableTriggerBase
+    {
+        private int _instance;
+        private Subject<Unit> _onTouchDown;
+        private Camera _camera;
+        private InputAction _inputAction;
+
+        private void OnEnable()
+        {
+            _inputAction.Enable();
+        }
+
+        private void OnDisable()
+        {
+            _inputAction.Disable();
+        }
+
+        private void Awake()
+        {
+            _camera = Camera.main;
+            _inputAction = InputSystem.actions.FindActionMap("System").FindAction("Touch");
+            _inputAction.canceled += OnTouchUp;
+        }
+
+        private void OnTouchUp(InputAction.CallbackContext obj)
+        {
+            if(_camera != null)
+            {
+                Vector2 clickPosition = Pointer.current.position.ReadValue();
+                Ray ray = _camera.ScreenPointToRay(clickPosition);
+
+                if (Physics.Raycast(ray, out RaycastHit hit))
+                {
+                    if (hit.collider.gameObject.GetInstanceID() == _instance)
+                        _onTouchDown?.OnNext(Unit.Default);
+                }
+            }
+        }
+
+        public Subject<Unit> OnTouchUpAsObservable(GameObject component)
+        {
+            _instance = component.gameObject.GetInstanceID();
+            return _onTouchDown ??= new Subject<Unit>();
+        }
+
+        protected override void RaiseOnCompletedOnDestroy()
+        {
+            _onTouchDown?.OnCompleted();
+        }
+    }
+    
     public class ObservableDoubleTouchDownTrigger : ObservableTriggerBase
     {
         private int _instance;
