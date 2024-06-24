@@ -43,7 +43,7 @@ public class LobbyPopupView : MonoBehaviour
 
     [Header("캐릭터 프로필")] [SerializeField] private CharacterProfile[] characterProfiles;
 
-    [Header("펫 프로필")] [SerializeField] private PetData[] petDataList;
+    [Header("펫 프로필")] [SerializeField] private Sprite[] petDataList;
 
     [Header("캐릭터 프로필 버튼")] [SerializeField]
     private Button hitProfileButton;
@@ -303,11 +303,8 @@ public class LobbyPopupView : MonoBehaviour
             bool isEnablePet = Singleton.Instance<GameManager>().IsEnablePet(petType);
             if (isEnablePet)
             {
-                // 개발 기간상 0단계 펫만 존재
-                const int petLevel = 0;
-
                 petImage.gameObject.SetActive(true);
-                petImage.sprite = petDataList[(int)petType].PetProfileImage[petLevel];
+                petImage.sprite = petDataList[(int)petType];
                 return true;
             }
         }

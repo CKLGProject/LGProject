@@ -1734,8 +1734,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -21.2}
-  m_SizeDelta: {x: 153.1276, y: 153.1268}
+  m_AnchoredPosition: {x: 0, y: -21.9}
+  m_SizeDelta: {x: 129.958, y: 129.96}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &264796995
 MonoBehaviour:
@@ -1757,7 +1757,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a0fec4e317b8e46048c36872565fbddc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e56aa2175e004794e833fd969a840ea0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -13769,11 +13769,11 @@ MonoBehaviour:
   - {fileID: 973375821}
   - {fileID: 1381916149}
   petDataList:
-  - {fileID: 11400000, guid: 62179994741ec4bf283630928d5b3631, type: 2}
-  - {fileID: 11400000, guid: 415e3f6f7f76640f2b757b7e9ef9e136, type: 2}
-  - {fileID: 11400000, guid: 29091777240d940099adb929c0fdb6af, type: 2}
-  - {fileID: 11400000, guid: 570b5cc60e386423ea93eed3a9eaa8e9, type: 2}
-  - {fileID: 11400000, guid: 49e7dab4f7aa24aada45e94c8e1628c1, type: 2}
+  - {fileID: 0}
+  - {fileID: 21300000, guid: e56aa2175e004794e833fd969a840ea0, type: 3}
+  - {fileID: 21300000, guid: 62f676bb9c396814f8b3ec6a867f0731, type: 3}
+  - {fileID: 21300000, guid: 3741a82e7fdc8c842bb2981b7fa14a78, type: 3}
+  - {fileID: 21300000, guid: 2bdf71b1aca173f40811d3d6cc2aeaba, type: 3}
   hitProfileButton: {fileID: 4396377990715545351}
   frostProfileButton: {fileID: 973375820}
   kaneProfileButton: {fileID: 1381916148}
