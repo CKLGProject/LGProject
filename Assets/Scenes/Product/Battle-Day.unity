@@ -4496,11 +4496,6 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1377608663600074391, guid: af5c522be8efb4b76b7f647f18ccff3c,
         type: 3}
-      propertyPath: ultimateSource
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1377608663600074391, guid: af5c522be8efb4b76b7f647f18ccff3c,
-        type: 3}
       propertyPath: JumpAttackBulletPrefab
       value: 
       objectReference: {fileID: 1079673998}
@@ -7217,10 +7212,20 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1355248535655832082, guid: 2733f80f426950d4598e4e6317bd7935,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6142601296869339651, guid: 2733f80f426950d4598e4e6317bd7935,
         type: 3}
       propertyPath: m_Name
       value: Hit_AI
+      objectReference: {fileID: 0}
+    - target: {fileID: 6595579595864457513, guid: 2733f80f426950d4598e4e6317bd7935,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8219133890818253592, guid: 2733f80f426950d4598e4e6317bd7935,
         type: 3}
@@ -7277,6 +7282,11 @@ PrefabInstance:
       propertyPath: grid
       value: 
       objectReference: {fileID: 266398497}
+    - target: {fileID: 8881860252120503662, guid: 2733f80f426950d4598e4e6317bd7935,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12427,7 +12437,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 996713019}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.03428489, y: -0.000000017196266, z: 5.8991884e-10, w: 0.9994121}
+  m_LocalRotation: {x: 0.03428489, y: 0.000000017196268, z: -5.8991895e-10, w: 0.9994121}
   m_LocalPosition: {x: 0, y: 2.3300004, z: -21.994781}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -16130,7 +16140,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1353022552}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.03428489, y: -0.000000017196266, z: 5.8991884e-10, w: 0.9994121}
+  m_LocalRotation: {x: 0.03428489, y: 0.000000017196268, z: -5.8991895e-10, w: 0.9994121}
   m_LocalPosition: {x: 0, y: 2.3300004, z: -21.994781}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -25512,11 +25522,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3655528678612276171, guid: e36772ac1b2dcda4da45ce3d28228fd0,
-        type: 3}
-      propertyPath: ultimateSource
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 4349796721831851310, guid: e36772ac1b2dcda4da45ce3d28228fd0,
         type: 3}
       propertyPath: m_Name
