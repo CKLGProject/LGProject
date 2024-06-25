@@ -95,6 +95,7 @@ public class LobbyView : MonoBehaviour
     // Constants
     private static readonly int DistortionStrength = Shader.PropertyToID("_DistortionStrength");
     private static readonly int ImageBrightness = Shader.PropertyToID("_ImageBrightness");
+    private static readonly int DistortionSpeed = Shader.PropertyToID("_Distortion_Speed");
 
     /// <summary>
     /// 프로필 이미지를 바인딩 합니다.
@@ -393,9 +394,10 @@ public class LobbyView : MonoBehaviour
     /// </summary>
     public void InitScreenFX()
     {
-        const float destDistortion = 0.03f;
+        const float destDistortion = 0f;
 
         screenRenderer.material.SetFloat(DistortionStrength, 1.35f);
+        screenRenderer.material.SetFloat(DistortionSpeed, 2f);
         screenRenderer.material.SetFloat(ImageBrightness, 0f);
 
         Sequence sequence = DOTween.Sequence();
