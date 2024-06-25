@@ -43,17 +43,11 @@
 
     <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>
 
-    <!-- To open bluetooth settings on some devices -->
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
-
     <uses-permission android:name="android.permission.VIBRATE"/>
 
     <!-- To be able to set phone wallpaper -->
     <uses-permission android:name="android.permission.SET_WALLPAPER"/>
-
-    <!-- For dialing phone number directly functionality -->
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
-
+    
     <!-- For GPS coordinates -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
@@ -63,9 +57,6 @@
     <!-- For some Telephony methods -->
     <uses-permission android:name="android.permission.MODIFY_PHONE_STATE"/>
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-
-    <!-- For silent SMS -->
-    <uses-permission android:name="android.permission.SEND_SMS"/>
 
     <!-- Flashlight & Taking photos -->
     <uses-permission android:name="android.permission.CAMERA" android:required="false"/>

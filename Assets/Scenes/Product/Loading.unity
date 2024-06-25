@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
+  m_IndirectSpecularColor: {r: 0.12729266, g: 0.13414232, b: 0.12114291, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1175,7 +1175,7 @@ MonoBehaviour:
   sceneLoadingList:
   - {fileID: 1055772021}
   - {fileID: 1677384517}
-  battleMapKind: -1
+  battleMapKind: 2
 --- !u!1 &1677384517
 GameObject:
   m_ObjectHideFlags: 0
