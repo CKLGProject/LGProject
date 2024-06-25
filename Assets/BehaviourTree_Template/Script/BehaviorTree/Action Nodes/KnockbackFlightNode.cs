@@ -20,7 +20,6 @@ namespace BehaviourTree
         {
             try
             {
-                _stateMachine.playable.effectManager.Stop(EffectManager.EFFECT.Airborne);
             }
             catch
             {
@@ -32,7 +31,7 @@ namespace BehaviourTree
         {
             try
             {
-                if ((!_stateMachine.IsKnockback) && _stateMachine.IsGrounded)
+                if ((!_stateMachine.IsKnockback && _stateMachine.IsGrounded) || _stateMachine.IsDead)
                 {
                     Debug.Log("Flight Fail");
                     Debug.Log($"_stateMachine.IsKnockback = {_stateMachine.IsKnockback} \\ _stateMachine.IsGrounded =  {_stateMachine.IsGrounded}");

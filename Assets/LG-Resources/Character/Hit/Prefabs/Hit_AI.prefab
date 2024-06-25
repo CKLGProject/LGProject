@@ -249,7 +249,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.25
+  m_Radius: 0.4
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0.5, z: 0}
@@ -433,14 +433,29 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8014300752184872275, guid: 677a68bf96020ca41b3dfffd46622418,
         type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8014300752184872275, guid: 677a68bf96020ca41b3dfffd46622418,
+        type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 8b6d37d1a36d0044fb6b8252ec1ff325, type: 2}
     - target: {fileID: -5760671784021858582, guid: 677a68bf96020ca41b3dfffd46622418,
         type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -5760671784021858582, guid: 677a68bf96020ca41b3dfffd46622418,
+        type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 8b6d37d1a36d0044fb6b8252ec1ff325, type: 2}
+    - target: {fileID: -483292093021651503, guid: 677a68bf96020ca41b3dfffd46622418,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -483292093021651503, guid: 677a68bf96020ca41b3dfffd46622418,
         type: 3}
       propertyPath: m_Materials.Array.data[0]

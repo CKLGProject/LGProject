@@ -94,10 +94,11 @@ namespace BehaviourTree
         }
 
         float curTimer = 0;
-        float minTimer = 0.2f;
+        float minTimer = 0.1f;
 
         private void Update()
         {
+            CameraCheck();
             if (BattleSceneSystem.Instance.IsStart)
             {
                 SuperAmmorTimer();
@@ -117,7 +118,7 @@ namespace BehaviourTree
                 PlayableGravity();
                 NewPlatformCheck();
                 DeadSpaceCheck();
-                CameraCheck();
+                //CameraCheck();
                 UnderPlatformCheck();
             }
         }

@@ -36,103 +36,110 @@ namespace pathFinding
 
         public void FindPath(PathRequest request, Action<PathResult> callback)
         {
-            Vector3[] wayPoint = Array.Empty<Vector3>();
-            bool pathSuccess = false;
-
-            Node startNode = _grid.NodeFromWorldPoint(request.PathStart);
-
-            //Instantiate(cube, startNode.worldPosition, Quaternion.identity).name = "startNode";
-            //Instantiate(cube, request.pathStart, Quaternion.identity).name = "PathStart";
-
-            Node targetNode = _grid.NodeFromWorldPoint(request.PathEnd);
-
-            //if (startNode == null || targetNode == null)
-            //    yield return null;
-
-            if (startNode.Walkable && targetNode.Walkable)
+            try
             {
-                Heap<Node> openSet = new Heap<Node>(_grid.MaxSize);
-                HashSet<Node> closeSet = new HashSet<Node>();
+                Vector3[] wayPoint = Array.Empty<Vector3>();
+                bool pathSuccess = false;
 
-                openSet.Add(startNode);
+                Node startNode = _grid.NodeFromWorldPoint(request.PathStart);
 
-                while (openSet.Count > 0)
+                //Instantiate(cube, startNode.worldPosition, Quaternion.identity).name = "startNode";
+                //Instantiate(cube, request.pathStart, Quaternion.identity).name = "PathStart";
+
+                Node targetNode = _grid.NodeFromWorldPoint(request.PathEnd);
+
+                //if (startNode == null || targetNode == null)
+                //    yield return null;
+
+                if (startNode.Walkable && targetNode.Walkable)
                 {
-                    Node currentNode = openSet.RemoveFirst();
+                    Heap<Node> openSet = new Heap<Node>(_grid.MaxSize);
+                    HashSet<Node> closeSet = new HashSet<Node>();
 
-                    closeSet.Add(currentNode);
+                    openSet.Add(startNode);
 
-                    if (currentNode == targetNode)
+                    while (openSet.Count > 0)
                     {
-                        pathSuccess = true;
-                        //openSet.Add(currentNode);
-                        //Instantiate(cube, currentNode.worldPosition, Quaternion.identity);
-                        break;
-                    }
+                        Node currentNode = openSet.RemoveFirst();
 
-                    foreach (Node neighbour in _grid.GetNeighbours(currentNode))
-                    {
-                        // 2024-04-26 -> 10시 59분
-                        // walkable이더라도 일단 넣고 경로 이동을 할 때 재판단하자.
-                        // 다음 목표가 walkable일 경우 그 다음 목표와 비교했을 때.
-                        // x + 2일 경우 점프해서 넘어가고, y+2일 경우 점프를 한다. 
-                        // 만약 다음과 같은 상황일 땐 어떠한가?
-                        // □ ■ <- 왼쪽이 다음 목적지 2
-                        // ■ ■ <- 오른쪽이 다음 목적지 1, 
-                        // ■ □ 
-                        // 위의 상황에서는 비교하였을 때 x는 +1이지만
-                        // y가 +2이므로 y+ 2위치까지 점프를 해서 이동하게 하자
+                        closeSet.Add(currentNode);
 
-
-                        if (!neighbour.Walkable || closeSet.Contains(neighbour))
-                            continue;
-
-                        var checkX = neighbour.GridX;
-                        var checkY = neighbour.GridY;
-
-                        if (checkX >= 100 && checkX < 0 && checkY >= 100 && checkY < 0) continue;
-
-                        #region Debug
-                        //if (!grid[checkX - 1, neighbour.gridY].walkable || !grid[neighbour.gridX, checkY - 1].walkable) continue;
-                        //if (!grid[checkX - 1, neighbour.gridY].walkable || !grid[neighbour.gridX, checkY].walkable) continue;
-                        //if (!grid[checkX - 1, neighbour.gridY].walkable || !grid[neighbour.gridX, checkY + 1].walkable) continue;
-                        //if (!grid[checkX, neighbour.gridY].walkable || !grid[neighbour.gridX, checkY - 1].walkable) continue;
-                        //if (!grid[checkX, neighbour.gridY].walkable || !grid[neighbour.gridX, checkY + 1].walkable) continue;
-                        //if (!grid[checkX + 1, neighbour.gridY].walkable || !grid[neighbour.gridX, checkY - 1].walkable) continue;
-                        //if (!grid[checkX + 1, neighbour.gridY].walkable || !grid[neighbour.gridX, checkY].walkable) continue;
-                        //if (!grid[checkX + 1, neighbour.gridY].walkable || !grid[neighbour.gridX, checkY + 1].walkable) continue;
-                        #endregion
-
-                        // 대각선 이동 시, 해당 이동 항향 ex) -1, -1 위치의 경우 (0, -1), (-1, 0)위치 둘 다 열려있는지 체크 해야함.
-                        int gCostDistance = GetDistance(currentNode, neighbour);
-                        int newMovementCostToNeighbour = currentNode.GCost + gCostDistance + neighbour.MovementPenalty;
-                        if (newMovementCostToNeighbour < neighbour.GCost || !openSet.Contains(neighbour))
+                        if (currentNode == targetNode)
                         {
-                            neighbour.GCost = newMovementCostToNeighbour;
-                            neighbour.HCost = GetDistance(neighbour, targetNode);
-                            neighbour.Parent = currentNode;
+                            pathSuccess = true;
+                            //openSet.Add(currentNode);
+                            //Instantiate(cube, currentNode.worldPosition, Quaternion.identity);
+                            break;
+                        }
 
-                            if (!openSet.Contains(neighbour))
-                                openSet.Add(neighbour);
-                            else
-                                openSet.UpdateItem(neighbour);
+                        foreach (Node neighbour in _grid.GetNeighbours(currentNode))
+                        {
+                            // 2024-04-26 -> 10시 59분
+                            // walkable이더라도 일단 넣고 경로 이동을 할 때 재판단하자.
+                            // 다음 목표가 walkable일 경우 그 다음 목표와 비교했을 때.
+                            // x + 2일 경우 점프해서 넘어가고, y+2일 경우 점프를 한다. 
+                            // 만약 다음과 같은 상황일 땐 어떠한가?
+                            // □ ■ <- 왼쪽이 다음 목적지 2
+                            // ■ ■ <- 오른쪽이 다음 목적지 1, 
+                            // ■ □ 
+                            // 위의 상황에서는 비교하였을 때 x는 +1이지만
+                            // y가 +2이므로 y+ 2위치까지 점프를 해서 이동하게 하자
+
+
+                            if (!neighbour.Walkable || closeSet.Contains(neighbour))
+                                continue;
+
+                            var checkX = neighbour.GridX;
+                            var checkY = neighbour.GridY;
+
+                            if (checkX >= 100 && checkX < 0 && checkY >= 100 && checkY < 0) continue;
+
+                            #region Debug
+                            //if (!grid[checkX - 1, neighbour.gridY].walkable || !grid[neighbour.gridX, checkY - 1].walkable) continue;
+                            //if (!grid[checkX - 1, neighbour.gridY].walkable || !grid[neighbour.gridX, checkY].walkable) continue;
+                            //if (!grid[checkX - 1, neighbour.gridY].walkable || !grid[neighbour.gridX, checkY + 1].walkable) continue;
+                            //if (!grid[checkX, neighbour.gridY].walkable || !grid[neighbour.gridX, checkY - 1].walkable) continue;
+                            //if (!grid[checkX, neighbour.gridY].walkable || !grid[neighbour.gridX, checkY + 1].walkable) continue;
+                            //if (!grid[checkX + 1, neighbour.gridY].walkable || !grid[neighbour.gridX, checkY - 1].walkable) continue;
+                            //if (!grid[checkX + 1, neighbour.gridY].walkable || !grid[neighbour.gridX, checkY].walkable) continue;
+                            //if (!grid[checkX + 1, neighbour.gridY].walkable || !grid[neighbour.gridX, checkY + 1].walkable) continue;
+                            #endregion
+
+                            // 대각선 이동 시, 해당 이동 항향 ex) -1, -1 위치의 경우 (0, -1), (-1, 0)위치 둘 다 열려있는지 체크 해야함.
+                            int gCostDistance = GetDistance(currentNode, neighbour);
+                            int newMovementCostToNeighbour = currentNode.GCost + gCostDistance + neighbour.MovementPenalty;
+                            if (newMovementCostToNeighbour < neighbour.GCost || !openSet.Contains(neighbour))
+                            {
+                                neighbour.GCost = newMovementCostToNeighbour;
+                                neighbour.HCost = GetDistance(neighbour, targetNode);
+                                neighbour.Parent = currentNode;
+
+                                if (!openSet.Contains(neighbour))
+                                    openSet.Add(neighbour);
+                                else
+                                    openSet.UpdateItem(neighbour);
+                            }
                         }
                     }
                 }
-            }
-            //yield return null;
-            if (pathSuccess)
-            {
-                wayPoint = RetracePath(startNode, targetNode);
-                pathSuccess = wayPoint.Length > 0;
-            }
+                //yield return null;
+                if (pathSuccess)
+                {
+                    wayPoint = RetracePath(startNode, targetNode);
+                    pathSuccess = wayPoint.Length > 0;
+                }
 
-            // 여기서 보통은 움직이게 함.
-            if(callback != null)    
-                callback(new PathResult(wayPoint, pathSuccess, request.Callback));
-            else
+                // 여기서 보통은 움직이게 함.
+                if (callback != null)
+                    callback(new PathResult(wayPoint, pathSuccess, request.Callback));
+                else
+                {
+                    Debug.Log("움직임을 직접 구현해야하는 로직");
+                }
+            }
+            catch
             {
-                Debug.Log("움직임을 직접 구현해야하는 로직");
+                Debug.Log("현재 보드에 있지 않음.");
             }
         }
 

@@ -133,7 +133,7 @@ namespace BehaviourTree
 
             #region 오디오 출력
 
-            _stateMachine.PlayAudioClip(_punchClip);
+            //_stateMachine.PlayAudioClip(_punchClip);
 
             #endregion
             #endregion

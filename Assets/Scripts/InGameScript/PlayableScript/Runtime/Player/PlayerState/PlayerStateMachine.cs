@@ -514,7 +514,7 @@ namespace LGProject.PlayerState
         {
             //UpdateData(dataType);
             // 누어 있는 상태에선 데미지를 입지 않는다.
-            if (IsDown || IsKnockback || IsUseUltimate || IsSuperArmor || (EnemyStateMachine != null && IsUseUltimate))
+            if (IsDown || IsUseUltimate || IsSuperArmor || (EnemyStateMachine != null && IsUseUltimate))
                 return;
             if (IsGuard)
             {

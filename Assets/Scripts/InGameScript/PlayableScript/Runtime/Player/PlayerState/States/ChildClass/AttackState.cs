@@ -153,11 +153,11 @@ namespace LGProject.PlayerState
                     break;
             }
             // 딜레이가 끝난 이후 추가 키 입력이 들어가면? 
+            if (DamageInCount == false) AttackJudge();
             if (CurrentTimer > animDelay)
             {
                 StateMachine.animator.SetInteger(Attack, 0);
                 // 공격 진행
-                if (DamageInCount == false) AttackJudge();
                 if (StateMachine.attackAction.triggered && StateMachine.AttackCount < 3)
                 {
                     // 다음 공격의 게이지가 100일 경우 Ultimate공격을 진행 아닐 경우 attackState

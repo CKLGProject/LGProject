@@ -95,7 +95,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4910213552037458275
 Transform:
   m_ObjectHideFlags: 0
@@ -134,14 +134,14 @@ MonoBehaviour:
   MaximumSpeed: 4.2
   DashSpeed: 2
   JumpScale: 1.1
-  FirstAttackDelay: 0.8
+  FirstAttackDelay: 1
   FirstAttackJudgeDelay: 0.4
   FirstAttackMovingValue: 1
-  SecondAttackDelay: 0.8
+  SecondAttackDelay: 1
   SecondAttackJudgeDelay: 0.4
   SecondAttackMovingValue: 1
-  ThirdAttackDelay: 0.5
-  ThirdAttackJudgeDelay: 0.4
+  ThirdAttackDelay: 1
+  ThirdAttackJudgeDelay: 0.2
   ThirdAttackMovingValue: 3
   DashAttackDelay: 0.5
   UltimateDelay: 2.5

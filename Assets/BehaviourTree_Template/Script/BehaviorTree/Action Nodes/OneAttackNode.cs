@@ -158,7 +158,7 @@ namespace BehaviourTree
             {
                 _stateMachine.animator.SetTrigger("JumpAttack");
 
-                _stateMachine.PlayAudioClip(_punchClip);
+                //_stateMachine.PlayAudioClip(_punchClip);
                 //Debug.Log("Jump Attack");
             }
             else
@@ -166,7 +166,7 @@ namespace BehaviourTree
                 _stateMachine.physics.velocity += _stateMachine.transform.forward * 5f;
                 _stateMachine.animator.SetTrigger("DashAttack");
 
-                _stateMachine.PlayAudioClip(_punchClip);
+                //_stateMachine.PlayAudioClip(_punchClip);
                 //Debug.Log("DashAttack");
             }
             _stateMachine.animator.SetFloat("Run", 0);

@@ -32,14 +32,10 @@ namespace LGProject.PlayerState
 
         public override void LogicUpdate()
         {
-            // 아하! 여기서 문제가 생기는구나!
-            //base.LogicUpdate();
 
             if (Damaged())
                 return;
-
-            //if (StateMachine.IsKnockback || StateMachine.IsDamaged)
-            //    return;
+            //Debug.Log($"{StateMachine.moveAction.ReadValue<Vector2>().x}");
 
             float moveThreshold = Mathf.Abs(StateMachine.moveAction.ReadValue<Vector2>().x);
             StateMachine.animator.SetFloat(Run, moveThreshold);

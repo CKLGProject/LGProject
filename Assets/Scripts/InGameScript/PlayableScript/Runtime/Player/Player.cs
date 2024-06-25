@@ -46,6 +46,7 @@ namespace LGProject.PlayerState
 
         protected virtual void Update()
         {
+            CameraCheck();
             if (BattleSceneSystem.Instance.IsStart)
             {
                 if (StateMachine.IsKnockback)
@@ -65,7 +66,6 @@ namespace LGProject.PlayerState
                 velocity = StateMachine.physics.velocity;
                 NewPlatformCheck();
                 DeadSpaceCheck();
-                CameraCheck();
                 UpdateUltimateTimer();
                 UnderPlatformCheck();
             }

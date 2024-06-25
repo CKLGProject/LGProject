@@ -22,7 +22,11 @@ namespace BehaviourTree
             _stateMachine.IsKnockback = false;
             _stateMachine.IsDamaged = false;
             _stateMachine.animator.ResetTrigger(Landing);
-            _stateMachine.BlinkPlayerMesh();
+            if (!_stateMachine.IsDead)
+            {
+                Debug.Log("Hello");
+                _stateMachine.BlinkPlayerMesh();
+            }
             //_stateMachine.BlinkPlayerMaterial();
             //Debug.Log("WakeUp");
         }
@@ -45,6 +49,8 @@ namespace BehaviourTree
         {
             try
             {
+                if (_stateMachine.IsDead)
+                    return State.Failure;
                 curTimer += Time.deltaTime;
                 // 일어나는 중이면 무적 판정
                 if (_stateMachine.playable.WakeUpDelay < curTimer)

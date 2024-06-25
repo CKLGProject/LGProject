@@ -344,7 +344,8 @@ namespace LGProject.PlayerState
                     return;
                 bullet.gameObject.SetActive(false);
                 bullet.PlayHitParticle();
-                bullet.Methods();
+                if(!StateMachine.IsDown && !StateMachine.IsDead && !StateMachine.IsSuperArmor)
+                    bullet.Methods();
                 StateMachine.ApplyHitDamaged(bullet.KnockbackVelocity, 0, StateMachine, bullet.KnockbackGage);
             }
         }
@@ -595,10 +596,10 @@ namespace LGProject.PlayerState
         private async UniTaskVoid AliveDelay()
         {
             await UniTask.Delay(TimeSpan.FromSeconds(respawnTime));
+            PlayerMashBlink().Forget();
             //DeadZone.AddTarget(transform);
             StateMachine.ResetVelocity();
             transform.position = Vector3.forward * -9.5f + AliveOffset;
-            StateMachine.IsDead = false;
             DamageGage = 0;
             battleModel.SyncDamageGage(ActorType, DamageGage);
 
@@ -608,18 +609,26 @@ namespace LGProject.PlayerState
             StateMachine.animator.SetFloat("Run", 0);
             StateMachine.animator.SetInteger("Attack", 0);
             StateMachine.AttackCount = 0;
+            Debug.Log("AA");
+            StateMachine.playable.effectManager.Stop(EffectManager.EFFECT.Airborne);
 
             StateMachine.IsDamaged = false;
             StateMachine.IsKnockback = false;
             StateMachine.IsGrounded = false;
             StateMachine.IsSuperArmor = true;
             StateMachine.IsDashAttack = false;
+            StateMachine.IsDown = false;
+            StateMachine.IsJumpping = false;
+            StateMachine.IsDead = false;
+
             if (StateMachine.CurrentState != null)
                 StateMachine.ChangeState(StateMachine.landingState);
 
             // 무적 2초
             await UniTask.Delay(TimeSpan.FromSeconds(1f));
             StateMachine.IsSuperArmor = false;
+            
+
         }
 
         #endregion

@@ -18831,15 +18831,15 @@ RectTransform:
   m_GameObject: {fileID: 1803861442}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.4101852, y: 0.4101852, z: 0.4101852}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 993654316}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 407.829, y: 25}
-  m_SizeDelta: {x: 593.6001, y: 704.80005}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 1, y: 1}
 --- !u!95 &1803861444
 Animator:
@@ -19993,16 +19993,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 623296231779395701, guid: 9c4c74ae4f3824e7b8d4e9a80aec652f,
-        type: 3}
-      propertyPath: m_Name
-      value: Mobile Controller Canvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 623296231779395701, guid: 9c4c74ae4f3824e7b8d4e9a80aec652f,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4421546113195957084, guid: a3266e0ec71ba4f04b780383729720b0,
         type: 3}
       propertyPath: m_Sprite
@@ -20105,6 +20095,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 192
+      objectReference: {fileID: 0}
+    - target: {fileID: 623296231779395701, guid: 9c4c74ae4f3824e7b8d4e9a80aec652f,
+        type: 3}
+      propertyPath: m_Name
+      value: Mobile Controller Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 623296231779395701, guid: 9c4c74ae4f3824e7b8d4e9a80aec652f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6026401484144103469, guid: 9c4c74ae4f3824e7b8d4e9a80aec652f,
         type: 3}
