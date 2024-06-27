@@ -76,7 +76,7 @@ namespace LGProject.PlayerState
                 // 생각보다 판정이 후하진 않게 하기
                 // hit box의 크기를 따라감.
                 Vector3 hitBox =
-                 new Vector3(0.5f, 1f, 1f);
+                 new Vector3(0.5f, 0.7f, 1);
 
                 Collider[] targets = Physics.OverlapBox(center, hitBox, Quaternion.identity, 1 << 3);
                 // 박스 내부에 들어온 적을 생각했을 때, Playable Character와 가까운 적을 타겟으로 삼는다.

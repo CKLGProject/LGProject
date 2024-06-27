@@ -187,9 +187,10 @@ MonoBehaviour:
   movingAttack: 1
   AliveOffset: {x: 0, y: 0, z: 0}
   respawnTime: 0
-  SkinnedMeshRenderer: []
-  BlinkTimer: 0
-  BlinkInterval: 0.1
+  SkinnedMeshRenderer:
+  - {fileID: 1391538820382187086}
+  BlinkTimer: 2
+  BlinkInterval: 0.5
   DefaultWeapon: {fileID: 0}
   UltimateWeapon: {fileID: 0}
   audioSource: {fileID: 7076176742742437425}
@@ -213,6 +214,7 @@ MonoBehaviour:
   IsNormalAttack: 0
   IsUltimate: 0
   JumpCount: 0
+  SupperAmmor: 0
   BulletPrefab1: {fileID: 7565654486342102922}
   BulletPrefab2: {fileID: 6786734534890916903}
   BulletPrefab3: {fileID: 3206966951630220093}
@@ -709,6 +711,12 @@ PrefabInstance:
 --- !u!4 &664818376887678670 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3373461568680871395, guid: 552147db2557f44a296252eaea33c1cd,
+    type: 3}
+  m_PrefabInstance: {fileID: 2875858042005320493}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &1391538820382187086 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 3793900647681011043, guid: 552147db2557f44a296252eaea33c1cd,
     type: 3}
   m_PrefabInstance: {fileID: 2875858042005320493}
   m_PrefabAsset: {fileID: 0}

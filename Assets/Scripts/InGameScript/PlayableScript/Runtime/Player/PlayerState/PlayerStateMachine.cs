@@ -422,6 +422,7 @@ namespace LGProject.PlayerState
             playable.IsDead = IsDead;
             playable.IsNormalAttack = IsNormalAttack;
             playable.JumpCount = JumpInCount;
+            playable.SupperAmmor = IsSuperArmor;
         }
 
         /// <summary>

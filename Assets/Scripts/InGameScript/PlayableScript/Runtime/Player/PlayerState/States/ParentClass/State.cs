@@ -26,7 +26,6 @@ namespace LGProject.PlayerState
 
         public virtual void LogicUpdate()
         {
-            Damaged();
         }
 
         public bool Damaged()

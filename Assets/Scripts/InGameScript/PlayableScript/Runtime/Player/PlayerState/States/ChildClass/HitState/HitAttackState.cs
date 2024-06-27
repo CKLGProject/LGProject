@@ -138,10 +138,10 @@ namespace LGProject.PlayerState
                     break;
             }
 
+            if (DamageInCount == false) AttackJudge();
             if (CurrentTimer > animDelay)
             {
                 StateMachine.animator.SetInteger(Attack, 0);
-                if (DamageInCount == false) AttackJudge();
                 if (StateMachine.attackAction.triggered && StateMachine.AttackCount < 3)
                 {
                     if (StateMachine.playable.UltimateGage >= 100)
