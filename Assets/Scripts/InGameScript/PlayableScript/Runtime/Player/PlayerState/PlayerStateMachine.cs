@@ -297,8 +297,10 @@ namespace LGProject.PlayerState
 
         public bool CheckFlightAI()
         {
-            if (!IsGrounded)
+            if (!IsGrounded && !IsDead && JumpInCount > 0 && !IsDamaged)
+            {
                 return true;
+            }
             return false;
         }
 
@@ -568,7 +570,6 @@ namespace LGProject.PlayerState
         {
             await UniTask.Delay(TimeSpan.FromSeconds(nockbackDelay));
             physics.velocity = velocity;
-            Debug.Log($"Velocity = {physics.velocity}");
             collider.isTrigger = true;
             IsKnockback = true;
         }

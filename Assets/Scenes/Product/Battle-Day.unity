@@ -4509,11 +4509,6 @@ PrefabInstance:
       propertyPath: JumpAttackBulletPrefab
       value: 
       objectReference: {fileID: 1079673998}
-    - target: {fileID: 3206966951630220093, guid: af5c522be8efb4b76b7f647f18ccff3c,
-        type: 3}
-      propertyPath: _hitEffect
-      value: 
-      objectReference: {fileID: 548951483}
     - target: {fileID: 5147967505005749542, guid: af5c522be8efb4b76b7f647f18ccff3c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4564,21 +4559,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6786734534890916903, guid: af5c522be8efb4b76b7f647f18ccff3c,
-        type: 3}
-      propertyPath: _hitEffect
-      value: 
-      objectReference: {fileID: 548951483}
     - target: {fileID: 7066266423145889497, guid: af5c522be8efb4b76b7f647f18ccff3c,
         type: 3}
       propertyPath: m_Name
       value: Kane_Playable
       objectReference: {fileID: 0}
-    - target: {fileID: 7565654486342102922, guid: af5c522be8efb4b76b7f647f18ccff3c,
-        type: 3}
-      propertyPath: _hitEffect
-      value: 
-      objectReference: {fileID: 548951483}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12437,8 +12422,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 996713019}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.034403633, y: 0.00017589676, z: -0.000006055072, w: 0.999408}
-  m_LocalPosition: {x: -1.3333334, y: 3.1846669, z: -21.664927}
+  m_LocalRotation: {x: 0.034341678, y: 0.00021831098, z: -0.0000075015905, w: 0.99941015}
+  m_LocalPosition: {x: -1.4018527, y: 3.231742, z: -21.647976}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -15617,7 +15602,7 @@ Transform:
   m_GameObject: {fileID: 1316624601}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.3333334, y: 0.7846668, z: -9.664927}
+  m_LocalPosition: {x: -1.4018527, y: 0.83174187, z: -9.647976}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -16140,8 +16125,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1353022552}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.034403633, y: 0.00017589676, z: -0.000006055072, w: 0.999408}
-  m_LocalPosition: {x: -1.3333334, y: 3.1846669, z: -21.664927}
+  m_LocalRotation: {x: 0.034341678, y: 0.00021831098, z: -0.0000075015905, w: 0.99941015}
+  m_LocalPosition: {x: -1.4018527, y: 3.231742, z: -21.647976}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -16782,6 +16767,7 @@ MonoBehaviour:
   IsDead: 0
   IsNormalAttack: 0
   IsUltimate: 0
+  JumpCount: 0
   target: {fileID: 0}
   grid: {fileID: 0}
   path: []
@@ -16796,6 +16782,7 @@ MonoBehaviour:
   AttackPercent: 0
   ChasingPercent: 0
   NormalMovePercent: 0
+  velocitys: []
   player: {fileID: 0}
 --- !u!54 &1382073906
 Rigidbody:

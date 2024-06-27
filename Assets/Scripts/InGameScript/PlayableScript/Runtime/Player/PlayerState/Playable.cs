@@ -273,12 +273,13 @@ namespace LGProject.PlayerState
 
                     break;
                 case ActorType.AI:
-                    if (!StateMachine.CheckFlightAI() &&
+                    if (!StateMachine.CheckFlightAI() && !IsKnockback &&
                         !CollisionObserver.CallUnderPlatformZone(ZoneType.Platform,
                             transform.position + Vector3.down * 0.25f))
                     {
-                        Debug.Log("Hello");
-                        //StateMachine.animator.SetTrigger("Jump1");
+                        
+                        StateMachine.animator.SetTrigger("Jump1");
+                        StateMachine.JumpInCount++;
                         StateMachine.IsGrounded = false;
                         StateMachine.IsJumpping = true;
                         StateMachine.collider.isTrigger = true;
@@ -351,7 +352,6 @@ namespace LGProject.PlayerState
                 bullet.PlayHitParticle();
                 if(!StateMachine.IsDown && !StateMachine.IsDead && !StateMachine.IsSuperArmor)
                     bullet.Methods();
-                Debug.Log($"KnockbackVel = {bullet.KnockbackVelocity}");
                 StateMachine.ApplyHitDamaged(bullet.KnockbackVelocity, 0, StateMachine, bullet.KnockbackGage);
             }
         }
@@ -423,7 +423,10 @@ namespace LGProject.PlayerState
                 StateMachine.collider.isTrigger = true;
                 StateMachine.animator.SetBool(Flying, StateMachine.JumpInCount < 1 ? true : false);
                 if (StateMachine.JumpInCount < 1)
+                {
+                    Debug.Log("AA");
                     StateMachine.JumpInCount++;
+                }
             }
             // 위를 체크하고 싶은데...
         }
@@ -459,7 +462,6 @@ namespace LGProject.PlayerState
             StateMachine.physics.velocity = Vector3.zero;
             StateMachine.collider.isTrigger = false;
             StateMachine.IsGrounded = true;
-            //StateMachine.IsKnockback = false;
             StateMachine.JumpInCount = 0;
             StateMachine.StandingVelocity();
         }
@@ -610,7 +612,6 @@ namespace LGProject.PlayerState
             transform.position = Vector3.forward * -9.5f + AliveOffset;
             DamageGage = 0;
             battleModel.SyncDamageGage(ActorType, DamageGage);
-            //StateMachine.physics.isKinematic = true;
             StateMachine.animator.SetTrigger("Jump1");
 
             StateMachine.animator.SetTrigger("Landing");
@@ -657,17 +658,8 @@ namespace LGProject.PlayerState
         public void ShowUltimateEffect()
         {
             effectManager.Play(EffectManager.EFFECT.Ultimate).Forget();
-            //PlayingUltimateReadySFX(true);
-
         }
 
-        //public void PlayingUltimateReadySFX(bool use)
-        //{
-        //    if(use)
-        //        ultimateSource.Play();
-        //    else
-        //        audioSource.Stop();
-        //}
 
         #endregion
     }

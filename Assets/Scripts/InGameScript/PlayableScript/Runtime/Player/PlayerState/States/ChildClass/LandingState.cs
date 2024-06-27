@@ -22,7 +22,6 @@ namespace LGProject.PlayerState
             StateMachine.StandingVelocity();
             StateMachine.animator.SetTrigger(Landing);
             _currentTimer = 0;
-            Debug.Log("Landing");
         }
 
         public override void Exit()

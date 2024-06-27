@@ -78,7 +78,7 @@ namespace LGProject.PlayerState
                     BulletPrefab3.transform.position = startPosition + transform.position + velocity;
 
                     velocity *= velocity.x;
-                    knockbackVelocity = (transform.forward * 1.5f + transform.up * 3) * 1.5f;
+                    knockbackVelocity = (transform.forward * 1.5f + transform.up * 3) * 3f;
                     BulletPrefab3.MoveSet(Speed, velocity, transform.position, knockbackVelocity, UpGage);
                     break;
 
@@ -86,12 +86,13 @@ namespace LGProject.PlayerState
 
                     JumpAttackBulletPrefab.gameObject.SetActive(true);
                     JumpAttackBulletPrefab.GetComponent<ParticleSystem>().Play();
-                    //StartPoint = Vector3.up * 0.5f ;
+
                     startPosition = transform.forward * -1f + transform.up * 1f;
 
                     JumpAttackBulletPrefab.transform.position = startPosition + transform.position + (velocity);
                     JumpAttackBulletPrefab.transform.rotation =
                         Quaternion.Euler(0, 0, transform.forward.x < 0 ? -135 : -45);
+
                     velocity *= velocity.x;
                     knockbackVelocity = (transform.forward * 1.5f + transform.up * 3) * 1.5f;
                     JumpAttackBulletPrefab.MoveSet(Speed, velocity, transform.position, knockbackVelocity, UpGage);

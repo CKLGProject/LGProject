@@ -100,17 +100,13 @@ namespace BehaviourTree
 
         private void Update()
         {
-            CameraCheck();
-            NewPlatformCheck();
-            PlayableGravity();
             if (BattleSceneSystem.Instance.IsStart)
             {
                 SuperAmmorTimer();
                 // 바라보는 방향 -> 일단 무조건 플레이어를 바라보게 설정
                 // 일단 여기에 넣어보자
-                if (StateMachine.IsKnockback || !StateMachine.IsGrounded)
+                if (StateMachine.IsKnockback || !StateMachine.IsGrounded || JumpCount > 0)
                 {
-                    //Debug.Log("Hello");
                     curTimer += Time.deltaTime;
                     if (curTimer < minTimer)
                         return;
@@ -119,9 +115,12 @@ namespace BehaviourTree
                 {
                     curTimer = 0;
                 }
+                CameraCheck();
+                PlayableGravity();
+                NewPlatformCheck();
                 GetStateMachine.Update();
                 PlayableGravity();
-                if (IsKnockback)
+                if (JumpCount > 0)
                 {
                     velocitys.Add(StateMachine.physics.velocity);
                 }

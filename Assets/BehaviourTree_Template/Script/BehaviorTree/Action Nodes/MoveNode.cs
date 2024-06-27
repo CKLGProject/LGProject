@@ -13,6 +13,7 @@ namespace BehaviourTree
 
         private LGProject.PlayerState.PlayerStateMachine _stateMachine;
         private AIAgent _agent;
+        private bool _playingAirborn = false;
         [Space(10f)]
 
         // 어디로 이동할 것인가가 관건
@@ -23,7 +24,7 @@ namespace BehaviourTree
 
         // 현재 이동을 A*로 진행하려 생각 중.
         // Platform을 기준으로 이동할 수 있는 노드이며 대각선 이동 또는 y축 이동일 경우 점프를 하게 대체.
-        private float jumpDelay = 0.5f;
+        private float jumpDelay = 0.25f;
         private float _curTimer = 0;
         private int _count = 0;
         
@@ -37,7 +38,8 @@ namespace BehaviourTree
             _agent.targetIndex = 0;
             _stateMachine.DataSet(LGProject.DATA_TYPE.Movement);
             _stateMachine.playable.effectManager.Play(EffectManager.EFFECT.Run).Forget();
-
+            _agent.GetStateMachine.animator.ResetTrigger("Landing");
+            _playingAirborn = false;
         }
 
         protected override void OnStop()
@@ -73,13 +75,8 @@ namespace BehaviourTree
                 if (_agent == null)
                     _agent = AIAgent.Instance;
 
-                if (_stateMachine.IsDamaged || _stateMachine.IsDead)
+                if (_stateMachine.IsDamaged || _stateMachine.IsDead || _stateMachine.IsKnockback)
                     return State.Failure;
-
-                //if (_agent.GetStateMachine.IsGrounded)
-                    //_agent.GetStateMachine.playable.effectManager.Play(EffectManager.EFFECT.Run).Forget();
-                //else
-                //    _agent.GetStateMachine.playable.effectManager.Stop(EffectManager.EFFECT.Run);
 
                 float distance = Vector3.Distance(_stateMachine.transform.position, _agent.player.position);
 
@@ -96,7 +93,7 @@ namespace BehaviourTree
                     // 이동을 해야함.
                     return State.Running;
                 }
-                _stateMachine.physics.velocity = Vector3.zero;
+                _stateMachine.StandingVelocity();
                 return State.Success;
             }
             catch
@@ -279,14 +276,15 @@ namespace BehaviourTree
         {
             if (_curTimer >= jumpDelay && _agent.GetStateMachine.JumpInCount < 2)
             {
-                _count++;
                 _agent.GetStateMachine.JumpInCount++;
                 _agent.HandleJumpping();
+                _stateMachine.IsGrounded = false;
                 _agent.GetStateMachine.collider.isTrigger = true;
                 _curTimer = 0;
-                _agent.effectManager.Stop(EffectManager.EFFECT.Run);
-                _agent.effectManager.Play(EffectManager.EFFECT.Airborne).Forget();
+                //_agent.effectManager.Stop(EffectManager.EFFECT.Run);
+                //_agent.effectManager.Play(EffectManager.EFFECT.Airborne).Forget();
                 _agent.GetStateMachine.animator.SetTrigger("Jump" + _agent.GetStateMachine.JumpInCount.ToString());
+
             }
         }
 
