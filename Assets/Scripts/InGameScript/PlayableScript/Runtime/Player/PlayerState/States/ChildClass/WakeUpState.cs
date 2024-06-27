@@ -27,7 +27,6 @@ namespace LGProject.PlayerState
             StateMachine.animator.SetFloat(Run, 0);
             if (!StateMachine.IsDead)
             {
-                Debug.Log("AA");
                 StateMachine.BlinkPlayerMesh();
             }
         }

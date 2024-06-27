@@ -156,7 +156,7 @@ namespace BehaviourTree
 
         private void Movement(float speedSpeed)
         {
-            if (_stateMachine.physics.velocity.x <= speedSpeed && _stateMachine.physics.velocity.x >= -speedSpeed)
+            if (_stateMachine.physics.velocity.x <= speedSpeed * (_stateMachine.IsPet ? 1.05f : 1) && _stateMachine.physics.velocity.x >= -speedSpeed * (_stateMachine.IsPet ? 1.05f : 1))
 
                 _stateMachine.physics.velocity += _stateMachine.transform.forward * 1.5f;
 

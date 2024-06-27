@@ -78,7 +78,7 @@ namespace LGProject.PlayerState
         [SerializeField] private float BlinkTimer = 2.5f;
         [Min(0.1f), Range(0.1f, 1f)]
         [SerializeField] private float BlinkInterval = 0.1f;
-
+        //public GameObject PetData;
 
         public float DamageGage { get; private set; }
         public void SetDamageGage(float value) => DamageGage = value;
@@ -149,6 +149,8 @@ namespace LGProject.PlayerState
         public int JumpCount;
 
         public bool SupperAmmor;
+
+        public bool IsPet;
 
         float _gravity = -9.8f;
         float _groundedGravity = -0.05f;

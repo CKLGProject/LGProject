@@ -51,7 +51,7 @@ namespace LGProject.PlayerState
 
         protected void Movement(float speedSpeed)
         {
-            if (StateMachine.physics.velocity.x <= speedSpeed && StateMachine.physics.velocity.x >= -speedSpeed)
+            if (StateMachine.physics.velocity.x <= speedSpeed * (StateMachine.IsPet ?  1.1f : 1) && StateMachine.physics.velocity.x >= -speedSpeed * (StateMachine.IsPet ? 1.1f : 1))
             {
                 // 바로 앞에 적이 있으면 더이상 이동하지 않음(애니메이션은 재생)
                 // 머리와 다리쪽에서 Ray를 쏠 예정

@@ -7212,6 +7212,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hit_AI
       objectReference: {fileID: 0}
+    - target: {fileID: 6142601296869339651, guid: 2733f80f426950d4598e4e6317bd7935,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8219133890818253592, guid: 2733f80f426950d4598e4e6317bd7935,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12422,7 +12427,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 996713019}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.034403633, y: 0.00017589676, z: -0.000006055072, w: 0.999408}
+  m_LocalRotation: {x: 0.034403633, y: 0.00017589676, z: -0.0000060550724, w: 0.999408}
   m_LocalPosition: {x: -1.3333334, y: 3.1846669, z: -21.664927}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -16125,7 +16130,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1353022552}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.034403633, y: 0.00017589676, z: -0.000006055072, w: 0.999408}
+  m_LocalRotation: {x: 0.034403633, y: 0.00017589676, z: -0.0000060550724, w: 0.999408}
   m_LocalPosition: {x: -1.3333334, y: 3.1846669, z: -21.664927}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -16769,6 +16774,7 @@ MonoBehaviour:
   IsUltimate: 0
   JumpCount: 0
   SupperAmmor: 0
+  IsPet: 0
   target: {fileID: 0}
   grid: {fileID: 0}
   path: []
@@ -16783,7 +16789,6 @@ MonoBehaviour:
   AttackPercent: 0
   ChasingPercent: 0
   NormalMovePercent: 0
-  velocitys: []
   player: {fileID: 0}
 --- !u!54 &1382073906
 Rigidbody:
@@ -24575,6 +24580,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Frost_AI
+      objectReference: {fileID: 0}
+    - target: {fileID: 1683840886605889499, guid: 551b652ef833b4348a77fd7332d7b83c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5134505680086110306, guid: 551b652ef833b4348a77fd7332d7b83c,
         type: 3}

@@ -21,7 +21,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &748704813484300572
 Transform:
   m_ObjectHideFlags: 0
@@ -109,6 +109,7 @@ MonoBehaviour:
   IsUltimate: 0
   JumpCount: 0
   SupperAmmor: 0
+  IsPet: 0
   target: {fileID: 0}
   grid: {fileID: 0}
   path: []
@@ -124,7 +125,6 @@ MonoBehaviour:
   AttackPercent: 0
   ChasingPercent: 0
   NormalMovePercent: 0
-  velocitys: []
   player: {fileID: 0}
 --- !u!136 &4885444769505129726
 CapsuleCollider:
@@ -146,9 +146,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.4
-  m_Height: 1.5
+  m_Height: 1.25
   m_Direction: 1
-  m_Center: {x: 0, y: 0.75, z: 0}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!54 &8377894398196911483
 Rigidbody:
   m_ObjectHideFlags: 0

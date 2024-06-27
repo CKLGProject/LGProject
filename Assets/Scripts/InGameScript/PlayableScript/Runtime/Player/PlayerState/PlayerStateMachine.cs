@@ -88,6 +88,8 @@ namespace LGProject.PlayerState
 
         public ECharacterType CharacterType;
 
+        public bool IsPet;
+
         private Dictionary<string, float> _animationClipsInfo = new Dictionary<string, float>();
 
         // Constant
@@ -142,6 +144,11 @@ namespace LGProject.PlayerState
             psm.IsGrounded = true;
             psm.IsGuard = false;
 
+            if (psm.playable.ActorType == ActorType.User)
+                psm.IsPet = GameObject.Find("User Pet") != null ? true : false;
+            else
+                psm.IsPet = GameObject.Find("AI Pet") != null ? true : false ;
+
             try
             {
                 psm.moveAction = InputSystem.actions["Move"];
@@ -157,8 +164,6 @@ namespace LGProject.PlayerState
                 psm.flightState = new FlightState(psm);
                 ApplyAttackState(psm.CharacterType, psm);
 
-                //psm.ultimateState = new UltimateState(psm);
-
                 ApplyJumpAttackState(psm.CharacterType, psm);
 
                 psm.hitState = new HitState(psm, ref psm.playable.HitDelay);
@@ -169,6 +174,7 @@ namespace LGProject.PlayerState
                 psm.wakeUpState = new WakeUpState(psm, ref psm.playable.WakeUpDelay);
                 psm.landingState = new LandingState(psm);
 
+                
 
                 psm.Initalize(psm.idleState);
                 //SetUltimateState();
@@ -423,6 +429,7 @@ namespace LGProject.PlayerState
             playable.IsNormalAttack = IsNormalAttack;
             playable.JumpCount = JumpInCount;
             playable.SupperAmmor = IsSuperArmor;
+            playable.IsPet = IsPet;
         }
 
         /// <summary>
@@ -530,7 +537,9 @@ namespace LGProject.PlayerState
             {
                 PlayAudioClip(DamagedSFXName);
                 physics.velocity = Vector3.zero;
-                playable.SetDamageGage(playable.DamageGage + (IsUltimate == true ? DamageGage * 0.5f : DamageGage));
+                float UpperDamageGage = playable.DamageGage + (IsUltimate == true ? DamageGage * 0.5f : DamageGage);
+                UpperDamageGage *= EnemyStateMachine.IsPet ? 1.1f : 1f;
+                playable.SetDamageGage(UpperDamageGage);
                 battleModel.SyncDamageGage(playable.ActorType, playable.DamageGage);
                 IsNormalAttack = false;
                 // 충격에 의한 물리 공식
