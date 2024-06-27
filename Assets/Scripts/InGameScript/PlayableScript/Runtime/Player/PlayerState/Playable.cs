@@ -424,7 +424,6 @@ namespace LGProject.PlayerState
                 StateMachine.animator.SetBool(Flying, StateMachine.JumpInCount < 1 ? true : false);
                 if (StateMachine.JumpInCount < 1)
                 {
-                    Debug.Log("AA");
                     StateMachine.JumpInCount++;
                 }
             }

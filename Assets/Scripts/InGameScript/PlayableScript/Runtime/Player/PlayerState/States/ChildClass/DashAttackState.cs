@@ -122,7 +122,6 @@ namespace LGProject.PlayerState
                     catch
                     {
 #if UNITY_EDITOR
-                        Debug.Log("AA");
 #endif
                     }
                 }

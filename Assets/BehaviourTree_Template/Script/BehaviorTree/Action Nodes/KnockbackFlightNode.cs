@@ -13,8 +13,6 @@ namespace BehaviourTree
             if (_stateMachine == null)
                 _stateMachine = AIAgent.Instance.GetStateMachine;
             _stateMachine.playable.effectManager.Play(EffectManager.EFFECT.Airborne).Forget();
-            _stateMachine.playable.Animator.SetTrigger("Knockback");
-            Debug.Log("Flight");
         }
 
         protected override void OnStop()
@@ -34,6 +32,7 @@ namespace BehaviourTree
                 // 일단 판정을 받아야함.
                 if (_stateMachine.IsKnockback)
                 {
+                    //_stateMachine.playable.Animator.SetTrigger("Knockback");
                     return State.Success;
                 }
 

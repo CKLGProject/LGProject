@@ -138,7 +138,7 @@ MonoBehaviour:
   FirstAttackJudgeDelay: 0.4
   FirstAttackMovingValue: 1
   SecondAttackDelay: 0.8
-  SecondAttackJudgeDelay: 0.4
+  SecondAttackJudgeDelay: 0.2
   SecondAttackMovingValue: 1
   ThirdAttackDelay: 0.8
   ThirdAttackJudgeDelay: 0.4
@@ -178,6 +178,7 @@ MonoBehaviour:
   IsDead: 0
   IsNormalAttack: 0
   IsUltimate: 0
+  JumpCount: 0
 --- !u!136 &1335163795397542594
 CapsuleCollider:
   m_ObjectHideFlags: 0
