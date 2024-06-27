@@ -35,7 +35,9 @@ namespace BehaviourTree
             StateMachineLogic();
             _curTimer = jumpDelay;
             _agent.targetIndex = 0;
-            _stateMachine.DataSet(LGProject.DATA_TYPE.Movement);  
+            _stateMachine.DataSet(LGProject.DATA_TYPE.Movement);
+            _stateMachine.playable.effectManager.Play(EffectManager.EFFECT.Run).Forget();
+
         }
 
         protected override void OnStop()
@@ -74,10 +76,10 @@ namespace BehaviourTree
                 if (_stateMachine.IsDamaged || _stateMachine.IsDead)
                     return State.Failure;
 
-                if (_agent.GetStateMachine.IsGrounded)
-                    _agent.GetStateMachine.playable.effectManager.Play(EffectManager.EFFECT.Run).Forget();
-                else
-                    _agent.GetStateMachine.playable.effectManager.Stop(EffectManager.EFFECT.Run);
+                //if (_agent.GetStateMachine.IsGrounded)
+                    //_agent.GetStateMachine.playable.effectManager.Play(EffectManager.EFFECT.Run).Forget();
+                //else
+                //    _agent.GetStateMachine.playable.effectManager.Stop(EffectManager.EFFECT.Run);
 
                 float distance = Vector3.Distance(_stateMachine.transform.position, _agent.player.position);
 
@@ -94,6 +96,7 @@ namespace BehaviourTree
                     // 이동을 해야함.
                     return State.Running;
                 }
+                _stateMachine.physics.velocity = Vector3.zero;
                 return State.Success;
             }
             catch
@@ -139,7 +142,8 @@ namespace BehaviourTree
 
 
                 //if (_agent.GetStateMachine.IsGrounded) 
-                _agent.transform.position = Vector3.MoveTowards(_agent.transform.position, currentWaypoint, _stateMachine.playable.MaximumSpeed * Time.deltaTime);
+                //_agent.transform.position = Vector3.MoveTowards(_agent.transform.position, currentWaypoint, _stateMachine.playable.MaximumSpeed * Time.deltaTime);
+                Movement(3f);
 
                 Vector3 direction = currentWaypoint - _agent.transform.position;
                 _agent.directionX = direction.x >= 0.1f ? true : false;
@@ -151,6 +155,14 @@ namespace BehaviourTree
                 return false;
             }
             return true;
+        }
+
+        private void Movement(float speedSpeed)
+        {
+            if (_stateMachine.physics.velocity.x <= speedSpeed && _stateMachine.physics.velocity.x >= -speedSpeed)
+
+                _stateMachine.physics.velocity += _stateMachine.transform.forward * 1.5f;
+
         }
 
         private bool CheckDownNode(Vector3 currentWayPoint)
@@ -272,7 +284,8 @@ namespace BehaviourTree
                 _agent.HandleJumpping();
                 _agent.GetStateMachine.collider.isTrigger = true;
                 _curTimer = 0;
-                //Debug.Log($"JumpCount / {_agent.GetStateMachine.JumpInCount}");
+                _agent.effectManager.Stop(EffectManager.EFFECT.Run);
+                _agent.effectManager.Play(EffectManager.EFFECT.Airborne).Forget();
                 _agent.GetStateMachine.animator.SetTrigger("Jump" + _agent.GetStateMachine.JumpInCount.ToString());
             }
         }
@@ -281,7 +294,6 @@ namespace BehaviourTree
         {
             if (_stateMachine == null)
                 _stateMachine = AIAgent.Instance.GetStateMachine;
-            //_stateMachine.animator.SetTrigger("Idle");
             _stateMachine.AttackCount = 0;
             _stateMachine.animator.SetInteger("Attack", 0);
             _stateMachine.animator.SetFloat("Run", 1f);

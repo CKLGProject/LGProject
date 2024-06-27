@@ -173,7 +173,7 @@ MonoBehaviour:
   SecondAttackDelay: 0.6
   SecondAttackJudgeDelay: 0.2
   SecondAttackMovingValue: 1
-  ThirdAttackDelay: 1
+  ThirdAttackDelay: 0.5
   ThirdAttackJudgeDelay: 0.2
   ThirdAttackMovingValue: 3
   DashAttackDelay: 0.75
@@ -333,7 +333,7 @@ MonoBehaviour:
   _KnockbackEffect: {fileID: 2682029315814992228, guid: accd91473619bb345890ff524dd4e26e,
     type: 3}
   _KnockbackOffset: {x: 0, y: 0, z: 0}
-  _RunEffect: {fileID: 1235096126941009767, guid: c775dfbf3c36bfb4ca265f3df6de1cf1,
+  _RunEffect: {fileID: 3131367911159837969, guid: df4bc5e6328e256438d58701736df1c0,
     type: 3}
   _RunOffset: {x: 0, y: 0, z: 0}
   _LandingEffect: {fileID: 3194273807269049694, guid: 6b511e017081e5e42b8a9df84cbd5177,
@@ -434,7 +434,7 @@ PrefabInstance:
     - target: {fileID: -8014300752184872275, guid: 677a68bf96020ca41b3dfffd46622418,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8014300752184872275, guid: 677a68bf96020ca41b3dfffd46622418,
         type: 3}
@@ -444,7 +444,7 @@ PrefabInstance:
     - target: {fileID: -5760671784021858582, guid: 677a68bf96020ca41b3dfffd46622418,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -5760671784021858582, guid: 677a68bf96020ca41b3dfffd46622418,
         type: 3}
@@ -454,7 +454,7 @@ PrefabInstance:
     - target: {fileID: -483292093021651503, guid: 677a68bf96020ca41b3dfffd46622418,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -483292093021651503, guid: 677a68bf96020ca41b3dfffd46622418,
         type: 3}

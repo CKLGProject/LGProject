@@ -29,7 +29,6 @@ namespace LGProject.PlayerState
             StateMachine.animator.SetInteger("Attack", 0);
             StateMachine.animator.SetTrigger(Landing);
             StateMachine.ResetVelocity();
-            
             // 피격 당해서 땅에 쿵 되었을 때 쿵 FX 출력
         }
 

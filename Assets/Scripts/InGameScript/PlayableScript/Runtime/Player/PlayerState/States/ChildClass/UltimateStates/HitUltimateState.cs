@@ -105,6 +105,7 @@ namespace LGProject.PlayerState
             Vector3 KnockbackValue = (StateMachine.transform.forward * 9f + StateMachine.transform.up * 9f) ;
 
             StateMachine.PlayAudioClip(UltimateSFXName);
+           
             targetStateMachine.ApplyHitDamaged(KnockbackValue, 0, StateMachine);
         }
 

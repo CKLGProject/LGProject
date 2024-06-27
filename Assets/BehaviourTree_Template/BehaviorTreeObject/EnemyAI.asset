@@ -226,7 +226,6 @@ MonoBehaviour:
   description: 
   children:
   - {fileID: 5990061257768801614}
-  - {fileID: -1173981029038407488}
   current: 0
 --- !u!114 &-5681522138099005796
 MonoBehaviour:
@@ -517,7 +516,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: f2c5be38d940ea84fa1513b47624f7a0
-  position: {x: 1103, y: 740.99994}
+  position: {x: 1205.5677, y: 741}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
@@ -1102,10 +1101,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ee50ff97a636c643a5a9957f3bda5b8, type: 3}
   m_Name: IsDeadNode
   m_EditorClassIdentifier: 
-  state: 0
+  state: 1
   started: 0
   guid: 1a660d081fc485e4bb784b5a5db1a0ca
-  position: {x: 884.9998, y: 740.99994}
+  position: {x: 965, y: 729}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}

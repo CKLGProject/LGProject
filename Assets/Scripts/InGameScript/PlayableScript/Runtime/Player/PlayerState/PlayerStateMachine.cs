@@ -297,7 +297,7 @@ namespace LGProject.PlayerState
 
         public bool CheckFlightAI()
         {
-            if (IsKnockback || JumpInCount > 0 || IsGuard)
+            if (!IsGrounded)
                 return true;
             return false;
         }
@@ -419,6 +419,7 @@ namespace LGProject.PlayerState
             playable.IsJumpping = IsJumpping;
             playable.IsDead = IsDead;
             playable.IsNormalAttack = IsNormalAttack;
+            playable.JumpCount = JumpInCount;
         }
 
         /// <summary>
@@ -533,6 +534,7 @@ namespace LGProject.PlayerState
                 velocity *= Mathf.Pow(2, (playable.DamageGage * 0.01f));
                 if (velocity != Vector3.zero)
                 {
+                    Debug.Log($"{velocity}");
                     SetVelocity(velocity, nockbackDelay).Forget();
                     animator.SetTrigger(Knockback);
                 }
@@ -566,6 +568,7 @@ namespace LGProject.PlayerState
         {
             await UniTask.Delay(TimeSpan.FromSeconds(nockbackDelay));
             physics.velocity = velocity;
+            Debug.Log($"Velocity = {physics.velocity}");
             collider.isTrigger = true;
             IsKnockback = true;
         }

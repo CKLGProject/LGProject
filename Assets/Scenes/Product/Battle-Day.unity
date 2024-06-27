@@ -7449,6 +7449,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: C_Hit_FX
       objectReference: {fileID: 0}
+    - target: {fileID: 1800673109272189368, guid: 8e6d8df30f942434e9bc2ae113bd59c8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2707465772680727615, guid: 8e6d8df30f942434e9bc2ae113bd59c8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -24132,7 +24137,7 @@ MonoBehaviour:
     y: 0
     width: 0
     height: 0
-  CollisionLineBoxScale: {x: 20, y: 10, z: 1}
+  CollisionLineBoxScale: {x: 22, y: 12, z: 1}
   Offset: {x: 0, y: 1.5, z: 0}
   CollisionColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!43 &2115693885

@@ -24,7 +24,6 @@ namespace BehaviourTree
             _stateMachine.animator.ResetTrigger(Landing);
             if (!_stateMachine.IsDead)
             {
-                Debug.Log("Hello");
                 _stateMachine.BlinkPlayerMesh();
             }
             //_stateMachine.BlinkPlayerMaterial();

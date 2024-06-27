@@ -267,7 +267,7 @@ MonoBehaviour:
   _KnockbackEffect: {fileID: 2682029315814992228, guid: accd91473619bb345890ff524dd4e26e,
     type: 3}
   _KnockbackOffset: {x: 0, y: 0, z: 0}
-  _RunEffect: {fileID: 1235096126941009767, guid: c775dfbf3c36bfb4ca265f3df6de1cf1,
+  _RunEffect: {fileID: 3131367911159837969, guid: df4bc5e6328e256438d58701736df1c0,
     type: 3}
   _RunOffset: {x: 0, y: 0, z: 0}
   _LandingEffect: {fileID: 3194273807269049694, guid: 6b511e017081e5e42b8a9df84cbd5177,

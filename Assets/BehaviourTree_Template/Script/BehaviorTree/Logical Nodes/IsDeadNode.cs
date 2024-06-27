@@ -20,11 +20,18 @@ namespace BehaviourTree
 
         protected override State OnUpdate()
         {
-            if (_stateMachine.IsDead)
+            try
             {
-                return State.Success;
+                if (_stateMachine.IsDead)
+                {
+                    return State.Running;
+                }
             }
-            return State.Failure;
+            catch
+            {
+
+            }
+            return State.Success;
 
         }
     }

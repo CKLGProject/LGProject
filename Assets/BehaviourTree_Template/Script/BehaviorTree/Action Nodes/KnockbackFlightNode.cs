@@ -18,13 +18,7 @@ namespace BehaviourTree
 
         protected override void OnStop()
         {
-            try
-            {
-            }
-            catch
-            {
 
-            }
         }
 
         protected override State OnUpdate()

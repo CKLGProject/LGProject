@@ -9739,7 +9739,7 @@ MonoBehaviour:
     y: 0
     width: 0
     height: 0
-  CollisionLineBoxScale: {x: 20, y: 10, z: 1}
+  CollisionLineBoxScale: {x: 22, y: 12, z: 1}
   Offset: {x: 0, y: 1.5, z: 0}
   CollisionColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &1104743393
@@ -13000,7 +13000,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1208162867}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0342849, y: 0.000000017196268, z: -5.899191e-10, w: 0.9994121}
+  m_LocalRotation: {x: 0.0342849, y: -0.000000017196266, z: 5.8991906e-10, w: 0.9994121}
   m_LocalPosition: {x: 0, y: 2.3300004, z: -21.63478}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -14286,7 +14286,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1328400254}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0342849, y: 0.000000017196268, z: -5.899191e-10, w: 0.9994121}
+  m_LocalRotation: {x: 0.0342849, y: -0.000000017196266, z: 5.8991906e-10, w: 0.9994121}
   m_LocalPosition: {x: 0, y: 2.3300004, z: -21.63478}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

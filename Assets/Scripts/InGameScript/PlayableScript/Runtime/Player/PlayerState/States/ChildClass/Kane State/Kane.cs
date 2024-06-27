@@ -54,7 +54,7 @@ namespace LGProject.PlayerState
                     BulletPrefab1.GetComponent<ParticleSystem>().Play();
                     startPosition = Vector3.up * 0.5f;
                     BulletPrefab1.transform.position = startPosition + transform.position + velocity;
-
+                    //velocity.x *= 5f;
                     velocity *= velocity.x;
                     BulletPrefab1.MoveSet(Speed, velocity, transform.position, Vector3.zero, UpGage);
 

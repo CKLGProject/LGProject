@@ -23,12 +23,13 @@ namespace BehaviourTree
             pathFinding.PathRequestManager.RequestPath(new pathFinding.PathRequest(_stateMachine.transform.position, _agent.player.position, _agent.GetPath));
 
             chasingPoint = pathFinding.Grid.Instance.NodeFromWorldPoint(_stateMachine.transform.position).WorldPosition;
+            _stateMachine.playable.effectManager.Play(EffectManager.EFFECT.Run).Forget();
             _stateMachine.DataSet(LGProject.DATA_TYPE.Chasing);
         }
 
         protected override void OnStop()
         {
-
+            _stateMachine.animator.SetFloat("Run", 0f);
         }
 
         protected override State OnUpdate()
@@ -38,6 +39,7 @@ namespace BehaviourTree
                 // path가 있는지 확인. || 내가 피해를 입은 경우 |}| 최종 경로에 도착한 경우 || 플레이어가 공중에 떠있을때 || 플레이어가 누워있을 때 || 플레이어가 떨어졌을 때,
                 if (EscapeConditions())
                 {
+                    Debug.Log("추격 안함");
                     return State.Failure;
                 }
 
@@ -61,6 +63,7 @@ namespace BehaviourTree
                     // 이동을 해야함.
                     return State.Running;
                 }
+                _stateMachine.physics.velocity = Vector3.zero;
                 return State.Success;
             }
             catch
@@ -114,7 +117,8 @@ namespace BehaviourTree
                 currentWaypoint.y = _stateMachine.transform.position.y;
             }
 
-            _stateMachine.transform.position = Vector3.MoveTowards(_stateMachine.transform.position, currentWaypoint, _agent.MaximumSpeed * Time.deltaTime);
+            //_stateMachine.transform.position = Vector3.MoveTowards(_stateMachine.transform.position, currentWaypoint, _agent.MaximumSpeed * Time.deltaTime);
+            Movement(3f);
 
             Vector3 direction = currentWaypoint - _stateMachine.transform.position;
 
@@ -124,7 +128,13 @@ namespace BehaviourTree
             _agent.transform.LookAt(rot);
             return true;
         }
+        private void Movement(float speedSpeed)
+        {
+            if (_stateMachine.physics.velocity.x <= speedSpeed && _stateMachine.physics.velocity.x >= -speedSpeed)
 
+                _stateMachine.physics.velocity += _stateMachine.transform.forward * 1.5f;
+
+        }
         RaycastHit hit;
         private void JumpingPointCheck(Vector3 direction)
         {
@@ -220,13 +230,15 @@ namespace BehaviourTree
 
         private void SetJumpVelocity()
         {
-            if (_curTimer >= jumpDelay)
+            if (_curTimer >= jumpDelay && _agent.GetStateMachine.JumpInCount < 2)
             {
                 _count++;
                 _agent.GetStateMachine.JumpInCount++;
                 _agent.HandleJumpping();
                 _agent.GetStateMachine.collider.isTrigger = true;
                 _curTimer = 0;
+                _agent.effectManager.Stop(EffectManager.EFFECT.Run);
+                _agent.effectManager.Play(EffectManager.EFFECT.Airborne).Forget();
                 _agent.GetStateMachine.animator.SetTrigger("Jump" + _agent.GetStateMachine.JumpInCount.ToString());
             }
 

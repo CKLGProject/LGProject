@@ -3,6 +3,7 @@ using LGProject;
 using UnityEngine;
 using UnityEditor;
 using UnityEngine.Singleton;
+using System.Collections.Generic;
 
 namespace BehaviourTree
 {
@@ -32,6 +33,7 @@ namespace BehaviourTree
         [HideInInspector] public int AttackPercent;
         [HideInInspector] public int ChasingPercent;
         [HideInInspector] public int NormalMovePercent;
+        public List<Vector3> velocitys;
 
         // 상대방
         public Transform player;
@@ -99,6 +101,8 @@ namespace BehaviourTree
         private void Update()
         {
             CameraCheck();
+            NewPlatformCheck();
+            PlayableGravity();
             if (BattleSceneSystem.Instance.IsStart)
             {
                 SuperAmmorTimer();
@@ -106,6 +110,7 @@ namespace BehaviourTree
                 // 일단 여기에 넣어보자
                 if (StateMachine.IsKnockback || !StateMachine.IsGrounded)
                 {
+                    //Debug.Log("Hello");
                     curTimer += Time.deltaTime;
                     if (curTimer < minTimer)
                         return;
@@ -116,9 +121,14 @@ namespace BehaviourTree
                 }
                 GetStateMachine.Update();
                 PlayableGravity();
-                NewPlatformCheck();
+                if (IsKnockback)
+                {
+                    velocitys.Add(StateMachine.physics.velocity);
+                }
+                velocity = StateMachine.physics.velocity;
                 DeadSpaceCheck();
                 //CameraCheck();
+
                 UnderPlatformCheck();
             }
         }
