@@ -65,7 +65,6 @@ namespace  LGProject.PlayerState
         private void Shoot()
         {
             _damageInCount = true;
-            Debug.Log("JumpAtk");
             StateMachine.ShootProjectile();
         }
     }

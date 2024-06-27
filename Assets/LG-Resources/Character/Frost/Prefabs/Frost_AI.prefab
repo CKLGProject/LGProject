@@ -66,7 +66,7 @@ MonoBehaviour:
   SecondAttackDelay: 0.6
   SecondAttackJudgeDelay: 0.2
   SecondAttackMovingValue: 1
-  ThirdAttackDelay: 1
+  ThirdAttackDelay: 0.5
   ThirdAttackJudgeDelay: 0.2
   ThirdAttackMovingValue: 3
   DashAttackDelay: 0.75

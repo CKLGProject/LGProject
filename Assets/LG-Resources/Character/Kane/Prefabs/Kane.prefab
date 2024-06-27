@@ -178,7 +178,7 @@ MonoBehaviour:
   ThirdAttackJudgeDelay: 0.5
   ThirdAttackMovingValue: 3
   DashAttackDelay: 0.5
-  UltimateDelay: 2.5
+  UltimateDelay: 3
   HitDelay: 1
   DownWaitDelay: 0.5
   WakeUpDelay: 0.5
@@ -212,6 +212,7 @@ MonoBehaviour:
   IsDead: 0
   IsNormalAttack: 0
   IsUltimate: 0
+  JumpCount: 0
   BulletPrefab1: {fileID: 7565654486342102922}
   BulletPrefab2: {fileID: 6786734534890916903}
   BulletPrefab3: {fileID: 3206966951630220093}
@@ -306,7 +307,7 @@ MonoBehaviour:
   _KnockbackEffect: {fileID: 2682029315814992228, guid: accd91473619bb345890ff524dd4e26e,
     type: 3}
   _KnockbackOffset: {x: 0, y: 0, z: 0}
-  _RunEffect: {fileID: 1235096126941009767, guid: c775dfbf3c36bfb4ca265f3df6de1cf1,
+  _RunEffect: {fileID: 3131367911159837969, guid: df4bc5e6328e256438d58701736df1c0,
     type: 3}
   _RunOffset: {x: 0, y: 0, z: 0}
   _LandingEffect: {fileID: 3194273807269049694, guid: 6b511e017081e5e42b8a9df84cbd5177,
@@ -657,17 +658,32 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: f8277743a51b34898a384b18dde0a355, type: 2}
+      objectReference: {fileID: 2100000, guid: 92edb1860abeb4615a5c9da0f212ec5f, type: 2}
     - target: {fileID: 4230691892640067556, guid: 552147db2557f44a296252eaea33c1cd,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 40584003bcfa1a946bc07d5c44491353, type: 2}
+      objectReference: {fileID: 2100000, guid: b18576e98751d419fab6048ba9450f67, type: 2}
     - target: {fileID: 5177603557631092481, guid: 552147db2557f44a296252eaea33c1cd,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: d794d0b2e0c3827449b955a5a896febb, type: 2}
+      objectReference: {fileID: 2100000, guid: 10331f6b9f62a477bb4f039cc23c2fb4, type: 2}
+    - target: {fileID: 8644916205924445562, guid: 552147db2557f44a296252eaea33c1cd,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8644916205924445562, guid: 552147db2557f44a296252eaea33c1cd,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8644916205924445562, guid: 552147db2557f44a296252eaea33c1cd,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8660665869633462169, guid: 552147db2557f44a296252eaea33c1cd,
         type: 3}
       propertyPath: m_Controller

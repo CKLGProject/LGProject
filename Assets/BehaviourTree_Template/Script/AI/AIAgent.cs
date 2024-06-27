@@ -3,6 +3,7 @@ using LGProject;
 using UnityEngine;
 using UnityEditor;
 using UnityEngine.Singleton;
+using System.Collections.Generic;
 
 namespace BehaviourTree
 {
@@ -32,6 +33,7 @@ namespace BehaviourTree
         [HideInInspector] public int AttackPercent;
         [HideInInspector] public int ChasingPercent;
         [HideInInspector] public int NormalMovePercent;
+        public List<Vector3> velocitys;
 
         // 상대방
         public Transform player;
@@ -94,7 +96,7 @@ namespace BehaviourTree
         }
 
         float curTimer = 0;
-        float minTimer = 0.2f;
+        float minTimer = 0.1f;
 
         private void Update()
         {
@@ -103,7 +105,7 @@ namespace BehaviourTree
                 SuperAmmorTimer();
                 // 바라보는 방향 -> 일단 무조건 플레이어를 바라보게 설정
                 // 일단 여기에 넣어보자
-                if (StateMachine.IsKnockback || !StateMachine.IsGrounded)
+                if (StateMachine.IsKnockback || !StateMachine.IsGrounded || JumpCount > 0)
                 {
                     curTimer += Time.deltaTime;
                     if (curTimer < minTimer)
@@ -113,11 +115,19 @@ namespace BehaviourTree
                 {
                     curTimer = 0;
                 }
-                GetStateMachine.Update();
+                CameraCheck();
                 PlayableGravity();
                 NewPlatformCheck();
+                GetStateMachine.Update();
+                PlayableGravity();
+                if (JumpCount > 0)
+                {
+                    velocitys.Add(StateMachine.physics.velocity);
+                }
+                velocity = StateMachine.physics.velocity;
                 DeadSpaceCheck();
-                CameraCheck();
+                //CameraCheck();
+
                 UnderPlatformCheck();
             }
         }

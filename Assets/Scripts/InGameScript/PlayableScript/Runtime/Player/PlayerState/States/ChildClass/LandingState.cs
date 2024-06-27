@@ -36,7 +36,7 @@ namespace LGProject.PlayerState
             if (Damaged())
                 return;
             _currentTimer += Time.deltaTime;
-            if (_currentTimer > 0.25f)
+            if (_currentTimer > 0.1f)
             {
                 if (Mathf.Abs(StateMachine.moveAction.ReadValue<Vector2>().x) > 0.2f)
                     StateMachine.ChangeState(StateMachine.moveState);

@@ -7,7 +7,7 @@ namespace BehaviourTree
         private AIAgent _agent;
         private LGProject.PlayerState.PlayerStateMachine _stateMachine;
         private LGProject.PlayerState.PlayerStateMachine _playerStateMachine;
-        [SerializeField] private float jumpDelay;
+        [SerializeField] private float jumpDelay = 1.25f;
         [SerializeField] private float stopRange;
         private float _curTimer;
         private int _count;
@@ -19,16 +19,19 @@ namespace BehaviourTree
             if (_agent == null)
                 _agent = AIAgent.Instance;
             StateMachineLogic();
+            jumpDelay = 0.25f;
             // 플레이어 
             pathFinding.PathRequestManager.RequestPath(new pathFinding.PathRequest(_stateMachine.transform.position, _agent.player.position, _agent.GetPath));
-
+            _curTimer = 0;
             chasingPoint = pathFinding.Grid.Instance.NodeFromWorldPoint(_stateMachine.transform.position).WorldPosition;
+            _stateMachine.playable.effectManager.Play(EffectManager.EFFECT.Run).Forget();
             _stateMachine.DataSet(LGProject.DATA_TYPE.Chasing);
+            _agent.GetStateMachine.animator.ResetTrigger("Landing");
         }
 
         protected override void OnStop()
         {
-
+            _stateMachine.animator.SetFloat("Run", 0f);
         }
 
         protected override State OnUpdate()
@@ -61,6 +64,7 @@ namespace BehaviourTree
                     // 이동을 해야함.
                     return State.Running;
                 }
+                _stateMachine.StandingVelocity();
                 return State.Success;
             }
             catch
@@ -84,6 +88,7 @@ namespace BehaviourTree
             if (_agent == null)
                 _agent = AIAgent.Instance;
             _curTimer += Time.deltaTime;
+            //Debug.Log($"_curTimer / {_curTimer}");
             Vector3 currentWaypoint = new Vector3(_agent.path[_agent.targetIndex].x, _agent.path[_agent.targetIndex].y - 0.45f, _agent.path[_agent.targetIndex].z);
 
             // 대각선 위인지 체크
@@ -114,7 +119,8 @@ namespace BehaviourTree
                 currentWaypoint.y = _stateMachine.transform.position.y;
             }
 
-            _stateMachine.transform.position = Vector3.MoveTowards(_stateMachine.transform.position, currentWaypoint, _agent.MaximumSpeed * Time.deltaTime);
+            //_stateMachine.transform.position = Vector3.MoveTowards(_stateMachine.transform.position, currentWaypoint, _agent.MaximumSpeed * Time.deltaTime);
+            Movement(3f);
 
             Vector3 direction = currentWaypoint - _stateMachine.transform.position;
 
@@ -124,38 +130,11 @@ namespace BehaviourTree
             _agent.transform.LookAt(rot);
             return true;
         }
-
-        RaycastHit hit;
-        private void JumpingPointCheck(Vector3 direction)
+        private void Movement(float speedSpeed)
         {
-            // 점프를 하기 위해 바로 대각선 아래를 체크
-            // 대각선 아래에 공간이 없으면 점프를 함.
-            // 점프를 하고 떨어지는 와중에도 공간이 없음 추가 점프를 해야하는데,
-            // 추가 점프(2단)는 나중에 구현하는 것으로 하자.
-            // 앞을 바라보고 있다는 것을 어떻게 표현해야 할까?
-            // lookAt? 아니... 그냥 바라보는 곳을 명확하게 하는 것이 좋아보인다.
+            if (_stateMachine.physics.velocity.x <= speedSpeed && _stateMachine.physics.velocity.x >= -speedSpeed)
 
-            // 점프를 하자마자 타이머가 돌아가야하는데, 이건 어떻게 표현할까?
-            Ray ray = new Ray(_stateMachine.transform.position + Vector3.up * 0.25f + Vector3.forward * 0.2f, Vector3.down);
-            _curTimer += Time.deltaTime;
-            bool case1 = /*Mathf.Abs(direction.x) < 1.5f && */direction.y >= 0.5f;
-            bool case2 = !Physics.Raycast(ray, out hit, 0.45f, 1 << 6) && _stateMachine.JumpInCount < 2;
-            // 높은 곳이면 점프를 한다.
-            if ((direction.y >= 1f && Mathf.Abs(direction.x) < 0.75f) && _stateMachine.JumpInCount < 2)
-            {
-                // 점프를 하는 조건
-                // isGrounded가 True거나, timer가 넘어설 경우
-                // isGrounded 때문인 것 같음.
-                SetJumpVelocity();
-            }
-            else if (case1 && case2)
-            {
-                SetJumpVelocity();
-            }
-            // 위를 체크하고 싶은데...
-
-
-            // 가는 길에 길이 없으면 쓰는 로직
+                _stateMachine.physics.velocity += _stateMachine.transform.forward * 1.5f;
 
         }
 
@@ -172,7 +151,7 @@ namespace BehaviourTree
                     Ray ray = new Ray(_agent.path[i], Vector3.down);
                     // 조건
                     // 노드의 간격 중 y값이 0이면서 노드 아래에 플랫폼이 존재하는 경우.
-                    if (directionNew.y < 0.1f && Physics.Raycast(ray, out hit, 0.5f, layerMask: 1 << 6))
+                    if (directionNew.y < 0.1f && Physics.Raycast(ray, out RaycastHit hit, 0.5f, layerMask: 1 << 6))
                     {
                         break;
                     }
@@ -207,29 +186,30 @@ namespace BehaviourTree
             if (_agent.path == null || 
                 _agent.path.Length < 1 || 
                 _stateMachine.IsDamaged || 
+                _stateMachine.IsKnockback ||
                 _playerStateMachine.IsKnockback || 
                 _playerStateMachine.IsDown ||
                 _playerStateMachine.transform.position.y < -0.5f ||
                 _stateMachine.IsDead)
-
                 return true;
             return false;
         }
 
-
-
         private void SetJumpVelocity()
         {
-            if (_curTimer >= jumpDelay)
+            if (_curTimer >= jumpDelay && _agent.GetStateMachine.JumpInCount < 2)
             {
-                _count++;
+                Debug.Log("AA");
                 _agent.GetStateMachine.JumpInCount++;
+
                 _agent.HandleJumpping();
+                _stateMachine.IsGrounded = false;
                 _agent.GetStateMachine.collider.isTrigger = true;
                 _curTimer = 0;
+                //_agent.effectManager.Stop(EffectManager.EFFECT.Run);
+                //_agent.effectManager.Play(EffectManager.EFFECT.Airborne).Forget();
                 _agent.GetStateMachine.animator.SetTrigger("Jump" + _agent.GetStateMachine.JumpInCount.ToString());
             }
-
         }
 
         private void StateMachineLogic()

@@ -36,7 +36,10 @@ namespace LGProject.PlayerState
         {
             //base.LogicUpdate();
             if (Damaged())
+            {
+                StateMachine.AttackCount = 0;
                 return;
+            }
             CurrentTimer += Time.deltaTime;
             AttackLogic();
         }

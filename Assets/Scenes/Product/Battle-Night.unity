@@ -4392,46 +4392,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1364768776903080780, guid: af5c522be8efb4b76b7f647f18ccff3c,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1377608663600074391, guid: af5c522be8efb4b76b7f647f18ccff3c,
-        type: 3}
-      propertyPath: UltimateDelay
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 1377608663600074391, guid: af5c522be8efb4b76b7f647f18ccff3c,
         type: 3}
       propertyPath: JumpAttackBulletPrefab
       value: 
       objectReference: {fileID: 568890504}
-    - target: {fileID: 1391538820382187086, guid: af5c522be8efb4b76b7f647f18ccff3c,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 92edb1860abeb4615a5c9da0f212ec5f, type: 2}
-    - target: {fileID: 2116540618607090889, guid: af5c522be8efb4b76b7f647f18ccff3c,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: b18576e98751d419fab6048ba9450f67, type: 2}
-    - target: {fileID: 2608681479178094010, guid: af5c522be8efb4b76b7f647f18ccff3c,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3206966951630220093, guid: af5c522be8efb4b76b7f647f18ccff3c,
         type: 3}
       propertyPath: _hitEffect
       value: 
       objectReference: {fileID: 1105259094}
-    - target: {fileID: 3258334394079392960, guid: af5c522be8efb4b76b7f647f18ccff3c,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5147967505005749542, guid: af5c522be8efb4b76b7f647f18ccff3c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4482,56 +4452,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5769657418695417431, guid: af5c522be8efb4b76b7f647f18ccff3c,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5769657418695417431, guid: af5c522be8efb4b76b7f647f18ccff3c,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5769657418695417431, guid: af5c522be8efb4b76b7f647f18ccff3c,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6786734534890916903, guid: af5c522be8efb4b76b7f647f18ccff3c,
         type: 3}
       propertyPath: _hitEffect
       value: 
       objectReference: {fileID: 1105259094}
-    - target: {fileID: 6932045493422461996, guid: af5c522be8efb4b76b7f647f18ccff3c,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 10331f6b9f62a477bb4f039cc23c2fb4, type: 2}
     - target: {fileID: 7066266423145889497, guid: af5c522be8efb4b76b7f647f18ccff3c,
         type: 3}
       propertyPath: m_Name
       value: Kane_Playable
-      objectReference: {fileID: 0}
-    - target: {fileID: 7066266423145889497, guid: af5c522be8efb4b76b7f647f18ccff3c,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7565654486342102922, guid: af5c522be8efb4b76b7f647f18ccff3c,
         type: 3}
       propertyPath: _hitEffect
       value: 
       objectReference: {fileID: 1105259094}
-    - target: {fileID: 8391687958315682612, guid: af5c522be8efb4b76b7f647f18ccff3c,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1377608663600074391, guid: 1183023d0846f204895b8367dd073489,
-        type: 3}
-      propertyPath: JumpAttackBulletPrefab
-      value: 
-      objectReference: {fileID: 568890504}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9739,7 +9674,7 @@ MonoBehaviour:
     y: 0
     width: 0
     height: 0
-  CollisionLineBoxScale: {x: 20, y: 10, z: 1}
+  CollisionLineBoxScale: {x: 22, y: 12, z: 1}
   Offset: {x: 0, y: 1.5, z: 0}
   CollisionColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &1104743393
@@ -17989,6 +17924,7 @@ MonoBehaviour:
   IsDead: 0
   IsNormalAttack: 0
   IsUltimate: 0
+  JumpCount: 0
   target: {fileID: 0}
   grid: {fileID: 0}
   path: []
@@ -18003,6 +17939,7 @@ MonoBehaviour:
   AttackPercent: 0
   ChasingPercent: 0
   NormalMovePercent: 0
+  velocitys: []
   player: {fileID: 0}
 --- !u!54 &1750267861
 Rigidbody:
@@ -18831,15 +18768,15 @@ RectTransform:
   m_GameObject: {fileID: 1803861442}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.4101852, y: 0.4101852, z: 0.4101852}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 993654316}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 407.829, y: 25}
-  m_SizeDelta: {x: 593.6001, y: 704.80005}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 1, y: 1}
 --- !u!95 &1803861444
 Animator:
@@ -19993,16 +19930,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 623296231779395701, guid: 9c4c74ae4f3824e7b8d4e9a80aec652f,
-        type: 3}
-      propertyPath: m_Name
-      value: Mobile Controller Canvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 623296231779395701, guid: 9c4c74ae4f3824e7b8d4e9a80aec652f,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4421546113195957084, guid: a3266e0ec71ba4f04b780383729720b0,
         type: 3}
       propertyPath: m_Sprite
@@ -20105,6 +20032,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 192
+      objectReference: {fileID: 0}
+    - target: {fileID: 623296231779395701, guid: 9c4c74ae4f3824e7b8d4e9a80aec652f,
+        type: 3}
+      propertyPath: m_Name
+      value: Mobile Controller Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 623296231779395701, guid: 9c4c74ae4f3824e7b8d4e9a80aec652f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6026401484144103469, guid: 9c4c74ae4f3824e7b8d4e9a80aec652f,
         type: 3}

@@ -146,6 +146,8 @@ namespace LGProject.PlayerState
         /*[HideInInspector]*/
         public bool IsUltimate;
 
+        public int JumpCount;
+
         float _gravity = -9.8f;
         float _groundedGravity = -0.05f;
 
@@ -229,8 +231,10 @@ namespace LGProject.PlayerState
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.CompareTag("Player") && !StateMachine.IsGrounded)
+            if (other.CompareTag("Player") && !StateMachine.IsGrounded && !StateMachine.IsKnockback)
+            {
                 StateMachine.StandingVelocity();
+            }
         }
 
         public void FocusUltimateUser(float focus)
@@ -269,11 +273,13 @@ namespace LGProject.PlayerState
 
                     break;
                 case ActorType.AI:
-                    if ( /*!StateMachine.CheckFlightAI() &&*/
+                    if (!StateMachine.CheckFlightAI() && !IsKnockback &&
                         !CollisionObserver.CallUnderPlatformZone(ZoneType.Platform,
                             transform.position + Vector3.down * 0.25f))
                     {
-                        //StateMachine.animator.SetTrigger("Jump1");
+                        
+                        StateMachine.animator.SetTrigger("Jump1");
+                        StateMachine.JumpInCount++;
                         StateMachine.IsGrounded = false;
                         StateMachine.IsJumpping = true;
                         StateMachine.collider.isTrigger = true;
@@ -344,7 +350,8 @@ namespace LGProject.PlayerState
                     return;
                 bullet.gameObject.SetActive(false);
                 bullet.PlayHitParticle();
-                bullet.Methods();
+                if(!StateMachine.IsDown && !StateMachine.IsDead && !StateMachine.IsSuperArmor)
+                    bullet.Methods();
                 StateMachine.ApplyHitDamaged(bullet.KnockbackVelocity, 0, StateMachine, bullet.KnockbackGage);
             }
         }
@@ -356,6 +363,7 @@ namespace LGProject.PlayerState
         // 공격 시작 
         public virtual void ShootProjectile(int attackCount, Vector3 velocity)
         {
+
         }
 
         #region CheckFields
@@ -407,7 +415,6 @@ namespace LGProject.PlayerState
                     {
                         StateMachine.ChangeState(StateMachine.landingState);
                     }
-                    //stateMachine.isHit = false;
                 }
             }
             else
@@ -416,7 +423,10 @@ namespace LGProject.PlayerState
                 StateMachine.collider.isTrigger = true;
                 StateMachine.animator.SetBool(Flying, StateMachine.JumpInCount < 1 ? true : false);
                 if (StateMachine.JumpInCount < 1)
+                {
+                    Debug.Log("AA");
                     StateMachine.JumpInCount++;
+                }
             }
             // 위를 체크하고 싶은데...
         }
@@ -427,6 +437,9 @@ namespace LGProject.PlayerState
             Vector3 velocity = StateMachine.physics.velocity;
             velocity.y = 0;
             transform.position = new Vector3(transform.position.x, UnderPlatform.rect.y, transform.position.z);
+            StateMachine.playable.effectManager.Stop(EffectManager.EFFECT.Airborne);
+            StateMachine.playable.effectManager.Play(EffectManager.EFFECT.Run).Forget();
+
 
             StateMachine.physics.velocity = velocity;
             StateMachine.collider.isTrigger = false;
@@ -436,7 +449,7 @@ namespace LGProject.PlayerState
             StateMachine.StandingVelocity();
         }
 
-        private void KncokbackLandingCheck()
+        private void KnockbackLandingCheck()
         {
             StateMachine.PlayAudioClip(KnockbackSFXName);
             StateMachine.VocaFX.PlayVoca(EVocaType.Kung);
@@ -449,7 +462,6 @@ namespace LGProject.PlayerState
             StateMachine.physics.velocity = Vector3.zero;
             StateMachine.collider.isTrigger = false;
             StateMachine.IsGrounded = true;
-            //StateMachine.IsKnockback = false;
             StateMachine.JumpInCount = 0;
             StateMachine.StandingVelocity();
         }
@@ -470,7 +482,7 @@ namespace LGProject.PlayerState
                 {
                     StateMachine.animator.SetTrigger(Landing);
                     if (StateMachine.IsKnockback)
-                        KncokbackLandingCheck();
+                        KnockbackLandingCheck();
                     else if (!StateMachine.IsGrounded)
                         JumpLandingCheck();
                 }
@@ -515,7 +527,6 @@ namespace LGProject.PlayerState
                 StateMachine.IsDead = true;
                 // 죽으면 어레이에서 빼주기.
 
-                //DeadZone.SubTarget(transform);
                 UltimateGage /= 2;
                 LifePoint -= 1; // 체력 감소
                 battleModel.SyncHealth(ActorType, LifePoint);
@@ -595,13 +606,12 @@ namespace LGProject.PlayerState
         private async UniTaskVoid AliveDelay()
         {
             await UniTask.Delay(TimeSpan.FromSeconds(respawnTime));
-            //DeadZone.AddTarget(transform);
+            PlayerMashBlink().Forget();
+
             StateMachine.ResetVelocity();
             transform.position = Vector3.forward * -9.5f + AliveOffset;
-            StateMachine.IsDead = false;
             DamageGage = 0;
             battleModel.SyncDamageGage(ActorType, DamageGage);
-
             StateMachine.animator.SetTrigger("Jump1");
 
             StateMachine.animator.SetTrigger("Landing");
@@ -609,17 +619,23 @@ namespace LGProject.PlayerState
             StateMachine.animator.SetInteger("Attack", 0);
             StateMachine.AttackCount = 0;
 
+            StateMachine.playable.effectManager.Stop(EffectManager.EFFECT.Airborne);
+
             StateMachine.IsDamaged = false;
             StateMachine.IsKnockback = false;
             StateMachine.IsGrounded = false;
             StateMachine.IsSuperArmor = true;
             StateMachine.IsDashAttack = false;
+            StateMachine.IsDown = false;
+            StateMachine.IsJumpping = false;
+
             if (StateMachine.CurrentState != null)
                 StateMachine.ChangeState(StateMachine.landingState);
 
             // 무적 2초
             await UniTask.Delay(TimeSpan.FromSeconds(1f));
-            StateMachine.IsSuperArmor = false;
+
+            StateMachine.IsDead = false;
         }
 
         #endregion
@@ -642,17 +658,8 @@ namespace LGProject.PlayerState
         public void ShowUltimateEffect()
         {
             effectManager.Play(EffectManager.EFFECT.Ultimate).Forget();
-            //PlayingUltimateReadySFX(true);
-
         }
 
-        //public void PlayingUltimateReadySFX(bool use)
-        //{
-        //    if(use)
-        //        ultimateSource.Play();
-        //    else
-        //        audioSource.Stop();
-        //}
 
         #endregion
     }

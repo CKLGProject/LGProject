@@ -24,6 +24,8 @@ namespace BehaviourTree
             StateMachine.IsDown = true;
             StateMachine.IsGrounded = true;
             StateMachine.animator.SetInteger(Run, 0);
+            StateMachine.playable.effectManager.Stop(EffectManager.EFFECT.Airborne);
+
             Debug.Log("Down");
         }
 
@@ -36,6 +38,8 @@ namespace BehaviourTree
         {
             try
             {
+                if (StateMachine.IsDead)
+                    return State.Failure;
                 if (StateMachine.IsGrounded)
                 {
                     _currentTimer += Time.deltaTime;

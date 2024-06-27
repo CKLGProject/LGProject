@@ -13,37 +13,27 @@ namespace BehaviourTree
             if (_stateMachine == null)
                 _stateMachine = AIAgent.Instance.GetStateMachine;
             _stateMachine.playable.effectManager.Play(EffectManager.EFFECT.Airborne).Forget();
+            _stateMachine.playable.Animator.SetTrigger("Knockback");
             Debug.Log("Flight");
         }
 
         protected override void OnStop()
         {
-            try
-            {
-                _stateMachine.playable.effectManager.Stop(EffectManager.EFFECT.Airborne);
-            }
-            catch
-            {
 
-            }
         }
 
         protected override State OnUpdate()
         {
             try
             {
-                if ((!_stateMachine.IsKnockback) && _stateMachine.IsGrounded)
-                {
-                    Debug.Log("Flight Fail");
-                    Debug.Log($"_stateMachine.IsKnockback = {_stateMachine.IsKnockback} \\ _stateMachine.IsGrounded =  {_stateMachine.IsGrounded}");
-                    _stateMachine.IsKnockback = false;
+                if ((!_stateMachine.IsKnockback && _stateMachine.IsGrounded) || _stateMachine.IsDead)
+                {     _stateMachine.IsKnockback = false;
                     _stateMachine.IsDamaged = false;
                     return State.Failure;
                 }
                 // 일단 판정을 받아야함.
                 if (_stateMachine.IsKnockback)
                 {
-                    Debug.Log("Flight Success");
                     return State.Success;
                 }
 

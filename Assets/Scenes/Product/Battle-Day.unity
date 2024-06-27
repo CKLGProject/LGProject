@@ -4509,11 +4509,6 @@ PrefabInstance:
       propertyPath: JumpAttackBulletPrefab
       value: 
       objectReference: {fileID: 1079673998}
-    - target: {fileID: 3206966951630220093, guid: af5c522be8efb4b76b7f647f18ccff3c,
-        type: 3}
-      propertyPath: _hitEffect
-      value: 
-      objectReference: {fileID: 548951483}
     - target: {fileID: 5147967505005749542, guid: af5c522be8efb4b76b7f647f18ccff3c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4564,21 +4559,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6786734534890916903, guid: af5c522be8efb4b76b7f647f18ccff3c,
-        type: 3}
-      propertyPath: _hitEffect
-      value: 
-      objectReference: {fileID: 548951483}
     - target: {fileID: 7066266423145889497, guid: af5c522be8efb4b76b7f647f18ccff3c,
         type: 3}
       propertyPath: m_Name
       value: Kane_Playable
       objectReference: {fileID: 0}
-    - target: {fileID: 7565654486342102922, guid: af5c522be8efb4b76b7f647f18ccff3c,
-        type: 3}
-      propertyPath: _hitEffect
-      value: 
-      objectReference: {fileID: 548951483}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7222,20 +7207,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1355248535655832082, guid: 2733f80f426950d4598e4e6317bd7935,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6142601296869339651, guid: 2733f80f426950d4598e4e6317bd7935,
         type: 3}
       propertyPath: m_Name
       value: Hit_AI
-      objectReference: {fileID: 0}
-    - target: {fileID: 6595579595864457513, guid: 2733f80f426950d4598e4e6317bd7935,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8219133890818253592, guid: 2733f80f426950d4598e4e6317bd7935,
         type: 3}
@@ -7292,11 +7267,6 @@ PrefabInstance:
       propertyPath: grid
       value: 
       objectReference: {fileID: 266398497}
-    - target: {fileID: 8881860252120503662, guid: 2733f80f426950d4598e4e6317bd7935,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7463,6 +7433,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: C_Hit_FX
+      objectReference: {fileID: 0}
+    - target: {fileID: 1800673109272189368, guid: 8e6d8df30f942434e9bc2ae113bd59c8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2707465772680727615, guid: 8e6d8df30f942434e9bc2ae113bd59c8,
         type: 3}
@@ -7959,8 +7934,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 40, y: 25}
-  m_SizeDelta: {x: 296.8, y: 352.4}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &599413578
 MonoBehaviour:
@@ -12447,8 +12422,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 996713019}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.03428489, y: -0.000000017196266, z: 5.8991884e-10, w: 0.9994121}
-  m_LocalPosition: {x: 0, y: 2.3300004, z: -21.994781}
+  m_LocalRotation: {x: 0.034341678, y: 0.00021831098, z: -0.0000075015905, w: 0.99941015}
+  m_LocalPosition: {x: -1.4018527, y: 3.231742, z: -21.647976}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -15627,7 +15602,7 @@ Transform:
   m_GameObject: {fileID: 1316624601}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.06999977, z: -9.994781}
+  m_LocalPosition: {x: -1.4018527, y: 0.83174187, z: -9.647976}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -16150,8 +16125,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1353022552}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.03428489, y: -0.000000017196266, z: 5.8991884e-10, w: 0.9994121}
-  m_LocalPosition: {x: 0, y: 2.3300004, z: -21.994781}
+  m_LocalRotation: {x: 0.034341678, y: 0.00021831098, z: -0.0000075015905, w: 0.99941015}
+  m_LocalPosition: {x: -1.4018527, y: 3.231742, z: -21.647976}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -16792,6 +16767,7 @@ MonoBehaviour:
   IsDead: 0
   IsNormalAttack: 0
   IsUltimate: 0
+  JumpCount: 0
   target: {fileID: 0}
   grid: {fileID: 0}
   path: []
@@ -16806,6 +16782,7 @@ MonoBehaviour:
   AttackPercent: 0
   ChasingPercent: 0
   NormalMovePercent: 0
+  velocitys: []
   player: {fileID: 0}
 --- !u!54 &1382073906
 Rigidbody:
@@ -24147,7 +24124,7 @@ MonoBehaviour:
     y: 0
     width: 0
     height: 0
-  CollisionLineBoxScale: {x: 20, y: 10, z: 1}
+  CollisionLineBoxScale: {x: 22, y: 12, z: 1}
   Offset: {x: 0, y: 1.5, z: 0}
   CollisionColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!43 &2115693885

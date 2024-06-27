@@ -46,6 +46,9 @@ namespace LGProject.PlayerState
 
         protected virtual void Update()
         {
+            CameraCheck();
+            NewPlatformCheck();
+            PlayableGravity();
             if (BattleSceneSystem.Instance.IsStart)
             {
                 if (StateMachine.IsKnockback)
@@ -61,11 +64,7 @@ namespace LGProject.PlayerState
                 SuperAmmorTimer();
                 StateMachine.CurrentState.LogicUpdate();
                 StateMachine.Update();
-                PlayableGravity();
-                velocity = StateMachine.physics.velocity;
-                NewPlatformCheck();
                 DeadSpaceCheck();
-                CameraCheck();
                 UpdateUltimateTimer();
                 UnderPlatformCheck();
             }

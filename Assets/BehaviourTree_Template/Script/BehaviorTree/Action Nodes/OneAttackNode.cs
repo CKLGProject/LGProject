@@ -36,6 +36,9 @@ namespace BehaviourTree
         protected override void OnStop()
         {
             ExitExceptionHandling();
+            _stateMachine.playable.effectManager.Stop(EffectManager.EFFECT.JumpAttack);
+            _stateMachine.playable.effectManager.Stop(EffectManager.EFFECT.DashAttack);
+
         }
 
         // Dash Attack을 할 때 이동 방향을 바라보며 공격을 해야함.
@@ -157,17 +160,13 @@ namespace BehaviourTree
             if (!_stateMachine.IsGrounded)
             {
                 _stateMachine.animator.SetTrigger("JumpAttack");
-
-                _stateMachine.PlayAudioClip(_punchClip);
-                //Debug.Log("Jump Attack");
+                _stateMachine.playable.effectManager.Play(EffectManager.EFFECT.JumpAttack).Forget();
             }
             else
             {
                 _stateMachine.physics.velocity += _stateMachine.transform.forward * 5f;
-                _stateMachine.animator.SetTrigger("DashAttack");
-
-                _stateMachine.PlayAudioClip(_punchClip);
-                //Debug.Log("DashAttack");
+                _stateMachine.animator.SetTrigger("DashAttack"); 
+                _stateMachine.playable.effectManager.Play(EffectManager.EFFECT.DashAttack).Forget();
             }
             _stateMachine.animator.SetFloat("Run", 0);
         }

@@ -297,8 +297,10 @@ namespace LGProject.PlayerState
 
         public bool CheckFlightAI()
         {
-            if (IsKnockback || JumpInCount > 0 || IsGuard)
+            if (!IsGrounded && !IsDead && JumpInCount > 0 && !IsDamaged)
+            {
                 return true;
+            }
             return false;
         }
 
@@ -419,6 +421,7 @@ namespace LGProject.PlayerState
             playable.IsJumpping = IsJumpping;
             playable.IsDead = IsDead;
             playable.IsNormalAttack = IsNormalAttack;
+            playable.JumpCount = JumpInCount;
         }
 
         /// <summary>
@@ -514,7 +517,7 @@ namespace LGProject.PlayerState
         {
             //UpdateData(dataType);
             // 누어 있는 상태에선 데미지를 입지 않는다.
-            if (IsDown || IsKnockback || IsUseUltimate || IsSuperArmor || (EnemyStateMachine != null && IsUseUltimate))
+            if (IsDown || IsUseUltimate || IsSuperArmor || (EnemyStateMachine != null && IsUseUltimate))
                 return;
             if (IsGuard)
             {
@@ -533,6 +536,7 @@ namespace LGProject.PlayerState
                 velocity *= Mathf.Pow(2, (playable.DamageGage * 0.01f));
                 if (velocity != Vector3.zero)
                 {
+                    Debug.Log($"{velocity}");
                     SetVelocity(velocity, nockbackDelay).Forget();
                     animator.SetTrigger(Knockback);
                 }

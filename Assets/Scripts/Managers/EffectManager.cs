@@ -914,7 +914,7 @@ public class EffectManager : MonoBehaviour
             tempEffect = Instantiate(_LandingEffect, transform.position, Quaternion.identity);
             tempEffect.transform.parent = transform;
             _EffectContainer.Add(EFFECT.Landing, tempEffect.GetComponent<ParticleSystem>());
-            tempEffect.SetActive(false);
+            //tempEffect.SetActive(false);
         }
         #endregion
 
