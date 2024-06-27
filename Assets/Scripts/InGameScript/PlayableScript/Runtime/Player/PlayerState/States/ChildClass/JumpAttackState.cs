@@ -134,7 +134,6 @@ namespace LGProject.PlayerState
                     }
                     catch
                     {
-                        Debug.Log("AA");
                     }
                 }
             }
