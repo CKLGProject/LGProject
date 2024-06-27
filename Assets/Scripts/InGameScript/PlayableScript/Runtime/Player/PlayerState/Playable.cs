@@ -148,6 +148,8 @@ namespace LGProject.PlayerState
 
         public int JumpCount;
 
+        public bool SupperAmmor;
+
         float _gravity = -9.8f;
         float _groundedGravity = -0.05f;
 

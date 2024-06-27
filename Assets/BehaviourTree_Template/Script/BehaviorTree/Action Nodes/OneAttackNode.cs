@@ -63,13 +63,9 @@ namespace BehaviourTree
 
         bool FollowPath()
         {
-            //if (_stateMachine.IsGrounded)
-            //{
-            //}
             Vector3 currentWaypoint = new Vector3(_agent.path[_agent.targetIndex].x, _agent.path[_agent.targetIndex].y - 0.45f, _agent.path[_agent.targetIndex].z);
             if (_stateMachine.transform.position == currentWaypoint)
             {
-                //startPoint = currentWaypoint;
                 _agent.targetIndex++;
                 if (_agent.targetIndex >= _agent.path.Length)
                 {
@@ -126,15 +122,12 @@ namespace BehaviourTree
                 Vector3 velocity = (_stateMachine.transform.forward * 3f + _stateMachine.transform.up * 1.5f) * 1.5f;
 
 
-                if (temp.Item1 != AIAgent.Instance.transform/* && !temp.Item1.GetStateMachine.isGuard*/)
+                if (temp.Item1 != AIAgent.Instance.transform)
                 {
-                    //Debug.Log($"v = {v}, direct = {direction}");
                     temp.
                     Item1.GetComponent<Playable>().
                     GetStateMachine.
                     ApplyHitDamaged(velocity, 0, _stateMachine);
-
-                    //temp.Item1.GetComponent<Playable>().GetStateMachine.HitPlayer = AIAgent.Instance.transform;
 
                     if (!temp.Item1.GetStateMachine.IsGuard && !temp.Item1.GetStateMachine.IsDown )
                     {

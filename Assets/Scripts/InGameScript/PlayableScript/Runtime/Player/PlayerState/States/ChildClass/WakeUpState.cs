@@ -25,6 +25,11 @@ namespace LGProject.PlayerState
             StateMachine.ResetAnimationParameters();
             StateMachine.animator.SetTrigger(WakeUp);
             StateMachine.animator.SetFloat(Run, 0);
+            if (!StateMachine.IsDead)
+            {
+                Debug.Log("AA");
+                StateMachine.BlinkPlayerMesh();
+            }
         }
 
         public override void Exit()

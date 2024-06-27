@@ -107,6 +107,8 @@ MonoBehaviour:
   IsDead: 0
   IsNormalAttack: 0
   IsUltimate: 0
+  JumpCount: 0
+  SupperAmmor: 0
   target: {fileID: 0}
   grid: {fileID: 0}
   path: []
@@ -122,6 +124,7 @@ MonoBehaviour:
   AttackPercent: 0
   ChasingPercent: 0
   NormalMovePercent: 0
+  velocitys: []
   player: {fileID: 0}
 --- !u!136 &4885444769505129726
 CapsuleCollider:

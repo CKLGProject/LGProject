@@ -33,7 +33,6 @@ namespace BehaviourTree
         [HideInInspector] public int AttackPercent;
         [HideInInspector] public int ChasingPercent;
         [HideInInspector] public int NormalMovePercent;
-        public List<Vector3> velocitys;
 
         // 상대방
         public Transform player;
@@ -120,10 +119,6 @@ namespace BehaviourTree
                 NewPlatformCheck();
                 GetStateMachine.Update();
                 PlayableGravity();
-                if (JumpCount > 0)
-                {
-                    velocitys.Add(StateMachine.physics.velocity);
-                }
                 velocity = StateMachine.physics.velocity;
                 DeadSpaceCheck();
                 //CameraCheck();
