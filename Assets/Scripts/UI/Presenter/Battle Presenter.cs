@@ -121,10 +121,23 @@ public class BattlePresenter : MonoBehaviour
                 count => _battleModel.SetTimerCountdown(count),
                 _ => BattleSceneSystem.Instance.GameEnd()).AddTo(this);
 
-        _battleModel.GameCountDownTimerObservable
+        _battleModel.GameCountDownProperty
             .Subscribe(count => _battleView.SetTimerText(count))
             .AddTo(this);
 
+        _battleModel.GameCountDownProperty.
+            Where(count => count <= 0 )
+            .Subscribe(_ =>
+            {
+                _battleView.ShowLosePopup();
+                BattleSceneSystem.Instance.GameEnd();
+            }).AddTo(this);
+
+
+        //_battleModel.GameCountDownTimerObservable
+        //    .Where(count => count >= 0).
+        //    .Subscribe(count => _battleView.SetTimerText(count))
+        //    .AddTo(this);
 
     }
 
