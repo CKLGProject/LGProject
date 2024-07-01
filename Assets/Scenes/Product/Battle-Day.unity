@@ -12437,8 +12437,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 996713019}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.034402043, y: 0.00017479697, z: -0.000006016935, w: 0.99940807}
-  m_LocalPosition: {x: -1.3333334, y: 3.190667, z: -21.664928}
+  m_LocalRotation: {x: 0.034355473, y: -0.000005121686, z: 0.0000001760619, w: 0.9994097}
+  m_LocalPosition: {x: 0, y: 3.617, z: -21.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -15617,7 +15617,7 @@ Transform:
   m_GameObject: {fileID: 1316624601}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.3333334, y: 0.79066676, z: -9.6649275}
+  m_LocalPosition: {x: 0, y: 1.217, z: -9.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -16114,7 +16114,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 25
+  field of view: 34.07342
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
@@ -16140,8 +16140,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1353022552}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.034402043, y: 0.00017479697, z: -0.000006016935, w: 0.99940807}
-  m_LocalPosition: {x: -1.3333334, y: 3.190667, z: -21.664928}
+  m_LocalRotation: {x: 0.034355473, y: -0.000005121686, z: 0.0000001760619, w: 0.9994097}
+  m_LocalPosition: {x: 0, y: 3.617, z: -21.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -24599,7 +24599,12 @@ PrefabInstance:
     - target: {fileID: 1683840886605889499, guid: 551b652ef833b4348a77fd7332d7b83c,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4885444769505129726, guid: 551b652ef833b4348a77fd7332d7b83c,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 0.65
       objectReference: {fileID: 0}
     - target: {fileID: 5134505680086110306, guid: 551b652ef833b4348a77fd7332d7b83c,
         type: 3}
@@ -25539,6 +25544,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Frost_Playable
+      objectReference: {fileID: 0}
+    - target: {fileID: 8725541552807560513, guid: e36772ac1b2dcda4da45ce3d28228fd0,
+        type: 3}
+      propertyPath: _AttackOffset1.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8725541552807560513, guid: e36772ac1b2dcda4da45ce3d28228fd0,
+        type: 3}
+      propertyPath: _AttackOffset2.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8725541552807560513, guid: e36772ac1b2dcda4da45ce3d28228fd0,
+        type: 3}
+      propertyPath: _AttackOffset3.x
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8938391724231686051, guid: e36772ac1b2dcda4da45ce3d28228fd0,
         type: 3}

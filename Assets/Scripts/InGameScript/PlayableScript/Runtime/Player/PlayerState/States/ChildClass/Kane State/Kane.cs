@@ -54,9 +54,9 @@ namespace LGProject.PlayerState
                     BulletPrefab1.GetComponent<ParticleSystem>().Play();
                     startPosition = Vector3.up * 0.5f;
                     BulletPrefab1.transform.position = startPosition + transform.position + velocity;
-                    //velocity.x *= 5f;
+                    knockbackVelocity = transform.forward * 2f;
                     velocity *= velocity.x;
-                    BulletPrefab1.MoveSet(Speed, velocity, transform.position, Vector3.zero, UpGage);
+                    BulletPrefab1.MoveSet(Speed, velocity, transform.position, knockbackVelocity, UpGage);
 
                     break;
                 case 2:
@@ -66,8 +66,9 @@ namespace LGProject.PlayerState
                     startPosition = Vector3.up * 0.5f;
                     BulletPrefab2.transform.position = startPosition + transform.position + velocity;
 
+                    knockbackVelocity = transform.forward * 2f;
                     velocity *= velocity.x;
-                    BulletPrefab2.MoveSet(Speed, velocity, transform.position, Vector3.zero, UpGage);
+                    BulletPrefab2.MoveSet(Speed, velocity, transform.position, knockbackVelocity, UpGage);
                     break;
                 case 3:
                     // 일당 생성으로 해보자
@@ -76,7 +77,7 @@ namespace LGProject.PlayerState
                     startPosition = Vector3.up * 0.5f;
 
                     BulletPrefab3.transform.position = startPosition + transform.position + velocity;
-
+                    knockbackVelocity = transform.forward * 2f;
                     velocity *= velocity.x;
                     knockbackVelocity = (transform.forward * 1.5f + transform.up * 3) * 3f;
                     BulletPrefab3.MoveSet(Speed, velocity, transform.position, knockbackVelocity, UpGage);
