@@ -544,7 +544,7 @@ namespace LGProject.PlayerState
                 IsNormalAttack = false;
                 // 충격에 의한 물리 공식
                 velocity *= Mathf.Pow(2, (playable.DamageGage * 0.01f));
-                if (velocity != Vector3.zero)
+                if (velocity.y > Vector3.zero.y)
                 {
                     Debug.Log($"{velocity}");
                     SetVelocity(velocity, nockbackDelay).Forget();
@@ -552,6 +552,7 @@ namespace LGProject.PlayerState
                 }
                 else
                 {
+                    physics.velocity = velocity;
                     animator.SetTrigger(Hit);
                 }
 
