@@ -139,7 +139,7 @@ namespace pathFinding
             }
             catch
             {
-                Debug.Log("현재 보드에 있지 않음.");
+                //Debug.Log("현재 보드에 있지 않음.");
             }
         }
 

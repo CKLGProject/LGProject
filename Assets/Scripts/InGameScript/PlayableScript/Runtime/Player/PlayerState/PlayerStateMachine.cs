@@ -546,7 +546,6 @@ namespace LGProject.PlayerState
                 velocity *= Mathf.Pow(2, (playable.DamageGage * 0.01f));
                 if (velocity.y > Vector3.zero.y)
                 {
-                    Debug.Log($"{velocity}");
                     SetVelocity(velocity, nockbackDelay).Forget();
                     animator.SetTrigger(Knockback);
                 }

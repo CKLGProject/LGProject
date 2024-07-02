@@ -27,7 +27,7 @@ namespace BehaviourTree
 
         protected override void OnStop()
         {
-            //Debug.Log("AttackJudgeNodeEnd");
+
         }
         protected override State OnUpdate()
         {

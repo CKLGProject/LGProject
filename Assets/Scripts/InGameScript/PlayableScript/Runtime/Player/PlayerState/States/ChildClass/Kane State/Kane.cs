@@ -79,7 +79,7 @@ namespace LGProject.PlayerState
                     BulletPrefab3.transform.position = startPosition + transform.position + velocity;
                     knockbackVelocity = transform.forward * 2f;
                     velocity *= velocity.x;
-                    knockbackVelocity = (transform.forward * 1.5f + transform.up * 3) * 3f;
+                    knockbackVelocity = (transform.forward * 1.5f + transform.up * 2) * 1.5f;
                     BulletPrefab3.MoveSet(Speed, velocity, transform.position, knockbackVelocity, UpGage);
                     break;
 

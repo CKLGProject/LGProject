@@ -21,11 +21,10 @@ namespace BehaviourTree
         {
             _currentTimer = 0;
             StateMachine.IsDamaged = false;
-            StateMachine.IsDown = true;
+            //StateMachine.IsDown = true;
             StateMachine.animator.SetInteger(Run, 0);
             StateMachine.playable.effectManager.Stop(EffectManager.EFFECT.Airborne);
 
-            Debug.Log("Down Start");
         }
 
         protected override void OnStop()
@@ -37,11 +36,11 @@ namespace BehaviourTree
         {
             try
             {
-                //Debug.Log("Down Update");
                 if (StateMachine.IsDead)
                     return State.Failure;
                 if (StateMachine.IsGrounded)
                 {
+                    StateMachine.IsDown = true;
                     _currentTimer += Time.deltaTime;
                     // 고정된 누어있는 시간이 존재함.
                     if (StateMachine.playable.DownWaitDelay < _currentTimer)
@@ -50,6 +49,10 @@ namespace BehaviourTree
                         StateMachine.animator.SetTrigger(WakeUp);
                         return State.Success;
                     }
+                }
+                else
+                {
+                    StateMachine.IsDown = false;
                 }
                 return State.Running;
             }

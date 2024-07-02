@@ -95,13 +95,7 @@ namespace LGProject.CollisionZone
                 PlayHitParticle();
                 gameObject.SetActive(false);
             }
-            //Debug.Log($"other {other.gameObject.layer} / {other.transform.name}");
-            //if (other.gameObject.layer == 3)
-            //{
-            //    //Debug.Log("Hello1");
-            //    gameObject.SetActive(false);
-            //}
-            //Debug.Log("World1");
+
         }
 
 
@@ -114,7 +108,7 @@ namespace LGProject.CollisionZone
             }
             if(collision.gameObject.layer == 1 << 6)
             {
-                Debug.Log("hello");
+
                 PlayHitParticle();
                 gameObject.SetActive(false);
             }

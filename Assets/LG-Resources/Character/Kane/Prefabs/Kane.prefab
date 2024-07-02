@@ -186,7 +186,7 @@ MonoBehaviour:
   projectile: {fileID: 0}
   movingAttack: 1
   AliveOffset: {x: 0, y: 0, z: 0}
-  respawnTime: 0
+  respawnTime: 1
   SkinnedMeshRenderer:
   - {fileID: 1391538820382187086}
   MeshRenderer:

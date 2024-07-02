@@ -13059,7 +13059,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1208162867}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0342849, y: 0.000000017198841, z: -5.900074e-10, w: 0.9994121}
+  m_LocalRotation: {x: 0.0342849, y: -0.000000017196268, z: 5.899191e-10, w: 0.9994121}
   m_LocalPosition: {x: 0, y: 2.3300004, z: -21.63478}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -14345,7 +14345,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1328400254}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0342849, y: 0.000000017198841, z: -5.900074e-10, w: 0.9994121}
+  m_LocalRotation: {x: 0.0342849, y: -0.000000017196268, z: 5.899191e-10, w: 0.9994121}
   m_LocalPosition: {x: 0, y: 2.3300004, z: -21.63478}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -17975,6 +17975,7 @@ MonoBehaviour:
   AliveOffset: {x: 0, y: 0, z: 0}
   respawnTime: 0
   SkinnedMeshRenderer: []
+  MeshRenderer: []
   BlinkTimer: 2.5
   BlinkInterval: 0.1
   DefaultWeapon: {fileID: 0}
@@ -21379,6 +21380,21 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: e41296821d4104ecbac5389b5cc8f5dd, type: 2}
+    - target: {fileID: 8725541552807560513, guid: e36772ac1b2dcda4da45ce3d28228fd0,
+        type: 3}
+      propertyPath: _AttackOffset1.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8725541552807560513, guid: e36772ac1b2dcda4da45ce3d28228fd0,
+        type: 3}
+      propertyPath: _AttackOffset2.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8725541552807560513, guid: e36772ac1b2dcda4da45ce3d28228fd0,
+        type: 3}
+      propertyPath: _AttackOffset3.x
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8938391724231686051, guid: e36772ac1b2dcda4da45ce3d28228fd0,
         type: 3}
       propertyPath: m_LocalPosition.x

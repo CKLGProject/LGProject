@@ -646,6 +646,7 @@ namespace LGProject.PlayerState
 
             if (StateMachine.CurrentState != null)
                 StateMachine.ChangeState(StateMachine.landingState);
+            PlayerMashBlink().Forget();
 
             // 무적 2초
             await UniTask.Delay(TimeSpan.FromSeconds(1f));

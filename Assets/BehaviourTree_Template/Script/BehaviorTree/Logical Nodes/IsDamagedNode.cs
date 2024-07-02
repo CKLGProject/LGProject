@@ -10,9 +10,7 @@ namespace BehaviourTree
         //public AIAgent Agent;
         protected override void OnStart()
         {
-            //if (Agent == null)
-            //    Agent = AIAgent.Instance;
-            Debug.Log("Damaged?");
+
 
         }
 
@@ -21,7 +19,7 @@ namespace BehaviourTree
             //agent.isHit = false;
             if(AIAgent.Instance.GetStateMachine.IsDamaged)
             {
-                //Debug.Log("IsDamaged true");
+
             }
 
         }

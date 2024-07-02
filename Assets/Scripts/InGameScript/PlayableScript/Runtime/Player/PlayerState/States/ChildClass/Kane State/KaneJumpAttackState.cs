@@ -24,6 +24,7 @@ namespace  LGProject.PlayerState
         public override void Exit()
         {
             base.Exit();
+            StateMachine.physics.isKinematic = false;
         }
 
         public override void LogicUpdate()
