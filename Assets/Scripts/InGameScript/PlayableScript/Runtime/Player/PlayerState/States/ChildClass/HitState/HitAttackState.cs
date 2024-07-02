@@ -174,8 +174,7 @@ namespace LGProject.PlayerState
 
             if (!DamageInCount)
             {
-                Vector3 right = Vector3.right * (StateMachine.playable.directionX == true ? 0.7f : -0.7f);
-                Vector3 center = StateMachine.transform.position + right + Vector3.up * 0.5f;
+                Vector3 center = StateMachine.transform.position +  StateMachine.transform.forward * 0.5f + StateMachine.transform.up * 0.5f;
 
                 Collider[] targets = Physics.OverlapBox(center, Vector3.one * 0.5f, Quaternion.identity, 1 << 3);
                 System.Tuple<Playable, float> temp = null;

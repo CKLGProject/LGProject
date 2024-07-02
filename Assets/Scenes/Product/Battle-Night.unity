@@ -12935,7 +12935,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1208162867}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0342849, y: 0.000000017196268, z: -5.899191e-10, w: 0.9994121}
+  m_LocalRotation: {x: 0.0342849, y: -0.000000017196266, z: 5.8991906e-10, w: 0.9994121}
   m_LocalPosition: {x: 0, y: 2.3300004, z: -21.63478}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -14221,7 +14221,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1328400254}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0342849, y: 0.000000017196268, z: -5.899191e-10, w: 0.9994121}
+  m_LocalRotation: {x: 0.0342849, y: -0.000000017196266, z: 5.8991906e-10, w: 0.9994121}
   m_LocalPosition: {x: 0, y: 2.3300004, z: -21.63478}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -17900,6 +17900,7 @@ MonoBehaviour:
   AliveOffset: {x: 0, y: 0, z: 0}
   respawnTime: 0
   SkinnedMeshRenderer: []
+  MeshRenderer: []
   BlinkTimer: 2.5
   BlinkInterval: 0.1
   DefaultWeapon: {fileID: 0}
@@ -17925,6 +17926,8 @@ MonoBehaviour:
   IsNormalAttack: 0
   IsUltimate: 0
   JumpCount: 0
+  SupperAmmor: 0
+  IsPet: 0
   target: {fileID: 0}
   grid: {fileID: 0}
   path: []
@@ -17939,7 +17942,6 @@ MonoBehaviour:
   AttackPercent: 0
   ChasingPercent: 0
   NormalMovePercent: 0
-  velocitys: []
   player: {fileID: 0}
 --- !u!54 &1750267861
 Rigidbody:
@@ -20577,7 +20579,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayGridGizmos: 0
-  displayGridOnPlatformGizmos: 1
+  displayGridOnPlatformGizmos: 0
   unwalkableMask:
     serializedVersion: 2
     m_Bits: 64

@@ -75,6 +75,7 @@ namespace LGProject.PlayerState
 
         [Header("무적 블링크 정보")]
         public SkinnedMeshRenderer[] SkinnedMeshRenderer;
+        public MeshRenderer[] MeshRenderer;
         [SerializeField] private float BlinkTimer = 2.5f;
         [Min(0.1f), Range(0.1f, 1f)]
         [SerializeField] private float BlinkInterval = 0.1f;
@@ -97,7 +98,7 @@ namespace LGProject.PlayerState
             UltimateGage = 100;
         }
 
-        [HideInInspector] public GameObject DefaultWeapon;
+        public GameObject DefaultWeapon;
 
         /*[HideInInspector]*/
         public GameObject UltimateWeapon;
@@ -281,7 +282,6 @@ namespace LGProject.PlayerState
                         !CollisionObserver.CallUnderPlatformZone(ZoneType.Platform,
                             transform.position + Vector3.down * 0.25f))
                     {
-                        
                         StateMachine.animator.SetTrigger("Jump1");
                         StateMachine.JumpInCount++;
                         StateMachine.IsGrounded = false;
@@ -318,6 +318,10 @@ namespace LGProject.PlayerState
             {
                 skin.enabled = false;
             }
+            foreach(var skin in MeshRenderer)
+            {
+                skin.enabled = false;
+            }
         }
 
         float currentSuperAmmorTimer = 0;
@@ -340,6 +344,10 @@ namespace LGProject.PlayerState
         private void AblePlayerMesh()
         {
             foreach (var skin in SkinnedMeshRenderer)
+            {
+                skin.enabled = true;
+            }
+            foreach (var skin in MeshRenderer)
             {
                 skin.enabled = true;
             }
@@ -464,6 +472,7 @@ namespace LGProject.PlayerState
 
             StateMachine.physics.velocity = Vector3.zero;
             StateMachine.collider.isTrigger = false;
+            StateMachine.IsKnockback = false;
             StateMachine.IsGrounded = true;
             StateMachine.JumpInCount = 0;
             StateMachine.StandingVelocity();
@@ -481,11 +490,14 @@ namespace LGProject.PlayerState
                 // 그럼 경우의 수는 2가지
                 // 바닥을 뚫었는가? 에 대한 체크
                 UnderPlatform = PlatformZoneCheck();
+                
                 if (UnderPlatform != null)
                 {
                     StateMachine.animator.SetTrigger(Landing);
                     if (StateMachine.IsKnockback)
+                    {
                         KnockbackLandingCheck();
+                    }
                     else if (!StateMachine.IsGrounded)
                         JumpLandingCheck();
                 }

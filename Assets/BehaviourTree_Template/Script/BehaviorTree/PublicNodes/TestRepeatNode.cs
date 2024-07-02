@@ -15,7 +15,7 @@ namespace BehaviourTree
 
         protected override void OnStop()
         {
-        
+
         }
 
         protected override State OnUpdate()

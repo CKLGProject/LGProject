@@ -22,11 +22,10 @@ namespace BehaviourTree
             _currentTimer = 0;
             StateMachine.IsDamaged = false;
             StateMachine.IsDown = true;
-            StateMachine.IsGrounded = true;
             StateMachine.animator.SetInteger(Run, 0);
             StateMachine.playable.effectManager.Stop(EffectManager.EFFECT.Airborne);
 
-            Debug.Log("Down");
+            Debug.Log("Down Start");
         }
 
         protected override void OnStop()
@@ -38,6 +37,7 @@ namespace BehaviourTree
         {
             try
             {
+                //Debug.Log("Down Update");
                 if (StateMachine.IsDead)
                     return State.Failure;
                 if (StateMachine.IsGrounded)

@@ -13,6 +13,8 @@ namespace BehaviourTree
             if (_stateMachine == null)
                 _stateMachine = AIAgent.Instance.GetStateMachine;
             _stateMachine.playable.effectManager.Play(EffectManager.EFFECT.Airborne).Forget();
+            _stateMachine.IsKnockback = true;
+            Debug.Log("Flight Start");
         }
 
         protected override void OnStop()
@@ -24,9 +26,13 @@ namespace BehaviourTree
         {
             try
             {
-                if ((!_stateMachine.IsKnockback && _stateMachine.IsGrounded) || _stateMachine.IsDead)
-                {     _stateMachine.IsKnockback = false;
+                //Debug.Log("Flight Update");
+
+                if (!_stateMachine.IsKnockback || _stateMachine.IsDead)
+                {  
+                    _stateMachine.IsKnockback = false;
                     _stateMachine.IsDamaged = false;
+                    //Debug.Log($"{_stateMachine.IsKnockback} // { _stateMachine.IsGrounded} // {_stateMachine.IsDead}");
                     return State.Failure;
                 }
                 // 일단 판정을 받아야함.

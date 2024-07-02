@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1ee089778469a6499c863647c673aaa, type: 3}
   m_Name: WeightDecoratorNode
   m_EditorClassIdentifier: 
-  state: 2
+  state: 1
   started: 0
   guid: 2a35be6a1506b9d4a90ef8fae3359fb2
   position: {x: 765, y: 505.00003}
@@ -106,7 +106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cb92853804b27d41ac471ecaeaa74e7, type: 3}
   m_Name: ChasingNode
   m_EditorClassIdentifier: 
-  state: 2
+  state: 1
   started: 0
   guid: db5bb0bbfa88ac941a05004522e17ed5
   position: {x: 630.99994, y: 955}
@@ -114,7 +114,7 @@ MonoBehaviour:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
   description: 
-  jumpDelay: 0
+  jumpDelay: 0.25
   stopRange: 1
 --- !u!114 &-7252241123171764499
 MonoBehaviour:
@@ -151,8 +151,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6babec2a44aec92419c275b704eb9284, type: 3}
   m_Name: SequencerNode
   m_EditorClassIdentifier: 
-  state: 2
-  started: 0
+  state: 0
+  started: 1
   guid: 46c412a0b6c1fe740a69dc3036bfcd9c
   position: {x: 159.00005, y: 645}
   blackboard:
@@ -163,7 +163,7 @@ MonoBehaviour:
   - {fileID: 429546570504228725}
   - {fileID: -4056544319149206852}
   - {fileID: -3990081122036225864}
-  current: 3
+  current: 0
 --- !u!114 &-6895995334728390926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,7 +197,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68047313e2fb8cf439c7453b6915160a, type: 3}
   m_Name: SelectorNode
   m_EditorClassIdentifier: 
-  state: 2
+  state: 1
   started: 0
   guid: 5894e005e03a1d347aa4dcb72175b1c4
   position: {x: -202.00018, y: 785}
@@ -220,8 +220,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6babec2a44aec92419c275b704eb9284, type: 3}
   m_Name: SequencerNode
   m_EditorClassIdentifier: 
-  state: 1
-  started: 0
+  state: 0
+  started: 1
   guid: 0faeed07953cba24e8eb851cd318a738
   position: {x: -42.000015, y: 340}
   blackboard:
@@ -232,7 +232,7 @@ MonoBehaviour:
   - {fileID: 8561578144344339604}
   - {fileID: 979470226565153095}
   - {fileID: -1847989979969271714}
-  current: 0
+  current: 2
 --- !u!114 &-4288313280875520722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -316,7 +316,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6babec2a44aec92419c275b704eb9284, type: 3}
   m_Name: SequencerNode
   m_EditorClassIdentifier: 
-  state: 2
+  state: 1
   started: 0
   guid: 9f9c52804eea2e14da7c847718889032
   position: {x: 710.99994, y: 809}
@@ -327,7 +327,7 @@ MonoBehaviour:
   children:
   - {fileID: -8219645718292566422}
   - {fileID: -2826794560748770681}
-  current: 2
+  current: 0
 --- !u!114 &-4056544319149206852
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -343,7 +343,7 @@ MonoBehaviour:
   state: 2
   started: 0
   guid: 33bb5ec2dcdf566469bc85ffc5a27bb6
-  position: {x: 135.8884, y: 809}
+  position: {x: 135.99994, y: 809}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
@@ -381,7 +381,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6babec2a44aec92419c275b704eb9284, type: 3}
   m_Name: SequencerNode
   m_EditorClassIdentifier: 
-  state: 2
+  state: 1
   started: 0
   guid: a0824f2786eaaa84e8d8044a0254cc62
   position: {x: 951, y: 1250.9999}
@@ -392,7 +392,7 @@ MonoBehaviour:
   children:
   - {fileID: -9094113144568606400}
   - {fileID: 3354794614377933772}
-  current: 2
+  current: 1
 --- !u!114 &-3455377277169705623
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -496,7 +496,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 918635b42d91aa84fb42901c6781c520, type: 3}
   m_Name: SetPathNode
   m_EditorClassIdentifier: 
-  state: 2
+  state: 1
   started: 0
   guid: 7be37b5e813774549844668f2551baa5
   position: {x: 357.44998, y: 796.0001}
@@ -528,7 +528,7 @@ MonoBehaviour:
   children:
   - {fileID: -2080985506334161861}
   - {fileID: 650769149217407391}
-  current: 1
+  current: 0
 --- !u!114 &-1878908651922025553
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -566,8 +566,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6babec2a44aec92419c275b704eb9284, type: 3}
   m_Name: SequencerNode
   m_EditorClassIdentifier: 
-  state: 2
-  started: 0
+  state: 0
+  started: 1
   guid: e8f5a5b3cbda8f04ab15bbe104c10fad
   position: {x: 37.999992, y: 494.99997}
   blackboard:
@@ -577,7 +577,7 @@ MonoBehaviour:
   children:
   - {fileID: 6457612046067698217}
   - {fileID: -7104301402895992465}
-  current: 2
+  current: 1
 --- !u!114 &-1743591964760258194
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -590,7 +590,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb389636a0b189f478e693e5a7bdd941, type: 3}
   m_Name: AttackJudgeNode
   m_EditorClassIdentifier: 
-  state: 2
+  state: 1
   started: 0
   guid: 15e885df896c3d2429008082aefa62fe
   position: {x: -323.00018, y: 1092}
@@ -612,8 +612,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ee50ff97a636c643a5a9957f3bda5b8, type: 3}
   m_Name: IsDeadNode
   m_EditorClassIdentifier: 
-  state: 0
-  started: 1
+  state: 2
+  started: 0
   guid: 93ac792961312244391b85d0e7f3b493
   position: {x: 1020, y: 478}
   blackboard:
@@ -674,7 +674,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1ee089778469a6499c863647c673aaa, type: 3}
   m_Name: WeightDecoratorNode
   m_EditorClassIdentifier: 
-  state: 2
+  state: 1
   started: 0
   guid: d8495a1b3c42f2a41bdcad15ede79ecc
   position: {x: 890, y: 1109}
@@ -774,7 +774,7 @@ MonoBehaviour:
   - {fileID: 6577803585413208398}
   - {fileID: 4814404046932979626}
   - {fileID: -1878908651922025553}
-  current: 2
+  current: 1
 --- !u!114 &429546570504228725
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -787,10 +787,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aa872d1ab0ac5b4ea5ff254b581eb0e, type: 3}
   m_Name: WaitNode
   m_EditorClassIdentifier: 
-  state: 2
-  started: 0
+  state: 0
+  started: 1
   guid: c53b56c3d59033c45bb47fbf7d31220c
-  position: {x: -24.111664, y: 809}
+  position: {x: -23.999939, y: 809}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
@@ -831,7 +831,7 @@ MonoBehaviour:
   state: 2
   started: 0
   guid: c8a290eb11d00cc448d59f4d7c7bbad2
-  position: {x: -104.00019, y: 495.00003}
+  position: {x: -104.000114, y: 495}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
@@ -849,8 +849,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6babec2a44aec92419c275b704eb9284, type: 3}
   m_Name: SequencerNode
   m_EditorClassIdentifier: 
-  state: 0
-  started: 1
+  state: 2
+  started: 0
   guid: 99b2ad5cb6cce0840861631503067de1
   position: {x: 1020, y: 339.99997}
   blackboard:
@@ -859,7 +859,7 @@ MonoBehaviour:
   description: 
   children:
   - {fileID: -1588003674210293885}
-  current: 0
+  current: 1
 --- !u!114 &2738437705131236544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -875,12 +875,12 @@ MonoBehaviour:
   state: 1
   started: 0
   guid: 04559b18972cb4c47941c309027e0730
-  position: {x: -161.00015, y: 1092}
+  position: {x: -163.00006, y: 1092}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
   description: 
-  jumpDelay: 0
+  jumpDelay: 0.25
   stopRange: 0.5
 --- !u!114 &3354794614377933772
 MonoBehaviour:
@@ -894,7 +894,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aa872d1ab0ac5b4ea5ff254b581eb0e, type: 3}
   m_Name: WaitNode
   m_EditorClassIdentifier: 
-  state: 2
+  state: 1
   started: 0
   guid: a7040ec54968d4245bf447b26fedef69
   position: {x: 1071, y: 1408}
@@ -915,7 +915,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68047313e2fb8cf439c7453b6915160a, type: 3}
   m_Name: SelectorNode
   m_EditorClassIdentifier: 
-  state: 2
+  state: 1
   started: 0
   guid: 7788440f0cc4d664c9c87f170b4ca0ae
   position: {x: 810, y: 655}
@@ -937,7 +937,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1be9f22672aa694c952eb42e6873cbd, type: 3}
   m_Name: StunedNode
   m_EditorClassIdentifier: 
-  state: 2
+  state: 1
   started: 0
   guid: f17ebf5bf62ba4549a0d16486fdba4ab
   position: {x: -575, y: 495}
@@ -984,7 +984,7 @@ MonoBehaviour:
   state: 2
   started: 0
   guid: 167c174f92969544091afa5718e50378
-  position: {x: -0.99990845, y: 645}
+  position: {x: -0.9999997, y: 644}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
@@ -1023,7 +1023,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6babec2a44aec92419c275b704eb9284, type: 3}
   m_Name: SequencerNode
   m_EditorClassIdentifier: 
-  state: 2
+  state: 1
   started: 0
   guid: 88e28914aa5736243bdbdbe70061e5fa
   position: {x: -301.0002, y: 926}
@@ -1033,7 +1033,7 @@ MonoBehaviour:
   description: 
   children:
   - {fileID: -1743591964760258194}
-  current: 1
+  current: 0
 --- !u!114 &7577682075917714005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1093,7 +1093,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41ba01fb4f8cf244694fcdefbe1221d6, type: 3}
   m_Name: RangeNode
   m_EditorClassIdentifier: 
-  state: 1
+  state: 2
   started: 0
   guid: e226da028ba38534994cecaa59e72f08
   position: {x: -240.99988, y: 495}

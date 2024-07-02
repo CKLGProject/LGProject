@@ -115,7 +115,7 @@ namespace BehaviourTree
                     curTimer = 0;
                 }
                 CameraCheck();
-                PlayableGravity();
+                //PlayableGravity();
                 NewPlatformCheck();
                 GetStateMachine.Update();
                 PlayableGravity();

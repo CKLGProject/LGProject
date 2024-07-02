@@ -3482,7 +3482,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayGridGizmos: 0
-  displayGridOnPlatformGizmos: 1
+  displayGridOnPlatformGizmos: 0
   unwalkableMask:
     serializedVersion: 2
     m_Bits: 64
@@ -12437,7 +12437,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 996713019}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.034355473, y: -0.000005121686, z: 0.0000001760619, w: 0.9994097}
+  m_LocalRotation: {x: 0.034355473, y: -0.0000051173874, z: 0.0000001759141, w: 0.9994097}
   m_LocalPosition: {x: 0, y: 3.617, z: -21.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -16140,7 +16140,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1353022552}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.034355473, y: -0.000005121686, z: 0.0000001760619, w: 0.9994097}
+  m_LocalRotation: {x: 0.034355473, y: -0.0000051173874, z: 0.0000001759141, w: 0.9994097}
   m_LocalPosition: {x: 0, y: 3.617, z: -21.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -16758,6 +16758,7 @@ MonoBehaviour:
   AliveOffset: {x: 0, y: 0, z: 0}
   respawnTime: 0
   SkinnedMeshRenderer: []
+  MeshRenderer: []
   BlinkTimer: 2.5
   BlinkInterval: 0.1
   DefaultWeapon: {fileID: 0}
@@ -24596,15 +24597,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: Frost_AI
       objectReference: {fileID: 0}
-    - target: {fileID: 1683840886605889499, guid: 551b652ef833b4348a77fd7332d7b83c,
+    - target: {fileID: 3158692459486806145, guid: 551b652ef833b4348a77fd7332d7b83c,
         type: 3}
-      propertyPath: m_IsActive
-      value: 1
+      propertyPath: m_LocalPosition.y
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4885444769505129726, guid: 551b652ef833b4348a77fd7332d7b83c,
         type: 3}
       propertyPath: m_Center.y
-      value: 0.65
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 5134505680086110306, guid: 551b652ef833b4348a77fd7332d7b83c,
         type: 3}
