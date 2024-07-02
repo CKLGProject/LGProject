@@ -80,6 +80,7 @@ namespace LGProject.PlayerState
             {
                 StateMachine.animator.SetInteger(Attack, 0);
 
+                if (DamageInCount == false) AttackJudge();
                 if (DamageInCount == false) Shoot();
                 if (StateMachine.attackAction.triggered && StateMachine.AttackCount < 3)
                 {
@@ -111,6 +112,59 @@ namespace LGProject.PlayerState
             #endregion
             DamageInCount = true;
             StateMachine.ShootProjectile();
+        }
+        public void AttackJudge()
+        {
+
+            if (!DamageInCount)
+            {
+                StateMachine.PlayAudioClip(AttackSoundName);
+                Vector3 center = StateMachine.transform.position + StateMachine.transform.forward * 0.5f + StateMachine.transform.up * 0.5f;
+
+                Collider[] targets = Physics.OverlapBox(center, Vector3.one * 0.5f, Quaternion.identity, 1 << 3);
+                System.Tuple<Playable, float> temp = null;
+
+                foreach (var t in targets)
+                {
+                    float distance = Vector3.Distance(center, t.transform.position);
+                    if ((temp == null || temp.Item2 >= distance) && t.transform != StateMachine.transform)
+                    {
+                        temp = System.Tuple.Create(t.GetComponent<Playable>(), distance);
+                    }
+                }
+                if (temp == null)
+                {
+                    DamageInCount = false;
+                }
+                else
+                {
+                    try
+                    {
+                        Vector3 direction = (temp.Item1.GetStateMachine.transform.position - StateMachine.transform.position).normalized;
+                        Vector3 velocity = (StateMachine.transform.forward * 1.5f + StateMachine.transform.up * 3) * 1.5f;
+
+                        if (temp.Item1 != StateMachine.transform)
+                        {
+                            temp.
+                            Item1.GetStateMachine.
+                            ApplyHitDamaged(StateMachine.AttackCount - 1 < 2 ? Vector3.zero : velocity, 0.1f, StateMachine);
+                            DamageInCount = true;
+
+                            if (!temp.Item1.GetStateMachine.IsGuard && !temp.Item1.GetStateMachine.IsDown && !temp.Item1.GetStateMachine.IsSuperArmor && !StateMachine.IsUseUltimate)
+                            {
+                                StateMachine.playable.SetUltimateGage(StateMachine.playable.UltimateGage + 10);
+                                StateMachine.UltimateGageIsFull();
+                            }
+                        }
+                    }
+                    catch
+                    {
+#if UNITY_EDITOR
+                        Debug.Log("AA");
+#endif
+                    }
+                }
+            }
         }
     }
 

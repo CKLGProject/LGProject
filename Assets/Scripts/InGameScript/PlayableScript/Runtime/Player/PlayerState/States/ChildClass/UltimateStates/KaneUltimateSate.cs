@@ -25,6 +25,7 @@ namespace LGProject.PlayerState
             base.Enter();
             StateMachine.ResetVelocity();
             StateMachine.animator.SetTrigger(Ultimate);
+            StateMachine.playable.SwitchingWeapon(true);
 
             StateMachine.IsUseUltimate = true;
             StateMachine.animator.updateMode = AnimatorUpdateMode.UnscaledTime;
@@ -80,6 +81,7 @@ namespace LGProject.PlayerState
             UltimateAttack();
             StateMachine.playable.FocusUltimateUser(OriginWeight);
             await UniTask.Delay(TimeSpan.FromSeconds(2f), DelayType.Realtime);
+            StateMachine.playable.SwitchingWeapon(false);
             StateMachine.battleModel.ShowCutScene(Data.ActorType.User, false);
         }
 

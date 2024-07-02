@@ -22,6 +22,8 @@ namespace BehaviourTree
 
         protected override State OnUpdate()
         {
+            if (AIAgent.Instance.GetStateMachine.IsDamaged)
+                return State.Failure;
             startTime += Time.deltaTime;
             if(startTime > duration)
             {

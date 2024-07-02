@@ -582,6 +582,7 @@ namespace LGProject.PlayerState
             await UniTask.Delay(TimeSpan.FromSeconds(nockbackDelay));
             physics.velocity = velocity;
             collider.isTrigger = true;
+            IsGrounded = false;
             IsKnockback = true;
         }
 

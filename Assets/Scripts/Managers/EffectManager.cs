@@ -1018,6 +1018,28 @@ public class EffectManager : MonoBehaviour
         }
     }
 
+    public async UniTaskVoid PointPlay(EFFECT effectType, Vector3 playPosition, float delaySeconds = 0f)
+    {
+        try
+        {
+            _EffectContainer.TryGetValue(effectType, out ParticleSystem   effect);
+
+            if(effect != null)
+            {
+                effect.gameObject.SetActive(true);
+                effect.transform.position = playPosition;
+                effect.Stop();
+                await UniTask.Delay(TimeSpan.FromSeconds(delaySeconds));
+                effect.GetComponent<ParticleSystem>().Play();
+
+            }
+        }
+        catch
+        {
+            Debug.LogError("EffectManager Error");
+        }
+    }
+
     public async UniTaskVoid Play(EFFECT effectType, float delaySeconds = 0f)
     {
         try

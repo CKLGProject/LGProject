@@ -83,6 +83,7 @@ MonoBehaviour:
   - {fileID: 4251090254274050616}
   - {fileID: 7316219252587536335}
   - {fileID: 2286646101770979356}
+  MeshRenderer: []
   BlinkTimer: 2
   BlinkInterval: 0.5
   DefaultWeapon: {fileID: 0}
@@ -148,7 +149,7 @@ CapsuleCollider:
   m_Radius: 0.4
   m_Height: 1.25
   m_Direction: 1
-  m_Center: {x: 0, y: 0.65, z: 0}
+  m_Center: {x: 0, y: 0.75, z: 0}
 --- !u!54 &8377894398196911483
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -588,7 +589,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 35745ab693c463e45b34ec93b1a52956,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 35745ab693c463e45b34ec93b1a52956,
         type: 3}

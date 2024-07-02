@@ -119,6 +119,7 @@ namespace LGProject.PlayerState
             StateMachine.playable.effectManager.Stop(EffectManager.EFFECT.Ultimate);
             StateMachine.animator.updateMode = AnimatorUpdateMode.Normal;
             StateMachine.playable.effectManager.Play(EffectManager.EFFECT.UltimateDash).Forget();
+            StateMachine.playable.effectManager.Play(EffectManager.EFFECT.UltimateHit).Forget();
             StateMachine.playable.effectManager.Stop(EffectManager.EFFECT.UltimatePreCenter);
             StateMachine.playable.effectManager.Stop(EffectManager.EFFECT.UltimatePreRHand);
 
@@ -135,6 +136,7 @@ namespace LGProject.PlayerState
             StateMachine.playable.FocusUltimateUser(OriginWeight);
             await UniTask.Delay(TimeSpan.FromSeconds(2f), DelayType.Realtime);
             //StateMachine.battleModel.ShowCutScene(Data.ActorType.User, false);
+            StateMachine.playable.effectManager.Stop(EffectManager.EFFECT.UltimateHit);
         }
     }
 }

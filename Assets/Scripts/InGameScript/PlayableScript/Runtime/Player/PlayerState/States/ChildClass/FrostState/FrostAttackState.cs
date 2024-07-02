@@ -169,8 +169,7 @@ namespace LGProject.PlayerState
 
             if (!DamageInCount)
             {
-                Vector3 right = Vector3.right * (StateMachine.playable.directionX == true ? 1.2f : -1.2f);
-                Vector3 center = StateMachine.transform.position + right + Vector3.up * 0.5f;
+                Vector3 center = StateMachine.transform.position + StateMachine.transform.forward * 0.7f + Vector3.up * 0.5f;
 
                 // 생각보다 판정이 후하진 않게 하기
                 // hit box의 크기를 따라감.

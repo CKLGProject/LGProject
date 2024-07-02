@@ -12,6 +12,7 @@ namespace BehaviourTree
         {
             //if (Agent == null)
             //    Agent = AIAgent.Instance;
+            Debug.Log("Damaged?");
 
         }
 
