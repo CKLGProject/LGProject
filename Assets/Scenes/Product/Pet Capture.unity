@@ -260,6 +260,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Refrigerator
       objectReference: {fileID: 0}
+    - target: {fileID: 7398625084743892175, guid: e88e75045706cc74d802b6d343c6c92f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7919266567689627253, guid: e88e75045706cc74d802b6d343c6c92f,
         type: 3}
       propertyPath: m_LocalPosition.x
